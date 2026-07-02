@@ -14,6 +14,7 @@ tags:
   - stale
   - ollama
   - mcp
+  - close-decision-pending
 related:
   - ../index.md
 rounds:
@@ -25,16 +26,39 @@ rounds:
     bot_review: []
     blocker: null
     resolution: null
-    timestamp: "2026-06-04T03:40:00Z"
+    timestamp: "2026-06-04T03:40:24Z"
+  - round: 2
+    action: "first check-in (zsxh1990)"
+    delta: null  # 无代码变更
+    response_time_h: 648  # 27 天无活动
+    maintainer_action: null
+    bot_review: []
+    blocker: "无活动、无评论、无 review (profile 估 3-7 天响应，实则 27 天)"
+    resolution: "friendly check-in to @kacperlukawski: '4 weeks since Ollama embedding... let me know if there's anything needs adjusting'"
+    timestamp: "2026-07-01T04:36:52Z"
+  - round: 3
+    action: "second check-in (zsxh1990) + close decision pending"
+    delta: null  # 无代码变更
+    response_time_h: 35  # 1.5 天无回应
+    maintainer_action: null
+    bot_review: []
+    blocker: "第二次检查仍是 28 天 total, 1 天自上次 check-in, 完全无回应"
+    resolution: "second check-in (comment_id 4867536983) 提供 3 个明确选项: rebase / add tests / close with summary"
+    timestamp: "2026-07-02T15:38:44Z"
 final_status: open-stale
-opened_at: "2026-06-04T03:40:00Z"
-last_activity: "2026-06-04T03:40:00Z"
-stale_days: 26
-next_action: "候选: A) zsxh1990 check-in / B) 直接 close + 复盘教训"
+opened_at: "2026-06-04T03:40:24Z"
+last_activity: "2026-07-02T15:38:44Z"
+stale_days: 28
+close_decision:
+  pending_until: "2026-07-09"
+  criteria:
+    - maintainer_response: "merge / amend request → continue"
+    - no_response_7d: "主动 close + summary comment (OpenClaw §6.1 优雅退出)"
 risk_notes:
-  - "Qdrant 可能已合并等效实现"
+  - "Qdrant 可能已合并等效实现 → 实测: #108 closed-not-merged, #111/#92 是 OpenAI-compatible, 等效 PR 不存在"
   - "base branch = master (可能需 rebase 到 main)"
-  - "GitHub Actions 应已警告"
+  - "PR mergeable=True, 无冲突"
+  - "maintainer 可能根本没看 PR (1-2 人核心, 资源饱和)"
 ---
 
 # qdrant MCP server PR #143: feat: add Ollama embedding provider for local models

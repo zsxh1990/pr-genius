@@ -20,20 +20,21 @@ related:
 agent_guidelines:
   allow_unsolicited_pr: true
   require_signed_off: false
-  require_cla: false
+  require_cla: false  # 2026-07-02 GH API 核实: CONTRIBUTING.md 不存在，无 CLA 条款
   require_changeset: false
   require_issue_first: false
   ai_policy: welcoming
   ai_assisted_disclosure: false
   human_required_in: []
-  maintainer_vibe: slow  # 26 天无活动验证
+  maintainer_vibe: slow  # 28 天无活动 + 1.5 天无 check-in 回应验证
   bot_review: none
   ci_first_run_needs_approval: false
-  default_branch: master  # ⚠️ 标准是 main，需手动切换 base
-  response_time_h_median: 168  # 待 #143 ping 验证
+  default_branch: master  # 实测 PR #143 base=master, ⚠️ 标准是 main
+  response_time_h_median: 672  # 28 天 = 4 周 (远超原估 7 天)
   merge_rate_30d: null
   close_keywords: []
-  one_pr_friendly: false  # 评审慢风险高
+  one_pr_friendly: false  # 评审极慢 (MCP server 仓普遍现象)
+verified_at: 2026-07-02
 misakanet_queries:
   - misakanet/lessons/contrib/stale-pr-handling.md  # 26 天无活动 stale PR 处置策略
 misakanet_lessons: []
