@@ -17,6 +17,19 @@ tags:
   - small-pr
 related:
   - ../index.md
+rounds:
+  - round: 1
+    action: "open PR"
+    delta: "+60 / -6 / 2 files"  # 极小 PR - OpenClaw §6.1 #2 ideal
+    response_time_h: 0.5
+    maintainer_action: null
+    bot_review:
+      - "coderabbit: 1 actionable finding (未修)"
+    timestamp: "2026-06-28T09:23:00Z"
+final_status: open
+opened_at: "2026-06-28T09:23:00Z"
+last_activity: "2026-06-28T09:23:00Z"
+next_action: "修 CodeRabbit 1 finding，等 maintainer review"
 ---
 
 # sourcebot PR #1383: feat: detect and surface ctags indexing failures

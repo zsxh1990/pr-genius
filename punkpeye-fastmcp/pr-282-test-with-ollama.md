@@ -17,6 +17,28 @@ tags:
   - first-time-contributor
 related:
   - ../index.md
+rounds:
+  - round: 1
+    action: "open PR"
+    delta: "+271 / -16 / 1 file"
+    response_time_h: null  # 首次贡献，CI 未跑
+    maintainer_action: null
+    bot_review: []
+    blocker: "CI 未跑（首次贡献需 maintainer 授权）"
+    timestamp: "2026-06-28T08:13:00Z"
+  - round: 2
+    action: "amend (CI fix: prettier)"
+    delta: "格式调整"
+    response_time_h: 1.5
+    maintainer_action: null
+    bot_review: []
+    blocker: "Prettier formatting issue"
+    resolution: "Fixed prettier formatting"
+    timestamp: "2026-06-28T09:39:00Z"
+final_status: open
+opened_at: "2026-06-28T08:13:00Z"
+last_activity: "2026-06-28T09:39:00Z"
+next_action: "等 punkpeye 授权 CI + 真实 review"
 ---
 
 # fastmcp PR #282: feat: add testWithOllama() for local LLM testing

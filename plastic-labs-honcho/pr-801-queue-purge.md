@@ -19,6 +19,40 @@ related:
   - ../index.md
 related_issues:
   - https://github.com/plastic-labs/honcho/issues/799
+rounds:
+  - round: 1
+    action: "open PR"
+    delta: "+283 / -0 / 3 files"
+    response_time_h: 0.5  # CodeRabbit 几小时内首轮
+    maintainer_action: null  # 仅 bot 反馈
+    bot_review:
+      - "coderabbit: 2 actionable + 1 outside-diff (DB session injection / ORM count anti-pattern)"
+    blocker: null
+    resolution: null
+    timestamp: "2026-06-12T01:44:00Z"
+  - round: 2
+    action: "amend (self-report)"
+    delta: "+50 / -10 / 3 files"  # 修复 db 默认参数 + count anti-pattern
+    response_time_h: 1
+    maintainer_action: null
+    bot_review:
+      - "coderabbit v2: 1 new finding (细节未深读)"
+    blocker: "Bug 1: db: AsyncSession = db (from src import db module)"
+    resolution: "commit 7ac3afe — from src.dependencies import db + Depends(db)"
+    commit: "7ac3afe"
+    timestamp: "2026-06-20T14:18:00Z"
+  - round: 3
+    action: "wait maintainer"
+    response_time_h: 192  # 8 天无维护者活动
+    maintainer_action: null  # 仍仅 bot
+    bot_review: []
+    blocker: null
+    resolution: null
+    timestamp: "2026-06-28T07:25:00Z"
+final_status: open
+opened_at: "2026-06-12T01:44:00Z"
+last_activity: "2026-06-20T14:18:00Z"
+next_action: "19 天无 maintainer；候选：A) 主动 close (释放注意力) / B) check-in ping"
 ---
 
 # honcho PR #801: feat: add queue purge endpoint for stranded work units

@@ -34,6 +34,7 @@ conforms_to: OKF v0.1 (Sudhakaran88/okf-conformance) + agent_guidelines extensio
 - 📋 **[AGENT_GUIDELINES_SCHEMA.md](./AGENT_GUIDELINES_SCHEMA.md)** — 每个仓 frontmatter 里 `agent_guidelines` 字段的 schema（Agent 可读 yaml 控制流）
 - 🚫 **[BLACKLIST.md](./BLACKLIST.md)** — 永久拉黑仓（Vite / microG / OpenBSD / GNOME / Linux / systemd）
 - ⚠️  **[anti-patterns/](./anti-patterns/README.md)** — 可检索反模式库（CI 报错 / 维护者拒绝语 → fix_action 秒级自愈）
+- 🔁 **[ROUNDS_SCHEMA.md](./ROUNDS_SCHEMA.md)** — PR Case Study `rounds` 字段 schema（多轮交互日志）
 - 🔧  **[validate.py](./validate.py)** — OKF v0.1 校验脚本（frontmatter + 死链 + 一致性）
 
 ## 统计
@@ -41,13 +42,14 @@ conforms_to: OKF v0.1 (Sudhakaran88/okf-conformance) + agent_guidelines extensio
 | 维度 | 数据 |
 |---|---|
 | 覆盖大仓（star ≥ 1k）| **8 个** |
-| 总 .md 文件 | **25 个** |
+| 总 .md 文件 | **26 个** |
 | Repo Profile（仓画像）| 8 |
-| PR Case Study（单 PR 深读）| 8 |
+| PR Case Study（单 PR 深读 + rounds）| 8 (全含多轮交互日志) |
 | Anti-Pattern（反模式）| 4 |
-| Schema Reference / Blacklist / Bundle | 5 |
-| 总大小 | 248 KB |
+| Schema Reference / Blacklist / Bundle | 6 |
+| 总大小 | ~250 KB |
 | Agent 友好度结构化（agent_guidelines）| **8/8 仓 ✅** |
+| 联邦声明（federates_with）| **根 + 8 仓 ✅** |
 
 ## 8 个大仓速查
 
@@ -168,6 +170,14 @@ misakanet_lessons:
 ---
 
 ## 📝 更新日志
+
+### 2026-07-02 v0.4.0（多轮交互日志 rounds）
+
+- ✅ **ROUNDS_SCHEMA.md** 新增（PR Case Study `rounds` 字段 schema）
+- ✅ **8/8 PR Case Study** 全加 `rounds` 字段（保留攻防过程，不只是结果）
+- 总 rounds 计数：uv 2 / honcho 3 / harbor 1 / fastmcp 2 / sourcebot 1 / future-agi 3 / qdrant 1 / E2B 2
+- 最终状态：1 merged (E2B #1413) / 1 closed-not-merged (uv #19685) / 6 open（含 1 stale）
+- 触发：克莱恩 5 条升级建议第 3 条「多轮交互逻辑」+ 2026-07-02 23:25 GMT+8 拍板启动
 
 ### 2026-07-02 v0.3.0（MisakaNet 联邦声明）
 

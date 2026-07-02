@@ -19,6 +19,37 @@ related:
   - ../index.md
 related_issues:
   - https://github.com/future-agi/future-agi/issues/775
+rounds:
+  - round: 1
+    action: "open PR"
+    delta: "+2 / -2 / 1 file"  # 极小
+    response_time_h: 0.07  # 4 分钟
+    maintainer_action: null
+    bot_review:
+      - "entelligence AI v1: 2 findings (project=None NameError, NULL project_id EndUser lookup)"
+    timestamp: "2026-06-04T10:55:00Z"
+  - round: 2
+    action: "amend (bot findings)"
+    delta: "小调整 (修 NULL project_id EndUser lookup)"
+    response_time_h: 130  # 5.4 天
+    maintainer_action: null
+    bot_review:
+      - "entelligence AI v2 (细节未深读)"
+    blocker: "NULL project_id EndUser lookup"
+    resolution: "Good catch! Will push fix."
+    timestamp: "2026-06-08T16:31:00Z"
+  - round: 3
+    action: "third-party check-in"
+    response_time_h: 471  # 19.6 天
+    maintainer_action: null  # maintainer 真实 review 未开始
+    bot_review: []
+    blocker: null
+    resolution: "@Ikalus1988 (克莱恩主号) friendly check-in: 'I've addressed. Happy to make any adjustments.'"
+    timestamp: "2026-06-28T07:25:00Z"
+final_status: open
+opened_at: "2026-06-04T10:55:00Z"
+last_activity: "2026-06-28T07:25:00Z"
+next_action: "7/5 前无回应 → zsxh1990 再 bump；7/12 前无回应 → 主动 close"
 ---
 
 # future-agi PR #778: feat: enable span list view without project_id (fix #775)

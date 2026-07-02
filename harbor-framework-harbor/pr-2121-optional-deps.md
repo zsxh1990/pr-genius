@@ -17,6 +17,21 @@ tags:
   - devin-reviewed
 related:
   - ../index.md
+rounds:
+  - round: 1
+    action: "open PR"
+    delta: "+57 / -23 / 6 files"
+    response_time_h: 0.1
+    maintainer_action: null
+    bot_review:
+      - "vercel[bot]: 部署预览需 maintainer 授权"
+      - "github-actions[bot]: diff viewer"
+      - "devin-ai-integration[bot]: 2 findings (待修)"
+    timestamp: "2026-06-28T09:14:00Z"
+final_status: open
+opened_at: "2026-06-28T09:14:00Z"
+last_activity: "2026-06-28T09:20:00Z"
+next_action: "修 Devin 2 findings，等 maintainer 触发 Vercel 预览"
 ---
 
 # harbor PR #2121: feat: make litellm and datasets optional dependencies

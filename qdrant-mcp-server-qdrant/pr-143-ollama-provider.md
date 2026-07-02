@@ -16,6 +16,25 @@ tags:
   - mcp
 related:
   - ../index.md
+rounds:
+  - round: 1
+    action: "open PR"
+    delta: "+76 / -0 / 4 files"
+    response_time_h: null  # 完全无活动
+    maintainer_action: null
+    bot_review: []
+    blocker: null
+    resolution: null
+    timestamp: "2026-06-04T03:40:00Z"
+final_status: open-stale
+opened_at: "2026-06-04T03:40:00Z"
+last_activity: "2026-06-04T03:40:00Z"
+stale_days: 26
+next_action: "候选: A) zsxh1990 check-in / B) 直接 close + 复盘教训"
+risk_notes:
+  - "Qdrant 可能已合并等效实现"
+  - "base branch = master (可能需 rebase 到 main)"
+  - "GitHub Actions 应已警告"
 ---
 
 # qdrant MCP server PR #143: feat: add Ollama embedding provider for local models
