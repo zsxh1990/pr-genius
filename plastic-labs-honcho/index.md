@@ -21,7 +21,7 @@ related:
 agent_guidelines:
   allow_unsolicited_pr: true
   require_signed_off: false
-  require_cla: false  # 未确认；下次提 PR 前核实
+  require_cla: false  # 2026-07-02 GH API 核实：CONTRIBUTING.md 存在但无 CLA 条款，仅 AGPL-3.0 license
   require_changeset: false
   require_issue_first: false
   ai_policy: welcoming
@@ -44,6 +44,7 @@ misakanet_lessons:
     contributed_via: zsxh1990/honcho#801
     absorbed_at: 2026-06-21
 federation_status: declared-2026-07-02
+verified_at: 2026-07-02  # 7/2 闭环验证后更新：CLA 核实 + round 4 已发
 ---
 
 # plastic-labs/honcho

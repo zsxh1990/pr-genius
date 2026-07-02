@@ -29,7 +29,7 @@ rounds:
       - "coderabbit: 2 actionable + 1 outside-diff (DB session injection / ORM count anti-pattern)"
     blocker: null
     resolution: null
-    timestamp: "2026-06-12T01:44:00Z"
+    timestamp: "2026-06-12T01:44:47Z"
   - round: 2
     action: "amend (self-report)"
     delta: "+50 / -10 / 3 files"  # 修复 db 默认参数 + count anti-pattern
@@ -40,25 +40,34 @@ rounds:
     blocker: "Bug 1: db: AsyncSession = db (from src import db module)"
     resolution: "commit 7ac3afe — from src.dependencies import db + Depends(db)"
     commit: "7ac3afe"
-    timestamp: "2026-06-20T14:18:00Z"
+    timestamp: "2026-06-20T14:18:45Z"
   - round: 3
-    action: "wait maintainer"
-    response_time_h: 192  # 8 天无维护者活动
+    action: "third-party check-in (Ikalus1988)"
+    response_time_h: 188  # 7.8 天（自 round 2 后）
     maintainer_action: null  # 仍仅 bot
     bot_review: []
     blocker: null
-    resolution: null
-    timestamp: "2026-06-28T07:25:00Z"
+    resolution: "@Ikalus1988 (克莱恩主号) friendly check-in: 'CodeRabbit caught two bugs which I've fixed in 7ac3afe. Let me know if there's ...'"
+    timestamp: "2026-06-28T07:25:58Z"
+  - round: 4
+    action: "second check-in (zsxh1990)"
+    delta: null  # 无代码变更
+    response_time_h: 96  # 4 天（自 round 3 后）
+    maintainer_action: null
+    bot_review: []
+    blocker: "19 天无 maintainer 真实 review（超 profile 预估 3-7 天）"
+    resolution: "friendly check-in ping (comment_id 4867501007): 'Addressed all CodeRabbit findings... Happy to make any adjustments.'"
+    timestamp: "2026-07-02T15:35:03Z"
 final_status: open
-opened_at: "2026-06-12T01:44:00Z"
-last_activity: "2026-06-20T14:18:00Z"
-next_action: "19 天无 maintainer；候选：A) 主动 close (释放注意力) / B) check-in ping"
+opened_at: "2026-06-12T01:44:47Z"
+last_activity: "2026-07-02T15:35:03Z"
+next_action: "7/9 前无回应 → zsxh1990 再 bump；7/16 前无回应 → 主动 close"
 ---
 
 # honcho PR #801: feat: add queue purge endpoint for stranded work units
 
 > zsxh1990 在 [plastic-labs/honcho#801](https://github.com/plastic-labs/honcho/pull/801) 的 queue purge PR 案例深读。  
-> **状态**：🟢 open（19 天）  
+> **状态**：🟢 open（21 天）  
 > **核心价值**：暴露了 FastAPI + SQLAlchemy 异步注入陷阱，已被 MEMORY.md §8 收录。
 
 ---
