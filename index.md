@@ -2,13 +2,19 @@
 type: Knowledge Bundle
 title: Big-Repo PR 知识库
 description: zsxh1990 已提 PR 的大仓（star ≥ 1k）PR 模式 + 经验沉淀，按 Google Open Knowledge Format (OKF v0.1) 组织
-version: 0.1.0
+version: 0.3.0
 created: 2026-07-01
+updated: 2026-07-02
 author: 太阳 (Misaka10004)
 based_on:
   - openclaw-pr-knowledge/report.md
   - uv-pr-knowledge/report.md
 conforms_to: OKF v0.1 (Sudhakaran88/okf-conformance)
+federates_with:
+  - misakanet/lessons/contrib/pr-strategy.md  # 查询路径（声明，不迁移）
+  - misakanet/agents/sun/index.md              # 太阳节点身份
+federation_mode: query-only  # 仅声明 + 查询，不同步内容
+federated_at: 2026-07-02
 ---
 
 # 大仓 PR 知识库
@@ -97,6 +103,18 @@ conforms_to: OKF v0.1 (Sudhakaran88/okf-conformance)
 ---
 
 ## 📝 更新日志
+
+### 2026-07-02 v0.3.0（联邦声明）
+
+- ✅ 根 index.md 加 `federates_with` 字段 + 声明 2 个查询路径
+- ✅ 8 仓 repo profile 加 `misakanet_queries` 字段
+- ✅ README 加 "MisakaNet Federation" 节
+- ✅ **不改 MisakaNet 主树 / 不迁移内容 / 不改目录结构**
+- 触发：克莱恩 2026-07-02 23:07 GMT+8 拍板（federation gate）
+
+### 2026-07-02 v0.2.0（Agent-first 升级）
+
+- 详见 README.md v0.2.0 段
 
 ### 2026-07-01 v0.1.0（克莱恩拍板建立）
 

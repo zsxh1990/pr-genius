@@ -34,6 +34,10 @@ agent_guidelines:
   merge_rate_30d: null
   close_keywords: []
   one_pr_friendly: false  # 评审慢风险高
+misakanet_queries:
+  - misakanet/lessons/contrib/stale-pr-handling.md  # 26 天无活动 stale PR 处置策略
+misakanet_lessons: []
+federation_status: declared-2026-07-02
 ---
 
 # qdrant/mcp-server-qdrant

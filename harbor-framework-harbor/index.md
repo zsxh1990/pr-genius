@@ -33,6 +33,10 @@ agent_guidelines:
   merge_rate_30d: null
   close_keywords: []
   one_pr_friendly: true
+misakanet_queries:
+  - misakanet/lessons/contrib/devin-ai-review-bot.md  # Harbor 接入 Devin AI review 经验
+misakanet_lessons: []
+federation_status: declared-2026-07-02
 ---
 
 # harbor-framework/harbor

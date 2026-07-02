@@ -37,6 +37,11 @@ agent_guidelines:
     - "not seeing major user pain"
     - "appreciate the initiative"
   one_pr_friendly: false  # CLA + changeset 流程重
+misakanet_queries:
+  - misakanet/lessons/contrib/cla-changeset-workflow.md  # CLA + changeset 强制流程经验
+  - misakanet/lessons/contrib/polite-close-vs-instant-close.md  # e2b 礼貌 vs vite 秒拒对比
+misakanet_lessons: []
+federation_status: declared-2026-07-02
 ---
 
 # e2b-dev/E2B

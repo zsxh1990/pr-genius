@@ -37,6 +37,13 @@ agent_guidelines:
     - "please add tests"
     - "AsyncSession"
   one_pr_friendly: true
+misakanet_queries:
+  - misakanet/lessons/contrib/default-parameter-trap.md  # honcho #801 db 默认参数陷阱已入 MisakaNet
+misakanet_lessons:
+  - id: default-parameter-trap
+    contributed_via: zsxh1990/honcho#801
+    absorbed_at: 2026-06-21
+federation_status: declared-2026-07-02
 ---
 
 # plastic-labs/honcho

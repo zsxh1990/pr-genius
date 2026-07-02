@@ -33,6 +33,10 @@ agent_guidelines:
   merge_rate_30d: null
   close_keywords: []
   one_pr_friendly: true
+misakanet_queries:
+  - misakanet/lessons/contrib/silent-failure-detection.md  # ctags 沉默失败检测
+misakanet_lessons: []
+federation_status: declared-2026-07-02
 ---
 
 # sourcebot-dev/sourcebot

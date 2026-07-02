@@ -35,6 +35,11 @@ agent_guidelines:
     - "autonomous"
     - "breaking change"
   one_pr_friendly: true
+misakanet_queries:
+  - misakanet/lessons/contrib/pr-strategy.md#external-pr-friendly-rate  # uv 友好度数据
+  - misakanet/lessons/contrib/pr-strategy.md#ai-assisted-disclosure-policy  # uv vs Claude Code 政策对比
+misakanet_lessons: []
+federation_status: declared-2026-07-02
 ---
 
 # astral-sh/uv

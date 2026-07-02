@@ -34,6 +34,10 @@ agent_guidelines:
   merge_rate_30d: null
   close_keywords: []
   one_pr_friendly: false  # PR 评审慢，多 PR 风险高
+misakanet_queries:
+  - misakanet/lessons/contrib/friendly-checkin-template.md  # Ikalus1988 发的 friendly check-in 模板
+misakanet_lessons: []
+federation_status: declared-2026-07-02
 ---
 
 # future-agi/future-agi

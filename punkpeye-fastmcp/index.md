@@ -34,6 +34,10 @@ agent_guidelines:
   close_keywords:
     - "prettier"
   one_pr_friendly: true
+misakanet_queries:
+  - misakanet/lessons/contrib/mcp-server-template.md  # MCP server 模板经验
+misakanet_lessons: []
+federation_status: declared-2026-07-02
 ---
 
 # punkpeye/fastmcp

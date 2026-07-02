@@ -103,6 +103,57 @@ mkdir research/big-repo-pr-knowledge/<org>-<repo>/
 - [uv PR 精简报告](../uv-pr-knowledge/report.md) — uv 调研原始数据
 - [OKF 规范](https://github.com/Sudhakaran88/okf-conformance/blob/main/CONFORMANCE.md)
 
+## 🔗 MisakaNet Federation（联邦声明，v0.3.0）
+
+> 本仓是 [MisakaNet](https://github.com/Ikalus1988/MisakaNet) 的**外部 PR 经验子库**。  
+> 采用**声明式联邦**模式：pr-genius 与 MisakaNet 主树互相声明对方为知识源，**不迁移内容、不改主树结构**。
+
+### 联邦原则
+
+- ✅ **声明 ≠ 迁移**：本仓保留完整所有权，MisakaNet 保留完整所有权
+- ✅ **查询路径而非内容**：本仓的 `misakanet_queries` 字段声明"想从 MisakaNet 拉取什么"，但实际查询走 MisakaNet
+- ✅ **单向贡献**：本仓的 lessons 可以被 MisakaNet 引用（如 honcho #801 的 default-parameter-trap），但不自动同步
+- ❌ **不**双向 push、❌ 不同步 commit、❌ 不改 MisakaNet 主树
+
+### 联邦字段规范
+
+```yaml
+# pr-genius 一侧（本仓）
+federates_with:
+  - misakanet/lessons/contrib/pr-strategy.md
+federation_mode: query-only
+
+# 每个 repo profile 加：
+misakanet_queries:
+  - <misakanet 路径>#<anchor>  # 本仓想拉的查询
+misakanet_lessons:
+  - id: <lesson-slug>
+    contributed_via: <org>/<repo>#<num>  # 反向贡献来源
+```
+
+### MisakaNet 一侧（计划中，克莱恩拍板后实施）
+
+预计在 MisakaNet 主树加：
+- `lessons/contrib/pr-strategy.md`（从本仓 8 仓画像蒸馏的策略总表）
+- `agents/sun/federation/peers/pr-genius.md`（太阳节点联邦声明）
+- `tools/federation.py`（双向查询脚本 v1）
+
+### 受益表
+
+| 谁 | 受益 |
+|---|---|
+| 太阳 (Misaka10004) | 提 PR 时 1ms 拉 yaml 控制流决策，不读 5k 散文 |
+| MisakaNet | 多一个外部 PR 经验数据源（只读） |
+| 后续 1000+ 节点 | 同上，无需重新调研 8 仓 |
+
+### 当前状态
+
+- ✅ 根 `index.md` 加 `federates_with`（v0.3.0）
+- ✅ 8 仓 repo profile 加 `misakanet_queries` + `misakanet_lessons`
+- ✅ 本 README 加 Federation 节
+- ✅ validate.py 不破（frontmatter / 死链 / 一致性全绿）
+- ⏸ MisakaNet 主树：不动（克莱恩拍板后）
+
 ## 引用本仓库
 
 ```bibtex
@@ -117,6 +168,14 @@ mkdir research/big-repo-pr-knowledge/<org>-<repo>/
 ---
 
 ## 📝 更新日志
+
+### 2026-07-02 v0.3.0（MisakaNet 联邦声明）
+
+- ✅ 根 `index.md` 加 `federates_with` 字段 + 2 个查询路径
+- ✅ 8 仓 repo profile 加 `misakanet_queries` + `misakanet_lessons` + `federation_status`
+- ✅ README 加 "MisakaNet Federation" 节（声明原则 + 字段规范 + 受益表）
+- ✅ **不动 MisakaNet 主树 / 不迁移内容 / 不改目录结构**
+- 触发：克莱恩 2026-07-02 23:07 GMT+8 拍板（federation gate）
 
 ### 2026-07-02 v0.2.0（克莱恩拍板升级 → Agent-first）
 
