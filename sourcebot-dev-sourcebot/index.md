@@ -1,0 +1,77 @@
+---
+type: Repo Profile
+title: sourcebot-dev/sourcebot PR 模式分析
+description: Sourcebot 仓 PR 模式 + zsxh1990 PR #1383 进展
+repo: sourcebot-dev/sourcebot
+url: https://github.com/sourcebot-dev/sourcebot
+star: 3553
+language: TypeScript
+zsxh_pr_count: 1
+status: in-flight
+analyzed_at: 2026-07-01
+tags:
+  - repo-profile
+  - code-search
+  - ctags
+  - typescript
+related:
+  - ./pr-1383-ctags-failure-detection.md
+---
+
+# sourcebot-dev/sourcebot
+
+> Sourcebot 是 self-hosted 代码搜索平台（替代 Sourcegraph）。  
+> **AI 友好度**：中（中型 startup，CodeRabbit 已配）。  
+> **zsxh1990 PR 经验**：1 个 open（#1383）。
+
+---
+
+## 1. 友好度画像
+
+- ✅ CodeRabbit 自动 review 配置
+- ✅ 中型 startup 风格（外部 PR 接受率较高）
+- ⚠️ maintainer 数量有限（4-6 人）
+
+---
+
+## 2. zsxh1990 PR 进展
+
+### 🟢 #1383 [feat: detect and surface ctags indexing failures](https://github.com/sourcebot-dev/sourcebot/pull/1383)
+
+| 维度 | 数据 |
+|---|---|
+| 创建 | 2026-06-28 09:23 UTC（3 天前） |
+| 状态 | open |
+| +60 / -6 / 2 files | 极小 PR（理想 size）|
+| CodeRabbit review | 1 actionable finding |
+
+**价值**：ctags 失败 = 用户最痛的"沉默失败"问题之一
+
+---
+
+## 3. 提 PR 方向
+
+### 🥇 indexing error reporting
+
+- 已有 #1383 基础 → 扩展：
+  - LSP indexer 失败检测
+  - Git clone 失败检测
+  - Per-connection 错误聚合
+
+### 🥈 search UX 改进
+
+- query syntax 高亮
+- filter UI 改进
+- saved searches
+
+### 🥉 connector 扩展
+
+- 新增 GitLab / Bitbucket connector
+- 改进 GitHub connector 速率限制处理
+
+---
+
+## 4. 关联文档
+
+- [OKF bundle 根入口](../index.md)
+- [PR #1383 案例深读](./pr-1383-ctags-failure-detection.md)

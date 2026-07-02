@@ -1,0 +1,103 @@
+# Big-Repo PR 知识库
+
+> 在大型开源项目（star ≥ 1k）上提 PR 的模式与经验沉淀。  
+> 收录对每个目标仓的**画像**（友好的维护者风格、提 PR 方向、SOP、反模式） + **单 PR 案例**（合并 / close / amend 完整链路）。  
+> 格式遵循 [Google Open Knowledge Format v0.1](https://github.com/Sudhakaran88/okf-conformance) —— 纯 Markdown + YAML frontmatter，路径即 ID，零运行时依赖。
+
+## 这是什么 / 给谁看
+
+- **作者背景**：维护者提外部 PR（AI-assisted 公开声明），失败/合并均记录。  
+- **读者画像**：想在大仓提 PR 的外部贡献者、想了解 vibe-coding / AI-assisted PR 在主流社区命中率的观察者、做工具自动化扫描的 agent。  
+- **不收录**：被永久拉黑的仓（microG / OpenBSD / GNOME / Linux kernel / systemd / Vite）、单 PR 失败仓（无重复模式可沉淀的）。  
+- **格式契约**：每个仓 = 1 个 `index.md`（Repo Profile）+ 1+ 个 `pr-<num>-<slug>.md`（PR Case Study），所有概念走 frontmatter `type` 字段分类。
+
+## 入口
+
+→ **[index.md](./index.md)** 是 OKF bundle 根入口（知识包主索引）
+
+## 统计
+
+| 维度 | 数据 |
+|---|---|
+| 覆盖大仓（star ≥ 1k）| **8 个** |
+| 总 .md 文件 | **17 个** |
+| Repo Profile（仓画像）| 8 |
+| PR Case Study（单 PR 深读）| 8 |
+| Knowledge Bundle（根入口）| 1 |
+| 总大小 | 76 KB |
+
+## 8 个大仓速查
+
+| 仓 | Star | 仓 Profile | 关键 PR |
+|---|---|---|---|
+| astral-sh/uv | 86.9k | [astral-sh-uv/](./astral-sh-uv/index.md) | [pr-19685](./astral-sh-uv/pr-19685-sarif-audit.md) |
+| plastic-labs/honcho | 5.6k | [plastic-labs-honcho/](./plastic-labs-honcho/index.md) | [pr-801](./plastic-labs-honcho/pr-801-queue-purge.md) |
+| harbor-framework/harbor | 2.8k | [harbor-framework-harbor/](./harbor-framework-harbor/index.md) | [pr-2121](./harbor-framework-harbor/pr-2121-optional-deps.md) |
+| punkpeye/fastmcp | 3.2k | [punkpeye-fastmcp/](./punkpeye-fastmcp/index.md) | [pr-282](./punkpeye-fastmcp/pr-282-test-with-ollama.md) |
+| sourcebot-dev/sourcebot | 3.5k | [sourcebot-dev-sourcebot/](./sourcebot-dev-sourcebot/index.md) | [pr-1383](./sourcebot-dev-sourcebot/pr-1383-ctags-failure-detection.md) |
+| future-agi/future-agi | 1.2k | [future-agi-future-agi/](./future-agi-future-agi/index.md) | [pr-778](./future-agi-future-agi/pr-778-span-list-without-project-id.md) |
+| qdrant/mcp-server-qdrant | 1.4k | [qdrant-mcp-server-qdrant/](./qdrant-mcp-server-qdrant/index.md) | [pr-143](./qdrant-mcp-server-qdrant/pr-143-ollama-provider.md) |
+| e2b-dev/E2B | 12.7k | [e2b-dev-e2b/](./e2b-dev-e2b/index.md) | [pr-1413](./e2b-dev-e2b/pr-1413-rich-to-ansi.md) |
+
+## OKF 合规
+
+- ✅ M1: bundle = 目录 + 17 .md 文件
+- ✅ M2: 每个 .md 以 YAML frontmatter 起头
+- ✅ M3: 每个概念文件有 `type` 字段（Knowledge Bundle / Repo Profile / PR Case Study）
+- ✅ M4: 59 个内部 .md 链接全部解析
+- ✅ M5: 路径即 ID
+- ✅ M6: 纯文本，无 SDK/网络依赖
+- ✅ S1: 根 `index.md` 入口
+- ✅ S2: 每子目录 `index.md` 索引子概念
+- ✅ S4: 无孤立文件
+
+## 工作流
+
+### 新仓加入
+
+```bash
+# 1. 创建子目录
+mkdir research/big-repo-pr-knowledge/<org>-<repo>/
+
+# 2. 写 <org>-<repo>/index.md（Repo Profile）
+#    - YAML frontmatter + type: Repo Profile
+#    - 友好度画像 + zsxh1990 PR 历史 + 提 PR 方向 + SOP + 反模式
+
+# 3. 写 <org>-<repo>/pr-<num>-<slug>.md（PR Case Study）
+#    - 每次提新 PR 都补一份
+
+# 4. 更新根 index.md（链接新仓）
+```
+
+### 增量更新
+
+每次提新 PR → 必须补 `PR Case Study`，否则不符合 OKF S3（单职责）。
+每次 close / merge → 更新对应 PR Case Study 的 `status` 字段 + 加教训到 `MEMORY.md`。
+
+## 关联
+
+- [OpenClaw PR 知识库（200 PR 深读）](../openclaw-pr-knowledge/README.md) — 单独归档，OpenClaw 是极端大仓
+- [uv PR 精简报告](../uv-pr-knowledge/report.md) — uv 调研原始数据
+- [OKF 规范](https://github.com/Sudhakaran88/okf-conformance/blob/main/CONFORMANCE.md)
+
+## 引用本仓库
+
+```bibtex
+@misc{pr-genius-2026,
+  title  = {Big-Repo PR Knowledge Base},
+  author = {zsxh1990},
+  year   = {2026},
+  url    = {https://github.com/zsxh1990/pr-genius}
+}
+```
+
+---
+
+## 📝 更新日志
+
+### 2026-07-01 v0.1.0（克莱恩拍板建立）
+
+- 创建 OKF bundle 结构（17 文件 / 8 仓）
+- 8 个仓 Profile + 8 个 PR Case Study 占位/完整
+- OKF M1-M6 + S1-S4 全合规
+- 增量规则：提新 PR → 自动补 PR Case Study
