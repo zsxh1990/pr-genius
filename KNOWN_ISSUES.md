@@ -2,74 +2,118 @@
 type: Schema Reference
 title: Known Issues
 description: pr-genius 已知数据瑕疵（待真实 PR 触发时一并修复）
-version: 0.1.0
+version: 0.2.0
 created: 2026-07-02
+updated: 2026-07-02
 ---
 
-# Known Issues — v0.4.0 review 发现
+# Known Issues — v0.5.0 review
 
-> 克莱恩 2026-07-02 23:29 GMT+8 拍板：先用真实 PR 验证 rounds 字段，再扩。
-> 本文件列出**已发现但不立即修**的数据瑕疵，下次真实 PR 触发时一并处理。
+> 克莱恩 2026-07-02 23:29 GMT+8 拍板节奏：先用真实 PR 验证 rounds 字段，再扩。
+> 2026-07-02 23:50 拍板 v0.5.0 schema 升级（基于 2 真实样本：honcho + qdrant）。
+> 本文件列出**已知数据瑕疵**，下次真实 PR 触发时一并处理。
 
-## v0.4.0 review 发现
+## ✅ v0.5.0 已修（关闭）
 
-### 1. uv #19685 delta 字段缺失
+### 1. delta 字段裸 null 歧义
+
+**原 issue**：`delta: null` 含义模糊（"无变更" vs "未测量"）  
+**修复**：v0.5.0 升级为对象 `{kind, value}`，3 种 kind `code_change` / `no_code_change` / `unknown`  
+**状态**：✅ **已修**（2026-07-02 v0.5.0 commit `a3e744c`）  
+**影响**：honcho 4 rounds + qdrant 3 rounds 已迁
+
+### 2. action 字符串无约束
+
+**原 issue**：action 字段是自由字符串（如 `"second check-in (zsxh1990) + close decision pending"`）  
+**修复**：v0.5.0 升级为 9 值枚举（`open`/`amend`/`bot_review`/`human_review`/`check_in`/`bump`/`close`/`merge`/`decision`）  
+**状态**：✅ **已修**  
+**影响**：所有迁移 case 的 action 现在是 enum 值
+
+### 3. close 决策信息无结构
+
+**原 issue**：close 类决策只能"塞进 action 字符串"或"野外字段"  
+**修复**：v0.5.0 schema 化 `close_decision: {status, reason, decided_at, actor}` case-level 字段  
+**状态**：✅ **已修**  
+**影响**：honcho + qdrant 都有 `close_decision: {status: pending, reason: ..., actor: zsxh1990}`
+
+---
+
+## 🟡 v0.5.0 仍未修（保留）
+
+### A. uv #19685 delta 真实值缺失
 
 **位置**：`astral-sh-uv/pr-19685-sarif-audit.md` round 1  
-**问题**：`delta: "未深读 (SARIF output 实现)"`  
-**应该**：写 `null` 或真实 diff 数字（+N / -M / K files）  
-**优先级**：低（不影响 rounds 字段的核心价值——保留攻防过程）  
-**修法时机**：下次提 uv PR 时，调 GH API 拉 PR #19685 真实 diff 补上
+**问题**：delta 写了 `unknown`（v0.5.0 正确），但**真实值未拉**  
+**修法时机**：下次提 uv PR 时调 GH API 拉 PR #19685 真实 diff 补 `value: "+N / -M / K files"`，然后把 `kind` 从 `unknown` 改成 `code_change`  
+**优先级**：低（语义已经准，只差真实数字）
 
-### 2. harbor #2121 / fastmcp #282 delta 来源
+### B. 6 未迁移 case 还在 warning 状态
 
-**位置**：`harbor-framework-harbor/pr-2121-optional-deps.md` round 1  
-**位置**：`punkpeye-fastmcp/pr-282-test-with-ollama.md` round 2  
-**问题**：delta 数字（+57/-23/6 等）从 case study body "规模"字段抄，没用 GH API 二次验证  
-**风险**：如果 case study body 当时记错了，rounds 就跟着错  
-**修法时机**：下次提 harbor/fastmcp PR 时调 GH API 验证
+**位置**：6 个 PR Case Study（uv #19685 / e2b #1413 / future-agi #778 / harbor #2121 / fastmcp #282 / sourcebot #1383）  
+**问题**：action 字符串 + delta 裸 string 仍在用 v0.1 格式  
+**修法时机**：克莱恩拍板时一次性迁移（用 `--strict` 跑 validate 看到 errors 后批量改）  
+**优先级**：中（gate #5 明示"别全仓大迁移"，保持 warning 是预期）
 
-### 3. 8 PR Case Study 缺 `commit` SHA
+### C. 8 PR Case Study 缺 `commit` SHA
 
 **位置**：全部 8 个  
-**问题**：除了 honcho #801 写了 commit `7ac3afe`，其他 7 个没 SHA  
-**原因**：当时手头没 GitHub CLI 实时拉，只能从 PR description 找  
-**修法时机**：下次有人维护 pr-genius 时一次性调 `gh pr view --json commits` 补齐
+**问题**：除了 honcho #801 写了 `7ac3afe`，其他 7 个没 SHA  
+**原因**：当时手头没 GitHub CLI 实时拉  
+**修法时机**：下次有人维护 pr-genius 时一次性 `gh pr view --json commits` 补齐  
+**优先级**：低
 
-### 4. E2B #1413 bot 名字核
+### D. E2B #1413 bot 名字核
 
 **位置**：`e2b-dev-e2b/pr-1413-rich-to-ansi.md` round 1  
 **bot**：`chatgpt-codex-connector[bot]`  
-**问题**：body 写 "chatgpt-codex-connector[bot] 自动 review" — 但 case study body 是 PR description 来源，没独立核  
-**风险**：bot 名字写错不影响 rounds 价值，但污染搜索关键词  
-**修法时机**：下次提 E2B PR 时调 `gh pr view 1413 --json reviews`
+**问题**：body 写 bot 名字，没独立核  
+**修法时机**：下次提 E2B PR 时调 `gh pr view 1413 --json reviews`  
+**优先级**：低
 
-## 待验证项（克莱恩要求的"用真实 PR 验证 rounds 够不够用"）
+---
 
-**目标**：跑 1-2 次真实 PR，更新 rounds 字段，看是否够用。
+## 🆕 v0.5.0 新发现（v0.4.1/2 闭环时发现）
+
+### E. profile `response_time_h_median` 实测值偏差大
+
+**位置**：`qdrant-mcp-server-qdrant/index.md`  
+**问题**：profile 估 `response_time_h_median: 168`（7 天），实测 672（28 天）= **4 倍低估**  
+**修法时机**：所有 profile 加 `verified_at: YYYY-MM-DD` 字段，闭环验证后更新；honcho + qdrant 已加，其它 6 仓下次闭环时加  
+**优先级**：中（Agent 决策基于 profile，估错会引导错方向）
+
+### F. profile 真实数据与文档脱节
+
+**位置**：`qdrant-mcp-server-qdrant/index.md`（zsxh1990 first check-in @ 7/1 04:36 UTC 完全没记录）  
+**问题**：body 写"26 天无活动"，实际 7/1 已经有 1 个 check-in  
+**修法时机**：每个 PR 闭环时，先用 GH API 拉 comments 重写 case study body  
+**优先级**：中
+
+---
+
+## 待验证项（克莱恩 23:29 拍板）
 
 ### 候选 PR
 
-- **首选**：honcho #801（如果 maintainer 响应 → bump + 等回应是一轮新数据）
-- **次选**：qdrant/mcp-server-qdrant #143（26 天 stale → 主动 close 是一轮"close"类样本）
+- **首选**：honcho #801（7/9 前无回应 → bump round 5）
+- **次选**：qdrant/mcp-server-qdrant #143（7/9 前无回应 → 主动 close round 4）
 - **备用**：future-agi #778（7/5 bump 是一轮 third-party check-in）
 
-### 验证维度
+### 验证维度（v0.5.0 升级后）
 
-- [ ] rounds 字段的 10 个字段（round/action/delta/...）是否够用？
-- [ ] 缺什么字段？（猜测可能缺 `ci_status: pass/fail`）
-- [ ] 多余字段？（猜测 `delta` 在某些 PR 不重要）
-- [ ] 时间戳精度（ISO-8601 UTC vs 简写）？
+- [ ] action enum 9 值够不够？
+- [ ] delta kind 3 种够不够？
+- [ ] close_decision status 5 种够不够？
 - [ ] rounds 长度上限？（一个 PR 多大轮次算"该止损"？）
 
 ## 节奏守则（克莱恩 23:29 拍板）
 
 - ❌ **不主动加新功能**（不再扩 agent_guidelines / anti-patterns / rounds）
-- ✅ **真实 PR 触发时一并修复上述 issues**
-- ✅ **每跑一次真实 PR，review 一次 rounds schema 够不够**
+- ✅ **真实 PR 触发时一并修复**
+- ✅ **每跑一次真实 PR，review 一次 schema 够不够**
 - ✅ **够用 → 沉淀到 MEMORY.md → 不动 schema**
-- ⚠️ **不够用 → 升级到 v0.5.0**
+- ⚠️ **不够用 → 升级到 v0.6.0**（不预设要升）
 
 ## 版本
 
+- v0.2.0 (2026-07-02 23:56)：v0.5.0 review，关 3 issues，加 2 new findings
 - v0.1.0 (2026-07-02)：初版

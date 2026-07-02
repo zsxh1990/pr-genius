@@ -42,14 +42,17 @@ conforms_to: OKF v0.1 (Sudhakaran88/okf-conformance) + agent_guidelines extensio
 | 维度 | 数据 |
 |---|---|
 | 覆盖大仓（star ≥ 1k）| **8 个** |
-| 总 .md 文件 | **26 个** |
+| 总 .md 文件 | **27 个** |
 | Repo Profile（仓画像）| 8 |
-| PR Case Study（单 PR 深读 + rounds）| 8 (全含多轮交互日志) |
+| PR Case Study（单 PR 深读 + rounds）| 8 |
+|   ├─ 已迁 v0.5.0 schema（action enum + delta object + close_decision）| 2 (honcho + qdrant) |
+|   └─ 未迁 v0.5.0 schema（warning 状态）| 6 |
 | Anti-Pattern（反模式）| 4 |
 | Schema Reference / Blacklist / Bundle | 6 |
-| 总大小 | ~250 KB |
+| 总大小 | ~255 KB |
 | Agent 友好度结构化（agent_guidelines）| **8/8 仓 ✅** |
 | 联邦声明（federates_with）| **根 + 8 仓 ✅** |
+| validate.py Check 数 | **4** (frontmatter / 死链 / 一致性 / rounds v0.5.0) |
 
 ## 8 个大仓速查
 
@@ -170,6 +173,16 @@ misakanet_lessons:
 ---
 
 ## 📝 更新日志
+
+### 2026-07-02 v0.5.0（rounds schema 实证升级）
+
+- ✅ **action 枚举化**（9 值：`open`/`amend`/`bot_review`/`human_review`/`check_in`/`bump`/`close`/`merge`/`decision`）
+- ✅ **delta 对象化**：`{kind, value}` 三类 `code_change` / `no_code_change` / `unknown` 解决裸 null 歧义
+- ✅ **close_decision case-level**：5 status `pending`/`close`/`keep_open`/`merged`/`superseded`，不再野外字段
+- ✅ **2 真实 PR 样本迁移**（honcho #801 4 rounds + qdrant #143 3 rounds）
+- ✅ **validate.py Check 4** + `--strict` 模式（非迁移 = warning，--strict = error）
+- ✅ **6 case 未迁移**（克莱恩 gate "别全仓大迁移"，保持 warning 状态）
+- 触发：honcho + qdrant 2 真实样本证明 schema 缺陷不个别 → 升 v0.5.0
 
 ### 2026-07-02 v0.4.0（多轮交互日志 rounds）
 
