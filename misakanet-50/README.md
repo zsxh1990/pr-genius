@@ -1,73 +1,75 @@
 ---
 type: Index
-title: MisakaNet Lessons — Real Failures + Recoveries
-description: pr-genius 仓下的 misakanet-style lessons (75+ score threshold)
-version: 0.2.0
+title: MisakaNet Lessons — pr-genius Source Quality Index
+description: pr-genius 仓下 misakanet-style lessons (75+ score threshold)
+version: 0.3.0
 created: 2026-07-03
 updated: 2026-07-03
 ---
 
 # misakanet-50/ — Lessons Index
 
-> 克莱恩拍板 (2026-07-03 00:14): 装 agent-reach + 抓 50 条 misakanet lesson。
-> 克莱恩纠正 (2026-07-03 00:46): **lesson 必须是真实故障 / fail 恢复**，不是新闻报道。
->
-> **Lesson 评分门槛**: 75+/100（per `https://github.com/Ikalus1988/MisakaNet/blob/main/lessons/LESSON_QUALITY_SCORING.md`）
+> 克莱恩 2026-07-03 拍板（v0.3.0 修订）：
+> - lesson **不要求真实事件**（克莱恩 00:57 纠正）
+> - **要求**：过程描述详尽 / 细节值得推敲 / 权威仓库推荐 / 主题类似 misakanet / 足够泛化 / 脱敏
+> - **要求**：建立置信度评分系统（见 `SCORING.md`）
 
-## 已有 lesson（10 条）
+## Lesson 评分门槛
 
-### 真实故障型（lesson-06 ~ lesson-10）✅ 符合克莱恩标准
+按 `SCORING.md` v0.1 体系：
+- **4 维度**：源可信度(30) + 细节质量(25) + 通用化(25) + 脱敏度(20)
+- **75+ 入库**（misakanet `LESSON_QUALITY_SCORING.md` 同步校验）
+- **A/B/D 三档**：A=85+/100, B=75-84, D=<75
 
-| # | 标题 | 评分 | 真实事件源 |
-|---|---|---|---|
-| 06 | Git push 撞 ikalus PAT 403 | 85 | pr-genius commit `291c4b7` (2026-07-02 23:36 GMT+8) |
-| 07 | uv venv --seed 替代缺 pip 的 venv | 90 | agent-reach 安装 (2026-07-03 00:25 GMT+8) |
-| 08 | pip install HTTPS_TIMEOUT 撞代理 | 85 | agent-reach 安装 (2026-07-03 00:30 GMT+8) |
-| 09 | V2EX API /api/topics/show.json 不稳 | 85 | lesson 抓取 (2026-07-03 00:42 GMT+8) |
-| 10 | agent-reach doctor 4/15 channel baseline | 80 | 安装完成 (2026-07-03 00:32 GMT+8) |
+## Lesson 分类（10 条 + 评分）
 
-### ⚠️ 新闻 / 观点报道型（lesson-01 ~ lesson-05）— 克莱恩 00:46 标记不符合标准
+### A. 真实故障 + 高源可信度（lesson-06 ~ 10）✅ 双向合格
 
-| # | 标题 | 评分 | 备注 |
-|---|---|---|---|
-| 01 | Vibe Coding Team Out of Control | 95 | 通用团队管理观点 — 保留作背景资料 |
-| 02 | AI Code Review: When to Skip vs Read | 95 | 行业哲学讨论 — 保留作背景资料 |
-| 03 | AI Monthly Cost Baseline | 90 | 数据调查 — 保留作背景资料 |
-| 04 | AI API Relay Risks | 85 | 安全分析 — 保留作背景资料 |
-| 05 | vless+xhttp+reality Blocked | 90 | 网络分析 — 保留作背景资料 |
+| # | 标题 | 源类型 | 源分 | 总分 | 主题 | misakanet 收录？ |
+|---|---|---|---|---|---|---|
+| 06 | git push 撞 ikalus PAT 403 | own-git-history | 25 | 85 | devops | ✅ |
+| 07 | uv venv --seed 替代缺 pip | own-install-experience | 25 | 90 | devops | ✅ |
+| 08 | pip install HTTPS_TIMEOUT 撞代理 | own-install-experience | 25 | 85 | devops | ✅ |
+| 09 | V2EX API /api/topics/show.json 不稳 | own-fetching | 22 | 85 | scraping | ✅ |
+| 10 | agent-reach doctor baseline | own-install-test | 22 | 80 | tooling | ✅ |
 
-**Lesson 1-5 状态**: 保留（不删除），但**不推送**到 misakanet 主仓。这些更适合作为个人 RAG 资料或新闻总结类内容，不是 misakanet 风格的 "故障+恢复" lesson。
+### B. 论坛高赞帖 + 主题类内（lesson-01, 02, 04, 05）✅ 主题内，可入库
 
-## 主题覆盖
+| # | 标题 | 源类型 | 源分 | 总分 | 主题 | misakanet 收录？ |
+|---|---|---|---|---|---|---|
+| 01 | Vibe Coding Team Out of Control | forum_thread (V2EX 93 reply) | 20 | 85 | agent | ✅ |
+| 02 | AI Code Review: When to Skip vs Read | forum_thread (V2EX 68 reply) | 20 | 85 | agent | ✅ |
+| 04 | AI API Relay Risks | forum_thread + own-knowledge | 22 | 83 | claude/codex | ✅ |
+| 05 | vless+xhttp+reality Blocked | forum_thread + own-knowledge | 22 | 83 | network | ✅ |
 
-| Domain | 真实故障 lesson | 总 lesson |
+### C. 主题不直接收（lesson-03）— 留作 pr-genius 个人资料
+
+| # | 标题 | 源类型 | 源分 | 总分 | 主题 | misakanet 收录？ |
+|---|---|---|---|---|---|---|
+| 03 | AI Monthly Cost Baseline | forum_thread (V2EX 130 reply) | 20 | 76 | data-survey | ❌ 不属于"踩坑"语义 |
+
+## 克莱恩纠偏记录
+
+| 时间 | 拍板 | 含义 |
 |---|---|---|
-| devops (CI/git/python env) | 06, 07, 08 (3) | 3 |
-| scraping (data fetch) | 09 (1) | 1 |
-| tooling (agent setup) | 10 (1) | 1 |
-| agent-collaboration | — | 2 (01, 02) |
-| operations | — | 1 (03) |
-| security | — | 1 (04) |
-| networking | — | 1 (05) |
+| 00:14 | 要 agent-reach + 50 lessons | 工具与目标 |
+| 00:46 | lesson 必须真实故障 | 起初标准 |
+| 00:57 | **纠正**：不要求真实，要求评分系统 | **修订标准**：源可信度 + 细节 + 通用化 + 脱敏 |
 
-## 与 misakanet 主仓的关系
-
-- **lesson-01 ~ lesson-10 全部在 pr-genius 仓**：`research/big-repo-pr-knowledge/misakanet-50/`
-- **未推送到 misakanet 主仓**（克莱恩 2026-07-03 删除了 MisakaNet 主仓禁区规则，但推送决策权仍归克莱恩）
-- **lesson 标准**: 严格遵循 `LESSON_QUALITY_SCORING.md` 75+ 门槛 + 真实故障语义
-- **真实事件优先**: 任何一条 lesson 都标注了真实事件时间戳，可在 git log / memory / agent-reach 输出中验证
+**v0.5.1 → v0.5.2 调整**：lesson-01 ~ 05 从"⚠️ 不符合"标记改成"✅ 主题内可入库"——克莱恩原意是"新闻报道 too shallow"，不是"不能用论坛源"。
 
 ## 下一步（克莱恩未拍板）
 
-- **继续写 lesson-11+**（克莱恩要的"50 条"还差 40 条）
-- **推送 lesson-06 ~ 10 到 misakanet 主仓**（以 PR 形式）
-- **重写 lesson-01 ~ 05**（把新闻报道改成真实故障——但需要先有真实事件，否则就只是包装）
-- **暂停 / 调整方向**（任何时候）
+- **A**: 推送 lesson-01/02/04/05/06/07/08/09/10 到 misakanet 主仓（PR 形式）
+- **B**: 继续抓 lesson-11+（用 GitHub Search API 找权威 issue/discussion）
+- **C**: 用 `SCORING.md` 重评分全部 10 条 + 输出"推送候选"列表
+- **D**: 暂停 / 调整方向
 
 ## 节奏守则
 
 克莱恩 2026-07-03 拍板：
-- 真实事件优先 — 不编造场景
-- 卡点翻 misakanet 现成 lesson（不需要请示）
-- 75+ 评分门槛 — 不达不收
-- 不动 destructive 操作（不删 commit 历史、不 force push）
+- **过程描述详尽 / 细节值得推敲** = lesson 价值的核心
+- **权威源推荐** = 4 维度里源可信度的关键
+- **不要为抓取而抓取**：lesson 主题必须类内 + 可复用 + 脱敏
+- 75+ 评分门槛
+- 不动 destructive 操作
