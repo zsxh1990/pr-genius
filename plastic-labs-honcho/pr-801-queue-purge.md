@@ -21,18 +21,22 @@ related_issues:
   - https://github.com/plastic-labs/honcho/issues/799
 rounds:
   - round: 1
-    action: "open PR"
-    delta: "+283 / -0 / 3 files"
-    response_time_h: 0.5  # CodeRabbit 几小时内首轮
-    maintainer_action: null  # 仅 bot 反馈
+    action: open
+    delta:
+      kind: code_change
+      value: "+283 / -0 / 3 files"
+    response_time_h: 0.5
+    maintainer_action: null
     bot_review:
       - "coderabbit: 2 actionable + 1 outside-diff (DB session injection / ORM count anti-pattern)"
     blocker: null
     resolution: null
     timestamp: "2026-06-12T01:44:47Z"
   - round: 2
-    action: "amend (self-report)"
-    delta: "+50 / -10 / 3 files"  # 修复 db 默认参数 + count anti-pattern
+    action: amend
+    delta:
+      kind: unknown  # 本轮 delta 未从 GH API 验证
+      value: null
     response_time_h: 1
     maintainer_action: null
     bot_review:
@@ -42,26 +46,38 @@ rounds:
     commit: "7ac3afe"
     timestamp: "2026-06-20T14:18:45Z"
   - round: 3
-    action: "third-party check-in (Ikalus1988)"
+    action: check_in
+    delta:
+      kind: no_code_change
+      value: null
     response_time_h: 188  # 7.8 天（自 round 2 后）
-    maintainer_action: null  # 仍仅 bot
+    maintainer_action: null
     bot_review: []
     blocker: null
     resolution: "@Ikalus1988 (克莱恩主号) friendly check-in: 'CodeRabbit caught two bugs which I've fixed in 7ac3afe. Let me know if there's ...'"
     timestamp: "2026-06-28T07:25:58Z"
   - round: 4
-    action: "second check-in (zsxh1990)"
-    delta: null  # 无代码变更
+    action: check_in
+    delta:
+      kind: no_code_change
+      value: null
     response_time_h: 96  # 4 天（自 round 3 后）
     maintainer_action: null
     bot_review: []
     blocker: "19 天无 maintainer 真实 review（超 profile 预估 3-7 天）"
     resolution: "friendly check-in ping (comment_id 4867501007): 'Addressed all CodeRabbit findings... Happy to make any adjustments.'"
     timestamp: "2026-07-02T15:35:03Z"
+close_decision:
+  status: pending
+  reason: "21 天 open, 2 check-ins, 无 maintainer 真实 review"
+  decided_at: null
+  actor: zsxh1990
 final_status: open
 opened_at: "2026-06-12T01:44:47Z"
 last_activity: "2026-07-02T15:35:03Z"
-next_action: "7/9 前无回应 → zsxh1990 再 bump；7/16 前无回应 → 主动 close"
+stale_days: 21
+next_action: "7/9 前无回应 → bump (round 5)；7/16 前无回应 → close (round 6)"
+schema_version: rounds-v0.2.0
 ---
 
 # honcho PR #801: feat: add queue purge endpoint for stranded work units

@@ -77,6 +77,61 @@ def check_frontmatter(files: list[Path]) -> None:
 
 LINK_RE = re.compile(r"\[([^\]]*)\]\((\./[^)]+\.md)\)")
 
+# v0.2.0 schema enum + delta object validation
+ACTION_ENUM = {
+    "open", "amend", "bot_review", "human_review",
+    "check_in", "bump", "close", "merge", "decision",
+}
+DELTA_KINDS = {"code_change", "no_code_change", "unknown"}
+CLOSE_DECISION_STATUS = {"pending", "close", "keep_open", "merged", "superseded"}
+
+def check_rounds_schema(files: list[Path], strict: bool = False) -> None:
+    """Check 4 (v0.2.0): PR Case Study rounds + delta + close_decision schema.
+
+    Non-migrated PR Case Studies emit warnings, not errors.
+    Use --strict to upgrade warnings to errors (for full-migration mode).
+    """
+    print(f"[Check 4] Rounds schema v0.2.0 (PR Case Study only, non-migrated = warning)")
+    target = errors if strict else warnings
+    for f in files:
+        text = f.read_text(encoding="utf-8")
+        fm, _ = parse_frontmatter(text)
+        if fm is None or fm.get("type") != "PR Case Study":
+            continue
+        rounds = fm.get("rounds")
+        if rounds is None:
+            continue  # backward compat: case studies w/o rounds skip
+
+        for r in rounds:
+            rnum = r.get("round", "?")
+            # action enum
+            action = r.get("action")
+            if action is not None and action not in ACTION_ENUM:
+                target.append(
+                    f"{f.relative_to(ROOT)} round {rnum}: action `{action}` not in enum {sorted(ACTION_ENUM)}"
+                )
+            # delta object
+            delta = r.get("delta")
+            if delta is not None and not isinstance(delta, dict):
+                target.append(
+                    f"{f.relative_to(ROOT)} round {rnum}: delta must be object {{kind, value}} not {type(delta).__name__}"
+                )
+            elif isinstance(delta, dict):
+                kind = delta.get("kind")
+                if kind not in DELTA_KINDS:
+                    target.append(
+                        f"{f.relative_to(ROOT)} round {rnum}: delta.kind `{kind}` not in {sorted(DELTA_KINDS)}"
+                    )
+
+        # close_decision case-level
+        cd = fm.get("close_decision")
+        if cd is not None and isinstance(cd, dict):
+            status = cd.get("status")
+            if status not in CLOSE_DECISION_STATUS:
+                target.append(
+                    f"{f.relative_to(ROOT)}: close_decision.status `{status}` not in {sorted(CLOSE_DECISION_STATUS)}"
+                )
+
 def check_internal_links(files: list[Path]) -> None:
     """Check 2: all internal [text](./path.md) links resolve."""
     print(f"[Check 2] Internal links resolve")
@@ -128,6 +183,7 @@ def main() -> int:
 
     check_frontmatter(md_files)
     check_internal_links(md_files)
+    check_rounds_schema(md_files, strict="--strict" in sys.argv)
 
     # Find subdirectories (Repo Profile roots)
     repo_dirs = [p for p in ROOT.iterdir() if p.is_dir() and not p.name.startswith(".")]
