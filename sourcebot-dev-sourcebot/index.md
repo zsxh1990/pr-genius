@@ -16,6 +16,23 @@ tags:
   - typescript
 related:
   - ./pr-1383-ctags-failure-detection.md
+agent_guidelines:
+  allow_unsolicited_pr: true
+  require_signed_off: false
+  require_cla: false
+  require_changeset: false
+  require_issue_first: false
+  ai_policy: welcoming
+  ai_assisted_disclosure: false
+  human_required_in: []
+  maintainer_vibe: responsive
+  bot_review: coderabbit
+  ci_first_run_needs_approval: false
+  default_branch: main
+  response_time_h_median: 48
+  merge_rate_30d: null
+  close_keywords: []
+  one_pr_friendly: true
 ---
 
 # sourcebot-dev/sourcebot

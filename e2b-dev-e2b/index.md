@@ -17,6 +17,26 @@ tags:
   - error-handler-archived
 related:
   - ./pr-1413-rich-to-ansi.md
+agent_guidelines:
+  allow_unsolicited_pr: true
+  require_signed_off: false
+  require_cla: true  # @cla-bot 强制
+  require_changeset: true  # @changeset-bot 强制
+  require_issue_first: false
+  ai_policy: restrictive
+  ai_assisted_disclosure: true
+  human_required_in: [comments]  # 推断：mishushakov 互动礼貌 = 人类在 loop
+  maintainer_vibe: strict
+  bot_review: none
+  ci_first_run_needs_approval: false
+  default_branch: main
+  response_time_h_median: 9  # 9h 考虑后拒 (PR #1458 验证)
+  merge_rate_30d: null
+  close_keywords:
+    - "we're not adding this feature"
+    - "not seeing major user pain"
+    - "appreciate the initiative"
+  one_pr_friendly: false  # CLA + changeset 流程重
 ---
 
 # e2b-dev/E2B

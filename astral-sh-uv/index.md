@@ -16,6 +16,25 @@ tags:
   - ai-friendly-conditional
 related:
   - ./pr-19685-sarif-audit.md
+agent_guidelines:
+  allow_unsolicited_pr: true
+  require_signed_off: false
+  require_cla: false
+  require_changeset: false
+  require_issue_first: false
+  ai_policy: conditional
+  ai_assisted_disclosure: true
+  human_required_in: [pr_body, comments, all_autonomous_forbidden]
+  maintainer_vibe: responsive
+  bot_review: none
+  ci_first_run_needs_approval: false
+  default_branch: main
+  response_time_h_median: 12
+  merge_rate_30d: 0.729
+  close_keywords:
+    - "autonomous"
+    - "breaking change"
+  one_pr_friendly: true
 ---
 
 # astral-sh/uv

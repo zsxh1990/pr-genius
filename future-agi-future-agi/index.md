@@ -17,6 +17,23 @@ tags:
   - priority-followup
 related:
   - ./pr-778-span-list-without-project-id.md
+agent_guidelines:
+  allow_unsolicited_pr: true
+  require_signed_off: false
+  require_cla: false
+  require_changeset: false
+  require_issue_first: false
+  ai_policy: welcoming
+  ai_assisted_disclosure: false
+  human_required_in: []
+  maintainer_vibe: slow
+  bot_review: entelligence
+  ci_first_run_needs_approval: false
+  default_branch: main
+  response_time_h_median: 168  # 3-7 天
+  merge_rate_30d: null
+  close_keywords: []
+  one_pr_friendly: false  # PR 评审慢，多 PR 风险高
 ---
 
 # future-agi/future-agi

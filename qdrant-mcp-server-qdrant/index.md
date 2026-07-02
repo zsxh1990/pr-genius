@@ -17,6 +17,23 @@ tags:
   - stale
 related:
   - ./pr-143-ollama-provider.md
+agent_guidelines:
+  allow_unsolicited_pr: true
+  require_signed_off: false
+  require_cla: false
+  require_changeset: false
+  require_issue_first: false
+  ai_policy: welcoming
+  ai_assisted_disclosure: false
+  human_required_in: []
+  maintainer_vibe: slow  # 26 天无活动验证
+  bot_review: none
+  ci_first_run_needs_approval: false
+  default_branch: master  # ⚠️ 标准是 main，需手动切换 base
+  response_time_h_median: 168  # 待 #143 ping 验证
+  merge_rate_30d: null
+  close_keywords: []
+  one_pr_friendly: false  # 评审慢风险高
 ---
 
 # qdrant/mcp-server-qdrant

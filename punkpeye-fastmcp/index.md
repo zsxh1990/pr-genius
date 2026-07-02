@@ -16,6 +16,24 @@ tags:
   - llm-testing
 related:
   - ./pr-282-test-with-ollama.md
+agent_guidelines:
+  allow_unsolicited_pr: true
+  require_signed_off: false
+  require_cla: false
+  require_changeset: false
+  require_issue_first: false
+  ai_policy: welcoming
+  ai_assisted_disclosure: false
+  human_required_in: []
+  maintainer_vibe: responsive
+  bot_review: none
+  ci_first_run_needs_approval: true  # 首提 PR 时 maintainer 需触发 CI
+  default_branch: main
+  response_time_h_median: 24
+  merge_rate_30d: null
+  close_keywords:
+    - "prettier"
+  one_pr_friendly: true
 ---
 
 # punkpeye/fastmcp

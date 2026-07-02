@@ -1,3 +1,17 @@
+---
+type: Knowledge Bundle
+title: Big-Repo PR 知识库
+description: 大型开源项目（star ≥ 1k）PR 模式 + 经验沉淀，Agent 可读结构化数据
+version: 0.2.0
+created: 2026-07-01
+updated: 2026-07-02
+author: zsxh1990 + 太阳 (Misaka10004)
+based_on:
+  - openclaw-pr-knowledge/report.md
+  - uv-pr-knowledge/report.md
+conforms_to: OKF v0.1 (Sudhakaran88/okf-conformance) + agent_guidelines extension
+---
+
 # Big-Repo PR 知识库
 
 > 在大型开源项目（star ≥ 1k）上提 PR 的模式与经验沉淀。  
@@ -15,16 +29,25 @@
 
 → **[index.md](./index.md)** 是 OKF bundle 根入口（知识包主索引）
 
+## 进阶结构（Agent-first）
+
+- 📋 **[AGENT_GUIDELINES_SCHEMA.md](./AGENT_GUIDELINES_SCHEMA.md)** — 每个仓 frontmatter 里 `agent_guidelines` 字段的 schema（Agent 可读 yaml 控制流）
+- 🚫 **[BLACKLIST.md](./BLACKLIST.md)** — 永久拉黑仓（Vite / microG / OpenBSD / GNOME / Linux / systemd）
+- ⚠️  **[anti-patterns/](./anti-patterns/README.md)** — 可检索反模式库（CI 报错 / 维护者拒绝语 → fix_action 秒级自愈）
+- 🔧  **[validate.py](./validate.py)** — OKF v0.1 校验脚本（frontmatter + 死链 + 一致性）
+
 ## 统计
 
 | 维度 | 数据 |
 |---|---|
 | 覆盖大仓（star ≥ 1k）| **8 个** |
-| 总 .md 文件 | **17 个** |
+| 总 .md 文件 | **25 个** |
 | Repo Profile（仓画像）| 8 |
 | PR Case Study（单 PR 深读）| 8 |
-| Knowledge Bundle（根入口）| 1 |
-| 总大小 | 76 KB |
+| Anti-Pattern（反模式）| 4 |
+| Schema Reference / Blacklist / Bundle | 5 |
+| 总大小 | 248 KB |
+| Agent 友好度结构化（agent_guidelines）| **8/8 仓 ✅** |
 
 ## 8 个大仓速查
 
@@ -94,6 +117,17 @@ mkdir research/big-repo-pr-knowledge/<org>-<repo>/
 ---
 
 ## 📝 更新日志
+
+### 2026-07-02 v0.2.0（克莱恩拍板升级 → Agent-first）
+
+- ✅ **agent_guidelines 字段** 加入所有 8 仓 frontmatter（17 个 yaml 键）
+- ✅ **AGENT_GUIDELINES_SCHEMA.md** 文档（schema 定义 + 调用示例）
+- ✅ **BLACKLIST.md** 永久拉黑仓排雷指南（6 仓 + 2 归档方向）
+- ✅ **anti-patterns/** 目录（4 条真实反模式：uv cargo fmt / Vite 秒拒 / honcho db 陷阱 / e2b not adding）
+- ✅ **validate.py** OKF v0.1 校验脚本（frontmatter + 死链 + 一致性，3 check）
+- ✅ README 加 frontmatter + 进阶结构章节
+- 触发：克莱恩 5 条升级建议（结构化友好度 / 反模式 / 多轮日志 / 黑名单 / 校验脚本）前 4 条落地
+- 下一步：阶段 3（多轮交互日志 rounds 字段）—— 克莱恩拍板后启动
 
 ### 2026-07-01 v0.1.0（克莱恩拍板建立）
 
