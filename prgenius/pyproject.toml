@@ -1,0 +1,37 @@
+[project]
+name = "prgenius"
+version = "0.1.0"
+description = "Evidence-backed lookup for big-repo PR contributions. Local-only, zero-runtime, stdlib-first."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name = "pr-genius contributors"}]
+keywords = ["okf", "pr-knowledge", "agent-readable", "contribution-intelligence", "evidence"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Documentation",
+]
+dependencies = []  # stdlib only
+
+[project.scripts]
+prgenius = "prgenius.cli:main"
+
+[project.urls]
+"Homepage" = "https://github.com/zsxh1990/pr-genius"
+"Issues" = "https://github.com/zsxh1990/pr-genius/issues"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+prgenius = ["py.typed"]

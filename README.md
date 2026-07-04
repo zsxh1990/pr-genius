@@ -5,7 +5,7 @@ description: 大型开源项目（star ≥ 1k）PR 模式 + 经验沉淀，Agent
 version: 0.2.0
 created: 2026-07-01
 updated: 2026-07-02
-author: zsxh1990 + 太阳 (Misaka10004)
+author: zsxh1990
 based_on:
   - openclaw-pr-knowledge/report.md
   - uv-pr-knowledge/report.md
@@ -204,20 +204,20 @@ misakanet_lessons:
     contributed_via: <org>/<repo>#<num>  # 反向贡献来源
 ```
 
-### MisakaNet 一侧（计划中，克莱恩拍板后实施）
+### MisakaNet 一侧（计划中）
 
 预计在 MisakaNet 主树加：
 - `lessons/contrib/pr-strategy.md`（从本仓 8 仓画像蒸馏的策略总表）
-- `agents/sun/federation/peers/pr-genius.md`（太阳节点联邦声明）
+- `agents/sun/federation/peers/pr-genius.md`（自动代理节点 联邦声明）
 - `tools/federation.py`（双向查询脚本 v1）
 
 ### 受益表
 
-| 谁 | 受益 |
+| 受益方 | 受益方式 |
 |---|---|
-| 太阳 (Misaka10004) | 提 PR 时 1ms 拉 yaml 控制流决策，不读 5k 散文 |
-| MisakaNet | 多一个外部 PR 经验数据源（只读） |
-| 后续 1000+ 节点 | 同上，无需重新调研 8 仓 |
+| External contributors | 提 PR 时 0ms 拉 yaml 控制流决策，不读 5k 散文 |
+| MisakaNet federation | 多一个外部 PR 经验数据源（只读） |
+| Downstream nodes | 同上，无需重新调研 8 仓 |
 
 ### 当前状态
 
@@ -225,7 +225,6 @@ misakanet_lessons:
 - ✅ 8 仓 repo profile 加 `misakanet_queries` + `misakanet_lessons`
 - ✅ 本 README 加 Federation 节
 - ✅ validate.py 不破（frontmatter / 死链 / 一致性全绿）
-- ⏸ MisakaNet 主树：不动（克莱恩拍板后）
 
 ## 引用本仓库
 
@@ -249,7 +248,7 @@ misakanet_lessons:
 - ✅ **close_decision case-level**：5 status `pending`/`close`/`keep_open`/`merged`/`superseded`，不再野外字段
 - ✅ **2 真实 PR 样本迁移**（honcho #801 4 rounds + qdrant #143 3 rounds）
 - ✅ **validate.py Check 4** + `--strict` 模式（非迁移 = warning，--strict = error）
-- ✅ **6 case 未迁移**（克莱恩 gate "别全仓大迁移"，保持 warning 状态）
+- ✅ **6 case 未迁移**（maintainer gate "别全仓大迁移"，保持 warning 状态；— 2026-07-04 v0.6.2 后已迁 0 个剩余，待 v0.7.0 BC 门面后重启）
 - 触发：honcho + qdrant 2 真实样本证明 schema 缺陷不个别 → 升 v0.5.0
 
 ### 2026-07-02 v0.4.0（多轮交互日志 rounds）
@@ -258,7 +257,7 @@ misakanet_lessons:
 - ✅ **8/8 PR Case Study** 全加 `rounds` 字段（保留攻防过程，不只是结果）
 - 总 rounds 计数：uv 2 / honcho 3 / harbor 1 / fastmcp 2 / sourcebot 1 / future-agi 3 / qdrant 1 / E2B 2
 - 最终状态：1 merged (E2B #1413) / 1 closed-not-merged (uv #19685) / 6 open（含 1 stale）
-- 触发：克莱恩 5 条升级建议第 3 条「多轮交互逻辑」+ 2026-07-02 23:25 GMT+8 拍板启动
+- 触发：5 条升级建议第 3 条「多轮交互逻辑」+ 2026-07-02 23:25 GMT+8 拍板启动
 
 ### 2026-07-02 v0.3.0（MisakaNet 联邦声明）
 
@@ -266,9 +265,9 @@ misakanet_lessons:
 - ✅ 8 仓 repo profile 加 `misakanet_queries` + `misakanet_lessons` + `federation_status`
 - ✅ README 加 "MisakaNet Federation" 节（声明原则 + 字段规范 + 受益表）
 - ✅ **不动 MisakaNet 主树 / 不迁移内容 / 不改目录结构**
-- 触发：克莱恩 2026-07-02 23:07 GMT+8 拍板（federation gate）
+- 触发：2026-07-02 23:07 GMT+8 拍板（federation gate）
 
-### 2026-07-02 v0.2.0（克莱恩拍板升级 → Agent-first）
+### 2026-07-02 v0.2.0（maintainer 拍板升级 → Agent-first）
 
 - ✅ **agent_guidelines 字段** 加入所有 8 仓 frontmatter（17 个 yaml 键）
 - ✅ **AGENT_GUIDELINES_SCHEMA.md** 文档（schema 定义 + 调用示例）
@@ -276,10 +275,10 @@ misakanet_lessons:
 - ✅ **anti-patterns/** 目录（4 条真实反模式：uv cargo fmt / Vite 秒拒 / honcho db 陷阱 / e2b not adding）
 - ✅ **validate.py** OKF v0.1 校验脚本（frontmatter + 死链 + 一致性，3 check）
 - ✅ README 加 frontmatter + 进阶结构章节
-- 触发：克莱恩 5 条升级建议（结构化友好度 / 反模式 / 多轮日志 / 黑名单 / 校验脚本）前 4 条落地
-- 下一步：阶段 3（多轮交互日志 rounds 字段）—— 克莱恩拍板后启动
+- 触发：5 条升级建议（结构化友好度 / 反模式 / 多轮日志 / 黑名单 / 校验脚本）前 4 条落地
+- 下一步：阶段 3（多轮交互日志 rounds 字段）—— 拍板后启动
 
-### 2026-07-01 v0.1.0（克莱恩拍板建立）
+### 2026-07-01 v0.1.0（maintainer 拍板建立）
 
 - 创建 OKF bundle 结构（17 文件 / 8 仓）
 - 8 个仓 Profile + 8 个 PR Case Study 占位/完整

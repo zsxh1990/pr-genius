@@ -32,6 +32,7 @@ desktop.ini
 .tmp/
 cache/
 *.log
+data/  # generated snapshots (validate.py --snapshot)
 
 # Sensitive
 secrets.txt

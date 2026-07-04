@@ -89,8 +89,17 @@ ACTION_ENUM = {
 }
 DELTA_KINDS = {"code_change", "no_code_change", "unknown"}
 CLOSE_DECISION_STATUS = {"pending", "close", "keep_open", "merged", "superseded"}
+# v0.7.0 evidence (all optional, validates when present)
+CONFIDENCE_VALUES = {"high", "medium", "low"}
+EVIDENCE_URL_RE = re.compile(r"^https?://")
 
-def check_rounds_schema(files: list[Path], strict: bool = False) -> None:
+def check_rounds_schema(files: list[Path], strict: bool = False, enforce_evidence: bool = False) -> None:
+    """Check 4 (v0.2.0): PR Case Study rounds + delta + close_decision schema.
+
+    Non-migrated PR Case Studies emit warnings, not errors.
+    Use --strict to upgrade warnings to errors (for full-migration mode).
+    Use --enforce-evidence to require v0.7.0 evidence fields (case-level).
+    """
     """Check 4 (v0.2.0): PR Case Study rounds + delta + close_decision schema.
 
     Non-migrated PR Case Studies emit warnings, not errors.
@@ -127,6 +136,20 @@ def check_rounds_schema(files: list[Path], strict: bool = False) -> None:
                     target.append(
                         f"{f.relative_to(ROOT)} round {rnum}: delta.kind `{kind}` not in {sorted(DELTA_KINDS)}"
                     )
+                # v0.7.0 evidence fields (optional, BC preserved):
+                # - verified_at (ISO-8601 string)
+                # - evidence_urls (list of http(s) URLs)
+                # - confidence (enum)
+                if delta.get("verified_at") is not None:
+                    if not isinstance(delta["verified_at"], str):
+                        target.append(f"{f.relative_to(ROOT)} round {rnum}: delta.verified_at must be string")
+                if delta.get("evidence_urls") is not None:
+                    urls = delta["evidence_urls"]
+                    if not isinstance(urls, list) or any(not isinstance(u, str) or not EVIDENCE_URL_RE.match(u) for u in urls):
+                        target.append(f"{f.relative_to(ROOT)} round {rnum}: delta.evidence_urls must be list of http(s) URLs")
+                if delta.get("confidence") is not None:
+                    if delta["confidence"] not in CONFIDENCE_VALUES:
+                        target.append(f"{f.relative_to(ROOT)} round {rnum}: delta.confidence `{delta['confidence']}` not in {sorted(CONFIDENCE_VALUES)}")
 
         # close_decision case-level
         cd = fm.get("close_decision")
@@ -136,6 +159,28 @@ def check_rounds_schema(files: list[Path], strict: bool = False) -> None:
                 target.append(
                     f"{f.relative_to(ROOT)}: close_decision.status `{status}` not in {sorted(CLOSE_DECISION_STATUS)}"
                 )
+
+        # v0.7.0 case-level evidence (optional)
+        for field in ("verified_at", "evidence_urls", "confidence"):
+            if field in fm and field not in {"verified_at", "evidence_urls"}:
+                # skip — these are top-level OK
+                pass
+        if fm.get("verified_at") is not None:
+            if not isinstance(fm["verified_at"], str):
+                target.append(f"{f.relative_to(ROOT)}: case-level verified_at must be string")
+        if fm.get("evidence_urls") is not None:
+            urls = fm["evidence_urls"]
+            if not isinstance(urls, list) or any(not isinstance(u, str) or not EVIDENCE_URL_RE.match(u) for u in urls):
+                target.append(f"{f.relative_to(ROOT)}: case-level evidence_urls must be list of http(s) URLs")
+        if fm.get("confidence") is not None and fm["confidence"] not in CONFIDENCE_VALUES:
+            target.append(f"{f.relative_to(ROOT)}: case-level confidence `{fm['confidence']}` not in {sorted(CONFIDENCE_VALUES)}")
+
+        # v0.7.0 evidence gate: when --enforce-evidence is on, case-level
+        # evidence is required (so a 100% evidence coverage check is possible).
+        if enforce_evidence:
+            for field in ("verified_at", "evidence_urls"):
+                if field not in fm or fm.get(field) in (None, [], ""):
+                    target.append(f"{f.relative_to(ROOT)}: --enforce-evidence: case-level `{field}` required")
 
 def check_internal_links(files: list[Path]) -> None:
     """Check 2: all internal [text](./path.md) links resolve."""
@@ -188,12 +233,35 @@ def main() -> int:
 
     check_frontmatter(md_files)
     check_internal_links(md_files)
-    check_rounds_schema(md_files, strict="--strict" in sys.argv)
+    check_rounds_schema(
+        md_files,
+        strict="--strict" in sys.argv,
+        enforce_evidence="--enforce-evidence" in sys.argv,
+    )
 
     # Find subdirectories (Repo Profile roots)
     repo_dirs = [p for p in ROOT.iterdir() if p.is_dir() and not p.name.startswith(".")]
     root_index = ROOT / "index.md"
     check_root_index_consistency(root_index, repo_dirs)
+
+    # T4: emit snapshot stats (used by validate.py --snapshot and scripts/dashboard.py)
+    if "--snapshot" in sys.argv:
+        import json as _json
+        from datetime import datetime as _dt, timezone as _tz
+        profile_count = sum(1 for d in repo_dirs if (d / "index.md").exists())
+        case_count = sum(1 for f in md_files if f.name.startswith("pr-"))
+        api_path = ROOT / "data" / "snapshot.json"
+        api_path.parent.mkdir(exist_ok=True)
+        api_path.write_text(_json.dumps({
+            "ran_at": _dt.now(_tz.utc).isoformat(),
+            "files_total": len(md_files),
+            "profiles": profile_count,
+            "case_studies": case_count,
+            "errors": len(errors),
+            "warnings": len(warnings),
+        }, indent=2))
+        print(f"[Snapshot] wrote {api_path}")
+        print(f"   profiles={profile_count} case_studies={case_count} errors={len(errors)} warnings={len(warnings)}")
 
     print()
     print("=" * 60)

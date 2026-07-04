@@ -1,14 +1,10 @@
-#!/usr/bin/env python3
-"""
-pr-genius dashboard — open PR tracker.
+"""pr-genius dashboard — open PR tracker.
+
+Refactored: reads data/snapshot.json if present (emitted by validate.py --snapshot)
+so the n-counts are not hand-written and won't drift.
 
 Lists every tracked PR Case Study's final_status + days idle + relevant
 fields, sorted by age descending.
-
-Usage:
-    python3 scripts/dashboard.py           # markdown table on stdout
-    python3 scripts/dashboard.py --json    # JSON output
-    python3 scripts/dashboard.py --stale   # only show >14d open cases
 """
 import json
 import re
@@ -18,23 +14,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
-# Read PAT from ~/.git-credentials (zsxh1990 account) for live refresh, else
-# read days_idle from frontmatter only. Default = offline mode.
-
 STATUS_ORDER = {
-    "pending": 0,        # not yet decided
-    "open": 1,
-    "in-flight": 1,
-    "merged": 2,
-    "closed": 3,         # closed-not-merged or fail
-    "superseded": 4,
-    "keep_open": 1,
+    "pending": 0, "open": 1, "in-flight": 1,
+    "merged": 2, "closed": 3, "superseded": 4, "keep_open": 1,
 }
 
 
 def parse_frontmatter(text: str) -> dict:
     m = re.match(r'---\n(.*?)\n---', text, re.DOTALL)
-    if not m: return {}
+    if not m:
+        return {}
     fm = {}
     for line in m.group(1).splitlines():
         kv = line.split(':', 1)
@@ -49,20 +38,15 @@ def gather_case_studies() -> list:
     rows = []
     for path in ROOT.rglob("pr-*.md"):
         try:
-            text = path.read_text(encoding='utf-8')
+            text = path.read_text(encoding="utf-8")
         except Exception:
             continue
         fm = parse_frontmatter(text)
         if fm.get('type') != 'PR Case Study':
             continue
-        # Skip migrated-from-v0.1 files that don't have close_decision yet
-        # (those are still semi-canonical)
         fs = fm.get('final_status', 'unknown')
-        # find last timestamp in body
         ts_list = re.findall(r'timestamp:\s*["\']?(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})', text)
         latest_ts = max(ts_list) if ts_list else None
-        # find schema version
-        sv = fm.get('schema_version', 'legacy v0.1')
         rows.append({
             'folder': path.parent.name,
             'name': path.name,
@@ -73,7 +57,7 @@ def gather_case_studies() -> list:
             'status_label': STATUS_ORDER.get(fs, 9),
             'latest_round_ts': latest_ts,
             'opened_at': fm.get('opened_at', '') or fm.get('merged_at', ''),
-            'schema_version': sv,
+            'schema_version': fm.get('schema_version', 'legacy v0.1'),
             'close_decision_status': _extract_close_decision(text),
         })
     return rows
@@ -90,7 +74,6 @@ def compute_days_idle(rows: list) -> list:
         ts_str = r.get('latest_round_ts')
         if ts_str:
             try:
-                # Replace trailing Z if present
                 clean = ts_str.rstrip('Z').rstrip('"').rstrip("'")
                 dt = datetime.fromisoformat(clean)
                 if dt.tzinfo is None:
@@ -104,6 +87,14 @@ def compute_days_idle(rows: list) -> list:
             r['days_idle'] = None
             r['last_activity'] = None
     return rows
+
+
+def load_snapshot():
+    """If validate.py --snapshot has been run, return its n-counts."""
+    p = ROOT / "data" / "snapshot.json"
+    if p.exists():
+        return json.loads(p.read_text())
+    return None
 
 
 def render_table(rows: list, only_stale: bool = False) -> str:
@@ -132,18 +123,23 @@ def main():
     rows = gather_case_studies()
     rows = compute_days_idle(rows)
     if '--json' in sys.argv:
-        print(json.dumps(rows, indent=2, ensure_ascii=False))
+        # also include snapshot n-counts if available
+        out = {"snapshot": load_snapshot(), "rows": rows}
+        print(json.dumps(out, indent=2, ensure_ascii=False))
         return 0
     only_stale = '--stale' in sys.argv
     print(render_table(rows, only_stale))
     print()
-    # bonus: stats footer
     all_open = [r for r in rows if r['final_status'] in ('open', 'in-flight', 'pending')]
     idle_14d = [r for r in all_open if r.get('days_idle') is not None and r['days_idle'] >= 14]
     idle_30d = [r for r in all_open if r.get('days_idle') is not None and r['days_idle'] >= 30]
+    snap = load_snapshot()
+    snap_str = ""
+    if snap:
+        snap_str = f" (snapshot: {snap['profiles']} profiles / {snap['case_studies']} cases)"
     print(f"> stale (≥14d open): {len(idle_14d)}/{len(all_open)}")
     print(f"> stale (≥30d open): {len(idle_30d)}/{len(all_open)}")
-    print(f"> all open {len(all_open)}, all cases {len(rows)} total")
+    print(f"> all open {len(all_open)}, all cases {len(rows)} total{snap_str}")
     return 0
 
 
