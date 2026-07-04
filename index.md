@@ -37,6 +37,9 @@ federated_at: 2026-07-02
 | 6 | [future-agi/future-agi](https://github.com/future-agi/future-agi) | 1.2k | 🟢 #778 open + 克莱恩亲自 check-in | [future-agi-future-agi/index.md](./future-agi-future-agi/index.md) |
 | 7 | [qdrant/mcp-server-qdrant](https://github.com/qdrant/mcp-server-qdrant) | 1.4k | 🟢 #143 open 26 天（⚠️ stale） | [qdrant-mcp-server-qdrant/index.md](./qdrant-mcp-server-qdrant/index.md) |
 | 8 | [e2b-dev/E2B](https://github.com/e2b-dev/E2B) | 12.7k | ❌ _ERROR_HANDLER 关 + 1413 已合并 | [e2b-dev-e2b/index.md](./e2b-dev-e2b/index.md) |
+| 9 | [agentic-community/mcp-gateway-registry](https://github.com/agentic-community/mcp-gateway-registry) | 765 | 🟢 #1382 + #1383 docs mermaid fix | [agentic-community-mcp-gateway-registry/index.md](./agentic-community-mcp-gateway-registry/index.md) |
+| 10 | [mongodb-js/mongodb-mcp-server](https://github.com/mongodb-js/mongodb-mcp-server) | 1.1k | 🟢 #1309 docs typo，jira 内肍 | [mongodb-js-mongodb-mcp-server/index.md](./mongodb-js-mongodb-mcp-server/index.md) |
+| 11 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 208k (hub) | ⚪ 未提 PR，仅画像存在 | [NousResearch-hermes-agent/index.md](./NousResearch-hermes-agent/index.md) |
 
 > 🟢 = open / ✅ = merged / ❌ = 关闭但有教训 / ⚠️ = 需关注  
 > **OpenClaw 单独走自己的知识库**（已在 [openclaw-pr-knowledge/](../openclaw-pr-knowledge/README.md)），不计入本 bundle。

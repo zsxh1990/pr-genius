@@ -46,17 +46,18 @@ Each profile is a directory. Naming: `owner-repo` with `-`, never `_`.
 
 | Profile | Star | Fork | Lang | Notes |
 |---|---|---|---|---|
-| `ag2ai-ag2/` | 21k★ | 3.8k | Python | Microsoft AutoGen fork; AI agent framework |
+| `ag2ai-ag2/` | 21k★ | 3.8k | Python | Microsoft AutoGen fork; AI agent framework (skip-for-now RISK) |
 | `astral-sh-uv/` | 35k★ | 1.5k | Rust | Astral Python package manager (legacy PR #19685) |
-| `e2b-dev-e2b/` | — | — | Python | PR #1458 _ERROR_HANDLER (CLOSED, archive) |
+| `e2b-dev-e2b/` | — | — | Python | PR #1458 _ERROR_HANDLER (CLOSED, archive) + PR #1413 (merged, refactor) |
 | `future-agi-future-agi/` | — | — | Python | (legacy) |
 | `harbor-framework-harbor/` | — | — | Python | (legacy) |
-| `mongodb-js-mongodb-mcp-server/` | 1.5k★ | 0.4k | Python | PR #1309 (open) |
-| `NousResearch-hermes-agent/` | 8.2k★ | 0.7k | Python | Hermes Agent; “AI-assisted welcomed” |
+| `mongodb-js-mongodb-mcp-server/` | 1.1k★ | 0.4k | TypeScript | PR #1309 (open) |
+| `NousResearch-hermes-agent/` | 208k★ (hub) | 38k | Python | Monorepo hub; image-only profile |
 | `plastic-labs-honcho/` | — | — | Python | PR #801 (merged) |
 | `punkpeye-fastmcp/` | — | — | Python | (legacy) |
 | `qdrant-mcp-server-qdrant/` | — | — | Python | PR #143 (close-decision) |
 | `sourcebot-dev-sourcebot/` | — | — | TypeScript | (legacy) |
+| `agentic-community-mcp-gateway-registry/` | 765★ | 201 | Python | 7/3-7/4 维护者集中清安全 + docs 周期；PR #1382 + #1383 (open) |
 
 Each profile directory contains either:
 - `index.md` (Repo Profile) — single-PR-safe default
