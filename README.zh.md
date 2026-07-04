@@ -1,5 +1,5 @@
 ---
-type: Knowledge Bundle (中文摘要)
+type: Knowledge Bundle
 title: Big-Repo PR 知识库
 description: 大型开源项目 PR 模式 + 经验沉淀（中文导航）
 version: 0.1.0

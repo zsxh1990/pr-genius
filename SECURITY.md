@@ -1,5 +1,5 @@
 ---
-type: Security Policy
+type: Community Resource
 title: Security & Coordinated Disclosure
 description: How to report security issues in pr-genius content / schemas / docs.
 version: 1.0.0

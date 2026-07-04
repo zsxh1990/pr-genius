@@ -1,5 +1,5 @@
 ---
-type: Community Channel
+type: Community Resource
 title: Discussions Index (placeholder until GitHub Discussions is enabled)
 description: Where to find chat-style threads about pr-genius schemas, profiles, and lessons.
 version: 0.1.0
