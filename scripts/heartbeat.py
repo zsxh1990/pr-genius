@@ -43,6 +43,7 @@ TRACKED_REPOS = [
     "e2b-dev/E2B",
     "NousResearch/hermes-agent",
     "mongodb-js/mongodb-mcp-server",
+    "agentic-community/mcp-gateway-registry",  # 2026-07-04 added: zsxh PR #1382 + #1383
 ]
 
 
