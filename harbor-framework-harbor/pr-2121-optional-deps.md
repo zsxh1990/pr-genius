@@ -19,8 +19,10 @@ related:
   - ../index.md
 rounds:
   - round: 1
-    action: "open PR"
-    delta: "+57 / -23 / 6 files"
+    action: open
+    delta:
+      kind: code_change
+      value: "+57 / -23 / 6 files"
     response_time_h: 0.1
     maintainer_action: null
     bot_review:
@@ -28,6 +30,11 @@ rounds:
       - "github-actions[bot]: diff viewer"
       - "devin-ai-integration[bot]: 2 findings (待修)"
     timestamp: "2026-06-28T09:14:00Z"
+close_decision:
+  status: pending
+  reason: "auto-migrated from v0.1; pending close decision by zsxh1990"
+  decided_at: null
+  actor: zsxh1990
 final_status: open
 opened_at: "2026-06-28T09:14:00Z"
 last_activity: "2026-06-28T09:20:00Z"

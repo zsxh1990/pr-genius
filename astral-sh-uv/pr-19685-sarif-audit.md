@@ -19,19 +19,26 @@ related_issues:
   - https://github.com/astral-sh/uv/issues/19660
 rounds:
   - round: 1
-    action: "open PR"
-    delta: "未深读 (SARIF output 实现)"
+    action: open
+    delta:
+      kind: no_code_change
+      value: "未深读 (SARIF output 实现)"
     response_time_h: 14
     maintainer_action: "@lucasew: 第一条 review"
     bot_review: []
     timestamp: "2026-06-04T..."
   - round: 2
-    action: "received maintainer feedback"
+    action: human_review
     response_time_h: 2
     maintainer_action: "@woodruffw CHANGES_REQUESTED + 关键反馈: '等 maintainer 在 issue 上达成共识再提 PR'"
     blocker: "设计空间未达成共识 - structured output format 需先在 issue #19660 讨论"
     resolution: "close PR，主动退出该方向"
     timestamp: "2026-06-05T14:37:00Z"
+close_decision:
+  status: pending
+  reason: "auto-migrated from v0.1; pending close decision by zsxh1990"
+  decided_at: null
+  actor: zsxh1990
 final_status: closed-not-merged
 closed_at: "2026-06-05"
 close_reason: "woodruffw '等设计共识' 反馈"

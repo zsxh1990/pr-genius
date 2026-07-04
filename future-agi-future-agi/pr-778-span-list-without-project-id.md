@@ -21,16 +21,20 @@ related_issues:
   - https://github.com/future-agi/future-agi/issues/775
 rounds:
   - round: 1
-    action: "open PR"
-    delta: "+2 / -2 / 1 file"  # 极小
+    action: open
+    delta:
+      kind: code_change
+      value: "+2 / -2 / 1 file"  # 极小
     response_time_h: 0.07  # 4 分钟
     maintainer_action: null
     bot_review:
       - "entelligence AI v1: 2 findings (project=None NameError, NULL project_id EndUser lookup)"
     timestamp: "2026-06-04T10:55:00Z"
   - round: 2
-    action: "amend (bot findings)"
-    delta: "小调整 (修 NULL project_id EndUser lookup)"
+    action: amend
+    delta:
+      kind: no_code_change
+      value: "小调整 (修 NULL project_id EndUser lookup)"
     response_time_h: 130  # 5.4 天
     maintainer_action: null
     bot_review:
@@ -39,13 +43,18 @@ rounds:
     resolution: "Good catch! Will push fix."
     timestamp: "2026-06-08T16:31:00Z"
   - round: 3
-    action: "third-party check-in"
+    action: check_in
     response_time_h: 471  # 19.6 天
     maintainer_action: null  # maintainer 真实 review 未开始
     bot_review: []
     blocker: null
     resolution: "@Ikalus1988 (克莱恩主号) friendly check-in: 'I've addressed. Happy to make any adjustments.'"
     timestamp: "2026-06-28T07:25:00Z"
+close_decision:
+  status: pending
+  reason: "auto-migrated from v0.1; pending close decision by zsxh1990"
+  decided_at: null
+  actor: zsxh1990
 final_status: open
 opened_at: "2026-06-04T10:55:00Z"
 last_activity: "2026-06-28T07:25:00Z"

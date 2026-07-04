@@ -19,13 +19,20 @@ related:
   - ../index.md
 rounds:
   - round: 1
-    action: "open PR"
-    delta: "+60 / -6 / 2 files"  # 极小 PR - OpenClaw §6.1 #2 ideal
+    action: open
+    delta:
+      kind: code_change
+      value: "+60 / -6 / 2 files"  # 极小 PR - OpenClaw §6.1 #2 ideal
     response_time_h: 0.5
     maintainer_action: null
     bot_review:
       - "coderabbit: 1 actionable finding (未修)"
     timestamp: "2026-06-28T09:23:00Z"
+close_decision:
+  status: pending
+  reason: "auto-migrated from v0.1; pending close decision by zsxh1990"
+  decided_at: null
+  actor: zsxh1990
 final_status: open
 opened_at: "2026-06-28T09:23:00Z"
 last_activity: "2026-06-28T09:23:00Z"

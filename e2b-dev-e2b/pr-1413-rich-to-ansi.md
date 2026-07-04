@@ -17,8 +17,10 @@ related:
   - ../index.md
 rounds:
   - round: 1
-    action: "open PR"
-    delta: "未深读 (核心 commit 385971054)"
+    action: open
+    delta:
+      kind: code_change
+      value: "未深读 (核心 commit 385971054)"
     response_time_h: 0.05  # 同分钟
     maintainer_action: null
     bot_review:
@@ -28,14 +30,21 @@ rounds:
     blocker: "CLA + changeset 硬性前置"
     timestamp: "2026-06-09T17:23:00Z"
   - round: 2
-    action: "amend (CLA + changeset)"
-    delta: "签 CLA + 加 changeset 文件"
+    action: amend
+    delta:
+      kind: code_change
+      value: "签 CLA + 加 changeset 文件"
     response_time_h: 1
     maintainer_action: null
     bot_review: []
     blocker: null
     resolution: "CLA + changeset 满足 → 走完整流程"
     timestamp: "2026-06-09T..."
+close_decision:
+  status: pending
+  reason: "auto-migrated from v0.1; pending close decision by zsxh1990"
+  decided_at: null
+  actor: zsxh1990
 final_status: merged
 merged_at: "2026-06-09"
 opened_at: "2026-06-09T..."

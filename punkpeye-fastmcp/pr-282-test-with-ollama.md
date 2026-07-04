@@ -19,22 +19,31 @@ related:
   - ../index.md
 rounds:
   - round: 1
-    action: "open PR"
-    delta: "+271 / -16 / 1 file"
+    action: open
+    delta:
+      kind: code_change
+      value: "+271 / -16 / 1 file"
     response_time_h: null  # 首次贡献，CI 未跑
     maintainer_action: null
     bot_review: []
     blocker: "CI 未跑（首次贡献需 maintainer 授权）"
     timestamp: "2026-06-28T08:13:00Z"
   - round: 2
-    action: "amend (CI fix: prettier)"
-    delta: "格式调整"
+    action: amend
+    delta:
+      kind: no_code_change
+      value: "格式调整"
     response_time_h: 1.5
     maintainer_action: null
     bot_review: []
     blocker: "Prettier formatting issue"
     resolution: "Fixed prettier formatting"
     timestamp: "2026-06-28T09:39:00Z"
+close_decision:
+  status: pending
+  reason: "auto-migrated from v0.1; pending close decision by zsxh1990"
+  decided_at: null
+  actor: zsxh1990
 final_status: open
 opened_at: "2026-06-28T08:13:00Z"
 last_activity: "2026-06-28T09:39:00Z"
