@@ -18,6 +18,55 @@ conforms_to: OKF v0.1 (Sudhakaran88/okf-conformance) + agent_guidelines extensio
 > 收录对每个目标仓的**画像**（友好的维护者风格、提 PR 方向、SOP、反模式） + **单 PR 案例**（合并 / close / amend 完整链路）。  
 > 格式遵循 [Google Open Knowledge Format v0.1](https://github.com/Sudhakaran88/okf-conformance) —— 纯 Markdown + YAML frontmatter，路径即 ID，零运行时依赖。
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![OKF v0.1](https://img.shields.io/badge/OKF-v0.1-blue.svg)](https://github.com/Sudhakaran88/okf-conformance)
+[![AI-assisted](https://img.shields.io/badge/AI-assisted-welcomed-brightgreen.svg)](CONTRIBUTING.md#ai-assisted-contributions)
+[![Validate](https://img.shields.io/badge/validate-passing-brightgreen.svg)](./validate.py)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
+## 🚀 Quick Start
+
+```bash
+# Clone
+git clone https://github.com/zsxh1990/pr-genius.git
+cd pr-genius
+
+# Validate
+python3 validate.py        # soft checks
+python3 validate.py --strict  # strict checks
+
+# Browse
+cat index.md               # root entry
+cat <org>-<repo>/index.md  # repo profile
+cat <org>-<repo>/pr-N-*.md # PR case study
+```
+
+## 📖 Contributing
+
+We welcome contributions — see [CONTRIBUTING.md](CONTRIBUTING.md) for the
+quick-start guide. AI-assisted PRs are first-class citizens; please disclose
+when you open a PR.
+
+## 🤝 Community
+
+- 📋 [Code of Conduct](CODE_OF_CONDUCT.md)
+- 🐛 [Issue Tracker](../../issues)
+- 💬 [Discussions](../../discussions)
+- 📜 [Changelog](CHANGELOG.md)
+- 🚫 [Blacklist](BLACKLIST.md) — repos we won't track
+
+## 📊 Stats
+
+| Metric | Value |
+|---|---|
+| Repo profiles | 11 (incl. NousResearch/hermes-agent) |
+| PR case studies | 11 (2 migrated to v0.5.0 schema, 9 in legacy v0.1) |
+| Anti-patterns | 4 |
+| Lessons (misakanet-50) | 10 |
+| Validator checks | 4 (frontmatter / links / consistency / rounds schema) |
+| OKF compliance | ✅ v0.1 |
+| Schema version | rounds v0.5.0 |
+
 ## 这是什么 / 给谁看
 
 - **作者背景**：维护者提外部 PR（AI-assisted 公开声明），失败/合并均记录。  

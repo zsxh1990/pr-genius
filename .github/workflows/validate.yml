@@ -1,0 +1,68 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Cache Python dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies (if any)
+        run: |
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          fi
+
+      - name: Run validator (soft checks)
+        run: python3 validate.py
+
+      - name: Run validator (strict checks)
+        # Strict mode fails on warnings — use as a soft gate
+        run: python3 validate.py --strict || echo "::warning::Strict validator reported issues — see logs"
+
+      - name: Check for orphan markdown
+        # List any .md file not referenced from another .md file
+        run: |
+          python3 -c "
+          import os, re, glob
+          md_files = set(f for f in glob.glob('**/*.md', recursive=True) if '.git' not in f)
+          referenced = set()
+          for md in md_files:
+              try:
+                  with open(md) as f:
+                      content = f.read()
+                  # Find all internal .md links
+                  for m in re.findall(r'\]\(([^)]+\.md)(?:#[^)]*)?\)', content):
+                      # Normalize relative path
+                      if not m.startswith(('http://', 'https://', '/')):
+                          target = os.path.normpath(os.path.join(os.path.dirname(md), m))
+                          referenced.add(target)
+              except: pass
+          orphans = md_files - referenced - {'README.md', 'CHANGELOG.md', 'LICENSE', 'CODE_OF_CONDUCT.md'}
+          if orphans:
+              print('::warning::Orphan .md files:', sorted(orphans))
+          else:
+              print('OK: no orphan .md files')
+          "

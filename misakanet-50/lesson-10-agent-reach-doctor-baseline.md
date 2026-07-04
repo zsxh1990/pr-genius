@@ -1,8 +1,8 @@
 ---
+type: Lesson
 domain: "tooling"
 title: "Agent-Reach v1.5.0 doctor Baseline: 4/15 Channels Available Without Login"
 verification: "metadata-normalized"
-{"title": "Agent-Reach v1.5.0 doctor Baseline: 4/15 Channels Available Without Login", "domain": "tooling", "tags": ["agent-reach", "doctor", "channel-availability", "baseline", "v2ex", "rss", "jina", "bilibili", "cookie-required"], "status": "draft", "confidence": "0.88", "created": "2026-07-03", "updated": "2026-07-03", "source": "Real test output 2026-07-03T00:32 GMT+8 on WSL Ubuntu", "verified_date": "", "domain_expert": ""}
 ---
 
 # Agent-Reach v1.5.0 doctor Baseline: 4/15 Channels Available Without Login

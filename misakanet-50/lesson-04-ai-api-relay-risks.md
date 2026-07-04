@@ -1,8 +1,8 @@
 ---
+type: Lesson
 domain: "security"
 title: "AI API Relay (中转站) Risk: Trust, Billing, and Legal Exposure"
 verification: "metadata-normalized"
-{"title": "AI API Relay (中转站) Risk: Trust, Billing, and Legal Exposure", "domain": "security", "tags": ["ai-relay", "中转站", "openai-proxy", "billing-fraud", "api-trust", "data-exfiltration", "codex-relay", "supply-chain-risk"], "status": "draft", "confidence": "0.78", "created": "2026-07-03", "updated": "2026-07-03", "source": "https://v2ex.com/t/1224483", "verified_date": "", "domain_expert": ""}
 ---
 
 # AI API Relay (中转站) Risk: Trust, Billing, and Legal Exposure

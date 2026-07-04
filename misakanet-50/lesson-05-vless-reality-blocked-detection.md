@@ -1,8 +1,8 @@
 ---
+type: Lesson
 domain: "networking"
 title: "vless+xhttp+reality Blocked: Detection Patterns and Mitigation"
 verification: "metadata-normalized"
-{"title": "vless+xhttp+reality Blocked: Detection Patterns and Mitigation", "domain": "networking", "tags": ["vless", "reality", "xhttp", "gfw", "proxy", "anti-censorship", "traffic-analysis", "tls-fingerprint", "domain-fronting"], "status": "draft", "confidence": "0.72", "created": "2026-07-03", "updated": "2026-07-03", "source": "https://v2ex.com/t/1224405", "verified_date": "", "domain_expert": ""}
 ---
 
 # vless+xhttp+reality Blocked: Detection Patterns and Mitigation

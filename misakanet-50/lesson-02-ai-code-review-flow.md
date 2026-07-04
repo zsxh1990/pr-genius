@@ -1,8 +1,8 @@
 ---
+type: Lesson
 domain: "agent-collaboration"
 title: "AI Code Review: When to Skip vs When to Read"
 verification: "metadata-normalized"
-{"title": "AI Code Review: When to Skip vs When to Read", "domain": "agent-collaboration", "tags": ["ai-coding", "code-review", "vibe-coding", "cursor", "codex", "tdd", "ai-assisted-development", "review-strategy"], "status": "draft", "confidence": "0.82", "created": "2026-07-03", "updated": "2026-07-03", "source": "https://v2ex.com/t/1224476", "verified_date": "", "domain_expert": ""}
 ---
 
 # AI Code Review: When to Skip vs When to Read

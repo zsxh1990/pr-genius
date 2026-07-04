@@ -69,6 +69,11 @@ def check_frontmatter(files: list[Path]) -> None:
             "Anti-Pattern",
             "Anti-Pattern Bundle",
             "Blacklist Reference",
+            "Risk Reference",      # ag2ai-ag2/RISK.md and similar risk registries
+            "Index",               # misakanet-50/README.md and similar index pages
+            "Lesson",              # misakanet-50/lesson-NN-*.md
+            "Community Resource",  # GitHub templates + community files (CONTRIBUTING/CHANGELOG/COC/LICENSE)
+            "Research Report",     # research/<project>/report.md
         }:
             warnings.append(
                 f"{f.relative_to(ROOT)}: unknown type `{fm['type']}`"

@@ -1,8 +1,8 @@
 ---
+type: Lesson
 domain: "agent-collaboration"
 title: "Vibe Coding Team Out of Control: Lessons from a Real Case"
 verification: "metadata-normalized"
-{"title": "Vibe Coding Team Out of Control: Lessons from a Real Case", "domain": "agent-collaboration", "tags": ["vibe-coding", "codex", "team-management", "agent-pitfall", "ai-assisted-development", "knowledge-debt", "spec-gap", "team-overhead"], "status": "draft", "confidence": "0.85", "created": "2026-07-03", "updated": "2026-07-03", "source": "https://v2ex.com/t/1224558", "verified_date": "", "domain_expert": ""}
 ---
 
 # Vibe Coding Team Out of Control: Lessons from a Real Case

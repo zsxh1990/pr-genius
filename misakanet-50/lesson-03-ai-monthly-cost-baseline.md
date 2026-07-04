@@ -1,8 +1,8 @@
 ---
+type: Lesson
 domain: "operations"
 title: "AI-Assisted Development Monthly Cost Baseline (China, 2026)"
 verification: "metadata-normalized"
-{"title": "AI-Assisted Development Monthly Cost Baseline (China, 2026)", "domain": "operations", "tags": ["ai-cost", "monthly-budget", "cursor", "codex", "deepseek", "china-pricing", "finance-baseline", "individual-developer"], "status": "draft", "confidence": "0.75", "created": "2026-07-03", "updated": "2026-07-03", "source": "https://v2ex.com/t/1224383", "verified_date": "", "domain_expert": ""}
 ---
 
 # AI-Assisted Development Monthly Cost Baseline (China, 2026)

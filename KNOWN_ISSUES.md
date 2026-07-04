@@ -117,3 +117,10 @@ updated: 2026-07-02
 
 - v0.2.0 (2026-07-02 23:56)：v0.5.0 review，关 3 issues，加 2 new findings
 - v0.1.0 (2026-07-02)：初版
+## Current validator state
+
+- Files checked: **52**
+- Errors: **0**
+- Warnings: **20**
+- Last heartbeat: 2026-07-04T02:00:07.732776+00:00
+
