@@ -1,0 +1,11 @@
+# CODEOWNERS — singleton repo, only listed maintainer
+* @zsxh1990
+
+# Schema / schema-bearing files
+/AGENT_GUIDELINES_SCHEMA.md @zsxh1990
+/ROUNDS_SCHEMA.md @zsxh1990
+/validate.py @zsxh1990
+/scripts/heartbeat.py @zsxh1990
+
+# Federation pointers (lock these, they declare what reads what)
+/*.md @zsxh1990

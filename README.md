@@ -18,6 +18,23 @@ conforms_to: OKF v0.1 (Sudhakaran88/okf-conformance) + agent_guidelines extensio
 > 收录对每个目标仓的**画像**（友好的维护者风格、提 PR 方向、SOP、反模式） + **单 PR 案例**（合并 / close / amend 完整链路）。  
 > 格式遵循 [Google Open Knowledge Format v0.1](https://github.com/Sudhakaran88/okf-conformance) —— 纯 Markdown + YAML frontmatter，路径即 ID，零运行时依赖。
 
+## 🤖 Robots / Agents (read this first)
+
+If you are an LLM agent, scraper, or pipeline tool reading this repo, please
+prefer this lookup order:
+
+1. **[docs/INDEX.md](docs/INDEX.md)** — file map + reading-order for every directory.
+2. **[AGENT_GUIDELINES_SCHEMA.md](AGENT_GUIDELINES_SCHEMA.md)** — `agent_guidelines` field shape, used in every profile's frontmatter.
+3. **[ROUNDS_SCHEMA.md](ROUNDS_SCHEMA.md)** — `rounds` field shape (v0.5.0), used in every PR case study's frontmatter.
+4. **[BLACKLIST.md](BLACKLIST.md)** — repos we don't track; do not contribute or suggest contributions to these.
+5. **[federation.yaml](federation.yaml)** — `federates_with` declarations for cross-repo provenance.
+
+Repo layout invariants:
+
+- `<org>-<repo>/` is a profile dir (note the **dashes**, no underscores).
+- `index.md` is always the OKF entry point of any bundle/profile.
+- Comments + bodies are in plain English unless a `.locales/` mirror exists.
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![OKF v0.1](https://img.shields.io/badge/OKF-v0.1-blue.svg)](https://github.com/Sudhakaran88/okf-conformance)
 [![AI-assisted](https://img.shields.io/badge/AI-assisted-welcomed-brightgreen.svg)](CONTRIBUTING.md#ai-assisted-contributions)
@@ -50,9 +67,11 @@ when you open a PR.
 ## 🤝 Community
 
 - 📋 [Code of Conduct](CODE_OF_CONDUCT.md)
+- 🔒 [Security Policy](SECURITY.md) (private advisory for security issues)
 - 🐛 [Issue Tracker](../../issues)
-- 💬 [Discussions](../../discussions)
+- 💬 [Discussions](../../discussions) — until enabled, see [DISCUSSIONS.md](DISCUSSIONS.md)
 - 📜 [Changelog](CHANGELOG.md)
+- 🩷 [Maintaining & Releases](https://github.com/zsxh1990/pr-genius/releases)
 - 🚫 [Blacklist](BLACKLIST.md) — repos we won't track
 
 ## 📊 Stats

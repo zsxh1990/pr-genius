@@ -65,6 +65,58 @@ schema used in PR Case Studies.
 
 ---
 
+## Profile / Lesson submission examples
+
+**Repo Profile** (e.g., new dir `acme-corp-widgets/` + `index.md`):
+
+```yaml
+---
+type: Repo Profile
+org: acme-corp
+repo: widgets
+stars: 1234  # at time of writing
+forks: 56
+language: Python
+conforms_to: OKF v0.1
+agent_guidelines:
+  pr_welcoming: high  # high | medium | low | none
+  preferred_labels: [chore, docs]
+  anti_terms: ['vibe coded']
+  reviewer_response_median_hours: 24
+  close_likelihood_estimate: 0.15
+  known_blockers: []
+federates_with:
+  - target: MisakaNet (Ikalus1988/MisakaNet)
+    mode: query-only
+---
+# acme-corp/widgets
+...
+```
+
+**PR Case Study** (e.g., `acme-corp-widgets/pr-42-foo.md`):
+
+```yaml
+---
+type: PR Case Study
+pr: 42
+target_repo: acme-corp/widgets
+schema_version: rounds v0.5.0
+rounds:
+  - round: 1
+    at: 2026-07-04T12:00:00Z
+    actor: zsxh1990
+    action: open
+    delta: { kind: code_change, value: "+12 / -2 / 1 files" }
+close_decision:
+  status: pending  # pending | merged | closed | superseded | keep_open
+---
+...
+```
+
+Both shapes validated by `python3 validate.py`.
+
+---
+
 ## AI-assisted contributions
 
 **AI-assisted PRs are welcomed** (this repo is itself AI-maintained). When

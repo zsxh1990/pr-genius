@@ -1,0 +1,23 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Discussions (general chat)
+    url: https://github.com/zsxh1990/pr-genius/discussions
+    about: Open-ended chat, schema questions, contributor profiles
+  - name: Security disclosure (private)
+    url: https://github.com/zsxh1990/pr-genius/security/advisories/new
+    about: Please do NOT file security issues in public issues.
+  - name: MisakaNet main project
+    url: https://github.com/Ikalus1988/MisakaNet
+    about: The federation target this project reads from. Issues there, not here.
+
+issue_template:
+  - name: docs(profile)
+    title: "Question: docs/profile suggestion"
+    description: Read CONTRIBUTING.md → "Profile Contributions". Link the repo + the line numbers you want changed.
+    order: 0
+    labels: ["type/docs", "area/profile"]
+  - name: docs(lesson)
+    title: "Lesson Contribution"
+    description: Read CONTRIBUTING.md → "Lesson Contributions". The misakanet-50/ directory explains the schema.
+    order: 1
+    labels: ["type/lesson", "area/misakanet-50"]

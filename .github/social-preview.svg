@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#1f2937"/>
+    </linearGradient>
+    <linearGradient id="title-fill" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#58a6ff"/>
+      <stop offset="50%" stop-color="#a371f7"/>
+      <stop offset="100%" stop-color="#f78166"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <circle cx="1080" cy="120" r="160" fill="#58a6ff" fill-opacity="0.15"/>
+  <circle cx="160" cy="540" r="220" fill="#a371f7" fill-opacity="0.10"/>
+  <text x="80" y="220" font-family="-apple-system, 'Segoe UI', Roboto, sans-serif" font-size="92" font-weight="800" fill="url(#title-fill)">pr-genius</text>
+  <text x="80" y="305" font-family="-apple-system, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="500" fill="#c9d1d9">External-PR patterns · AI-assisted · OKF v0.1 · rounds v0.5.0</text>
+  <text x="80" y="380" font-family="-apple-system, 'Segoe UI', Roboto, sans-serif" font-size="22" fill="#8b949e">Big-repo PR experience log — readable by humans and agents.</text>
+  <text x="80" y="420" font-family="-apple-system, 'Segoe UI', Roboto, sans-serif" font-size="22" fill="#8b949e">11 profiles · 11 case studies · 10 lessons · 4 anti-patterns</text>
+  <g transform="translate(80,470)">
+    <rect width="160" height="36" rx="6" fill="#238636"/>
+    <text x="80" y="24" text-anchor="middle" font-family="-apple-system, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600" fill="white">MIT License</text>
+    <rect x="180" width="160" height="36" rx="6" fill="#1f6feb"/>
+    <text x="260" y="24" text-anchor="middle" font-family="-apple-system, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600" fill="white">OKF v0.1</text>
+    <rect x="360" width="220" height="36" rx="6" fill="#a371f7"/>
+    <text x="470" y="24" text-anchor="middle" font-family="-apple-system, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600" fill="white">AI-assisted welcomed</text>
+    <rect x="600" width="200" height="36" rx="6" fill="#1f2937" stroke="#30363d"/>
+    <text x="700" y="24" text-anchor="middle" font-family="-apple-system, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600" fill="#c9d1d9">rounds v0.5.0</text>
+  </g>
+</svg>
