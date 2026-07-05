@@ -40,7 +40,18 @@ agent_guidelines:
 federates_with:
   - target: MisakaNet (Ikalus1988/MisakaNet)
     mode: query-only
+verified_at: "2026-07-05T14:53:11.740158Z"
+evidence_urls:
+  - https://github.com/agentic-community/mcp-gateway-registry
+  - https://api.github.com/repos/agentic-community/mcp-gateway-registry
+  - https://api.github.com/repos/agentic-community/mcp-gateway-registry/releases/latest
+  - https://api.github.com/repos/agentic-community/mcp-gateway-registry/commits
+confidence: high  # autogen from GH API; bump to medium if human-curated
+last_release: 1.25.0
+last_commit_sha: 1d2f5d46
+stars: 766
 ---
+
 
 # agentic-community/mcp-gateway-registry
 

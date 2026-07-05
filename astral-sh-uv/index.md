@@ -40,7 +40,18 @@ misakanet_queries:
   - misakanet/lessons/contrib/pr-strategy.md#ai-assisted-disclosure-policy  # uv vs Claude Code 政策对比
 misakanet_lessons: []
 federation_status: declared-2026-07-02
+verified_at: "2026-07-05T14:53:11.740158Z"
+evidence_urls:
+  - https://github.com/astral-sh/uv
+  - https://api.github.com/repos/astral-sh/uv
+  - https://api.github.com/repos/astral-sh/uv/releases/latest
+  - https://api.github.com/repos/astral-sh/uv/commits
+confidence: high  # autogen from GH API; bump to medium if human-curated
+last_release: 0.11.26
+last_commit_sha: 32194f49
+stars: 87098
 ---
+
 
 # astral-sh/uv
 

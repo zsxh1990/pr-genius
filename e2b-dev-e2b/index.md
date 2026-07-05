@@ -42,7 +42,18 @@ misakanet_queries:
   - misakanet/lessons/contrib/polite-close-vs-instant-close.md  # e2b 礼貌 vs vite 秒拒对比
 misakanet_lessons: []
 federation_status: declared-2026-07-02
+verified_at: "2026-07-05T14:53:11.740158Z"
+evidence_urls:
+  - https://github.com/e2b-dev/E2B
+  - https://api.github.com/repos/e2b-dev/E2B
+  - https://api.github.com/repos/e2b-dev/E2B/releases/latest
+  - https://api.github.com/repos/e2b-dev/E2B/commits
+confidence: high  # autogen from GH API; bump to medium if human-curated
+last_release: e2b@2.31.0
+last_commit_sha: a6b1cf4b
+stars: 12844
 ---
+
 
 # e2b-dev/E2B
 

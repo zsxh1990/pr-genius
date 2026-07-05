@@ -37,7 +37,18 @@ misakanet_queries:
   - misakanet/lessons/contrib/silent-failure-detection.md  # ctags 沉默失败检测
 misakanet_lessons: []
 federation_status: declared-2026-07-02
+verified_at: "2026-07-05T14:53:11.740158Z"
+evidence_urls:
+  - https://github.com/sourcebot-dev/sourcebot
+  - https://api.github.com/repos/sourcebot-dev/sourcebot
+  - https://api.github.com/repos/sourcebot-dev/sourcebot/releases/latest
+  - https://api.github.com/repos/sourcebot-dev/sourcebot/commits
+confidence: high  # autogen from GH API; bump to medium if human-curated
+last_release: v5.0.4
+last_commit_sha: 9c4780da
+stars: 3563
 ---
+
 
 # sourcebot-dev/sourcebot
 

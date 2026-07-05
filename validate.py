@@ -74,6 +74,7 @@ def check_frontmatter(files: list[Path]) -> None:
             "Lesson",              # misakanet-50/lesson-NN-*.md
             "Community Resource",  # GitHub templates + community files (CONTRIBUTING/CHANGELOG/COC/LICENSE)
             "Research Report",     # research/<project>/report.md
+            "Roadmap",             # docs/ROADMAP.md, docs/METRICS.md — measurable goals
         }:
             warnings.append(
                 f"{f.relative_to(ROOT)}: unknown type `{fm['type']}`"

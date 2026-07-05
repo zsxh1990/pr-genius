@@ -37,7 +37,18 @@ misakanet_queries:
   - misakanet/lessons/contrib/devin-ai-review-bot.md  # Harbor 接入 Devin AI review 经验
 misakanet_lessons: []
 federation_status: declared-2026-07-02
+verified_at: "2026-07-05T14:53:11.740158Z"
+evidence_urls:
+  - https://github.com/harbor-framework/harbor
+  - https://api.github.com/repos/harbor-framework/harbor
+  - https://api.github.com/repos/harbor-framework/harbor/releases/latest
+  - https://api.github.com/repos/harbor-framework/harbor/commits
+confidence: high  # autogen from GH API; bump to medium if human-curated
+last_release: v0.17.1
+last_commit_sha: 1d6c3851
+stars: 2959
 ---
+
 
 # harbor-framework/harbor
 
