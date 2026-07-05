@@ -76,19 +76,11 @@ def case_evidence_coverage():
 
 
 def round_evidence_coverage():
-    """Return (covered, total) for round-level evidence on rounds that *should*
-    have evidence (open / amend / merge / close / decision / bot_review /
-    human_review). Excludes check_in / bump rounds: they're meta-rounds about
-    maintainer response timing, not about diff content, so requiring GH API
-    evidence would be the wrong gate.
+    """Return (covered, total) for round-level evidence.
 
-    A round is considered covered when its chunk contains a `      verified_at:`
-    line at the delta level.
+    Counts unique (file, round) pairs that have a `      verified_at:`
+    line in the frontmatter rounds block.
     """
-    actionable_actions = {
-        "open", "amend", "merge", "close", "decision", "bot_review",
-        "human_review",
-    }
     total = 0
     covered = 0
     for cf in ROOT.glob("*/pr-*.md"):
@@ -98,15 +90,13 @@ def round_evidence_coverage():
         if not fm_match:
             continue
         rounds_block = fm_match.group(1)
+        # Each round starts with a line `      - round: N`
         round_starts = list(re.finditer(r"^[ \t]+- round:\s*(\d+)", rounds_block, re.MULTILINE))
-        for i, m in enumerate(round_starts):
-            end = round_starts[i + 1].start() if i + 1 < len(round_starts) else len(rounds_block)
+        total += len(round_starts)
+        for m in round_starts:
+            round_idx = round_starts.index(m)
+            end = round_starts[round_idx + 1].start() if round_idx + 1 < len(round_starts) else len(rounds_block)
             chunk = rounds_block[m.start():end]
-            action_m = re.search(r"^[ \t]+action:\s*(\w+)", chunk, re.MULTILINE)
-            action = action_m.group(1) if action_m else None
-            if action not in actionable_actions:
-                continue  # skip check_in / bump
-            total += 1
             if re.search(r"^[ \t]+verified_at:", chunk, re.MULTILINE):
                 covered += 1
     return covered, total
