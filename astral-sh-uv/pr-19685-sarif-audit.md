@@ -17,6 +17,15 @@ related:
   - ../index.md
 related_issues:
   - https://github.com/astral-sh/uv/issues/19660
+verified_at: "2026-07-05T01:08:34Z"
+evidence_urls:
+  - https://github.com/astral-sh/uv/pull/19685
+  - https://api.github.com/repos/astral-sh/uv/pulls/19685
+  - https://api.github.com/repos/astral-sh/uv/pulls/19685/files
+  - https://api.github.com/repos/astral-sh/uv/issues/19685/comments
+  - https://api.github.com/repos/astral-sh/uv/pulls/19685/reviews
+  - https://api.github.com/repos/astral-sh/uv/pulls/19685/commits
+confidence: medium  # case frontmatter `status: merged / merged_at: 2026-06-05` 与 API 实测 `state=closed, merged=False, closed_at=2026-06-05T14:43:54Z` 不一致；known-issue G (新增)
 rounds:
   - round: 1
     action: open

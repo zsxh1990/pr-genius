@@ -9,6 +9,15 @@ author: zsxh1990
 status: open
 opened_at: 2026-07-04
 schema_version: rounds v0.5.0
+verified_at: "2026-07-05T01:08:34Z"
+evidence_urls:
+  - https://github.com/agentic-community/mcp-gateway-registry/pull/1382
+  - https://api.github.com/repos/agentic-community/mcp-gateway-registry/pulls/1382
+  - https://api.github.com/repos/agentic-community/mcp-gateway-registry/pulls/1382/files
+  - https://api.github.com/repos/agentic-community/mcp-gateway-registry/issues/1382/comments
+  - https://api.github.com/repos/agentic-community/mcp-gateway-registry/pulls/1382/reviews
+  - https://api.github.com/repos/agentic-community/mcp-gateway-registry/pulls/1382/commits
+confidence: medium  # case frontmatter `status: open` 与 API 实测 `state=closed, merged=True, merged_at=2026-07-04T16:30:18Z, merged_by: aarora79` 不一致；known-issue H (新增)
 rounds:
   - round: 1
     action: open

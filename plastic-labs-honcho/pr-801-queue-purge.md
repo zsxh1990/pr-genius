@@ -19,6 +19,15 @@ related:
   - ../index.md
 related_issues:
   - https://github.com/plastic-labs/honcho/issues/799
+verified_at: "2026-07-05T01:08:34Z"
+evidence_urls:
+  - https://github.com/plastic-labs/honcho/pull/801
+  - https://api.github.com/repos/plastic-labs/honcho/pulls/801
+  - https://api.github.com/repos/plastic-labs/honcho/pulls/801/files
+  - https://api.github.com/repos/plastic-labs/honcho/issues/801/comments
+  - https://api.github.com/repos/plastic-labs/honcho/pulls/801/reviews
+  - https://api.github.com/repos/plastic-labs/honcho/pulls/801/commits
+confidence: high
 rounds:
   - round: 1
     action: open

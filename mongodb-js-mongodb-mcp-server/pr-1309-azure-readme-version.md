@@ -17,6 +17,15 @@ tags:
   - mongojs-mcp
 related:
   - ../index.md
+verified_at: "2026-07-05T01:08:34Z"
+evidence_urls:
+  - https://github.com/mongodb-js/mongodb-mcp-server/pull/1309
+  - https://api.github.com/repos/mongodb-js/mongodb-mcp-server/pulls/1309
+  - https://api.github.com/repos/mongodb-js/mongodb-mcp-server/pulls/1309/files
+  - https://api.github.com/repos/mongodb-js/mongodb-mcp-server/issues/1309/comments
+  - https://api.github.com/repos/mongodb-js/mongodb-mcp-server/pulls/1309/reviews
+  - https://api.github.com/repos/mongodb-js/mongodb-mcp-server/pulls/1309/commits
+confidence: high
 rounds:
   - round: 1
     action: open

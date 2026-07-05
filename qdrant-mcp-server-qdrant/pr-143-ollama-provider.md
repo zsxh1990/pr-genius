@@ -17,6 +17,15 @@ tags:
   - close-decision-pending
 related:
   - ../index.md
+verified_at: "2026-07-05T01:08:34Z"
+evidence_urls:
+  - https://github.com/qdrant/mcp-server-qdrant/pull/143
+  - https://api.github.com/repos/qdrant/mcp-server-qdrant/pulls/143
+  - https://api.github.com/repos/qdrant/mcp-server-qdrant/pulls/143/files
+  - https://api.github.com/repos/qdrant/mcp-server-qdrant/issues/143/comments
+  - https://api.github.com/repos/qdrant/mcp-server-qdrant/pulls/143/reviews
+  - https://api.github.com/repos/qdrant/mcp-server-qdrant/pulls/143/commits
+confidence: high
 rounds:
   - round: 1
     action: open

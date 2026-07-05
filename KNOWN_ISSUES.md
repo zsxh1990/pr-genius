@@ -88,6 +88,20 @@ updated: 2026-07-02
 **修法时机**：每个 PR 闭环时，先用 GH API 拉 comments 重写 case study body  
 **优先级**：中
 
+### G. uv #19685 `status: merged` drift
+
+**位置**：`astral-sh-uv/pr-19685-sarif-audit.md`  
+**问题**：frontmatter 写 `status: merged / merged_at: 2026-06-05`，GH API 实测 `state=closed, merged=False, closed_at=2026-06-05T14:43:54Z, merge_commit_sha=604822fb`，两者不一致。可能是当时被 squash/rebase 替换导致。原本状态要看 `merged = true ? "merged" : "closed-merged-or-not"`重新推导  
+**修法时机**：下次提 uv PR 时调 GH API 拉 PR #19685 重新对齐 status/merged 字段  
+**优先级**：中
+
+### H. agentic #1382 `status: open` 应是 merged
+
+**位置**：`agentic-community-mcp-gateway-registry/pr-1382-auth-md-mermaid-token.md`  
+**问题**：frontmatter 写 `status: open`，GH API 实测 `state=closed, merged=True, merged_at=2026-07-04T16:30:18Z, merged_by: aarora79`。7/4 16:30 后已合并，case study 未同步。  
+**修法时机**：下次提 agentic-community PR 时同步拉 #1382 真实状态并升级 case status 为 `final_status: closed-merged`（v0.5.0 valid value）  
+**优先级**：中
+
 ---
 
 ## 待验证项（克莱恩 23:29 拍板）
@@ -115,6 +129,11 @@ updated: 2026-07-02
 
 ## 版本
 
+- v0.7.1 (2026-07-05 09:09)：N1 补 evidence + 发现 2 case status drift
+  - 5 case 补 case-level `verified_at / evidence_urls / confidence`（honcho #801 / qdrant #143 / uv #19685 / mongodb #1309 / agentic #1382）
+  - `--enforce-evidence`：22 → 12 warnings（还差 e2b/future-agi/harbor/fastmcp/sourcebot/agentic-#1383 六个 case）
+  - validate.py --strict：0 errors（绿）
+  - Add issue G（uv #19685 status drift merged 实际 closed-not-merged）/ H（agentic #1382 status drift open 实际 merged）
 - v0.2.0 (2026-07-02 23:56)：v0.5.0 review，关 3 issues，加 2 new findings
 - v0.1.0 (2026-07-02)：初版
 ## Current validator state
