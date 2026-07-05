@@ -70,6 +70,11 @@ rounds:
     delta:
       kind: no_code_change
       value: null
+      verified_at: "2026-06-28T07:25:58Z"
+      evidence_urls:
+        - https://github.com/plastic-labs/honcho/pull/801
+        - https://api.github.com/repos/plastic-labs/honcho/issues/801/comments
+      confidence: low  # no_code_change round — verified via timestamp + comments URL
     response_time_h: 188  # 7.8 天（自 round 2 后）
     maintainer_action: null
     bot_review: []
@@ -81,6 +86,11 @@ rounds:
     delta:
       kind: no_code_change
       value: null
+      verified_at: "2026-07-02T15:35:03Z"
+      evidence_urls:
+        - https://github.com/plastic-labs/honcho/pull/801
+        - https://api.github.com/repos/plastic-labs/honcho/issues/801/comments
+      confidence: low  # no_code_change round — verified via timestamp + comments URL
     response_time_h: 96  # 4 天（自 round 3 后）
     maintainer_action: null
     bot_review: []

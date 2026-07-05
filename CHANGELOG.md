@@ -11,6 +11,55 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 
 ## [Unreleased]
 
+## [0.7.5] - 2026-07-05
+
+### Added
+- `archive/scripts/inject-round-evidence.py` — re-runnable round-level evidence
+  installer (11/11 case round 1 + 4/4 amend rounds have `verified_at` /
+  `evidence_urls` / `confidence`)
+- `archive/scripts/refresh-badges.py` — regenerates `docs/badges/*.json` for
+  dynamic shields.io endpoints (validate / evidence / round-evidence /
+  profiles / cases / lessons / releases / latest-release / prgenius version)
+- `docs/INDEX.md` synced with current counts (was stale on agentic #1382/#1383
+  double-counted as 12 PRs instead of 11 case studies)
+
+## [0.7.4] - 2026-07-05
+
+### Changed
+- CI workflow now hard-fails on `validate.py --enforce-evidence` (no more
+  `|| echo ::warning::` soft gate) — future PRs missing case-level evidence
+  get red build
+- README adds `Evidence 100%` and `Latest release` shields
+
+### Added
+- Round-level evidence fields populated for all 11 case studies' round 1
+  (`open` action) and 4 amend rounds (e2b / future-agi / honcho / fastmcp)
+- `prgenius` package version bumped from `0.1.0` → `0.7.3` in
+  `src/prgenius/__init__.py` and `pyproject.toml`
+
+Compare: [0.7.3...0.7.4](https://github.com/zsxh1990/pr-genius/compare/v0.7.3...0.7.4)
+
+## [0.7.3] - 2026-07-05
+
+### Added
+- Case-level `verified_at` / `evidence_urls` / `confidence` for **all 11** PR
+  Case Studies (honcho / qdrant / uv / mongodb / agentic / e2b / future-agi /
+  harbor / fastmcp / sourcebot) — `validate.py --enforce-evidence` 22 → 0
+
+### Fixed
+- 4 case frontmatter status drift corrections (uv#19685 → closed-not-merged,
+  agentic#1382/#1383 → closed-merged, e2b#1413 → closed-not-merged)
+- Released v0.6.3 / v0.6.4 / v0.7.0 / v0.7.1 / v0.7.3 GitHub Releases (5 added
+  on top of pre-existing v0.6.0 / v0.6.1 / v0.6.2)
+- `archive/scripts/git-push-via-api.py` — Git DB API fallback for when
+  `github.com:443` is unreachable but `api.github.com:443` works (WSL
+  network-route workaround)
+- `archive/scripts/create-v07[1|3]-release.py` and
+  `archive/scripts/create-v063-v064-v070-release.py` — release-creation
+  helpers using the GitHub API
+
+Compare: [0.7.1...0.7.3](https://github.com/zsxh1990/pr-genius/compare/v0.7.1...0.7.3)
+
 ## [0.7.1] - 2026-07-05
 
 ### Changed

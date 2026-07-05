@@ -2,7 +2,7 @@
 type: Index
 title: pr-genius Index Map
 description: Agent-readable map of every file in this repo and what it does.
-version: 0.7.4
+version: 0.7.5
 created: 2026-07-04
 updated: 2026-07-05
 conforms_to: OKF v0.1
@@ -163,9 +163,10 @@ re-runnable evidence / release tools.
 |---|---|
 | `prgenius` package version | `0.7.3` (in `prgenius/src/prgenius/__init__.py`) |
 | Latest GH release | `v0.7.4` (2026-07-05) |
-| Total case studies | 11 (12 PRs — agentic #1382 + #1383 both closed-merged) |
+| Total case studies | 11 (one PR per file; agentic #1382 + #1383 are separate case studies for the same profile) |
 | Total profiles | 12 |
-| Total lessons | 11 |
+| Total lessons | 11 (`misakanet-50/lesson-01`..`lesson-11`) |
 | Total anti-patterns | 5 |
+| Round-level evidence | 11/11 round-1 + 4/4 amend rounds have `verified_at` / `evidence_urls` / `confidence` |
 | `validate.py --strict` | 0 errors ✅ |
-| `validate.py --enforce-evidence` | 0 warnings ✅ |
+| `validate.py --enforce-evidence` | 0 warnings ✅ (hard-gate on PRs) |

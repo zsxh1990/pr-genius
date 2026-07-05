@@ -53,6 +53,11 @@ rounds:
         - https://github.com/punkpeye/fastmcp/pull/282
         - https://api.github.com/repos/punkpeye/fastmcp/pulls/282/files
       confidence: low  # round-level timestamp from case body (not GH API cross-ref)
+      verified_at: "2026-06-28T09:39:00Z"
+      evidence_urls:
+        - https://github.com/punkpeye/fastmcp/pull/282
+        - https://api.github.com/repos/punkpeye/fastmcp/pulls/282/files
+      confidence: low  # round-level timestamp from case body (not GH API cross-ref)
     response_time_h: 1.5
     maintainer_action: null
     bot_review: []

@@ -55,6 +55,11 @@ rounds:
         - https://github.com/e2b-dev/E2B/pull/1413
         - https://api.github.com/repos/e2b-dev/E2B/pulls/1413/files
       confidence: low  # round-level timestamp from case body (not GH API cross-ref)
+      verified_at: "2026-06-09T00:00:00Z"
+      evidence_urls:
+        - https://github.com/e2b-dev/E2B/pull/1413
+        - https://api.github.com/repos/e2b-dev/E2B/pulls/1413/files
+      confidence: low  # round-level timestamp from case body (not GH API cross-ref)
     response_time_h: 1
     maintainer_action: null
     bot_review: []

@@ -149,15 +149,14 @@ def inject(file_path, evidence):
         else:
             ts_iso_full = ts_iso
         indent = m.group(2)
-        # The next line after value: starts at indent N (= sibling of delta:, e.g. 4 spaces).
-        # delta children (kind, value) sit at N+2. So delta-children indent = indent + "  ".
-        delta_indent = indent + "  "
+        # After `value: ...\n`, the next line is already a child of delta:
+        # (at 6 spaces) or a sibling of delta: (at 4 spaces). Use indent as-is.
         add = (
-            f"{delta_indent}verified_at: \"{ts_iso_full}\"\n"
-            f"{delta_indent}evidence_urls:\n"
-            f"{delta_indent}  - https://github.com/{gh_repo}/pull/{n}\n"
-            f"{delta_indent}  - https://api.github.com/repos/{gh_repo}/pulls/{n}/files\n"
-            f"{delta_indent}confidence: low  # round-level timestamp from case body (not GH API cross-ref)\n"
+            f"{indent}verified_at: \"{ts_iso_full}\"\n"
+            f"{indent}evidence_urls:\n"
+            f"{indent}  - https://github.com/{gh_repo}/pull/{n}\n"
+            f"{indent}  - https://api.github.com/repos/{gh_repo}/pulls/{n}/files\n"
+            f"{indent}confidence: low  # round-level timestamp from case body (not GH API cross-ref)\n"
         )
         # m.end(1) ends after group 1's `\n` so the splice keeps the next
         # line's indent intact (m.end() would consume indent = m.group(2)).
@@ -181,15 +180,70 @@ def inject(file_path, evidence):
         sha = sha_match.group(1)
         ts_iso = ts_match.group(1)
         indent = m.group(2)
-        delta_indent = indent + "  "
         add = (
-            f"{delta_indent}verified_at: \"{ts_iso}\"\n"
-            f"{delta_indent}evidence_urls:\n"
-            f"{delta_indent}  - https://github.com/{gh_repo}/pull/{n}/commits/{sha}\n"
-            f"{delta_indent}  - https://github.com/{gh_repo}/commit/{sha}\n"
-            f"{delta_indent}confidence: medium  # round-level commit SHA cross-refs to GH\n"
+            f"{indent}verified_at: \"{ts_iso}\"\n"
+            f"{indent}evidence_urls:\n"
+            f"{indent}  - https://github.com/{gh_repo}/pull/{n}/commits/{sha}\n"
+            f"{indent}  - https://github.com/{gh_repo}/commit/{sha}\n"
+            f"{indent}confidence: medium  # round-level commit SHA cross-refs to GH\n"
         )
         text = text[: m.end(1)] + add + text[m.end(1):]
+        injected_amends += 1
+
+    # Pass C: non-amend round WITH delta block (check_in / bump / bot_review /
+    # merge / close / decision). Inject verified_at inside delta block.
+    non_amend_anchor = re.compile(
+        r"(    action:\s*(?:check_in|bump|bot_review|merge|close|decision)\n    delta:\n      kind:\s*(?:code_change|no_code_change)\n      value:[^\n]*\n)([ \t]+)",
+        re.MULTILINE,
+    )
+    for m in list(non_amend_anchor.finditer(text)):
+        post_value = text[m.end():m.end()+800]
+        if re.search(r"\n      verified_at:", post_value):
+            continue
+        ts_match = re.search(r"    timestamp:\s*\"(\d{4}-\d{2}-\d{2}T[^\"]*)\"", post_value)
+        if not ts_match:
+            continue
+        ts_iso = ts_match.group(1)
+        indent = m.group(2)
+        add = (
+            f"{indent}verified_at: \"{ts_iso}\"\n"
+            f"{indent}evidence_urls:\n"
+            f"{indent}  - https://github.com/{gh_repo}/pull/{n}\n"
+            f"{indent}  - https://api.github.com/repos/{gh_repo}/issues/{n}/comments\n"
+            f"{indent}confidence: low  # round-level timestamp from case body (not GH API cross-ref)\n"
+        )
+        text = text[: m.end(1)] + add + text[m.end(1):]
+        injected_amends += 1
+
+    # Pass D: round WITHOUT delta: block (e.g. human_review where the case
+    # body only records reviewer text). Inject verified_at as a sibling of
+    # timestamp at round level (4-space indent).
+    # Anchor: action line + 1..N sibling fields ending at timestamp.
+    no_delta_anchor = re.compile(
+        r"(    action:\s*(?:human_review|check_in|bump|bot_review|merge|close|decision)\n)(?:[ \t]+[a-z_]+:[^\n]*\n|[ \t]+- [^\n]*\n|[ \t]+\"[^\"]*\"\n)*[ \t]+timestamp:\s*\"(\d{4}-\d{2}-\d{2}T[^\"]*)\"",
+        re.MULTILINE,
+    )
+    for m in list(no_delta_anchor.finditer(text)):
+        post_value = text[m.end():m.end()+200]
+        if re.search(r"^[ \t]+verified_at:", post_value, re.MULTILINE):
+            continue
+        # Verify this is a round block (preceded by `- round: N`)
+        lookback = text[max(0, m.start()-80):m.start()]
+        if not re.search(r"- round:\s*\d+\s*\n[ \t]+action:\s*", lookback):
+            continue
+        ts_iso = m.group(2)
+        add = (
+            f"    verified_at: \"{ts_iso}\"\n"
+            f"    evidence_urls:\n"
+            f"      - https://github.com/{gh_repo}/pull/{n}\n"
+            f"      - https://api.github.com/repos/{gh_repo}/pulls/{n}/reviews\n"
+            f"    confidence: low  # round-level timestamp from case body (not GH API cross-ref)\n"
+        )
+        # Insert immediately before `    timestamp:` line. m.end() is just
+        # after timestamp ISO close quote.
+        # Find the timestamp line start position within m.group(0).
+        ts_line_pos = text.rfind("    timestamp:", m.start(), m.end())
+        text = text[:ts_line_pos] + add + text[ts_line_pos:]
         injected_amends += 1
 
     if not (injected_round1 or injected_amends):
