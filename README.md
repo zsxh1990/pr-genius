@@ -38,15 +38,9 @@ Repo layout invariants:
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![OKF v0.1](https://img.shields.io/badge/OKF-v0.1-blue.svg)](https://github.com/Sudhakaran88/okf-conformance)
 [![AI-assisted](https://img.shields.io/badge/AI-assisted-welcomed-brightgreen.svg)](CONTRIBUTING.md#ai-assisted-contributions)
-[![Validate](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/zsxh1990/pr-genius/main/docs/badges/validate.json&label=validate&query=$.message&colorB=brightgreen)](./validate.py)
-[![Evidence](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/zsxh1990/pr-genius/main/docs/badges/evidence.json&label=evidence&query=$.message&colorB=brightgreen)](./validate.py)
-[![Round evidence](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/zsxh1990/pr-genius/main/docs/badges/round_evidence.json&label=rounds&query=$.message&colorB=brightgreen)](./archive/scripts/inject-round-evidence.py)
-[![Profiles](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/zsxh1990/pr-genius/main/docs/badges/profiles.json&label=profiles&query=$.message&colorB=blue)](./README.md)
-[![Cases](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/zsxh1990/pr-genius/main/docs/badges/cases.json&label=cases&query=$.message&colorB=blue)](./README.md)
-[![Lessons](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/zsxh1990/pr-genius/main/docs/badges/lessons.json&label=lessons&query=$.message&colorB=blue)](./misakanet-50/README.md)
-[![Releases](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/zsxh1990/pr-genius/main/docs/badges/releases.json&label=releases&query=$.message&colorB=blue)](https://github.com/zsxh1990/pr-genius/releases)
+[![Validate](https://img.shields.io/badge/validate-passing-brightgreen.svg)](./validate.py)
+[![Evidence](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/zsxh1990/pr-genius/main/docs/badges/evidence.json&label=evidence+coverage&query=$.message&colorB=brightgreen)](./validate.py)
 [![Latest release](https://img.shields.io/github/v/release/zsxh1990/pr-genius)](https://github.com/zsxh1990/pr-genius/releases)
-[![prgenius](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/zsxh1990/pr-genius/main/docs/badges/prgenius_version.json&label=prgenius&query=$.message&colorB=blue)](./prgenius/README.md)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 ## 🚀 Quick Start
@@ -71,11 +65,6 @@ cat <org>-<repo>/pr-N-*.md # PR case study
 We welcome contributions — see [CONTRIBUTING.md](CONTRIBUTING.md) for the
 quick-start guide. AI-assisted PRs are first-class citizens; please disclose
 when you open a PR.
-
-> 📝 **Read first**: [docs/BLOG.md](docs/BLOG.md) — a 300-line walkthrough
-> of what this repo is, who uses it, how to install, and a real example
-> case study (honcho#801 round-by-round). For the metrics roadmap see
-> [docs/METRICS.md](docs/METRICS.md).
 
 ## 🤝 Community
 

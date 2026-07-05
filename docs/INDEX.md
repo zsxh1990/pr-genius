@@ -23,8 +23,6 @@ this, you can use it to plan your next retrieval step.
 |---|---|---|
 | `README.md` | What this is, Quick Start, stats, badges | 1 |
 | `index.md` | Root OKF index (Sudhakaran88/okf-conformance) | 2 |
-| `docs/BLOG.md` | Long-form blog: what pr-genius is, who uses it, how to install | 1.5 |
-| `docs/METRICS.md` | 克莱恩 7 量化指标对账 + 消项 roadmap | 0 |
 | `KNOWN_ISSUES.md` | Known data gaps + verification plan | 3 |
 | `CHANGELOG.md` | Version history (Keep a Changelog, 9 releases) | - |
 | `CONTRIBUTING.md` | How to contribute (profile/lesson/PR/AI-assisted) | - |
@@ -164,13 +162,11 @@ re-runnable evidence / release tools.
 | Field | Value |
 |---|---|
 | `prgenius` package version | `0.7.3` (in `prgenius/src/prgenius/__init__.py`) |
-| Latest GH release | `v0.7.5` (2026-07-05) |
+| Latest GH release | `v0.7.4` (2026-07-05) |
 | Total case studies | 11 (one PR per file; agentic #1382 + #1383 are separate case studies for the same profile) |
-| Total profiles | 12 (11/12 with case-level `verified_at`; 11/12 with profile-level `verified_at` = 91.7%) |
+| Total profiles | 12 |
 | Total lessons | 11 (`misakanet-50/lesson-01`..`lesson-11`) |
 | Total anti-patterns | 5 |
 | Round-level evidence | 11/11 round-1 + 4/4 amend rounds have `verified_at` / `evidence_urls` / `confidence` |
-| Long-form blog | `docs/BLOG.md` (v0.7.6, 355 lines, 13.4 KB) |
-| Metrics roadmap | `docs/METRICS.md` (克莱恩 7 指标对账, 短期可消 4/7) |
 | `validate.py --strict` | 0 errors ✅ |
 | `validate.py --enforce-evidence` | 0 warnings ✅ (hard-gate on PRs) |
