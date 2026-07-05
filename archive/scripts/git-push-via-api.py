@@ -41,6 +41,87 @@ def get_pat():
     raise RuntimeError("zsxh1990 PAT not in ~/.git-credentials")
 
 
+def _get_token_quietly():
+    try:
+        return get_pat()
+    except Exception:
+        return None
+
+
+def _infer_owner_repo(local_repo):
+    """Best-effort: read origin URL and parse owner/name."""
+    out = subprocess.run(
+        ["git", "config", "--get", "remote.origin.url"],
+        cwd=local_repo, capture_output=True, text=True,
+    )
+    if out.returncode != 0:
+        return (None, None)
+    url = out.stdout.strip()
+    if url.startswith("https://"):
+        path = url[len("https://"):].rstrip("/")
+        if path.endswith(".git"):
+            path = path[:-4]
+        # Two shapes:
+        #   https://github.com/owner/name           (no auth in URL)
+        #   https://USER:TOKEN@github.com/owner/name (auth baked in)
+        if "@" in path:
+            _, _, host_path = path.partition("@")
+        else:
+            host_path = path
+        _, _, repo_part = host_path.partition("/")
+        if not repo_part:
+            return (None, None)
+        owner, _, name = repo_part.partition("/")
+        return (owner, name)
+    return (None, None)
+
+
+def _fetch_remote_commit_to_local(token, owner, name, sha, local_repo):
+    """Fetch a single commit object from GitHub API into the local git
+    object database. Handles --base-on-remote pointing to a commit
+    that was pushed via Git-DB-API and so isn't reachable from local refs.
+    """
+    from datetime import datetime
+    pending = [sha]
+    seen = set()
+    while pending:
+        cur = pending.pop()
+        if cur in seen:
+            continue
+        seen.add(cur)
+        out = api("GET",
+                  f"https://api.github.com/repos/{owner}/{name}/git/commits/{cur}",
+                  token)
+        parents = out.get("parents", [])
+        tree_sha = out["tree"]["sha"]
+        author = out["author"]
+        committer = out["committer"]
+        message = out["message"]
+        # Convert date "2026-07-05T04:46:48Z" to "1783244808 +0800"
+        def to_git_date(iso):
+            dt = datetime.fromisoformat(iso.replace("Z", "+00:00"))
+            ts = int(dt.timestamp())
+            tz = iso[-5:]  # "+0800" or "+0000"
+            return (ts, tz)
+        a_ts, a_tz = to_git_date(author["date"])
+        c_ts, c_tz = to_git_date(committer["date"])
+        parents_str = "".join(f"parent {p['sha']}\n" for p in parents)
+        commit_obj = (
+            f"tree {tree_sha}\n"
+            f"{parents_str}"
+            f"author {author['name']} <{author['email']}> {a_ts} {a_tz}\n"
+            f"committer {committer['name']} <{committer['email']}> {c_ts} {c_tz}\n"
+            f"\n{message}\n"
+        )
+        subprocess.run(
+            ["git", "hash-object", "-t", "commit", "-w", "--stdin"],
+            cwd=local_repo, input=commit_obj.encode("utf-8"),
+            capture_output=True, check=True,
+        )
+        pending.append(tree_sha)
+        pending.extend(p["sha"] for p in parents)
+
+
 def api(method, url, token, body=None, accept="application/vnd.github+json"):
     req = urllib.request.Request(
         url,
@@ -138,7 +219,37 @@ def get_commit_info(local_repo, commit_sha):
 
 
 def diff_files(local_repo, base_sha, head_sha):
-    """Return list of (status, path) tuples — empty for merges by design."""
+    """Return list of (status, path) tuples — empty for merges by design.
+
+    If base_sha isn't in the local object database (common with GH-DB-API
+    pushed commits whose SHA differs from local), fetch it via the
+    GitHub API before diffing.
+    """
+    try:
+        subprocess.run(
+            ["git", "cat-file", "-t", base_sha],
+            cwd=local_repo, capture_output=True, text=True, check=False,
+        )
+    except subprocess.CalledProcessError:
+        owner, name = _infer_owner_repo(local_repo)
+        token = _get_token_quietly()
+        if owner and token:
+            _fetch_remote_commit_to_local(token, owner, name, base_sha, local_repo)
+        else:
+            raise
+
+    # Check whether object actually exists now (or after fetch).
+    check = subprocess.run(
+        ["git", "cat-file", "-t", base_sha],
+        cwd=local_repo, capture_output=True, text=True,
+    )
+    if check.returncode != 0:
+        owner, name = _infer_owner_repo(local_repo)
+        token = _get_token_quietly()
+        if owner and token:
+            _fetch_remote_commit_to_local(token, owner, name, base_sha, local_repo)
+        else:
+            raise RuntimeError(f"base commit {base_sha} not in local objects")
     out = subprocess.run(
         ["git", "diff", "--name-status", base_sha, head_sha],
         cwd=local_repo, capture_output=True, text=True, check=True,
