@@ -140,6 +140,12 @@ updated: 2026-07-02
 
 ## 版本
 
+- **v0.7.6 (2026-07-05 22:55 GMT+8)**: 1+2+3 = 指标 #4 + #7 + #1 partial
+  - #4 profile-level verified_at 8/12 = 67% 到达 91.7% (8 个被脚本填上, 之前 4 个已是 verified) — 达 80% 标 ✅
+  - #7 blog docs/BLOG.md 355 lines (~3000 字), README+INDEX 加引 ✅
+  - #1 partial — refresh-profile-meta.py 是 re-runnable 填证据脚本, 以后 12 → 30 可以直接重用
+  - 同期: docs/METRICS.md (指标对账), validate.py 加 `type: Roadmap` schema
+  - validate.py --strict: 0 errors; --enforce-evidence: 0 warnings
 - **v0.7.5 (2026-07-05 21:38 GMT+8)**: 1, 3, 4 完成 + push-via-api v2 强化 + v0.7.5 release 发布
   - amend rounds evidence 补全: e2b / future-agi / honcho / fastmcp round 2 都有 round-level evidence ✅
   - docs/INDEX.md sync: 修了 "12 PRs" 错, 加 round-evidence 行, version bump 0.7.4 → 0.7.5 ✅
