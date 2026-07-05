@@ -140,13 +140,16 @@ updated: 2026-07-02
 
 ## 版本
 
-- **v0.7.5 (2026-07-05 13:30 GMT+8)**: 1, 3, 4 继续完善
-  - amend rounds evidence 补全: e2b #1413 / future-agi #778 / honcho #801 / fastmcp #282 round 2 都有 round-level verified_at + evidence_urls + confidence
-  - docs/INDEX.md 完整重写: 12 profiles + 11 cases + 11 lessons + 5 anti-patterns + 7 archive scripts + 全治理资产
-  - Badges 自动化: archive/scripts/update-evidence-badge.py emit docs/badges/evidence.json; CI workflow 加 step; README badge 改 dynamic JSON shields.io URL
-  - inject-round-evidence.py 升级: 处理 2 amend 路径 (code_change + unknown+commit); idempotency 全开; indent 错误修 3 次 (8 spaces → 4 → delta_indent)
+- **v0.7.5 (2026-07-05 21:38 GMT+8)**: 1, 3, 4 完成 + push-via-api v2 强化 + v0.7.5 release 发布
+  - amend rounds evidence 补全: e2b / future-agi / honcho / fastmcp round 2 都有 round-level evidence ✅
+  - docs/INDEX.md sync: 修了 "12 PRs" 错, 加 round-evidence 行, version bump 0.7.4 → 0.7.5 ✅
+  - Badges 自动化: archive/scripts/refresh-badges.py emit 9 endpoint JSON (validate/evidence/round_evidence/profiles/cases/lessons/releases/latest_release/prgenius_version); README 10 badge 槽都连上
+  - Round-level evidence: 21/21 (100%) — 11 round 1 + 4 amend + 6 check_in/bump/human_review
+  - git-push-via-api.py 加 --push-all-unpushed loop: 6 commits (含 af2c785 / a8188d6 / 6a1633e / 414b200 / 65dca0c 本地未 push 的) 一个一个 push 到远端
+  - v0.7.5 GitHub Release 发布 (id=349120080, tag=c9366a46), 10th GH release total
   - validate.py --strict: 0 errors ✅
   - validate.py --enforce-evidence: 0 warnings ✅
+- **v0.7.5 (2026-07-05 13:30 GMT+8)**: 1, 3, 4 继续完善 (内期 early pass)
 - **v0.7.4 (2026-07-05 12:46 GMT+8)**: 继续完善
   - Round-level evidence 补全 (11/11 case round 1 都 verified_at + 3 evidence_urls + confidence)
   - CI workflow 加 --enforce-evidence hard gate (不 warning, 真正失败 PR)
