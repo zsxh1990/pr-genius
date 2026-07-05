@@ -72,6 +72,11 @@ We welcome contributions — see [CONTRIBUTING.md](CONTRIBUTING.md) for the
 quick-start guide. AI-assisted PRs are first-class citizens; please disclose
 when you open a PR.
 
+> 📝 **Read first**: [docs/BLOG.md](docs/BLOG.md) — a 300-line walkthrough
+> of what this repo is, who uses it, how to install, and a real example
+> case study (honcho#801 round-by-round). For the metrics roadmap see
+> [docs/METRICS.md](docs/METRICS.md).
+
 ## 🤝 Community
 
 - 📋 [Code of Conduct](CODE_OF_CONDUCT.md)
