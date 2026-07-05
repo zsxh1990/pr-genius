@@ -129,6 +129,12 @@ updated: 2026-07-02
 
 ## 版本
 
+- v0.7.2 (2026-07-05 11:35)：remote-side release workflow + network-route workaround
+  - v0.7.1 commit (0684030 local / 184075c6 GH-API) pushed via **Git DB API** fallback when WSL→github.com:443 timed out (today, 11:30+ GMT+8); see `archive/scripts/git-push-via-api.py` for the re-runnable workaround
+  - v0.7.1 Release + tag created via `archive/scripts/create-v071-release.py` (POST git/refs + POST releases)
+  - Local ref drift: `refs/remotes/origin/main` is stale (git fetch also blocked by same route) — first `git pull` after route recovers will report "Not current with origin/main"; use `git replace 0684030 184075c6` or hard-reset to origin/main once fetchable
+  - v0.6.3 / v0.6.4 / v0.7.0 / v0.7.1 still missing GitHub Release notes (only v0.6.0/1/2 released) — portal hygiene, not blocker; track in KNOWN_ISSUES for later pass
+  - Captured at network-recovery: restate that Direct HTTPS push to `github.com:443` is NOT an option during this WSL window; route table must allow `api.github.com:443` only; CLI fakery through Git DB API is the only path until proxy/Clash is restarted
 - v0.7.1 (2026-07-05 09:09)：N1 补 evidence + 发现 2 case status drift
   - 5 case 补 case-level `verified_at / evidence_urls / confidence`（honcho #801 / qdrant #143 / uv #19685 / mongodb #1309 / agentic #1382）
   - `--enforce-evidence`：22 → 12 warnings（还差 e2b/future-agi/harbor/fastmcp/sourcebot/agentic-#1383 六个 case）
