@@ -38,7 +38,18 @@ misakanet_queries:
   - misakanet/lessons/contrib/friendly-checkin-template.md  # Ikalus1988 发的 friendly check-in 模板
 misakanet_lessons: []
 federation_status: declared-2026-07-02
+verified_at: "2026-07-05T14:53:11.740158Z"
+evidence_urls:
+  - https://github.com/future-agi/future-agi
+  - https://api.github.com/repos/future-agi/future-agi
+  - https://api.github.com/repos/future-agi/future-agi/releases/latest
+  - https://api.github.com/repos/future-agi/future-agi/commits
+confidence: high  # autogen from GH API; bump to medium if human-curated
+last_release: 0.5.10
+last_commit_sha: ee70af01
+stars: 1304
 ---
+
 
 # future-agi/future-agi
 

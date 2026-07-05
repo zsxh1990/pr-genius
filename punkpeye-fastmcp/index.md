@@ -38,7 +38,18 @@ misakanet_queries:
   - misakanet/lessons/contrib/mcp-server-template.md  # MCP server 模板经验
 misakanet_lessons: []
 federation_status: declared-2026-07-02
+verified_at: "2026-07-05T14:53:11.740158Z"
+evidence_urls:
+  - https://github.com/punkpeye/fastmcp
+  - https://api.github.com/repos/punkpeye/fastmcp
+  - https://api.github.com/repos/punkpeye/fastmcp/releases/latest
+  - https://api.github.com/repos/punkpeye/fastmcp/commits
+confidence: high  # autogen from GH API; bump to medium if human-curated
+last_release: v4.4.0
+last_commit_sha: b170e78c
+stars: 3215
 ---
+
 
 # punkpeye/fastmcp
 
