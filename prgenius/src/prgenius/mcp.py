@@ -20,10 +20,10 @@ import sys
 from pathlib import Path
 
 # mcp SDK: only imported at serve() time so the rest of the package stays stdlib.
-REPO_ROOT = Path(__file__).resolve().parents[3]  # up to big-repo-pr-knowledge
+REPO_ROOT_DEFAULT = Path(__file__).resolve().parents[3]  # up to big-repo-pr-knowledge
 
 
-def _load_tools():
+def _load_tools(repo_root: Path | None = None):
     from mcp.server.fastmcp import FastMCP
     from .parser import (
         iter_case_studies,
@@ -36,10 +36,12 @@ def _load_tools():
         "Local stdio; no network calls."
     ))
 
+    rr = repo_root or REPO_ROOT_DEFAULT
+
     @mcp.tool()
     def get_repo_profile(repo: str) -> dict:
         """Return one Repo Profile by `org/name` (e.g. astral-sh/uv)."""
-        p = profile_get(REPO_ROOT, repo)
+        p = profile_get(rr, repo)
         if p is None:
             return {"error": f"profile not found: {repo}"}
         return p["frontmatter"]
@@ -48,7 +50,7 @@ def _load_tools():
     def list_open_prs() -> list:
         """List every PR Case Study with final_status=open."""
         out = []
-        for c in iter_case_studies(REPO_ROOT):
+        for c in iter_case_studies(rr):
             fm = c["frontmatter"]
             if fm.get("final_status") == "open":
                 out.append({
@@ -64,7 +66,7 @@ def _load_tools():
     @mcp.tool()
     def get_case_study(repo: str, pr_number: int) -> dict:
         """Return one PR Case Study by `org/name` + `pr_number`."""
-        for c in iter_case_studies(REPO_ROOT):
+        for c in iter_case_studies(rr):
             fm = c["frontmatter"]
             if (
                 fm.get("repo", "").strip("/").lower() == repo.strip("/").lower()
@@ -85,9 +87,14 @@ def _load_tools():
     return mcp
 
 
-def serve() -> int:
-    """Run stdio MCP server. Blocks until the host disconnects."""
-    mcp = _load_tools()
+def serve(repo_root: Path | None = None) -> int:
+    """Run stdio MCP server. Blocks until the host disconnects.
+
+    Args:
+        repo_root: Override the knowledge base location. If None, uses
+            the auto-detected default (parents[3] of this file).
+    """
+    mcp = _load_tools(repo_root=repo_root)
     mcp.run(transport="stdio")
     return 0
 

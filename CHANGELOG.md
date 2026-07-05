@@ -11,15 +11,100 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 
 ## [Unreleased]
 
+## [0.7.1] - 2026-07-05
+
+### Changed
+- Realigned `CHANGELOG.md` — entries previously parked under `[Unreleased]` are now
+  under the release they landed in (doc-drift fix only; no code diff)
+
+### Fixed
+- `prgenius` distribution renamed `prgenius` → `prgenius-kb` (PyPI name collision
+  with an unrelated 2024 GPT-3 PR-description tool — uploader/purpose/maintainer
+  all differ). Import path `prgenius.cli` unchanged.
+- `prgenius/README.md` missing frontmatter (validate.py --strict was red)
+
 ### Added
-- 🆕 `SECURITY.md` — coordinated disclosure policy (private advisory + email)
-- 🆕 `DISCUSSIONS.md` — placeholder for GitHub Discussions until enabled
-- 🆕 `.github/ISSUE_TEMPLATE/config.yml` — chooser config linking to Discussions/Security/MisakaNet
-- 🆕 `.github/CODEOWNERS` — singleton maintainer marker
-- 🆕 `.github/FUNDING.yml` — sponsors entry
-- 🆕 `.github/social-preview.svg` — repo social preview source (requires manual upload via Settings → Social preview)
-- 🆕 `docs/INDEX.md` — agent-readable file map (P3 stub, expanded below)
+- 5 PR Case Studies now carry case-level `verified_at` / `evidence_urls` /
+  `confidence`: honcho#801, qdrant#143, uv#19685, mongodb#1309, agentic#1382
+- `archive/scripts/refresh-evidence.py` — reusable GH-API fetch (5 endpoints × N
+  PRs) for evidence refresh passes
+- MCP `--repo-root` flag now actually flows through `cli.py cmd_mcp_serve` →
+  `mcp.serve(repo_root=...)` → `_load_tools(rr)` (was parsed but ignored — every
+  tool was reading the hardcoded module-level constant)
+- MCP install/config snippets for Cursor / Claude Code / Cline in
+  `prgenius/README.md` (MCP wiring section)
+
+### Known issues
+- G. `astral-sh-uv/pr-19685-sarif-audit.md`: case frontmatter says
+  `status: merged / merged_at: 2026-06-05`; GH API returns
+  `state=closed, merged=False, closed_at=2026-06-05T14:43:54Z`.
+- H. `agentic-community-mcp-gateway-registry/pr-1382-auth-md-mermaid-token.md`:
+  case frontmatter says `status: open`; GH API returns
+  `state=closed, merged=True, merged_at=2026-07-04T16:30:18Z, merged_by=aarora79`.
+
+### Stats
+- 12 profiles / 12 case studies / 11 lessons / 5 anti-patterns
+- validate.py --strict: 0 errors
+- validate.py --enforce-evidence: 12 warnings (down from 22 pre-N1; 6 cases
+  not yet refreshed)
+
+Compare: [0.7.0...0.7.1](https://github.com/zsxh1990/pr-genius/compare/v0.7.0...0.7.1)
+
+## [0.7.0] - 2026-07-04
+
+### Added (BREAKING for delta shape, but BC over v0.5.0)
+- `prgenius/` Python package — stdlib-only CLI (`python3 -m prgenius …`) and
+  stdio MCP shell (`python3 -m prgenius mcp serve`)
+- `ROUNDS_SCHEMA.md` v0.7.0 — `verified_at` / `evidence_urls` / `confidence`
+  added to delta + case-level (all optional, backward compatible)
+- `mcp[server]>=1.0` optional runtime dependency (only loaded when
+  `mcp serve` is invoked; everything else stays stdlib)
+
+### Stats
+- 12 profiles / 12 case studies / 11 lessons / 5 anti-patterns
+
+Compare: [0.6.4...0.7.0](https://github.com/zsxh1990/pr-genius/compare/v0.6.4...v0.7.0)
+
+## [0.6.4] - 2026-07-04
+
+### Added
+- `misakanet-50/lesson-11` — mcp typo pool (real-failure category)
+- `scripts/heartbeat.py` snapshot tool + `validate.py --heartbeat` mode
+
+Compare: [0.6.3...0.6.4](https://github.com/zsxh1990/pr-genius/compare/v0.6.3...v0.6.4)
+
+## [0.6.3] - 2026-07-04
+
+### Added
+- `agentic-community-mcp-gateway-registry/` profile + 2 PR Case Studies
+  (pr-1382, pr-1383)
+
+Compare: [0.6.2...0.6.3](https://github.com/zsxh1990/pr-genius/compare/v0.6.2...v0.6.3)
+
+## [0.6.2] - 2026-07-04
+
+### Changed
+- 6 legacy PR Case Studies migrated to `rounds v0.5.0` schema (action enum +
+  delta object + close_decision case-level)
+
+Compare: [0.6.1...0.6.2](https://github.com/zsxh1990/pr-genius/compare/v0.6.1...0.6.2)
+
+## [0.6.1] - 2026-07-04
+
+### Added
+- `SECURITY.md` — coordinated disclosure policy (private advisory + email)
+- `DISCUSSIONS.md` — placeholder for GitHub Discussions until enabled
+- `.github/ISSUE_TEMPLATE/config.yml` — chooser config linking to
+  Discussions/Security/MisakaNet
+- `.github/CODEOWNERS` — singleton maintainer marker
+- `.github/FUNDING.yml` — sponsors entry
+- `.github/social-preview.svg` — repo social preview source (requires manual
+  upload via Settings → Social preview)
+- `docs/INDEX.md` — agent-readable file map (P3 stub)
 - Topics (10) on GitHub repo settings + extended description + homepage link
+- `README.zh.md` Chinese mirror
+
+Compare: [0.6.0...0.6.1](https://github.com/zsxh1990/pr-genius/compare/v0.6.0...0.6.1)
 
 ## [0.6.0] - 2026-07-03
 
