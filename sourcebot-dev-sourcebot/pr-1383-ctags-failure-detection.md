@@ -17,12 +17,27 @@ tags:
   - small-pr
 related:
   - ../index.md
+verified_at: "2026-07-05T04:12:46Z"
+evidence_urls:
+  - https://github.com/sourcebot-dev/sourcebot/pull/1383
+  - https://api.github.com/repos/sourcebot-dev/sourcebot/pulls/1383
+  - https://api.github.com/repos/sourcebot-dev/sourcebot/pulls/1383/files
+  - https://api.github.com/repos/sourcebot-dev/sourcebot/issues/1383/comments
+  - https://api.github.com/repos/sourcebot-dev/sourcebot/pulls/1383/reviews
+  - https://api.github.com/repos/sourcebot-dev/sourcebot/pulls/1383/commits
+confidence: high
 rounds:
   - round: 1
     action: open
     delta:
       kind: code_change
       value: "+60 / -6 / 2 files"  # 极小 PR - OpenClaw §6.1 #2 ideal
+      verified_at: "2026-06-28T09:23:26Z"
+      evidence_urls:
+        - https://github.com/sourcebot-dev/sourcebot/pull/1383/files
+        - https://github.com/sourcebot-dev/sourcebot/pull/1383
+        - https://api.github.com/repos/sourcebot-dev/sourcebot/pulls/1383/commits
+      confidence: high  # PR created_at from GH API; commits at 1ec1917d
     response_time_h: 0.5
     maintainer_action: null
     bot_review:

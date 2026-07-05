@@ -70,9 +70,9 @@ def cmd_schema_info(_args) -> int:
     return 0
 
 
-def cmd_dump(_args) -> int:
+def cmd_dump(args) -> int:
     """Dump everything in NDJSON (one PR per line) for benchmark use."""
-    root = REPO_ROOT_DEFAULT if not _args.repo_root else Path(_args.repo_root)
+    root = _get_repo_root(args)
     for c in iter_case_studies(root):
         fm = c["frontmatter"]
         record = {
@@ -96,10 +96,15 @@ def cmd_dump(_args) -> int:
     return 0
 
 
-def cmd_mcp_serve(_args) -> int:
-    """stdio MCP shell. See prgenius/mcp.py for the small facade."""
+def cmd_mcp_serve(args) -> int:
+    """stdio MCP shell. See prgenius/mcp.py for the small facade.
+
+    Pass --repo-root to point the MCP server at a non-default location
+    (e.g. an isolated worktree or a forked copy of the knowledge base).
+    """
     from .mcp import serve
-    serve()
+    repo_root = _get_repo_root(args)
+    return serve(repo_root=repo_root)
 
 
 def main(argv: list[str] | None = None) -> int:

@@ -6,8 +6,8 @@ pr_number: 19685
 pr_url: https://github.com/astral-sh/uv/pull/19685
 repo: astral-sh/uv
 author: zsxh1990
-status: merged
-merged_at: 2026-06-05
+status: closed-not-merged
+closed_at: 2026-06-05T14:43:54Z
 tags:
   - pr-case-study
   - success
@@ -32,12 +32,26 @@ rounds:
     delta:
       kind: no_code_change
       value: "未深读 (SARIF output 实现)"
+      verified_at: "2026-06-05T06:55:30Z"
+      evidence_urls:
+        - https://github.com/astral-sh/uv/pull/19685/files
+        - https://github.com/astral-sh/uv/pull/19685
+        - https://api.github.com/repos/astral-sh/uv/pulls/19685/commits
+      confidence: high  # PR created_at from GH API; commits at 604822fb
     response_time_h: 14
     maintainer_action: "@lucasew: 第一条 review"
     bot_review: []
     timestamp: "2026-06-04T..."
   - round: 2
     action: human_review
+    delta:
+      kind: no_code_change
+      value: null
+      verified_at: "2026-06-05T14:37:00Z"
+      evidence_urls:
+        - https://github.com/astral-sh/uv/pull/19685
+        - https://api.github.com/repos/astral-sh/uv/issues/19685/comments
+      confidence: low  # no_code_change round — verified via timestamp + comments URL
     response_time_h: 2
     maintainer_action: "@woodruffw CHANGES_REQUESTED + 关键反馈: '等 maintainer 在 issue 上达成共识再提 PR'"
     blocker: "设计空间未达成共识 - structured output format 需先在 issue #19660 讨论"

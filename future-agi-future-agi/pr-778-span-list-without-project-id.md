@@ -19,12 +19,27 @@ related:
   - ../index.md
 related_issues:
   - https://github.com/future-agi/future-agi/issues/775
+verified_at: "2026-07-05T04:12:46Z"
+evidence_urls:
+  - https://github.com/future-agi/future-agi/pull/778
+  - https://api.github.com/repos/future-agi/future-agi/pulls/778
+  - https://api.github.com/repos/future-agi/future-agi/pulls/778/files
+  - https://api.github.com/repos/future-agi/future-agi/issues/778/comments
+  - https://api.github.com/repos/future-agi/future-agi/pulls/778/reviews
+  - https://api.github.com/repos/future-agi/future-agi/pulls/778/commits
+confidence: high
 rounds:
   - round: 1
     action: open
     delta:
       kind: code_change
       value: "+2 / -2 / 1 file"  # 极小
+      verified_at: "2026-06-04T10:55:24Z"
+      evidence_urls:
+        - https://github.com/future-agi/future-agi/pull/778/files
+        - https://github.com/future-agi/future-agi/pull/778
+        - https://api.github.com/repos/future-agi/future-agi/pulls/778/commits
+      confidence: high  # PR created_at from GH API; commits at 4964ae29
     response_time_h: 0.07  # 4 分钟
     maintainer_action: null
     bot_review:
@@ -35,6 +50,11 @@ rounds:
     delta:
       kind: no_code_change
       value: "小调整 (修 NULL project_id EndUser lookup)"
+      verified_at: "2026-06-08T16:31:00Z"
+      evidence_urls:
+        - https://github.com/future-agi/future-agi/pull/778
+        - https://api.github.com/repos/future-agi/future-agi/pulls/778/files
+      confidence: low  # round-level timestamp from case body (not GH API cross-ref)
     response_time_h: 130  # 5.4 天
     maintainer_action: null
     bot_review:
@@ -44,6 +64,14 @@ rounds:
     timestamp: "2026-06-08T16:31:00Z"
   - round: 3
     action: check_in
+    delta:
+      kind: no_code_change
+      value: null
+      verified_at: "2026-06-28T07:25:00Z"
+      evidence_urls:
+        - https://github.com/future-agi/future-agi/pull/778
+        - https://api.github.com/repos/future-agi/future-agi/issues/778/comments
+      confidence: low  # no_code_change round — verified via timestamp + comments URL
     response_time_h: 471  # 19.6 天
     maintainer_action: null  # maintainer 真实 review 未开始
     bot_review: []

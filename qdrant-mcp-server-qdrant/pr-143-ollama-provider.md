@@ -32,6 +32,12 @@ rounds:
     delta:
       kind: code_change
       value: "+76 / -0 / 4 files"
+      verified_at: "2026-06-04T03:40:24Z"
+      evidence_urls:
+        - https://github.com/qdrant/mcp-server-qdrant/pull/143/files
+        - https://github.com/qdrant/mcp-server-qdrant/pull/143
+        - https://api.github.com/repos/qdrant/mcp-server-qdrant/pulls/143/commits
+      confidence: high  # PR created_at from GH API; commits at 8fe1f020
     response_time_h: null
     maintainer_action: null
     bot_review: []
@@ -43,6 +49,11 @@ rounds:
     delta:
       kind: no_code_change
       value: null
+      verified_at: "2026-07-01T04:36:52Z"
+      evidence_urls:
+        - https://github.com/qdrant/mcp-server-qdrant/pull/143
+        - https://api.github.com/repos/qdrant/mcp-server-qdrant/issues/143/comments
+      confidence: low  # no_code_change round — verified via timestamp + comments URL
     response_time_h: 648  # 27 天无活动
     maintainer_action: null
     bot_review: []
@@ -54,6 +65,11 @@ rounds:
     delta:
       kind: no_code_change
       value: null
+      verified_at: "2026-07-02T15:38:44Z"
+      evidence_urls:
+        - https://github.com/qdrant/mcp-server-qdrant/pull/143
+        - https://api.github.com/repos/qdrant/mcp-server-qdrant/issues/143/comments
+      confidence: low  # no_code_change round — verified via timestamp + comments URL
     response_time_h: 35  # 1.5 天无回应
     maintainer_action: null
     bot_review: []

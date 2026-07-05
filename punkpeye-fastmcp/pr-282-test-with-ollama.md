@@ -17,12 +17,27 @@ tags:
   - first-time-contributor
 related:
   - ../index.md
+verified_at: "2026-07-05T04:12:46Z"
+evidence_urls:
+  - https://github.com/punkpeye/fastmcp/pull/282
+  - https://api.github.com/repos/punkpeye/fastmcp/pulls/282
+  - https://api.github.com/repos/punkpeye/fastmcp/pulls/282/files
+  - https://api.github.com/repos/punkpeye/fastmcp/issues/282/comments
+  - https://api.github.com/repos/punkpeye/fastmcp/pulls/282/reviews
+  - https://api.github.com/repos/punkpeye/fastmcp/pulls/282/commits
+confidence: high
 rounds:
   - round: 1
     action: open
     delta:
       kind: code_change
       value: "+271 / -16 / 1 file"
+      verified_at: "2026-06-28T08:13:56Z"
+      evidence_urls:
+        - https://github.com/punkpeye/fastmcp/pull/282/files
+        - https://github.com/punkpeye/fastmcp/pull/282
+        - https://api.github.com/repos/punkpeye/fastmcp/pulls/282/commits
+      confidence: high  # PR created_at from GH API; commits at 2606984d
     response_time_h: null  # 首次贡献，CI 未跑
     maintainer_action: null
     bot_review: []
@@ -33,6 +48,16 @@ rounds:
     delta:
       kind: no_code_change
       value: "格式调整"
+      verified_at: "2026-06-28T09:39:00Z"
+      evidence_urls:
+        - https://github.com/punkpeye/fastmcp/pull/282
+        - https://api.github.com/repos/punkpeye/fastmcp/pulls/282/files
+      confidence: low  # round-level timestamp from case body (not GH API cross-ref)
+      verified_at: "2026-06-28T09:39:00Z"
+      evidence_urls:
+        - https://github.com/punkpeye/fastmcp/pull/282
+        - https://api.github.com/repos/punkpeye/fastmcp/pulls/282/files
+      confidence: low  # round-level timestamp from case body (not GH API cross-ref)
     response_time_h: 1.5
     maintainer_action: null
     bot_review: []
