@@ -97,11 +97,17 @@ def _fetch_remote_commit_to_local(token, owner, name, sha, local_repo):
         author = out["author"]
         committer = out["committer"]
         message = out["message"]
-        # Convert date "2026-07-05T04:46:48Z" to "1783244808 +0800"
+        # Convert date "2026-07-05T04:46:48Z" to git-format ("1783244808 +0000")
         def to_git_date(iso):
             dt = datetime.fromisoformat(iso.replace("Z", "+00:00"))
             ts = int(dt.timestamp())
-            tz = iso[-5:]  # "+0800" or "+0000"
+            # Git expects "Z" → "+0000"; explicit offset like "+08:00" → "+0800".
+            if iso.endswith("Z"):
+                tz = "+0000"
+            else:
+                # iso ends with "+HH:MM" or "-HH:MM"
+                sign, hh, mm = iso[-6], iso[-5:-3], iso[-2:]
+                tz = f"{sign}{hh}{mm}"
             return (ts, tz)
         a_ts, a_tz = to_git_date(author["date"])
         c_ts, c_tz = to_git_date(committer["date"])
@@ -374,24 +380,24 @@ def main():
     info = get_commit_info(local, new_sha)
     message = get_commit_message(local, new_sha)
 
-    # If --base-on-remote given, diff against that and squash all
-    # unpushed commits into one big push commit. Otherwise, push only the
-    # latest commit (parent = HEAD~1).
+    # If --base-on-remote given, diff against local HEAD~1 (we only have
+    # local objects) but use --base-on-remote as the parent when creating
+    # the new commit on GH (so GH-side lineage is intact).
     if args.base_on_remote:
-        parent = args.base_on_remote
+        parent = get_parent_sha(local, new_sha)
+        if not parent:
+            sys.exit("First commit (no parent) — too risky for one-shot fallback")
+        remote_parent_sha = args.base_on_remote
     else:
         parent = get_parent_sha(local, new_sha)
         if not parent:
             sys.exit("First commit (no parent) — too risky for one-shot fallback")
+        remote_parent_sha = parent
 
     # 2. Find which files changed (vs parent)
     diffs = diff_files(local, parent, new_sha)
     if any(s.startswith(("A", "M", "D", "T", "R", "C")) for s, _ in diffs):
         pass  # any of these are fine
-
-    # 3. Get base_tree from parent's commit on the remote side.
-    # If local parent SHA isn't on remote, fall back to --base-on-remote.
-    remote_parent_sha = args.base_on_remote or parent
     print(f"[1/5] resolving base_tree from remote parent {remote_parent_sha[:8]}…",
           file=sys.stderr)
     base_tree = gh_get_tree_base(token, owner, name, remote_parent_sha)
