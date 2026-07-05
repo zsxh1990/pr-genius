@@ -354,55 +354,36 @@ def gh_update_ref(token, owner, repo, branch, new_sha, force=True):
                body=body)
 
 
-def main():
-    p = argparse.ArgumentParser()
-    p.add_argument("--repo", required=True, help="owner/name")
-    p.add_argument("--local-repo", required=True)
-    p.add_argument("--branch", default="main")
-    p.add_argument("--base-on-remote", help=(
-        "If local parent SHA doesn't exist on remote (common in this WSL "
-        "workaround where GH API generates different SHAs than local git "
-        "due to date-format differences), pass the remote-side parent SHA "
-        "here. The script will use its tree as the base_tree."
-    ))
-    p.add_argument("--dry-run", action="store_true")
-    args = p.parse_args()
+def find_unpushed_commits(local_repo, base_commit_local):
+    """Return list of local commit SHAs between base_commit_local and HEAD
+    (exclusive of base, inclusive of HEAD), in chronological order."""
+    out = subprocess.run(
+        ["git", "log", "--format=%H", f"{base_commit_local}~1..HEAD"],
+        cwd=local_repo, capture_output=True, text=True, check=True,
+    )
+    return list(reversed([line for line in out.stdout.splitlines() if line.strip()]))
 
-    owner, _, name = args.repo.partition("/")
-    if not name:
-        sys.exit("--repo must be owner/name")
 
-    local = Path(args.local_repo).resolve()
-    token = get_pat()
+def push_single_commit(local, repo_owner, repo_name, commit_sha, remote_parent_sha,
+                        token, branch="main", dry_run=False):
+    """Post one local commit's contents through the GH DB API, with the new
+    commit's parent set to remote_parent_sha on the GH side.
 
-    # 1. Compute what's about to land
-    new_sha = get_head_sha(local, args.branch)
-    info = get_commit_info(local, new_sha)
-    message = get_commit_message(local, new_sha)
+    `commit_sha` is the LOCAL commit we want to mirror; we extract its
+    metadata + file diff using local objects, then create a GH-side
+    commit whose parent matches the existing remote chain.
+    """
+    info = get_commit_info(local, commit_sha)
+    message = get_commit_message(local, commit_sha)
+    parent = get_parent_sha(local, commit_sha) or remote_parent_sha
 
-    # If --base-on-remote given, diff against local HEAD~1 (we only have
-    # local objects) but use --base-on-remote as the parent when creating
-    # the new commit on GH (so GH-side lineage is intact).
-    if args.base_on_remote:
-        parent = get_parent_sha(local, new_sha)
-        if not parent:
-            sys.exit("First commit (no parent) — too risky for one-shot fallback")
-        remote_parent_sha = args.base_on_remote
-    else:
-        parent = get_parent_sha(local, new_sha)
-        if not parent:
-            sys.exit("First commit (no parent) — too risky for one-shot fallback")
-        remote_parent_sha = parent
-
-    # 2. Find which files changed (vs parent)
-    diffs = diff_files(local, parent, new_sha)
-    if any(s.startswith(("A", "M", "D", "T", "R", "C")) for s, _ in diffs):
-        pass  # any of these are fine
+    # 2. Find which files changed in this single commit
+    diffs = diff_files(local, parent, commit_sha)
     print(f"[1/5] resolving base_tree from remote parent {remote_parent_sha[:8]}…",
           file=sys.stderr)
-    base_tree = gh_get_tree_base(token, owner, name, remote_parent_sha)
+    base_tree = gh_get_tree_base(token, repo_owner, repo_name, remote_parent_sha)
 
-    # 4. For each changed file, create a new blob and add to tree
+    # 3. POST blobs for changes
     print(f"[2/5] posting blobs for {len(diffs)} changed file(s)…",
           file=sys.stderr)
     tree_items = []
@@ -415,8 +396,8 @@ def main():
                 "sha": None,
             })
         else:
-            content = read_blob(local, new_sha, path)
-            blob_resp = gh_create_blob(token, owner, name, content)
+            content = read_blob(local, commit_sha, path)
+            blob_resp = gh_create_blob(token, repo_owner, repo_name, content)
             print(f"  {status} {path}: blob={blob_resp['sha'][:8]} ({len(content)}b)",
                   file=sys.stderr)
             tree_items.append({
@@ -426,28 +407,116 @@ def main():
                 "sha": blob_resp["sha"],
             })
 
-    # 5. POST new tree with base_tree=base_tree (preserves unchanged)
+    # 4. POST tree
     print(f"[3/5] posting tree (base_tree={base_tree[:8]})…", file=sys.stderr)
-    new_tree = gh_create_tree(token, owner, name, tree_items, base_tree_sha=base_tree)
+    new_tree = gh_create_tree(token, repo_owner, repo_name, tree_items,
+                               base_tree_sha=base_tree)
 
-    # 6. POST new commit pointing at new_tree, parent=remote_parent_sha
-    # (use the remote parent so GH lineage is intact).
-    print(f"[4/5] posting commit…", file=sys.stderr)
-    new_commit = gh_create_commit(token, owner, name, message, new_tree,
+    # 5. POST commit
+    print(f"[4/5] posting commit (parent=remote {remote_parent_sha[:8]})…",
+          file=sys.stderr)
+    new_commit = gh_create_commit(token, repo_owner, repo_name, message, new_tree,
                                   remote_parent_sha, info, info)
     print(f"  new_commit={new_commit[:8]}", file=sys.stderr)
 
-    # 7. PATCH refs/heads/<branch>
-    print(f"[5/5] updating refs/heads/{args.branch}…", file=sys.stderr)
-    if args.dry_run:
+    # 6. PATCH ref
+    print(f"[5/5] updating refs/heads/{branch}…", file=sys.stderr)
+    if dry_run:
         print("DRY RUN — would PATCH refs", file=sys.stderr)
-        return
-    ref_resp = gh_update_ref(token, owner, name, args.branch, new_commit,
-                             force=True)
+        return new_commit
+    ref_resp = gh_update_ref(token, repo_owner, repo_name, branch,
+                             new_commit, force=True)
     print(f"  ref now: {ref_resp['object']['sha'][:8]}", file=sys.stderr)
+    return new_commit
 
-    print(f"\nDONE. {args.repo}@{args.branch} now at {new_commit}",
-          file=sys.stderr)
+
+def main():
+    p = argparse.ArgumentParser()
+    p.add_argument("--repo", required=True, help="owner/name")
+    p.add_argument("--local-repo", required=True)
+    p.add_argument("--branch", default="main")
+    p.add_argument("--base-on-remote", help=(
+        "If local parent SHA doesn't exist on remote (common in this WSL "
+        "workaround where GH API generates different SHAs than local git "
+        "due to date-format differences), pass the remote-side parent SHA "
+        "here. The script will use its tree as the base_tree."
+    ))
+    p.add_argument("--push-all-unpushed", action="store_true", help=(
+        "Push every unpushed local commit (between origin/main and HEAD) "
+        "as a separate GH-side commit, one per local commit. Each local "
+        "commit's metadata + diff is mirrored exactly; SHA differs only "
+        "due to the date-format SHA-algo divergence GitHub uses."
+    ))
+    p.add_argument("--dry-run", action="store_true")
+    args = p.parse_args()
+
+    owner, _, name = args.repo.partition("/")
+    if not name:
+        sys.exit("--repo must be owner/name")
+
+    local = Path(args.local_repo).resolve()
+    token = get_pat()
+
+    if args.push_all_unpushed:
+        # Resolve base commit (shared ancestor between local main and
+        # remote main). Walk back from HEAD until we find a commit whose
+        # SHA also exists on remote (= SHA unchanged).
+        out = subprocess.run(
+            ["git", "log", "--format=%H", "origin/main..HEAD"],
+            cwd=local, capture_output=True, text=True, check=True,
+        )
+        unpushed_local = list(reversed([line for line in out.stdout.splitlines() if line.strip()]))
+        if not unpushed_local:
+            print("Nothing to push (origin/main already at HEAD).", file=sys.stderr)
+            return
+
+        # Find the LOCAL commit that immediately precedes the first
+        # unpushed commit. That's our local-side base.
+        first_unpushed = unpushed_local[0]
+        local_base = get_parent_sha(local, first_unpushed)
+        if not local_base:
+            sys.exit("First unpushed commit has no parent — refusing to push")
+
+        # The REMOTE-side base SHA either comes from --base-on-remote
+        # (if provided) or from asking GH for the commit at that path.
+        if args.base_on_remote:
+            remote_base = args.base_on_remote
+        else:
+            # Try fetching the commit object's GH-side equivalent via
+            # the GH API; if it returns the same SHA we already know the
+            # remote mirror exists.
+            try:
+                resp = api("GET", f"https://api.github.com/repos/{owner}/{name}/git/commits/{local_base}",
+                           token)
+                remote_base = resp["sha"]
+                if remote_base != local_base:
+                    print(f"NOTE: GH SHA differs — local={local_base[:8]}, remote={remote_base[:8]}",
+                          file=sys.stderr)
+            except Exception as e:
+                print(f"WARN: couldn't resolve remote equivalent of {local_base[:8]}: {e}",
+                      file=sys.stderr)
+                print("Pass --base-on-remote=<remote_sha> to skip the lookup.", file=sys.stderr)
+                sys.exit(1)
+
+        print(f"Pushing {len(unpushed_local)} unpushed commit(s) one-by-one "
+              f"starting from remote base {remote_base[:8]}…", file=sys.stderr)
+        current_remote_parent = remote_base
+        for i, sha in enumerate(unpushed_local, 1):
+            short = sha[:8]
+            print(f"\n=== [{i}/{len(unpushed_local)}] local {short} ===", file=sys.stderr)
+            current_remote_parent = push_single_commit(
+                local, owner, name, sha, current_remote_parent,
+                token, branch=args.branch, dry_run=args.dry_run,
+            )
+        print(f"\nDONE. {args.repo}@{args.branch} now at {current_remote_parent}",
+              file=sys.stderr)
+        return
+
+    # Single-commit path (legacy behavior).
+    new_sha = get_head_sha(local, args.branch)
+    push_single_commit(local, owner, name, new_sha,
+                       args.base_on_remote or get_parent_sha(local, new_sha),
+                       token, dry_run=args.dry_run)
 
 
 if __name__ == "__main__":
