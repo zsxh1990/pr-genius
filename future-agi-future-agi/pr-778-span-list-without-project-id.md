@@ -19,6 +19,15 @@ related:
   - ../index.md
 related_issues:
   - https://github.com/future-agi/future-agi/issues/775
+verified_at: "2026-07-05T04:12:46Z"
+evidence_urls:
+  - https://github.com/future-agi/future-agi/pull/778
+  - https://api.github.com/repos/future-agi/future-agi/pulls/778
+  - https://api.github.com/repos/future-agi/future-agi/pulls/778/files
+  - https://api.github.com/repos/future-agi/future-agi/issues/778/comments
+  - https://api.github.com/repos/future-agi/future-agi/pulls/778/reviews
+  - https://api.github.com/repos/future-agi/future-agi/pulls/778/commits
+confidence: high
 rounds:
   - round: 1
     action: open

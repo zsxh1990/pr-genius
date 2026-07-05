@@ -6,9 +6,20 @@ pr_number: 1383
 pr_url: https://github.com/agentic-community/mcp-gateway-registry/pull/1383
 repo: agentic-community/mcp-gateway-registry
 author: zsxh1990
-status: open
+status: closed-merged
 opened_at: 2026-07-04
+merged_at: "2026-07-04T16:28:52Z"
+closed_at: "2026-07-04T16:28:52Z"
 schema_version: rounds v0.5.0
+verified_at: "2026-07-05T04:12:46Z"
+evidence_urls:
+  - https://github.com/agentic-community/mcp-gateway-registry/pull/1383
+  - https://api.github.com/repos/agentic-community/mcp-gateway-registry/pulls/1383
+  - https://api.github.com/repos/agentic-community/mcp-gateway-registry/pulls/1383/files
+  - https://api.github.com/repos/agentic-community/mcp-gateway-registry/issues/1383/comments
+  - https://api.github.com/repos/agentic-community/mcp-gateway-registry/pulls/1383/reviews
+  - https://api.github.com/repos/agentic-community/mcp-gateway-registry/pulls/1383/commits
+confidence: medium  # KNOWN_ISSUES J (新增): case body wrote 'open' but GH API shows `state=closed, merged=True, merged_at=2026-07-04T16:28:52Z`. status now corrected to closed-merged.
 rounds:
   - round: 1
     action: open
@@ -26,7 +37,7 @@ close_decision:
   reason: "1 file 2 lines docs typo fix, same pattern as #1382"
   decided_at: null
   actor: zsxh1990
-final_status: open
+final_status: closed-merged
 ---
 
 # PR #1383: docs(egress-vault): fix mermaid render of placeholders

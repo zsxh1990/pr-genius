@@ -6,8 +6,8 @@ pr_number: 19685
 pr_url: https://github.com/astral-sh/uv/pull/19685
 repo: astral-sh/uv
 author: zsxh1990
-status: merged
-merged_at: 2026-06-05
+status: closed-not-merged
+closed_at: 2026-06-05T14:43:54Z
 tags:
   - pr-case-study
   - success

@@ -242,6 +242,12 @@ def main():
     p.add_argument("--repo", required=True, help="owner/name")
     p.add_argument("--local-repo", required=True)
     p.add_argument("--branch", default="main")
+    p.add_argument("--base-on-remote", help=(
+        "If local parent SHA doesn't exist on remote (common in this WSL "
+        "workaround where GH API generates different SHAs than local git "
+        "due to date-format differences), pass the remote-side parent SHA "
+        "here. The script will use its tree as the base_tree."
+    ))
     p.add_argument("--dry-run", action="store_true")
     args = p.parse_args()
 
@@ -265,9 +271,12 @@ def main():
     if any(s.startswith(("A", "M", "D", "T", "R", "C")) for s, _ in diffs):
         pass  # any of these are fine
 
-    # 3. Get base_tree from parent's commit
-    print(f"[1/5] resolving base_tree from parent {parent[:8]}…", file=sys.stderr)
-    base_tree = gh_get_tree_base(token, owner, name, parent)
+    # 3. Get base_tree from parent's commit on the remote side.
+    # If local parent SHA isn't on remote, fall back to --base-on-remote.
+    remote_parent_sha = args.base_on_remote or parent
+    print(f"[1/5] resolving base_tree from remote parent {remote_parent_sha[:8]}…",
+          file=sys.stderr)
+    base_tree = gh_get_tree_base(token, owner, name, remote_parent_sha)
 
     # 4. For each changed file, create a new blob and add to tree
     print(f"[2/5] posting blobs for {len(diffs)} changed file(s)…",
@@ -297,14 +306,14 @@ def main():
     print(f"[3/5] posting tree (base_tree={base_tree[:8]})…", file=sys.stderr)
     new_tree = gh_create_tree(token, owner, name, tree_items, base_tree_sha=base_tree)
 
-    # 6. POST new commit pointing at new_tree, parent=parent
+    # 6. POST new commit pointing at new_tree, parent=remote_parent_sha
+    # (use the remote parent so GH lineage is intact).
     print(f"[4/5] posting commit…", file=sys.stderr)
     new_commit = gh_create_commit(token, owner, name, message, new_tree,
-                                  parent, info, info)
+                                  remote_parent_sha, info, info)
     print(f"  new_commit={new_commit[:8]}", file=sys.stderr)
 
-    # 7. PATCH refs/heads/<branch> (force=true since we're rebasing commits
-    #    that don't share history with what GH currently has as ancestor).
+    # 7. PATCH refs/heads/<branch>
     print(f"[5/5] updating refs/heads/{args.branch}…", file=sys.stderr)
     if args.dry_run:
         print("DRY RUN — would PATCH refs", file=sys.stderr)

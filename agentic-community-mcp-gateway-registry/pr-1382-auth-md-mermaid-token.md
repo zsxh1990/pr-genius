@@ -6,8 +6,10 @@ pr_number: 1382
 pr_url: https://github.com/agentic-community/mcp-gateway-registry/pull/1382
 repo: agentic-community/mcp-gateway-registry
 author: zsxh1990
-status: open
+status: closed-merged
 opened_at: 2026-07-04
+merged_at: "2026-07-04T16:30:18Z"
+closed_at: "2026-07-04T16:30:18Z"
 schema_version: rounds v0.5.0
 verified_at: "2026-07-05T01:08:34Z"
 evidence_urls:
@@ -35,7 +37,7 @@ close_decision:
   reason: "1 file 1 line docs typo fix, 100% match with prior merged pattern (#1373 + #1375)"
   decided_at: null
   actor: zsxh1990
-final_status: open
+final_status: closed-merged
 ---
 
 # PR #1382: docs(auth): fix mermaid render of token placeholder

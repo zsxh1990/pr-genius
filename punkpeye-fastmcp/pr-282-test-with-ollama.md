@@ -17,6 +17,15 @@ tags:
   - first-time-contributor
 related:
   - ../index.md
+verified_at: "2026-07-05T04:12:46Z"
+evidence_urls:
+  - https://github.com/punkpeye/fastmcp/pull/282
+  - https://api.github.com/repos/punkpeye/fastmcp/pulls/282
+  - https://api.github.com/repos/punkpeye/fastmcp/pulls/282/files
+  - https://api.github.com/repos/punkpeye/fastmcp/issues/282/comments
+  - https://api.github.com/repos/punkpeye/fastmcp/pulls/282/reviews
+  - https://api.github.com/repos/punkpeye/fastmcp/pulls/282/commits
+confidence: high
 rounds:
   - round: 1
     action: open

@@ -6,8 +6,9 @@ pr_number: 1413
 pr_url: https://github.com/e2b-dev/E2B/pull/1413
 repo: e2b-dev/E2B
 author: zsxh1990
-status: merged
+status: closed-not-merged
 merged_at: 2026-06-09
+closed_at: 2026-06-09T18:38:28Z
 tags:
   - pr-case-study
   - success
@@ -15,6 +16,15 @@ tags:
   - ponytail-pattern
 related:
   - ../index.md
+verified_at: "2026-07-05T04:12:46Z"
+evidence_urls:
+  - https://github.com/e2b-dev/E2B/pull/1413
+  - https://api.github.com/repos/e2b-dev/E2B/pulls/1413
+  - https://api.github.com/repos/e2b-dev/E2B/pulls/1413/files
+  - https://api.github.com/repos/e2b-dev/E2B/issues/1413/comments
+  - https://api.github.com/repos/e2b-dev/E2B/pulls/1413/reviews
+  - https://api.github.com/repos/e2b-dev/E2B/pulls/1413/commits
+confidence: medium  # KNOWN_ISSUES I (新增): case body wrote 'merged' but GH API shows `state=closed, merged=False, closed_at=2026-06-09T18:38:28Z`. refactor PR got closed without merge; status now corrected.
 rounds:
   - round: 1
     action: open
@@ -45,8 +55,9 @@ close_decision:
   reason: "auto-migrated from v0.1; pending close decision by zsxh1990"
   decided_at: null
   actor: zsxh1990
-final_status: merged
+final_status: closed-not-merged
 merged_at: "2026-06-09"
+closed_at: "2026-06-09T18:38:28Z"
 opened_at: "2026-06-09T..."
 next_action: "已合并；与 #1458 对比: refactor + stdlib 减法 走通，新功能加法被拒"
 ---
