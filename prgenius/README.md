@@ -1,3 +1,13 @@
+---
+type: Schema Reference
+title: prgenius
+description: Evidence-backed lookup library for big-repo PR contributions — stdlib-first CLI + stdio MCP shell.
+version: 0.7.0
+created: 2026-07-04
+updated: 2026-07-05
+author: zsxh1990
+---
+
 # prgenius
 
 **Evidence-backed lookup for big-repo PR contributions. Local-only. Stdlib-first.**
@@ -8,7 +18,7 @@ base in this repo and exposes it through structured tool calls.
 ## Install
 
 ```bash
-pip install prgenius
+pip install prgenius-kb
 ```
 
 Or run from a checkout:

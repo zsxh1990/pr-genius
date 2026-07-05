@@ -1,7 +1,7 @@
 [project]
-name = "prgenius"
+name = "prgenius-kb"
 version = "0.1.0"
-description = "Evidence-backed lookup for big-repo PR contributions. Local-only, zero-runtime, stdlib-first."
+description = "Evidence-backed lookup for big-repo PR contributions. Local-only, zero-runtime, stdlib-first. Renamed from `prgenius` to avoid PyPI name collision with an unrelated 2024 GPT-3 PR-description tool."
 readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "MIT"}
@@ -20,7 +20,7 @@ classifiers = [
 dependencies = []  # stdlib only
 
 [project.scripts]
-prgenius = "prgenius.cli:main"
+prgenius-kb = "prgenius.cli:main"
 
 [project.urls]
 "Homepage" = "https://github.com/zsxh1990/pr-genius"
