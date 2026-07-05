@@ -39,6 +39,8 @@ Repo layout invariants:
 [![OKF v0.1](https://img.shields.io/badge/OKF-v0.1-blue.svg)](https://github.com/Sudhakaran88/okf-conformance)
 [![AI-assisted](https://img.shields.io/badge/AI-assisted-welcomed-brightgreen.svg)](CONTRIBUTING.md#ai-assisted-contributions)
 [![Validate](https://img.shields.io/badge/validate-passing-brightgreen.svg)](./validate.py)
+[![Evidence](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/zsxh1990/pr-genius/main/docs/badges/evidence.json&label=evidence+coverage&query=$.message&colorB=brightgreen)](./validate.py)
+[![Latest release](https://img.shields.io/github/v/release/zsxh1990/pr-genius)](https://github.com/zsxh1990/pr-genius/releases)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 ## 🚀 Quick Start

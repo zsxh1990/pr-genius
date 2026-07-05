@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""refresh-evidence.py — fetch GH API evidence for N=5 PR case studies.
+"""refresh-evidence.py - fetch GH API evidence for N=5 PR case studies.
 
 N1 self-decision: read GH API endpoints for these PRs and dump structured
 evidence (commits / files / reviews / comments / PR-meta) to a tmp JSON.
@@ -40,7 +40,14 @@ TARGETS = [
     ("astral-sh", "uv", 19685),
     ("mongodb-js", "mongodb-mcp-server", 1309),
     ("agentic-community", "mcp-gateway-registry", 1382),
-]
+    # Phase 2 (r0.7.2): cover remaining 6 --enforce-evidence gaps
+    ("e2b-dev", "E2B", 1413),
+    ("future-agi", "future-agi", 778),
+    ("harbor-framework", "harbor", 2121),
+    ("punkpeye", "fastmcp", 282),
+    ("agentic-community", "mcp-gateway-registry", 1383),
+    ("sourcebot-dev", "sourcebot", 1383),
+]	
 
 # GH API endpoints we want per PR
 ENDPOINTS = [

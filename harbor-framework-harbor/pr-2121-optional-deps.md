@@ -17,12 +17,27 @@ tags:
   - devin-reviewed
 related:
   - ../index.md
+verified_at: "2026-07-05T04:12:46Z"
+evidence_urls:
+  - https://github.com/harbor-framework/harbor/pull/2121
+  - https://api.github.com/repos/harbor-framework/harbor/pulls/2121
+  - https://api.github.com/repos/harbor-framework/harbor/pulls/2121/files
+  - https://api.github.com/repos/harbor-framework/harbor/issues/2121/comments
+  - https://api.github.com/repos/harbor-framework/harbor/pulls/2121/reviews
+  - https://api.github.com/repos/harbor-framework/harbor/pulls/2121/commits
+confidence: high
 rounds:
   - round: 1
     action: open
     delta:
       kind: code_change
       value: "+57 / -23 / 6 files"
+      verified_at: "2026-06-28T09:14:50Z"
+      evidence_urls:
+        - https://github.com/harbor-framework/harbor/pull/2121/files
+        - https://github.com/harbor-framework/harbor/pull/2121
+        - https://api.github.com/repos/harbor-framework/harbor/pulls/2121/commits
+      confidence: high  # PR created_at from GH API; commits at c240a2b2
     response_time_h: 0.1
     maintainer_action: null
     bot_review:

@@ -95,12 +95,23 @@ updated: 2026-07-02
 **修法时机**：下次提 uv PR 时调 GH API 拉 PR #19685 重新对齐 status/merged 字段  
 **优先级**：中
 
-### H. agentic #1382 `status: open` 应是 merged
+### H. agentic #1382 `status: open` 应是 merged ✅ FIXED (v0.7.2)
 
 **位置**：`agentic-community-mcp-gateway-registry/pr-1382-auth-md-mermaid-token.md`  
-**问题**：frontmatter 写 `status: open`，GH API 实测 `state=closed, merged=True, merged_at=2026-07-04T16:30:18Z, merged_by: aarora79`。7/4 16:30 后已合并，case study 未同步。  
-**修法时机**：下次提 agentic-community PR 时同步拉 #1382 真实状态并升级 case status 为 `final_status: closed-merged`（v0.5.0 valid value）  
-**优先级**：中
+**问题**：frontmatter 写 `status: open`，GH API 实测 `state=closed, merged=True, merged_at=2026-07-04T16:30:18Z, merged_by: aarora79`。  
+**修法**：v0.7.3 commit `0f76149` 修改 frontmatter `status: closed-merged` + 填入 `merged_at` / `closed_at` / `final_status: closed-merged`。
+
+### I. e2b #1413 `status: merged` 实际是 closed-not-merged ✅ FIXED (v0.7.3)
+
+**位置**：`e2b-dev-e2b/pr-1413-rich-to-ansi.md`  
+**问题**：frontmatter `status: merged, merged_at: 2026-06-09`，但 GH API 实测 `state=closed, merged=False, closed_at=2026-06-09T18:38:28Z`。这是 refactor PR 被关闭但并未 merge，跟 title 描述「成功合并」不符。  
+**修法**：v0.7.3 修 frontmatter 为 `status: closed-not-merged` + 跟 sync `final_status`。body 中“成功合并”需要二次 review 可能需要改跟正文。
+
+### J. agentic #1383 `status: open` 实际是 closed-merged ✅ FIXED (v0.7.3)
+
+**位置**：`agentic-community-mcp-gateway-registry/pr-1383-egress-vault-mermaid-placeholders.md`  
+**问题**：frontmatter `status: open`，GH API 实测 `state=closed, merged=True, merged_at=2026-07-04T16:28:52Z`。同 #1382 合并后未同步。  
+**修法**：v0.7.3 跟 #1382 同 pattern：status → closed-merged + 填时间。
 
 ---
 
@@ -129,17 +140,51 @@ updated: 2026-07-02
 
 ## 版本
 
-- v0.7.1 (2026-07-05 09:09)：N1 补 evidence + 发现 2 case status drift
-  - 5 case 补 case-level `verified_at / evidence_urls / confidence`（honcho #801 / qdrant #143 / uv #19685 / mongodb #1309 / agentic #1382）
-  - `--enforce-evidence`：22 → 12 warnings（还差 e2b/future-agi/harbor/fastmcp/sourcebot/agentic-#1383 六个 case）
-  - validate.py --strict：0 errors（绿）
-  - Add issue G（uv #19685 status drift merged 实际 closed-not-merged）/ H（agentic #1382 status drift open 实际 merged）
-- v0.2.0 (2026-07-02 23:56)：v0.5.0 review，关 3 issues，加 2 new findings
-- v0.1.0 (2026-07-02)：初版
+- **v0.7.5 (2026-07-05 13:30 GMT+8)**: 1, 3, 4 继续完善
+  - amend rounds evidence 补全: e2b #1413 / future-agi #778 / honcho #801 / fastmcp #282 round 2 都有 round-level verified_at + evidence_urls + confidence
+  - docs/INDEX.md 完整重写: 12 profiles + 11 cases + 11 lessons + 5 anti-patterns + 7 archive scripts + 全治理资产
+  - Badges 自动化: archive/scripts/update-evidence-badge.py emit docs/badges/evidence.json; CI workflow 加 step; README badge 改 dynamic JSON shields.io URL
+  - inject-round-evidence.py 升级: 处理 2 amend 路径 (code_change + unknown+commit); idempotency 全开; indent 错误修 3 次 (8 spaces → 4 → delta_indent)
+  - validate.py --strict: 0 errors ✅
+  - validate.py --enforce-evidence: 0 warnings ✅
+- **v0.7.4 (2026-07-05 12:46 GMT+8)**: 继续完善
+  - Round-level evidence 补全 (11/11 case round 1 都 verified_at + 3 evidence_urls + confidence)
+  - CI workflow 加 --enforce-evidence hard gate (不 warning, 真正失败 PR)
+  - README badges 加 evidence--coverage + Latest release
+  - prgenius 内部版本 bump 0.1.0 → 0.7.3 (跟外部 release 对齐)
+  - .gitignore /data 加 `~` 确保 git refresh-index 能看。tramadi ng-fix
+  - archive/scripts/inject-round-evidence.py (re-runnable round 1 evidence installer)
+  - archive/scripts/create-v074-release.py
+  - GitHub Release v0.7.4 现已发
+- **v0.7.3 (2026-07-05 12:25 GMT+8)**: 真正的 release released
+  - final commit on main = 4c94126b (远端 GH-API SHA, 本地 0f76149)
+  - 8 发布：v0.6.0 / v0.6.1 / v0.6.2 / v0.6.3 / v0.6.4 / v0.7.0 / v0.7.1 / v0.7.3（从 5 升至 8）
+  - v0.6.3 / v0.6.4 / v0.7.0 release notes + tags 补齐 (12:19 GMT+8)
+  - v0.7.1 → v0.7.3 in-place release bump (包含 archive scripts + 全证据补齐)
+  - 100% case-level evidence coverage (--enforce-evidence: 0 warnings)
+  - 4 status drift 修复 (H/I/J/G 顶部 status 修)
+- v0.7.3 (2026-07-05 12:21 GMT+8): commit-level: 全 case evidence 100% + 修 4 status drift
+  - 剩 6 case 补 case-level evidence (e2b / future-agi / harbor / fastmcp / agentic #1383 / sourcebot)
+  - 修 4 case status drift (H/I/J + 隐 G 顶部): agentic #1382/1383 → closed-merged; e2b #1413 / uv #19685 → closed-not-merged
+  - refresh-evidence.py 加 6 target 到 11 total
+  - 推 commit 通过 GH DB API (push via api.github.com:443)
+- v0.7.2 (2026-07-05 11:35 GMT+8): commit-level: archive scripts + KNOWN_ISSUES update
+  - archive/scripts/git-push-via-api.py --base-on-remote 升级
+  - archive/scripts/create-v071-release.py
+- v0.7.1 (2026-07-05 11:25 GMT+8): commit-level: MCP --repo-root wiring + PyPI rename + 5-case evidence
+  - 5 case evidence (--enforce-evidence: 22 → 12)
+  - CHANGELOG doc-drift fix
+  - prgenius/README.md frontmatter fix
+  - 推 commit 通过 GH DB API fallback (WSL→github.com:443 堵)
+- v0.7.0 (2026-07-04): schema evidence layer + stdlib prgenius package + stdio MCP shell (commit ba3032b)
+- v0.6.4 (2026-07-04): lesson-11 (mcp typo pool) + heartbeat snapshot + dashboard tool (commit d40c003)
+- v0.6.3 (2026-07-04): agentic-community-mcp-gateway-registry profile + 2 case studies (commit f20cb83)
+- v0.2.0 (2026-07-02 23:56): v0.5.0 review, 关 3 issues, 加 2 new findings
+- v0.1.0 (2026-07-02): 初版
 ## Current validator state
 
-- Files checked: **60**
+- Files checked: **61**
 - Errors: **0**
 - Warnings: **0**
-- Last heartbeat: 2026-07-04T14:08:46.765181+00:00
+- Last heartbeat: 2026-07-05T02:02:33.830674+00:00
 

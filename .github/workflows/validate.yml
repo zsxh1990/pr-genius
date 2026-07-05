@@ -39,8 +39,23 @@ jobs:
         run: python3 validate.py
 
       - name: Run validator (strict checks)
-        # Strict mode fails on warnings — use as a soft gate
+        # Strict mode fails on warnings — soft gate (warning, not red)
         run: python3 validate.py --strict || echo "::warning::Strict validator reported issues — see logs"
+
+      - name: Run validator (enforce evidence — hard gate)
+        # Hard fail: any case lacking verified_at / evidence_urls blocks the
+        # PR. This is the durable enforcement of "100% case-level evidence"
+        # promised in v0.7.x release notes.
+        run: python3 validate.py --enforce-evidence
+
+      - name: Refresh evidence coverage badge
+        # Emit docs/badges/evidence.json so the README badge (shields.io
+        # dynamic JSON) stays in sync with the validator's coverage count.
+        run: |
+          python3 archive/scripts/update-evidence-badge.py
+          if [ -n "$(git status --porcelain docs/badges/evidence.json)" ]; then
+            echo "::warning::evidence.json drift — CI badge updated; this is informational only"
+          fi
 
       - name: Check for orphan markdown
         # List any .md file not referenced from another .md file

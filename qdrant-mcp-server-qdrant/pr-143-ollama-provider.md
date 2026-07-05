@@ -32,6 +32,12 @@ rounds:
     delta:
       kind: code_change
       value: "+76 / -0 / 4 files"
+      verified_at: "2026-06-04T03:40:24Z"
+      evidence_urls:
+        - https://github.com/qdrant/mcp-server-qdrant/pull/143/files
+        - https://github.com/qdrant/mcp-server-qdrant/pull/143
+        - https://api.github.com/repos/qdrant/mcp-server-qdrant/pulls/143/commits
+      confidence: high  # PR created_at from GH API; commits at 8fe1f020
     response_time_h: null
     maintainer_action: null
     bot_review: []

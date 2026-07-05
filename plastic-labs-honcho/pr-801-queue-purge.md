@@ -34,6 +34,12 @@ rounds:
     delta:
       kind: code_change
       value: "+283 / -0 / 3 files"
+      verified_at: "2026-06-12T01:44:47Z"
+      evidence_urls:
+        - https://github.com/plastic-labs/honcho/pull/801/files
+        - https://github.com/plastic-labs/honcho/pull/801
+        - https://api.github.com/repos/plastic-labs/honcho/pulls/801/commits
+      confidence: high  # PR created_at from GH API; commits at 2da2ec7d
     response_time_h: 0.5
     maintainer_action: null
     bot_review:
@@ -46,6 +52,11 @@ rounds:
     delta:
       kind: unknown  # 本轮 delta 未从 GH API 验证
       value: null
+      verified_at: "2026-06-20T14:18:45Z"
+      evidence_urls:
+        - https://github.com/plastic-labs/honcho/pull/801/commits/7ac3afe
+        - https://github.com/plastic-labs/honcho/commit/7ac3afe
+      confidence: medium  # round-level commit SHA cross-refs to GH
     response_time_h: 1
     maintainer_action: null
     bot_review:

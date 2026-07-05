@@ -82,6 +82,66 @@ The MCP shell exposes 4 tools to local agents:
 
 No network, no auth, no rate-limiting. Agent calls go through stdio only.
 
+### `--repo-root` flag
+
+The MCP server defaults to a path computed from its install location
+(`<package>/../..` × 3 to reach the knowledge base). When that path is
+wrong (editable install, venv, worktree, fork), pass `--repo-root`:
+
+```bash
+python3 -m prgenius --repo-root /path/to/big-repo-pr-knowledge mcp serve
+```
+
+### Wiring into Cursor / Claude Code / Cline
+
+These editors all read MCP server config from JSON. Point `command` at
+`python3 -m prgenius` and `args` at `mcp serve` (add `--repo-root` if the
+auto-detected path doesn't match your checkout). No `env` keys, no auth.
+
+**Claude Code** (`~/.claude/mcp.json` or project-local `.mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "pr-genius": {
+      "command": "python3",
+      "args": ["-m", "prgenius", "--repo-root", "/abs/path/to/big-repo-pr-knowledge", "mcp", "serve"]
+    }
+  }
+}
+```
+
+**Cursor** (`~/.cursor/mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "pr-genius": {
+      "command": "python3 -m prgenius",
+      "args": ["--repo-root", "/abs/path/to/big-repo-pr-knowledge", "mcp", "serve"]
+    }
+  }
+}
+```
+
+**Cline** (VS Code `cline_mcp_settings.json`):
+
+```json
+{
+  "mcpServers": {
+    "pr-genius": {
+      "command": "python3",
+      "args": ["-m", "prgenius", "--repo-root", "/abs/path/to/big-repo-pr-knowledge", "mcp", "serve"],
+      "disabled": false
+    }
+  }
+}
+```
+
+Replace `/abs/path/to/big-repo-pr-knowledge` with the actual checkout.
+Omit `--repo-root` only if you installed prgenius from this exact
+checkout (then the default path resolves correctly).
+
 ## Schema we honor
 
 - **rounds v0.5.0** — `action` enum + `delta` object + case-level `close_decision`
