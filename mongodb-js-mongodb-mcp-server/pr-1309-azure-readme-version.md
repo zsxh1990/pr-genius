@@ -32,6 +32,18 @@ rounds:
     delta:
       kind: code_change
       value: "+1 / -1 / 1 file (deploy/azure/README.md)"
+      verified_at: "2026-07-02T16:14:18Z"
+      evidence_urls:
+        - https://github.com/mongodb-js/mongodb-mcp-server/pull/1309/files
+        - https://github.com/mongodb-js/mongodb-mcp-server/pull/1309
+        - https://api.github.com/repos/mongodb-js/mongodb-mcp-server/pulls/1309/commits
+      confidence: high  # PR created_at from GH API; commits at a02fc16b
+      verified_at: "2026-07-02T16:14:18Z"
+      evidence_urls:
+        - https://github.com/mongodb-js/mongodb-mcp-server/pull/1309/files
+        - https://github.com/mongodb-js/mongodb-mcp-server/pull/1309
+        - https://api.github.com/repos/mongodb-js/mongodb-mcp-server/pulls/1309/commits
+      confidence: high  # PR created_at from GH API; commits at a02fc16b
     response_time_h: null  # 等待 maintainer
     maintainer_action: null
     bot_review: []

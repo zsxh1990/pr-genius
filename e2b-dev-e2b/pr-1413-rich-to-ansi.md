@@ -31,6 +31,18 @@ rounds:
     delta:
       kind: code_change
       value: "未深读 (核心 commit 385971054)"
+      verified_at: "2026-06-09T17:23:02Z"
+      evidence_urls:
+        - https://github.com/e2b-dev/E2B/pull/1413/files
+        - https://github.com/e2b-dev/E2B/pull/1413
+        - https://api.github.com/repos/e2b-dev/E2B/pulls/1413/commits
+      confidence: high  # PR created_at from GH API; commits at 1a3a7ebc
+      verified_at: "2026-06-09T17:23:02Z"
+      evidence_urls:
+        - https://github.com/e2b-dev/E2B/pull/1413/files
+        - https://github.com/e2b-dev/E2B/pull/1413
+        - https://api.github.com/repos/e2b-dev/E2B/pulls/1413/commits
+      confidence: high  # PR created_at from GH API; commits at 1a3a7ebc
     response_time_h: 0.05  # 同分钟
     maintainer_action: null
     bot_review:

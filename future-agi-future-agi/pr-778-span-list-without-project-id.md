@@ -34,6 +34,12 @@ rounds:
     delta:
       kind: code_change
       value: "+2 / -2 / 1 file"  # 极小
+      verified_at: "2026-06-04T10:55:24Z"
+      evidence_urls:
+        - https://github.com/future-agi/future-agi/pull/778/files
+        - https://github.com/future-agi/future-agi/pull/778
+        - https://api.github.com/repos/future-agi/future-agi/pulls/778/commits
+      confidence: high  # PR created_at from GH API; commits at 4964ae29
     response_time_h: 0.07  # 4 分钟
     maintainer_action: null
     bot_review:

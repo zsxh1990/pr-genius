@@ -32,6 +32,18 @@ rounds:
     delta:
       kind: code_change
       value: "+271 / -16 / 1 file"
+      verified_at: "2026-06-28T08:13:56Z"
+      evidence_urls:
+        - https://github.com/punkpeye/fastmcp/pull/282/files
+        - https://github.com/punkpeye/fastmcp/pull/282
+        - https://api.github.com/repos/punkpeye/fastmcp/pulls/282/commits
+      confidence: high  # PR created_at from GH API; commits at 2606984d
+      verified_at: "2026-06-28T08:13:56Z"
+      evidence_urls:
+        - https://github.com/punkpeye/fastmcp/pull/282/files
+        - https://github.com/punkpeye/fastmcp/pull/282
+        - https://api.github.com/repos/punkpeye/fastmcp/pulls/282/commits
+      confidence: high  # PR created_at from GH API; commits at 2606984d
     response_time_h: null  # 首次贡献，CI 未跑
     maintainer_action: null
     bot_review: []

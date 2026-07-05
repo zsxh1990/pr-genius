@@ -26,6 +26,18 @@ rounds:
     delta:
       kind: code_change
       value: "+1 / -1 / 1 file (docs/auth.md L186 <token> → [token])"
+      verified_at: "2026-07-04T04:05:38Z"
+      evidence_urls:
+        - https://github.com/agentic-community/mcp-gateway-registry/pull/1382/files
+        - https://github.com/agentic-community/mcp-gateway-registry/pull/1382
+        - https://api.github.com/repos/agentic-community/mcp-gateway-registry/pulls/1382/commits
+      confidence: high  # PR created_at from GH API; commits at bbc0f166
+      verified_at: "2026-07-04T04:05:38Z"
+      evidence_urls:
+        - https://github.com/agentic-community/mcp-gateway-registry/pull/1382/files
+        - https://github.com/agentic-community/mcp-gateway-registry/pull/1382
+        - https://api.github.com/repos/agentic-community/mcp-gateway-registry/pulls/1382/commits
+      confidence: high  # PR created_at from GH API; commits at bbc0f166
     response_time_h: 0.05
     maintainer_action: null
     bot_review: []

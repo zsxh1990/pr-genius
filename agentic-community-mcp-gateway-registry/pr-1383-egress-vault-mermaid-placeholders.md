@@ -26,6 +26,18 @@ rounds:
     delta:
       kind: code_change
       value: "+2 / -2 / 1 file (docs/egress-credential-vault.md L147+L161 <server>/<path> → [server]/[path])"
+      verified_at: "2026-07-04T04:07:47Z"
+      evidence_urls:
+        - https://github.com/agentic-community/mcp-gateway-registry/pull/1383/files
+        - https://github.com/agentic-community/mcp-gateway-registry/pull/1383
+        - https://api.github.com/repos/agentic-community/mcp-gateway-registry/pulls/1383/commits
+      confidence: high  # PR created_at from GH API; commits at 52f3c7ae
+      verified_at: "2026-07-04T04:07:47Z"
+      evidence_urls:
+        - https://github.com/agentic-community/mcp-gateway-registry/pull/1383/files
+        - https://github.com/agentic-community/mcp-gateway-registry/pull/1383
+        - https://api.github.com/repos/agentic-community/mcp-gateway-registry/pulls/1383/commits
+      confidence: high  # PR created_at from GH API; commits at 52f3c7ae
     response_time_h: 0.05
     maintainer_action: null
     bot_review: []

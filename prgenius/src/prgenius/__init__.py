@@ -10,7 +10,7 @@ Public surface:
 - schema_info() — return supported OKF schema versions
 """
 
-__version__ = "0.1.0"
+__version__ = "0.7.3"
 __all__ = [
     "__version__",
     "load",

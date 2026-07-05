@@ -32,6 +32,12 @@ rounds:
     delta:
       kind: no_code_change
       value: "未深读 (SARIF output 实现)"
+      verified_at: "2026-06-05T06:55:30Z"
+      evidence_urls:
+        - https://github.com/astral-sh/uv/pull/19685/files
+        - https://github.com/astral-sh/uv/pull/19685
+        - https://api.github.com/repos/astral-sh/uv/pulls/19685/commits
+      confidence: high  # PR created_at from GH API; commits at 604822fb
     response_time_h: 14
     maintainer_action: "@lucasew: 第一条 review"
     bot_review: []
