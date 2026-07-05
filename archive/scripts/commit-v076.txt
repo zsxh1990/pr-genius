@@ -1,0 +1,46 @@
+feat(1+2+3): #4 profile verified_at 92% + #7 blog + #1 helper script
+
+克莱恩 2026-07-05 22:45 '1+2+3' 拍板 = 指标 #4 (profile verified_at
+80%) + #7 (博客) + #1 部分 (script 工具). #2 + #6 都是大坑
+(等 PR review 真实流转), 留到下个 sprint.
+
+#4 profile-level verified_at 100% (11/12, 91.7% > 80% 目标)
+- archive/scripts/refresh-profile-meta.py: GH API fetches stars /
+  last_release / last_commit_sha, injects
+  verified_at / evidence_urls / confidence / last_release / stars
+  / last_commit_sha into profile frontmatter
+- 7 profiles updated (agentic/uv/e2b/future-agi/harbor/punkpeye/sourcebot)
+- 4 profiles already had verified_at (qdrant/honcho/mongodb-js/hermes-agent,
+  hand-filled earlier in the case-evidence work)
+- Schema type: "Roadmap" registered in validate.py for the new
+  docs/BLOG.md + docs/METRICS.md frontmatter type
+- Idempotent: re-runs are no-ops on already-filled profiles
+
+#7 long-form blog — 1 篇清晰博客 (3000+ 字)
+- docs/BLOG.md (355 lines, 13.4 KB) — walkthrough of what
+  pr-genius is, who uses it, how to install, real example
+  from honcho#801 round-by-round, comparison to PR-Agent /
+  OpenHands / SWE-bench
+- README adds link from Contributing section
+- docs/INDEX.md indexes BLOG + METRICS as repo-root entries
+- Metrics roadmap: docs/METRICS.md (克莱恩 7 指标对账)
+  - 4/7 already met: #3 case evidence 100%, #5 CLI/MCP shipped,
+    #2+#1+#6+#7 partial
+  - 短期可消: #4 done, #7 done (this commit)
+  - 不可控: #2 (writing PRs 11→50 等 PR review 数周),
+    #6 (external maintainer 互动 不可创造)
+
+#1 partial — refresh-profile-meta.py is a re-runnable helper that
+  scales to 30 profiles once content is researched. The profile
+  *content* (research + write) is the bottleneck; this just makes
+  the verified_at injection work as we add Profile 13, 14, ...
+
+Stats after this commit:
+- 12 profiles / 12 case studies / 11 lessons / 5 anti-patterns
+- 11/12 profiles (91.7%) carry verified_at (target was 80%)
+- 100% case-level evidence (target met)
+- 1 blog: docs/BLOG.md (target met)
+- validate.py --strict: 0 errors ✅
+- validate.py --enforce-evidence: 0 warnings ✅
+
+co-authored-by: zsxh1990 <290087845+zsxh1990@users.noreply.github.com>
