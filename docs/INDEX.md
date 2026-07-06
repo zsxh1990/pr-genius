@@ -40,15 +40,16 @@ this, you can use it to plan your next retrieval step.
 | Path | Purpose |
 |---|---|
 | `AGENT_GUIDELINES_SCHEMA.md` | 17-key agent_guidelines field (8 repo profiles × shape) |
-| `ROUNDS_SCHEMA.md` | rounds v0.7.0 schema (action / delta / close_decision / evidence) |
+| `ROUNDS_SCHEMA.md` | rounds schema: v0.5.0 (action enum + delta object + close_decision) → v0.7.0 (case-level + round-level evidence 加固). Migrations: 2 cases at v0.5.0 (honcho + qdrant), 9 legacy v0.1 |
 | `BLACKLIST.md` | Repos we don't track (with reason) |
 | `federation.yaml` | `federates_with` declarations (MisakaNet query-only) |
 
 ## `prgenius/` Python package
 
-The local stdlib-only Python library + CLI + stdio MCP shell. Shipped
-as the `prgenius-kb` distribution on PyPI (renamed from `prgenius` to
-avoid a 2024 name collision).
+The local stdlib-only Python library + CLI + stdio MCP shell. Distribution
+**name** on PyPI would be `prgenius-kb` (renamed from `prgenius` to avoid
+a 2024 name collision); ⚠️ **PyPI publish is pending** — install via
+`PYTHONPATH=src python -m prgenius ...` for now.
 
 | Path | Purpose |
 |---|---|
@@ -62,8 +63,8 @@ avoid a 2024 name collision).
 
 ## Repo profiles (`<org>-<repo>/`)
 
-12 profiles total. Each is a directory. Naming: `owner-repo` with `-`,
-never `_`.
+12 profile dirs total (11 with `index.md` + 1 stub `ag2ai-ag2` image-only).
+Each is a directory. Naming: `owner-repo` with `-`, never `_`.
 
 | Profile | Star | Lang | Case studies + status (post-v0.7.4 status drift fix) |
 |---|---|---|---|
@@ -163,13 +164,13 @@ re-runnable evidence / release tools.
 
 | Field | Value |
 |---|---|
-| `prgenius` package version | `0.7.3` (in `prgenius/src/prgenius/__init__.py`) |
+| `prgenius` package version | `0.7.5` |
 | Latest GH release | `v0.7.5` (2026-07-05) |
 | Total case studies | 11 (one PR per file; agentic #1382 + #1383 are separate case studies for the same profile) |
-| Total profiles | 12 (11/12 with case-level `verified_at`; 11/12 with profile-level `verified_at` = 91.7%) |
+| Total profiles | 11 live + 1 stub `ag2ai-ag2` (7/11 with `evidence_urls`, 11/11 with `verified_at` = 100%) |
 | Total lessons | 11 (`misakanet-50/lesson-01`..`lesson-11`) |
 | Total anti-patterns | 5 |
-| Round-level evidence | 11/11 round-1 + 4/4 amend rounds have `verified_at` / `evidence_urls` / `confidence` |
+| Round-level evidence | 16/16 across 11 cases (11 round-1 open + 4 amend + 1 check-in) |
 | Long-form blog | `docs/BLOG.md` (v0.7.6, 355 lines, 13.4 KB) |
 | Metrics roadmap | `docs/METRICS.md` (克莱恩 7 指标对账, 短期可消 4/7) |
 | `validate.py --strict` | 0 errors ✅ |

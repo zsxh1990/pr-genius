@@ -1,6 +1,6 @@
 [project]
 name = "prgenius-kb"
-version = "0.7.3"
+version = "0.7.5"
 description = "Evidence-backed lookup for big-repo PR contributions. Local-only, zero-runtime, stdlib-first. Renamed from `prgenius` to avoid PyPI name collision with an unrelated 2024 GPT-3 PR-description tool."
 readme = "README.md"
 requires-python = ">=3.9"

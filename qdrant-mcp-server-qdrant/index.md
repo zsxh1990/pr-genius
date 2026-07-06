@@ -9,6 +9,14 @@ language: Python
 zsxh_pr_count: 1
 status: stale-26d
 analyzed_at: 2026-07-01
+evidence_urls:
+  - https://github.com/qdrant/mcp-server-qdrant
+  - https://api.github.com/repos/qdrant/mcp-server-qdrant
+  - https://api.github.com/repos/qdrant/mcp-server-qdrant/pulls/143
+  - https://api.github.com/repos/qdrant/mcp-server-qdrant/issues/143/comments
+  - ./pr-143-ollama-provider.md
+confidence: high  # zsxh1990 PR #143 stale-26d, 3 rounds 已记录
+verified_at: 2026-07-06
 tags:
   - repo-profile
   - mcp

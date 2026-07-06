@@ -10,6 +10,14 @@ zsxh_pr_count: 1
 status: in-flight
 data_source: zsxh PR #1309
 analyzed_at: 2026-07-03
+evidence_urls:
+  - https://github.com/mongodb-js/mongodb-mcp-server
+  - https://api.github.com/repos/mongodb-js/mongodb-mcp-server
+  - https://api.github.com/repos/mongodb-js/mongodb-mcp-server/releases/latest
+  - https://api.github.com/repos/mongodb-js/mongodb-mcp-server/pulls/1309
+  - ./pr-1309-azure-readme-version.md
+confidence: high  # zsxh1990 PR #1309 in-flight, 持续观察
+verified_at: 2026-07-06
 tags:
   - repo-profile
   - mcp

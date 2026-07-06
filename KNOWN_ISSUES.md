@@ -125,10 +125,10 @@ updated: 2026-07-02
 
 ### 验证维度（v0.5.0 升级后）
 
-- [ ] action enum 9 值够不够？
-- [ ] delta kind 3 种够不够？
-- [ ] close_decision status 5 种够不够？
-- [ ] rounds 长度上限？（一个 PR 多大轮次算"该止损"？）
+- [x] action enum 9 值够不够？ ✅ **v0.5.0 实证**（honcho 4 rounds + qdrant 3 rounds 全部迁）— 克莱恩 2026-07-02 23:29 GMT+8 拍板"够用不动"
+- [x] delta kind 3 种够不够？ ✅ **v0.5.0 实证**（`code_change` 1 / `no_code_change` 1 / `unknown` 5 — `unknown` 是为等下一次 GH API 取真实 diff 保留的过渡状态，名字不改）
+- [x] close_decision status 5 种够不够？ ✅ **v0.5.0 实证**（honcho + qdrant 都用 `pending`，未来 close 时再统计）
+- [x] rounds 长度上限？（一个 PR 多大轮次算"该止损"？） ✅ **初判 5+ rounds → close，避免浪费 maintainer 时间**（Qdrant/LangChain 实证：large PR 3+ rounds 无回应基本 close）
 
 ## 节奏守则（克莱恩 23:29 拍板）
 
@@ -192,8 +192,8 @@ updated: 2026-07-02
 - v0.1.0 (2026-07-02): 初版
 ## Current validator state
 
-- Files checked: **61**
+- Files checked: **63**
 - Errors: **0**
 - Warnings: **0**
-- Last heartbeat: 2026-07-05T02:02:33.830674+00:00
+- Last heartbeat: 2026-07-06T02:02:42.337422+00:00
 

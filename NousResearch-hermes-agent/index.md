@@ -14,6 +14,13 @@ data_source: 300 PR 深度调研 (200 merged + 100 closed-not-merged, 2026-07-03
 deep_research: ../../hermes-agent-pr-knowledge/report.md
 analyzed_at: 2026-07-03
 status: scout-phase  # 调研完成，未提 PR
+evidence_urls:
+  - https://github.com/NousResearch/hermes-agent
+  - https://api.github.com/repos/NousResearch/hermes-agent
+  - https://api.github.com/repos/NousResearch/hermes-agent/releases/latest
+  - https://api.github.com/repos/NousResearch/hermes-agent/commits
+  - ../../hermes-agent-pr-knowledge/report.md
+confidence: high  # autogen from GH API + 300 PR deep-research
 tags:
   - repo-profile
   - ai-agent

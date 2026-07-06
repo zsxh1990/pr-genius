@@ -10,6 +10,14 @@ zsxh_pr_count: 1
 status: in-flight
 data_source: zsxh PR #801
 analyzed_at: 2026-07-01
+evidence_urls:
+  - https://github.com/plastic-labs/honcho
+  - https://api.github.com/repos/plastic-labs/honcho
+  - https://api.github.com/repos/plastic-labs/honcho/pulls/801
+  - https://api.github.com/repos/plastic-labs/honcho/issues/801/comments
+  - ./pr-801-queue-purge.md
+confidence: high  # zsxh1990 PR #801 in-flight, 4 rounds 已记录
+verified_at: 2026-07-06
 tags:
   - repo-profile
   - ai-memory
