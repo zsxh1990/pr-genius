@@ -3,7 +3,7 @@ line = open('/home/eric_jia/.git-credentials').read().splitlines()[0]
 user, _, rest = line[len('https://'):].rpartition('@')
 u, _, t = user.partition(':')
 
-HEAD_SHA = "0c2a37053c9f65ee5ddbc01f85ab4db9496439e8"
+HEAD_SHA = "238bf7155321e4c869a4defcde7d9592d544f539"  # post-push, equal to GH main HEAD
 TAG = "v0.7.6"
 REPO = "zsxh1990/pr-genius"
 
