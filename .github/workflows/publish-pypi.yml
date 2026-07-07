@@ -41,8 +41,12 @@ jobs:
           python -c "import prgenius; print('__version__:', prgenius.__version__)"
 
       - name: Publish to PyPI via Trusted Publisher (OIDC)
-        working-directory: prgenius
         uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: prgenius/dist
         # No API token — Trusted Publisher is configured in PyPI project
         # settings to allow this workflow (owner=zsxh1990, repo=pr-genius,
         # workflow=.github/workflows/publish-pypi.yml, env=pypi).
+        # `packages-dir` is relative to GITHUB_WORKSPACE (= repo root),
+        # so `prgenius/dist` resolves correctly without step-level
+        # `working-directory` (which is run-step-only and conflicts with `uses:`).
