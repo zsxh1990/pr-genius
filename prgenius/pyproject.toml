@@ -1,26 +1,30 @@
 [project]
-name = "prgenius-kb"
-version = "0.7.5"
-description = "Evidence-backed lookup for big-repo PR contributions. Local-only, zero-runtime, stdlib-first. Renamed from `prgenius` to avoid PyPI name collision with an unrelated 2024 GPT-3 PR-description tool."
+name = "prgenius-core"
+version = "0.7.7"
+description = "Evidence-backed lookup for big-repo PR contributions. Local-only, zero-runtime, stdlib-first. Renamed from `prgenius` to avoid PyPI name collision with an unrelated 2024 GPT-3 PR-description tool. Distribution renamed again in v0.7.8: `prgenius-kb` → `prgenius-core` (aligned with `misakanet-core` convention)."
 readme = "README.md"
 requires-python = ">=3.9"
-license = {text = "MIT"}
+license = "MIT"
 authors = [{name = "pr-genius contributors"}]
 keywords = ["okf", "pr-knowledge", "agent-readable", "contribution-intelligence", "evidence"]
 classifiers = [
+    "Development Status :: 4 - Beta",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Topic :: Software Development :: Documentation",
 ]
 dependencies = []  # stdlib only
 
+[project.optional-dependencies]
+mcp = ["mcp>=1.0"]
+dev = ["build", "twine", "pytest"]
+
 [project.scripts]
-prgenius-kb = "prgenius.cli:main"
+prgenius-core = "prgenius.cli:main"
 
 [project.urls]
 "Homepage" = "https://github.com/zsxh1990/pr-genius"

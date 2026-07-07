@@ -19,7 +19,7 @@ conforms_to: OKF v0.1
 > 11 PR Case Studies, 11 lessons, and 5 anti-patterns about how a single
 > account (`zsxh1990`) contributes to large open-source codebases. Every
 > claim is back-linked to a GitHub URL. Install:
-> `pip install prgenius-kb`. Configure any MCP-aware agent (Claude Code,
+> `pip install prgenius-core`. Configure any MCP-aware agent (Claude Code,
 > Cursor, Cline) in 30 seconds. Browse via `prgenius` CLI or MCP shell.
 > Contribute a new case study by adding a `pr-NNN-*.md` file under an
 > existing `<org>-<repo>/` directory.
@@ -221,12 +221,12 @@ asking the maintainer "did my round-4 fix land?"
 ### As a Python package
 
 ```bash
-pip install prgenius-kb
+pip install prgenius-core
 ```
 
-(The distribution was renamed from `prgenius` to `prgenius-kb` in
-v0.7.1 because the original name on PyPI was taken by an unrelated
-2024 GPT-3 PR-description tool.)
+(The distribution was renamed twice: `prgenius` → `prgenius-kb` in v0.7.1
+to dodge a 2024 PyPI name collision, then `prgenius-kb` → `prgenius-core` in
+v0.7.8 to drop the awkward `kb` suffix and align with `misakanet-core`.)
 
 ### As an MCP-aware agent extension
 
@@ -347,7 +347,7 @@ as: *"a git-tracked, OKF-compliant knowledge bundle of 12
 hand-curated Repo Profiles and 11 PR Case Studies from one
 contributor (`zsxh1990`) across large OSS codebases; every claim is
 back-linked to GitHub URLs in frontmatter; the install path is
-`pip install prgenius-kb` plus an MCP shell; the contribute path
+`pip install prgenius-core` plus an MCP shell; the contribute path
 is dropping a `pr-*.md` file under an existing `<org>-<repo>/`
 dir and running `validate.py`; and the goal is to get an LLM coding
 agent to produce better PRs on first try by reading what worked."*

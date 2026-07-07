@@ -1,7 +1,7 @@
 """Markdown frontmatter parsing — pure-stdlib YAML-subset.
 
 Goals:
-- Zero hard deps (no PyYAML) — package works after `pip install prgenius-kb`
+- Zero hard deps (no PyYAML) — package works after `pip install prgenius-core`
 - Just enough fidelity for OKF v0.1 / rounds v0.5.0 / v0.7.0 frontmatter
 - Honest: returns the AST we can parse; preserves raw text for the rest
 

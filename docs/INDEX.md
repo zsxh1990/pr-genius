@@ -47,14 +47,15 @@ this, you can use it to plan your next retrieval step.
 ## `prgenius/` Python package
 
 The local stdlib-only Python library + CLI + stdio MCP shell. Distribution
-**name** on PyPI would be `prgenius-kb` (renamed from `prgenius` to avoid
-a 2024 name collision); ⚠️ **PyPI publish is pending** — install via
-`PYTHONPATH=src python -m prgenius ...` for now.
+**name** on PyPI is `prgenius-core` (renamed twice: `prgenius` → `prgenius-kb`
+in v0.7.1 to dodge a 2024 collision, then `prgenius-kb` → `prgenius-core` in
+v0.7.8 to align with `misakanet-core` naming convention); ⚠️ **PyPI publish
+is pending** — install via `PYTHONPATH=src python -m prgenius ...` for now.
 
 | Path | Purpose |
 |---|---|
 | `prgenius/README.md` | Package-level README — install + Cursor/Claude/Cline MCP snippets |
-| `prgenius/pyproject.toml` | stdlib-only build config (`prgenius-kb` distribution) |
+| `prgenius/pyproject.toml` | stdlib-only build config (`prgenius-core` distribution) |
 | `prgenius/src/prgenius/__init__.py` | Package metadata (`__version__ = "0.7.3"`) |
 | `prgenius/src/prgenius/parser.py` | Pure-stdlib frontmatter parser + iterators |
 | `prgenius/src/prgenius/cli.py` | CLI entry (`python3 -m prgenius ...`) |

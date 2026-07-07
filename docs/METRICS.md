@@ -93,7 +93,7 @@ Prgenius 包已:
 定义: 一篇 host 在 pr-genius 仓内的 blog-quality 文档, 长 3000+ 字, 解释:
 - pr-genius 是什么 (agent-readable knowledge bundle for big-repo PR contributions)
 - 谁该用 (coding agent + maintainer + solo developer)
-- 怎么 install (pip install prgenius-kb + MCP config snippet)
+- 怎么 install (pip install prgenius-core + MCP config snippet)
 - 一个 walkthrough 用真实数据 (honcho #801 round 4)
 - 怎么参与 (CONTRIBUTING.md snapshot)
 - 跟同类项目对比 (pr-agent / OpenHands / SWE-bench)

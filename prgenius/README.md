@@ -18,7 +18,7 @@ base in this repo and exposes it through structured tool calls.
 ## Install
 
 ```bash
-pip install prgenius-kb
+pip install prgenius-core
 ```
 
 Or run from a checkout:
@@ -26,6 +26,30 @@ Or run from a checkout:
 ```bash
 cd prgenius
 PYTHONPATH=src python3 -m prgenius --version
+```
+
+## Important: PyPI package is the *interface*, not the data
+
+The PyPI wheel ships only the Python code (`prgenius/` package).
+**The knowledge base (profile markdown, case studies, OKF schemas) lives
+in the GitHub repo** at <https://github.com/zsxh1990/pr-genius> and is
+**not** bundled into the wheel. To use `prgenius-core` after `pip install`,
+point it at a checkout of the knowledge base:
+
+```bash
+git clone https://github.com/zsxh1990/pr-genius
+prgenius-core --repo-root ./pr-genius profile get astral-sh/uv
+```
+
+If you cloned a specific tag/commit, the package's `__version__` should
+match (e.g. v0.7.7 ↔ `prgenius-core==0.7.7`).
+
+### Optional: MCP server
+
+The MCP entry point (`prgenius-core mcp serve`) requires the `mcp` package:
+
+```bash
+pip install "prgenius-core[mcp]"
 ```
 
 ## Quick Start

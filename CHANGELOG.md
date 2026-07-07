@@ -11,6 +11,14 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 
 ## [Unreleased]
 
+## [0.7.8] - 2026-07-07
+
+### Changed
+- `prgenius` distribution renamed `prgenius-kb` → **`prgenius-core`**
+  (drop the awkward `kb` suffix; align with `misakanet-core` naming
+  convention). CLI entry point `prgenius-kb` → `prgenius-core`; import
+  path `prgenius.cli` unchanged. PyPI publish still pending.
+
 ## [0.7.5] - 2026-07-05
 
 ### Added
