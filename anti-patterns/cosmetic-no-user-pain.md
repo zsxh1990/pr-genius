@@ -1,7 +1,8 @@
 ---
 type: Anti-Pattern
 key: cosmetic-no-user-pain
-symptom: "we're not seeing any major user pain this PR would solve" / "I don't think this is useful"
+symptom: |
+  "we're not seeing any major user pain this PR would solve" / "I don't think this is useful"
 root_cause: 提交了美化/格式化/输出改进，但没有解决真实用户痛点。维护者认为这些改动是 cosmetic（表面修饰），不值得 review 和维护成本。
 trigger_keywords:
   - "not useful"

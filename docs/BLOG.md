@@ -16,7 +16,7 @@ conforms_to: OKF v0.1
 # pr-genius: A Knowledge Bundle for Agents That Already Ship PRs
 
 > **TL;DR**: `pr-genius` is a git repository containing 12 Repo Profiles,
-> 11 PR Case Studies, 11 lessons, and 5 anti-patterns about how a single
+> 11 PR Case Studies, 11 lessons, and 12 anti-patterns about how a single
 > account (`zsxh1990`) contributes to large open-source codebases. Every
 > claim is back-linked to a GitHub URL. Install:
 > `pip install prgenius-core`. Configure any MCP-aware agent (Claude Code,
@@ -82,7 +82,7 @@ pr-genius/
 ├── <org>-<repo>/                      # 12 of these
 │   ├── index.md                       # the Repo Profile (frontmatter + narrative)
 │   └── pr-NNN-*.md                    # 1–N PR Case Studies per profile
-├── misakanet-50/                      # 11 lessons, 5 anti-patterns
+├── misakanet-50/                      # 11 lessons, 12 anti-patterns (sibling anti-patterns/ actually)
 │   ├── lesson-NN-*.md
 │   └── ...
 └── docs/                              # docs/INDEX.md + docs/BLOG.md (this file)

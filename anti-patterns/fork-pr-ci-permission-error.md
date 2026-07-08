@@ -1,4 +1,8 @@
 ---
+type: Anti-Pattern
+key: fork-pr-ci-permission-error
+symptom: |
+  CI 检查报 "Resource not accessible by integration"（DCO / star-request / audit / lint 全部红）
 title: "Fork PR CI 权限错误 — Resource not accessible by integration"
 domain: devops
 tags:

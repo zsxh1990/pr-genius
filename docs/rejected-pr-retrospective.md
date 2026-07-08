@@ -1,5 +1,5 @@
 ---
-type: Retrospective
+type: Research Report
 title: 被拒 PR 复盘 — 18 个被拒 PR 的反模式分析
 description: 从 18 个被拒 PR 中提取的 4 个核心反模式，以及预防策略
 version: 1.0.0

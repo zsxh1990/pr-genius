@@ -1,7 +1,8 @@
 ---
 type: Anti-Pattern
 key: low-value-contribution
-symptom: "we don't accept this type of contribution" / "not aligned with project goals" / "closing"
+symptom: |
+  "we don't accept this type of contribution" / "not aligned with project goals" / "closing"
 root_cause: 提交的贡献不符合项目的核心价值或维护者的需求。可能是文档、测试、重构等"外围"贡献，但维护者更关注核心功能。
 trigger_keywords:
   - "not aligned"

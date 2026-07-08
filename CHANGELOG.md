@@ -100,7 +100,7 @@ Compare: [0.7.1...0.7.3](https://github.com/zsxh1990/pr-genius/compare/v0.7.1...
   `state=closed, merged=True, merged_at=2026-07-04T16:30:18Z, merged_by=aarora79`.
 
 ### Stats
-- 12 profiles / 12 case studies / 11 lessons / 5 anti-patterns
+- 12 profiles / 12 case studies / 11 lessons / 12 anti-patterns
 - validate.py --strict: 0 errors
 - validate.py --enforce-evidence: 12 warnings (down from 22 pre-N1; 6 cases
   not yet refreshed)
@@ -118,7 +118,7 @@ Compare: [0.7.0...0.7.1](https://github.com/zsxh1990/pr-genius/compare/v0.7.0...
   `mcp serve` is invoked; everything else stays stdlib)
 
 ### Stats
-- 12 profiles / 12 case studies / 11 lessons / 5 anti-patterns
+- 12 profiles / 12 case studies / 11 lessons / 12 anti-patterns
 
 Compare: [0.6.4...0.7.0](https://github.com/zsxh1990/pr-genius/compare/v0.6.4...v0.7.0)
 

@@ -1,4 +1,5 @@
 ---
+type: Research Report
 title: "PR 反模式分析 — 从被拒 PR 中提取可复用教训"
 domain: development
 tags:

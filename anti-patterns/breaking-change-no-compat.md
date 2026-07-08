@@ -1,7 +1,8 @@
 ---
 type: Anti-Pattern
 key: breaking-change-no-compat
-symptom: "pretty big breaking change" / "has its own set of compatibility issues" / "unnecessary at the moment"
+symptom: |
+  "pretty big breaking change" / "has its own set of compatibility issues" / "unnecessary at the moment"
 root_cause: 提交了破坏性变更（breaking change）但没有考虑向后兼容性。维护者担心这会影响现有用户，即使改动本身是合理的。
 trigger_keywords:
   - "breaking change"

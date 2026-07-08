@@ -1,4 +1,8 @@
 ---
+type: Anti-Pattern
+key: github-pr-diff-caching
+symptom: |
+  force push 之后 PR review 显示的还是旧 diff / reviewer 看不出改动
 title: "GitHub PR 缓存陷阱 — force push 后 PR diff 不更新"
 domain: devops
 tags:

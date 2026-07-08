@@ -1,7 +1,8 @@
 ---
 type: Anti-Pattern
 key: upstream-already-implementing
-symptom: "官方自己做了" / "upstream implemented" / "we're already working on this"
+symptom: |
+  "官方自己做了" / "upstream implemented" / "we're already working on this"
 root_cause: 维护者已经在内部实现或计划实现相同功能，外部 PR 被拒绝是因为重复劳动。**注意：这是最有价值的反模式，因为它证明你的方向是正确的！**
 trigger_keywords:
   - "already working on this"

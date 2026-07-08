@@ -1,4 +1,7 @@
 ---
+type: Anti-Pattern
+key: fork-main-sync-upstream
+symptom: PR 包含与本次改动无关的文件，CI 检查报 "diff includes unrelated changes" / "please sync your fork"
 title: "Fork 同步陷阱 — main 分支 diverged 导致 PR 包含无关文件"
 domain: devops
 tags:
