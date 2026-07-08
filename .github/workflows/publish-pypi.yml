@@ -11,6 +11,8 @@ jobs:
     name: Build & publish prgenius-core to PyPI
     runs-on: ubuntu-latest
     environment: pypi  # optional but recommended for Trusted Publisher
+    permissions:
+      id-token: write   # required for PyPI Trusted Publisher OIDC token
 
     steps:
       - name: Checkout
