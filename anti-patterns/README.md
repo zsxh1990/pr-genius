@@ -46,7 +46,7 @@ def self_heal(symptom: str, repo: str) -> str | None:
     return None
 ```
 
-## 已有反模式（8 条）
+## 已有反模式（11 条）
 
 | Key | 仓 | 信号 |
 |---|---|---|
@@ -58,6 +58,9 @@ def self_heal(symptom: str, repo: str) -> str | None:
 | [breaking-change-no-compat](./breaking-change-no-compat.md) | plastic-labs/honcho | "pretty big breaking change" / "compatibility issues" |
 | [upstream-already-implementing](./upstream-already-implementing.md) | astral-sh/uv | "官方自己做了" / upstream implemented |
 | [low-value-contribution](./low-value-contribution.md) | patchwork-dev/patchwork-os | "not aligned with project goals" |
+| [fork-main-sync-upstream](./fork-main-sync-upstream.md) | 多仓 | PR 包含无关文件 / diverged |
+| [fork-pr-ci-permission-error](./fork-pr-ci-permission-error.md) | 多仓 | "Resource not accessible by integration" |
+| [github-pr-diff-caching](./github-pr-diff-caching.md) | 多仓 | force push 后 PR diff 不更新 |
 
 ## 加入新反模式流程
 
