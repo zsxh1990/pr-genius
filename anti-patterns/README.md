@@ -46,7 +46,7 @@ def self_heal(symptom: str, repo: str) -> str | None:
     return None
 ```
 
-## 已有反模式（4 条）
+## 已有反模式（8 条）
 
 | Key | 仓 | 信号 |
 |---|---|---|
@@ -54,6 +54,10 @@ def self_heal(symptom: str, repo: str) -> str | None:
 | [vite-sapphi-red-instant-close](./vite-sapphi-red-instant-close.md) | vitejs/vite | "I don't think this is useful" |
 | [honcho-default-db-module-trap](./honcho-default-db-module-trap.md) | plastic-labs/honcho | `db: AsyncSession = db` 默认参数陷阱 |
 | [e2b-feature-not-adding-canned-response](./e2b-feature-not-adding-canned-response.md) | e2b-dev/E2B | "we're not adding this feature to our CLI" |
+| [cosmetic-no-user-pain](./cosmetic-no-user-pain.md) | 多仓 | "not seeing any major user pain" / "cosmetic" |
+| [breaking-change-no-compat](./breaking-change-no-compat.md) | plastic-labs/honcho | "pretty big breaking change" / "compatibility issues" |
+| [upstream-already-implementing](./upstream-already-implementing.md) | astral-sh/uv | "官方自己做了" / upstream implemented |
+| [low-value-contribution](./low-value-contribution.md) | patchwork-dev/patchwork-os | "not aligned with project goals" |
 
 ## 加入新反模式流程
 
