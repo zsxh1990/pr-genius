@@ -95,7 +95,7 @@ when you open a PR.
 | PR case studies | 12 (all migrated to v0.5.0 schema) |
 | Anti-patterns | 13 (incl. anti-patterns/README.md) |
 | Lessons (misakanet-50) | 11 |
-| Round-level evidence | 100% (16/16 across 11 cases: 11 round-1 opens + 4 amend rounds + 1 check-in) |
+| Round-level evidence | 100% (16/16 across 11 cases: 11 round-1 opens + 4 amend rounds + 1 check-in) [v0.7.5 snapshot; post-12-cases refresh pending] |
 | Validator checks | 4 (frontmatter / links / consistency / rounds schema) |
 | OKF compliance | ✅ v0.1 |
 | Schema version | rounds v0.5.0 |
