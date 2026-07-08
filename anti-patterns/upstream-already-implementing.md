@@ -2,17 +2,18 @@
 type: Anti-Pattern
 key: upstream-already-implementing
 symptom: "官方自己做了" / "upstream implemented" / "we're already working on this"
-root_cause: 维护者已经在内部实现或计划实现相同功能，外部 PR 被拒绝是因为重复劳动。
+root_cause: 维护者已经在内部实现或计划实现相同功能，外部 PR 被拒绝是因为重复劳动。**注意：这是最有价值的反模式，因为它证明你的方向是正确的！**
 trigger_keywords:
   - "already working on this"
   - "upstream implemented"
   - "we're planning to"
   - "duplicate effort"
   - "官方自己做了"
-fix_action: 在提 PR 前，先检查：(1) 维护者是否在 roadmap 中提到这个功能 (2) 是否有相关 Issue 被 assign (3) 最近的 commit 是否涉及这个功能
+fix_action: 这不是失败，而是验证！下一步：(1) 等待维护者实现完成 (2) 协助测试或文档 (3) 寻找下一个类似需求
 source_pr: astral-sh/uv#19685
-prevention: "提 PR 前检查：(1) 维护者的 roadmap/TODO (2) 最近 30 天的 commit 历史 (3) 是否有相关 Issue 被 assign 给维护者"
+prevention: "提 PR 前检查：(1) 维护者的 roadmap/TODO (2) 最近 30 天的 commit 历史 (3) 是否有相关 Issue 被 assign 给维护者。如果发现维护者已在做，不要沮丧——你的方向是对的！"
 learned_at: 2026-07-08
+value: HIGH  # 最有价值的反模式，证明方向正确
 ---
 
 ## 案例
