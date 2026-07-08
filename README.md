@@ -91,15 +91,15 @@ when you open a PR.
 
 | Metric | Value |
 |---|---|
-| Repo profiles | 11 (incl. NousResearch/hermes-agent) + 1 stub (`ag2ai-ag2` image-only, no PR case yet) |
-| PR case studies | 11 (2 migrated to v0.5.0 schema, 9 in legacy v0.1) |
-| Anti-patterns | 5 |
+| Repo profiles | 12 (incl. NousResearch/hermes-agent + agentic-community-mcp-gateway-registry) |
+| PR case studies | 12 (all migrated to v0.5.0 schema) |
+| Anti-patterns | 13 (incl. anti-patterns/README.md) |
 | Lessons (misakanet-50) | 11 |
 | Round-level evidence | 100% (16/16 across 11 cases: 11 round-1 opens + 4 amend rounds + 1 check-in) |
 | Validator checks | 4 (frontmatter / links / consistency / rounds schema) |
 | OKF compliance | ✅ v0.1 |
 | Schema version | rounds v0.5.0 |
-| Latest release | v0.7.5 (2026-07-05) |
+| Latest release | v0.7.8 (2026-07-07; first PyPI publish via Trusted Publisher) |
 
 ## 这是什么 / 给谁看
 
