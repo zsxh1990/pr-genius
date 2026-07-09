@@ -11,6 +11,49 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-07-09
+
+### Added — Evaluator v0.4.0 (P3/P4/P6)
+- `author_association` dimension: OWNER +0.40, MEMBER +0.25, COLLABORATOR +0.20,
+  CONTRIBUTOR +0.05, NONE +0.0 — fixes 8/8 FN where MEMBER/OWNER PRs were
+  misclassified as rejected
+- CLI `--author-association` parameter for `eval` / `suggest`
+- `duplicate` label signal strengthened from -15 to -25
+- Success pattern per-match bonus reduced from +0.05 to +0.03 (issue link downweight)
+
+### Changed — Evaluator v0.4.0
+- Cross-validation accuracy: 80.0% → **87.2%** (180 PR, 9 repos)
+- Merged recall: 86.0% → **95.9%**
+- FN (漏报): 14 → **4**
+- LibreChat: 45% → **85%**, langchain: 80% → **95%**
+
+## [0.7.9] - 2026-07-09
+
+### Added — Evaluator v0.3.0 (P0/P1/P2)
+- `scripts/cross_validate.py` — automated cross-validation script (`--repo`, `--all`, `--limit`, `--verbose`, `--json`)
+- 3 new anti-patterns: `ai-generated-content`, `missing-issue-reference`, `duplicate-pr-same-author`
+- 9 large repo profiles: langchain-ai/langchain, yt-dlp/yt-dlp, microsoft/markitdown,
+  langchain-ai/langgraph, onyx-dot-app/onyx, danny-avila/LibreChat, goreleaser/nfpm,
+  python-jsonschema/jsonschema, woodruffw/zizmor
+- Label signal layer (`LABEL_SIGNALS` dict): ai-policy-violation -20, missing-issue-link -10,
+  duplicate -15, new-contributor -3, bug +5, help-wanted +5, etc.
+- Bot PR independent channel: dependabot[bot], pre-commit-ci[bot], renovate[bot], etc.
+  with size-based baseline (small 70%, medium 50%, large 30%)
+- Dynamic baseline: `repo_merge_rate * 0.7 + 0.45 * 0.3`
+- CLI parameters: `--body`, `--labels`, `--author`, `--star-count`, `--repo-merge-rate`
+
+### Fixed — Evaluator v0.3.0
+- P0: `issue-linked-fix` matching now uses regex `(fixes|closes|resolves)\s+#\d+` instead
+  of substring match — eliminates false positives from "this fix addresses..." patterns
+- Anti-pattern check now includes PR body (was title+description only)
+- Success pattern matching now includes body in full_text for non-issue factors
+
+### Changed — Evaluator v0.3.0
+- Base rate: 0.50 → **0.45** (conservative)
+- Thresholds: high 0.70→0.60, medium 0.40→0.35
+- Cross-validation accuracy: 67.6% → **80.0%** (180 PR, 9 repos)
+- Rejected recall: 50.0% → **72.5%**
+
 ## [0.7.8] - 2026-07-07
 
 ### Changed
