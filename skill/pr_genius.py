@@ -1,83 +1,58 @@
 #!/usr/bin/env python3
 """
-PR Genius — PR 评估和建议工具 (standalone skill version)
+PR Genius — 提交前改进顾问 (standalone skill version)
 
-基于历史反模式和成功模式，评估 PR 的成功率，提供改进建议。
-
-v0.3.0: P0 issue-linked-fix 正则匹配, P1 标签信号层, P2 Bot PR 独立通道
+v1.0.0: 从"合并概率预测器"转为"提交前改进顾问"
 
 Usage:
-    python3 pr_genius.py eval "feat: add error handler" --repo vitejs/vite
-    python3 pr_genius.py eval "fix: update deps" --repo langchain-ai/langchain --author "dependabot[bot]" --labels "dependencies"
-    python3 pr_genius.py suggest "feat: add error handler" --repo vitejs/vite
-    python3 pr_genius.py describe "feat: add error handler" --repo vitejs/vite
+    python3 pr_genius.py analyze "feat: add feature" --repo org/repo --body "..."
+    python3 pr_genius.py analyze "feat: add feature" --repo org/repo --format json
+    python3 pr_genius.py eval "feat: add feature" --repo org/repo  (兼容旧命令)
 """
 
 import argparse
+import json
 import re
 import sys
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-# 知识库路径
 KNOWLEDGE_BASE = Path(__file__).parent.parent
 
 # ============================================================
 # 常量
 # ============================================================
 
-# P1: 标签信号层
-LABEL_SIGNALS: Dict[str, float] = {
-    "ai-policy-violation": -20,
-    "invalid": -20,
-    "wontfix": -20,
-    "spam": -25,
-    "duplicate": -25,
-    "missing-issue-link": -10,
-    "needs-information": -10,
-    "awaiting-response": -5,
-    "stale": -10,
-    "new-contributor": -3,
-    "first-time contributor": -3,
-    "help wanted": 5,
-    "good first issue": 3,
-    "enhancement": 3,
-    "bug": 5,
-    "documentation": 3,
-    "dependencies": 2,
+LABEL_SIGNALS: Dict[str, str] = {
+    "ai-policy-violation": "negative", "invalid": "negative", "wontfix": "negative",
+    "spam": "negative", "duplicate": "negative", "missing-issue-link": "negative",
+    "needs-information": "negative", "awaiting-response": "negative", "stale": "negative",
+    "new-contributor": "neutral", "first-time contributor": "neutral",
+    "help wanted": "positive", "good first issue": "positive", "enhancement": "positive",
+    "bug": "positive", "documentation": "positive", "dependencies": "positive",
 }
 
-# P2: Bot PR 作者集合
 BOT_AUTHORS = {
-    "dependabot[bot]",
-    "pre-commit-ci[bot]",
-    "renovate[bot]",
-    "github-actions[bot]",
-    "mergify[bot]",
-    "codecov[bot]",
-    "snyk-bot",
-    "greenkeeper[bot]",
+    "dependabot[bot]", "pre-commit-ci[bot]", "renovate[bot]",
+    "github-actions[bot]", "mergify[bot]", "codecov[bot]",
+    "snyk-bot", "greenkeeper[bot]",
 }
 
-# Issue 关联正则
 ISSUE_LINK_RE = re.compile(
-    r"(?:fix(?:es|ed)?|close[sd]?|resolve[sd]?)\s+#\d+",
-    re.IGNORECASE,
+    r"(?:fix(?:es|ed)?|close[sd]?|resolve[sd]?)\s+#\d+", re.IGNORECASE,
 )
 
-# 基线和阈值
-BASE_RATE_HUMAN = 0.45
-BOT_BASE_RATES = {"small": 0.70, "medium": 0.50, "large": 0.30}
-THRESHOLD_HIGH = 0.60
-THRESHOLD_MED = 0.35
+ASSOCIATION_LABELS = {
+    "OWNER": "仓库所有者", "MEMBER": "组织成员", "COLLABORATOR": "协作者",
+    "CONTRIBUTOR": "历史贡献者", "NONE": "首次贡献者",
+}
 
-# P3: author_association 加权
-ASSOCIATION_BOOST = {
-    "OWNER": 0.40,
-    "MEMBER": 0.25,
-    "COLLABORATOR": 0.15,
-    "CONTRIBUTOR": 0.04,
-    "NONE": 0.0,
+ANTI_PATTERN_SEVERITY = {
+    "ai-generated-content": "critical", "spam": "critical",
+    "cosmetic-no-user-pain": "high", "breaking-change-no-compat": "high",
+    "missing-issue-reference": "high", "duplicate-pr-same-author": "high",
+    "low-value-contribution": "medium", "upstream-already-implementing": "medium",
+    "fork-main-sync-upstream": "low",
 }
 
 
@@ -90,30 +65,23 @@ def is_bot_author(author: str) -> bool:
 
 
 def get_repo_size(star_count: int) -> str:
-    if star_count < 5000:
-        return "small"
-    elif star_count < 50000:
-        return "medium"
-    else:
-        return "large"
+    if star_count < 5000: return "small"
+    elif star_count < 50000: return "medium"
+    else: return "large"
 
 
 def check_issue_link(body: str) -> bool:
     return bool(ISSUE_LINK_RE.search(body))
 
 
-def compute_label_score(labels: List[str]) -> float:
-    score = 0.0
-    for label in labels:
-        label_lower = label.lower().strip()
-        if label_lower in LABEL_SIGNALS:
-            score += LABEL_SIGNALS[label_lower]
-        else:
-            for key, val in LABEL_SIGNALS.items():
-                if key in label_lower:
-                    score += val
-                    break
-    return score
+def _parse_label(label: str) -> Tuple[str, str]:
+    label_lower = label.lower().strip()
+    if label_lower in LABEL_SIGNALS:
+        return label, LABEL_SIGNALS[label_lower]
+    for key, polarity in LABEL_SIGNALS.items():
+        if key in label_lower:
+            return label, polarity
+    return label, "unknown"
 
 
 # ============================================================
@@ -121,52 +89,33 @@ def compute_label_score(labels: List[str]) -> float:
 # ============================================================
 
 def _parse_frontmatter(content: str) -> Optional[dict]:
-    """解析 Markdown frontmatter"""
     match = re.match(r"^---\s*\n(.*?)\n---", content, re.DOTALL)
     if not match:
         return None
-
     try:
         fm = {}
         current_key = None
         current_value = []
         in_list = False
-
         for line in match.group(1).strip().split("\n"):
             if re.match(r'^[a-zA-Z_]+:', line) and not line.startswith('  '):
                 if current_key:
-                    if in_list:
-                        fm[current_key] = current_value
-                    else:
-                        fm[current_key] = ' '.join(current_value).strip()
-
+                    fm[current_key] = current_value if in_list else ' '.join(current_value).strip()
                 key, value = line.split(":", 1)
                 current_key = key.strip()
                 value = value.strip()
-
                 if value == '':
-                    current_value = []
-                    in_list = True
+                    current_value = []; in_list = True
                 elif value.startswith('['):
-                    current_value = [v.strip().strip('"') for v in value[1:-1].split(",")]
-                    in_list = False
+                    current_value = [v.strip().strip('"') for v in value[1:-1].split(",")]; in_list = False
                 else:
-                    current_value = [value]
-                    in_list = False
-
+                    current_value = [value]; in_list = False
             elif line.startswith('  - ') and in_list:
-                item = line[4:].strip().strip('"')
-                current_value.append(item)
-
+                current_value.append(line[4:].strip().strip('"'))
             elif line.startswith('  ') and not in_list:
                 current_value.append(line.strip())
-
         if current_key:
-            if in_list:
-                fm[current_key] = current_value
-            else:
-                fm[current_key] = ' '.join(current_value).strip()
-
+            fm[current_key] = current_value if in_list else ' '.join(current_value).strip()
         return fm
     except Exception:
         return None
@@ -174,433 +123,313 @@ def _parse_frontmatter(content: str) -> Optional[dict]:
 
 def load_anti_patterns() -> Dict[str, dict]:
     patterns = {}
-    anti_patterns_dir = KNOWLEDGE_BASE / "anti-patterns"
-    if not anti_patterns_dir.exists():
-        return patterns
-
-    for file in anti_patterns_dir.glob("*.md"):
-        if file.name == "README.md":
-            continue
-        content = file.read_text(encoding="utf-8")
-        fm = _parse_frontmatter(content)
-        if fm:
-            patterns[file.stem] = fm
-
+    d = KNOWLEDGE_BASE / "anti-patterns"
+    if not d.exists(): return patterns
+    for f in d.glob("*.md"):
+        if f.name == "README.md": continue
+        fm = _parse_frontmatter(f.read_text(encoding="utf-8"))
+        if fm: patterns[f.stem] = fm
     return patterns
 
 
 def load_success_patterns() -> Dict[str, dict]:
     patterns = {}
-    success_patterns_dir = KNOWLEDGE_BASE / "success-patterns"
-    if not success_patterns_dir.exists():
-        return patterns
-
-    for file in success_patterns_dir.glob("*.md"):
-        if file.name == "README.md":
-            continue
-        content = file.read_text(encoding="utf-8")
-        fm = _parse_frontmatter(content)
-        if fm:
-            patterns[file.stem] = fm
-
+    d = KNOWLEDGE_BASE / "success-patterns"
+    if not d.exists(): return patterns
+    for f in d.glob("*.md"):
+        if f.name == "README.md": continue
+        fm = _parse_frontmatter(f.read_text(encoding="utf-8"))
+        if fm: patterns[f.stem] = fm
     return patterns
 
-
-def load_repo_config(repo: str) -> Optional[dict]:
-    org, name = repo.split("/")
-    repo_dir = KNOWLEDGE_BASE / f"{org}-{name}"
-    if not repo_dir.exists():
-        return None
-
-    index_file = repo_dir / "index.md"
-    if not index_file.exists():
-        return None
-
-    content = index_file.read_text(encoding="utf-8")
-    return _parse_frontmatter(content)
-
-
-# ============================================================
-# 评估逻辑
-# ============================================================
 
 def check_anti_patterns(title: str, description: str, repo: str, body: str = "") -> List[dict]:
     anti_patterns = load_anti_patterns()
     matches = []
     text = f"{title} {description} {body}".lower()
-
     for key, pattern in anti_patterns.items():
         keywords = pattern.get("trigger_keywords", [])
         if isinstance(keywords, list):
             for keyword in keywords:
                 if keyword.lower() in text:
                     matches.append({
-                        "key": key,
-                        "keyword": keyword,
+                        "key": key, "keyword": keyword,
                         "symptom": pattern.get("symptom", ""),
                         "fix_action": pattern.get("fix_action", ""),
                         "source_pr": pattern.get("source_pr", ""),
                     })
                     break
-
         symptom = pattern.get("symptom", "")
         if symptom and symptom.lower() in text:
             matches.append({
-                "key": key,
-                "symptom": symptom,
+                "key": key, "symptom": symptom,
                 "fix_action": pattern.get("fix_action", ""),
                 "source_pr": pattern.get("source_pr", ""),
             })
-
     return matches
 
 
-def check_success_patterns(
-    title: str, description: str, repo: str, body: str = "",
-) -> List[dict]:
-    """P0: 对含 Issue 关联语义的 factor，要求 body 匹配 fixes|closes|resolves #NNN"""
-    success_patterns = load_success_patterns()
-    matches = []
-    text = f"{title} {description}".lower()
-    full_text = f"{title} {description} {body}".lower()
+# ============================================================
+# 核心: analyze_pr
+# ============================================================
 
-    issue_semantic_keywords = {
-        "fix", "fixes", "fixed", "close", "closes", "closed",
-        "resolve", "resolves", "resolved", "issue", "bug",
-    }
-
-    for key, pattern in success_patterns.items():
-        factors = pattern.get("success_factors", [])
-        if isinstance(factors, list):
-            match_count = 0
-            non_issue_match = False
-            for factor in factors:
-                factor_keywords = set(re.findall(r'\w+', factor.lower()))
-                has_issue_semantic = bool(factor_keywords & issue_semantic_keywords)
-
-                if has_issue_semantic:
-                    if body and check_issue_link(body):
-                        match_count += 1
-                else:
-                    generic_keywords = {"pr", "the", "a", "an", "is", "are", "was", "were",
-                                        "be", "been", "being", "have", "has", "had", "do",
-                                        "does", "did", "will", "would", "could", "should",
-                                        "may", "might", "can", "shall", "of", "in", "on",
-                                        "at", "to", "for", "with", "by", "from", "as", "into",
-                                        "through", "during", "before", "after", "above", "below",
-                                        "between", "out", "off", "over", "under", "again",
-                                        "further", "then", "once", "and", "but", "or", "nor",
-                                        "not", "so", "very", "just", "than", "too", "also",
-                                        "new", "use", "used", "using", "add", "added", "adding",
-                                        "的", "中", "了", "是", "在", "有", "和", "与"}
-                    meaningful_kws = factor_keywords - generic_keywords
-                    meaningful_kws = {kw for kw in meaningful_kws if not kw.isdigit()}
-                    if meaningful_kws and any(kw in full_text for kw in meaningful_kws):
-                        match_count += 1
-                        non_issue_match = True
-
-            # 阈值 0.5，且必须至少有一个非 issue 语义 factor 匹配
-            if match_count >= len(factors) * 0.5 and non_issue_match:
-                matches.append({
-                    "key": key,
-                    "description": pattern.get("description", ""),
-                    "success_factors": factors,
-                    "source_pr": pattern.get("source_pr", ""),
-                })
-
-    return matches
-
-
-def predict_success_rate(
+def analyze_pr(
     title: str, description: str, repo: str,
     body: str = "", labels: Optional[List[str]] = None,
     author: str = "", star_count: int = 0,
-    repo_merge_rate: float = 0.0,
-    author_association: str = "NONE",
-) -> Tuple[float, str]:
-    if labels is None:
-        labels = []
+    repo_merge_rate: float = 0.0, author_association: str = "NONE",
+) -> dict:
+    if labels is None: labels = []
 
-    # 动态基线
-    if repo_merge_rate > 0:
-        dynamic_base = repo_merge_rate * 0.7 + BASE_RATE_HUMAN * 0.3
+    signals_pos, signals_neg, signals_neu = [], [], []
+    checklist = []
+
+    # 1. Issue 关联
+    has_issue_link = check_issue_link(body) if body else False
+    if has_issue_link:
+        signals_pos.append({"key": "issue_linked", "description": "PR body 包含 Issue 关联 (fixes/closes/resolves #NNN)"})
     else:
-        dynamic_base = BASE_RATE_HUMAN
+        signals_neg.append({"key": "no_issue_link", "description": "PR body 缺少 Issue 关联", "severity": "high"})
+        checklist.append({"action": "add_issue_link", "priority": "P0", "done": False,
+                          "hint": "在 body 中添加 `Fixes #NNN` 或 `Closes #NNN`"})
 
-    # P2: Bot PR 独立通道
-    if author and is_bot_author(author):
-        repo_size = get_repo_size(star_count) if star_count > 0 else "medium"
-        base_rate = BOT_BASE_RATES.get(repo_size, 0.50)
-        label_adj = compute_label_score(labels) * 0.5
-        base_rate = max(0.0, min(1.0, base_rate + label_adj / 100))
-        if base_rate >= THRESHOLD_HIGH:
-            level = "高"
-        elif base_rate >= THRESHOLD_MED:
-            level = "中"
-        else:
-            level = "低"
-        return base_rate, level
-
-    # 人类 PR
+    # 2. 反模式
     anti_matches = check_anti_patterns(title, description, repo, body=body)
-    success_matches = check_success_patterns(title, description, repo, body=body)
-
-    base_rate = dynamic_base
-
-    # P3: author_association 加权（严选型仓库打折）
-    assoc_upper = author_association.upper().strip()
-    raw_boost = ASSOCIATION_BOOST.get(assoc_upper, 0.0)
-    if assoc_upper == "OWNER":
-        base_rate += raw_boost
-    elif raw_boost > 0 and repo_merge_rate > 0:
-        scale = max(0.50, min(1.0, (repo_merge_rate - 0.2) / 0.5))
-        base_rate += raw_boost * scale
-    else:
-        base_rate += raw_boost
-
-    # 大仓外部贡献者惩罚：star > 20k 且 NONE → -0.10
-    if assoc_upper == "NONE" and star_count > 20000:
-        base_rate -= 0.10
-
     for match in anti_matches:
         key = match["key"]
-        if "cosmetic" in key:
-            base_rate -= 0.30
-        elif "breaking" in key:
-            base_rate -= 0.25
-        elif "upstream" in key:
-            base_rate -= 0.10
-        elif "low-value" in key:
-            base_rate -= 0.20
-        elif "ai-generated" in key or "ai-policy" in key:
-            base_rate -= 0.25
-        elif "missing-issue" in key:
-            base_rate -= 0.15
-        elif "duplicate" in key:
-            base_rate -= 0.20
+        severity = ANTI_PATTERN_SEVERITY.get(key, "medium")
+        signals_neg.append({
+            "key": key, "description": match.get("symptom", ""), "severity": severity,
+            "fix_action": match.get("fix_action", ""), "source_pr": match.get("source_pr", ""),
+        })
+        if match.get("fix_action"):
+            checklist.append({"action": f"fix_{key}", "priority": "P0" if severity in ("critical", "high") else "P1",
+                              "done": False, "hint": match["fix_action"]})
+
+    # 3. 标签
+    neg_labels, pos_labels = [], []
+    for label in labels:
+        _, polarity = _parse_label(label)
+        if polarity == "negative": neg_labels.append(label)
+        elif polarity == "positive": pos_labels.append(label)
+    if neg_labels:
+        signals_neg.append({"key": "negative_labels", "description": f"PR 带有负面标签: {', '.join(neg_labels)}", "severity": "high"})
+        checklist.append({"action": "resolve_labels", "priority": "P0", "done": False,
+                          "hint": "先解决标签标记的问题再提交"})
+    if pos_labels:
+        signals_pos.append({"key": "positive_labels", "description": f"PR 带有正面标签: {', '.join(pos_labels)}"})
+
+    # 4. 作者身份
+    assoc_upper = author_association.upper().strip()
+    if is_bot_author(author):
+        signals_neu.append({"key": "bot_author", "description": f"Bot PR ({author})"})
+    elif assoc_upper == "OWNER":
+        signals_pos.append({"key": "owner_author", "description": "仓库所有者提交"})
+    elif assoc_upper in ("MEMBER", "COLLABORATOR"):
+        signals_pos.append({"key": "insider_author", "description": f"{ASSOCIATION_LABELS.get(assoc_upper)}，有写入权限"})
+    elif assoc_upper == "CONTRIBUTOR":
+        signals_pos.append({"key": "returning_contributor", "description": "历史贡献者"})
+    elif assoc_upper == "NONE":
+        if star_count > 20000:
+            signals_neg.append({"key": "first_contributor_large_repo",
+                                "description": f"首次在大仓 ({star_count:,}⭐) 提 PR", "severity": "medium"})
+            checklist.append({"action": "build_trust", "priority": "P1", "done": False,
+                              "hint": "先在 Issue 中参与讨论，建立维护者信任"})
         else:
-            base_rate -= 0.15
+            signals_neu.append({"key": "first_contributor", "description": "首次贡献者"})
 
-    # 成功模式加成（封顶 +0.08，进一步降权）
-    if success_matches:
-        base_rate += min(0.08, len(success_matches) * 0.02)
+    # 5. 仓库上下文
+    repo_context = {}
+    if star_count > 0:
+        repo_context["star_count"] = star_count
+        repo_context["repo_size"] = get_repo_size(star_count)
+    if repo_merge_rate > 0:
+        repo_context["merge_rate"] = repo_merge_rate
+        if repo_merge_rate < 0.3:
+            signals_neu.append({"key": "strict_repo", "description": f"该仓库 merge 率较低 ({repo_merge_rate:.0%})，审查严格"})
+        elif repo_merge_rate > 0.8:
+            signals_pos.append({"key": "lenient_repo", "description": f"该仓库 merge 率较高 ({repo_merge_rate:.0%})"})
 
-    # P1: 标签信号
-    label_adj = compute_label_score(labels)
-    base_rate += label_adj / 100
+    # 6. 通用清单
+    if not is_bot_author(author):
+        checklist.append({"action": "ci_passing", "priority": "P1", "done": False, "hint": "确认 CI 全部通过"})
+        checklist.append({"action": "dco_signoff", "priority": "P1", "done": False, "hint": "使用 `git commit -s` 添加 DCO sign-off"})
 
-    base_rate = max(0.0, min(1.0, base_rate))
+    # 7. 计算 tier
+    neg_critical = sum(1 for s in signals_neg if s.get("severity") in ("critical", "high"))
+    neg_medium = sum(1 for s in signals_neg if s.get("severity") == "medium")
+    pos_count = len(signals_pos)
 
-    if base_rate >= THRESHOLD_HIGH:
-        level = "高"
-    elif base_rate >= THRESHOLD_MED:
-        level = "中"
+    if neg_critical >= 1 or neg_medium >= 2 or (neg_medium >= 1 and pos_count == 0):
+        tier = "high_risk"
+    elif neg_medium >= 1 or pos_count == 0:
+        tier = "medium_risk"
+    elif pos_count >= 2 and neg_critical == 0:
+        tier = "low_risk"
     else:
-        level = "低"
+        tier = "medium_risk"
 
-    return base_rate, level
+    return {
+        "repo": repo, "title": title, "tier": tier,
+        "signals": {"positive": signals_pos, "negative": signals_neg, "neutral": signals_neu},
+        "checklist": checklist,
+        "anti_patterns_hit": [m["key"] for m in anti_matches],
+        "repo_context": repo_context,
+    }
 
 
-def generate_suggestions(
-    title: str, description: str, repo: str,
-    body: str = "", labels: Optional[List[str]] = None,
-    author: str = "",
-) -> List[str]:
-    suggestions = []
-    anti_matches = check_anti_patterns(title, description, repo, body=body)
-    success_matches = check_success_patterns(title, description, repo, body=body)
-
-    for match in anti_matches:
-        suggestions.append(f"### 避免 {match['key']} 反模式\n")
-        suggestions.append(f"**问题**: {match.get('symptom', '未知')}\n")
-        suggestions.append(f"**建议**: {match.get('fix_action', '无')}\n")
-        if match.get('source_pr'):
-            suggestions.append(f"**历史案例**: {match['source_pr']}\n")
-        suggestions.append("")
-
-    if success_matches:
-        suggestions.append("### 参考成功模式\n")
-        for match in success_matches:
-            suggestions.append(f"- **{match['key']}**: {match.get('description', '')}\n")
-            if match.get('success_factors'):
-                suggestions.append("  - 成功因素:\n")
-                for factor in match['success_factors'][:3]:
-                    suggestions.append(f"    - {factor}\n")
-        suggestions.append("")
-
-    if labels:
-        label_score = compute_label_score(labels)
-        if label_score < -10:
-            suggestions.append("### ⚠️ 标签警告\n")
-            negative_labels = [l for l in labels if compute_label_score([l]) < 0]
-            suggestions.append(f"以下标签可能影响合并概率: {', '.join(negative_labels)}\n")
-            suggestions.append("建议先解决标签标记的问题再提交 PR\n\n")
-
-    suggestions.append("### 通用建议\n")
-    suggestions.append("1. **先 Issue 后 PR**: 先在 Issue 中讨论方案\n")
-    suggestions.append("2. **完整交付**: 代码 + 测试 + 文档\n")
-    suggestions.append("3. **单一 commit**: 保持 PR 干净\n")
-    suggestions.append("4. **DCO sign-off**: 使用 `git commit -s`\n")
-    suggestions.append("")
-
-    return suggestions
-
+# ============================================================
+# 兼容: eval_pr
+# ============================================================
 
 def eval_pr(
     title: str, description: str, repo: str,
     body: str = "", labels: Optional[List[str]] = None,
     author: str = "", star_count: int = 0,
-    repo_merge_rate: float = 0.0,
-    author_association: str = "NONE",
-) -> str:
-    if labels is None:
-        labels = []
-
-    rate, level = predict_success_rate(
-        title, description, repo,
-        body=body, labels=labels, author=author, star_count=star_count,
-        repo_merge_rate=repo_merge_rate, author_association=author_association,
-    )
-    anti_matches = check_anti_patterns(title, description, repo, body=body)
-    success_matches = check_success_patterns(title, description, repo, body=body)
-
-    output = []
-    output.append("## PR 评估结果\n")
-
-    if author and is_bot_author(author):
-        output.append("🤖 **Bot PR** — 走独立评估通道\n\n")
-
-    output.append(f"### 成功率预测: {rate:.0%} ({level})\n")
-
-    if labels:
-        label_score = compute_label_score(labels)
-        if label_score != 0:
-            signal = "正面" if label_score > 0 else "负面"
-            output.append(f"### 标签信号: {signal} ({label_score:+.0f} 分)\n")
-            output.append(f"标签: {', '.join(labels)}\n\n")
-
-    if anti_matches:
-        output.append("### 反模式命中\n")
-        for match in anti_matches:
-            output.append(f"- ⚠️ **{match['key']}**: {match.get('symptom', '未知')}\n")
-            if match.get('fix_action'):
-                output.append(f"  - 建议: {match['fix_action']}\n")
-            if match.get('source_pr'):
-                output.append(f"  - 历史案例: {match['source_pr']}\n")
-        output.append("")
-    else:
-        output.append("### 反模式命中\n")
-        output.append("- ✅ 未命中任何反模式\n\n")
-
-    if success_matches:
-        output.append("### 成功模式匹配\n")
-        for match in success_matches:
-            output.append(f"- ✅ **{match['key']}**: {match.get('description', '')}\n")
-        output.append("")
-    else:
-        output.append("### 成功模式匹配\n")
-        output.append("- ❌ 未匹配任何成功模式\n\n")
-
-    suggestions = generate_suggestions(
+    repo_merge_rate: float = 0.0, author_association: str = "NONE",
+) -> dict:
+    analysis = analyze_pr(
         title, description, repo, body=body, labels=labels, author=author,
+        star_count=star_count, repo_merge_rate=repo_merge_rate,
+        author_association=author_association,
     )
-    if suggestions:
-        output.append("### 改进建议\n")
-        output.extend(suggestions)
-
-    return "".join(output)
-
-
-def suggest_pr(
-    title: str, description: str, repo: str,
-    body: str = "", labels: Optional[List[str]] = None,
-    author: str = "",
-) -> str:
-    suggestions = generate_suggestions(
-        title, description, repo, body=body, labels=labels, author=author,
-    )
-    output = []
-    output.append("## 改进建议\n")
-    output.extend(suggestions)
-    return "".join(output)
+    tier_map = {"low_risk": "低风险", "medium_risk": "中风险", "high_risk": "高风险"}
+    return {
+        "title": title, "repo": repo, "author": author, "labels": labels,
+        "is_bot": is_bot_author(author) if author else False,
+        "tier": tier_map.get(analysis["tier"], analysis["tier"]),
+        "tier_raw": analysis["tier"], "analysis": analysis,
+    }
 
 
-def describe_pr(title: str, description: str, repo: str, issue: str = None) -> str:
-    output = []
-    output.append("## PR 描述\n")
-    output.append("### 标题\n")
-    output.append(f"{title}\n\n")
-    output.append("### 描述\n")
-    output.append(f"{description}\n\n")
+# ============================================================
+# CLI
+# ============================================================
 
-    if issue:
-        output.append("### 关联 Issue\n")
-        output.append(f"Closes {issue}\n\n")
+TIER_ICONS = {"low_risk": "🟢", "medium_risk": "🟡", "high_risk": "🔴"}
+TIER_LABELS = {"low_risk": "低风险", "medium_risk": "中风险", "high_risk": "高风险"}
 
-    output.append("### 验收标准\n")
-    output.append("- [ ] 代码实现\n")
-    output.append("- [ ] 测试覆盖\n")
-    output.append("- [ ] 文档更新\n")
-    output.append("- [ ] DCO sign-off\n")
-    output.append("- [ ] CI 通过\n")
 
-    return "".join(output)
+def _print_analysis(result: dict):
+    tier = result["tier"]
+    icon = TIER_ICONS.get(tier, "⚪")
+    label = TIER_LABELS.get(tier, tier)
+    signals = result["signals"]
+
+    print(f"## PR 分析: {result['repo']}\n")
+    print(f"**{icon} 综合评估: {label}** ({len(signals['positive'])} 正面 / {len(signals['negative'])} 负面)\n")
+
+    if signals["negative"]:
+        print("### ⚠️ 需要改进\n")
+        for i, s in enumerate(signals["negative"], 1):
+            sev = s.get("severity", "")
+            sev_icon = {"critical": "🚨", "high": "⚠️", "medium": "📋"}.get(sev, "•")
+            print(f"{i}. {sev_icon} **{s['description']}**")
+            if s.get("fix_action"): print(f"   → {s['fix_action']}")
+            if s.get("source_pr"): print(f"   (历史案例: {s['source_pr']})")
+        print()
+
+    if signals["positive"]:
+        print("### ✅ 已具备\n")
+        for s in signals["positive"]: print(f"- {s['description']}")
+        print()
+
+    if signals["neutral"]:
+        print("### ℹ️ 参考信息\n")
+        for s in signals["neutral"]: print(f"- {s['description']}")
+        print()
+
+    if result["checklist"]:
+        print("### 📋 提交前清单\n")
+        for item in result["checklist"]:
+            mark = "✅" if item["done"] else "☐"
+            print(f"- [{mark}] **[{item['priority']}]** {item['hint']}")
+        print()
+
+    ctx = result.get("repo_context", {})
+    if ctx:
+        parts = []
+        if "star_count" in ctx: parts.append(f"{ctx['star_count']:,}⭐")
+        if "repo_size" in ctx: parts.append(ctx["repo_size"])
+        if "merge_rate" in ctx: parts.append(f"merge率 {ctx['merge_rate']:.0%}")
+        if parts: print(f"*仓库: {' | '.join(parts)}*\n")
 
 
 def main():
-    parser = argparse.ArgumentParser(description="PR Genius — PR 评估和建议工具")
+    parser = argparse.ArgumentParser(description="PR Genius — 提交前改进顾问")
     subparsers = parser.add_subparsers(dest="command", help="命令")
 
-    # eval 命令
-    eval_parser = subparsers.add_parser("eval", help="评估 PR")
-    eval_parser.add_argument("title", help="PR 标题")
-    eval_parser.add_argument("--description", "-d", default="", help="PR 描述")
-    eval_parser.add_argument("--body", "-b", default="", help="PR body")
-    eval_parser.add_argument("--repo", "-r", required=True, help="目标仓库 (org/repo)")
-    eval_parser.add_argument("--labels", "-l", nargs="*", default=[], help="PR 标签")
-    eval_parser.add_argument("--author", "-a", default="", help="PR 作者")
-    eval_parser.add_argument("--star-count", type=int, default=0, help="仓库 star 数")
-    eval_parser.add_argument("--repo-merge-rate", type=float, default=0.0, help="仓库历史 merge 率 (0-1)")
-    eval_parser.add_argument("--author-association", default="NONE", help="作者身份 (NONE/CONTRIBUTOR/COLLABORATOR/MEMBER/OWNER)")
+    # analyze
+    ap = subparsers.add_parser("analyze", help="分析 PR 并生成改进建议")
+    ap.add_argument("title")
+    ap.add_argument("--description", "-d", default="")
+    ap.add_argument("--body", "-b", default="")
+    ap.add_argument("--repo", "-r", required=True)
+    ap.add_argument("--labels", "-l", nargs="*", default=[])
+    ap.add_argument("--author", "-a", default="")
+    ap.add_argument("--star-count", type=int, default=0)
+    ap.add_argument("--repo-merge-rate", type=float, default=0.0)
+    ap.add_argument("--author-association", default="NONE")
+    ap.add_argument("--format", "-f", choices=["text", "json"], default="text")
 
-    # suggest 命令
-    suggest_parser = subparsers.add_parser("suggest", help="获取改进建议")
-    suggest_parser.add_argument("title", help="PR 标题")
-    suggest_parser.add_argument("--description", "-d", default="", help="PR 描述")
-    suggest_parser.add_argument("--body", "-b", default="", help="PR body")
-    suggest_parser.add_argument("--repo", "-r", required=True, help="目标仓库 (org/repo)")
-    suggest_parser.add_argument("--labels", "-l", nargs="*", default=[], help="PR 标签")
-    suggest_parser.add_argument("--author", "-a", default="", help="PR 作者")
-    suggest_parser.add_argument("--type", "-t", choices=["all", "success", "anti-pattern"],
-                               default="all", help="建议类型")
+    # eval (兼容)
+    ep = subparsers.add_parser("eval", help="评估 PR (降级为三档)")
+    ep.add_argument("title")
+    ep.add_argument("--description", "-d", default="")
+    ep.add_argument("--body", "-b", default="")
+    ep.add_argument("--repo", "-r", required=True)
+    ep.add_argument("--labels", "-l", nargs="*", default=[])
+    ep.add_argument("--author", "-a", default="")
+    ep.add_argument("--star-count", type=int, default=0)
+    ep.add_argument("--repo-merge-rate", type=float, default=0.0)
+    ep.add_argument("--author-association", default="NONE")
 
-    # describe 命令
-    describe_parser = subparsers.add_parser("describe", help="生成 PR 描述")
-    describe_parser.add_argument("title", help="PR 标题")
-    describe_parser.add_argument("--description", "-d", default="", help="PR 描述")
-    describe_parser.add_argument("--repo", "-r", required=True, help="目标仓库 (org/repo)")
-    describe_parser.add_argument("--issue", "-i", help="关联 Issue (org/repo#number)")
+    # describe
+    dp = subparsers.add_parser("describe", help="生成 PR 描述模板")
+    dp.add_argument("title")
+    dp.add_argument("--description", "-d", default="")
+    dp.add_argument("--repo", "-r", required=True)
+    dp.add_argument("--issue", "-i")
 
     args = parser.parse_args()
 
-    if args.command == "eval":
+    if args.command == "analyze":
+        result = analyze_pr(
+            args.title, args.description, args.repo,
+            body=args.body, labels=args.labels, author=args.author,
+            star_count=args.star_count, repo_merge_rate=args.repo_merge_rate,
+            author_association=args.author_association,
+        )
+        if args.format == "json":
+            print(json.dumps(result, indent=2, ensure_ascii=False))
+        else:
+            _print_analysis(result)
+
+    elif args.command == "eval":
         result = eval_pr(
             args.title, args.description, args.repo,
             body=args.body, labels=args.labels, author=args.author,
-            star_count=args.star_count,
-            repo_merge_rate=args.repo_merge_rate,
+            star_count=args.star_count, repo_merge_rate=args.repo_merge_rate,
             author_association=args.author_association,
         )
-        print(result)
-    elif args.command == "suggest":
-        result = suggest_pr(
-            args.title, args.description, args.repo,
-            body=args.body, labels=args.labels, author=args.author,
-        )
-        print(result)
+        tier = result["tier"]
+        icon = TIER_ICONS.get(result.get("tier_raw", ""), "⚪")
+        print(f"**{icon} 风险等级: {tier}**\n")
+        analysis = result["analysis"]
+        if analysis["signals"]["negative"]:
+            print("### ⚠️ 风险点")
+            for s in analysis["signals"]["negative"]: print(f"- {s['description']}")
+            print()
+        if analysis["checklist"]:
+            print("### 📋 建议")
+            for item in analysis["checklist"]:
+                if not item["done"]: print(f"- **[{item['priority']}]** {item['hint']}")
+
     elif args.command == "describe":
-        result = describe_pr(args.title, args.description, args.repo, args.issue)
-        print(result)
+        print(f"## PR 描述\n### 标题\n{args.title}\n### 描述\n{args.description}\n")
+        if args.issue: print(f"### 关联 Issue\nCloses {args.issue}\n")
+        print("### 验收标准\n- [ ] 代码实现\n- [ ] 测试覆盖\n- [ ] DCO sign-off\n- [ ] CI 通过")
+
     else:
         parser.print_help()
 

@@ -1,12 +1,10 @@
-"""PR Evaluator — 基于反模式和成功模式评估 PR
+"""PR Evaluator — 提交前改进顾问
 
-提供 PR 评估、建议生成、成功率预测等功能。
-
-v0.3.0 改进:
-- P0: issue-linked-fix 匹配改用正则，不再子串匹配
-- P1: 新增标签信号层 (LABEL_SIGNALS)
-- P2: Bot PR 独立评估通道
-- 基线从 0.5 降到 0.45，阈值调整为偏保守
+v1.0.0: 从"合并概率预测器"转为"提交前改进顾问"
+- 核心接口: analyze_pr() → 结构化信号 + 可操作建议 + 三档风险
+- 降级: predict_success_rate() 仅内部使用，不对外暴露
+- 砍掉: 成功模式匹配从评分中移除（语义太粗，跨仓库泛化差）
+- 保留: 反模式检测 + 标签信号 + author 历史 → 直接输出 actionable 建议
 """
 from __future__ import annotations
 import re
@@ -17,66 +15,62 @@ from typing import Dict, List, Optional, Tuple
 # 常量
 # ============================================================
 
-# P1: 标签信号层 — 正面/负面分数
-LABEL_SIGNALS: Dict[str, float] = {
-    # 强拒绝信号
-    "ai-policy-violation": -20,
-    "invalid": -20,
-    "wontfix": -20,
-    "spam": -25,
-    "duplicate": -25,
-    # 中等拒绝信号
-    "missing-issue-link": -10,
-    "needs-information": -10,
-    "awaiting-response": -5,
-    "stale": -10,
-    # 弱信号
-    "new-contributor": -3,
-    "first-time contributor": -3,
-    # 正面信号
-    "help wanted": 5,
-    "good first issue": 3,
-    "enhancement": 3,
-    "bug": 5,
-    "documentation": 3,
-    "dependencies": 2,
+# 标签信号 — 用于检测，不再用于评分
+LABEL_SIGNALS: Dict[str, str] = {
+    # 负面
+    "ai-policy-violation": "negative",
+    "invalid": "negative",
+    "wontfix": "negative",
+    "spam": "negative",
+    "duplicate": "negative",
+    "missing-issue-link": "negative",
+    "needs-information": "negative",
+    "awaiting-response": "negative",
+    "stale": "negative",
+    "new-contributor": "neutral",
+    "first-time contributor": "neutral",
+    # 正面
+    "help wanted": "positive",
+    "good first issue": "positive",
+    "enhancement": "positive",
+    "bug": "positive",
+    "documentation": "positive",
+    "dependencies": "positive",
 }
 
-# P2: Bot PR 作者集合
+# Bot 作者集合
 BOT_AUTHORS = {
-    "dependabot[bot]",
-    "pre-commit-ci[bot]",
-    "renovate[bot]",
-    "github-actions[bot]",
-    "mergify[bot]",
-    "codecov[bot]",
-    "snyk-bot",
-    "greenkeeper[bot]",
+    "dependabot[bot]", "pre-commit-ci[bot]", "renovate[bot]",
+    "github-actions[bot]", "mergify[bot]", "codecov[bot]",
+    "snyk-bot", "greenkeeper[bot]",
 }
 
-# Issue 关联正则 — 只匹配真正的 Issue 引用
+# Issue 关联正则
 ISSUE_LINK_RE = re.compile(
     r"(?:fix(?:es|ed)?|close[sd]?|resolve[sd]?)\s+#\d+",
     re.IGNORECASE,
 )
 
-# P0: 基线和阈值（偏保守）
-BASE_RATE_HUMAN = 0.45       # 人类 PR 基线（从 0.5 降到 0.45）
-BOT_BASE_RATES = {           # Bot PR 基线按仓库规模
-    "small": 0.70,           # <5k stars
-    "medium": 0.50,          # 5k-50k stars
-    "large": 0.30,           # >50k stars
+# author_association 描述
+ASSOCIATION_LABELS = {
+    "OWNER": "仓库所有者",
+    "MEMBER": "组织成员",
+    "COLLABORATOR": "协作者",
+    "CONTRIBUTOR": "历史贡献者",
+    "NONE": "首次贡献者",
 }
-THRESHOLD_HIGH = 0.60        # "高" 阈值（从 0.7 降到 0.6）
-THRESHOLD_MED = 0.35         # "中" 阈值（从 0.4 降到 0.35）
 
-# P3: author_association 加权
-ASSOCIATION_BOOST: Dict[str, float] = {
-    "OWNER": 0.40,        # OWNER PR 几乎必定 merged
-    "MEMBER": 0.25,       # MEMBER PR 通常 merged
-    "COLLABORATOR": 0.15, # COLLABORATOR 有合入权限（v0.4.0=0.20, v0.4.2=0.10, 回调到中间值）
-    "CONTRIBUTOR": 0.04,  # 有历史，轻微加分（v0.4.0=0.05, v0.4.2=0.02, 回调到中间值）
-    "NONE": 0.0,          # 外部贡献者，不加不减
+# 反模式严重程度
+ANTI_PATTERN_SEVERITY = {
+    "ai-generated-content": "critical",
+    "spam": "critical",
+    "cosmetic-no-user-pain": "high",
+    "breaking-change-no-compat": "high",
+    "missing-issue-reference": "high",
+    "duplicate-pr-same-author": "high",
+    "low-value-contribution": "medium",
+    "upstream-already-implementing": "medium",
+    "fork-main-sync-upstream": "low",
 }
 
 
@@ -85,12 +79,10 @@ ASSOCIATION_BOOST: Dict[str, float] = {
 # ============================================================
 
 def is_bot_author(author: str) -> bool:
-    """判断是否为 Bot 作者"""
     return author.lower().strip() in {a.lower() for a in BOT_AUTHORS}
 
 
 def get_repo_size(star_count: int) -> str:
-    """根据 star 数判断仓库规模"""
     if star_count < 5000:
         return "small"
     elif star_count < 50000:
@@ -100,25 +92,18 @@ def get_repo_size(star_count: int) -> str:
 
 
 def check_issue_link(body: str) -> bool:
-    """检查 body 是否包含真正的 Issue 关联 (fixes #NNN / closes #NNN)"""
     return bool(ISSUE_LINK_RE.search(body))
 
 
-def compute_label_score(labels: List[str]) -> float:
-    """计算标签信号分数"""
-    score = 0.0
-    for label in labels:
-        label_lower = label.lower().strip()
-        # 精确匹配
-        if label_lower in LABEL_SIGNALS:
-            score += LABEL_SIGNALS[label_lower]
-        else:
-            # 模糊匹配（标签可能带前缀/后缀）
-            for key, val in LABEL_SIGNALS.items():
-                if key in label_lower:
-                    score += val
-                    break
-    return score
+def _parse_label(label: str) -> Tuple[str, str]:
+    """返回 (label, polarity) — positive/negative/neutral/unknown"""
+    label_lower = label.lower().strip()
+    if label_lower in LABEL_SIGNALS:
+        return label, LABEL_SIGNALS[label_lower]
+    for key, polarity in LABEL_SIGNALS.items():
+        if key in label_lower:
+            return label, polarity
+    return label, "unknown"
 
 
 # ============================================================
@@ -126,270 +111,129 @@ def compute_label_score(labels: List[str]) -> float:
 # ============================================================
 
 def load_anti_patterns(repo_root: Path) -> Dict[str, dict]:
-    """加载反模式库"""
     patterns = {}
     anti_patterns_dir = repo_root / "anti-patterns"
-
     if not anti_patterns_dir.exists():
         return patterns
 
     for file in anti_patterns_dir.glob("*.md"):
         if file.name == "README.md":
             continue
-
         content = file.read_text(encoding="utf-8")
-
-        # 解析 frontmatter
         match = re.match(r"^---\s*\n(.*?)\n---", content, re.DOTALL)
         if not match:
             continue
-
         try:
             fm = {}
             current_key = None
             current_value = []
             in_list = False
-
             for line in match.group(1).strip().split("\n"):
-                # 检查是否是新的 key-value 对
                 if re.match(r'^[a-zA-Z_]+:', line) and not line.startswith('  '):
-                    # 保存之前的 key-value 对
                     if current_key:
-                        if in_list:
-                            fm[current_key] = current_value
-                        else:
-                            fm[current_key] = ' '.join(current_value).strip()
-
-                    # 开始新的 key-value 对
+                        fm[current_key] = current_value if in_list else ' '.join(current_value).strip()
                     key, value = line.split(":", 1)
                     current_key = key.strip()
                     value = value.strip()
-
-                    # 检查是否是列表
                     if value == '':
                         current_value = []
                         in_list = True
                     elif value.startswith('['):
-                        # 内联列表
                         current_value = [v.strip().strip('"') for v in value[1:-1].split(",")]
                         in_list = False
                     else:
                         current_value = [value]
                         in_list = False
-
                 elif line.startswith('  - ') and in_list:
-                    # 列表项
-                    item = line[4:].strip().strip('"')
-                    current_value.append(item)
-
+                    current_value.append(line[4:].strip().strip('"'))
                 elif line.startswith('  ') and not in_list:
-                    # 多行值
                     current_value.append(line.strip())
-
-            # 保存最后一个 key-value 对
             if current_key:
-                if in_list:
-                    fm[current_key] = current_value
-                else:
-                    fm[current_key] = ' '.join(current_value).strip()
-
+                fm[current_key] = current_value if in_list else ' '.join(current_value).strip()
             patterns[file.stem] = fm
         except Exception:
             continue
-
     return patterns
 
-
-def load_success_patterns(repo_root: Path) -> Dict[str, dict]:
-    """加载成功模式库"""
-    patterns = {}
-    success_patterns_dir = repo_root / "success-patterns"
-
-    if not success_patterns_dir.exists():
-        return patterns
-
-    for file in success_patterns_dir.glob("*.md"):
-        if file.name == "README.md":
-            continue
-
-        content = file.read_text(encoding="utf-8")
-
-        # 解析 frontmatter
-        match = re.match(r"^---\s*\n(.*?)\n---", content, re.DOTALL)
-        if not match:
-            continue
-
-        try:
-            fm = {}
-            current_key = None
-            current_value = []
-            in_list = False
-
-            for line in match.group(1).strip().split("\n"):
-                # 检查是否是新的 key-value 对
-                if re.match(r'^[a-zA-Z_]+:', line) and not line.startswith('  '):
-                    # 保存之前的 key-value 对
-                    if current_key:
-                        if in_list:
-                            fm[current_key] = current_value
-                        else:
-                            fm[current_key] = ' '.join(current_value).strip()
-
-                    # 开始新的 key-value 对
-                    key, value = line.split(":", 1)
-                    current_key = key.strip()
-                    value = value.strip()
-
-                    # 检查是否是列表
-                    if value == '':
-                        current_value = []
-                        in_list = True
-                    elif value.startswith('['):
-                        # 内联列表
-                        current_value = [v.strip().strip('"') for v in value[1:-1].split(",")]
-                        in_list = False
-                    else:
-                        current_value = [value]
-                        in_list = False
-
-                elif line.startswith('  - ') and in_list:
-                    # 列表项
-                    item = line[4:].strip().strip('"')
-                    current_value.append(item)
-
-                elif line.startswith('  ') and not in_list:
-                    # 多行值
-                    current_value.append(line.strip())
-
-            # 保存最后一个 key-value 对
-            if current_key:
-                if in_list:
-                    fm[current_key] = current_value
-                else:
-                    fm[current_key] = ' '.join(current_value).strip()
-
-            patterns[file.stem] = fm
-        except Exception:
-            continue
-
-    return patterns
-
-
-# ============================================================
-# 评估逻辑
-# ============================================================
 
 def check_anti_patterns(title: str, description: str, repo: str, repo_root: Path, body: str = "") -> List[dict]:
     """检查 PR 是否命中反模式"""
     anti_patterns = load_anti_patterns(repo_root)
     matches = []
-
-    # 合并标题、描述、body 进行检查
     text = f"{title} {description} {body}".lower()
-
     for key, pattern in anti_patterns.items():
-        # 检查 trigger_keywords
         keywords = pattern.get("trigger_keywords", [])
         if isinstance(keywords, list):
             for keyword in keywords:
                 if keyword.lower() in text:
                     matches.append({
-                        "key": key,
-                        "keyword": keyword,
+                        "key": key, "keyword": keyword,
                         "symptom": pattern.get("symptom", ""),
                         "fix_action": pattern.get("fix_action", ""),
                         "source_pr": pattern.get("source_pr", ""),
                     })
                     break
-
-        # 检查 symptom
         symptom = pattern.get("symptom", "")
         if symptom and symptom.lower() in text:
             matches.append({
-                "key": key,
-                "symptom": symptom,
+                "key": key, "symptom": symptom,
                 "fix_action": pattern.get("fix_action", ""),
                 "source_pr": pattern.get("source_pr", ""),
             })
-
     return matches
 
 
-def check_success_patterns(
-    title: str,
-    description: str,
-    repo: str,
-    repo_root: Path,
-    body: str = "",
-) -> List[dict]:
-    """检查 PR 是否符合成功模式
-
-    P0 改进: 对含 Issue 关联语义的 factor，要求 body 匹配 fixes|closes|resolves #NNN
-    阈值从 0.5 提高到 0.6
-    """
-    success_patterns = load_success_patterns(repo_root)
-    matches = []
-
-    # 合并标题、描述、body 进行检查
-    text = f"{title} {description}".lower()
-    full_text = f"{title} {description} {body}".lower()
-
-    # P0: Issue 关联语义关键词 — 命中这些词的 factor 需要正则验证
-    issue_semantic_keywords = {"fix", "fixes", "fixed", "close", "closes", "closed",
-                                "resolve", "resolves", "resolved", "issue", "bug"}
-
-    for key, pattern in success_patterns.items():
-        # 检查 success_factors
-        factors = pattern.get("success_factors", [])
-        if isinstance(factors, list):
-            match_count = 0
-            non_issue_match = False  # 至少一个非 issue 语义 factor 匹配
-            for factor in factors:
-                factor_keywords = set(re.findall(r'\w+', factor.lower()))
-
-                # P0: 检查这个 factor 是否涉及 Issue 关联
-                has_issue_semantic = bool(factor_keywords & issue_semantic_keywords)
-
-                if has_issue_semantic:
-                    # 这个 factor 涉及 Issue 关联，必须用正则验证 body 真正引用了 Issue
-                    if body and check_issue_link(body):
-                        match_count += 1
-                    # 否则不计分（之前会因为 "fix" 子串匹配而误加分）
-                else:
-                    # 非 Issue 关联的 factor，用 full_text（含 body）匹配
-                    # 过滤掉过于泛化的关键词
-                    generic_keywords = {"pr", "the", "a", "an", "is", "are", "was", "were",
-                                        "be", "been", "being", "have", "has", "had", "do",
-                                        "does", "did", "will", "would", "could", "should",
-                                        "may", "might", "can", "shall", "of", "in", "on",
-                                        "at", "to", "for", "with", "by", "from", "as", "into",
-                                        "through", "during", "before", "after", "above", "below",
-                                        "between", "out", "off", "over", "under", "again",
-                                        "further", "then", "once", "and", "but", "or", "nor",
-                                        "not", "so", "very", "just", "than", "too", "also",
-                                        "new", "use", "used", "using", "add", "added", "adding",
-                                        "的", "中", "了", "是", "在", "有", "和", "与"}
-                    meaningful_kws = factor_keywords - generic_keywords
-                    # 过滤纯数字（避免 "3" 匹配 "13425"）
-                    meaningful_kws = {kw for kw in meaningful_kws if not kw.isdigit()}
-                    if meaningful_kws and any(kw in full_text for kw in meaningful_kws):
-                        match_count += 1
-                        non_issue_match = True
-
-            # 阈值 0.5，且必须至少有一个非 issue 语义 factor 匹配
-            # （防止仅有 fixes #NNN 就匹配成功模式）
-            if match_count >= len(factors) * 0.5 and non_issue_match:
-                matches.append({
-                    "key": key,
-                    "description": pattern.get("description", ""),
-                    "success_factors": factors,
-                    "source_pr": pattern.get("source_pr", ""),
-                })
-
-    return matches
+def load_success_patterns(repo_root: Path) -> Dict[str, dict]:
+    """保留加载但不再用于评分 — 仅作参考"""
+    patterns = {}
+    success_patterns_dir = repo_root / "success-patterns"
+    if not success_patterns_dir.exists():
+        return patterns
+    for file in success_patterns_dir.glob("*.md"):
+        if file.name == "README.md":
+            continue
+        content = file.read_text(encoding="utf-8")
+        match = re.match(r"^---\s*\n(.*?)\n---", content, re.DOTALL)
+        if not match:
+            continue
+        try:
+            fm = {}
+            current_key = None
+            current_value = []
+            in_list = False
+            for line in match.group(1).strip().split("\n"):
+                if re.match(r'^[a-zA-Z_]+:', line) and not line.startswith('  '):
+                    if current_key:
+                        fm[current_key] = current_value if in_list else ' '.join(current_value).strip()
+                    key, value = line.split(":", 1)
+                    current_key = key.strip()
+                    value = value.strip()
+                    if value == '':
+                        current_value = []
+                        in_list = True
+                    elif value.startswith('['):
+                        current_value = [v.strip().strip('"') for v in value[1:-1].split(",")]
+                        in_list = False
+                    else:
+                        current_value = [value]
+                        in_list = False
+                elif line.startswith('  - ') and in_list:
+                    current_value.append(line[4:].strip().strip('"'))
+                elif line.startswith('  ') and not in_list:
+                    current_value.append(line.strip())
+            if current_key:
+                fm[current_key] = current_value if in_list else ' '.join(current_value).strip()
+            patterns[file.stem] = fm
+        except Exception:
+            continue
+    return patterns
 
 
-def predict_success_rate(
+# ============================================================
+# 核心: analyze_pr — 提交前改进顾问
+# ============================================================
+
+def analyze_pr(
     title: str,
     description: str,
     repo: str,
@@ -400,162 +244,197 @@ def predict_success_rate(
     star_count: int = 0,
     repo_merge_rate: float = 0.0,
     author_association: str = "NONE",
-) -> Tuple[float, str]:
-    """预测 PR 成功率
+) -> dict:
+    """分析 PR 并生成结构化改进建议
 
-    P0: 基线 0.45，阈值调整
-    P1: 标签信号层
-    P2: Bot PR 独立通道
-    P3: author_association 加权
-    repo_merge_rate: 仓库历史 merge 率（0-1），用于动态基线
-    author_association: NONE/CONTRIBUTOR/COLLABORATOR/MEMBER/OWNER
+    返回:
+    {
+        "repo": str,
+        "title": str,
+        "tier": "low_risk" | "medium_risk" | "high_risk",
+        "signals": {
+            "positive": [{"key": str, "description": str}],
+            "negative": [{"key": str, "description": str, "severity": str}],
+            "neutral":  [{"key": str, "description": str}]
+        },
+        "checklist": [
+            {"action": str, "priority": "P0"|"P1"|"P2", "done": bool, "hint": str}
+        ],
+        "anti_patterns_hit": [...],
+        "repo_context": {...}
+    }
     """
     if labels is None:
         labels = []
 
-    # 动态基线：如果有仓库 merge 率数据，用它来调整基线
-    if repo_merge_rate > 0:
-        # 基线 = 仓库 merge 率 * 0.7 + 默认基线 * 0.3（防止过拟合）
-        dynamic_base = repo_merge_rate * 0.7 + BASE_RATE_HUMAN * 0.3
+    signals_pos = []
+    signals_neg = []
+    signals_neu = []
+    checklist = []
+
+    # ---- 1. Issue 关联检查 ----
+    has_issue_link = check_issue_link(body) if body else False
+    if has_issue_link:
+        signals_pos.append({"key": "issue_linked", "description": "PR body 包含 Issue 关联 (fixes/closes/resolves #NNN)"})
     else:
-        dynamic_base = BASE_RATE_HUMAN
+        signals_neg.append({
+            "key": "no_issue_link",
+            "description": "PR body 缺少 Issue 关联",
+            "severity": "high",
+        })
+        checklist.append({
+            "action": "add_issue_link",
+            "priority": "P0",
+            "done": False,
+            "hint": "在 body 中添加 `Fixes #NNN` 或 `Closes #NNN`，关联已有的 Issue",
+        })
 
-    # P2: Bot PR 走独立通道
-    if author and is_bot_author(author):
-        repo_size = get_repo_size(star_count) if star_count > 0 else "medium"
-        base_rate = BOT_BASE_RATES.get(repo_size, 0.50)
-        # Bot PR 也受标签影响（但幅度较小）
-        label_adj = compute_label_score(labels) * 0.5  # 标签影响减半
-        base_rate = max(0.0, min(1.0, base_rate + label_adj / 100))
-        if base_rate >= THRESHOLD_HIGH:
-            level = "高"
-        elif base_rate >= THRESHOLD_MED:
-            level = "中"
-        else:
-            level = "低"
-        return base_rate, level
-
-    # 人类 PR 评估
+    # ---- 2. 反模式检测 ----
     anti_matches = check_anti_patterns(title, description, repo, repo_root, body=body)
-    success_matches = check_success_patterns(title, description, repo, repo_root, body=body)
-
-    # 基础成功率（动态基线）
-    base_rate = dynamic_base
-
-    # P3: author_association 加权（严选型仓库打折）
-    assoc_upper = author_association.upper().strip()
-    raw_boost = ASSOCIATION_BOOST.get(assoc_upper, 0.0)
-    if assoc_upper == "OWNER":
-        # OWNER 几乎不受仓库风格影响（自己合自己）
-        base_rate += raw_boost
-    elif raw_boost > 0 and repo_merge_rate > 0:
-        # 严选型仓库（merge 率低）→ boost 打折
-        # merge_rate >= 0.7 → scale 1.0, merge_rate <= 0.2 → scale 0.25
-        scale = max(0.50, min(1.0, (repo_merge_rate - 0.2) / 0.5))
-        base_rate += raw_boost * scale
-    else:
-        base_rate += raw_boost
-
-    # 大仓外部贡献者惩罚：star > 20k 且 NONE → -0.10
-    if assoc_upper == "NONE" and star_count > 20000:
-        base_rate -= 0.10
-
-    # 反模式惩罚
     for match in anti_matches:
         key = match["key"]
-        if "cosmetic" in key:
-            base_rate -= 0.30
-        elif "breaking" in key:
-            base_rate -= 0.25
-        elif "upstream" in key:
-            base_rate -= 0.10
-        elif "low-value" in key:
-            base_rate -= 0.20
-        elif "ai-generated" in key or "ai-policy" in key:
-            base_rate -= 0.25
-        elif "missing-issue" in key:
-            base_rate -= 0.15
-        elif "duplicate" in key:
-            base_rate -= 0.20
+        severity = ANTI_PATTERN_SEVERITY.get(key, "medium")
+        signals_neg.append({
+            "key": key,
+            "description": match.get("symptom", match.get("description", "")),
+            "severity": severity,
+            "fix_action": match.get("fix_action", ""),
+            "source_pr": match.get("source_pr", ""),
+        })
+        if match.get("fix_action"):
+            checklist.append({
+                "action": f"fix_{key}",
+                "priority": "P0" if severity in ("critical", "high") else "P1",
+                "done": False,
+                "hint": match["fix_action"],
+            })
+
+    # ---- 3. 标签信号 ----
+    negative_labels = []
+    positive_labels = []
+    for label in labels:
+        _, polarity = _parse_label(label)
+        if polarity == "negative":
+            negative_labels.append(label)
+        elif polarity == "positive":
+            positive_labels.append(label)
+
+    if negative_labels:
+        signals_neg.append({
+            "key": "negative_labels",
+            "description": f"PR 带有负面标签: {', '.join(negative_labels)}",
+            "severity": "high",
+        })
+        checklist.append({
+            "action": "resolve_labels",
+            "priority": "P0",
+            "done": False,
+            "hint": "先解决标签标记的问题（如 missing-issue-link → 添加 Issue 关联）再提交",
+        })
+    if positive_labels:
+        signals_pos.append({"key": "positive_labels", "description": f"PR 带有正面标签: {', '.join(positive_labels)}"})
+
+    # ---- 4. 作者身份分析 ----
+    assoc_upper = author_association.upper().strip()
+    assoc_label = ASSOCIATION_LABELS.get(assoc_upper, assoc_upper)
+
+    if is_bot_author(author):
+        signals_neu.append({"key": "bot_author", "description": f"Bot PR ({author})"})
+    elif assoc_upper == "OWNER":
+        signals_pos.append({"key": "owner_author", "description": "仓库所有者提交，通常有更高合并率"})
+    elif assoc_upper in ("MEMBER", "COLLABORATOR"):
+        signals_pos.append({"key": "insider_author", "description": f"{assoc_label}，有仓库写入权限"})
+    elif assoc_upper == "CONTRIBUTOR":
+        signals_pos.append({"key": "returning_contributor", "description": "历史贡献者，有合并记录"})
+    elif assoc_upper == "NONE":
+        if star_count > 20000:
+            signals_neg.append({
+                "key": "first_contributor_large_repo",
+                "description": f"首次在大仓 ({star_count:,}⭐) 提 PR，外部贡献者合并率通常较低",
+                "severity": "medium",
+            })
+            checklist.append({
+                "action": "build_trust",
+                "priority": "P1",
+                "done": False,
+                "hint": "先在 Issue 中参与讨论、回复评论，建立维护者信任后再提 PR",
+            })
         else:
-            base_rate -= 0.15  # 通用反模式惩罚
+            signals_neu.append({"key": "first_contributor", "description": "首次贡献者"})
 
-    # 成功模式加成（封顶 +0.08，进一步降权）
-    if success_matches:
-        base_rate += min(0.08, len(success_matches) * 0.02)
+    # ---- 5. 仓库上下文 ----
+    repo_context = {}
+    if star_count > 0:
+        repo_context["star_count"] = star_count
+        repo_context["repo_size"] = get_repo_size(star_count)
+    if repo_merge_rate > 0:
+        repo_context["merge_rate"] = repo_merge_rate
+        if repo_merge_rate < 0.3:
+            signals_neu.append({"key": "strict_repo", "description": f"该仓库近期 merge 率较低 ({repo_merge_rate:.0%})，审查严格"})
+        elif repo_merge_rate > 0.8:
+            signals_pos.append({"key": "lenient_repo", "description": f"该仓库近期 merge 率较高 ({repo_merge_rate:.0%})"})
 
-    # P1: 标签信号
-    label_adj = compute_label_score(labels)
-    base_rate += label_adj / 100  # 标签分数按百分比影响
+    # ---- 6. Bot 特殊检查 ----
+    if is_bot_author(author):
+        # Bot PR 通常有 auto-merge，但小仓更可靠
+        if star_count > 0 and star_count < 5000:
+            signals_pos.append({"key": "bot_small_repo", "description": "小仓 Bot PR 通常配置了 auto-merge"})
+        checklist.append({
+            "action": "bot_auto_merge",
+            "priority": "P2",
+            "done": True,  # Bot 通常自动处理
+            "hint": "Bot PR 通常由自动化流程处理",
+        })
 
-    # 限制在 0-1 之间
-    base_rate = max(0.0, min(1.0, base_rate))
+    # ---- 7. 通用清单 ----
+    if not is_bot_author(author):
+        checklist.append({
+            "action": "ci_passing",
+            "priority": "P1",
+            "done": False,
+            "hint": "确认 CI 全部通过",
+        })
+        checklist.append({
+            "action": "dco_signoff",
+            "priority": "P1",
+            "done": False,
+            "hint": "使用 `git commit -s` 添加 DCO sign-off",
+        })
 
-    # 生成预测说明
-    if base_rate >= THRESHOLD_HIGH:
-        level = "高"
-    elif base_rate >= THRESHOLD_MED:
-        level = "中"
+    # ---- 8. 计算 tier ----
+    neg_critical = sum(1 for s in signals_neg if s.get("severity") in ("critical", "high"))
+    neg_medium = sum(1 for s in signals_neg if s.get("severity") == "medium")
+    pos_count = len(signals_pos)
+
+    if neg_critical >= 1:
+        tier = "high_risk"
+    elif neg_medium >= 2 or (neg_medium >= 1 and pos_count == 0):
+        tier = "high_risk"
+    elif neg_medium >= 1 or (pos_count == 0 and len(signals_neu) == 0):
+        tier = "medium_risk"
+    elif pos_count >= 2 and neg_critical == 0:
+        tier = "low_risk"
     else:
-        level = "低"
+        tier = "medium_risk"
 
-    return base_rate, level
+    return {
+        "repo": repo,
+        "title": title,
+        "tier": tier,
+        "signals": {
+            "positive": signals_pos,
+            "negative": signals_neg,
+            "neutral": signals_neu,
+        },
+        "checklist": checklist,
+        "anti_patterns_hit": [m["key"] for m in anti_matches],
+        "repo_context": repo_context,
+    }
 
 
-def generate_suggestions(
-    title: str,
-    description: str,
-    repo: str,
-    repo_root: Path,
-    body: str = "",
-    labels: Optional[List[str]] = None,
-    author: str = "",
-) -> List[str]:
-    """生成改进建议"""
-    suggestions = []
-
-    anti_matches = check_anti_patterns(title, description, repo, repo_root, body=body)
-    success_matches = check_success_patterns(title, description, repo, repo_root, body=body)
-
-    # 基于反模式的建议
-    for match in anti_matches:
-        suggestions.append(f"### 避免 {match['key']} 反模式\n")
-        suggestions.append(f"**问题**: {match.get('symptom', '未知')}\n")
-        suggestions.append(f"**建议**: {match.get('fix_action', '无')}\n")
-        if match.get('source_pr'):
-            suggestions.append(f"**历史案例**: {match['source_pr']}\n")
-        suggestions.append("")
-
-    # 基于成功模式的建议
-    if success_matches:
-        suggestions.append("### 参考成功模式\n")
-        for match in success_matches:
-            suggestions.append(f"- **{match['key']}**: {match.get('description', '')}\n")
-            if match.get('success_factors'):
-                suggestions.append("  - 成功因素:\n")
-                for factor in match['success_factors'][:3]:
-                    suggestions.append(f"    - {factor}\n")
-        suggestions.append("")
-
-    # P1: 标签相关建议
-    if labels:
-        label_score = compute_label_score(labels)
-        if label_score < -10:
-            suggestions.append("### ⚠️ 标签警告\n")
-            negative_labels = [l for l in labels if compute_label_score([l]) < 0]
-            suggestions.append(f"以下标签可能影响合并概率: {', '.join(negative_labels)}\n")
-            suggestions.append("建议先解决标签标记的问题再提交 PR\n\n")
-
-    # 通用建议
-    suggestions.append("### 通用建议\n")
-    suggestions.append("1. **先 Issue 后 PR**: 先在 Issue 中讨论方案\n")
-    suggestions.append("2. **完整交付**: 代码 + 测试 + 文档\n")
-    suggestions.append("3. **单一 commit**: 保持 PR 干净\n")
-    suggestions.append("4. **DCO sign-off**: 使用 `git commit -s`\n")
-    suggestions.append("")
-
-    return suggestions
-
+# ============================================================
+# 兼容: eval_pr — 降级为三档显示
+# ============================================================
 
 def eval_pr(
     title: str,
@@ -569,21 +448,16 @@ def eval_pr(
     repo_merge_rate: float = 0.0,
     author_association: str = "NONE",
 ) -> dict:
-    """评估 PR"""
-    if labels is None:
-        labels = []
-
-    rate, level = predict_success_rate(
-        title, description, repo, repo_root,
-        body=body, labels=labels, author=author, star_count=star_count,
-        repo_merge_rate=repo_merge_rate, author_association=author_association,
-    )
-    anti_matches = check_anti_patterns(title, description, repo, repo_root, body=body)
-    success_matches = check_success_patterns(title, description, repo, repo_root, body=body)
-    suggestions = generate_suggestions(
+    """评估 PR — 降级为三档，核心数据来自 analyze_pr"""
+    analysis = analyze_pr(
         title, description, repo, repo_root,
         body=body, labels=labels, author=author,
+        star_count=star_count, repo_merge_rate=repo_merge_rate,
+        author_association=author_association,
     )
+
+    # 兼容旧接口
+    tier_map = {"low_risk": "低风险", "medium_risk": "中风险", "high_risk": "高风险"}
 
     return {
         "title": title,
@@ -592,32 +466,79 @@ def eval_pr(
         "author": author,
         "labels": labels,
         "is_bot": is_bot_author(author) if author else False,
-        "success_rate": rate,
-        "success_level": level,
-        "anti_patterns": anti_matches,
-        "success_patterns": success_matches,
-        "suggestions": suggestions,
+        "tier": tier_map.get(analysis["tier"], analysis["tier"]),
+        "tier_raw": analysis["tier"],
+        "analysis": analysis,
     }
 
 
-def suggest_pr(
-    title: str,
-    description: str,
-    repo: str,
-    repo_root: Path,
-    body: str = "",
-    labels: Optional[List[str]] = None,
-    author: str = "",
-) -> dict:
-    """生成改进建议"""
-    suggestions = generate_suggestions(
-        title, description, repo, repo_root,
-        body=body, labels=labels, author=author,
-    )
+# ============================================================
+# 内部兼容: predict_success_rate (仅供 cross_validate 使用)
+# ============================================================
 
-    return {
-        "title": title,
-        "description": description,
-        "repo": repo,
-        "suggestions": suggestions,
-    }
+# 评分常量 (内部使用)
+_BASE_RATE = 0.45
+_ASSOCIATION_BOOST = {"OWNER": 0.40, "MEMBER": 0.25, "COLLABORATOR": 0.15, "CONTRIBUTOR": 0.04, "NONE": 0.0}
+_BOT_BASE_RATES = {"small": 0.70, "medium": 0.50, "large": 0.30}
+
+
+def predict_success_rate(
+    title: str, description: str, repo: str, repo_root: Path,
+    body: str = "", labels: Optional[List[str]] = None,
+    author: str = "", star_count: int = 0,
+    repo_merge_rate: float = 0.0, author_association: str = "NONE",
+) -> Tuple[float, str]:
+    """内部兼容函数 — 仅供 cross_validate.py 使用"""
+    if labels is None:
+        labels = []
+
+    # 动态基线
+    dynamic_base = repo_merge_rate * 0.7 + _BASE_RATE * 0.3 if repo_merge_rate > 0 else _BASE_RATE
+
+    # Bot 通道
+    if author and is_bot_author(author):
+        repo_size = get_repo_size(star_count) if star_count > 0 else "medium"
+        rate = _BOT_BASE_RATES.get(repo_size, 0.50)
+        label_score = sum(-10 if _parse_label(l)[1] == "negative" else 0 for l in labels) * 0.5
+        rate = max(0.0, min(1.0, rate + label_score / 100))
+        return rate, "高" if rate >= 0.60 else "中" if rate >= 0.35 else "低"
+
+    # 人类 PR
+    rate = dynamic_base
+
+    # association boost
+    assoc_upper = author_association.upper().strip()
+    raw = _ASSOCIATION_BOOST.get(assoc_upper, 0.0)
+    if assoc_upper == "OWNER":
+        rate += raw
+    elif raw > 0 and repo_merge_rate > 0:
+        scale = max(0.50, min(1.0, (repo_merge_rate - 0.2) / 0.5))
+        rate += raw * scale
+    else:
+        rate += raw
+
+    # 大仓 NONE 惩罚
+    if assoc_upper == "NONE" and star_count > 20000:
+        rate -= 0.10
+
+    # 反模式
+    anti = check_anti_patterns(title, description, repo, repo_root, body=body)
+    for m in anti:
+        k = m["key"]
+        if "cosmetic" in k: rate -= 0.30
+        elif "breaking" in k: rate -= 0.25
+        elif "ai-generated" in k or "ai-policy" in k: rate -= 0.25
+        elif "duplicate" in k: rate -= 0.20
+        elif "low-value" in k: rate -= 0.20
+        elif "missing-issue" in k: rate -= 0.15
+        elif "upstream" in k: rate -= 0.10
+        else: rate -= 0.15
+
+    # 标签
+    for l in labels:
+        _, pol = _parse_label(l)
+        if pol == "negative": rate -= 0.10
+        elif pol == "positive": rate += 0.03
+
+    rate = max(0.0, min(1.0, rate))
+    return rate, "高" if rate >= 0.60 else "中" if rate >= 0.35 else "低"

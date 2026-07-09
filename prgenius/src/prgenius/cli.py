@@ -1,12 +1,12 @@
 """CLI entry point for `prgenius`.
 
 Usage examples (run from repo root):
+    python3 -m prgenius analyze "feat: add feature" --repo org/repo --body "..."
+    python3 -m prgenius analyze "feat: add feature" --repo org/repo --format json
+    python3 -m prgenius eval "feat: add feature" --repo org/repo
     python3 -m prgenius profile get astral-sh/uv
     python3 -m prgenius case list --status=open
-    python3 -m prgenius schema info
-    python3 -m prgenius dump --format=ndjson  > cases.ndjson
-    python3 -m prgenius eval "fix: update deps" --repo langchain-ai/langchain --author "dependabot[bot]" --labels "dependencies"
-    python3 -m prgenius mcp serve  # stdio MCP shell
+    python3 -m prgenius mcp serve
 """
 from __future__ import annotations
 import argparse
@@ -21,10 +21,10 @@ from .parser import (
     profile_get,
     schema_info,
 )
-from .evaluator import eval_pr, suggest_pr
+from .evaluator import analyze_pr, eval_pr
 
 
-REPO_ROOT_DEFAULT = Path(__file__).resolve().parents[3]  # up to big-repo-pr-knowledge
+REPO_ROOT_DEFAULT = Path(__file__).resolve().parents[3]
 
 
 def _get_repo_root(args) -> Path:
@@ -32,6 +32,142 @@ def _get_repo_root(args) -> Path:
         return Path(args.repo_root).resolve()
     return REPO_ROOT_DEFAULT
 
+
+# ============================================================
+# analyze — 主命令
+# ============================================================
+
+TIER_ICONS = {"low_risk": "🟢", "medium_risk": "🟡", "high_risk": "🔴"}
+TIER_LABELS = {"low_risk": "低风险", "medium_risk": "中风险", "high_risk": "高风险"}
+
+
+def cmd_analyze(args) -> int:
+    """分析 PR 并输出改进建议"""
+    repo_root = _get_repo_root(args)
+    labels = args.labels if args.labels else []
+
+    result = analyze_pr(
+        args.title, args.description or "", args.repo, repo_root,
+        body=args.body or "", labels=labels, author=args.author or "",
+        star_count=args.star_count or 0, repo_merge_rate=args.repo_merge_rate or 0.0,
+        author_association=args.author_association or "NONE",
+    )
+
+    if args.format == "json":
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+        return 0
+
+    # 人类可读输出
+    tier = result["tier"]
+    icon = TIER_ICONS.get(tier, "⚪")
+    label = TIER_LABELS.get(tier, tier)
+    signals = result["signals"]
+
+    print(f"## PR 分析: {result['repo']}\n")
+    print(f"**{icon} 综合评估: {label}** ({len(signals['positive'])} 正面 / {len(signals['negative'])} 负面)\n")
+
+    # 负面信号
+    if signals["negative"]:
+        print("### ⚠️ 需要改进\n")
+        for i, s in enumerate(signals["negative"], 1):
+            sev = s.get("severity", "")
+            sev_icon = {"critical": "🚨", "high": "⚠️", "medium": "📋"}.get(sev, "•")
+            print(f"{i}. {sev_icon} **{s['description']}**")
+            if s.get("fix_action"):
+                print(f"   → {s['fix_action']}")
+            if s.get("source_pr"):
+                print(f"   (历史案例: {s['source_pr']})")
+        print()
+
+    # 正面信号
+    if signals["positive"]:
+        print("### ✅ 已具备\n")
+        for s in signals["positive"]:
+            print(f"- {s['description']}")
+        print()
+
+    # 中性信号
+    if signals["neutral"]:
+        print("### ℹ️ 参考信息\n")
+        for s in signals["neutral"]:
+            print(f"- {s['description']}")
+        print()
+
+    # 提交前清单
+    if result["checklist"]:
+        print("### 📋 提交前清单\n")
+        for item in result["checklist"]:
+            mark = "✅" if item["done"] else "☐"
+            pri = item["priority"]
+            print(f"- [{mark}] **[{pri}]** {item['hint']}")
+        print()
+
+    # 仓库上下文
+    ctx = result.get("repo_context", {})
+    if ctx:
+        parts = []
+        if "star_count" in ctx:
+            parts.append(f"{ctx['star_count']:,}⭐")
+        if "repo_size" in ctx:
+            parts.append(ctx["repo_size"])
+        if "merge_rate" in ctx:
+            parts.append(f"merge率 {ctx['merge_rate']:.0%}")
+        if parts:
+            print(f"*仓库: {' | '.join(parts)}*\n")
+
+    return 0
+
+
+# ============================================================
+# eval — 兼容旧命令，降级为三档
+# ============================================================
+
+def cmd_eval(args) -> int:
+    """评估 PR（降级为三档）"""
+    repo_root = _get_repo_root(args)
+    labels = args.labels if args.labels else []
+    result = eval_pr(
+        args.title, args.description or "", args.repo, repo_root,
+        body=args.body or "", labels=labels, author=args.author or "",
+        star_count=args.star_count or 0, repo_merge_rate=args.repo_merge_rate or 0.0,
+        author_association=args.author_association or "NONE",
+    )
+
+    tier = result["tier"]
+    icon = TIER_ICONS.get(result.get("tier_raw", ""), "⚪")
+
+    print(f"## PR 评估: {result['repo']}\n")
+    print(f"**{icon} 风险等级: {tier}**\n")
+
+    # 复用 analyze 输出
+    analysis = result["analysis"]
+    signals = analysis["signals"]
+
+    if signals["negative"]:
+        print("### ⚠️ 风险点\n")
+        for s in signals["negative"]:
+            print(f"- {s['description']}")
+        print()
+
+    if signals["positive"]:
+        print("### ✅ 正面信号\n")
+        for s in signals["positive"]:
+            print(f"- {s['description']}")
+        print()
+
+    if analysis["checklist"]:
+        print("### 📋 建议\n")
+        for item in analysis["checklist"]:
+            if not item["done"]:
+                print(f"- **[{item['priority']}]** {item['hint']}")
+        print()
+
+    return 0
+
+
+# ============================================================
+# 其他命令
+# ============================================================
 
 def cmd_profile_get(args) -> int:
     p = profile_get(_get_repo_root(args), args.repo)
@@ -73,7 +209,6 @@ def cmd_schema_info(_args) -> int:
 
 
 def cmd_dump(args) -> int:
-    """Dump everything in NDJSON (one PR per line) for benchmark use."""
     root = _get_repo_root(args)
     for c in iter_case_studies(root):
         fm = c["frontmatter"]
@@ -98,153 +233,97 @@ def cmd_dump(args) -> int:
     return 0
 
 
-def cmd_eval(args) -> int:
-    """评估 PR"""
-    repo_root = _get_repo_root(args)
-    labels = args.labels if args.labels else []
-    result = eval_pr(
-        args.title, args.description, args.repo, repo_root,
-        body=args.body or "",
-        labels=labels,
-        author=args.author or "",
-        star_count=args.star_count or 0,
-        repo_merge_rate=args.repo_merge_rate or 0.0,
-        author_association=args.author_association or "NONE",
-    )
-
-    output = []
-    output.append("## PR 评估结果\n")
-
-    # Bot 标记
-    if result.get("is_bot"):
-        output.append("🤖 **Bot PR** — 走独立评估通道\n\n")
-
-    output.append(f"### 成功率预测: {result['success_rate']:.0%} ({result['success_level']})\n")
-
-    # 标签信号
-    if result.get("labels"):
-        from .evaluator import compute_label_score
-        label_score = compute_label_score(result["labels"])
-        if label_score != 0:
-            signal = "正面" if label_score > 0 else "负面"
-            output.append(f"### 标签信号: {signal} ({label_score:+.0f} 分)\n")
-            output.append(f"标签: {', '.join(result['labels'])}\n\n")
-
-    # 反模式命中
-    if result['anti_patterns']:
-        output.append("### 反模式命中\n")
-        for match in result['anti_patterns']:
-            output.append(f"- ⚠️ **{match['key']}**: {match.get('symptom', '未知')}\n")
-            if match.get('fix_action'):
-                output.append(f"  - 建议: {match['fix_action']}\n")
-            if match.get('source_pr'):
-                output.append(f"  - 历史案例: {match['source_pr']}\n")
-        output.append("")
-    else:
-        output.append("### 反模式命中\n")
-        output.append("- ✅ 未命中任何反模式\n\n")
-
-    # 成功模式匹配
-    if result['success_patterns']:
-        output.append("### 成功模式匹配\n")
-        for match in result['success_patterns']:
-            output.append(f"- ✅ **{match['key']}**: {match.get('description', '')}\n")
-        output.append("")
-    else:
-        output.append("### 成功模式匹配\n")
-        output.append("- ❌ 未匹配任何成功模式\n\n")
-
-    # 改进建议
-    if result['suggestions']:
-        output.append("### 改进建议\n")
-        output.extend(result['suggestions'])
-
-    print("".join(output))
-    return 0
-
-
 def cmd_suggest(args) -> int:
-    """生成改进建议"""
-    repo_root = _get_repo_root(args)
-    labels = args.labels if args.labels else []
-    result = suggest_pr(
-        args.title, args.description, args.repo, repo_root,
-        body=args.body or "",
-        labels=labels,
-        author=args.author or "",
-    )
-
-    output = []
-    output.append("## 改进建议\n")
-    output.extend(result['suggestions'])
-
-    print("".join(output))
-    return 0
+    """兼容旧命令 — 转发到 analyze"""
+    return cmd_analyze(args)
 
 
 def cmd_mcp_serve(args) -> int:
-    """stdio MCP shell. See prgenius/mcp.py for the small facade.
-
-    Pass --repo-root to point the MCP server at a non-default location
-    (e.g. an isolated worktree or a forked copy of the knowledge base).
-    """
     from .mcp import serve
     repo_root = _get_repo_root(args)
     return serve(repo_root=repo_root)
 
 
+# ============================================================
+# main
+# ============================================================
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="prgenius",
-        description="Evidence-backed lookup for big-repo PR contributions.",
+        description="PR Genius — 提交前改进顾问",
     )
-    parser.add_argument("--repo-root", help="Path to big-repo-pr-knowledge (default: auto-detect)")
+    parser.add_argument("--repo-root", help="Path to pr-genius repo (default: auto-detect)")
     parser.add_argument("--version", action="version", version=f"prgenius {__version__}")
     sub = parser.add_subparsers(dest="cmd", required=True)
 
+    # ---- analyze (主命令) ----
+    an = sub.add_parser("analyze", help="分析 PR 并生成改进建议")
+    an.add_argument("title", help="PR 标题")
+    an.add_argument("--description", "-d", default="", help="PR 描述")
+    an.add_argument("--body", "-b", default="", help="PR body (完整内容)")
+    an.add_argument("--repo", "-r", required=True, help="目标仓库 (org/repo)")
+    an.add_argument("--labels", "-l", nargs="*", default=[], help="PR 标签")
+    an.add_argument("--author", "-a", default="", help="PR 作者")
+    an.add_argument("--star-count", type=int, default=0, help="仓库 star 数")
+    an.add_argument("--repo-merge-rate", type=float, default=0.0, help="仓库 merge 率 (0-1)")
+    an.add_argument("--author-association", default="NONE",
+                    help="作者身份 (NONE/CONTRIBUTOR/COLLABORATOR/MEMBER/OWNER)")
+    an.add_argument("--format", "-f", choices=["text", "json"], default="text", help="输出格式")
+    an.set_defaults(func=cmd_analyze)
+
+    # ---- eval (兼容旧命令) ----
+    ev = sub.add_parser("eval", help="评估 PR (降级为三档)")
+    ev.add_argument("title", help="PR 标题")
+    ev.add_argument("--description", "-d", default="", help="PR 描述")
+    ev.add_argument("--body", "-b", default="", help="PR body")
+    ev.add_argument("--repo", "-r", required=True, help="目标仓库 (org/repo)")
+    ev.add_argument("--labels", "-l", nargs="*", default=[], help="PR 标签")
+    ev.add_argument("--author", "-a", default="", help="PR 作者")
+    ev.add_argument("--star-count", type=int, default=0, help="仓库 star 数")
+    ev.add_argument("--repo-merge-rate", type=float, default=0.0, help="仓库 merge 率")
+    ev.add_argument("--author-association", default="NONE", help="作者身份")
+    ev.set_defaults(func=cmd_eval)
+
+    # ---- suggest (兼容) ----
+    sg = sub.add_parser("suggest", help="获取改进建议 (同 analyze)")
+    sg.add_argument("title", help="PR 标题")
+    sg.add_argument("--description", "-d", default="", help="PR 描述")
+    sg.add_argument("--body", "-b", default="", help="PR body")
+    sg.add_argument("--repo", "-r", required=True, help="目标仓库 (org/repo)")
+    sg.add_argument("--labels", "-l", nargs="*", default=[], help="PR 标签")
+    sg.add_argument("--author", "-a", default="", help="PR 作者")
+    sg.add_argument("--star-count", type=int, default=0, help="仓库 star 数")
+    sg.add_argument("--repo-merge-rate", type=float, default=0.0, help="仓库 merge 率")
+    sg.add_argument("--author-association", default="NONE", help="作者身份")
+    sg.add_argument("--format", "-f", choices=["text", "json"], default="text", help="输出格式")
+    sg.set_defaults(func=cmd_suggest)
+
+    # ---- profile ----
     p_get = sub.add_parser("profile", help="Profile operations")
     p_get_sub = p_get.add_subparsers(dest="profile_cmd", required=True)
     pp = p_get_sub.add_parser("get", help="Get one profile")
-    pp.add_argument("repo", help="org/name (e.g. astral-sh/uv)")
+    pp.add_argument("repo", help="org/name")
     pp.set_defaults(func=cmd_profile_get)
 
+    # ---- case ----
     c_list = sub.add_parser("case", help="Case study operations")
     c_list_sub = c_list.add_subparsers(dest="case_cmd", required=True)
     cl = c_list_sub.add_parser("list", help="List case studies")
-    cl.add_argument("--status", help="Filter by final_status (open/merged/...)")
+    cl.add_argument("--status", help="Filter by final_status")
     cl.set_defaults(func=cmd_case_list)
 
+    # ---- schema ----
     s_info = sub.add_parser("schema", help="Schema info")
     s_info_sub = s_info.add_subparsers(dest="schema_cmd", required=True)
     si = s_info_sub.add_parser("info", help="Show supported schema versions")
     si.set_defaults(func=cmd_schema_info)
 
-    dmp = sub.add_parser("dump", help="NDJSON dump of all cases (for benchmarks)")
+    # ---- dump ----
+    dmp = sub.add_parser("dump", help="NDJSON dump of all cases")
     dmp.set_defaults(func=cmd_dump)
 
-    # eval 命令 — 新增 --body, --labels, --author, --star-count
-    ev = sub.add_parser("eval", help="评估 PR")
-    ev.add_argument("title", help="PR 标题")
-    ev.add_argument("--description", "-d", default="", help="PR 描述")
-    ev.add_argument("--body", "-b", default="", help="PR body (完整内容)")
-    ev.add_argument("--repo", "-r", required=True, help="目标仓库 (org/repo)")
-    ev.add_argument("--labels", "-l", nargs="*", default=[], help="PR 标签列表")
-    ev.add_argument("--author", "-a", default="", help="PR 作者")
-    ev.add_argument("--star-count", type=int, default=0, help="仓库 star 数")
-    ev.add_argument("--repo-merge-rate", type=float, default=0.0, help="仓库历史 merge 率 (0-1)")
-    ev.add_argument("--author-association", default="NONE", help="作者身份 (NONE/CONTRIBUTOR/COLLABORATOR/MEMBER/OWNER)")
-    ev.set_defaults(func=cmd_eval)
-
-    # suggest 命令 — 同样新增参数
-    sg = sub.add_parser("suggest", help="获取改进建议")
-    sg.add_argument("title", help="PR 标题")
-    sg.add_argument("--description", "-d", default="", help="PR 描述")
-    sg.add_argument("--body", "-b", default="", help="PR body")
-    sg.add_argument("--repo", "-r", required=True, help="目标仓库 (org/repo)")
-    sg.add_argument("--labels", "-l", nargs="*", default=[], help="PR 标签列表")
-    sg.add_argument("--author", "-a", default="", help="PR 作者")
-    sg.set_defaults(func=cmd_suggest)
-
+    # ---- mcp ----
     m_serve = sub.add_parser("mcp", help="MCP server (stdio)")
     m_serve_sub = m_serve.add_subparsers(dest="mcp_cmd", required=True)
     ms = m_serve_sub.add_parser("serve", help="Run stdio MCP shell")
