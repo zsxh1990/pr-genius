@@ -33,7 +33,7 @@ learned_at: YYYY-MM-DD
 ---
 ```
 
-## 已有成功模式（5 条）
+## 已有成功模式（10 条）
 
 | Key | 仓库 | 描述 |
 |-----|------|------|
@@ -42,6 +42,11 @@ learned_at: YYYY-MM-DD
 | [misakanet-lesson-contribution](./misakanet-lesson-contribution.md) | Ikalus1988/MisakaNet | 脱敏泛化的技术教训 |
 | [misakanet-mcp-quickstart](./misakanet-mcp-quickstart.md) | Ikalus1988/MisakaNet | 文档+测试+配置示例 |
 | [mcp-gateway-secret-uri-safe](./mcp-gateway-secret-uri-safe.md) | agentic-community/mcp-gateway-registry | 安全修复（URI-safe 字符约束） |
+| [llmservingsim-docs-overrides](./llmservingsim-docs-overrides.md) | casys-kaist/LLMServingSim | 文档贡献：补充配置说明+示例 |
+| [agentclaimguard-langchain-middleware](./agentclaimguard-langchain-middleware.md) | konoeph/AgentClaimGuard | 功能贡献：LangChain 中间件适配器 |
+| [evotown-timezone-fix](./evotown-timezone-fix.md) | EXboys/evotown | Bug 修复：未定义变量导致时区问题 |
+| [bilig-docs-relative-paths](./bilig-docs-relative-paths.md) | proompteng/bilig | 文档修复：替换绝对路径为相对路径 |
+| [cortex-memory-tiers-guide](./cortex-memory-tiers-guide.md) | gambletan/cortex | 文档贡献：补充架构指南 |
 
 ## 成功模式分类
 
