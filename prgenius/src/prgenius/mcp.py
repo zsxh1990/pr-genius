@@ -30,6 +30,7 @@ def _load_tools(repo_root: Path | None = None):
         profile_get,
         schema_info,
     )
+    from .evaluator import eval_pr, suggest_pr
 
     mcp = FastMCP(name="prgenius", instructions=(
         "Evidence-backed lookup for big-repo PR contributions. "
@@ -83,6 +84,16 @@ def _load_tools(repo_root: Path | None = None):
     def schema_info() -> dict:
         """Return supported schema versions + enum values."""
         return schema_info()
+
+    @mcp.tool()
+    def eval_pr(title: str, description: str, repo: str) -> dict:
+        """评估 PR 成功率，检查反模式和成功模式"""
+        return eval_pr(title, description, repo, rr)
+
+    @mcp.tool()
+    def suggest_pr(title: str, description: str, repo: str) -> dict:
+        """生成改进建议"""
+        return suggest_pr(title, description, repo, rr)
 
     return mcp
 

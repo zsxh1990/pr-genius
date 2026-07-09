@@ -20,6 +20,7 @@ from .parser import (
     profile_get,
     schema_info,
 )
+from .evaluator import eval_pr, suggest_pr
 
 
 REPO_ROOT_DEFAULT = Path(__file__).resolve().parents[3]  # up to big-repo-pr-knowledge
@@ -96,6 +97,61 @@ def cmd_dump(args) -> int:
     return 0
 
 
+def cmd_eval(args) -> int:
+    """评估 PR"""
+    repo_root = _get_repo_root(args)
+    result = eval_pr(args.title, args.description, args.repo, repo_root)
+
+    output = []
+    output.append("## PR 评估结果\n")
+    output.append(f"### 成功率预测: {result['success_rate']:.0%} ({result['success_level']})\n")
+
+    # 反模式命中
+    if result['anti_patterns']:
+        output.append("### 反模式命中\n")
+        for match in result['anti_patterns']:
+            output.append(f"- ⚠️ **{match['key']}**: {match.get('symptom', '未知')}\n")
+            if match.get('fix_action'):
+                output.append(f"  - 建议: {match['fix_action']}\n")
+            if match.get('source_pr'):
+                output.append(f"  - 历史案例: {match['source_pr']}\n")
+        output.append("")
+    else:
+        output.append("### 反模式命中\n")
+        output.append("- ✅ 未命中任何反模式\n\n")
+
+    # 成功模式匹配
+    if result['success_patterns']:
+        output.append("### 成功模式匹配\n")
+        for match in result['success_patterns']:
+            output.append(f"- ✅ **{match['key']}**: {match.get('description', '')}\n")
+        output.append("")
+    else:
+        output.append("### 成功模式匹配\n")
+        output.append("- ❌ 未匹配任何成功模式\n\n")
+
+    # 改进建议
+    if result['suggestions']:
+        output.append("### 改进建议\n")
+        output.extend(result['suggestions'])
+
+    print("".join(output))
+    return 0
+
+
+def cmd_suggest(args) -> int:
+    """生成改进建议"""
+    repo_root = _get_repo_root(args)
+    result = suggest_pr(args.title, args.description, args.repo, repo_root)
+
+    output = []
+    output.append("## 改进建议\n")
+    output.extend(result['suggestions'])
+
+    print("".join(output))
+    return 0
+
+
 def cmd_mcp_serve(args) -> int:
     """stdio MCP shell. See prgenius/mcp.py for the small facade.
 
@@ -135,6 +191,18 @@ def main(argv: list[str] | None = None) -> int:
 
     dmp = sub.add_parser("dump", help="NDJSON dump of all cases (for benchmarks)")
     dmp.set_defaults(func=cmd_dump)
+
+    ev = sub.add_parser("eval", help="评估 PR")
+    ev.add_argument("title", help="PR 标题")
+    ev.add_argument("--description", "-d", default="", help="PR 描述")
+    ev.add_argument("--repo", "-r", required=True, help="目标仓库 (org/repo)")
+    ev.set_defaults(func=cmd_eval)
+
+    sg = sub.add_parser("suggest", help="获取改进建议")
+    sg.add_argument("title", help="PR 标题")
+    sg.add_argument("--description", "-d", default="", help="PR 描述")
+    sg.add_argument("--repo", "-r", required=True, help="目标仓库 (org/repo)")
+    sg.set_defaults(func=cmd_suggest)
 
     m_serve = sub.add_parser("mcp", help="MCP server (stdio)")
     m_serve_sub = m_serve.add_subparsers(dest="mcp_cmd", required=True)
