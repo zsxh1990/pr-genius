@@ -110,6 +110,7 @@ def evaluate_pr(pr: dict, repo: str, star_count: int, repo_merge_rate: float = 0
     title = pr.get("title", "")
     body = pr.get("body", "") or ""
     author = pr.get("user", {}).get("login", "")
+    author_association = pr.get("author_association", "NONE")
     merged = pr.get("merged_at") is not None
     state = pr.get("state", "closed")
 
@@ -121,7 +122,7 @@ def evaluate_pr(pr: dict, repo: str, star_count: int, repo_merge_rate: float = 0
     rate, level = predict_success_rate(
         title, body, repo, REPO_ROOT,
         body=body, labels=labels, author=author, star_count=star_count,
-        repo_merge_rate=repo_merge_rate,
+        repo_merge_rate=repo_merge_rate, author_association=author_association,
     )
 
     # 判断预测结果
@@ -132,6 +133,7 @@ def evaluate_pr(pr: dict, repo: str, star_count: int, repo_merge_rate: float = 0
         "pr_number": pr_number,
         "title": title[:80],
         "author": author,
+        "author_association": author_association,
         "is_bot": is_bot_author(author),
         "labels": labels,
         "predicted_rate": rate,

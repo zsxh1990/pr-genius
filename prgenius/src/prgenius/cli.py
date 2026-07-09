@@ -109,6 +109,7 @@ def cmd_eval(args) -> int:
         author=args.author or "",
         star_count=args.star_count or 0,
         repo_merge_rate=args.repo_merge_rate or 0.0,
+        author_association=args.author_association or "NONE",
     )
 
     output = []
@@ -231,6 +232,7 @@ def main(argv: list[str] | None = None) -> int:
     ev.add_argument("--author", "-a", default="", help="PR 作者")
     ev.add_argument("--star-count", type=int, default=0, help="仓库 star 数")
     ev.add_argument("--repo-merge-rate", type=float, default=0.0, help="仓库历史 merge 率 (0-1)")
+    ev.add_argument("--author-association", default="NONE", help="作者身份 (NONE/CONTRIBUTOR/COLLABORATOR/MEMBER/OWNER)")
     ev.set_defaults(func=cmd_eval)
 
     # suggest 命令 — 同样新增参数

@@ -32,7 +32,7 @@ LABEL_SIGNALS: Dict[str, float] = {
     "invalid": -20,
     "wontfix": -20,
     "spam": -25,
-    "duplicate": -15,
+    "duplicate": -25,
     "missing-issue-link": -10,
     "needs-information": -10,
     "awaiting-response": -5,
@@ -70,6 +70,15 @@ BASE_RATE_HUMAN = 0.45
 BOT_BASE_RATES = {"small": 0.70, "medium": 0.50, "large": 0.30}
 THRESHOLD_HIGH = 0.60
 THRESHOLD_MED = 0.35
+
+# P3: author_association 加权
+ASSOCIATION_BOOST = {
+    "OWNER": 0.40,
+    "MEMBER": 0.25,
+    "COLLABORATOR": 0.20,
+    "CONTRIBUTOR": 0.05,
+    "NONE": 0.0,
+}
 
 
 # ============================================================
@@ -292,6 +301,7 @@ def predict_success_rate(
     body: str = "", labels: Optional[List[str]] = None,
     author: str = "", star_count: int = 0,
     repo_merge_rate: float = 0.0,
+    author_association: str = "NONE",
 ) -> Tuple[float, str]:
     if labels is None:
         labels = []
@@ -322,6 +332,10 @@ def predict_success_rate(
 
     base_rate = dynamic_base
 
+    # P3: author_association 加权
+    assoc_upper = author_association.upper().strip()
+    base_rate += ASSOCIATION_BOOST.get(assoc_upper, 0.0)
+
     for match in anti_matches:
         key = match["key"]
         if "cosmetic" in key:
@@ -341,9 +355,9 @@ def predict_success_rate(
         else:
             base_rate -= 0.15
 
-    # 成功模式加成（封顶 +0.15）
+    # 成功模式加成（封顶 +0.12，P6 降权）
     if success_matches:
-        base_rate += min(0.15, len(success_matches) * 0.05)
+        base_rate += min(0.12, len(success_matches) * 0.03)
 
     # P1: 标签信号
     label_adj = compute_label_score(labels)
@@ -411,6 +425,7 @@ def eval_pr(
     body: str = "", labels: Optional[List[str]] = None,
     author: str = "", star_count: int = 0,
     repo_merge_rate: float = 0.0,
+    author_association: str = "NONE",
 ) -> str:
     if labels is None:
         labels = []
@@ -418,7 +433,7 @@ def eval_pr(
     rate, level = predict_success_rate(
         title, description, repo,
         body=body, labels=labels, author=author, star_count=star_count,
-        repo_merge_rate=repo_merge_rate,
+        repo_merge_rate=repo_merge_rate, author_association=author_association,
     )
     anti_matches = check_anti_patterns(title, description, repo, body=body)
     success_matches = check_success_patterns(title, description, repo, body=body)
@@ -520,6 +535,7 @@ def main():
     eval_parser.add_argument("--author", "-a", default="", help="PR 作者")
     eval_parser.add_argument("--star-count", type=int, default=0, help="仓库 star 数")
     eval_parser.add_argument("--repo-merge-rate", type=float, default=0.0, help="仓库历史 merge 率 (0-1)")
+    eval_parser.add_argument("--author-association", default="NONE", help="作者身份 (NONE/CONTRIBUTOR/COLLABORATOR/MEMBER/OWNER)")
 
     # suggest 命令
     suggest_parser = subparsers.add_parser("suggest", help="获取改进建议")
@@ -547,6 +563,7 @@ def main():
             body=args.body, labels=args.labels, author=args.author,
             star_count=args.star_count,
             repo_merge_rate=args.repo_merge_rate,
+            author_association=args.author_association,
         )
         print(result)
     elif args.command == "suggest":

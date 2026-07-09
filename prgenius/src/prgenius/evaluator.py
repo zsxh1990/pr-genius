@@ -24,7 +24,7 @@ LABEL_SIGNALS: Dict[str, float] = {
     "invalid": -20,
     "wontfix": -20,
     "spam": -25,
-    "duplicate": -15,
+    "duplicate": -25,
     # 中等拒绝信号
     "missing-issue-link": -10,
     "needs-information": -10,
@@ -69,6 +69,15 @@ BOT_BASE_RATES = {           # Bot PR 基线按仓库规模
 }
 THRESHOLD_HIGH = 0.60        # "高" 阈值（从 0.7 降到 0.6）
 THRESHOLD_MED = 0.35         # "中" 阈值（从 0.4 降到 0.35）
+
+# P3: author_association 加权
+ASSOCIATION_BOOST: Dict[str, float] = {
+    "OWNER": 0.40,        # OWNER PR 几乎必定 merged
+    "MEMBER": 0.25,       # MEMBER PR 通常 merged
+    "COLLABORATOR": 0.20, # COLLABORATOR PR 大概率 merged
+    "CONTRIBUTOR": 0.05,  # 有历史，轻微加分
+    "NONE": 0.0,          # 外部贡献者，不加不减
+}
 
 
 # ============================================================
@@ -372,13 +381,16 @@ def predict_success_rate(
     author: str = "",
     star_count: int = 0,
     repo_merge_rate: float = 0.0,
+    author_association: str = "NONE",
 ) -> Tuple[float, str]:
     """预测 PR 成功率
 
     P0: 基线 0.45，阈值调整
     P1: 标签信号层
     P2: Bot PR 独立通道
+    P3: author_association 加权
     repo_merge_rate: 仓库历史 merge 率（0-1），用于动态基线
+    author_association: NONE/CONTRIBUTOR/COLLABORATOR/MEMBER/OWNER
     """
     if labels is None:
         labels = []
@@ -412,6 +424,10 @@ def predict_success_rate(
     # 基础成功率（动态基线）
     base_rate = dynamic_base
 
+    # P3: author_association 加权
+    assoc_upper = author_association.upper().strip()
+    base_rate += ASSOCIATION_BOOST.get(assoc_upper, 0.0)
+
     # 反模式惩罚
     for match in anti_matches:
         key = match["key"]
@@ -432,9 +448,9 @@ def predict_success_rate(
         else:
             base_rate -= 0.15  # 通用反模式惩罚
 
-    # 成功模式加成（封顶 +0.15，防止叠加过多）
+    # 成功模式加成（封顶 +0.12，P6 降权）
     if success_matches:
-        base_rate += min(0.15, len(success_matches) * 0.05)
+        base_rate += min(0.12, len(success_matches) * 0.03)
 
     # P1: 标签信号
     label_adj = compute_label_score(labels)
@@ -519,6 +535,7 @@ def eval_pr(
     author: str = "",
     star_count: int = 0,
     repo_merge_rate: float = 0.0,
+    author_association: str = "NONE",
 ) -> dict:
     """评估 PR"""
     if labels is None:
@@ -527,7 +544,7 @@ def eval_pr(
     rate, level = predict_success_rate(
         title, description, repo, repo_root,
         body=body, labels=labels, author=author, star_count=star_count,
-        repo_merge_rate=repo_merge_rate,
+        repo_merge_rate=repo_merge_rate, author_association=author_association,
     )
     anti_matches = check_anti_patterns(title, description, repo, repo_root, body=body)
     success_matches = check_success_patterns(title, description, repo, repo_root, body=body)
