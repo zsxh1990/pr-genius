@@ -1,47 +1,83 @@
-"""stdio MCP shell for prgenius — a thin façade.
+"""stdio MCP shell for prgenius — v1.1.1
 
-This module is optional: only loaded if `mcp` is installed (the only runtime
-dependency we ever take). Calling `python3 -m prgenius mcp serve` starts a
-stdio MCP server that exposes the prgenius lookup surface to local agents
-(Cursor/Cline/Claude Code). No network, no auth, no rate-limiting.
-
-Promoted tools (intentionally small — ACD rule "first to simplify wins"):
-- get_repo_profile(repo) → returns one Repo Profile dict
-- list_open_prs() → list of PRs with final_status=open
-- get_case_study(repo, pr_number) → one PR Case Study
-- schema_info() → enumerated schema versions
-
-This file is ~70 lines (one per tool + boilerplate). Anyone reading it should
-be able to verify the surface and the path-resolution logic in under 5 min.
+MCP surface:
+- analyze_pr(title, repo, body, ...) → 结构化信号 + 建议 + 三档风险
+- coach_pr(title, repo, body, ...) → pass/fail + checklist
+- get_repo_profile(repo) → 仓库画像
+- list_open_prs() → open PR 列表
+- get_case_study(repo, pr_number) → PR 案例
+- schema_info() → schema 版本
 """
 from __future__ import annotations
-import json
 import sys
 from pathlib import Path
 
-# mcp SDK: only imported at serve() time so the rest of the package stays stdlib.
-REPO_ROOT_DEFAULT = Path(__file__).resolve().parents[3]  # up to big-repo-pr-knowledge
+REPO_ROOT_DEFAULT = Path(__file__).resolve().parents[3]
 
 
 def _load_tools(repo_root: Path | None = None):
     from mcp.server.fastmcp import FastMCP
-    from .parser import (
-        iter_case_studies,
-        profile_get,
-        schema_info,
-    )
-    from .evaluator import eval_pr, suggest_pr
+    from .parser import iter_case_studies, profile_get, schema_info as _schema_info
+    from .evaluator import analyze_pr as _analyze_pr, eval_pr as _eval_pr
 
     mcp = FastMCP(name="prgenius", instructions=(
-        "Evidence-backed lookup for big-repo PR contributions. "
-        "Local stdio; no network calls."
+        "PR Genius — 提交前改进顾问。"
+        "analyze_pr 分析 PR 并给出改进建议，coach_pr 用于 Agent PR Dojo (pass/fail)。"
     ))
 
     rr = repo_root or REPO_ROOT_DEFAULT
 
     @mcp.tool()
+    def analyze_pr(
+        title: str,
+        repo: str,
+        body: str = "",
+        description: str = "",
+        author: str = "",
+        author_association: str = "NONE",
+        labels: list[str] | None = None,
+        star_count: int = 0,
+        repo_merge_rate: float = 0.0,
+    ) -> dict:
+        """分析 PR 并生成结构化改进建议。
+
+        返回 tier (low_risk/medium_risk/high_risk)、signals (positive/negative/neutral)、checklist。
+        """
+        return _analyze_pr(
+            title, description, repo, rr,
+            body=body, labels=labels or [], author=author,
+            star_count=star_count, repo_merge_rate=repo_merge_rate,
+            author_association=author_association,
+        )
+
+    @mcp.tool()
+    def coach_pr(
+        title: str,
+        repo: str,
+        body: str = "",
+        description: str = "",
+        author: str = "",
+        author_association: str = "NONE",
+        labels: list[str] | None = None,
+        star_count: int = 0,
+        repo_merge_rate: float = 0.0,
+    ) -> dict:
+        """Agent PR Dojo: 返回 pass/fail + checklist。
+
+        pass=true 表示可以提交，pass=false 表示有阻塞问题需先修复。
+        """
+        result = _analyze_pr(
+            title, description, repo, rr,
+            body=body, labels=labels or [], author=author,
+            star_count=star_count, repo_merge_rate=repo_merge_rate,
+            author_association=author_association,
+        )
+        result["pass"] = result["tier"] != "high_risk"
+        return result
+
+    @mcp.tool()
     def get_repo_profile(repo: str) -> dict:
-        """Return one Repo Profile by `org/name` (e.g. astral-sh/uv)."""
+        """返回仓库画像 (org/name)。"""
         p = profile_get(rr, repo)
         if p is None:
             return {"error": f"profile not found: {repo}"}
@@ -49,7 +85,7 @@ def _load_tools(repo_root: Path | None = None):
 
     @mcp.tool()
     def list_open_prs() -> list:
-        """List every PR Case Study with final_status=open."""
+        """列出所有 final_status=open 的 PR Case Study。"""
         out = []
         for c in iter_case_studies(rr):
             fm = c["frontmatter"]
@@ -59,52 +95,31 @@ def _load_tools(repo_root: Path | None = None):
                     "pr_number": fm.get("pr_number"),
                     "pr_url": fm.get("pr_url"),
                     "folder": c["folder"],
-                    "schema_version": fm.get("schema_version", "legacy v0.1"),
-                    "verified_at": fm.get("verified_at"),
                 })
         return out
 
     @mcp.tool()
     def get_case_study(repo: str, pr_number: int) -> dict:
-        """Return one PR Case Study by `org/name` + `pr_number`."""
+        """返回单个 PR Case Study。"""
         for c in iter_case_studies(rr):
             fm = c["frontmatter"]
             if (
                 fm.get("repo", "").strip("/").lower() == repo.strip("/").lower()
                 and str(fm.get("pr_number")) == str(pr_number)
             ):
-                return {
-                    "frontmatter": fm,
-                    "body": c["body"],
-                    "path": c["path"],
-                }
+                return {"frontmatter": fm, "body": c["body"], "path": c["path"]}
         return {"error": f"case study not found: {repo}#{pr_number}"}
 
     @mcp.tool()
     def schema_info() -> dict:
-        """Return supported schema versions + enum values."""
-        return schema_info()
-
-    @mcp.tool()
-    def eval_pr(title: str, description: str, repo: str) -> dict:
-        """评估 PR 成功率，检查反模式和成功模式"""
-        return eval_pr(title, description, repo, rr)
-
-    @mcp.tool()
-    def suggest_pr(title: str, description: str, repo: str) -> dict:
-        """生成改进建议"""
-        return suggest_pr(title, description, repo, rr)
+        """返回支持的 schema 版本和枚举值。"""
+        return _schema_info()
 
     return mcp
 
 
 def serve(repo_root: Path | None = None) -> int:
-    """Run stdio MCP server. Blocks until the host disconnects.
-
-    Args:
-        repo_root: Override the knowledge base location. If None, uses
-            the auto-detected default (parents[3] of this file).
-    """
+    """Run stdio MCP server. Blocks until the host disconnects."""
     mcp = _load_tools(repo_root=repo_root)
     mcp.run(transport="stdio")
     return 0

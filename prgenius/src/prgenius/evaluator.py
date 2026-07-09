@@ -79,7 +79,21 @@ ANTI_PATTERN_SEVERITY = {
 # ============================================================
 
 def is_bot_author(author: str) -> bool:
-    return author.lower().strip() in {a.lower() for a in BOT_AUTHORS}
+    """判断是否为 Bot 作者
+
+    规则优先级:
+    1. 白名单精确匹配
+    2. login 以 [bot] 结尾 → 确定是 bot
+    3. login 包含 -bot 或 _bot → 弱信号 (不单独使用)
+    """
+    login = author.lower().strip()
+    # 白名单
+    if login in {a.lower() for a in BOT_AUTHORS}:
+        return True
+    # 通用规则: [bot] 后缀
+    if login.endswith("[bot]"):
+        return True
+    return False
 
 
 def get_repo_size(star_count: int) -> str:
@@ -93,6 +107,40 @@ def get_repo_size(star_count: int) -> str:
 
 def check_issue_link(body: str) -> bool:
     return bool(ISSUE_LINK_RE.search(body))
+
+
+def _check_requires_dco(repo: str, repo_root: Path) -> Optional[bool]:
+    """检查仓库是否要求 DCO sign-off
+
+    返回:
+        True  — requires_dco: true
+        False — requires_dco: false
+        None  — 未找到 profile 或未声明
+    """
+    # 尝试加载仓库 profile
+    target_folder = repo.replace("/", "-").lower()
+    profile_dir = repo_root / target_folder
+    index_file = profile_dir / "index.md"
+    if not index_file.exists():
+        return None
+
+    try:
+        content = index_file.read_text(encoding="utf-8")
+        match = re.match(r"^---\s*\n(.*?)\n---", content, re.DOTALL)
+        if not match:
+            return None
+        # 简单搜索 requires_dco 字段
+        for line in match.group(1).split("\n"):
+            line = line.strip()
+            if line.startswith("requires_dco:") or line.startswith("require_signed_off:"):
+                value = line.split(":", 1)[1].strip().lower()
+                if value in ("true", "yes"):
+                    return True
+                elif value in ("false", "no"):
+                    return False
+        return None
+    except Exception:
+        return None
 
 
 def _parse_label(label: str) -> Tuple[str, str]:
@@ -272,22 +320,24 @@ def analyze_pr(
     signals_neu = []
     checklist = []
 
-    # ---- 1. Issue 关联检查 ----
-    has_issue_link = check_issue_link(body) if body else False
-    if has_issue_link:
-        signals_pos.append({"key": "issue_linked", "description": "PR body 包含 Issue 关联 (fixes/closes/resolves #NNN)"})
-    else:
-        signals_neg.append({
-            "key": "no_issue_link",
-            "description": "PR body 缺少 Issue 关联",
-            "severity": "high",
-        })
-        checklist.append({
-            "action": "add_issue_link",
-            "priority": "P0",
-            "done": False,
-            "hint": "在 body 中添加 `Fixes #NNN` 或 `Closes #NNN`，关联已有的 Issue",
-        })
+    # ---- 1. Issue 关联检查 (跳过 Bot) ----
+    is_bot = is_bot_author(author)
+    if not is_bot:
+        has_issue_link = check_issue_link(body) if body else False
+        if has_issue_link:
+            signals_pos.append({"key": "issue_linked", "description": "PR body 包含 Issue 关联 (fixes/closes/resolves #NNN)"})
+        else:
+            signals_neg.append({
+                "key": "no_issue_link",
+                "description": "PR body 缺少 Issue 关联",
+                "severity": "high",
+            })
+            checklist.append({
+                "action": "add_issue_link",
+                "priority": "P0",
+                "done": False,
+                "hint": "在 body 中添加 `Fixes #NNN` 或 `Closes #NNN`，关联已有的 Issue",
+            })
 
     # ---- 2. 反模式检测 ----
     anti_matches = check_anti_patterns(title, description, repo, repo_root, body=body)
@@ -338,7 +388,7 @@ def analyze_pr(
     assoc_upper = author_association.upper().strip()
     assoc_label = ASSOCIATION_LABELS.get(assoc_upper, assoc_upper)
 
-    if is_bot_author(author):
+    if is_bot:
         signals_neu.append({"key": "bot_author", "description": f"Bot PR ({author})"})
     elif assoc_upper == "OWNER":
         signals_pos.append({"key": "owner_author", "description": "仓库所有者提交，通常有更高合并率"})
@@ -375,7 +425,7 @@ def analyze_pr(
             signals_pos.append({"key": "lenient_repo", "description": f"该仓库近期 merge 率较高 ({repo_merge_rate:.0%})"})
 
     # ---- 6. Bot 特殊检查 ----
-    if is_bot_author(author):
+    if is_bot:
         # Bot PR 通常有 auto-merge，但小仓更可靠
         if star_count > 0 and star_count < 5000:
             signals_pos.append({"key": "bot_small_repo", "description": "小仓 Bot PR 通常配置了 auto-merge"})
@@ -387,19 +437,31 @@ def analyze_pr(
         })
 
     # ---- 7. 通用清单 ----
-    if not is_bot_author(author):
+    if not is_bot:
         checklist.append({
             "action": "ci_passing",
             "priority": "P1",
             "done": False,
             "hint": "确认 CI 全部通过",
         })
-        checklist.append({
-            "action": "dco_signoff",
-            "priority": "P1",
-            "done": False,
-            "hint": "使用 `git commit -s` 添加 DCO sign-off",
-        })
+
+        # DCO: 仓库感知
+        requires_dco = _check_requires_dco(repo, repo_root)
+        if requires_dco is True:
+            checklist.append({
+                "action": "dco_signoff",
+                "priority": "P1",
+                "done": False,
+                "hint": "使用 `git commit -s` 添加 DCO sign-off",
+            })
+        elif requires_dco is None:
+            # 未知仓库，降级为 P2 提醒
+            checklist.append({
+                "action": "dco_signoff",
+                "priority": "P2",
+                "done": False,
+                "hint": "确认是否需要 DCO sign-off (`git commit -s`)",
+            })
 
     # ---- 8. 计算 tier ----
     neg_critical = sum(1 for s in signals_neg if s.get("severity") in ("critical", "high"))
@@ -488,7 +550,10 @@ def predict_success_rate(
     author: str = "", star_count: int = 0,
     repo_merge_rate: float = 0.0, author_association: str = "NONE",
 ) -> Tuple[float, str]:
-    """内部兼容函数 — 仅供 cross_validate.py 使用"""
+    """Deprecated: 启发式校准函数，仅供 cross_validate.py 历史兼容使用。
+
+    不要在 CLI/MCP 中暴露。新代码应使用 analyze_pr() 或 coach_pr()。
+    """
     if labels is None:
         labels = []
 

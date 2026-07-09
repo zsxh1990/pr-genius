@@ -61,7 +61,13 @@ ANTI_PATTERN_SEVERITY = {
 # ============================================================
 
 def is_bot_author(author: str) -> bool:
-    return author.lower().strip() in {a.lower() for a in BOT_AUTHORS}
+    """判断是否为 Bot 作者 (白名单 + [bot] 后缀规则)"""
+    login = author.lower().strip()
+    if login in {a.lower() for a in BOT_AUTHORS}:
+        return True
+    if login.endswith("[bot]"):
+        return True
+    return False
 
 
 def get_repo_size(star_count: int) -> str:
@@ -72,6 +78,28 @@ def get_repo_size(star_count: int) -> str:
 
 def check_issue_link(body: str) -> bool:
     return bool(ISSUE_LINK_RE.search(body))
+
+
+def _check_requires_dco(repo: str) -> Optional[bool]:
+    """检查仓库是否要求 DCO (True/False/None=未知)"""
+    target_folder = repo.replace("/", "-").lower()
+    index_file = KNOWLEDGE_BASE / target_folder / "index.md"
+    if not index_file.exists():
+        return None
+    try:
+        content = index_file.read_text(encoding="utf-8")
+        match = re.match(r"^---\s*\n(.*?)\n---", content, re.DOTALL)
+        if not match:
+            return None
+        for line in match.group(1).split("\n"):
+            line = line.strip()
+            if line.startswith("requires_dco:") or line.startswith("require_signed_off:"):
+                value = line.split(":", 1)[1].strip().lower()
+                if value in ("true", "yes"): return True
+                elif value in ("false", "no"): return False
+        return None
+    except Exception:
+        return None
 
 
 def _parse_label(label: str) -> Tuple[str, str]:
@@ -184,14 +212,16 @@ def analyze_pr(
     signals_pos, signals_neg, signals_neu = [], [], []
     checklist = []
 
-    # 1. Issue 关联
-    has_issue_link = check_issue_link(body) if body else False
-    if has_issue_link:
-        signals_pos.append({"key": "issue_linked", "description": "PR body 包含 Issue 关联 (fixes/closes/resolves #NNN)"})
-    else:
-        signals_neg.append({"key": "no_issue_link", "description": "PR body 缺少 Issue 关联", "severity": "high"})
-        checklist.append({"action": "add_issue_link", "priority": "P0", "done": False,
-                          "hint": "在 body 中添加 `Fixes #NNN` 或 `Closes #NNN`"})
+    # 1. Issue 关联 (跳过 Bot)
+    is_bot = is_bot_author(author)
+    if not is_bot:
+        has_issue_link = check_issue_link(body) if body else False
+        if has_issue_link:
+            signals_pos.append({"key": "issue_linked", "description": "PR body 包含 Issue 关联 (fixes/closes/resolves #NNN)"})
+        else:
+            signals_neg.append({"key": "no_issue_link", "description": "PR body 缺少 Issue 关联", "severity": "high"})
+            checklist.append({"action": "add_issue_link", "priority": "P0", "done": False,
+                              "hint": "在 body 中添加 `Fixes #NNN` 或 `Closes #NNN`"})
 
     # 2. 反模式
     anti_matches = check_anti_patterns(title, description, repo, body=body)
@@ -221,7 +251,7 @@ def analyze_pr(
 
     # 4. 作者身份
     assoc_upper = author_association.upper().strip()
-    if is_bot_author(author):
+    if is_bot:
         signals_neu.append({"key": "bot_author", "description": f"Bot PR ({author})"})
     elif assoc_upper == "OWNER":
         signals_pos.append({"key": "owner_author", "description": "仓库所有者提交"})
@@ -251,9 +281,14 @@ def analyze_pr(
             signals_pos.append({"key": "lenient_repo", "description": f"该仓库 merge 率较高 ({repo_merge_rate:.0%})"})
 
     # 6. 通用清单
-    if not is_bot_author(author):
+    if not is_bot:
         checklist.append({"action": "ci_passing", "priority": "P1", "done": False, "hint": "确认 CI 全部通过"})
-        checklist.append({"action": "dco_signoff", "priority": "P1", "done": False, "hint": "使用 `git commit -s` 添加 DCO sign-off"})
+        # DCO: 仓库感知
+        requires_dco = _check_requires_dco(repo)
+        if requires_dco is True:
+            checklist.append({"action": "dco_signoff", "priority": "P1", "done": False, "hint": "使用 `git commit -s` 添加 DCO sign-off"})
+        elif requires_dco is None:
+            checklist.append({"action": "dco_signoff", "priority": "P2", "done": False, "hint": "确认是否需要 DCO sign-off (`git commit -s`)"})
 
     # 7. 计算 tier
     neg_critical = sum(1 for s in signals_neg if s.get("severity") in ("critical", "high"))
