@@ -11,6 +11,23 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-07-09
+
+### Fixed
+- **MCP surface rewrite**: `analyze_pr` / `coach_pr` 替代旧 `eval_pr` / `suggest_pr`
+  - 别名导入防止函数遮蔽 (`from .evaluator import analyze_pr as _analyze_pr`)
+  - 旧 `suggest_pr` 已从 MCP 移除（v1.0.0 后不再存在）
+
+### Changed
+- **DCO 仓库感知**: 从 profile 读取 `requires_dco` / `require_signed_off`
+  - `true` → P1 必做项
+  - `false` → 不提示
+  - 未声明 → P2 提醒
+- **Bot 检测升级**: 白名单 + `[bot]` 后缀通用规则
+  - `my-custom[bot]` 等未知 bot 也能正确识别
+  - Bot PR 跳过 issue link 检查
+- **predict_success_rate** docstring 标注 deprecated，仅供 cross_validate 历史兼容
+
 ## [1.1.0] - 2026-07-09
 
 ### Added

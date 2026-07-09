@@ -1,22 +1,19 @@
 ---
 type: Knowledge Bundle
-title: Big-Repo PR 知识库
-description: 大型开源项目（star ≥ 1k）PR 模式 + 经验沉淀，Agent 可读结构化数据
-version: 0.2.0
+title: PR Genius — 提交前改进顾问
+description: 大型开源项目 PR 知识库 + 提交前改进顾问，Agent 可读结构化数据
+version: 1.1.1
 created: 2026-07-01
-updated: 2026-07-02
+updated: 2026-07-09
 author: zsxh1990
-based_on:
-  - openclaw-pr-knowledge/report.md
-  - uv-pr-knowledge/report.md
 conforms_to: OKF v0.1 (Sudhakaran88/okf-conformance) + agent_guidelines extension
 ---
 
-# Big-Repo PR 知识库
+# PR Genius — 提交前改进顾问
 
-> 在大型开源项目（star ≥ 1k）上提 PR 的模式与经验沉淀。  
-> 收录对每个目标仓的**画像**（友好的维护者风格、提 PR 方向、SOP、反模式） + **单 PR 案例**（合并 / close / amend 完整链路）。  
-> 格式遵循 [Google Open Knowledge Format v0.1](https://github.com/Sudhakaran88/okf-conformance) —— 纯 Markdown + YAML frontmatter，路径即 ID，零运行时依赖。
+> 大型开源项目（star ≥ 1k）PR 知识库 + 提交前改进顾问。
+> **不是概率预测器，是贡献质量侧车。**
+> 格式遵循 [Google Open Knowledge Format v0.1](https://github.com/Sudhakaran88/okf-conformance)。
 
 ## 🤖 Robots / Agents (read this first)
 
@@ -55,15 +52,22 @@ Repo layout invariants:
 # Clone
 git clone https://github.com/zsxh1990/pr-genius.git
 cd pr-genius
+pip install -e prgenius/  # optional: install as package
+
+# 提交前分析 (主命令)
+python3 -m prgenius analyze "feat: add feature" --repo org/repo --body "Fixes #123"
+
+# Agent PR Dojo (exit 0=pass, 1=fail)
+python3 -m prgenius coach "feat: add feature" --repo org/repo --body "Fixes #123"
+
+# 被拒 PR → lesson/anti-pattern draft
+python3 -m prgenius harvest org/repo 123 --type lesson
+
+# 查看仓库画像
+python3 -m prgenius profile get Ikalus1988/MisakaNet
 
 # Validate
-python3 validate.py        # soft checks
-python3 validate.py --strict  # strict checks
-
-# Browse
-cat index.md               # root entry
-cat <org>-<repo>/index.md  # repo profile
-cat <org>-<repo>/pr-N-*.md # PR case study
+python3 validate.py --strict
 ```
 
 ## 📖 Contributing
@@ -91,15 +95,14 @@ when you open a PR.
 
 | Metric | Value |
 |---|---|
-| Repo profiles | 12 (incl. NousResearch/hermes-agent + agentic-community-mcp-gateway-registry) |
-| PR case studies | 12 (all migrated to v0.5.0 schema) |
-| Anti-patterns | 13 (incl. anti-patterns/README.md) |
+| Version | 1.1.1 |
+| Repo profiles | 21 (12 已提 PR + 9 大仓画像) |
+| Anti-patterns | 16 |
+| Success patterns | 11 |
 | Lessons (misakanet-50) | 11 |
-| Round-level evidence | 100% (16/16 across 11 cases: 11 round-1 opens + 4 amend rounds + 1 check-in) [v0.7.5 snapshot; post-12-cases refresh pending] |
-| Validator checks | 4 (frontmatter / links / consistency / rounds schema) |
+| Total .md files | 100 |
+| Validator checks | ✅ 0 errors |
 | OKF compliance | ✅ v0.1 |
-| Schema version | rounds v0.5.0 |
-| Latest release | v0.7.8 (2026-07-07; first PyPI publish via Trusted Publisher) |
 
 ## 这是什么 / 给谁看
 

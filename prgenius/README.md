@@ -1,19 +1,18 @@
 ---
 type: Schema Reference
 title: prgenius
-description: Evidence-backed lookup library for big-repo PR contributions — stdlib-first CLI + stdio MCP shell.
-version: 0.7.0
+description: PR Genius — 提交前改进顾问，stdlib-first CLI + stdio MCP shell
+version: 1.1.1
 created: 2026-07-04
-updated: 2026-07-05
+updated: 2026-07-09
 author: zsxh1990
 ---
 
 # prgenius
 
-**Evidence-backed lookup for big-repo PR contributions. Local-only. Stdlib-first.**
+**PR Genius — 提交前改进顾问。Local-only. Stdlib-first.**
 
-A pure-Python (zero hard deps) library + CLI that reads the markdown knowledge
-base in this repo and exposes it through structured tool calls.
+A pure-Python (zero hard deps) library + CLI for PR contribution quality analysis.
 
 ## Install
 
@@ -87,24 +86,29 @@ for case in iter_case_studies("path/to/repo_root"):
 
 ## What's exposed
 
-| Tool | Description |
+| Command | Description |
 |---|---|
-| `prgenius profile get <org/name>` | One Repo Profile (frontmatter + first lines) |
-| `prgenius case list [--status=...]` | All PR Case Study rows |
-| `prgenius schema info` | Supported schema versions + enums |
-| `prgenius dump` | NDJSON dump (one case per line) |
-| `prgenius mcp serve` | Stdio MCP server (4 tools) |
+| `prgenius analyze "title" --repo org/repo` | 提交前改进建议 (三档风险) |
+| `prgenius coach "title" --repo org/repo` | Agent PR Dojo (exit 0=pass, 1=fail) |
+| `prgenius harvest org/repo 123` | 被拒 PR → anti-pattern/lesson draft |
+| `prgenius profile get <org/name>` | 仓库画像 |
+| `prgenius case list [--status=...]` | PR Case Study 列表 |
+| `prgenius schema info` | Schema 版本 |
+| `prgenius dump` | NDJSON dump |
+| `prgenius mcp serve` | Stdio MCP server |
 
 ## MCP surface (when `mcp` is installed)
 
-The MCP shell exposes 4 tools to local agents:
+6 tools for local agents:
 
-- `get_repo_profile(repo)` — one Profile dict
-- `list_open_prs()` — currently-open PRs
-- `get_case_study(repo, pr_number)` — one Case Study
-- `schema_info()` — schema versions + enums
+- `analyze_pr(title, repo, body, ...)` — 结构化信号 + 建议 + 三档风险
+- `coach_pr(title, repo, body, ...)` — pass/fail + checklist
+- `get_repo_profile(repo)` — 仓库画像
+- `list_open_prs()` — open PR 列表
+- `get_case_study(repo, pr_number)` — PR 案例
+- `schema_info()` — schema 版本
 
-No network, no auth, no rate-limiting. Agent calls go through stdio only.
+No network, no auth. Stdio only.
 
 ### `--repo-root` flag
 
