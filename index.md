@@ -2,9 +2,9 @@
 type: Knowledge Bundle
 title: Big-Repo PR 知识库
 description: zsxh1990 已提 PR 的大仓（star ≥ 1k）PR 模式 + 经验沉淀，按 Google Open Knowledge Format (OKF v0.1) 组织
-version: 0.3.0
+version: 1.1.0
 created: 2026-07-01
-updated: 2026-07-02
+updated: 2026-07-09
 author: zsxh1990
 based_on:
   - openclaw-pr-knowledge/report.md
@@ -25,24 +25,53 @@ federated_at: 2026-07-02
 
 ---
 
-## 🎯 8 个目标仓（按 PR 价值排序）
+## 🎯 目标仓 + 大仓画像
 
-| # | 仓 | Star | zsxh1990 PR 现状 | 文档 |
+### 已提 PR 的仓
+
+| # | 仓 | Star | 状态 | 文档 |
 |---|---|---|---|---|
-| 1 | [astral-sh/uv](https://github.com/astral-sh/uv) | 86.9k | ✅ #19685 closed（已合并可能）+ AI 友好 | [astral-sh-uv/index.md](./astral-sh-uv/index.md) |
-| 2 | [plastic-labs/honcho](https://github.com/plastic-labs/honcho) | 5.6k | 🟢 #801 open，CodeRabbit 已审 | [plastic-labs-honcho/index.md](./plastic-labs-honcho/index.md) |
-| 3 | [harbor-framework/harbor](https://github.com/harbor-framework/harbor) | 2.8k | 🟢 #2121 open，Vercel + Devin 已审 | [harbor-framework-harbor/index.md](./harbor-framework-harbor/index.md) |
-| 4 | [punkpeye/fastmcp](https://github.com/punkpeye/fastmcp) | 3.2k | 🟢 #282 open，已修 Prettier | [punkpeye-fastmcp/index.md](./punkpeye-fastmcp/index.md) |
-| 5 | [sourcebot-dev/sourcebot](https://github.com/sourcebot-dev/sourcebot) | 3.5k | 🟢 #1383 open，CodeRabbit 已审 | [sourcebot-dev-sourcebot/index.md](./sourcebot-dev-sourcebot/index.md) |
-| 6 | [future-agi/future-agi](https://github.com/future-agi/future-agi) | 1.2k | 🟢 #778 open + 提案人亲自 check-in | [future-agi-future-agi/index.md](./future-agi-future-agi/index.md) |
-| 7 | [qdrant/mcp-server-qdrant](https://github.com/qdrant/mcp-server-qdrant) | 1.4k | 🟢 #143 open 26 天（⚠️ stale） | [qdrant-mcp-server-qdrant/index.md](./qdrant-mcp-server-qdrant/index.md) |
-| 8 | [e2b-dev/E2B](https://github.com/e2b-dev/E2B) | 12.7k | ❌ _ERROR_HANDLER 关 + 1413 已合并 | [e2b-dev-e2b/index.md](./e2b-dev-e2b/index.md) |
-| 9 | [agentic-community/mcp-gateway-registry](https://github.com/agentic-community/mcp-gateway-registry) | 765 | 🟢 #1382 + #1383 docs mermaid fix | [agentic-community-mcp-gateway-registry/index.md](./agentic-community-mcp-gateway-registry/index.md) |
-| 10 | [mongodb-js/mongodb-mcp-server](https://github.com/mongodb-js/mongodb-mcp-server) | 1.1k | 🟢 #1309 docs typo，jira 内肍 | [mongodb-js-mongodb-mcp-server/index.md](./mongodb-js-mongodb-mcp-server/index.md) |
-| 11 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 208k (hub) | ⚪ 未提 PR，仅画像存在 | [NousResearch-hermes-agent/index.md](./NousResearch-hermes-agent/index.md) |
+| 1 | [astral-sh/uv](https://github.com/astral-sh/uv) | 87k | ✅ #19685 | [astral-sh-uv/index.md](./astral-sh-uv/index.md) |
+| 2 | [plastic-labs/honcho](https://github.com/plastic-labs/honcho) | 5.6k | 🟢 #801 | [plastic-labs-honcho/index.md](./plastic-labs-honcho/index.md) |
+| 3 | [harbor-framework/harbor](https://github.com/harbor-framework/harbor) | 2.8k | 🟢 #2121 | [harbor-framework-harbor/index.md](./harbor-framework-harbor/index.md) |
+| 4 | [punkpeye/fastmcp](https://github.com/punkpeye/fastmcp) | 3.2k | 🟢 #282 | [punkpeye-fastmcp/index.md](./punkpeye-fastmcp/index.md) |
+| 5 | [sourcebot-dev/sourcebot](https://github.com/sourcebot-dev/sourcebot) | 3.5k | 🟢 #1383 | [sourcebot-dev-sourcebot/index.md](./sourcebot-dev-sourcebot/index.md) |
+| 6 | [future-agi/future-agi](https://github.com/future-agi/future-agi) | 1.2k | 🟢 #778 | [future-agi-future-agi/index.md](./future-agi-future-agi/index.md) |
+| 7 | [qdrant/mcp-server-qdrant](https://github.com/qdrant/mcp-server-qdrant) | 1.4k | 🟢 #143 | [qdrant-mcp-server-qdrant/index.md](./qdrant-mcp-server-qdrant/index.md) |
+| 8 | [e2b-dev/E2B](https://github.com/e2b-dev/E2B) | 12.7k | ❌ 教训 | [e2b-dev-e2b/index.md](./e2b-dev-e2b/index.md) |
+| 9 | [agentic-community/mcp-gateway-registry](https://github.com/agentic-community/mcp-gateway-registry) | 765 | ✅ #1382/#1383 | [agentic-community-mcp-gateway-registry/index.md](./agentic-community-mcp-gateway-registry/index.md) |
+| 10 | [mongodb-js/mongodb-mcp-server](https://github.com/mongodb-js/mongodb-mcp-server) | 1.1k | 🟢 #1309 | [mongodb-js-mongodb-mcp-server/index.md](./mongodb-js-mongodb-mcp-server/index.md) |
+| 11 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 208k | ⚪ 仅画像 | [NousResearch-hermes-agent/index.md](./NousResearch-hermes-agent/index.md) |
+| 12 | [Ikalus1988/MisakaNet](https://github.com/Ikalus1988/MisakaNet) | — | 🟢 federation peer | [Ikalus1988-MisakaNet/index.md](./Ikalus1988-MisakaNet/index.md) |
+
+### 大仓画像（交叉验证用）
+
+| 仓 | Star | 文档 |
+|---|---|---|
+| langchain-ai/langchain | 141k | [langchain-ai-langchain/index.md](./langchain-ai-langchain/index.md) |
+| yt-dlp/yt-dlp | 177k | [yt-dlp-yt-dlp/index.md](./yt-dlp-yt-dlp/index.md) |
+| microsoft/markitdown | 164k | [microsoft-markitdown/index.md](./microsoft-markitdown/index.md) |
+| langchain-ai/langgraph | 37k | [langchain-ai-langgraph/index.md](./langchain-ai-langgraph/index.md) |
+| onyx-dot-app/onyx | 31k | [onyx-dot-app-onyx/index.md](./onyx-dot-app-onyx/index.md) |
+| danny-avila/LibreChat | 40k | [danny-avila-LibreChat/index.md](./danny-avila-LibreChat/index.md) |
+| goreleaser/nfpm | 2.6k | [goreleaser-nfpm/index.md](./goreleaser-nfpm/index.md) |
+| python-jsonschema/jsonschema | 5k | [python-jsonschema-jsonschema/index.md](./python-jsonschema-jsonschema/index.md) |
+| woodruffw/zizmor | 5.8k | [woodruffw-zizmor/index.md](./woodruffw-zizmor/index.md) |
 
 > 🟢 = open / ✅ = merged / ❌ = 关闭但有教训 / ⚠️ = 需关注  
 > **OpenClaw 单独走自己的知识库**（已在 [openclaw-pr-knowledge/](../openclaw-pr-knowledge/README.md)），不计入本 bundle。
+
+---
+
+## 🛠️ 工具
+
+| 工具 | 用途 | 命令 |
+|------|------|------|
+| **analyze** | 提交前改进建议 | `python3 -m prgenius analyze "title" --repo org/repo --body "..."` |
+| **coach** | Agent PR Dojo (exit 0/1) | `python3 -m prgenius coach "title" --repo org/repo --body "..."` |
+| **harvest** | 被拒 PR → lesson/anti-pattern | `python3 scripts/harvest.py org/repo 123` |
+| **eval** | 兼容旧命令 (三档) | `python3 -m prgenius eval "title" --repo org/repo` |
+| **cross_validate** | 交叉验证 | `python3 scripts/cross_validate.py --all` |
 
 ---
 

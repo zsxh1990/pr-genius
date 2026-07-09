@@ -298,6 +298,26 @@ def cmd_suggest(args) -> int:
     return cmd_analyze(args)
 
 
+def cmd_harvest(args) -> int:
+    """从被拒 PR 提取反模式/lesson draft"""
+    import subprocess
+    repo_root = _get_repo_root(args)
+    harvest_script = repo_root / "scripts" / "harvest.py"
+    if not harvest_script.exists():
+        print(f"harvest script not found: {harvest_script}", file=sys.stderr)
+        return 1
+
+    cmd = [sys.executable, str(harvest_script), args.repo_or_url]
+    if args.number:
+        cmd.append(str(args.number))
+    if args.type:
+        cmd.extend(["--type", args.type])
+    if args.output:
+        cmd.extend(["--output", args.output])
+
+    return subprocess.call(cmd)
+
+
 def cmd_mcp_serve(args) -> int:
     from .mcp import serve
     repo_root = _get_repo_root(args)
@@ -372,6 +392,14 @@ def main(argv: list[str] | None = None) -> int:
     sg.add_argument("--author-association", default="NONE", help="作者身份")
     sg.add_argument("--format", "-f", choices=["text", "json"], default="text", help="输出格式")
     sg.set_defaults(func=cmd_suggest)
+
+    # ---- harvest ----
+    hv = sub.add_parser("harvest", help="从被拒 PR 提取 anti-pattern/lesson draft")
+    hv.add_argument("repo_or_url", help="org/repo 或 PR URL")
+    hv.add_argument("number", nargs="?", type=int, help="PR number")
+    hv.add_argument("--type", "-t", choices=["anti-pattern", "lesson"], default="anti-pattern", help="输出类型")
+    hv.add_argument("--output", "-o", help="输出文件路径")
+    hv.set_defaults(func=cmd_harvest)
 
     # ---- profile ----
     p_get = sub.add_parser("profile", help="Profile operations")

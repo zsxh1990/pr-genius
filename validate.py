@@ -75,6 +75,10 @@ def check_frontmatter(files: list[Path]) -> None:
             "Community Resource",  # GitHub templates + community files (CONTRIBUTING/CHANGELOG/COC/LICENSE)
             "Research Report",     # research/<project>/report.md
             "Roadmap",             # docs/ROADMAP.md, docs/METRICS.md — measurable goals
+            "Success Pattern",     # success-patterns/*.md
+            "Success Pattern Bundle",  # success-patterns/README.md
+            "Skill",               # skill/skill.md
+            "Retrospective",       # docs/rejected-pr-retrospective.md
         }:
             warnings.append(
                 f"{f.relative_to(ROOT)}: unknown type `{fm['type']}`"

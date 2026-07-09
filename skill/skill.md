@@ -1,7 +1,8 @@
 ---
+type: Skill
 name: pr-genius
 description: PR 评估和建议工具 — 基于历史反模式和成功模式
-version: 1.0.0
+version: 1.1.0
 author: zsxh1990
 ---
 

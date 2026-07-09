@@ -11,6 +11,37 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-07-09
+
+### Added
+- **coach** command (Agent PR Dojo): `python3 -m prgenius coach "title" --repo org/repo`
+  - exit 0 = pass (低风险/中风险), exit 1 = fail (高风险)
+  - `--format json` for bot/agent consumption
+- **harvest** script: `python3 scripts/harvest.py org/repo 123`
+  - 从被拒 PR 自动提取 anti-pattern/lesson draft
+  - 支持 `--type lesson` (MisakaNet 风格) 和 `--type anti-pattern`
+  - 自动检测 self-close (作者自己关闭) via events API
+- Ikalus1988-MisakaNet repo profile
+- validate.py accepts Success Pattern, Skill, Retrospective types
+- index.md updated with tools section + all 21 repos
+
+### Fixed
+- skill/skill.md: added missing `type: Skill` field
+- validate.py --strict now passes (0 errors)
+
+### Changed
+- Version unified to 1.1.0 across __init__.py, pyproject.toml, CHANGELOG
+
+## [1.0.0] - 2026-07-09
+
+### Changed (BREAKING)
+- **从"合并概率预测器"转为"提交前改进顾问"**
+- 新增 `analyze` 命令: 结构化信号 + 可操作建议 + 三档风险 (🟢低/🟡中/🔴高)
+- `eval` 降级为三档，不再显示百分比
+- 砍掉成功模式匹配从评分中移除（语义太粗，泛化差）
+- 反模式检测 + 标签信号 + author 历史 → 直接输出 actionable 建议
+- `predict_success_rate` 保留为内部兼容函数仅供 cross_validate 使用
+
 ## [0.8.0] - 2026-07-09
 
 ### Added — Evaluator v0.4.0 (P3/P4/P6)
