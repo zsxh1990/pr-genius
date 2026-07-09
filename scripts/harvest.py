@@ -69,9 +69,24 @@ def fetch_labels(repo: str, pr_number: int) -> list:
     return [l["name"] for l in data.get("labels", [])]
 
 
-def extract_close_reason(pr: dict, comments: list, reviews: list) -> str:
+def fetch_events(repo: str, pr_number: int) -> list:
+    data = gh_api(f"https://api.github.com/repos/{repo}/issues/{pr_number}/events")
+    return data if data else []
+
+
+def extract_close_reason(pr: dict, comments: list, reviews: list, events: list = None) -> str:
     """从 PR 数据中提取关闭原因"""
     reasons = []
+    if events is None:
+        events = []
+
+    # 检查是否作者自己关闭 (通过 events API)
+    pr_author = pr.get("user", {}).get("login", "")
+    for event in events:
+        if event.get("event") == "closed":
+            closer = event.get("actor", {}).get("login", "")
+            if closer == pr_author:
+                return f"作者 @{pr_author} 自己关闭了 PR"
 
     # 检查标签
     labels = [l["name"] for l in pr.get("labels", [])]
@@ -262,11 +277,12 @@ def main():
     comments = fetch_comments(repo, pr_number)
     reviews = fetch_reviews(repo, pr_number)
     labels = fetch_labels(repo, pr_number)
+    events = fetch_events(repo, pr_number)
 
     # 补充 labels 到 pr
     pr["labels"] = [{"name": l} for l in labels]
 
-    close_reason = extract_close_reason(pr, comments, reviews)
+    close_reason = extract_close_reason(pr, comments, reviews, events)
 
     print(f"📋 关闭原因: {close_reason}", file=sys.stderr)
 
