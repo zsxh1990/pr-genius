@@ -74,8 +74,8 @@ THRESHOLD_MED = 0.35         # "中" 阈值（从 0.4 降到 0.35）
 ASSOCIATION_BOOST: Dict[str, float] = {
     "OWNER": 0.40,        # OWNER PR 几乎必定 merged
     "MEMBER": 0.25,       # MEMBER PR 通常 merged
-    "COLLABORATOR": 0.10, # COLLABORATOR 有合入权限但不一定 merge
-    "CONTRIBUTOR": 0.02,  # 有历史，极轻微加分
+    "COLLABORATOR": 0.15, # COLLABORATOR 有合入权限（v0.4.0=0.20, v0.4.2=0.10, 回调到中间值）
+    "CONTRIBUTOR": 0.04,  # 有历史，轻微加分（v0.4.0=0.05, v0.4.2=0.02, 回调到中间值）
     "NONE": 0.0,          # 外部贡献者，不加不减
 }
 
@@ -451,13 +451,13 @@ def predict_success_rate(
     elif raw_boost > 0 and repo_merge_rate > 0:
         # 严选型仓库（merge 率低）→ boost 打折
         # merge_rate >= 0.7 → scale 1.0, merge_rate <= 0.2 → scale 0.25
-        scale = max(0.25, min(1.0, (repo_merge_rate - 0.2) / 0.5))
+        scale = max(0.50, min(1.0, (repo_merge_rate - 0.2) / 0.5))
         base_rate += raw_boost * scale
     else:
         base_rate += raw_boost
 
-    # 大仓外部贡献者惩罚：star > 50k 且 NONE → -0.10
-    if assoc_upper == "NONE" and star_count > 50000:
+    # 大仓外部贡献者惩罚：star > 20k 且 NONE → -0.10
+    if assoc_upper == "NONE" and star_count > 20000:
         base_rate -= 0.10
 
     # 反模式惩罚

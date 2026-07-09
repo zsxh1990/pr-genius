@@ -75,8 +75,8 @@ THRESHOLD_MED = 0.35
 ASSOCIATION_BOOST = {
     "OWNER": 0.40,
     "MEMBER": 0.25,
-    "COLLABORATOR": 0.10,
-    "CONTRIBUTOR": 0.02,
+    "COLLABORATOR": 0.15,
+    "CONTRIBUTOR": 0.04,
     "NONE": 0.0,
 }
 
@@ -353,13 +353,13 @@ def predict_success_rate(
     if assoc_upper == "OWNER":
         base_rate += raw_boost
     elif raw_boost > 0 and repo_merge_rate > 0:
-        scale = max(0.25, min(1.0, (repo_merge_rate - 0.2) / 0.5))
+        scale = max(0.50, min(1.0, (repo_merge_rate - 0.2) / 0.5))
         base_rate += raw_boost * scale
     else:
         base_rate += raw_boost
 
-    # 大仓外部贡献者惩罚：star > 50k 且 NONE → -0.10
-    if assoc_upper == "NONE" and star_count > 50000:
+    # 大仓外部贡献者惩罚：star > 20k 且 NONE → -0.10
+    if assoc_upper == "NONE" and star_count > 20000:
         base_rate -= 0.10
 
     for match in anti_matches:
