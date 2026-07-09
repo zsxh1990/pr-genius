@@ -29,10 +29,10 @@ created: 2026-07-09
 | Ikalus1988/MisakaNet | #184 | 联邦原型 | 06-10 | 核心功能 |
 | Ikalus1988/MisakaNet | #155 | asyncio.Lock 门控 | 06-08 | 性能优化 |
 | Ikalus1988/MisakaNet | #147 | 滑动窗口审计 | 06-04 | 核心功能 |
-| casys-kaist/LLMServingSim | #38 | 文档 | 06-10 | 文档贡献 |
-| konoeph/AgentClaimGuard | #8 | LangChain adapter | 06-16 | 集成贡献 |
+| casys-kaist/LLMServingSim | #38 | per-instance 配置文档 | 06-10 | 文档贡献 |
+| konoeph/AgentClaimGuard | #8 | LangChain middleware | 06-16 | 功能贡献 |
 | EXboys/evotown | #103 | 时区修复 | 06-04 | Bug 修复 |
-| proompteng/bilig | #441 | 文档路径修复 | 06-06 | Bug 修复 |
+| proompteng/bilig | #441 | 绝对路径→相对路径 | 06-06 | 文档修复 |
 | gambletan/cortex | #12 | memory-tiers guide | 06-13 | 文档贡献 |
 
 ## 核心成功模式
