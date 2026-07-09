@@ -358,6 +358,10 @@ def predict_success_rate(
     else:
         base_rate += raw_boost
 
+    # 大仓外部贡献者惩罚：star > 50k 且 NONE → -0.10
+    if assoc_upper == "NONE" and star_count > 50000:
+        base_rate -= 0.10
+
     for match in anti_matches:
         key = match["key"]
         if "cosmetic" in key:
