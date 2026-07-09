@@ -12,15 +12,15 @@ author: zsxh1990
 
 ## 安装
 
-### Claude Code
+### 一键安装（推荐）
 
 ```bash
-# 方式 1: 全局安装
-claude skill install github:zsxh1990/pr-genius/skill
+# 克隆仓库
+git clone https://github.com/zsxh1990/pr-genius.git
 
-# 方式 2: 项目内安装
-cd your-project
-claude skill add github:zsxh1990/pr-genius/skill
+# 运行安装脚本
+cd pr-genius
+./skill/install.sh
 ```
 
 ### 手动安装
@@ -29,8 +29,17 @@ claude skill add github:zsxh1990/pr-genius/skill
 # 克隆仓库
 git clone https://github.com/zsxh1990/pr-genius.git
 
-# 复制 skill 文件到你的项目
-cp -r pr-genius/skill ~/.claude/skills/pr-genius
+# 复制 skill 文件到 Claude Code skills 目录
+mkdir -p ~/.claude/skills/pr-genius
+cp pr-genius/skill/pr_genius.py ~/.claude/skills/pr-genius/
+cp pr-genius/skill/skill.md ~/.claude/skills/pr-genius/SKILL.md
+
+# 复制知识库
+cp -r pr-genius/anti-patterns ~/.claude/skills/pr-genius/
+cp -r pr-genius/success-patterns ~/.claude/skills/pr-genius/
+
+# 创建符号链接到知识库
+ln -sf $(pwd)/pr-genius ~/.claude/skills/pr-genius/knowledge-base
 ```
 
 ## 使用
