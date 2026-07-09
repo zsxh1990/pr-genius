@@ -384,6 +384,19 @@ def main():
     ep.add_argument("--repo-merge-rate", type=float, default=0.0)
     ep.add_argument("--author-association", default="NONE")
 
+    # coach (Agent PR Dojo)
+    ch = subparsers.add_parser("coach", help="Agent PR Dojo — exit 0=pass, exit 1=fail")
+    ch.add_argument("title")
+    ch.add_argument("--description", "-d", default="")
+    ch.add_argument("--body", "-b", default="")
+    ch.add_argument("--repo", "-r", required=True)
+    ch.add_argument("--labels", "-l", nargs="*", default=[])
+    ch.add_argument("--author", "-a", default="")
+    ch.add_argument("--star-count", type=int, default=0)
+    ch.add_argument("--repo-merge-rate", type=float, default=0.0)
+    ch.add_argument("--author-association", default="NONE")
+    ch.add_argument("--format", "-f", choices=["text", "json"], default="text")
+
     # describe
     dp = subparsers.add_parser("describe", help="生成 PR 描述模板")
     dp.add_argument("title")
@@ -424,6 +437,44 @@ def main():
             print("### 📋 建议")
             for item in analysis["checklist"]:
                 if not item["done"]: print(f"- **[{item['priority']}]** {item['hint']}")
+
+    elif args.command == "coach":
+        result = analyze_pr(
+            args.title, args.description, args.repo,
+            body=args.body, labels=args.labels, author=args.author,
+            star_count=args.star_count, repo_merge_rate=args.repo_merge_rate,
+            author_association=args.author_association,
+        )
+        tier = result["tier"]
+        icon = TIER_ICONS.get(tier, "⚪")
+        label = TIER_LABELS.get(tier, tier)
+        passed = tier != "high_risk"
+
+        if args.format == "json":
+            result["pass"] = passed
+            result["exit_code"] = 0 if passed else 1
+            import json as _json
+            print(_json.dumps(result, indent=2, ensure_ascii=False))
+        else:
+            status = "✅ PASS" if passed else "❌ FAIL"
+            print(f"{icon} {status} — {label}\n")
+            if result["signals"]["negative"]:
+                for s in result["signals"]["negative"]:
+                    sev = s.get("severity", "")
+                    sev_icon = {"critical": "🚨", "high": "⚠️", "medium": "📋"}.get(sev, "•")
+                    print(f"  {sev_icon} {s['description']}")
+                    if s.get("fix_action"): print(f"     → {s['fix_action']}")
+                print()
+            undone = [c for c in result["checklist"] if not c["done"]]
+            if undone:
+                print("📋 待修复:")
+                for item in undone: print(f"  [{item['priority']}] {item['hint']}")
+                print()
+            if passed:
+                print("可以提交，但建议先完成上述 checklist。")
+            else:
+                print("请先修复上述问题再提交。")
+        sys.exit(0 if passed else 1)
 
     elif args.command == "describe":
         print(f"## PR 描述\n### 标题\n{args.title}\n### 描述\n{args.description}\n")

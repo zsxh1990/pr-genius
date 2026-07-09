@@ -119,6 +119,66 @@ def cmd_analyze(args) -> int:
 
 
 # ============================================================
+# coach — Agent PR Dojo (exit code = pass/fail)
+# ============================================================
+
+def cmd_coach(args) -> int:
+    """Agent PR Dojo: analyze + exit code 表示 pass/fail
+
+    exit 0 = 通过 (低风险/中风险)
+    exit 1 = 不通过 (高风险)，Agent 应先修复再提交
+    """
+    repo_root = _get_repo_root(args)
+    labels = args.labels if args.labels else []
+
+    result = analyze_pr(
+        args.title, args.description or "", args.repo, repo_root,
+        body=args.body or "", labels=labels, author=args.author or "",
+        star_count=args.star_count or 0, repo_merge_rate=args.repo_merge_rate or 0.0,
+        author_association=args.author_association or "NONE",
+    )
+
+    tier = result["tier"]
+    icon = TIER_ICONS.get(tier, "⚪")
+    label = TIER_LABELS.get(tier, tier)
+
+    if args.format == "json":
+        # JSON 输出: 加 pass/fail 字段
+        result["pass"] = tier != "high_risk"
+        result["exit_code"] = 0 if tier != "high_risk" else 1
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+    else:
+        # 人类可读
+        passed = tier != "high_risk"
+        status = "✅ PASS" if passed else "❌ FAIL"
+        print(f"{icon} {status} — {label}\n")
+
+        if result["signals"]["negative"]:
+            for s in result["signals"]["negative"]:
+                sev = s.get("severity", "")
+                sev_icon = {"critical": "🚨", "high": "⚠️", "medium": "📋"}.get(sev, "•")
+                print(f"  {sev_icon} {s['description']}")
+                if s.get("fix_action"):
+                    print(f"     → {s['fix_action']}")
+            print()
+
+        if result["checklist"]:
+            undone = [c for c in result["checklist"] if not c["done"]]
+            if undone:
+                print("📋 待修复:")
+                for item in undone:
+                    print(f"  [{item['priority']}] {item['hint']}")
+                print()
+
+        if passed:
+            print("可以提交，但建议先完成上述 checklist。")
+        else:
+            print("请先修复上述问题再提交。")
+
+    return 0 if tier != "high_risk" else 1
+
+
+# ============================================================
 # eval — 兼容旧命令，降级为三档
 # ============================================================
 
@@ -284,6 +344,20 @@ def main(argv: list[str] | None = None) -> int:
     ev.add_argument("--repo-merge-rate", type=float, default=0.0, help="仓库 merge 率")
     ev.add_argument("--author-association", default="NONE", help="作者身份")
     ev.set_defaults(func=cmd_eval)
+
+    # ---- coach (Agent PR Dojo) ----
+    ch = sub.add_parser("coach", help="Agent PR Dojo — exit 0=pass, exit 1=fail")
+    ch.add_argument("title", help="PR 标题")
+    ch.add_argument("--description", "-d", default="", help="PR 描述")
+    ch.add_argument("--body", "-b", default="", help="PR body")
+    ch.add_argument("--repo", "-r", required=True, help="目标仓库 (org/repo)")
+    ch.add_argument("--labels", "-l", nargs="*", default=[], help="PR 标签")
+    ch.add_argument("--author", "-a", default="", help="PR 作者")
+    ch.add_argument("--star-count", type=int, default=0, help="仓库 star 数")
+    ch.add_argument("--repo-merge-rate", type=float, default=0.0, help="仓库 merge 率")
+    ch.add_argument("--author-association", default="NONE", help="作者身份")
+    ch.add_argument("--format", "-f", choices=["text", "json"], default="text", help="输出格式")
+    ch.set_defaults(func=cmd_coach)
 
     # ---- suggest (兼容) ----
     sg = sub.add_parser("suggest", help="获取改进建议 (同 analyze)")
