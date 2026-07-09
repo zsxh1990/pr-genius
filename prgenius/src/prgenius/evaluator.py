@@ -74,8 +74,8 @@ THRESHOLD_MED = 0.35         # "中" 阈值（从 0.4 降到 0.35）
 ASSOCIATION_BOOST: Dict[str, float] = {
     "OWNER": 0.40,        # OWNER PR 几乎必定 merged
     "MEMBER": 0.25,       # MEMBER PR 通常 merged
-    "COLLABORATOR": 0.20, # COLLABORATOR PR 大概率 merged
-    "CONTRIBUTOR": 0.05,  # 有历史，轻微加分
+    "COLLABORATOR": 0.10, # COLLABORATOR 有合入权限但不一定 merge
+    "CONTRIBUTOR": 0.02,  # 有历史，极轻微加分
     "NONE": 0.0,          # 外部贡献者，不加不减
 }
 
@@ -343,6 +343,7 @@ def check_success_patterns(
         factors = pattern.get("success_factors", [])
         if isinstance(factors, list):
             match_count = 0
+            non_issue_match = False  # 至少一个非 issue 语义 factor 匹配
             for factor in factors:
                 factor_keywords = set(re.findall(r'\w+', factor.lower()))
 
@@ -356,11 +357,28 @@ def check_success_patterns(
                     # 否则不计分（之前会因为 "fix" 子串匹配而误加分）
                 else:
                     # 非 Issue 关联的 factor，用 full_text（含 body）匹配
-                    if any(kw in full_text for kw in factor_keywords):
+                    # 过滤掉过于泛化的关键词
+                    generic_keywords = {"pr", "the", "a", "an", "is", "are", "was", "were",
+                                        "be", "been", "being", "have", "has", "had", "do",
+                                        "does", "did", "will", "would", "could", "should",
+                                        "may", "might", "can", "shall", "of", "in", "on",
+                                        "at", "to", "for", "with", "by", "from", "as", "into",
+                                        "through", "during", "before", "after", "above", "below",
+                                        "between", "out", "off", "over", "under", "again",
+                                        "further", "then", "once", "and", "but", "or", "nor",
+                                        "not", "so", "very", "just", "than", "too", "also",
+                                        "new", "use", "used", "using", "add", "added", "adding",
+                                        "的", "中", "了", "是", "在", "有", "和", "与"}
+                    meaningful_kws = factor_keywords - generic_keywords
+                    # 过滤纯数字（避免 "3" 匹配 "13425"）
+                    meaningful_kws = {kw for kw in meaningful_kws if not kw.isdigit()}
+                    if meaningful_kws and any(kw in full_text for kw in meaningful_kws):
                         match_count += 1
+                        non_issue_match = True
 
-            # 阈值 0.5（P0 的核心改进是 issue-linked 正则，不是阈值）
-            if match_count >= len(factors) * 0.5:
+            # 阈值 0.5，且必须至少有一个非 issue 语义 factor 匹配
+            # （防止仅有 fixes #NNN 就匹配成功模式）
+            if match_count >= len(factors) * 0.5 and non_issue_match:
                 matches.append({
                     "key": key,
                     "description": pattern.get("description", ""),
@@ -424,9 +442,19 @@ def predict_success_rate(
     # 基础成功率（动态基线）
     base_rate = dynamic_base
 
-    # P3: author_association 加权
+    # P3: author_association 加权（严选型仓库打折）
     assoc_upper = author_association.upper().strip()
-    base_rate += ASSOCIATION_BOOST.get(assoc_upper, 0.0)
+    raw_boost = ASSOCIATION_BOOST.get(assoc_upper, 0.0)
+    if assoc_upper == "OWNER":
+        # OWNER 几乎不受仓库风格影响（自己合自己）
+        base_rate += raw_boost
+    elif raw_boost > 0 and repo_merge_rate > 0:
+        # 严选型仓库（merge 率低）→ boost 打折
+        # merge_rate >= 0.7 → scale 1.0, merge_rate <= 0.2 → scale 0.25
+        scale = max(0.25, min(1.0, (repo_merge_rate - 0.2) / 0.5))
+        base_rate += raw_boost * scale
+    else:
+        base_rate += raw_boost
 
     # 反模式惩罚
     for match in anti_matches:
@@ -448,9 +476,9 @@ def predict_success_rate(
         else:
             base_rate -= 0.15  # 通用反模式惩罚
 
-    # 成功模式加成（封顶 +0.12，P6 降权）
+    # 成功模式加成（封顶 +0.08，进一步降权）
     if success_matches:
-        base_rate += min(0.12, len(success_matches) * 0.03)
+        base_rate += min(0.08, len(success_matches) * 0.02)
 
     # P1: 标签信号
     label_adj = compute_label_score(labels)

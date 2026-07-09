@@ -126,7 +126,7 @@ def evaluate_pr(pr: dict, repo: str, star_count: int, repo_merge_rate: float = 0
     )
 
     # 判断预测结果
-    predicted_merged = rate >= 0.50  # 阈值：50% 以上预测 merged
+    predicted_merged = rate > 0.50  # 阈值：strict > 50% 预测 merged
     actual_merged = merged
 
     return {

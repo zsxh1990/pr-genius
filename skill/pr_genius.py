@@ -75,8 +75,8 @@ THRESHOLD_MED = 0.35
 ASSOCIATION_BOOST = {
     "OWNER": 0.40,
     "MEMBER": 0.25,
-    "COLLABORATOR": 0.20,
-    "CONTRIBUTOR": 0.05,
+    "COLLABORATOR": 0.10,
+    "CONTRIBUTOR": 0.02,
     "NONE": 0.0,
 }
 
@@ -273,6 +273,7 @@ def check_success_patterns(
         factors = pattern.get("success_factors", [])
         if isinstance(factors, list):
             match_count = 0
+            non_issue_match = False
             for factor in factors:
                 factor_keywords = set(re.findall(r'\w+', factor.lower()))
                 has_issue_semantic = bool(factor_keywords & issue_semantic_keywords)
@@ -281,11 +282,25 @@ def check_success_patterns(
                     if body and check_issue_link(body):
                         match_count += 1
                 else:
-                    if any(kw in full_text for kw in factor_keywords):
+                    generic_keywords = {"pr", "the", "a", "an", "is", "are", "was", "were",
+                                        "be", "been", "being", "have", "has", "had", "do",
+                                        "does", "did", "will", "would", "could", "should",
+                                        "may", "might", "can", "shall", "of", "in", "on",
+                                        "at", "to", "for", "with", "by", "from", "as", "into",
+                                        "through", "during", "before", "after", "above", "below",
+                                        "between", "out", "off", "over", "under", "again",
+                                        "further", "then", "once", "and", "but", "or", "nor",
+                                        "not", "so", "very", "just", "than", "too", "also",
+                                        "new", "use", "used", "using", "add", "added", "adding",
+                                        "的", "中", "了", "是", "在", "有", "和", "与"}
+                    meaningful_kws = factor_keywords - generic_keywords
+                    meaningful_kws = {kw for kw in meaningful_kws if not kw.isdigit()}
+                    if meaningful_kws and any(kw in full_text for kw in meaningful_kws):
                         match_count += 1
+                        non_issue_match = True
 
-            # 阈值 0.5
-            if match_count >= len(factors) * 0.5:
+            # 阈值 0.5，且必须至少有一个非 issue 语义 factor 匹配
+            if match_count >= len(factors) * 0.5 and non_issue_match:
                 matches.append({
                     "key": key,
                     "description": pattern.get("description", ""),
@@ -332,9 +347,16 @@ def predict_success_rate(
 
     base_rate = dynamic_base
 
-    # P3: author_association 加权
+    # P3: author_association 加权（严选型仓库打折）
     assoc_upper = author_association.upper().strip()
-    base_rate += ASSOCIATION_BOOST.get(assoc_upper, 0.0)
+    raw_boost = ASSOCIATION_BOOST.get(assoc_upper, 0.0)
+    if assoc_upper == "OWNER":
+        base_rate += raw_boost
+    elif raw_boost > 0 and repo_merge_rate > 0:
+        scale = max(0.25, min(1.0, (repo_merge_rate - 0.2) / 0.5))
+        base_rate += raw_boost * scale
+    else:
+        base_rate += raw_boost
 
     for match in anti_matches:
         key = match["key"]
@@ -355,9 +377,9 @@ def predict_success_rate(
         else:
             base_rate -= 0.15
 
-    # 成功模式加成（封顶 +0.12，P6 降权）
+    # 成功模式加成（封顶 +0.08，进一步降权）
     if success_matches:
-        base_rate += min(0.12, len(success_matches) * 0.03)
+        base_rate += min(0.08, len(success_matches) * 0.02)
 
     # P1: 标签信号
     label_adj = compute_label_score(labels)
