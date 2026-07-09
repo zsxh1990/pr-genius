@@ -5,6 +5,7 @@ Usage examples (run from repo root):
     python3 -m prgenius case list --status=open
     python3 -m prgenius schema info
     python3 -m prgenius dump --format=ndjson  > cases.ndjson
+    python3 -m prgenius eval "fix: update deps" --repo langchain-ai/langchain --author "dependabot[bot]" --labels "dependencies"
     python3 -m prgenius mcp serve  # stdio MCP shell
 """
 from __future__ import annotations
@@ -100,11 +101,33 @@ def cmd_dump(args) -> int:
 def cmd_eval(args) -> int:
     """评估 PR"""
     repo_root = _get_repo_root(args)
-    result = eval_pr(args.title, args.description, args.repo, repo_root)
+    labels = args.labels if args.labels else []
+    result = eval_pr(
+        args.title, args.description, args.repo, repo_root,
+        body=args.body or "",
+        labels=labels,
+        author=args.author or "",
+        star_count=args.star_count or 0,
+        repo_merge_rate=args.repo_merge_rate or 0.0,
+    )
 
     output = []
     output.append("## PR 评估结果\n")
+
+    # Bot 标记
+    if result.get("is_bot"):
+        output.append("🤖 **Bot PR** — 走独立评估通道\n\n")
+
     output.append(f"### 成功率预测: {result['success_rate']:.0%} ({result['success_level']})\n")
+
+    # 标签信号
+    if result.get("labels"):
+        from .evaluator import compute_label_score
+        label_score = compute_label_score(result["labels"])
+        if label_score != 0:
+            signal = "正面" if label_score > 0 else "负面"
+            output.append(f"### 标签信号: {signal} ({label_score:+.0f} 分)\n")
+            output.append(f"标签: {', '.join(result['labels'])}\n\n")
 
     # 反模式命中
     if result['anti_patterns']:
@@ -142,7 +165,13 @@ def cmd_eval(args) -> int:
 def cmd_suggest(args) -> int:
     """生成改进建议"""
     repo_root = _get_repo_root(args)
-    result = suggest_pr(args.title, args.description, args.repo, repo_root)
+    labels = args.labels if args.labels else []
+    result = suggest_pr(
+        args.title, args.description, args.repo, repo_root,
+        body=args.body or "",
+        labels=labels,
+        author=args.author or "",
+    )
 
     output = []
     output.append("## 改进建议\n")
@@ -192,16 +221,26 @@ def main(argv: list[str] | None = None) -> int:
     dmp = sub.add_parser("dump", help="NDJSON dump of all cases (for benchmarks)")
     dmp.set_defaults(func=cmd_dump)
 
+    # eval 命令 — 新增 --body, --labels, --author, --star-count
     ev = sub.add_parser("eval", help="评估 PR")
     ev.add_argument("title", help="PR 标题")
     ev.add_argument("--description", "-d", default="", help="PR 描述")
+    ev.add_argument("--body", "-b", default="", help="PR body (完整内容)")
     ev.add_argument("--repo", "-r", required=True, help="目标仓库 (org/repo)")
+    ev.add_argument("--labels", "-l", nargs="*", default=[], help="PR 标签列表")
+    ev.add_argument("--author", "-a", default="", help="PR 作者")
+    ev.add_argument("--star-count", type=int, default=0, help="仓库 star 数")
+    ev.add_argument("--repo-merge-rate", type=float, default=0.0, help="仓库历史 merge 率 (0-1)")
     ev.set_defaults(func=cmd_eval)
 
+    # suggest 命令 — 同样新增参数
     sg = sub.add_parser("suggest", help="获取改进建议")
     sg.add_argument("title", help="PR 标题")
     sg.add_argument("--description", "-d", default="", help="PR 描述")
+    sg.add_argument("--body", "-b", default="", help="PR body")
     sg.add_argument("--repo", "-r", required=True, help="目标仓库 (org/repo)")
+    sg.add_argument("--labels", "-l", nargs="*", default=[], help="PR 标签列表")
+    sg.add_argument("--author", "-a", default="", help="PR 作者")
     sg.set_defaults(func=cmd_suggest)
 
     m_serve = sub.add_parser("mcp", help="MCP server (stdio)")
