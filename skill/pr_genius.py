@@ -102,6 +102,28 @@ def _check_requires_dco(repo: str) -> Optional[bool]:
         return None
 
 
+def _check_require_issue_first(repo: str) -> Optional[bool]:
+    """检查仓库是否要求先 Issue 后 PR (True/False/None=未知)"""
+    target_folder = repo.replace("/", "-").lower()
+    index_file = KNOWLEDGE_BASE / target_folder / "index.md"
+    if not index_file.exists():
+        return None
+    try:
+        content = index_file.read_text(encoding="utf-8")
+        match = re.match(r"^---\s*\n(.*?)\n---", content, re.DOTALL)
+        if not match:
+            return None
+        for line in match.group(1).split("\n"):
+            line = line.strip()
+            if line.startswith("require_issue_first:"):
+                value = line.split(":", 1)[1].strip().lower()
+                if value in ("true", "yes"): return True
+                elif value in ("false", "no"): return False
+        return None
+    except Exception:
+        return None
+
+
 def _parse_label(label: str) -> Tuple[str, str]:
     label_lower = label.lower().strip()
     if label_lower in LABEL_SIGNALS:
@@ -212,16 +234,24 @@ def analyze_pr(
     signals_pos, signals_neg, signals_neu = [], [], []
     checklist = []
 
-    # 1. Issue 关联 (跳过 Bot)
+    # 1. Issue 关联 (跳过 Bot, 仓库感知)
     is_bot = is_bot_author(author)
+    require_issue_first = _check_require_issue_first(repo)
+
     if not is_bot:
         has_issue_link = check_issue_link(body) if body else False
         if has_issue_link:
             signals_pos.append({"key": "issue_linked", "description": "PR body 包含 Issue 关联 (fixes/closes/resolves #NNN)"})
         else:
-            signals_neg.append({"key": "no_issue_link", "description": "PR body 缺少 Issue 关联", "severity": "high"})
-            checklist.append({"action": "add_issue_link", "priority": "P0", "done": False,
-                              "hint": "在 body 中添加 `Fixes #NNN` 或 `Closes #NNN`"})
+            if require_issue_first is True:
+                signals_neg.append({"key": "no_issue_link", "description": "PR body 缺少 Issue 关联（该仓库要求先 Issue 后 PR）", "severity": "high"})
+                checklist.append({"action": "add_issue_link", "priority": "P0", "done": False,
+                                  "hint": "在 body 中添加 `Fixes #NNN` 或 `Closes #NNN`"})
+            elif require_issue_first is None:
+                signals_neu.append({"key": "no_issue_link_hint", "description": "PR body 未包含 Issue 关联，建议确认是否需要"})
+                checklist.append({"action": "add_issue_link", "priority": "P2", "done": False,
+                                  "hint": "建议在 body 中添加 Issue 关联（如果仓库要求）"})
+            # require_issue_first = False → 不提示
 
     # 2. 反模式
     anti_matches = check_anti_patterns(title, description, repo, body=body)
