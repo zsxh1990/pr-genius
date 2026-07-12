@@ -323,6 +323,7 @@ def analyze_pr(
     star_count: int = 0,
     repo_merge_rate: float = 0.0,
     author_association: str = "NONE",
+    mergeable: str = "MERGEABLE",
 ) -> dict:
     """分析 PR 并生成结构化改进建议
 
@@ -350,6 +351,20 @@ def analyze_pr(
     signals_neg = []
     signals_neu = []
     checklist = []
+
+    # ---- 0. 合并冲突检查 ----
+    if mergeable and mergeable.upper() == "CONFLICTING":
+        signals_neg.append({
+            "key": "merge_conflict",
+            "description": "PR 有合并冲突，需要 rebase 或解决冲突",
+            "severity": "high",
+        })
+        checklist.append({
+            "action": "resolve_conflicts",
+            "priority": "P0",
+            "done": False,
+            "hint": "解决合并冲突后 force push",
+        })
 
     # ---- 1. Issue 关联检查 (跳过 Bot, 仓库感知) ----
     is_bot = is_bot_author(author)

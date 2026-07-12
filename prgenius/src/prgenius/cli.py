@@ -51,6 +51,7 @@ def cmd_analyze(args) -> int:
         body=args.body or "", labels=labels, author=args.author or "",
         star_count=args.star_count or 0, repo_merge_rate=args.repo_merge_rate or 0.0,
         author_association=args.author_association or "NONE",
+        mergeable=args.mergeable or "MERGEABLE",
     )
 
     if args.format == "json":
@@ -136,6 +137,7 @@ def cmd_coach(args) -> int:
         body=args.body or "", labels=labels, author=args.author or "",
         star_count=args.star_count or 0, repo_merge_rate=args.repo_merge_rate or 0.0,
         author_association=args.author_association or "NONE",
+        mergeable=args.mergeable or "MERGEABLE",
     )
 
     tier = result["tier"]
@@ -349,6 +351,8 @@ def main(argv: list[str] | None = None) -> int:
     an.add_argument("--repo-merge-rate", type=float, default=0.0, help="仓库 merge 率 (0-1)")
     an.add_argument("--author-association", default="NONE",
                     help="作者身份 (NONE/CONTRIBUTOR/COLLABORATOR/MEMBER/OWNER)")
+    an.add_argument("--mergeable", default="MERGEABLE",
+                    help="合并状态 (MERGEABLE/CONFLICTING/UNKNOWN)")
     an.add_argument("--format", "-f", choices=["text", "json"], default="text", help="输出格式")
     an.set_defaults(func=cmd_analyze)
 
@@ -376,6 +380,7 @@ def main(argv: list[str] | None = None) -> int:
     ch.add_argument("--star-count", type=int, default=0, help="仓库 star 数")
     ch.add_argument("--repo-merge-rate", type=float, default=0.0, help="仓库 merge 率")
     ch.add_argument("--author-association", default="NONE", help="作者身份")
+    ch.add_argument("--mergeable", default="MERGEABLE", help="合并状态 (MERGEABLE/CONFLICTING/UNKNOWN)")
     ch.add_argument("--format", "-f", choices=["text", "json"], default="text", help="输出格式")
     ch.set_defaults(func=cmd_coach)
 

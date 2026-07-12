@@ -228,11 +228,17 @@ def analyze_pr(
     body: str = "", labels: Optional[List[str]] = None,
     author: str = "", star_count: int = 0,
     repo_merge_rate: float = 0.0, author_association: str = "NONE",
+    mergeable: str = "MERGEABLE",
 ) -> dict:
     if labels is None: labels = []
 
     signals_pos, signals_neg, signals_neu = [], [], []
     checklist = []
+
+    # 0. 合并冲突检查
+    if mergeable and mergeable.upper() == "CONFLICTING":
+        signals_neg.append({"key": "merge_conflict", "description": "PR 有合并冲突，需要 rebase 或解决冲突", "severity": "high"})
+        checklist.append({"action": "resolve_conflicts", "priority": "P0", "done": False, "hint": "解决合并冲突后 force push"})
 
     # 1. Issue 关联 (跳过 Bot, 仓库感知)
     is_bot = is_bot_author(author)
@@ -460,6 +466,7 @@ def main():
     ch.add_argument("--star-count", type=int, default=0)
     ch.add_argument("--repo-merge-rate", type=float, default=0.0)
     ch.add_argument("--author-association", default="NONE")
+    ch.add_argument("--mergeable", default="MERGEABLE", help="合并状态 (MERGEABLE/CONFLICTING/UNKNOWN)")
     ch.add_argument("--format", "-f", choices=["text", "json"], default="text")
 
     # describe
@@ -509,6 +516,7 @@ def main():
             body=args.body, labels=args.labels, author=args.author,
             star_count=args.star_count, repo_merge_rate=args.repo_merge_rate,
             author_association=args.author_association,
+            mergeable=args.mergeable,
         )
         tier = result["tier"]
         icon = TIER_ICONS.get(tier, "⚪")
