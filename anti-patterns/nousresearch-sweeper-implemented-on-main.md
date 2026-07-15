@@ -4,7 +4,7 @@ key: nousresearch-sweeper-implemented-on-main
 description: "NousResearch PR 已在 main 实现"
 symptom: "标签包含 sweeper: implemented-on-main"
 trigger_keywords:
-  - ""
+  - "sweeper implemented on main"
 fix_action: "检查 main 分支最新代码"
 source_pr: "NousResearch/hermes-agent#53124"
 severity: medium

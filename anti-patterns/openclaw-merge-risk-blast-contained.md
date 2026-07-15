@@ -4,7 +4,7 @@ key: openclaw-merge-risk-blast-contained
 description: "OpenClaw PR 影响范围可控"
 symptom: "标签包含 sweeper: blast-contained"
 trigger_keywords:
-  - ""
+  - "merge risk blast contained"
 fix_action: "保持影响范围可控"
 source_pr: "NousResearch/hermes-agent#52865"
 severity: low

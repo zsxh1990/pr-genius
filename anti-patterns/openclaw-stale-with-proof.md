@@ -4,7 +4,7 @@ key: openclaw-stale-with-proof
 description: "OpenClaw PR 有 proof 但被标记 stale"
 symptom: "标签包含 stale 和 proof: supplied"
 trigger_keywords:
-  - ""
+  - "stale with proof"
 fix_action: "定期更新 PR"
 source_pr: "openclaw/openclaw#87304"
 severity: medium

@@ -4,7 +4,7 @@ key: openclaw-merge-risk-caching
 description: "OpenClaw PR 涉及缓存风险"
 symptom: "标签包含 merge-risk: risk-caching"
 trigger_keywords:
-  - ""
+  - "merge risk caching"
 fix_action: "测试缓存一致性"
 source_pr: "NousResearch/hermes-agent#53213"
 severity: medium

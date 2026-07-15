@@ -4,7 +4,7 @@ key: nousresearch-sweeper-blast-moderate
 description: "NousResearch PR 影响范围中等"
 symptom: "标签包含 sweeper: blast-moderate"
 trigger_keywords:
-  - ""
+  - "sweeper blast moderate"
 fix_action: "控制影响范围"
 source_pr: "NousResearch/hermes-agent#52958"
 severity: medium

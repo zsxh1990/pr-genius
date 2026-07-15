@@ -4,7 +4,7 @@ key: nousresearch-sweeper-risk-caching
 description: "NousResearch PR 涉及缓存风险"
 symptom: "标签包含 sweeper: risk-caching"
 trigger_keywords:
-  - ""
+  - "sweeper risk caching"
 fix_action: "测试缓存一致性"
 source_pr: "NousResearch/hermes-agent#53213"
 severity: medium
