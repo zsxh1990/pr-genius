@@ -1,0 +1,31 @@
+{
+  "id": "astral-sh-uv-20480",
+  "repo": "astral-sh/uv",
+  "pr_number": 20480,
+  "title": "Rebase conflicted pull requests in an isolated job",
+  "author": "zanieb",
+  "state": "MERGED",
+  "merged": true,
+  "category": "merged_success",
+  "created_at": "2026-07-16T18:43:27Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "files_changed": 1,
+    "additions": 57,
+    "deletions": 4,
+    "review_count": 0,
+    "comment_count": 0
+  },
+  "metrics": {
+    "files_changed": 1,
+    "additions": 57,
+    "deletions": 4
+  }
+}

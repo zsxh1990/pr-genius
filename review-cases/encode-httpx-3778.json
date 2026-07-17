@@ -1,0 +1,31 @@
+{
+  "id": "encode-httpx-3778",
+  "repo": "encode/httpx",
+  "pr_number": 3778,
+  "title": "Refactor `map_httpcore_exceptions` to not be a context manager",
+  "author": "akx",
+  "state": "OPEN",
+  "merged": false,
+  "category": "open_pending",
+  "created_at": "2026-02-24T15:14:52Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": true,
+    "files_changed": 1,
+    "additions": 37,
+    "deletions": 30,
+    "review_count": 0,
+    "comment_count": 0
+  },
+  "metrics": {
+    "files_changed": 1,
+    "additions": 37,
+    "deletions": 30
+  }
+}

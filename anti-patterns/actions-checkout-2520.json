@@ -1,0 +1,31 @@
+{
+  "id": "actions-checkout-2520",
+  "repo": "actions/checkout",
+  "pr_number": 2520,
+  "title": "Backport #2518 to releases/v2–v6: skip unsafe PR check on default checkout",
+  "author": "app/copilot-swe-agent",
+  "state": "CLOSED",
+  "merged": false,
+  "category": "closed_rejected",
+  "created_at": "2026-07-15T14:45:17Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": true,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "files_changed": 0,
+    "additions": 0,
+    "deletions": 0,
+    "review_count": 0,
+    "comment_count": 0
+  },
+  "metrics": {
+    "files_changed": 0,
+    "additions": 0,
+    "deletions": 0
+  }
+}

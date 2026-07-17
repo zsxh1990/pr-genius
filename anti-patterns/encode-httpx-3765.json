@@ -1,0 +1,31 @@
+{
+  "id": "encode-httpx-3765",
+  "repo": "encode/httpx",
+  "pr_number": 3765,
+  "title": "docs: use canonical Requests docs URL",
+  "author": "droppingbeans",
+  "state": "CLOSED",
+  "merged": false,
+  "category": "closed_rejected",
+  "created_at": "2026-02-18T00:21:27Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": true,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "files_changed": 1,
+    "additions": 1,
+    "deletions": 1,
+    "review_count": 0,
+    "comment_count": 1
+  },
+  "metrics": {
+    "files_changed": 1,
+    "additions": 1,
+    "deletions": 1
+  }
+}

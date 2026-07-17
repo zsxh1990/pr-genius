@@ -1,0 +1,31 @@
+{
+  "id": "astral-sh-uv-20483",
+  "repo": "astral-sh/uv",
+  "pr_number": 20483,
+  "title": "Further compact cached distribution metadata",
+  "author": "charliermarsh",
+  "state": "MERGED",
+  "merged": true,
+  "category": "merged_success",
+  "created_at": "2026-07-16T18:56:58Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "files_changed": 10,
+    "additions": 304,
+    "deletions": 78,
+    "review_count": 0,
+    "comment_count": 5
+  },
+  "metrics": {
+    "files_changed": 10,
+    "additions": 304,
+    "deletions": 78
+  }
+}

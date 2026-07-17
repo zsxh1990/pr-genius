@@ -1,0 +1,31 @@
+{
+  "id": "hashicorp-terraform-38874",
+  "repo": "hashicorp/terraform",
+  "pr_number": 38874,
+  "title": "docs: Fix typo in CONTRIBUTING.md (seperate → separate)",
+  "author": "deejcnd-8",
+  "state": "CLOSED",
+  "merged": false,
+  "category": "closed_already_done",
+  "created_at": "2026-07-14T11:22:22Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": true,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "files_changed": 1,
+    "additions": 3,
+    "deletions": 0,
+    "review_count": 0,
+    "comment_count": 2
+  },
+  "metrics": {
+    "files_changed": 1,
+    "additions": 3,
+    "deletions": 0
+  }
+}

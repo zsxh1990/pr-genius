@@ -1,0 +1,31 @@
+{
+  "id": "actions-checkout-2524",
+  "repo": "actions/checkout",
+  "pr_number": 2524,
+  "title": "backport fixes to releases-v4",
+  "author": "aiqiaoy",
+  "state": "MERGED",
+  "merged": true,
+  "category": "merged_success",
+  "created_at": "2026-07-16T18:20:18Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "files_changed": 3,
+    "additions": 144,
+    "deletions": 19,
+    "review_count": 1,
+    "comment_count": 0
+  },
+  "metrics": {
+    "files_changed": 3,
+    "additions": 144,
+    "deletions": 19
+  }
+}
