@@ -79,6 +79,7 @@ def check_frontmatter(files: list[Path]) -> None:
             "Success Pattern Bundle",  # success-patterns/README.md
             "Skill",               # skill/skill.md
             "Retrospective",       # docs/rejected-pr-retrospective.md
+            "Test Report",         # docs/coach-smoke-test-*.md
         }:
             warnings.append(
                 f"{f.relative_to(ROOT)}: unknown type `{fm['type']}`"

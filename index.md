@@ -57,8 +57,24 @@ federated_at: 2026-07-02
 | goreleaser/nfpm | 2.6k | [goreleaser-nfpm/index.md](./goreleaser-nfpm/index.md) |
 | python-jsonschema/jsonschema | 5k | [python-jsonschema-jsonschema/index.md](./python-jsonschema-jsonschema/index.md) |
 | woodruffw/zizmor | 5.8k | [woodruffw-zizmor/index.md](./woodruffw-zizmor/index.md) |
+| encode/httpx | 15k | [encode-httpx/index.md](./encode-httpx/index.md) |
+| actions/checkout | 8.5k | [actions-checkout/index.md](./actions-checkout/index.md) |
+| pydantic/pydantic | 28k | [pydantic-pydantic/index.md](./pydantic-pydantic/index.md) |
+| tailwindlabs/tailwindcss | 96k | [tailwindlabs-tailwindcss/index.md](./tailwindlabs-tailwindcss/index.md) |
+| huggingface/transformers | 163k | [huggingface-transformers/index.md](./huggingface-transformers/index.md) |
+| hashicorp/terraform | 49k | [hashicorp-terraform/index.md](./hashicorp-terraform/index.md) |
+| grafana/grafana | 76k | [grafana-grafana/index.md](./grafana-grafana/index.md) |
+| kubernetes/kubernetes | 124k | [kubernetes-kubernetes/index.md](./kubernetes-kubernetes/index.md) |
+| docker/compose | 38k | [docker-compose/index.md](./docker-compose/index.md) |
+| cli/cli | 45k | [cli-cli/index.md](./cli-cli/index.md) |
+| openai/openai-python | 31k | [openai-openai-python/index.md](./openai-openai-python/index.md) |
+| rust-lang/rust | 115k | [rust-lang-rust/index.md](./rust-lang-rust/index.md) |
+| facebook/react | 247k | [facebook-react/index.md](./facebook-react/index.md) |
+| fastapi/fastapi | 101k | [fastapi-fastapi/index.md](./fastapi-fastapi/index.md) |
+| chroma-core/chroma | 29k | [chroma-core-chroma/index.md](./chroma-core-chroma/index.md) |
+| qdrant/qdrant | 33k | [qdrant-qdrant/index.md](./qdrant-qdrant/index.md) |
 
-> 🟢 = open / ✅ = merged / ❌ = 关闭但有教训 / ⚠️ = 需关注  
+> 🟢 = open / ✅ = merged / ❌ = 关闭但有教训 / ⚠️ = 需关注
 > **OpenClaw 单独走自己的知识库**（已在 [openclaw-pr-knowledge/](../openclaw-pr-knowledge/README.md)），不计入本 bundle。
 
 ---

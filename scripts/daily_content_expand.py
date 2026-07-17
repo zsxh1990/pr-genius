@@ -139,24 +139,46 @@ def _classify_pr(pr: dict) -> str:
 
 
 def _extract_signals(pr: dict, repo: str) -> dict:
-    """Extract learning signals from a PR."""
+    """Extract learning signals from a PR.
+
+    Includes both text-based signals (from title/body) and metadata-based
+    signals (from PR stats) to avoid all-False cases for bot PRs.
+    """
     body = pr.get("body", "") or ""
     title = pr.get("title", "") or ""
+    title_lower = title.lower()
+    body_lower = body.lower()
+
+    files = pr.get("changedFiles", 0)
+    additions = pr.get("additions", 0)
+    deletions = pr.get("deletions", 0)
+    total_changes = additions + deletions
 
     signals = {
-        "has_issue_link": "fixes #" in body.lower() or "closes #" in body.lower(),
+        # Text-based signals
+        "has_issue_link": "fixes #" in body_lower or "closes #" in body_lower or "fixes https://" in body_lower,
         "has_description": len(body) > 100,
-        "has_test_mention": any(w in body.lower() for w in ["test", "spec", "coverage"]),
-        "has_breaking_change": any(w in title.lower() for w in ["breaking", "major", "v2"]),
-        "is_docs_only": any(w in title.lower() for w in ["docs", "readme", "documentation"]),
-        "is_bug_fix": any(w in title.lower() for w in ["fix", "bug", "patch", "hotfix"]),
-        "is_feature": any(w in title.lower() for w in ["feat", "feature", "add"]),
-        "is_refactor": any(w in title.lower() for w in ["refactor", "clean", "chore"]),
-        "files_changed": pr.get("changedFiles", 0),
-        "additions": pr.get("additions", 0),
-        "deletions": pr.get("deletions", 0),
+        "has_test_mention": any(w in body_lower for w in ["test", "spec", "coverage"]),
+        "has_breaking_change": any(w in title_lower for w in ["breaking", "major", "v2"]),
+        "is_docs_only": any(w in title_lower for w in ["docs", "readme", "documentation", ".md"]),
+        "is_bug_fix": any(w in title_lower for w in ["fix", "bug", "patch", "hotfix"]),
+        "is_feature": any(w in title_lower for w in ["feat", "feature", "add", "support"]),
+        "is_refactor": any(w in title_lower for w in ["refactor", "clean", "chore", "perf"]),
+        # Metadata-based signals (always have value)
+        "is_small_pr": files <= 3 and total_changes < 50,
+        "is_large_pr": files > 10 or total_changes > 500,
+        "is_backport": "backport" in title_lower or "release" in title_lower,
+        "is_dependency_update": any(w in title_lower for w in ["bump", "update", "upgrade", "dependabot"]),
+        "is_bot_pr": any(w in title_lower for w in ["dependabot", "renovate", "bot", "auto-", "[ci"]),
+        "has_reviews": len(pr.get("reviews", [])) > 0,
+        "has_comments": len(pr.get("comments", [])) > 0,
+        # Numeric metrics
+        "files_changed": files,
+        "additions": additions,
+        "deletions": deletions,
         "review_count": len(pr.get("reviews", [])),
         "comment_count": len(pr.get("comments", [])),
+        "change_ratio": round(deletions / max(additions, 1), 2),  # >1 = net deletion
     }
 
     return signals
