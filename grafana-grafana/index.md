@@ -9,6 +9,7 @@ status: research-only
 analyzed_at: 2026-07-15
 data_source: coach smoke test analysis
 agent_guidelines:
+  external_merge_rate: 0.67
   allow_unsolicited_pr: true
   require_signed_off: false
   require_cla: false

@@ -18,6 +18,7 @@ related:
   - ./pr-19685-sarif-audit.md
 agent_guidelines:
   allow_unsolicited_pr: true
+  external_merge_rate: 0.93
   require_signed_off: false
   require_cla: false
   require_changeset: false

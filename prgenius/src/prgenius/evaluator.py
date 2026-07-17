@@ -486,6 +486,10 @@ def analyze_pr(
             signals_neu.append({"key": "strict_repo", "description": f"该仓库近期 merge 率较低 ({repo_merge_rate:.0%})，审查严格"})
         elif repo_merge_rate > 0.8:
             signals_pos.append({"key": "lenient_repo", "description": f"该仓库近期 merge 率较高 ({repo_merge_rate:.0%})"})
+            # High merge rate offsets big repo penalty
+            if star_count > 20000:
+                # Remove the "first_contributor_large_repo" negative signal if present
+                signals_neg[:] = [s for s in signals_neg if s.get("key") != "first_contributor_large_repo"]
 
     # ---- 6. Bot 特殊检查 ----
     if is_bot:
