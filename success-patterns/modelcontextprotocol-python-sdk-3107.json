@@ -1,0 +1,39 @@
+{
+  "id": "modelcontextprotocol-python-sdk-3107",
+  "repo": "modelcontextprotocol/python-sdk",
+  "pr_number": 3107,
+  "title": "docs: make API reference rendering independent of page order",
+  "author": "maxisbey",
+  "state": "MERGED",
+  "merged": true,
+  "category": "merged_success",
+  "created_at": "2026-07-16T17:25:19Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": true,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": true,
+    "files_changed": 6,
+    "additions": 146,
+    "deletions": 35,
+    "review_count": 1,
+    "comment_count": 1,
+    "change_ratio": 0.24
+  },
+  "metrics": {
+    "files_changed": 6,
+    "additions": 146,
+    "deletions": 35
+  }
+}

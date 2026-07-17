@@ -1,0 +1,39 @@
+{
+  "id": "modelcontextprotocol-python-sdk-3118",
+  "repo": "modelcontextprotocol/python-sdk",
+  "pr_number": 3118,
+  "title": "fix(server): generate tool output schema in serialization mode",
+  "author": "jayzuccarelli",
+  "state": "OPEN",
+  "merged": false,
+  "category": "review_approved_pending",
+  "created_at": "2026-07-17T03:53:10Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": false,
+    "files_changed": 2,
+    "additions": 78,
+    "deletions": 3,
+    "review_count": 2,
+    "comment_count": 0,
+    "change_ratio": 0.04
+  },
+  "metrics": {
+    "files_changed": 2,
+    "additions": 78,
+    "deletions": 3
+  }
+}

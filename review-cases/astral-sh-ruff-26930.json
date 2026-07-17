@@ -1,0 +1,39 @@
+{
+  "id": "astral-sh-ruff-26930",
+  "repo": "astral-sh/ruff",
+  "pr_number": 26930,
+  "title": "Add missing period in `RUF200` \"Why is this bad?\" documentation portion",
+  "author": "jonathandung",
+  "state": "OPEN",
+  "merged": false,
+  "category": "open_pending",
+  "created_at": "2026-07-17T08:50:07Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": true,
+    "is_bug_fix": false,
+    "is_feature": true,
+    "is_refactor": false,
+    "is_small_pr": true,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 1,
+    "additions": 1,
+    "deletions": 1,
+    "review_count": 0,
+    "comment_count": 1,
+    "change_ratio": 1.0
+  },
+  "metrics": {
+    "files_changed": 1,
+    "additions": 1,
+    "deletions": 1
+  }
+}

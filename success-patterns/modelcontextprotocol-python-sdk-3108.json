@@ -1,0 +1,39 @@
+{
+  "id": "modelcontextprotocol-python-sdk-3108",
+  "repo": "modelcontextprotocol/python-sdk",
+  "pr_number": 3108,
+  "title": "docs: load media examples from disk instead of inline base64",
+  "author": "maxisbey",
+  "state": "MERGED",
+  "merged": true,
+  "category": "merged_success",
+  "created_at": "2026-07-16T17:30:10Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": true,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": true,
+    "files_changed": 6,
+    "additions": 108,
+    "deletions": 50,
+    "review_count": 2,
+    "comment_count": 1,
+    "change_ratio": 0.46
+  },
+  "metrics": {
+    "files_changed": 6,
+    "additions": 108,
+    "deletions": 50
+  }
+}

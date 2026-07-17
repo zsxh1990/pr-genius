@@ -1,12 +1,12 @@
 {
-  "total_cases": 87,
+  "total_cases": 121,
   "counts": {
-    "correct": 33,
-    "close": 32,
-    "wrong": 22,
+    "correct": 53,
+    "close": 43,
+    "wrong": 25,
     "skip": 0
   },
-  "accuracy_pct": 74.7,
+  "accuracy_pct": 79.3,
   "by_repo": {
     "pydantic/pydantic": {
       "correct": 7,
@@ -29,6 +29,13 @@
       "skip": 0,
       "total": 13
     },
+    "astral-sh/uv": {
+      "correct": 1,
+      "close": 2,
+      "wrong": 9,
+      "skip": 0,
+      "total": 12
+    },
     "microsoft/markitdown": {
       "correct": 1,
       "close": 11,
@@ -36,12 +43,26 @@
       "skip": 0,
       "total": 12
     },
-    "astral-sh/uv": {
-      "correct": 1,
-      "close": 0,
-      "wrong": 7,
+    "microsoft/TypeScript": {
+      "correct": 8,
+      "close": 2,
+      "wrong": 0,
+      "skip": 0,
+      "total": 10
+    },
+    "modelcontextprotocol/python-sdk": {
+      "correct": 5,
+      "close": 3,
+      "wrong": 0,
       "skip": 0,
       "total": 8
+    },
+    "astral-sh/ruff": {
+      "correct": 6,
+      "close": 1,
+      "wrong": 0,
+      "skip": 0,
+      "total": 7
     },
     "tailwindlabs/tailwindcss": {
       "correct": 4,
@@ -57,6 +78,13 @@
       "skip": 0,
       "total": 5
     },
+    "grafana/grafana": {
+      "correct": 2,
+      "close": 2,
+      "wrong": 0,
+      "skip": 0,
+      "total": 4
+    },
     "rust-lang/rust": {
       "correct": 0,
       "close": 2,
@@ -64,9 +92,9 @@
       "skip": 0,
       "total": 3
     },
-    "grafana/grafana": {
-      "correct": 2,
-      "close": 1,
+    "docker/compose": {
+      "correct": 1,
+      "close": 2,
       "wrong": 0,
       "skip": 0,
       "total": 3
@@ -77,6 +105,20 @@
       "wrong": 0,
       "skip": 0,
       "total": 3
+    },
+    "openai/openai-python": {
+      "correct": 0,
+      "close": 1,
+      "wrong": 1,
+      "skip": 0,
+      "total": 2
+    },
+    "denoland/deno": {
+      "correct": 0,
+      "close": 1,
+      "wrong": 0,
+      "skip": 0,
+      "total": 1
     },
     "kubernetes/kubernetes": {
       "correct": 0,
@@ -100,20 +142,6 @@
       "total": 1
     },
     "cli/cli": {
-      "correct": 0,
-      "close": 1,
-      "wrong": 0,
-      "skip": 0,
-      "total": 1
-    },
-    "docker/compose": {
-      "correct": 0,
-      "close": 1,
-      "wrong": 0,
-      "skip": 0,
-      "total": 1
-    },
-    "openai/openai-python": {
       "correct": 0,
       "close": 1,
       "wrong": 0,
@@ -214,6 +242,45 @@
       "success_pattern_hits": []
     },
     {
+      "id": "astral-sh-ruff-26929",
+      "repo": "astral-sh/ruff",
+      "pr_number": 26929,
+      "title": "[ty] Fix memory report detail outcome icons",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "astral-sh-uv-20473",
+      "repo": "astral-sh/uv",
+      "pr_number": 20473,
+      "title": "Support range requests in the Packse server",
+      "actual_outcome": "merged",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "wrong",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "astral-sh-uv-20478",
+      "repo": "astral-sh/uv",
+      "pr_number": 20478,
+      "title": "Improve automated security review comments",
+      "actual_outcome": "merged",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "wrong",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "astral-sh-uv-20479",
       "repo": "astral-sh/uv",
       "pr_number": 20479,
@@ -305,6 +372,19 @@
       "success_pattern_hits": []
     },
     {
+      "id": "denoland-deno-36104",
+      "repo": "denoland/deno",
+      "pr_number": 36104,
+      "title": "feat(check): run native tsc and map its diagnostics",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "encode-httpx-3773",
       "repo": "encode/httpx",
       "pr_number": 3773,
@@ -387,6 +467,58 @@
       "repo": "kubernetes/kubernetes",
       "pr_number": 140654,
       "title": "Fix status wiping api definition test and fix gaps",
+      "actual_outcome": "merged",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "wrong",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "modelcontextprotocol-python-sdk-3106",
+      "repo": "modelcontextprotocol/python-sdk",
+      "pr_number": 3106,
+      "title": "Pin pymdown-extensions back to 11.0",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "modelcontextprotocol-python-sdk-3107",
+      "repo": "modelcontextprotocol/python-sdk",
+      "pr_number": 3107,
+      "title": "docs: make API reference rendering independent of page order",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "modelcontextprotocol-python-sdk-3108",
+      "repo": "modelcontextprotocol/python-sdk",
+      "pr_number": 3108,
+      "title": "docs: load media examples from disk instead of inline base64",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "openai-openai-python-3501",
+      "repo": "openai/openai-python",
+      "pr_number": 3501,
+      "title": "release: 2.46.0",
       "actual_outcome": "merged",
       "predicted_risk": "high",
       "predicted_rate": null,
@@ -578,6 +710,19 @@
       "success_pattern_hits": []
     },
     {
+      "id": "docker-compose-13930",
+      "repo": "docker/compose",
+      "pr_number": 13930,
+      "title": "build(deps): bump github/codeql-action/upload-sarif from 4.3",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "encode-httpx-3765",
       "repo": "encode/httpx",
       "pr_number": 3765,
@@ -660,6 +805,110 @@
       "repo": "hashicorp/terraform",
       "pr_number": 38889,
       "title": "CVE remediation",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "microsoft-TypeScript-63622",
+      "repo": "microsoft/TypeScript",
+      "pr_number": 63622,
+      "title": "Update copilot-setup-steps.yml",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "microsoft-TypeScript-63623",
+      "repo": "microsoft/TypeScript",
+      "pr_number": 63623,
+      "title": "Update codeql-configuration.yml",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "microsoft-TypeScript-63624",
+      "repo": "microsoft/TypeScript",
+      "pr_number": 63624,
+      "title": "gh pr checkout 63624 - Atualização ",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "microsoft-TypeScript-63625",
+      "repo": "microsoft/TypeScript",
+      "pr_number": 63625,
+      "title": "Atualização ",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "microsoft-TypeScript-63629",
+      "repo": "microsoft/TypeScript",
+      "pr_number": 63629,
+      "title": "fix(formatting): recover from token spans outside property c",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "microsoft-TypeScript-63630",
+      "repo": "microsoft/TypeScript",
+      "pr_number": 63630,
+      "title": "Create frontend change",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "microsoft-TypeScript-63631",
+      "repo": "microsoft/TypeScript",
+      "pr_number": 63631,
+      "title": "fix(2814): correct misleading error message for functions wi",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "microsoft-TypeScript-63638",
+      "repo": "microsoft/TypeScript",
+      "pr_number": 63638,
+      "title": "Fix inconsistent `typeof this` when `this` parameter comes f",
       "actual_outcome": "closed",
       "predicted_risk": "high",
       "predicted_rate": null,
@@ -864,6 +1113,110 @@
       "success_pattern_hits": []
     },
     {
+      "id": "astral-sh-ruff-26923",
+      "repo": "astral-sh/ruff",
+      "pr_number": 26923,
+      "title": "[ty] Normalize structured docstring type labels",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "astral-sh-ruff-26924",
+      "repo": "astral-sh/ruff",
+      "pr_number": 26924,
+      "title": "[ty] Render structured prose directive bodies as prose",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "astral-sh-ruff-26925",
+      "repo": "astral-sh/ruff",
+      "pr_number": 26925,
+      "title": "[ty] Reuse applicable own-line suppressions in `--add-ignore",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "astral-sh-ruff-26927",
+      "repo": "astral-sh/ruff",
+      "pr_number": 26927,
+      "title": "[ty] Specialize deferred receiver TypeVars",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "astral-sh-ruff-26928",
+      "repo": "astral-sh/ruff",
+      "pr_number": 26928,
+      "title": "[ty] Model docstring backtick spans explicitly",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "astral-sh-ruff-26930",
+      "repo": "astral-sh/ruff",
+      "pr_number": 26930,
+      "title": "Add missing period in `RUF200` \"Why is this bad?\" documentat",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "astral-sh-uv-20472",
+      "repo": "astral-sh/uv",
+      "pr_number": 20472,
+      "title": "Render Packse scenario graphs as Markdown",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "astral-sh-uv-20488",
+      "repo": "astral-sh/uv",
+      "pr_number": 20488,
+      "title": "Experiment with bundled wheel metadata",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "cli-cli-13899",
       "repo": "cli/cli",
       "pr_number": 13899,
@@ -881,6 +1234,19 @@
       "repo": "docker/compose",
       "pr_number": 13936,
       "title": "Pass IPAM options when creating networks",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "docker-compose-13947",
+      "repo": "docker/compose",
+      "pr_number": 13947,
+      "title": "build(deps): bump github.com/containerd/containerd/v2 from 2",
       "actual_outcome": "open",
       "predicted_risk": "high",
       "predicted_rate": null,
@@ -1046,6 +1412,45 @@
       "success_pattern_hits": []
     },
     {
+      "id": "grafana-grafana-128659",
+      "repo": "grafana/grafana",
+      "pr_number": 128659,
+      "title": "feat: block serving from unified unless scheme registered",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "microsoft-TypeScript-63615",
+      "repo": "microsoft/TypeScript",
+      "pr_number": 63615,
+      "title": "Bump the github-actions group across 1 directory with 5 upda",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "microsoft-TypeScript-63633",
+      "repo": "microsoft/TypeScript",
+      "pr_number": 63633,
+      "title": "Bump js-yaml from 4.1.1 to 4.3.0",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "microsoft-markitdown-2204",
       "repo": "microsoft/markitdown",
       "pr_number": 2204,
@@ -1185,6 +1590,71 @@
       "predicted_rate": null,
       "actual_risk": "medium",
       "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "modelcontextprotocol-python-sdk-3105",
+      "repo": "modelcontextprotocol/python-sdk",
+      "pr_number": 3105,
+      "title": "Correct stable v2 target date to 2026-07-28",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "modelcontextprotocol-python-sdk-3116",
+      "repo": "modelcontextprotocol/python-sdk",
+      "pr_number": 3116,
+      "title": "chore(deps): bump starlette from 0.49.1 to 1.3.1",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "modelcontextprotocol-python-sdk-3117",
+      "repo": "modelcontextprotocol/python-sdk",
+      "pr_number": 3117,
+      "title": "Isolate the stdio server's stdin and stdout from handler sub",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "modelcontextprotocol-python-sdk-3118",
+      "repo": "modelcontextprotocol/python-sdk",
+      "pr_number": 3118,
+      "title": "fix(server): generate tool output schema in serialization mo",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "modelcontextprotocol-python-sdk-3119",
+      "repo": "modelcontextprotocol/python-sdk",
+      "pr_number": 3119,
+      "title": "fix(server): forward tool args under the real parameter name",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
       "anti_pattern_hits": [],
       "success_pattern_hits": []
     },
