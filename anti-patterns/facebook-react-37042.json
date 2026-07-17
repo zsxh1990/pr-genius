@@ -1,0 +1,31 @@
+{
+  "id": "facebook-react-37042",
+  "repo": "facebook/react",
+  "pr_number": 37042,
+  "title": "[Fiber] Detect useSyncExternalStore mutations missed while Activity tree was hidden",
+  "author": "deepshekhardas",
+  "state": "CLOSED",
+  "merged": false,
+  "category": "closed_duplicate",
+  "created_at": "2026-07-16T11:45:42Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "files_changed": 2,
+    "additions": 148,
+    "deletions": 10,
+    "review_count": 0,
+    "comment_count": 2
+  },
+  "metrics": {
+    "files_changed": 2,
+    "additions": 148,
+    "deletions": 10
+  }
+}

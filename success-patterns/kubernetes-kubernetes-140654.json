@@ -1,0 +1,31 @@
+{
+  "id": "kubernetes-kubernetes-140654",
+  "repo": "kubernetes/kubernetes",
+  "pr_number": 140654,
+  "title": "Fix status wiping api definition test and fix gaps",
+  "author": "jpbetz",
+  "state": "MERGED",
+  "merged": true,
+  "category": "merged_success",
+  "created_at": "2026-07-16T19:47:39Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "files_changed": 5,
+    "additions": 32,
+    "deletions": 13,
+    "review_count": 0,
+    "comment_count": 5
+  },
+  "metrics": {
+    "files_changed": 5,
+    "additions": 32,
+    "deletions": 13
+  }
+}

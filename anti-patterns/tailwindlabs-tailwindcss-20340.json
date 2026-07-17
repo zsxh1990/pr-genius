@@ -1,0 +1,31 @@
+{
+  "id": "tailwindlabs-tailwindcss-20340",
+  "repo": "tailwindlabs/tailwindcss",
+  "pr_number": 20340,
+  "title": "fix: lazily load @parcel/watcher in @tailwindcss/cli",
+  "author": "deepshekhardas",
+  "state": "CLOSED",
+  "merged": false,
+  "category": "closed_duplicate",
+  "created_at": "2026-07-16T06:44:47Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "files_changed": 3,
+    "additions": 62,
+    "deletions": 22,
+    "review_count": 0,
+    "comment_count": 2
+  },
+  "metrics": {
+    "files_changed": 3,
+    "additions": 62,
+    "deletions": 22
+  }
+}

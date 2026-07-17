@@ -1,0 +1,31 @@
+{
+  "id": "pydantic-pydantic-13442",
+  "repo": "pydantic/pydantic",
+  "pr_number": 13442,
+  "title": "Defer placeholders in Mypy plugin",
+  "author": "Viicos",
+  "state": "MERGED",
+  "merged": true,
+  "category": "merged_success",
+  "created_at": "2026-07-13T20:07:10Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "files_changed": 2,
+    "additions": 26,
+    "deletions": 1,
+    "review_count": 1,
+    "comment_count": 3
+  },
+  "metrics": {
+    "files_changed": 2,
+    "additions": 26,
+    "deletions": 1
+  }
+}
