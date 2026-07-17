@@ -1,0 +1,45 @@
+---
+type: Repo Profile
+title: hashicorp/terraform PR 模式分析
+description: 49215-star Go project
+repo: hashicorp/terraform
+url: https://github.com/hashicorp/terraform
+star: 49215
+language: Go
+license: NOASSERTION
+default_branch: main
+zsxh_pr_count: 0
+status: auto-generated
+analyzed_at: 2026-07-17
+data_source: GitHub API + 30-PR sample
+agent_guidelines:
+  allow_unsolicited_pr: true
+  require_signed_off: false
+  require_cla: false
+  require_issue_first: false
+  ai_policy: selective
+  maintainer_vibe: responsive
+  bot_review: false
+  ci_first_run_needs_approval: false
+  default_branch: main
+  response_time_h_median: 36
+  external_merge_rate: 0.73
+tags:
+  - repo-profile
+  - go
+  - auto-generated
+---
+
+## PR 文化
+
+- **合并率**: 外部 PR 合并率约 73%
+- **响应时间**: 中位数 ~36h
+- **AI 政策**: selective
+- **语言**: Go
+- **Stars**: 49215
+
+## 贡献指南
+
+- License: NOASSERTION
+- Default branch: main
+- Topics: infrastructure,iac

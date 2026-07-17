@@ -18,31 +18,80 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 
 
+def _get_merge_rate(repo: str) -> float:
+    """Read external_merge_rate from repo profile."""
+    profile_dir = REPO / repo.replace("/", "-")
+    index_file = profile_dir / "index.md"
+    if not index_file.exists():
+        return 0.0
+    try:
+        import re
+        text = index_file.read_text()
+        m = re.search(r'external_merge_rate:\s*([\d.]+)', text)
+        return float(m.group(1)) if m else 0.0
+    except (ValueError, AttributeError):
+        return 0.0
+
+
+def _get_star_count(repo: str) -> int:
+    """Read star count from repo profile."""
+    profile_dir = REPO / repo.replace("/", "-")
+    index_file = profile_dir / "index.md"
+    if not index_file.exists():
+        return 0
+    try:
+        import re
+        text = index_file.read_text()
+        m = re.search(r'^star:\s*(\d+)', text, re.MULTILINE)
+        return int(m.group(1)) if m else 0
+    except (ValueError, AttributeError):
+        return 0
+
+
 def _run_eval(title: str, repo: str, body: str = "") -> dict:
     """Run pr-genius eval and return parsed result."""
+    merge_rate = _get_merge_rate(repo)
+    star_count = _get_star_count(repo)
     cmd = ["python3", "-m", "prgenius", "eval", title, "--repo", repo]
+    if merge_rate > 0:
+        cmd += ["--repo-merge-rate", str(merge_rate)]
+    if star_count > 0:
+        cmd += ["--star-count", str(star_count)]
     if body:
         cmd += ["--description", body[:500]]
 
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=15, cwd=REPO)
+        import os
+        env = os.environ.copy()
+        env["PYTHONPATH"] = str(REPO / "prgenius" / "src") + ":" + env.get("PYTHONPATH", "")
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=15, cwd=REPO, env=env)
         output = result.stdout + result.stderr
 
-        # Parse success rate prediction: "成功率预测: 50% (中)"
+        # Parse risk level from output
+        # Format 1: "成功率预测: 50% (中)"
+        # Format 2: "🟡 风险等级: 中风险"
         import re
-        rate_match = re.search(r'成功率预测:\s*(\d+)%', output)
-        success_rate = int(rate_match.group(1)) if rate_match else None
+        risk = "unknown"
+        success_rate = None
 
-        # Map success rate to risk level
-        if success_rate is not None:
+        rate_match = re.search(r'成功率预测:\s*(\d+)%', output)
+        if rate_match:
+            success_rate = int(rate_match.group(1))
             if success_rate >= 70:
                 risk = "low"
             elif success_rate >= 40:
                 risk = "medium"
             else:
                 risk = "high"
-        else:
-            risk = "unknown"
+
+        # Format 2: check risk level icons
+        if risk == "unknown":
+            if "🟢" in output or "低风险" in output:
+                risk = "low"
+            elif "🟡" in output or "中风险" in output:
+                risk = "medium"
+            elif "🔴" in output or "高风险" in output:
+                risk = "high"
 
         # Extract anti-pattern hits
         anti_hits = []
