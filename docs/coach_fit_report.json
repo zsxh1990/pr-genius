@@ -1,0 +1,1605 @@
+{
+  "total_cases": 87,
+  "counts": {
+    "correct": 33,
+    "close": 54,
+    "wrong": 0,
+    "skip": 0
+  },
+  "accuracy_pct": 100.0,
+  "by_repo": {
+    "pydantic/pydantic": {
+      "correct": 2,
+      "close": 13,
+      "wrong": 0,
+      "skip": 0,
+      "total": 15
+    },
+    "actions/checkout": {
+      "correct": 3,
+      "close": 10,
+      "wrong": 0,
+      "skip": 0,
+      "total": 13
+    },
+    "encode/httpx": {
+      "correct": 11,
+      "close": 2,
+      "wrong": 0,
+      "skip": 0,
+      "total": 13
+    },
+    "microsoft/markitdown": {
+      "correct": 11,
+      "close": 1,
+      "wrong": 0,
+      "skip": 0,
+      "total": 12
+    },
+    "astral-sh/uv": {
+      "correct": 0,
+      "close": 8,
+      "wrong": 0,
+      "skip": 0,
+      "total": 8
+    },
+    "tailwindlabs/tailwindcss": {
+      "correct": 0,
+      "close": 6,
+      "wrong": 0,
+      "skip": 0,
+      "total": 6
+    },
+    "huggingface/transformers": {
+      "correct": 0,
+      "close": 5,
+      "wrong": 0,
+      "skip": 0,
+      "total": 5
+    },
+    "rust-lang/rust": {
+      "correct": 2,
+      "close": 1,
+      "wrong": 0,
+      "skip": 0,
+      "total": 3
+    },
+    "grafana/grafana": {
+      "correct": 1,
+      "close": 2,
+      "wrong": 0,
+      "skip": 0,
+      "total": 3
+    },
+    "hashicorp/terraform": {
+      "correct": 0,
+      "close": 3,
+      "wrong": 0,
+      "skip": 0,
+      "total": 3
+    },
+    "kubernetes/kubernetes": {
+      "correct": 0,
+      "close": 1,
+      "wrong": 0,
+      "skip": 0,
+      "total": 1
+    },
+    "chroma-core/chroma": {
+      "correct": 0,
+      "close": 1,
+      "wrong": 0,
+      "skip": 0,
+      "total": 1
+    },
+    "facebook/react": {
+      "correct": 0,
+      "close": 1,
+      "wrong": 0,
+      "skip": 0,
+      "total": 1
+    },
+    "cli/cli": {
+      "correct": 1,
+      "close": 0,
+      "wrong": 0,
+      "skip": 0,
+      "total": 1
+    },
+    "docker/compose": {
+      "correct": 1,
+      "close": 0,
+      "wrong": 0,
+      "skip": 0,
+      "total": 1
+    },
+    "openai/openai-python": {
+      "correct": 1,
+      "close": 0,
+      "wrong": 0,
+      "skip": 0,
+      "total": 1
+    }
+  },
+  "results": [
+    {
+      "id": "actions-checkout-2518",
+      "repo": "actions/checkout",
+      "pr_number": 2518,
+      "title": "skip running unsafe pr check if input is default",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "actions-checkout-2521",
+      "repo": "actions/checkout",
+      "pr_number": 2521,
+      "title": "trim only ascii whitespace for branch",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "actions-checkout-2523",
+      "repo": "actions/checkout",
+      "pr_number": 2523,
+      "title": "backport fixes to releases-v5",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "actions-checkout-2524",
+      "repo": "actions/checkout",
+      "pr_number": 2524,
+      "title": "backport fixes to releases-v4",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "actions-checkout-2525",
+      "repo": "actions/checkout",
+      "pr_number": 2525,
+      "title": "backport fixes to releases-v3",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "actions-checkout-2526",
+      "repo": "actions/checkout",
+      "pr_number": 2526,
+      "title": "backport fixes to releases-v2",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "actions-checkout-2527",
+      "repo": "actions/checkout",
+      "pr_number": 2527,
+      "title": "backport fixes to releases-v6",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "astral-sh-uv-20479",
+      "repo": "astral-sh/uv",
+      "pr_number": 20479,
+      "title": "Report existing coverage for unreproducible bugs",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "astral-sh-uv-20480",
+      "repo": "astral-sh/uv",
+      "pr_number": 20480,
+      "title": "Rebase conflicted pull requests in an isolated job",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "astral-sh-uv-20482",
+      "repo": "astral-sh/uv",
+      "pr_number": 20482,
+      "title": "Retain Codex automation threads",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "astral-sh-uv-20483",
+      "repo": "astral-sh/uv",
+      "pr_number": 20483,
+      "title": "Further compact cached distribution metadata",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "astral-sh-uv-20484",
+      "repo": "astral-sh/uv",
+      "pr_number": 20484,
+      "title": "Format automation summaries as JSON",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "astral-sh-uv-20485",
+      "repo": "astral-sh/uv",
+      "pr_number": 20485,
+      "title": "Name imported Codex automation threads",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "astral-sh-uv-20486",
+      "repo": "astral-sh/uv",
+      "pr_number": 20486,
+      "title": "Decode stale cache entries in one blocking task",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "encode-httpx-3773",
+      "repo": "encode/httpx",
+      "pr_number": 3773,
+      "title": "Adapt test_response_decode_text_using_autodetect for chardet",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "huggingface-transformers-47361",
+      "repo": "huggingface/transformers",
+      "pr_number": 47361,
+      "title": "Fix assisted decoding for models with EncoderDecoder cache &",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "huggingface-transformers-47362",
+      "repo": "huggingface/transformers",
+      "pr_number": 47362,
+      "title": "ci: Handle empty GitHub token in CI run lookup",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "huggingface-transformers-47363",
+      "repo": "huggingface/transformers",
+      "pr_number": 47363,
+      "title": "Fix TimesFM 2.5 window_size AttributeError",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "huggingface-transformers-47364",
+      "repo": "huggingface/transformers",
+      "pr_number": 47364,
+      "title": "Fix Daily CI reporting issues",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "huggingface-transformers-47366",
+      "repo": "huggingface/transformers",
+      "pr_number": 47366,
+      "title": "Update dev version on main",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "kubernetes-kubernetes-140654",
+      "repo": "kubernetes/kubernetes",
+      "pr_number": 140654,
+      "title": "Fix status wiping api definition test and fix gaps",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "pydantic-pydantic-13441",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13441,
+      "title": "Skip `RootModel.__init__()` in Mypy plugin",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "pydantic-pydantic-13442",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13442,
+      "title": "Defer placeholders in Mypy plugin",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "pydantic-pydantic-13445",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13445,
+      "title": "List `typing-inspection` in install dependencies",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "pydantic-pydantic-13449",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13449,
+      "title": "Fix Rust lint errors",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "pydantic-pydantic-13452",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13452,
+      "title": "Fix `Interval` zero bounds silently dropped in pipeline API",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "pydantic-pydantic-13456",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13456,
+      "title": "Sync `RootModel.model_dump()` signature with its parent",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "rust-lang-rust-159407",
+      "repo": "rust-lang/rust",
+      "pr_number": 159407,
+      "title": "Rollup of 18 pull requests",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "tailwindlabs-tailwindcss-20335",
+      "repo": "tailwindlabs/tailwindcss",
+      "pr_number": 20335,
+      "title": "Ensure earlier `@source` is not accidentally ignored by late",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "tailwindlabs-tailwindcss-20336",
+      "repo": "tailwindlabs/tailwindcss",
+      "pr_number": 20336,
+      "title": "Don't trigger a full page reload for scanned files that Vite",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "actions-checkout-2509",
+      "repo": "actions/checkout",
+      "pr_number": 2509,
+      "title": "add warpbuild caching",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "actions-checkout-2517",
+      "repo": "actions/checkout",
+      "pr_number": 2517,
+      "title": "update readme",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "actions-checkout-2520",
+      "repo": "actions/checkout",
+      "pr_number": 2520,
+      "title": "Backport #2518 to releases/v2–v6: skip unsafe PR check on de",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "astral-sh-uv-20487",
+      "repo": "astral-sh/uv",
+      "pr_number": 20487,
+      "title": "Select resolver prefetch candidates in one pass",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "chroma-core-chroma-7434",
+      "repo": "chroma-core/chroma",
+      "pr_number": 7434,
+      "title": "test: add unit tests for create_batches",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "encode-httpx-3765",
+      "repo": "encode/httpx",
+      "pr_number": 3765,
+      "title": "docs: use canonical Requests docs URL",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "facebook-react-37042",
+      "repo": "facebook/react",
+      "pr_number": 37042,
+      "title": "[Fiber] Detect useSyncExternalStore mutations missed while A",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "grafana-grafana-128644",
+      "repo": "grafana/grafana",
+      "pr_number": 128644,
+      "title": "Homepage: Alerts card layout",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "grafana-grafana-128650",
+      "repo": "grafana/grafana",
+      "pr_number": 128650,
+      "title": "LogsTable: Fix crash when time/body fields have config.displ",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "hashicorp-terraform-38874",
+      "repo": "hashicorp/terraform",
+      "pr_number": 38874,
+      "title": "docs: Fix typo in CONTRIBUTING.md (seperate → separate)",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "hashicorp-terraform-38886",
+      "repo": "hashicorp/terraform",
+      "pr_number": 38886,
+      "title": "docs: fix spelling typos (recieve → receive, occured → occur",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "hashicorp-terraform-38889",
+      "repo": "hashicorp/terraform",
+      "pr_number": 38889,
+      "title": "CVE remediation",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "microsoft-markitdown-2200",
+      "repo": "microsoft/markitdown",
+      "pr_number": 2200,
+      "title": "Preserve percent-encoded href octets",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "pydantic-pydantic-13439",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13439,
+      "title": "fix(mypy): reflect use_enum_values in field types",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "pydantic-pydantic-13440",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13440,
+      "title": "fix(mypy): reflect use_enum_values in field types",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "pydantic-pydantic-13444",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13444,
+      "title": "Add __hash__ to NameEmail to restore hashability",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "pydantic-pydantic-13447",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13447,
+      "title": "Fix `model_construct` to honor `validation_alias` over `alia",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "pydantic-pydantic-13451",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13451,
+      "title": "Include extra field names in serialization warnings",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "pydantic-pydantic-13454",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13454,
+      "title": "Fix RootModel model_dump typing signature",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "pydantic-pydantic-13455",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13455,
+      "title": "fix: align RootModel.model_dump() TYPE_CHECKING signature wi",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "tailwindlabs-tailwindcss-20337",
+      "repo": "tailwindlabs/tailwindcss",
+      "pr_number": 20337,
+      "title": "Ensure `drop-shadow-*` utilities work with theme values cont",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "tailwindlabs-tailwindcss-20338",
+      "repo": "tailwindlabs/tailwindcss",
+      "pr_number": 20338,
+      "title": "fix: lazily load @parcel/watcher in @tailwindcss/cli (#20325",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "tailwindlabs-tailwindcss-20340",
+      "repo": "tailwindlabs/tailwindcss",
+      "pr_number": 20340,
+      "title": "fix: lazily load @parcel/watcher in @tailwindcss/cli",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "tailwindlabs-tailwindcss-20342",
+      "repo": "tailwindlabs/tailwindcss",
+      "pr_number": 20342,
+      "title": "fix(cli): use case-insensitive path comparison on Windows in",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "actions-checkout-2513",
+      "repo": "actions/checkout",
+      "pr_number": 2513,
+      "title": "Bump the minor-npm-dependencies group with 3 updates",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "actions-checkout-2514",
+      "repo": "actions/checkout",
+      "pr_number": 2514,
+      "title": "Bump jest and @types/jest",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "actions-checkout-2516",
+      "repo": "actions/checkout",
+      "pr_number": 2516,
+      "title": "Bump @types/node from 24.1.0 to 26.1.1",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "cli-cli-13899",
+      "repo": "cli/cli",
+      "pr_number": 13899,
+      "title": "Warn instead of failing when issue fields can't be set",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "docker-compose-13936",
+      "repo": "docker/compose",
+      "pr_number": 13936,
+      "title": "Pass IPAM options when creating networks",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "encode-httpx-3768",
+      "repo": "encode/httpx",
+      "pr_number": 3768,
+      "title": "Enable ruff UP (pyupgrade) rule and fix all 56 violations",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "encode-httpx-3769",
+      "repo": "encode/httpx",
+      "pr_number": 3769,
+      "title": "Ensure mounted transports are closed even if main transport ",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "encode-httpx-3770",
+      "repo": "encode/httpx",
+      "pr_number": 3770,
+      "title": "Add missing `| None` to auth parameter in convenience method",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "encode-httpx-3771",
+      "repo": "encode/httpx",
+      "pr_number": 3771,
+      "title": "Fix `unquote` IndexError on empty string input",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "encode-httpx-3774",
+      "repo": "encode/httpx",
+      "pr_number": 3774,
+      "title": "docs: fix two broken examples in transports.md",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "encode-httpx-3775",
+      "repo": "encode/httpx",
+      "pr_number": 3775,
+      "title": "Do not hang forever if test server fails to start",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "encode-httpx-3776",
+      "repo": "encode/httpx",
+      "pr_number": 3776,
+      "title": "Quiesce warnings from `grep` in sync-version",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "encode-httpx-3777",
+      "repo": "encode/httpx",
+      "pr_number": 3777,
+      "title": "Add real async iterator for ByteStreams",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "encode-httpx-3778",
+      "repo": "encode/httpx",
+      "pr_number": 3778,
+      "title": "Refactor `map_httpcore_exceptions` to not be a context manag",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "encode-httpx-3783",
+      "repo": "encode/httpx",
+      "pr_number": 3783,
+      "title": "Add option to keep the same method for 301/302 redirects",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "encode-httpx-3785",
+      "repo": "encode/httpx",
+      "pr_number": 3785,
+      "title": "Bump cryptography from 45.0.7 to 46.0.6",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "grafana-grafana-128658",
+      "repo": "grafana/grafana",
+      "pr_number": 128658,
+      "title": "Scopes: only redirect on apply when redirectPath is configur",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "microsoft-markitdown-2204",
+      "repo": "microsoft/markitdown",
+      "pr_number": 2204,
+      "title": "fix(docx): resolve math converter crash on empty runs in OMM",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "microsoft-markitdown-2205",
+      "repo": "microsoft/markitdown",
+      "pr_number": 2205,
+      "title": "feat(cli): add --info flag to extract lightweight JSON metad",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "microsoft-markitdown-2206",
+      "repo": "microsoft/markitdown",
+      "pr_number": 2206,
+      "title": "feat(eml): add local EmlConverter supporting header extracti",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "microsoft-markitdown-2209",
+      "repo": "microsoft/markitdown",
+      "pr_number": 2209,
+      "title": "fix: decode encoded Windows drive separators",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "microsoft-markitdown-2210",
+      "repo": "microsoft/markitdown",
+      "pr_number": 2210,
+      "title": "Rename README.md to README.md.",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "microsoft-markitdown-2212",
+      "repo": "microsoft/markitdown",
+      "pr_number": 2212,
+      "title": "fix: decode percent-encoded Windows drive letters in file UR",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "microsoft-markitdown-2213",
+      "repo": "microsoft/markitdown",
+      "pr_number": 2213,
+      "title": "feat: add GIF support to ImageConverter",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "microsoft-markitdown-2215",
+      "repo": "microsoft/markitdown",
+      "pr_number": 2215,
+      "title": "docs: clarify built-in PDF conversion limitations",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "microsoft-markitdown-2216",
+      "repo": "microsoft/markitdown",
+      "pr_number": 2216,
+      "title": "Update virtual environment instructions in README",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "microsoft-markitdown-2219",
+      "repo": "microsoft/markitdown",
+      "pr_number": 2219,
+      "title": "docs: add 'Use with AI Agents' section to README",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "microsoft-markitdown-2220",
+      "repo": "microsoft/markitdown",
+      "pr_number": 2220,
+      "title": "Add MarkItDown Flutter Edition — offline Windows/Android/Web",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "openai-openai-python-3501",
+      "repo": "openai/openai-python",
+      "pr_number": 3501,
+      "title": "release: 2.46.0",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "pydantic-pydantic-13443",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13443,
+      "title": "docs: expand guidance on troubleshooting validation failures",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "pydantic-pydantic-13446",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13446,
+      "title": "fix: `Gt` constraint silently dropped in experimental pipeli",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "rust-lang-rust-159412",
+      "repo": "rust-lang/rust",
+      "pr_number": 159412,
+      "title": "Reorganize `tests/ui/issues` [26/N]",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    },
+    {
+      "id": "rust-lang-rust-159416",
+      "repo": "rust-lang/rust",
+      "pr_number": 159416,
+      "title": "Fix typo in usize::overflowing_add docs",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": 50,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [
+        "### 反模式命中"
+      ],
+      "success_pattern_hits": [
+        "### 成功模式匹配"
+      ]
+    }
+  ]
+}
