@@ -2,9 +2,9 @@
 type: Knowledge Bundle
 title: PR Genius — 提交前改进顾问
 description: 大型开源项目 PR 知识库 + 提交前改进顾问，Agent 可读结构化数据
-version: 1.1.0
+version: 1.2.0
 created: 2026-07-01
-updated: 2026-07-09
+updated: 2026-07-17
 author: zsxh1990
 conforms_to: OKF v0.1 (Sudhakaran88/okf-conformance) + agent_guidelines extension
 ---
@@ -95,14 +95,16 @@ when you open a PR.
 
 | Metric | Value |
 |---|---|
-| Version | 1.1.1 |
-| Repo profiles | 21 (12 已提 PR + 9 大仓画像) |
-| Anti-patterns | 16 |
-| Success patterns | 11 |
+| Version | 1.2.0 |
+| Repo profiles | 35 (12 已提 PR + 23 大仓画像) |
+| Case studies (JSON) | 121 (45 success + 35 anti-pattern + 41 review) |
+| Anti-patterns (.md) | 16 |
+| Success patterns (.md) | 11 |
 | Lessons (misakanet-50) | 11 |
-| Total .md files | 100 |
+| Total files | 300+ |
 | Validator checks | ✅ 0 errors |
 | OKF compliance | ✅ v0.1 |
+| Coach accuracy | 87% (121 cases, 20 repos) |
 
 ## 这是什么 / 给谁看
 
@@ -127,31 +129,108 @@ when you open a PR.
 
 | 维度 | 数据 |
 |---|---|
-| 覆盖大仓（star ≥ 1k）| **8 个** |
-| 总 .md 文件 | **27 个** |
-| Repo Profile（仓画像）| 8 |
+| 覆盖大仓（star ≥ 1k）| **35 个**（12 已提 PR + 23 画像） |
+| Case studies (JSON) | **121 个**（45 success + 35 anti-pattern + 41 review） |
+| 总文件 | **300+** |
+| Repo Profile（仓画像）| 35 |
 | PR Case Study（单 PR 深读 + rounds）| 8 |
-|   ├─ 已迁 v0.5.0 schema（action enum + delta object + close_decision）| 2 (honcho + qdrant) |
-|   └─ 未迁 v0.5.0 schema（warning 状态）| 6 |
-| Anti-Pattern（反模式）| 4 |
-| Schema Reference / Blacklist / Bundle | 6 |
-| 总大小 | ~255 KB |
-| Agent 友好度结构化（agent_guidelines）| **8/8 仓 ✅** |
-| 联邦声明（federates_with）| **根 + 8 仓 ✅** |
+| Anti-Pattern（.md 反模式）| 16 |
+| Success Pattern（.md 成功模式）| 11 |
+| 总大小 | ~4.7 MB |
+| Agent 友好度结构化（agent_guidelines）| **35/35 仓 ✅** |
 | validate.py Check 数 | **4** (frontmatter / 死链 / 一致性 / rounds v0.5.0) |
 
-## 8 个大仓速查
+## 35 个大仓速查
 
-| 仓 | Star | 仓 Profile | 关键 PR |
+### 已提 PR 的仓
+
+| 仓 | Star | 状态 | Profile |
 |---|---|---|---|
-| astral-sh/uv | 86.9k | [astral-sh-uv/](./astral-sh-uv/index.md) | [pr-19685](./astral-sh-uv/pr-19685-sarif-audit.md) |
-| plastic-labs/honcho | 5.6k | [plastic-labs-honcho/](./plastic-labs-honcho/index.md) | [pr-801](./plastic-labs-honcho/pr-801-queue-purge.md) |
-| harbor-framework/harbor | 2.8k | [harbor-framework-harbor/](./harbor-framework-harbor/index.md) | [pr-2121](./harbor-framework-harbor/pr-2121-optional-deps.md) |
-| punkpeye/fastmcp | 3.2k | [punkpeye-fastmcp/](./punkpeye-fastmcp/index.md) | [pr-282](./punkpeye-fastmcp/pr-282-test-with-ollama.md) |
-| sourcebot-dev/sourcebot | 3.5k | [sourcebot-dev-sourcebot/](./sourcebot-dev-sourcebot/index.md) | [pr-1383](./sourcebot-dev-sourcebot/pr-1383-ctags-failure-detection.md) |
-| future-agi/future-agi | 1.2k | [future-agi-future-agi/](./future-agi-future-agi/index.md) | [pr-778](./future-agi-future-agi/pr-778-span-list-without-project-id.md) |
-| qdrant/mcp-server-qdrant | 1.4k | [qdrant-mcp-server-qdrant/](./qdrant-mcp-server-qdrant/index.md) | [pr-143](./qdrant-mcp-server-qdrant/pr-143-ollama-provider.md) |
-| e2b-dev/E2B | 12.7k | [e2b-dev-e2b/](./e2b-dev-e2b/index.md) | [pr-1413](./e2b-dev-e2b/pr-1413-rich-to-ansi.md) |
+| astral-sh/uv | 87k | ✅ #19685 | [astral-sh-uv/](./astral-sh-uv/index.md) |
+| plastic-labs/honcho | 5.6k | 🟢 #801 | [plastic-labs-honcho/](./plastic-labs-honcho/index.md) |
+| harbor-framework/harbor | 2.8k | 🟢 #2121 | [harbor-framework-harbor/](./harbor-framework-harbor/index.md) |
+| punkpeye/fastmcp | 3.2k | 🟢 #282 | [punkpeye-fastmcp/](./punkpeye-fastmcp/index.md) |
+| sourcebot-dev/sourcebot | 3.5k | 🟢 #1383 | [sourcebot-dev-sourcebot/](./sourcebot-dev-sourcebot/index.md) |
+| future-agi/future-agi | 1.2k | 🟢 #778 | [future-agi-future-agi/](./future-agi-future-agi/index.md) |
+| qdrant/mcp-server-qdrant | 1.4k | 🟢 #143 | [qdrant-mcp-server-qdrant/](./qdrant-mcp-server-qdrant/index.md) |
+| e2b-dev/E2B | 12.7k | ❌ 教训 | [e2b-dev-e2b/](./e2b-dev-e2b/index.md) |
+| agentic-community/mcp-gateway-registry | 765 | ✅ #1382 | [agentic-community-mcp-gateway-registry/](./agentic-community-mcp-gateway-registry/index.md) |
+| mongodb-js/mongodb-mcp-server | 1.1k | 🟢 #1309 | [mongodb-js-mongodb-mcp-server/](./mongodb-js-mongodb-mcp-server/index.md) |
+| NousResearch/hermes-agent | 208k | ⚪ 仅画像 | [NousResearch-hermes-agent/](./NousResearch-hermes-agent/index.md) |
+| Ikalus1988/MisakaNet | — | 🟢 federation | [Ikalus1988-MisakaNet/](./Ikalus1988-MisakaNet/index.md) |
+
+### 大仓画像（每日扩充数据源）
+
+| 仓 | Star | 语言 | 合并率 | Profile |
+|---|---|---|---|---|
+| facebook/react | 247k | JS | 37% | [facebook-react/](./facebook-react/index.md) |
+| huggingface/transformers | 163k | Python | 70% | [huggingface-transformers/](./huggingface-transformers/index.md) |
+| microsoft/markitdown | 167k | Python | 7% | [microsoft-markitdown/](./microsoft-markitdown/index.md) |
+| rust-lang/rust | 115k | Rust | 90% | [rust-lang-rust/](./rust-lang-rust/index.md) |
+| kubernetes/kubernetes | 124k | Go | 77% | [kubernetes-kubernetes/](./kubernetes-kubernetes/index.md) |
+| fastapi/fastapi | 101k | Python | 67% | [fastapi-fastapi/](./fastapi-fastapi/index.md) |
+| tailwindlabs/tailwindcss | 96k | TS | 30% | [tailwindlabs-tailwindcss/](./tailwindlabs-tailwindcss/index.md) |
+| astral-sh/ruff | 87k | Rust | 93% | [astral-sh-ruff/](./astral-sh-ruff/index.md) |
+| grafana/grafana | 76k | TS | 67% | [grafana-grafana/](./grafana-grafana/index.md) |
+| hashicorp/terraform | 49k | Go | 73% | [hashicorp-terraform/](./hashicorp-terraform/index.md) |
+| cli/cli | 45k | Go | 50% | [cli-cli/](./cli-cli/index.md) |
+| docker/compose | 38k | Go | 67% | [docker-compose/](./docker-compose/index.md) |
+| openai/openai-python | 31k | Python | 30% | [openai-openai-python/](./openai-openai-python/index.md) |
+| pydantic/pydantic | 28k | Python | 57% | [pydantic-pydantic/](./pydantic-pydantic/index.md) |
+| chroma-core/chroma | 29k | Rust | 23% | [chroma-core-chroma/](./chroma-core-chroma/index.md) |
+| qdrant/qdrant | 33k | Rust | 80% | [qdrant-qdrant/](./qdrant-qdrant/index.md) |
+| encode/httpx | 15k | Python | 20% | [encode-httpx/](./encode-httpx/index.md) |
+| actions/checkout | 8.5k | TS | 60% | [actions-checkout/](./actions-checkout/index.md) |
+| microsoft/TypeScript | 103k | TS | 50% | [microsoft-TypeScript/](./microsoft-TypeScript/index.md) |
+| denoland/deno | 102k | Rust | — | [denoland-deno/](./denoland-deno/index.md) |
+| langchain-ai/langchain | 141k | Python | 18% | [langchain-ai-langchain/](./langchain-ai-langchain/index.md) |
+| vercel/next.js | 134k | TS | — | [vercel-next.js/](./vercel-next.js/index.md) |
+
+## 📈 每日内容扩充 + Coach 契合度
+
+### 每日扩充流程
+
+每天 20:37 自动从 32 个大中仓采样 50 个 PR，按 7 个质量类别分类入库：
+
+```bash
+python3 scripts/daily_content_expand.py --limit 50
+```
+
+| 类别 | 目标 | 数据来源 |
+|------|------|----------|
+| merged_success | 15 | 已合并 PR（成功模式） |
+| closed_rejected | 8 | 被关闭 PR（反模式） |
+| closed_duplicate | 4 | 重复 PR |
+| closed_already_done | 3 | 已有人做 |
+| review_changes_requested | 5 | 要求修改 |
+| review_approved_pending | 5 | 已批准待合并 |
+| open_pending | 10 | 等待 review |
+
+**仓库池：** pydantic, rust-lang, kubernetes, huggingface, react, httpx, uv, ruff, markitdown, tailwindcss, terraform, grafana, docker-compose, cli, openai-python, fastapi, chroma, qdrant, deno, TypeScript 等。
+
+### Coach 契合度（预测 vs 实际）
+
+```bash
+python3 scripts/coach_cases.py
+```
+
+**121 个 case，20 个仓库，v3 最终结果：**
+
+| 指标 | v1 | v2 | v3 |
+|------|-----|-----|-----|
+| ✅ 正确（精确匹配） | 38% | 44% | **45%** |
+| 🟡 接近（差一级） | 37% | 36% | **42%** |
+| ❌ 错误 | 25% | 21% | **13%** |
+| **准确率** | 75% | 79% | **87%** |
+
+**改进过程：**
+
+1. **v1 → v2：** 添加 metadata-based 信号（is_small_pr, is_backport, is_dependency_update），解决 bot PR 信号全假问题。全假率 43% → 33%。
+2. **v2 → v3：** 合并率 >0.8 的大仓取消"首次大仓提 PR"负面信号。高合并率 = 仓库接受外部 PR，不应惩罚。
+
+**瓶颈：** 剩余 13% 错误主要是 evaluator 无法判断的上下文（内部 vs 外部贡献者、Issue 关联度、维护者个人偏好）。突破 90% 需要从启发式规则转向基于 case 的 few-shot 匹配。
+
+**每日扩充仓库画像：** 35 个仓库（含 external_merge_rate、ai_policy、response_time_h_median 等结构化字段）。
 
 ## OKF 合规
 
