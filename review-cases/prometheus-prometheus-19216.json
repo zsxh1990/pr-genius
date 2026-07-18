@@ -1,0 +1,39 @@
+{
+  "id": "prometheus-prometheus-19216",
+  "repo": "prometheus/prometheus",
+  "pr_number": 19216,
+  "title": "tsdb: fix OOO chunk ID overflow via modular wrapping",
+  "author": "periklis",
+  "state": "OPEN",
+  "merged": false,
+  "category": "open_pending",
+  "created_at": "2026-07-16T12:18:10Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": true,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": false,
+    "files_changed": 6,
+    "additions": 899,
+    "deletions": 6,
+    "review_count": 0,
+    "comment_count": 0,
+    "change_ratio": 0.01
+  },
+  "metrics": {
+    "files_changed": 6,
+    "additions": 899,
+    "deletions": 6
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "tailwindlabs-tailwindcss-20339",
+  "repo": "tailwindlabs/tailwindcss",
+  "pr_number": 20339,
+  "title": "fix: stale @tailwindcss/postcss output when input CSS changes without file mtime update",
+  "author": "deepshekhardas",
+  "state": "CLOSED",
+  "merged": false,
+  "category": "closed_rejected",
+  "created_at": "2026-07-16T06:44:39Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": true,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 3,
+    "additions": 63,
+    "deletions": 13,
+    "review_count": 0,
+    "comment_count": 2,
+    "change_ratio": 0.21
+  },
+  "metrics": {
+    "files_changed": 3,
+    "additions": 63,
+    "deletions": 13
+  }
+}

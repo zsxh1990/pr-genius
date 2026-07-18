@@ -1,0 +1,39 @@
+{
+  "id": "golang-go-80407",
+  "repo": "golang/go",
+  "pr_number": 80407,
+  "title": "go/build/constraint: match \"go1.\" only as a tag prefix in GoVersion",
+  "author": "goto1134",
+  "state": "CLOSED",
+  "merged": false,
+  "category": "closed_rejected",
+  "created_at": "2026-07-14T17:07:13Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": true,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 3,
+    "additions": 6,
+    "deletions": 1,
+    "review_count": 0,
+    "comment_count": 26,
+    "change_ratio": 0.17
+  },
+  "metrics": {
+    "files_changed": 3,
+    "additions": 6,
+    "deletions": 1
+  }
+}

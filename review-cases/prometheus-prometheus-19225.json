@@ -1,0 +1,39 @@
+{
+  "id": "prometheus-prometheus-19225",
+  "repo": "prometheus/prometheus",
+  "pr_number": 19225,
+  "title": "test(api): Fix silent target error in metricMetadata tests",
+  "author": "vishalmore90",
+  "state": "OPEN",
+  "merged": false,
+  "category": "open_pending",
+  "created_at": "2026-07-17T14:57:31Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": false,
+    "files_changed": 3,
+    "additions": 59,
+    "deletions": 4,
+    "review_count": 0,
+    "comment_count": 0,
+    "change_ratio": 0.07
+  },
+  "metrics": {
+    "files_changed": 3,
+    "additions": 59,
+    "deletions": 4
+  }
+}
