@@ -96,10 +96,11 @@ when you open a PR.
 | Metric | Value |
 |---|---|
 | Version | 1.2.0 |
-| Repo profiles | 35 (12 已提 PR + 23 大仓画像) |
-| Case studies (JSON) | 121 (45 success + 35 anti-pattern + 41 review) |
-| Anti-patterns (.md) | 16 |
-| Success patterns (.md) | 11 |
+| Repo profiles | 40 (含 Profile 仓画像 + stub + federation) |
+| Case studies (.md) | 19 (含 rounds + close_decision 完整 schema) |
+| Case studies (.json) | 140 (50 review + 33 anti-pattern + 38 success + 19 misc) |
+| Anti-patterns (.md) | 52 |
+| Success patterns (.md) | 39 |
 | Lessons (misakanet-50) | 11 |
 | Total files | 300+ |
 | Validator checks | ✅ 0 errors |
@@ -170,7 +171,6 @@ when you open a PR.
 | kubernetes/kubernetes | 124k | Go | 77% | [kubernetes-kubernetes/](./kubernetes-kubernetes/index.md) |
 | fastapi/fastapi | 101k | Python | 67% | [fastapi-fastapi/](./fastapi-fastapi/index.md) |
 | tailwindlabs/tailwindcss | 96k | TS | 30% | [tailwindlabs-tailwindcss/](./tailwindlabs-tailwindcss/index.md) |
-| astral-sh/ruff | 87k | Rust | 93% | [astral-sh-ruff/](./astral-sh-ruff/index.md) |
 | grafana/grafana | 76k | TS | 67% | [grafana-grafana/](./grafana-grafana/index.md) |
 | hashicorp/terraform | 49k | Go | 73% | [hashicorp-terraform/](./hashicorp-terraform/index.md) |
 | cli/cli | 45k | Go | 50% | [cli-cli/](./cli-cli/index.md) |
@@ -182,7 +182,6 @@ when you open a PR.
 | encode/httpx | 15k | Python | 20% | [encode-httpx/](./encode-httpx/index.md) |
 | actions/checkout | 8.5k | TS | 60% | [actions-checkout/](./actions-checkout/index.md) |
 | microsoft/TypeScript | 103k | TS | 50% | [microsoft-TypeScript/](./microsoft-TypeScript/index.md) |
-| denoland/deno | 102k | Rust | — | [denoland-deno/](./denoland-deno/index.md) |
 | langchain-ai/langchain | 141k | Python | 18% | [langchain-ai-langchain/](./langchain-ai-langchain/index.md) |
 | vercel/next.js | 134k | TS | — | [vercel-next.js/](./vercel-next.js/index.md) |
 

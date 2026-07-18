@@ -11,6 +11,18 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 
 ## [Unreleased]
 
+### Compliance
+- **OKF v0.1 合规审计** (克莱恩 2026-07-19 拍板): upstream
+  [Sudhakaran88/okf-conformance](https://github.com/Sudhakaran88/okf-conformance)
+  validator 实测 **PASS conformant · exit 0 · 0 errors · 0 warnings**.
+  - 修复 4 MUST errors (M2 frontmatter + 3× M4 relative path)
+  - 修复 120 SHOULD warnings (97 S4 orphan + 23 S2 sibling chain)
+  - 命名规范化: docs/INDEX.md → docs/index.md (OKF M5 path identity)
+  - 新增 docs/COMPLIANCE_AUDIT.md (审计历史 + 已知方言清单)
+  - 新增 archive/scripts/pr-genius-landscape-search/ (5 search/fetch 脚本)
+  - validate.py type 白名单加 Compliance Audit
+- See docs/COMPLIANCE_AUDIT.md for full audit history.
+
 ## [1.2.0] - 2026-07-18
 
 ### Added

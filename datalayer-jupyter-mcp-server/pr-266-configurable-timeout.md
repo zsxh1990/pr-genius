@@ -9,6 +9,14 @@ status: closed-merged
 opened_at: "2026-07-12"
 merged_at: "2026-07-13"
 schema_version: rounds v0.5.0
+verified_at: "2026-07-17T19:18:00Z"
+evidence_urls:
+  - https://github.com/datalayer/jupyter-mcp-server/pull/266
+  - https://api.github.com/repos/datalayer/jupyter-mcp-server/pulls/266
+  - https://api.github.com/repos/datalayer/jupyter-mcp-server/pulls/266/files
+  - https://api.github.com/repos/datalayer/jupyter-mcp-server/issues/266/comments
+  - https://api.github.com/repos/datalayer/jupyter-mcp-server/pulls/266/reviews
+  - https://api.github.com/repos/datalayer/jupyter-mcp-server/pulls/266/commits
 confidence: high
 rounds:
   - round: 1

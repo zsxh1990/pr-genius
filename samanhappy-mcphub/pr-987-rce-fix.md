@@ -9,6 +9,14 @@ status: closed-merged
 opened_at: "2026-07-12"
 merged_at: "2026-07-13"
 schema_version: rounds v0.5.0
+verified_at: "2026-07-17T19:18:00Z"
+evidence_urls:
+  - https://github.com/samanhappy/mcphub/pull/987
+  - https://api.github.com/repos/samanhappy/mcphub/pulls/987
+  - https://api.github.com/repos/samanhappy/mcphub/pulls/987/files
+  - https://api.github.com/repos/samanhappy/mcphub/issues/987/comments
+  - https://api.github.com/repos/samanhappy/mcphub/pulls/987/reviews
+  - https://api.github.com/repos/samanhappy/mcphub/pulls/987/commits
 confidence: high
 rounds:
   - round: 1

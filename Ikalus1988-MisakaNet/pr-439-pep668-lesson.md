@@ -9,6 +9,14 @@ status: closed-merged
 opened_at: "2026-07-10"
 merged_at: "2026-07-10"
 schema_version: rounds v0.5.0
+verified_at: "2026-07-17T19:18:00Z"
+evidence_urls:
+  - https://github.com/Ikalus1988/MisakaNet/pull/439
+  - https://api.github.com/repos/Ikalus1988/MisakaNet/pulls/439
+  - https://api.github.com/repos/Ikalus1988/MisakaNet/pulls/439/files
+  - https://api.github.com/repos/Ikalus1988/MisakaNet/issues/439/comments
+  - https://api.github.com/repos/Ikalus1988/MisakaNet/pulls/439/reviews
+  - https://api.github.com/repos/Ikalus1988/MisakaNet/pulls/439/commits
 confidence: high
 rounds:
   - round: 1
