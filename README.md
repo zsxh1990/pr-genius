@@ -33,7 +33,7 @@ Repo layout invariants:
 - Comments + bodies are in plain English unless a `.locales/` mirror exists.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![OKF v0.1](https://img.shields.io/badge/OKF-v0.1-blue.svg)](https://github.com/Sudhakaran88/okf-conformance)
+[![OKF v0.1 compliant](https://img.shields.io/badge/OKF-v0.1-compliant-brightgreen.svg)](https://github.com/Sudhakaran88/okf-conformance/blob/main/CONFORMANCE.md)
 [![AI-assisted](https://img.shields.io/badge/AI-assisted-welcomed-brightgreen.svg)](CONTRIBUTING.md#ai-assisted-contributions)
 [![Validate](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/zsxh1990/pr-genius/main/docs/badges/validate.json&label=validate&query=$.message&colorB=brightgreen)](./validate.py)
 [![Evidence](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/zsxh1990/pr-genius/main/docs/badges/evidence.json&label=evidence&query=$.message&colorB=brightgreen)](./validate.py)

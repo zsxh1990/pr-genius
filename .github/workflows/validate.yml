@@ -81,3 +81,16 @@ jobs:
           else:
               print('OK: no orphan .md files')
           "
+
+      - name: Upstream OKF v0.1 validator (hard gate)
+        # Run the official Sudhakaran88/okf-conformance validator against this
+        # repo. Hard fail on any MUST violation. SHOULD warnings are surfaced
+        # but do not block merge. See docs/COMPLIANCE_AUDIT.md.
+        run: |
+          git clone --depth 1 https://github.com/Sudhakaran88/okf-conformance.git /tmp/okf-conformance
+          node /tmp/okf-conformance/validator/okf-validate.mjs . \
+            --strict || (
+              echo "::error::OKF v0.1 validator failed — see docs/COMPLIANCE_AUDIT.md for repair guide"
+              exit 1
+            )
+          echo "OK: upstream OKF v0.1 validator passed"
