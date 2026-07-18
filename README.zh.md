@@ -16,7 +16,7 @@ created: 2026-07-04
 
 ## 给中文 Agent 读者的读取顺序
 
-1. **[docs/INDEX.md](docs/INDEX.md)** — 文件地图 + 推荐读取顺序
+1. **[docs/index.md](docs/index.md)** — 文件地图 + 推荐读取顺序
 2. **[AGENT_GUIDELINES_SCHEMA.md](AGENT_GUIDELINES_SCHEMA.md)** — `agent_guidelines` 字段 schema
 3. **[ROUNDS_SCHEMA.md](ROUNDS_SCHEMA.md)** — PR Case Study `rounds` 字段 schema (v0.5.0)
 4. **[BLACKLIST.md](BLACKLIST.md)** — 永久拉黑仓清单

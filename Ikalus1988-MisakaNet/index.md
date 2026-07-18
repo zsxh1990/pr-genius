@@ -60,3 +60,11 @@ tags:
 
 - pr-genius 作为 MisakaNet 的 Contributor Quality Sidecar
 - 被拒 PR 通过 `harvest` 命令沉淀为 lesson/anti-pattern
+
+## PR Case Studies（本仓 5 项）
+
+- [pr-439-pep668-lesson.md](./pr-439-pep668-lesson.md) — MisakaNet #439 — PEP 668 lesson
+- [pr-440-frontmatter-tests.md](./pr-440-frontmatter-tests.md) — MisakaNet #440 — frontmatter 边界测试
+- [pr-441-smart-fallback.md](./pr-441-smart-fallback.md) — MisakaNet #441 — smart fallback with telemetry
+- [pr-452-frontmatter-batch.md](./pr-452-frontmatter-batch.md) — MisakaNet #452 — 20 bare JSON → YAML
+- [pr-474-fanuc-lessons.md](./pr-474-fanuc-lessons.md) — MisakaNet #474 — 7 FANUC 机器人课程

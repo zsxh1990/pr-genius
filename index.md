@@ -150,6 +150,222 @@ federated_at: 2026-07-02
 
 ---
 
+## 🗂️ 仓内导航（OKF S2/S4 自动链接）
+
+> 由 [Sudhakaran88/okf-conformance](https://github.com/Sudhakaran88/okf-conformance) validator
+> 强制要求：每个 concept 至少被一个链接引用（无孤儿），`index.md` 必须链所有 sibling concept。
+> 2026-07-19 克莱恩拍板补链，4 个 MUST 错误 + 120 warnings → 0。
+
+### 仓根核心文档
+
+- [README.md](./README.md) · [README.zh.md](./README.zh.md) · [CHANGELOG.md](./CHANGELOG.md)
+- [CONTRIBUTING.md](./CONTRIBUTING.md) · [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) · [SECURITY.md](./SECURITY.md)
+- [DISCUSSIONS.md](./DISCUSSIONS.md) · [KNOWN_ISSUES.md](./KNOWN_ISSUES.md)
+- [AGENT_GUIDELINES_SCHEMA.md](./AGENT_GUIDELINES_SCHEMA.md) · [ROUNDS_SCHEMA.md](./ROUNDS_SCHEMA.md) · [BLACKLIST.md](./BLACKLIST.md)
+
+### 📐 docs/ — 文档与报告
+
+- [BLOG.md](./docs/BLOG.md) · [index.md](./docs/index.md) · [METRICS.md](./docs/METRICS.md)
+- [anti-pattern-analysis-methodology.md](./docs/anti-pattern-analysis-methodology.md) — PR 反模式分析 — 从被拒 PR 中提取可复用教训
+- [coach-smoke-test-2026-07-15.md](./docs/coach-smoke-test-2026-07-15.md) — Coach Smoke Test — 5 Large Repos × 20 PRs
+- [rejected-pr-retrospective.md](./docs/rejected-pr-retrospective.md) — 被拒 PR 复盘 — 18 个被拒 PR 的反模式分析
+- [success-pr-retrospective.md](./docs/success-pr-retrospective.md) — 成功 PR 复盘 — 21 个已合并 PR 的成功模式分析
+
+### ⚠️ anti-patterns/ — 反模式库（46 项）
+
+> [README 索引](./anti-patterns/README.md) · 主条目按反模式 slug 组织。
+
+**AI/Vibe 编码反模式**
+
+- [ai-generated-content.md](./anti-patterns/ai-generated-content.md)
+- [anthropics-anthropic-sdk-python-1757.json](./anti-patterns/anthropics-anthropic-sdk-python-1757.json)
+- [missing-issue-reference.md](./anti-patterns/missing-issue-reference.md)
+- [nousresearch-comp-desktop.md](./anti-patterns/nousresearch-comp-desktop.md)
+- [nousresearch-cron-risk.md](./anti-patterns/nousresearch-cron-risk.md)
+- [nousresearch-duplicate-pr.md](./anti-patterns/nousresearch-duplicate-pr.md)
+- [nousresearch-provider-specific.md](./anti-patterns/nousresearch-provider-specific.md)
+- [nousresearch-tool-specific.md](./anti-patterns/nousresearch-tool-specific.md)
+- [nousresearch-sweeper-blast-broad.md](./anti-patterns/nousresearch-sweeper-blast-broad.md)
+- [nousresearch-sweeper-blast-contained.md](./anti-patterns/nousresearch-sweeper-blast-contained.md)
+- [nousresearch-sweeper-blast-moderate.md](./anti-patterns/nousresearch-sweeper-blast-moderate.md)
+- [nousresearch-sweeper-implemented-on-main.md](./anti-patterns/nousresearch-sweeper-implemented-on-main.md)
+- [nousresearch-sweeper-not-planned.md](./anti-patterns/nousresearch-sweeper-not-planned.md)
+- [nousresearch-sweeper-risk-caching.md](./anti-patterns/nousresearch-sweeper-risk-caching.md)
+- [nousresearch-sweeper-risk-message-delivery.md](./anti-patterns/nousresearch-sweeper-risk-message-delivery.md)
+
+**代码/工程反模式**
+
+- [breaking-change-no-compat.md](./anti-patterns/breaking-change-no-compat.md)
+- [cosmetic-no-user-pain.md](./anti-patterns/cosmetic-no-user-pain.md)
+- [duplicate-pr-same-author.md](./anti-patterns/duplicate-pr-same-author.md)
+- [fork-main-sync-upstream.md](./anti-patterns/fork-main-sync-upstream.md)
+- [fork-pr-ci-permission-error.md](./anti-patterns/fork-pr-ci-permission-error.md)
+- [github-pr-diff-caching.md](./anti-patterns/github-pr-diff-caching.md)
+- [honcho-default-db-module-trap.md](./anti-patterns/honcho-default-db-module-trap.md)
+- [low-value-contribution.md](./anti-patterns/low-value-contribution.md)
+- [stale-pr-far-behind-main.md](./anti-patterns/stale-pr-far-behind-main.md)
+- [superseded-by-maintainer.md](./anti-patterns/superseded-by-maintainer.md)
+- [upstream-already-implementing.md](./anti-patterns/upstream-already-implementing.md)
+- [uv-cargo-fmt-required.md](./anti-patterns/uv-cargo-fmt-required.md)
+
+**OpenClaw 专项反模式（25 项，从 PR #93310 复盘提取）**
+
+- [nousresearch-risk-platform-windows.md](./anti-patterns/nousresearch-risk-platform-windows.md)
+- [nousresearch-risk-security-boundary.md](./anti-patterns/nousresearch-risk-security-boundary.md)
+- [nousresearch-risk-session-state.md](./anti-patterns/nousresearch-risk-session-state.md)
+- [openclaw-auth-provider-risk.md](./anti-patterns/openclaw-auth-provider-risk.md)
+- [openclaw-availability-risk.md](./anti-patterns/openclaw-availability-risk.md)
+- [openclaw-compatibility-risk.md](./anti-patterns/openclaw-compatibility-risk.md)
+- [openclaw-duplicate-pr.md](./anti-patterns/openclaw-duplicate-pr.md)
+- [openclaw-merge-risk-blast-contained.md](./anti-patterns/openclaw-merge-risk-blast-contained.md)
+- [openclaw-merge-risk-caching.md](./anti-patterns/openclaw-merge-risk-caching.md)
+- [openclaw-message-delivery-risk.md](./anti-patterns/openclaw-message-delivery-risk.md)
+- [openclaw-missing-proof.md](./anti-patterns/openclaw-missing-proof.md)
+- [openclaw-module-refactored.md](./anti-patterns/openclaw-module-refactored.md)
+- [openclaw-needs-real-behavior-proof.md](./anti-patterns/openclaw-needs-real-behavior-proof.md)
+- [openclaw-platform-windows.md](./anti-patterns/openclaw-platform-windows.md)
+- [openclaw-refactor-risk.md](./anti-patterns/openclaw-refactor-risk.md)
+- [openclaw-security-boundary-risk.md](./anti-patterns/openclaw-security-boundary-risk.md)
+- [openclaw-session-state-risk.md](./anti-patterns/openclaw-session-state-risk.md)
+- [openclaw-stale-pr.md](./anti-patterns/openclaw-stale-pr.md)
+- [openclaw-stale-with-proof.md](./anti-patterns/openclaw-stale-with-proof.md)
+- [openclaw-sweeper-not-planned.md](./anti-patterns/openclaw-sweeper-not-planned.md)
+- [openclaw-triage-needs-pr-context.md](./anti-patterns/openclaw-triage-needs-pr-context.md)
+- [openclaw-waiting-on-author.md](./anti-patterns/openclaw-waiting-on-author.md)
+
+**真实 PR 反模式案例（按仓组织）**
+
+- [awesome-mcp-servers-glama-badge-required.md](./anti-patterns/awesome-mcp-servers-glama-badge-required.md) — awesome-mcp-servers 仓 Glama score badge requirement
+- [vite-sapphi-red-instant-close.md](./anti-patterns/vite-sapphi-red-instant-close.md) — Vite 仓 sapphi-red 秒拒反 AI PR
+- [e2b-feature-not-adding-canned-response.md](./anti-patterns/e2b-feature-not-adding-canned-response.md) — E2B 仓"we're not adding this feature"反模式
+- [trusted-publisher-oidc-insufficient.md](./anti-patterns/trusted-publisher-oidc-insufficient.md) — PyPI Trusted Publisher OIDC 权限缺失
+- [actions-checkout-2509.json](./anti-patterns/actions-checkout-2509.json)
+- [actions-checkout-2517.json](./anti-patterns/actions-checkout-2517.json)
+- [actions-checkout-2520.json](./anti-patterns/actions-checkout-2520.json)
+- [astral-sh-uv-20487.json](./anti-patterns/astral-sh-uv-20487.json)
+- [chroma-core-chroma-7434.json](./anti-patterns/chroma-core-chroma-7434.json)
+- [docker-compose-13930.json](./anti-patterns/docker-compose-13930.json)
+- [docker-compose-13932.json](./anti-patterns/docker-compose-13932.json)
+- [encode-httpx-3765.json](./anti-patterns/encode-httpx-3765.json)
+- [facebook-react-37042.json](./anti-patterns/facebook-react-37042.json)
+- [goharbor-harbor-23566.json](./anti-patterns/goharbor-harbor-23566.json)
+- [goharbor-harbor-23567.json](./anti-patterns/goharbor-harbor-23567.json)
+- [golang-go-80407.json](./anti-patterns/golang-go-80407.json)
+- [grafana-grafana-128644.json](./anti-patterns/grafana-grafana-128644.json)
+- [grafana-grafana-128650.json](./anti-patterns/grafana-grafana-128650.json)
+- [hashicorp-terraform-38874.json](./anti-patterns/hashicorp-terraform-38874.json)
+- [hashicorp-terraform-38886.json](./anti-patterns/hashicorp-terraform-38886.json)
+- [hashicorp-terraform-38889.json](./anti-patterns/hashicorp-terraform-38889.json)
+- [microsoft-TypeScript-63622~63638.json](./anti-patterns/microsoft-TypeScript-63622.json)（共 9 条）
+- [microsoft-markitdown-2200.json](./anti-patterns/microsoft-markitdown-2200.json)
+- [pydantic-pydantic-13439~13455.json](./anti-patterns/pydantic-pydantic-13439.json)（共 7 条）
+- [tailwindlabs-tailwindcss-20323~20342.json](./anti-patterns/tailwindlabs-tailwindcss-20323.json)（共 7 条）
+
+### ✅ success-patterns/ — 成功模式库（31 项）
+
+> [README 索引](./success-patterns/README.md) · 主条目按成功模式 slug 组织。
+
+**MisakaNet 模式（4 项，从 PR #248/#244 合并提取）**
+
+- [misakanet-frontmatter-normalization.md](./success-patterns/misakanet-frontmatter-normalization.md) — frontmatter 规范化模板
+- [misakanet-lesson-contribution.md](./success-patterns/misakanet-lesson-contribution.md) — lesson 贡献 SOP
+- [misakanet-mcp-quickstart.md](./success-patterns/misakanet-mcp-quickstart.md) — MCP quickstart 模式
+- [misakanet-reputation-system.md](./success-patterns/misakanet-reputation-system.md) — sigmoid cap 反刷分
+
+**OpenClaw 模式（17 项，从 PR #93310 复盘提取）**
+
+- [openclaw-app-fix.md](./success-patterns/openclaw-app-fix.md)
+- [openclaw-channel-fix.md](./success-patterns/openclaw-channel-fix.md)
+- [openclaw-dependency-update.md](./success-patterns/openclaw-dependency-update.md)
+- [openclaw-docs-fix.md](./success-patterns/openclaw-docs-fix.md)
+- [openclaw-extension-fix.md](./success-patterns/openclaw-extension-fix.md)
+- [openclaw-maintainer-pr.md](./success-patterns/openclaw-maintainer-pr.md)
+- [openclaw-p0-priority-fix.md](./success-patterns/openclaw-p0-priority-fix.md)
+- [openclaw-p1-priority-fix.md](./success-patterns/openclaw-p1-priority-fix.md)
+- [openclaw-p2-priority-fix.md](./success-patterns/openclaw-p2-priority-fix.md)
+- [openclaw-plugin-fix.md](./success-patterns/openclaw-plugin-fix.md)
+- [openclaw-proof-sufficient.md](./success-patterns/openclaw-proof-sufficient.md)
+- [openclaw-scripts-fix.md](./success-patterns/openclaw-scripts-fix.md)
+- [openclaw-small-focused-fix.md](./success-patterns/openclaw-small-focused-fix.md)
+
+**NousResearch 模式（12 项）**
+
+- [nourresearch-comp-desktop-fix.md](./success-patterns/nourresearch-comp-desktop-fix.md)
+- [nousresearch-area-fix.md](./success-patterns/nousresearch-area-fix.md)
+- [nousresearch-bug-fix.md](./success-patterns/nousresearch-bug-fix.md)
+- [nousresearch-comp-agent-fix.md](./success-patterns/nousresearch-comp-agent-fix.md)
+- [nousresearch-comp-cli-fix.md](./success-patterns/nousresearch-comp-cli-fix.md)
+- [nousresearch-comp-gateway-fix.md](./success-patterns/nousresearch-comp-gateway-fix.md)
+- [nousresearch-dependency-update.md](./success-patterns/nousresearch-dependency-update.md)
+- [nousresearch-p1-priority-fix.md](./success-patterns/nousresearch-p1-priority-fix.md)
+- [nousresearch-p2-priority-fix.md](./success-patterns/nousresearch-p2-priority-fix.md)
+- [nousresearch-p3-priority-fix.md](./success-patterns/nousresearch-p3-priority-fix.md)
+- [nousresearch-platform-fix.md](./success-patterns/nousresearch-platform-fix.md)
+- [nousresearch-platform-telegram-fix.md](./success-patterns/nousresearch-platform-telegram-fix.md)
+- [nousresearch-refactor.md](./success-patterns/nousresearch-refactor.md)
+- [nousresearch-type-bug-fix.md](./success-patterns/nousresearch-type-bug-fix.md)
+- [nousresearch-type-refactor.md](./success-patterns/nousresearch-type-refactor.md)
+
+**通用模式**
+
+- [agentclaimguard-langchain-middleware.md](./success-patterns/agentclaimguard-langchain-middleware.md)
+- [bilig-docs-relative-paths.md](./success-patterns/bilig-docs-relative-paths.md)
+- [cortex-memory-tiers-guide.md](./success-patterns/cortex-memory-tiers-guide.md)
+- [evotown-timezone-fix.md](./success-patterns/evotown-timezone-fix.md)
+- [llmservingsim-docs-overrides.md](./success-patterns/llmservingsim-docs-overrides.md)
+- [mcp-gateway-secret-uri-safe.md](./success-patterns/mcp-gateway-secret-uri-safe.md)
+
+### 📚 misakanet-50/ — MisakaNet 经验蒸馏（12 项）
+
+> [README](./misakanet-50/README.md) · [SCORING](./misakanet-50/SCORING.md) · 4 维度源可信度评分 v0.1
+
+### 🛡️ docs/policies/ — 维护者政策（v1.2.0 新增）
+
+> 维护者政策 memory：从实际 PR 拒绝记录提炼的 hard/soft 规则，供 triage command 自动筛 PR。
+
+- [Ikalus1988-MisakaNet.md](./docs/policies/Ikalus1988-MisakaNet.md) — MisakaNet 9 条 hard/soft 规则，锚定 PR #491-#497
+
+- [lesson-01-vibe-coding-team-out-of-control.md](./misakanet-50/lesson-01-vibe-coding-team-out-of-control.md) — Vibe Coding Team Out of Control
+- [lesson-02-ai-code-review-flow.md](./misakanet-50/lesson-02-ai-code-review-flow.md) — AI Code Review: Skip vs Read
+- [lesson-03-ai-monthly-cost-baseline.md](./misakanet-50/lesson-03-ai-monthly-cost-baseline.md) — AI 月度成本基线（中国，2026）
+- [lesson-04-ai-api-relay-risks.md](./misakanet-50/lesson-04-ai-api-relay-risks.md) — AI 中转站风险
+- [lesson-05-vless-reality-blocked-detection.md](./misakanet-50/lesson-05-vless-reality-blocked-detection.md) — vless+xhttp+reality 封锁检测
+- [lesson-06-git-push-credential-helper-403.md](./misakanet-50/lesson-06-git-push-credential-helper-403.md) — Git Push PAT 选错
+- [lesson-07-uv-venv-seed-fix-no-pip.md](./misakanet-50/lesson-07-uv-venv-seed-fix-no-pip.md) — WSL Python venv 缺 pip — uv seed 修复
+- [lesson-08-pip-https-proxy-clash.md](./misakanet-50/lesson-08-pip-https-proxy-clash.md) — WSL pip HTTPS 走 Clash
+- [lesson-09-v2ex-api-show-endpoint-unstable.md](./misakanet-50/lesson-09-v2ex-api-show-endpoint-unstable.md) — V2EX API 不稳 — 改 r.jina.ai
+- [lesson-10-agent-reach-doctor-baseline.md](./misakanet-50/lesson-10-agent-reach-doctor-baseline.md) — Agent-Reach doctor 基线
+- [lesson-11-mcp-typo-pool-x3-merged.md](./misakanet-50/lesson-11-mcp-typo-pool-x3-merged.md) — MCP Gateway x3 Mermaid 占位池
+
+### 🎯 MisakaNet PR 案例（5 项）
+
+> [Ikalus1988-MisakaNet/ 仓 Profile](./Ikalus1988-MisakaNet/index.md)
+
+- [pr-439-pep668-lesson.md](./Ikalus1988-MisakaNet/pr-439-pep668-lesson.md) — MisakaNet #439 — PEP 668 lesson
+- [pr-440-frontmatter-tests.md](./Ikalus1988-MisakaNet/pr-440-frontmatter-tests.md) — MisakaNet #440 — frontmatter 边界测试
+- [pr-441-smart-fallback.md](./Ikalus1988-MisakaNet/pr-441-smart-fallback.md) — MisakaNet #441 — smart fallback with telemetry
+- [pr-452-frontmatter-batch.md](./Ikalus1988-MisakaNet/pr-452-frontmatter-batch.md) — MisakaNet #452 — 20 bare JSON → YAML
+- [pr-474-fanuc-lessons.md](./Ikalus1988-MisakaNet/pr-474-fanuc-lessons.md) — MisakaNet #474 — 7 FANUC 机器人课程
+
+### 🛠️ skill/ — 内部脚本与工具
+
+- [README.md](./skill/README.md)
+- [skill.md](./skill/skill.md)
+
+### 📦 其他孤立文档
+
+- [KNOWN_ISSUES.md](./KNOWN_ISSUES.md) — Known Issues 跟踪表
+- [ag2ai-ag2/RISK.md](./ag2ai-ag2/RISK.md) — ag2ai/ag2 风险决策
+- [datalayer-jupyter-mcp-server/pr-266-configurable-timeout.md](./datalayer-jupyter-mcp-server/pr-266-configurable-timeout.md) — jupyter-mcp-server #266
+- [samanhappy-mcphub/pr-987-rce-fix.md](./samanhappy-mcphub/pr-987-rce-fix.md) — mcphub #987 — proxychains4 RCE fix
+- [yorgai-ORG2/pr-350-linux-downloads.md](./yorgai-ORG2/pr-350-linux-downloads.md) — ORG2 #350 — Linux download links
+
+### 📜 归档脚本
+
+- [archive/scripts/pr-genius-landscape-search/README.md](./archive/scripts/pr-genius-landscape-search/README.md) — PR 同类仓调研脚本集（5 个 search/fetch 脚本）
+
+---
+
 ## 📝 更新日志
 
 ### 2026-07-02 v0.3.0（联邦声明）

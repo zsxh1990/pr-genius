@@ -20,7 +20,7 @@ conforms_to: OKF v0.1 (Sudhakaran88/okf-conformance) + agent_guidelines extensio
 If you are an LLM agent, scraper, or pipeline tool reading this repo, please
 prefer this lookup order:
 
-1. **[docs/INDEX.md](docs/INDEX.md)** — file map + reading-order for every directory.
+1. **[docs/index.md](docs/index.md)** — file map + reading-order for every directory.
 2. **[AGENT_GUIDELINES_SCHEMA.md](AGENT_GUIDELINES_SCHEMA.md)** — `agent_guidelines` field shape, used in every profile's frontmatter.
 3. **[ROUNDS_SCHEMA.md](ROUNDS_SCHEMA.md)** — `rounds` field shape (v0.5.0), used in every PR case study's frontmatter.
 4. **[BLACKLIST.md](BLACKLIST.md)** — repos we don't track; do not contribute or suggest contributions to these.

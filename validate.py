@@ -80,6 +80,8 @@ def check_frontmatter(files: list[Path]) -> None:
             "Skill",               # skill/skill.md
             "Retrospective",       # docs/rejected-pr-retrospective.md
             "Test Report",         # docs/coach-smoke-test-*.md
+            "Compliance Audit",    # docs/COMPLIANCE_AUDIT.md (added 2026-07-19)
+            "Maintainer Policy", # docs/policies/<repo>.md (added 2026-07-18 by v1.2.0)
         }:
             warnings.append(
                 f"{f.relative_to(ROOT)}: unknown type `{fm['type']}`"

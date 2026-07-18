@@ -288,7 +288,7 @@ research approach. Repo Profiles take longer to draft than Case
 Studies because they require *evidence*-backed claims about the
 upstream's vibe.
 
-We follow [CONTRIBUTING.md](CONTRIBUTING.md) and treat AI-assisted
+We follow [CONTRIBUTING.md](../CONTRIBUTING.md) and treat AI-assisted
 PRs as first-class citizens with mandatory disclosure (`AI-assisted`
 badge at the top of the PR body).
 

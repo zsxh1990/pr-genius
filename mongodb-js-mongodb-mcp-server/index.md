@@ -167,6 +167,10 @@ decision:
 - [anti-patterns](../anti-patterns/) — 本仓无命中反模式
 - [OKF bundle 根入口](../index.md)
 
+## PR Case Studies（本仓 1 项）
+
+- [pr-1309-azure-readme-version.md](./pr-1309-azure-readme-version.md) — mongodb-mcp-server #1309 — docs(azure): remove stale tested image version
+
 ---
 
 ## 📝 更新日志

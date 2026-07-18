@@ -176,3 +176,13 @@ re-runnable evidence / release tools.
 | Metrics roadmap | `docs/METRICS.md` (克莱恩 7 指标对账, 短期可消 4/7) |
 | `validate.py --strict` | 0 errors ✅ |
 | `validate.py --enforce-evidence` | 0 warnings ✅ (hard-gate on PRs) |
+
+## docs/ 文档清单（6 篇 sibling）
+
+- [BLOG.md](./BLOG.md) — 长篇 blog（v0.7.6, 355 行, 13.4 KB）
+- [METRICS.md](./METRICS.md) — 7 指标对账 roadmap
+- [anti-pattern-analysis-methodology.md](./anti-pattern-analysis-methodology.md) — PR 反模式分析方法
+- [coach-smoke-test-2026-07-15.md](./coach-smoke-test-2026-07-15.md) — Coach Smoke Test
+- [rejected-pr-retrospective.md](./rejected-pr-retrospective.md) — 18 个被拒 PR 反模式分析
+- [success-pr-retrospective.md](./success-pr-retrospective.md) — 21 个合并 PR 成功模式分析
+- [COMPLIANCE_AUDIT.md](./COMPLIANCE_AUDIT.md) — OKF v0.1 合规审计报告（2026-07-19）

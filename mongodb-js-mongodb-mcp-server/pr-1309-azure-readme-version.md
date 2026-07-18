@@ -155,7 +155,7 @@ schema_version: rounds-v0.2.0
 ## 关联文档
 
 - [mongodb-js-mongodb-mcp-server 仓 Profile](../index.md)
-- [OKF bundle 根入口](../../index.md)
-- [BLACKLIST](../../BLACKLIST.md) — mongodb-js 不在拉黑清单
-- [anti-patterns](../../anti-patterns/) — 无命中
-- [MEMORY.md pr-genius v0.5.0](../../../MEMORY.md#-pr-genius-zsxh1990-仓-v050-沉淀2026-07-02-2356-gmt8)
+- [OKF bundle 根入口](../index.md)
+- [BLACKLIST](../BLACKLIST.md) — mongodb-js 不在拉黑清单
+- [anti-patterns](../anti-patterns/) — 无命中
+- [MisakaNet MEMORY 引用（v0.5.0 沉淀）](https://github.com/Ikalus1988/MisakaNet/blob/main/memory/2026-07-02.md) — 已外链，跨仓引用超出 OKF bundle 范围
