@@ -15,6 +15,7 @@ import sys
 from pathlib import Path
 
 from . import __version__
+from .triage import triage_pr
 from .parser import (
     iter_profiles,
     iter_case_studies,
@@ -326,6 +327,56 @@ def cmd_mcp_serve(args) -> int:
     return serve(repo_root=repo_root)
 
 
+def cmd_triage(args) -> int:
+    """Triage PR against maintainer policy."""
+    repo_root = _get_repo_root(args)
+    body = args.body or ""
+    diff_stat = args.diff_stat or ""
+
+    # Read body from file if specified
+    if args.body_file:
+        try:
+            body = Path(args.body_file).read_text(encoding="utf-8")
+        except (OSError, FileNotFoundError) as e:
+            print(f"Error reading body file: {e}", file=sys.stderr)
+            return 1
+
+    result = triage_pr(
+        title=args.title,
+        repo=args.repo,
+        body=body,
+        diff_stat=diff_stat,
+        repo_root=repo_root,
+    )
+
+    if args.format == "json":
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+    else:
+        # Human-readable output
+        print(f"## PR Triage: {result['repo']}\n")
+        print(f"**{result['message']}**\n")
+
+        if result.get("policy_loaded"):
+            print(f"Policy: `{result['policy_file']}`")
+            print(f"Rules checked: {result['rules_checked']}\n")
+
+        if result["violations"]:
+            print("### Violations\n")
+            for v in result["violations"]:
+                icon = "🔴" if v["rule_type"] == "hard" else "🟡"
+                anchors = ", ".join(f"#{a}" for a in v.get("anchors", []))
+                print(f"{icon} **Rule {v['rule_number']}**: {v['rule_title']}")
+                print(f"   Evidence: {v['evidence']}")
+                if anchors:
+                    print(f"   Anchors: {anchors}")
+                print()
+        else:
+            print("No policy violations detected.\n")
+
+    # Exit code: 1 = reject, 0 = pass/warn
+    return 1 if result["verdict"] == "reject" else 0
+
+
 # ============================================================
 # main
 # ============================================================
@@ -383,6 +434,16 @@ def main(argv: list[str] | None = None) -> int:
     ch.add_argument("--mergeable", default="MERGEABLE", help="合并状态 (MERGEABLE/CONFLICTING/UNKNOWN)")
     ch.add_argument("--format", "-f", choices=["text", "json"], default="text", help="输出格式")
     ch.set_defaults(func=cmd_coach)
+
+    # ---- triage ----
+    tr = sub.add_parser("triage", help="Policy-aware PR triage")
+    tr.add_argument("title", help="PR 标题")
+    tr.add_argument("--repo", "-r", required=True, help="目标仓库 (org/repo)")
+    tr.add_argument("--body", "-b", default="", help="PR body")
+    tr.add_argument("--body-file", default="", help="从文件读取 PR body")
+    tr.add_argument("--diff-stat", default="", help="git diff --stat 输出")
+    tr.add_argument("--format", "-f", choices=["text", "json"], default="text", help="输出格式")
+    tr.set_defaults(func=cmd_triage)
 
     # ---- suggest (兼容) ----
     sg = sub.add_parser("suggest", help="获取改进建议 (同 analyze)")
