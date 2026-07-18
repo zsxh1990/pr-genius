@@ -97,17 +97,29 @@ def _check_policy_rules(title: str, body: str, diff_stat: str, policy: dict) -> 
         # Rule 1: 破坏性 README 重写
         if "readme" in rule_title and ("重写" in rule_title or "rewrite" in rule_title):
             if "readme" in diff_stat.lower():
-                # Check if it's a large change (heuristic: more than 50 lines changed in README)
-                readme_match = re.search(r"README.*?(\d+)", diff_stat)
-                if readme_match and int(readme_match.group(1)) > 50:
+                # Check for destructive rewrite: @@ -1,N +1,M @@ where N >> M
+                hunk_match = re.search(r"@@\s+-1,(\d+)\s+\+1,(\d+)\s+@@", diff_stat)
+                if hunk_match:
+                    old_lines = int(hunk_match.group(1))
+                    new_lines = int(hunk_match.group(2))
+                    if old_lines > 50 and new_lines < old_lines * 0.1:
+                        triggered = True
+                        evidence = f"README 从 {old_lines} 行重写为 {new_lines} 行（破坏性替换）"
+                # Also check for large line count in diff stat
+                elif re.search(r"README.*?(\d{3,})", diff_stat):
                     triggered = True
-                    evidence = f"README 修改超过 50 行"
+                    evidence = "README 大规模修改"
 
         # Rule 2: 生成器残留文件
         elif "生成器" in rule_title or "generator" in rule_title or "残留" in rule_title:
-            if "---" in diff_stat or "```" in diff_stat:
+            # Check for files with --- in the filename (not diff format ---)
+            # e.g. "README.md ---" or "search_knowledge.py ---"
+            if re.search(r'\w+\.\w+\s+---', diff_stat):
                 triggered = True
-                evidence = "diff stat 中发现 --- 或 ``` 残留"
+                evidence = "发现文件名含 --- 的生成器残留文件"
+            elif "```" in diff_stat and "diff" not in diff_stat[:20]:
+                triggered = True
+                evidence = "diff stat 中发现 ``` 残留"
 
         # Rule 3: 粘贴 patch 到源码
         elif "粘贴" in rule_title or "paste" in rule_title or "patch" in rule_title:
@@ -122,6 +134,14 @@ def _check_policy_rules(title: str, body: str, diff_stat: str, policy: dict) -> 
             if deletions and int(deletions[0]) > 100:
                 triggered = True
                 evidence = f"删除超过 100 行"
+            # Also check for destructive rewrites of core .py files
+            hunk_match = re.search(r"@@\s+-1,(\d+)\s+\+1,(\d+)\s+@@", diff_stat)
+            if hunk_match and ".py" in diff_stat:
+                old_lines = int(hunk_match.group(1))
+                new_lines = int(hunk_match.group(2))
+                if old_lines > 100 and new_lines < old_lines * 0.2:
+                    triggered = True
+                    evidence = f"核心 .py 文件从 {old_lines} 行重写为 {new_lines} 行"
 
         # Rule 5: docs-only PR 不应改代码
         elif "docs" in rule_title and "代码" in rule_title:
