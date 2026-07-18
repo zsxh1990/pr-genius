@@ -11,6 +11,38 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-07-18
+
+### Added
+- **Daily content expansion**: `scripts/daily_content_expand.py`
+  - 自动从 32 个大中仓采样 50 PR/天
+  - 7 类质量配额（merged/closed/review/open）
+  - 每日 20:37 cron 触发
+- **Coach fit report**: `scripts/coach_cases.py`
+  - 预测 vs 实际结果对比
+  - 156 case, 24 repo, 85% 准确率
+- **13 new repo profiles**: httpx, checkout, pydantic, markitdown, tailwindcss,
+  huggingface, terraform, docker-compose, cli, openai-python, rust-lang,
+  react, fastapi, chroma, qdrant, TypeScript, ruff, deno, golang, anthropics, prometheus
+- **Maintainer Policy Memory**: `docs/policies/Ikalus1988-MisakaNet.md`
+  - 基于 PR #491-#497 锚点的 9 条维护者政策
+  - triage 指南 + hard/soft 分类
+- **Shared utilities**: `prgenius/src/prgenius/utils.py`
+  - run_gh, fetch_recent_prs, get_merge_rate, classify_pr, extract_signals
+
+### Changed
+- **evaluator**: 合并率 >0.8 的大仓取消"首次大仓提 PR"负面信号
+  - 准确率从 79% 提升到 87%（121 case）/ 85%（156 case）
+- **Signal extraction**: 新增 8 个 metadata-based 信号
+  - is_small_pr, is_large_pr, is_backport, is_dependency_update,
+    is_bot_pr, has_reviews, has_comments, change_ratio
+- **validate.py**: 新增 "Test Report" 合法 type
+- **Version**: 统一为 1.2.0（README + pyproject.toml + __init__.py）
+
+### Fixed
+- README version 1.1.1 → 1.2.0（与 pyproject.toml 一致）
+- 根 index.md 同步 35 个仓库画像
+
 ## [1.1.1] - 2026-07-09
 
 ### Fixed
