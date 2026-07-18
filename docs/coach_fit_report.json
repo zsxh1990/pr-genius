@@ -1,12 +1,12 @@
 {
-  "total_cases": 121,
+  "total_cases": 156,
   "counts": {
-    "correct": 54,
-    "close": 51,
-    "wrong": 16,
+    "correct": 70,
+    "close": 62,
+    "wrong": 24,
     "skip": 0
   },
-  "accuracy_pct": 86.8,
+  "accuracy_pct": 84.6,
   "by_repo": {
     "pydantic/pydantic": {
       "correct": 7,
@@ -29,6 +29,13 @@
       "skip": 0,
       "total": 13
     },
+    "prometheus/prometheus": {
+      "correct": 12,
+      "close": 1,
+      "wrong": 0,
+      "skip": 0,
+      "total": 13
+    },
     "astral-sh/uv": {
       "correct": 2,
       "close": 10,
@@ -43,12 +50,26 @@
       "skip": 0,
       "total": 12
     },
+    "docker/compose": {
+      "correct": 2,
+      "close": 4,
+      "wrong": 5,
+      "skip": 0,
+      "total": 11
+    },
     "microsoft/TypeScript": {
       "correct": 8,
       "close": 2,
       "wrong": 0,
       "skip": 0,
       "total": 10
+    },
+    "tailwindlabs/tailwindcss": {
+      "correct": 7,
+      "close": 0,
+      "wrong": 2,
+      "skip": 0,
+      "total": 9
     },
     "modelcontextprotocol/python-sdk": {
       "correct": 5,
@@ -64,12 +85,19 @@
       "skip": 0,
       "total": 7
     },
-    "tailwindlabs/tailwindcss": {
-      "correct": 4,
-      "close": 0,
-      "wrong": 2,
+    "rust-lang/rust": {
+      "correct": 0,
+      "close": 3,
+      "wrong": 3,
       "skip": 0,
       "total": 6
+    },
+    "goharbor/harbor": {
+      "correct": 0,
+      "close": 5,
+      "wrong": 0,
+      "skip": 0,
+      "total": 5
     },
     "huggingface/transformers": {
       "correct": 0,
@@ -85,17 +113,10 @@
       "skip": 0,
       "total": 4
     },
-    "rust-lang/rust": {
+    "openai/openai-python": {
       "correct": 0,
-      "close": 2,
-      "wrong": 1,
-      "skip": 0,
-      "total": 3
-    },
-    "docker/compose": {
-      "correct": 1,
-      "close": 2,
-      "wrong": 0,
+      "close": 1,
+      "wrong": 2,
       "skip": 0,
       "total": 3
     },
@@ -105,13 +126,6 @@
       "wrong": 0,
       "skip": 0,
       "total": 3
-    },
-    "openai/openai-python": {
-      "correct": 0,
-      "close": 1,
-      "wrong": 1,
-      "skip": 0,
-      "total": 2
     },
     "denoland/deno": {
       "correct": 0,
@@ -127,6 +141,13 @@
       "skip": 0,
       "total": 1
     },
+    "anthropics/anthropic-sdk-python": {
+      "correct": 0,
+      "close": 1,
+      "wrong": 0,
+      "skip": 0,
+      "total": 1
+    },
     "chroma-core/chroma": {
       "correct": 1,
       "close": 0,
@@ -137,6 +158,13 @@
     "facebook/react": {
       "correct": 1,
       "close": 0,
+      "wrong": 0,
+      "skip": 0,
+      "total": 1
+    },
+    "golang/go": {
+      "correct": 0,
+      "close": 1,
       "wrong": 0,
       "skip": 0,
       "total": 1
@@ -385,10 +413,114 @@
       "success_pattern_hits": []
     },
     {
+      "id": "docker-compose-13931",
+      "repo": "docker/compose",
+      "pr_number": 13931,
+      "title": "fix(reconcile): preserve zero-replica services during hashin",
+      "actual_outcome": "merged",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "wrong",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "docker-compose-13941",
+      "repo": "docker/compose",
+      "pr_number": 13941,
+      "title": "build(deps): bump the docker-actions group across 1 director",
+      "actual_outcome": "merged",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "wrong",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "docker-compose-13942",
+      "repo": "docker/compose",
+      "pr_number": 13942,
+      "title": "build(deps): bump github/codeql-action/upload-sarif from 4.3",
+      "actual_outcome": "merged",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "wrong",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "docker-compose-13943",
+      "repo": "docker/compose",
+      "pr_number": 13943,
+      "title": "build(deps): bump actions/stale from 10.3.0 to 10.4.0",
+      "actual_outcome": "merged",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "wrong",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "docker-compose-13950",
+      "repo": "docker/compose",
+      "pr_number": 13950,
+      "title": "fix(config): warn when service selection is silently ignored",
+      "actual_outcome": "merged",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "wrong",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "encode-httpx-3773",
       "repo": "encode/httpx",
       "pr_number": 3773,
       "title": "Adapt test_response_decode_text_using_autodetect for chardet",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "goharbor-harbor-23569",
+      "repo": "goharbor/harbor",
+      "pr_number": 23569,
+      "title": "fix(replication): fix incorrect error propagation in getAcce",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "goharbor-harbor-23571",
+      "repo": "goharbor/harbor",
+      "pr_number": 23571,
+      "title": "fix: address unsafe type assertions causing potential panics",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "goharbor-harbor-23572",
+      "repo": "goharbor/harbor",
+      "pr_number": 23572,
+      "title": "fix: guard against division by zero when merging scan report",
       "actual_outcome": "merged",
       "predicted_risk": "medium",
       "predicted_rate": null,
@@ -528,6 +660,32 @@
       "success_pattern_hits": []
     },
     {
+      "id": "openai-openai-python-3515",
+      "repo": "openai/openai-python",
+      "pr_number": 3515,
+      "title": "fix(deps): require patched aiohttp on Python 3.10+",
+      "actual_outcome": "merged",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "wrong",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "prometheus-prometheus-19213",
+      "repo": "prometheus/prometheus",
+      "pr_number": 19213,
+      "title": "docs: Remove retired Go report card badge",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "pydantic-pydantic-13441",
       "repo": "pydantic/pydantic",
       "pr_number": 13441,
@@ -619,6 +777,32 @@
       "success_pattern_hits": []
     },
     {
+      "id": "rust-lang-rust-159468",
+      "repo": "rust-lang/rust",
+      "pr_number": 159468,
+      "title": "Android platform support: add links to make it easier to fig",
+      "actual_outcome": "merged",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "wrong",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "rust-lang-rust-159498",
+      "repo": "rust-lang/rust",
+      "pr_number": 159498,
+      "title": "Rollup of 5 pull requests",
+      "actual_outcome": "merged",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "wrong",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "tailwindlabs-tailwindcss-20335",
       "repo": "tailwindlabs/tailwindcss",
       "pr_number": 20335,
@@ -684,6 +868,19 @@
       "success_pattern_hits": []
     },
     {
+      "id": "anthropics-anthropic-sdk-python-1757",
+      "repo": "anthropics/anthropic-sdk-python",
+      "pr_number": 1757,
+      "title": "fix(examples): replace dated model alias in tools example",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "astral-sh-uv-20487",
       "repo": "astral-sh/uv",
       "pr_number": 20487,
@@ -723,6 +920,19 @@
       "success_pattern_hits": []
     },
     {
+      "id": "docker-compose-13932",
+      "repo": "docker/compose",
+      "pr_number": 13932,
+      "title": "fix: honor [SERVICE...] filter in config --no-interpolate",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "encode-httpx-3765",
       "repo": "encode/httpx",
       "pr_number": 3765,
@@ -745,6 +955,45 @@
       "predicted_rate": null,
       "actual_risk": "high",
       "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "goharbor-harbor-23566",
+      "repo": "goharbor/harbor",
+      "pr_number": 23566,
+      "title": "fix: safely type assert filter values when building artifact",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "goharbor-harbor-23567",
+      "repo": "goharbor/harbor",
+      "pr_number": 23567,
+      "title": "fix: safely type assert filter values when building reposito",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "golang-go-80407",
+      "repo": "golang/go",
+      "pr_number": 80407,
+      "title": "go/build/constraint: match \"go1.\" only as a tag prefix in Go",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "close",
       "anti_pattern_hits": [],
       "success_pattern_hits": []
     },
@@ -1022,6 +1271,19 @@
       "success_pattern_hits": []
     },
     {
+      "id": "tailwindlabs-tailwindcss-20323",
+      "repo": "tailwindlabs/tailwindcss",
+      "pr_number": 20323,
+      "title": "Avoid full reload in `@tailwindcss/vite` when editing a scan",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "tailwindlabs-tailwindcss-20337",
       "repo": "tailwindlabs/tailwindcss",
       "pr_number": 20337,
@@ -1048,10 +1310,36 @@
       "success_pattern_hits": []
     },
     {
+      "id": "tailwindlabs-tailwindcss-20339",
+      "repo": "tailwindlabs/tailwindcss",
+      "pr_number": 20339,
+      "title": "fix: stale @tailwindcss/postcss output when input CSS change",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "tailwindlabs-tailwindcss-20340",
       "repo": "tailwindlabs/tailwindcss",
       "pr_number": 20340,
       "title": "fix: lazily load @parcel/watcher in @tailwindcss/cli",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "tailwindlabs-tailwindcss-20341",
+      "repo": "tailwindlabs/tailwindcss",
+      "pr_number": 20341,
+      "title": "fix: prevent @tailwindcss/upgrade from rewriting node_module",
       "actual_outcome": "closed",
       "predicted_risk": "high",
       "predicted_rate": null,
@@ -1243,10 +1531,36 @@
       "success_pattern_hits": []
     },
     {
+      "id": "docker-compose-13937",
+      "repo": "docker/compose",
+      "pr_number": 13937,
+      "title": "Resolve pre_start hook images alongside service images",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "docker-compose-13947",
       "repo": "docker/compose",
       "pr_number": 13947,
       "title": "build(deps): bump github.com/containerd/containerd/v2 from 2",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "docker-compose-13949",
+      "repo": "docker/compose",
+      "pr_number": 13949,
+      "title": "fix(build): use platform image-manifest digest, not attested",
       "actual_outcome": "open",
       "predicted_risk": "high",
       "predicted_rate": null,
@@ -1672,6 +1986,162 @@
       "success_pattern_hits": []
     },
     {
+      "id": "prometheus-prometheus-19214",
+      "repo": "prometheus/prometheus",
+      "pr_number": 19214,
+      "title": "scrape: raise 'Scrape failed' log level from debug to warn",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "prometheus-prometheus-19215",
+      "repo": "prometheus/prometheus",
+      "pr_number": 19215,
+      "title": "web: fix IPv6 address mangling in TLS handshake error logs",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "prometheus-prometheus-19216",
+      "repo": "prometheus/prometheus",
+      "pr_number": 19216,
+      "title": "tsdb: fix OOO chunk ID overflow via modular wrapping",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "prometheus-prometheus-19217",
+      "repo": "prometheus/prometheus",
+      "pr_number": 19217,
+      "title": "notifier: add test coverage for sendLoop error paths and dra",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "prometheus-prometheus-19218",
+      "repo": "prometheus/prometheus",
+      "pr_number": 19218,
+      "title": "remote_write: Ignore metadata when deciding RWv2 shard count",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "prometheus-prometheus-19219",
+      "repo": "prometheus/prometheus",
+      "pr_number": 19219,
+      "title": "promqltest: improve ST support with absolute and repeat synt",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "prometheus-prometheus-19220",
+      "repo": "prometheus/prometheus",
+      "pr_number": 19220,
+      "title": "tsdb/wlog: avoid shadowing checkpoint metadata",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "prometheus-prometheus-19221",
+      "repo": "prometheus/prometheus",
+      "pr_number": 19221,
+      "title": "model/histogram: trim native histogram buckets in place",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "prometheus-prometheus-19223",
+      "repo": "prometheus/prometheus",
+      "pr_number": 19223,
+      "title": "chore: update client_golang to v1.24.0-rc.0",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "prometheus-prometheus-19225",
+      "repo": "prometheus/prometheus",
+      "pr_number": 19225,
+      "title": "test(api): Fix silent target error in metricMetadata tests",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "prometheus-prometheus-19226",
+      "repo": "prometheus/prometheus",
+      "pr_number": 19226,
+      "title": "tsdb: use bytes.Clone instead of make and copy",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "prometheus-prometheus-19227",
+      "repo": "prometheus/prometheus",
+      "pr_number": 19227,
+      "title": "promql: handle to_nearest=0 and negative values in round()",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "pydantic-pydantic-13443",
       "repo": "pydantic/pydantic",
       "pr_number": 13443,
@@ -1715,6 +2185,19 @@
       "repo": "rust-lang/rust",
       "pr_number": 159416,
       "title": "Fix typo in usize::overflowing_add docs",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "rust-lang-rust-159500",
+      "repo": "rust-lang/rust",
+      "pr_number": 159500,
+      "title": "Move compiletest CLI parsing to `cli.rs`",
       "actual_outcome": "open",
       "predicted_risk": "high",
       "predicted_rate": null,
