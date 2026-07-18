@@ -1,0 +1,39 @@
+{
+  "id": "kubernetes-kubernetes-140708",
+  "repo": "kubernetes/kubernetes",
+  "pr_number": 140708,
+  "title": "/test: move /test/e2e/lifecycle tests to /test/e2e_kubeadm",
+  "author": "neolit123",
+  "state": "MERGED",
+  "merged": true,
+  "category": "merged_success",
+  "created_at": "2026-07-18T09:16:25Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": true,
+    "files_changed": 9,
+    "additions": 87,
+    "deletions": 213,
+    "review_count": 1,
+    "comment_count": 9,
+    "change_ratio": 2.45
+  },
+  "metrics": {
+    "files_changed": 9,
+    "additions": 87,
+    "deletions": 213
+  }
+}
