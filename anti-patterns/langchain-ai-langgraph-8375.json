@@ -1,0 +1,39 @@
+{
+  "id": "langchain-ai-langgraph-8375",
+  "repo": "langchain-ai/langgraph",
+  "pr_number": 8375,
+  "title": "fix(checkpoint): avoid nan cosine scores for zero-norm vectors in InMemoryStore",
+  "author": "anuragpaul602-netizen",
+  "state": "CLOSED",
+  "merged": false,
+  "category": "closed_rejected",
+  "created_at": "2026-07-18T14:05:06Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": true,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 2,
+    "additions": 26,
+    "deletions": 2,
+    "review_count": 0,
+    "comment_count": 1,
+    "change_ratio": 0.08
+  },
+  "metrics": {
+    "files_changed": 2,
+    "additions": 26,
+    "deletions": 2
+  }
+}
