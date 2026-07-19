@@ -109,7 +109,7 @@ def check_issue_link(body: str) -> bool:
     return bool(ISSUE_LINK_RE.search(body))
 
 
-def _check_requires_dco(repo: str, repo_root: Path) -> Optional[bool]:
+def _check_requires_dco(repo: str, repo_root) -> Optional[bool]:
     """检查仓库是否要求 DCO sign-off
 
     返回:
@@ -117,6 +117,8 @@ def _check_requires_dco(repo: str, repo_root: Path) -> Optional[bool]:
         False — requires_dco: false
         None  — 未找到 profile 或未声明
     """
+    # v1.4.0 修复: 接受 str | Path
+    repo_root = Path(repo_root) if not isinstance(repo_root, Path) else repo_root
     # 尝试加载仓库 profile
     target_folder = repo.replace("/", "-").lower()
     profile_dir = repo_root / target_folder
@@ -143,7 +145,7 @@ def _check_requires_dco(repo: str, repo_root: Path) -> Optional[bool]:
         return None
 
 
-def _check_require_issue_first(repo: str, repo_root: Path) -> Optional[bool]:
+def _check_require_issue_first(repo: str, repo_root) -> Optional[bool]:
     """检查仓库是否要求先 Issue 后 PR
 
     返回:
@@ -151,6 +153,8 @@ def _check_require_issue_first(repo: str, repo_root: Path) -> Optional[bool]:
         False — require_issue_first: false
         None  — 未找到 profile 或未声明
     """
+    # v1.4.0 修复: 接受 str | Path
+    repo_root = Path(repo_root) if not isinstance(repo_root, Path) else repo_root
     target_folder = repo.replace("/", "-").lower()
     index_file = repo_root / target_folder / "index.md"
     if not index_file.exists():
@@ -174,13 +178,15 @@ def _check_require_issue_first(repo: str, repo_root: Path) -> Optional[bool]:
         return None
 
 
-def _check_has_policy(repo: str, repo_root: Path) -> bool:
+def _check_has_policy(repo: str, repo_root) -> bool:
     """检查仓库是否有 pr-genius profile + maintainer policy
 
     返回:
         True  — 仓在 pr-genius 有 profile + policy 文件
         False — 无 profile 或无 policy
     """
+    # v1.4.0 修复: 接受 str | Path
+    repo_root = Path(repo_root) if not isinstance(repo_root, Path) else repo_root
     target_folder = repo.replace("/", "-").lower()
     profile_index = repo_root / target_folder / "index.md"
     if not profile_index.exists():
@@ -204,7 +210,9 @@ def _parse_label(label: str) -> Tuple[str, str]:
 # 模式加载
 # ============================================================
 
-def load_anti_patterns(repo_root: Path) -> Dict[str, dict]:
+def load_anti_patterns(repo_root) -> Dict[str, dict]:
+    # v1.4.0 修复: 接受 str | Path (MCP smoke test 发现)
+    repo_root = Path(repo_root) if not isinstance(repo_root, Path) else repo_root
     patterns = {}
     anti_patterns_dir = repo_root / "anti-patterns"
     if not anti_patterns_dir.exists():
@@ -250,8 +258,10 @@ def load_anti_patterns(repo_root: Path) -> Dict[str, dict]:
     return patterns
 
 
-def check_anti_patterns(title: str, description: str, repo: str, repo_root: Path, body: str = "") -> List[dict]:
+def check_anti_patterns(title: str, description: str, repo: str, repo_root, body: str = "") -> List[dict]:
     """检查 PR 是否命中反模式"""
+    # v1.4.0 修复: 接受 str | Path
+    repo_root = Path(repo_root) if not isinstance(repo_root, Path) else repo_root
     anti_patterns = load_anti_patterns(repo_root)
     matches = []
     text = f"{title} {description} {body}".lower()
@@ -277,8 +287,10 @@ def check_anti_patterns(title: str, description: str, repo: str, repo_root: Path
     return matches
 
 
-def load_success_patterns(repo_root: Path) -> Dict[str, dict]:
+def load_success_patterns(repo_root) -> Dict[str, dict]:
     """保留加载但不再用于评分 — 仅作参考"""
+    # v1.4.0 修复: 接受 str | Path
+    repo_root = Path(repo_root) if not isinstance(repo_root, Path) else repo_root
     patterns = {}
     success_patterns_dir = repo_root / "success-patterns"
     if not success_patterns_dir.exists():
