@@ -96,16 +96,18 @@ when you open a PR.
 | Metric | Value |
 |---|---|
 | Version | 1.2.0 |
-| Repo profiles | 40 (含 Profile 仓画像 + stub + federation) |
-| Case studies (.md) | 19 (含 rounds + close_decision 完整 schema) |
-| Case studies (.json) | 140 (50 review + 33 anti-pattern + 38 success + 19 misc) |
-| Anti-patterns (.md) | 52 |
-| Success patterns (.md) | 39 |
+| Repo profiles | 49 (含 Profile 仓画像 + stub + federation) |
+| Case studies (.md) | 25 (含 rounds + close_decision 完整 schema) |
+| Anti-patterns (.md) | 67 (含 15 ContribAI 闭 PR 反模式) |
+| Anti-patterns (.json) | 59 |
+| Success patterns (.md) | 38 |
+| Success patterns (.json) | 73 |
+| Review cases (.json) | 94 |
 | Lessons (misakanet-50) | 11 |
-| Total files | 300+ |
+| Total files | 228 .md |
 | Validator checks | ✅ 0 errors |
 | OKF compliance | ✅ v0.1 |
-| Coach accuracy | 87% (121 cases, 20 repos) |
+| Coach accuracy | 83.2% (226 cases, 28 repos) |
 
 ## 这是什么 / 给谁看
 
@@ -128,18 +130,20 @@ when you open a PR.
 
 ## 统计
 
-| 维度 | 数据 |
+| Metric | Value |
 |---|---|
-| 覆盖大仓（star ≥ 1k）| **35 个**（12 已提 PR + 23 画像） |
-| Case studies (JSON) | **121 个**（45 success + 35 anti-pattern + 41 review） |
-| 总文件 | **300+** |
-| Repo Profile（仓画像）| 35 |
-| PR Case Study（单 PR 深读 + rounds）| 8 |
-| Anti-Pattern（.md 反模式）| 16 |
-| Success Pattern（.md 成功模式）| 11 |
-| 总大小 | ~4.7 MB |
-| Agent 友好度结构化（agent_guidelines）| **35/35 仓 ✅** |
-| validate.py Check 数 | **4** (frontmatter / 死链 / 一致性 / rounds v0.5.0) |
+| Version | 1.2.0 |
+| Repo profiles | 49 |
+| Case studies (.md) | 25 |
+| Anti-patterns (.md) | 67 |
+| Anti-patterns (.json) | 59 |
+| Success patterns (.md) | 38 |
+| Success patterns (.json) | 73 |
+| Review cases (.json) | 94 |
+| Lessons (misakanet-50) | 11 |
+| Validator checks | ✅ 0 errors |
+| OKF compliance | ✅ v0.1 |
+| Coach accuracy | 83.2% (226 cases, 28 repos) |
 
 ## 35 个大仓速查
 
