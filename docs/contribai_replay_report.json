@@ -1,0 +1,204 @@
+{
+  "total": 15,
+  "hits": 15,
+  "hit_rate": 1.0,
+  "results": [
+    {
+      "key": "contribai-duplicate-pr",
+      "hit": true,
+      "tier": "high_risk",
+      "anti_patterns_hit": [
+        "contribai-duplicate-pr",
+        "duplicate-pr-same-author",
+        "nousresearch-duplicate-pr",
+        "openclaw-duplicate-pr"
+      ],
+      "negative_signals": [
+        "duplicate-pr-same-author",
+        "nousresearch-duplicate-pr",
+        "contribai-duplicate-pr",
+        "openclaw-duplicate-pr",
+        "first_contributor_large_repo",
+        "needs_preflight"
+      ]
+    },
+    {
+      "key": "contribai-out-of-scope",
+      "hit": true,
+      "tier": "high_risk",
+      "anti_patterns_hit": [
+        "contribai-docs-pr-missing-quickstart",
+        "contribai-out-of-scope"
+      ],
+      "negative_signals": [
+        "contribai-docs-pr-missing-quickstart",
+        "contribai-out-of-scope",
+        "first_contributor_large_repo",
+        "needs_preflight"
+      ]
+    },
+    {
+      "key": "contribai-not-a-real-bug",
+      "hit": true,
+      "tier": "high_risk",
+      "anti_patterns_hit": [
+        "contribai-not-a-real-bug"
+      ],
+      "negative_signals": [
+        "contribai-not-a-real-bug",
+        "first_contributor_large_repo",
+        "needs_preflight"
+      ]
+    },
+    {
+      "key": "contribai-missing-tests",
+      "hit": true,
+      "tier": "high_risk",
+      "anti_patterns_hit": [
+        "contribai-missing-tests"
+      ],
+      "negative_signals": [
+        "contribai-missing-tests",
+        "needs_preflight"
+      ]
+    },
+    {
+      "key": "contribai-archived-repo",
+      "hit": true,
+      "tier": "high_risk",
+      "anti_patterns_hit": [
+        "contribai-archived-repo"
+      ],
+      "negative_signals": [
+        "contribai-archived-repo",
+        "first_contributor_large_repo",
+        "needs_preflight"
+      ]
+    },
+    {
+      "key": "contribai-docs-pr-missing-quickstart",
+      "hit": true,
+      "tier": "high_risk",
+      "anti_patterns_hit": [
+        "contribai-docs-pr-missing-quickstart"
+      ],
+      "negative_signals": [
+        "contribai-docs-pr-missing-quickstart",
+        "first_contributor_large_repo",
+        "needs_preflight"
+      ]
+    },
+    {
+      "key": "contribai-design-philosophy-mismatch",
+      "hit": true,
+      "tier": "high_risk",
+      "anti_patterns_hit": [
+        "contribai-design-philosophy-mismatch"
+      ],
+      "negative_signals": [
+        "contribai-design-philosophy-mismatch"
+      ]
+    },
+    {
+      "key": "contribai-incomplete-readme-contributing",
+      "hit": true,
+      "tier": "high_risk",
+      "anti_patterns_hit": [
+        "contribai-incomplete-readme-contributing"
+      ],
+      "negative_signals": [
+        "contribai-incomplete-readme-contributing"
+      ]
+    },
+    {
+      "key": "contribai-first-time-large-repo",
+      "hit": true,
+      "tier": "high_risk",
+      "anti_patterns_hit": [
+        "contribai-first-time-large-repo"
+      ],
+      "negative_signals": [
+        "contribai-first-time-large-repo",
+        "first_contributor_large_repo",
+        "needs_preflight"
+      ]
+    },
+    {
+      "key": "contribai-breaking-change-no-migration",
+      "hit": true,
+      "tier": "high_risk",
+      "anti_patterns_hit": [
+        "breaking-change-no-compat",
+        "contribai-breaking-change-no-migration",
+        "openclaw-compatibility-risk",
+        "openclaw-refactor-risk"
+      ],
+      "negative_signals": [
+        "contribai-breaking-change-no-migration",
+        "openclaw-compatibility-risk",
+        "openclaw-refactor-risk",
+        "breaking-change-no-compat",
+        "first_contributor_large_repo",
+        "needs_preflight"
+      ]
+    },
+    {
+      "key": "contribai-performance-benchmark-missing",
+      "hit": true,
+      "tier": "high_risk",
+      "anti_patterns_hit": [
+        "contribai-performance-benchmark-missing"
+      ],
+      "negative_signals": [
+        "contribai-performance-benchmark-missing",
+        "first_contributor_large_repo",
+        "needs_preflight"
+      ]
+    },
+    {
+      "key": "contribai-ethical-review-failed",
+      "hit": true,
+      "tier": "high_risk",
+      "anti_patterns_hit": [
+        "contribai-ethical-review-failed"
+      ],
+      "negative_signals": [
+        "contribai-ethical-review-failed"
+      ]
+    },
+    {
+      "key": "contribai-site-tos-violation",
+      "hit": true,
+      "tier": "high_risk",
+      "anti_patterns_hit": [
+        "contribai-site-tos-violation"
+      ],
+      "negative_signals": [
+        "contribai-site-tos-violation"
+      ]
+    },
+    {
+      "key": "contribai-auto-generated-trash",
+      "hit": true,
+      "tier": "high_risk",
+      "anti_patterns_hit": [
+        "contribai-auto-generated-trash"
+      ],
+      "negative_signals": [
+        "contribai-auto-generated-trash"
+      ]
+    },
+    {
+      "key": "contribai-needs-rfc-first",
+      "hit": true,
+      "tier": "high_risk",
+      "anti_patterns_hit": [
+        "contribai-needs-rfc-first"
+      ],
+      "negative_signals": [
+        "contribai-needs-rfc-first",
+        "needs_preflight"
+      ]
+    }
+  ]
+}
