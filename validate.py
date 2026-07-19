@@ -285,6 +285,11 @@ def check_anti_pattern_referenced(files: list[Path]) -> None:
     print(f"   anti-patterns: {len(ap_keys)}, referenced: {len(referenced_keys)}, orphans: {len(orphans)}, case studies: {case_count}")
 
 
+try:
+    from validate_checks.anti_pattern_referenced import check_profile_guideline_evidence
+except ImportError:
+    check_profile_guideline_evidence = None
+
 def check_case_study_outcome_required(files: list[Path]) -> None:
     """Check 5 (Month 2 克莱恩 P0 #4): case study outcome/reason/evidence 不可缺.
 
@@ -338,6 +343,8 @@ def main() -> int:
     check_root_index_consistency(root_index, repo_dirs)
     check_anti_pattern_referenced(md_files)
     check_case_study_outcome_required(md_files)
+    if check_profile_guideline_evidence:
+        check_profile_guideline_evidence(md_files, parse_frontmatter, warnings, errors, ROOT)
 
     # T4: emit snapshot stats (used by validate.py --snapshot and scripts/dashboard.py)
     if "--snapshot" in sys.argv:
