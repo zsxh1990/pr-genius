@@ -238,6 +238,86 @@ def check_root_index_consistency(root_index: Path, repo_dirs: list[Path]) -> Non
         )
 
 
+def check_anti_pattern_referenced(files: list[Path]) -> None:
+    """Check 4 (Month 2 克莱恩 P0 #4): 漂移检测.
+
+    反模式必须被至少 1 个 case study 引用 (links: 字段),
+    否则标记为 orphan — 警告. 不直接 error (orphan 可能合理,
+    例如 contribai 还没被 case 引用就入库).
+
+    Month 2 P0 #4 'case study ↔ anti-pattern 反向链'.
+    """
+    print(f"[Check 4] Anti-pattern reverse-link coverage")
+    anti_patterns_dir = ROOT / "anti-patterns"
+    if not anti_patterns_dir.exists():
+        print(f"   (no anti-patterns/ dir, skip)")
+        return
+
+    # 1. 收集所有 anti-pattern keys (from anti-patterns/*.md frontmatter)
+    ap_keys: set[str] = set()
+    for f in anti_patterns_dir.glob("*.md"):
+        if f.name == "README.md":
+            continue
+        fm, _ = parse_frontmatter(f.read_text(encoding="utf-8"))
+        if fm is None or "_error" in fm:
+            continue
+        k = fm.get("key")
+        if k:
+            ap_keys.add(k)
+
+    # 2. 收集所有 case study 中引用的 anti-pattern keys (from links: 字段或 body 文本)
+    case_files = [f for f in files if f.name.startswith("pr-")]
+    referenced_keys: set[str] = set()
+    case_count = len(case_files)
+    for cf in case_files:
+        text = cf.read_text(encoding="utf-8")
+        for k in ap_keys:
+            if k in text:
+                referenced_keys.add(k)
+
+    # 3. 警告 orphan anti-patterns
+    orphans = ap_keys - referenced_keys
+    if orphans:
+        for k in sorted(orphans):
+            warnings.append(
+                f"orphan anti-pattern: anti-patterns/{k}.md referenced by 0/{case_count} case studies"
+            )
+    print(f"   anti-patterns: {len(ap_keys)}, referenced: {len(referenced_keys)}, orphans: {len(orphans)}, case studies: {case_count}")
+
+
+def check_case_study_outcome_required(files: list[Path]) -> None:
+    """Check 5 (Month 2 克莱恩 P0 #4): case study outcome/reason/evidence 不可缺.
+
+    PR Case Study (v0.5.0 rounds schema) 必须含 close_decision.status
+    字段 + rounds[] 至少 1 轮. 缺 → error (v1.4.0 克莱恩验收门槛).
+    """
+    print(f"[Check 5] Case study outcome / evidence required")
+    case_files = [f for f in files if f.name.startswith("pr-")]
+    for f in case_files:
+        fm, _ = parse_frontmatter(f.read_text(encoding="utf-8"))
+        if fm is None or "_error" in fm:
+            continue
+        # Check 1: schema_version 必须是 rounds-v0.5.0+
+        sv = fm.get("schema_version", "")
+        if not sv.startswith("rounds-v"):
+            continue  # legacy v0.1 不强制
+        # Check 2: close_decision.status 必须存在
+        cd = fm.get("close_decision")
+        if not cd or not isinstance(cd, dict):
+            errors.append(f"{f.relative_to(ROOT)}: rounds-v0.5.0 schema but missing close_decision")
+            continue
+        if "status" not in cd:
+            errors.append(f"{f.relative_to(ROOT)}: rounds-v0.5.0 schema but close_decision missing `status`")
+        # Check 3: rounds[] 至少 1 轮
+        rounds = fm.get("rounds", [])
+        if not rounds or len(rounds) < 1:
+            errors.append(f"{f.relative_to(ROOT)}: rounds-v0.5.0 schema but rounds[] is empty")
+        # Check 4: case-level evidence_urls 必须非空
+        eu = fm.get("evidence_urls", [])
+        if not eu or len(eu) < 1:
+            errors.append(f"{f.relative_to(ROOT)}: rounds-v0.5.0 schema but evidence_urls is empty")
+
+
 def main() -> int:
     print(f"pr-genius OKF v0.1 validator — {ROOT}\n")
 
@@ -256,6 +336,8 @@ def main() -> int:
     repo_dirs = [p for p in ROOT.iterdir() if p.is_dir() and not p.name.startswith(".")]
     root_index = ROOT / "index.md"
     check_root_index_consistency(root_index, repo_dirs)
+    check_anti_pattern_referenced(md_files)
+    check_case_study_outcome_required(md_files)
 
     # T4: emit snapshot stats (used by validate.py --snapshot and scripts/dashboard.py)
     if "--snapshot" in sys.argv:
