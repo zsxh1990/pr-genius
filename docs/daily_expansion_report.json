@@ -1,20 +1,16 @@
 {
-  "date": "2026-07-18",
-  "repos_scanned": 29,
-  "prs_fetched": 435,
-  "new_cases": 31,
+  "date": "2026-07-19",
+  "repos_scanned": 32,
+  "prs_fetched": 480,
+  "new_cases": 39,
   "category_counts": {
     "merged_success": 15,
     "closed_rejected": 8,
-    "closed_duplicate": 4,
+    "closed_duplicate": 3,
     "closed_already_done": 3,
-    "review_changes_requested": 3,
+    "review_changes_requested": 4,
     "review_approved_pending": 5,
     "open_pending": 10
   },
-  "skipped_repos": [
-    "mongodb/mongo-python-driver",
-    "qdrant/qdrant",
-    "microsoft/TypeScript"
-  ]
+  "skipped_repos": []
 }

@@ -1,0 +1,39 @@
+{
+  "id": "kubernetes-kubernetes-140705",
+  "repo": "kubernetes/kubernetes",
+  "pr_number": 140705,
+  "title": "Upgrade go-oidc to v3",
+  "author": "chimanjain",
+  "state": "CLOSED",
+  "merged": false,
+  "category": "closed_already_done",
+  "created_at": "2026-07-18T06:14:06Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": true,
+    "is_backport": false,
+    "is_dependency_update": true,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 75,
+    "additions": 10405,
+    "deletions": 2162,
+    "review_count": 0,
+    "comment_count": 6,
+    "change_ratio": 0.21
+  },
+  "metrics": {
+    "files_changed": 75,
+    "additions": 10405,
+    "deletions": 2162
+  }
+}
