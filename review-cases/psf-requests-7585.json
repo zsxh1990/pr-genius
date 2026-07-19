@@ -1,0 +1,39 @@
+{
+  "id": "psf-requests-7585",
+  "repo": "psf/requests",
+  "pr_number": 7585,
+  "title": "Response.content retains and re-raises errors from a broken stream",
+  "author": "agu2347",
+  "state": "OPEN",
+  "merged": false,
+  "category": "open_pending",
+  "created_at": "2026-07-18T07:48:14Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": false,
+    "files_changed": 3,
+    "additions": 61,
+    "deletions": 2,
+    "review_count": 0,
+    "comment_count": 0,
+    "change_ratio": 0.03
+  },
+  "metrics": {
+    "files_changed": 3,
+    "additions": 61,
+    "deletions": 2
+  }
+}

@@ -2,7 +2,7 @@
   "date": "2026-07-19",
   "repos_scanned": 32,
   "prs_fetched": 480,
-  "new_cases": 15,
+  "new_cases": 16,
   "category_counts": {
     "merged_success": 15,
     "closed_rejected": 8,
