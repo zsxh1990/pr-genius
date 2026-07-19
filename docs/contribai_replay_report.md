@@ -1,9 +1,9 @@
 ---
 type: Research Report
 title: ContribAI Anti-Pattern Replay Report
-description: pr-genius v1.4.0 验收 — 15 contribai closed-PR 反模式回放检测, 100% hit rate
-version: 1.0.0
-created: 2026-07-19
+description: pr-genius v1.4.0 acceptance — 15 contribai closed-PR anti-pattern replay detection, 100% hit rate
+version: "1.0.0"
+created: "2026-07-19"
 generated_by: scripts/contribai_replay.py
 ---
 

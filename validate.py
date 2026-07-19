@@ -72,6 +72,7 @@ def check_frontmatter(files: list[Path]) -> None:
             "Schema Reference",
             "Anti-Pattern",
             "Anti-Pattern Bundle",
+            "Demo",
             "Blacklist Reference",
             "Risk Reference",      # ag2ai-ag2/RISK.md and similar risk registries
             "Index",               # misakanet-50/README.md and similar index pages

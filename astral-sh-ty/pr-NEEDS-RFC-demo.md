@@ -12,7 +12,7 @@ closed_at: "2026-07-19T20:30:00Z"
 verified_at: "2026-07-19T20:30:00Z"
 evidence_urls:
   - https://github.com/astral-sh/ty/pull/999999-demo
-  - anti-patterns/contribai-needs-rfc-first.md
+  - https://raw.githubusercontent.com/zsxh1990/pr-genius/main/anti-patterns/contribai-needs-rfc-first.md
   - https://docs.astral.sh/ty/
 confidence: medium
 schema_version: rounds-v0.5.0

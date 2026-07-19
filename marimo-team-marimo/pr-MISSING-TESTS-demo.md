@@ -12,7 +12,7 @@ closed_at: "2026-07-19T20:30:00Z"
 verified_at: "2026-07-19T20:30:00Z"
 evidence_urls:
   - https://github.com/marimo-team/marimo/pull/999999-demo
-  - anti-patterns/contribai-missing-tests.md
+  - https://raw.githubusercontent.com/zsxh1990/pr-genius/main/anti-patterns/contribai-missing-tests.md
   - https://docs.marimo.io
 confidence: medium
 schema_version: rounds-v0.5.0

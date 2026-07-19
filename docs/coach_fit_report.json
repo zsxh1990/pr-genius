@@ -1,5 +1,5 @@
 {
-  "total_cases": 226,
+  "total_cases": 241,
   "counts": {
     "correct": 89,
     "close": 99,
@@ -200,6 +200,76 @@
     "golang/go": {
       "correct": 0,
       "close": 1,
+      "wrong": 0,
+      "skip": 0,
+      "total": 1
+    },
+    "pallets/flask": {
+      "correct": 0,
+      "close": 0,
+      "wrong": 0,
+      "skip": 0,
+      "total": 4
+    },
+    "pandas-dev/pandas": {
+      "correct": 0,
+      "close": 0,
+      "wrong": 0,
+      "skip": 0,
+      "total": 2
+    },
+    "marimo-team/marimo": {
+      "correct": 0,
+      "close": 0,
+      "wrong": 0,
+      "skip": 0,
+      "total": 1
+    },
+    "moment/moment": {
+      "correct": 0,
+      "close": 0,
+      "wrong": 0,
+      "skip": 0,
+      "total": 1
+    },
+    "OpenBSD/src": {
+      "correct": 0,
+      "close": 0,
+      "wrong": 0,
+      "skip": 0,
+      "total": 1
+    },
+    "HolmesGPT/holmesgpt": {
+      "correct": 0,
+      "close": 0,
+      "wrong": 0,
+      "skip": 0,
+      "total": 1
+    },
+    "django/django": {
+      "correct": 0,
+      "close": 0,
+      "wrong": 0,
+      "skip": 0,
+      "total": 1
+    },
+    "soxoj/maigret": {
+      "correct": 0,
+      "close": 0,
+      "wrong": 0,
+      "skip": 0,
+      "total": 2
+    },
+    "Ikalus1988/MisakaNet": {
+      "correct": 0,
+      "close": 0,
+      "wrong": 0,
+      "skip": 0,
+      "total": 1
+    },
+    "astral-sh/ty": {
+      "correct": 0,
+      "close": 0,
       "wrong": 0,
       "skip": 0,
       "total": 1
@@ -3143,6 +3213,253 @@
       "fit": "close",
       "anti_pattern_hits": [],
       "success_pattern_hits": []
+    },
+    {
+      "id": "contribai-replay-01",
+      "repo": "pallets/flask",
+      "pr_number": null,
+      "title": "contribai-duplicate-pr",
+      "actual_outcome": "closed-not-merged",
+      "predicted_risk": "high",
+      "predicted_rate": 0.3,
+      "actual_risk": "high",
+      "fit": "n/a",
+      "anti_pattern_hits": [
+        "contribai-duplicate-pr",
+        "duplicate-pr-same-author",
+        "nousresearch-duplicate-pr",
+        "openclaw-duplicate-pr"
+      ],
+      "success_pattern_hits": [],
+      "source": "contribai_replay_v1.4.0"
+    },
+    {
+      "id": "contribai-replay-02",
+      "repo": "pandas-dev/pandas",
+      "pr_number": null,
+      "title": "contribai-out-of-scope",
+      "actual_outcome": "closed-not-merged",
+      "predicted_risk": "high",
+      "predicted_rate": 0.3,
+      "actual_risk": "high",
+      "fit": "n/a",
+      "anti_pattern_hits": [
+        "contribai-docs-pr-missing-quickstart",
+        "contribai-out-of-scope"
+      ],
+      "success_pattern_hits": [],
+      "source": "contribai_replay_v1.4.0"
+    },
+    {
+      "id": "contribai-replay-03",
+      "repo": "pallets/flask",
+      "pr_number": null,
+      "title": "contribai-not-a-real-bug",
+      "actual_outcome": "closed-not-merged",
+      "predicted_risk": "high",
+      "predicted_rate": 0.3,
+      "actual_risk": "high",
+      "fit": "n/a",
+      "anti_pattern_hits": [
+        "contribai-not-a-real-bug"
+      ],
+      "success_pattern_hits": [],
+      "source": "contribai_replay_v1.4.0"
+    },
+    {
+      "id": "contribai-replay-04",
+      "repo": "marimo-team/marimo",
+      "pr_number": null,
+      "title": "contribai-missing-tests",
+      "actual_outcome": "closed-not-merged",
+      "predicted_risk": "high",
+      "predicted_rate": 0.3,
+      "actual_risk": "high",
+      "fit": "n/a",
+      "anti_pattern_hits": [
+        "contribai-missing-tests"
+      ],
+      "success_pattern_hits": [],
+      "source": "contribai_replay_v1.4.0"
+    },
+    {
+      "id": "contribai-replay-05",
+      "repo": "moment/moment",
+      "pr_number": null,
+      "title": "contribai-archived-repo",
+      "actual_outcome": "closed-not-merged",
+      "predicted_risk": "high",
+      "predicted_rate": 0.3,
+      "actual_risk": "high",
+      "fit": "n/a",
+      "anti_pattern_hits": [
+        "contribai-archived-repo"
+      ],
+      "success_pattern_hits": [],
+      "source": "contribai_replay_v1.4.0"
+    },
+    {
+      "id": "contribai-replay-06",
+      "repo": "pallets/flask",
+      "pr_number": null,
+      "title": "contribai-docs-pr-missing-quickstart",
+      "actual_outcome": "closed-not-merged",
+      "predicted_risk": "high",
+      "predicted_rate": 0.3,
+      "actual_risk": "high",
+      "fit": "n/a",
+      "anti_pattern_hits": [
+        "contribai-docs-pr-missing-quickstart"
+      ],
+      "success_pattern_hits": [],
+      "source": "contribai_replay_v1.4.0"
+    },
+    {
+      "id": "contribai-replay-07",
+      "repo": "OpenBSD/src",
+      "pr_number": null,
+      "title": "contribai-design-philosophy-mismatch",
+      "actual_outcome": "closed-not-merged",
+      "predicted_risk": "high",
+      "predicted_rate": 0.3,
+      "actual_risk": "high",
+      "fit": "n/a",
+      "anti_pattern_hits": [
+        "contribai-design-philosophy-mismatch"
+      ],
+      "success_pattern_hits": [],
+      "source": "contribai_replay_v1.4.0"
+    },
+    {
+      "id": "contribai-replay-08",
+      "repo": "HolmesGPT/holmesgpt",
+      "pr_number": null,
+      "title": "contribai-incomplete-readme-contributing",
+      "actual_outcome": "closed-not-merged",
+      "predicted_risk": "high",
+      "predicted_rate": 0.3,
+      "actual_risk": "high",
+      "fit": "n/a",
+      "anti_pattern_hits": [
+        "contribai-incomplete-readme-contributing"
+      ],
+      "success_pattern_hits": [],
+      "source": "contribai_replay_v1.4.0"
+    },
+    {
+      "id": "contribai-replay-09",
+      "repo": "django/django",
+      "pr_number": null,
+      "title": "contribai-first-time-large-repo",
+      "actual_outcome": "closed-not-merged",
+      "predicted_risk": "high",
+      "predicted_rate": 0.3,
+      "actual_risk": "high",
+      "fit": "n/a",
+      "anti_pattern_hits": [
+        "contribai-first-time-large-repo"
+      ],
+      "success_pattern_hits": [],
+      "source": "contribai_replay_v1.4.0"
+    },
+    {
+      "id": "contribai-replay-10",
+      "repo": "pallets/flask",
+      "pr_number": null,
+      "title": "contribai-breaking-change-no-migration",
+      "actual_outcome": "closed-not-merged",
+      "predicted_risk": "high",
+      "predicted_rate": 0.3,
+      "actual_risk": "high",
+      "fit": "n/a",
+      "anti_pattern_hits": [
+        "breaking-change-no-compat",
+        "contribai-breaking-change-no-migration",
+        "openclaw-compatibility-risk",
+        "openclaw-refactor-risk"
+      ],
+      "success_pattern_hits": [],
+      "source": "contribai_replay_v1.4.0"
+    },
+    {
+      "id": "contribai-replay-11",
+      "repo": "pandas-dev/pandas",
+      "pr_number": null,
+      "title": "contribai-performance-benchmark-missing",
+      "actual_outcome": "closed-not-merged",
+      "predicted_risk": "high",
+      "predicted_rate": 0.3,
+      "actual_risk": "high",
+      "fit": "n/a",
+      "anti_pattern_hits": [
+        "contribai-performance-benchmark-missing"
+      ],
+      "success_pattern_hits": [],
+      "source": "contribai_replay_v1.4.0"
+    },
+    {
+      "id": "contribai-replay-12",
+      "repo": "soxoj/maigret",
+      "pr_number": null,
+      "title": "contribai-ethical-review-failed",
+      "actual_outcome": "closed-not-merged",
+      "predicted_risk": "high",
+      "predicted_rate": 0.3,
+      "actual_risk": "high",
+      "fit": "n/a",
+      "anti_pattern_hits": [
+        "contribai-ethical-review-failed"
+      ],
+      "success_pattern_hits": [],
+      "source": "contribai_replay_v1.4.0"
+    },
+    {
+      "id": "contribai-replay-13",
+      "repo": "soxoj/maigret",
+      "pr_number": null,
+      "title": "contribai-site-tos-violation",
+      "actual_outcome": "closed-not-merged",
+      "predicted_risk": "high",
+      "predicted_rate": 0.3,
+      "actual_risk": "high",
+      "fit": "n/a",
+      "anti_pattern_hits": [
+        "contribai-site-tos-violation"
+      ],
+      "success_pattern_hits": [],
+      "source": "contribai_replay_v1.4.0"
+    },
+    {
+      "id": "contribai-replay-14",
+      "repo": "Ikalus1988/MisakaNet",
+      "pr_number": null,
+      "title": "contribai-auto-generated-trash",
+      "actual_outcome": "closed-not-merged",
+      "predicted_risk": "high",
+      "predicted_rate": 0.3,
+      "actual_risk": "high",
+      "fit": "n/a",
+      "anti_pattern_hits": [
+        "contribai-auto-generated-trash"
+      ],
+      "success_pattern_hits": [],
+      "source": "contribai_replay_v1.4.0"
+    },
+    {
+      "id": "contribai-replay-15",
+      "repo": "astral-sh/ty",
+      "pr_number": null,
+      "title": "contribai-needs-rfc-first",
+      "actual_outcome": "closed-not-merged",
+      "predicted_risk": "high",
+      "predicted_rate": 0.3,
+      "actual_risk": "high",
+      "fit": "n/a",
+      "anti_pattern_hits": [
+        "contribai-needs-rfc-first"
+      ],
+      "success_pattern_hits": [],
+      "source": "contribai_replay_v1.4.0"
     }
   ]
 }

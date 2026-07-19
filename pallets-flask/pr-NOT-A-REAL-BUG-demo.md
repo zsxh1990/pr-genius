@@ -12,7 +12,7 @@ closed_at: "2026-07-19T20:30:00Z"
 verified_at: "2026-07-19T20:30:00Z"
 evidence_urls:
   - https://github.com/pallets/flask/pull/999999-demo
-  - anti-patterns/contribai-not-a-real-bug.md
+  - https://raw.githubusercontent.com/zsxh1990/pr-genius/main/anti-patterns/contribai-not-a-real-bug.md
 confidence: medium  # 合成 case 基于 ContribAI 实证
 schema_version: rounds-v0.5.0
 tags:

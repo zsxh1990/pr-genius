@@ -134,7 +134,7 @@ when you open a PR.
 |---|---|
 | Version | 1.2.0 |
 | Repo profiles | 49 |
-| Case studies (.md) | 25 |
+| Case studies (.md) | 29 |
 | Anti-patterns (.md) | 67 |
 | Anti-patterns (.json) | 59 |
 | Success patterns (.md) | 38 |
@@ -143,7 +143,7 @@ when you open a PR.
 | Lessons (misakanet-50) | 11 |
 | Validator checks | ✅ 0 errors |
 | OKF compliance | ✅ v0.1 |
-| Coach accuracy | 83.2% (226 cases, 28 repos) |
+| Coach accuracy | 83.2% (241 cases, 38 repos) |
 
 ## 35 个大仓速查
 

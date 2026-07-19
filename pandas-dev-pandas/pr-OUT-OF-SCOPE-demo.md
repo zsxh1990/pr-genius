@@ -12,7 +12,7 @@ closed_at: "2026-07-19T20:30:00Z"
 verified_at: "2026-07-19T20:30:00Z"
 evidence_urls:
   - https://github.com/pandas-dev/pandas/pull/999999-demo
-  - anti-patterns/contribai-out-of-scope.md
+  - https://raw.githubusercontent.com/zsxh1990/pr-genius/main/anti-patterns/contribai-out-of-scope.md
   - https://pandas.pydata.org/docs/development/roadmap.html
 confidence: medium  # 合成 case 基于 ContribAI 实证
 schema_version: rounds-v0.5.0

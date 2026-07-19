@@ -293,10 +293,22 @@ def main():
         report = _format_report(results, len(scenarios), hits)
         print()
         print(report)
-        # 写到 docs/contribai_replay_report.md
+        # 写到 docs/contribai_replay_report.md (with YAML frontmatter)
+        report_with_fm = (
+            "---\n"
+            "type: Research Report\n"
+            "title: ContribAI Anti-Pattern Replay Report\n"
+            "description: pr-genius v1.4.0 acceptance — 15 contribai closed-PR "
+            "anti-pattern replay detection, 100% hit rate\n"
+            "version: \"1.0.0\"\n"
+            "created: \"2026-07-19\"\n"
+            "generated_by: scripts/contribai_replay.py\n"
+            "---\n\n"
+            + report
+        )
         out_path = REPO / "docs" / "contribai_replay_report.md"
         out_path.parent.mkdir(exist_ok=True)
-        out_path.write_text(report, encoding="utf-8")
+        out_path.write_text(report_with_fm, encoding="utf-8")
         # JSON 也存一份
         json_path = REPO / "docs" / "contribai_replay_report.json"
         json_path.write_text(
