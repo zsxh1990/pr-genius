@@ -44,7 +44,11 @@ def parse_frontmatter(text: str) -> tuple[dict | None, str]:
 
 
 def find_md_files(root: Path) -> list[Path]:
-    return sorted(p for p in root.rglob("*.md") if ".git" not in p.parts)
+    SKIP_DIRS = {".git", ".pytest_cache", "__pycache__", "node_modules"}
+    return sorted(
+        p for p in root.rglob("*.md")
+        if not any(part in SKIP_DIRS for part in p.parts)
+    )
 
 
 def check_frontmatter(files: list[Path]) -> None:

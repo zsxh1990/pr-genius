@@ -206,15 +206,26 @@ def triage_pr(
     Returns:
         dict with verdict, violations, policy_loaded, etc.
     """
-    root = repo_root or Path(__file__).resolve().parent.parent.parent
+    root = repo_root or Path(__file__).resolve().parents[3]
 
     policy = _load_policy(repo, root)
     if not policy:
         return {
-            "verdict": "no_policy",
+            "verdict": "needs_preflight",
             "repo": repo,
             "policy_loaded": False,
-            "message": f"No maintainer policy found for {repo}",
+            "message": (
+                f"No maintainer policy found for {repo}. "
+                "For unknown repos, run these preflight checks before opening PR."
+            ),
+            "generic_checks": [
+                "confirm real bug (not feature request / enhancement only)",
+                "link issue or maintainer request (avoid unsolicited)",
+                "check CONTRIBUTING / CODEOWNERS for required artifacts",
+                "check duplicate PRs (gh search prs --state all)",
+                "check repo archived status (gh repo view)",
+                "run tests locally + check CI status",
+            ],
             "violations": [],
         }
 

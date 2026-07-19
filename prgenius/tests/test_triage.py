@@ -40,8 +40,10 @@ class TestLoadPolicy:
 class TestTriagePr:
     def test_no_policy_repo(self):
         result = triage_pr("feat: test", "unknown/repo", repo_root=REPO_ROOT)
-        assert result["verdict"] == "no_policy"
+        # P0-A1 2026-07-19: 无 policy 仓改为 needs_preflight (克莱恩 验收门槛)
+        assert result["verdict"] == "needs_preflight"
         assert result["policy_loaded"] is False
+        assert len(result["generic_checks"]) == 6  # 6 条 preflight 检查清单
 
     def test_clean_pr_passes(self):
         result = triage_pr(

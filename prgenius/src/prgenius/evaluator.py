@@ -174,6 +174,21 @@ def _check_require_issue_first(repo: str, repo_root: Path) -> Optional[bool]:
         return None
 
 
+def _check_has_policy(repo: str, repo_root: Path) -> bool:
+    """检查仓库是否有 pr-genius profile + maintainer policy
+
+    返回:
+        True  — 仓在 pr-genius 有 profile + policy 文件
+        False — 无 profile 或无 policy
+    """
+    target_folder = repo.replace("/", "-").lower()
+    profile_index = repo_root / target_folder / "index.md"
+    if not profile_index.exists():
+        return False
+    policy_file = repo_root / "docs" / "policies" / f"{target_folder}.md"
+    return policy_file.exists()
+
+
 def _parse_label(label: str) -> Tuple[str, str]:
     """返回 (label, polarity) — positive/negative/neutral/unknown"""
     label_lower = label.lower().strip()
@@ -490,6 +505,43 @@ def analyze_pr(
             if star_count > 20000:
                 # Remove the "first_contributor_large_repo" negative signal if present
                 signals_neg[:] = [s for s in signals_neg if s.get("key") != "first_contributor_large_repo"]
+
+    # ---- 5.5. 无 policy 大仓 needs_preflight 检查 (克莱恩 2026-07-19 P1) ----
+    has_policy = _check_has_policy(repo, repo_root)
+    repo_context["has_policy"] = has_policy
+    # P0-A2 克莱恩 验收门槛: 无 policy 仓 默认 需 preflight.
+    # star_count 未知 (==0) 也触发, 因用户可能不想传 star 但仍需 preflight.
+    if not has_policy and (star_count >= 10000 or star_count == 0):
+        signals_neg.append({
+            "key": "needs_preflight",
+            "description": (
+                f"大仓 ({star_count:,}⭐) 无 pr-genius profile/policy。"
+                "对未知仓, 默认不轻易 pass, 必须跑 preflight 检查。"
+            ),
+            "severity": "high",
+            "generic_checks": [
+                "confirm real bug (not feature request / enhancement only)",
+                "link issue or maintainer request (avoid unsolicited)",
+                "check CONTRIBUTING / CODEOWNERS for required artifacts",
+                "check duplicate PRs (gh search prs --state all)",
+                "check repo archived status (gh repo view)",
+                "run tests locally + check CI status",
+            ],
+        })
+        for check in [
+            "confirm real bug",
+            "link issue or maintainer request",
+            "check CONTRIBUTING",
+            "check duplicate PRs",
+            "check archived status",
+            "run tests + check CI",
+        ]:
+            checklist.append({
+                "action": f"preflight_{check.split()[0].lower()}",
+                "priority": "P0",
+                "done": False,
+                "hint": check,
+            })
 
     # ---- 6. Bot 特殊检查 ----
     if is_bot:
