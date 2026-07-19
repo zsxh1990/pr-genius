@@ -331,7 +331,7 @@ def analyze_pr(
     title: str,
     description: str,
     repo: str,
-    repo_root: Path,
+    repo_root,
     body: str = "",
     labels: Optional[List[str]] = None,
     author: str = "",
@@ -359,6 +359,8 @@ def analyze_pr(
         "repo_context": {...}
     }
     """
+    # Accept str | Path — fix str/str 除法 bug (M0 MCP smoke test 暴露)
+    repo_root = Path(repo_root) if not isinstance(repo_root, Path) else repo_root
     if labels is None:
         labels = []
 

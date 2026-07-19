@@ -206,7 +206,7 @@ def triage_pr(
     Returns:
         dict with verdict, violations, policy_loaded, etc.
     """
-    root = repo_root or Path(__file__).resolve().parents[3]
+    root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[3]
 
     policy = _load_policy(repo, root)
     if not policy:
