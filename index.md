@@ -64,6 +64,17 @@ federated_at: 2026-07-02
 | huggingface/transformers | 163k | [huggingface-transformers/index.md](./huggingface-transformers/index.md) |
 | hashicorp/terraform | 49k | [hashicorp-terraform/index.md](./hashicorp-terraform/index.md) |
 | grafana/grafana | 76k | [grafana-grafana/index.md](./grafana-grafana/index.md) |
+| pallets/flask | 67k | [pallets-flask/index.md](./pallets-flask/index.md) |
+| pandas-dev/pandas | 45k | [pandas-dev-pandas/index.md](./pandas-dev-pandas/index.md) |
+| marimo-team/marimo | 13k | [marimo-team-marimo/index.md](./marimo-team-marimo/index.md) |
+| astral-sh/ty | 12k | [astral-sh-ty/index.md](./astral-sh-ty/index.md) |
+| koala73/worldmonitor | 2.5k | [koala73-worldmonitor/index.md](./koala73-worldmonitor/index.md) |
+| soxoj/maigret | 6.5k | [soxoj-maigret/index.md](./soxoj-maigret/index.md) |
+| HolmesGPT/holmesgpt | 4.5k | [HolmesGPT-holmesgpt/index.md](./HolmesGPT-holmesgpt/index.md) |
+| KnugiHK/WhatsApp-Chat-Exporter | 1.8k | [KnugiHK-WhatsApp-Chat-Exporter/index.md](./KnugiHK-WhatsApp-Chat-Exporter/index.md) |
+| PharMolix/OpenBioMed | 0.8k | [PharMolix-OpenBioMed/index.md](./PharMolix-OpenBioMed/index.md) |
+| vugu/vugu | 3.2k | [vugu-vugu/index.md](./vugu-vugu/index.md) |
+| openclaw/openclaw | 28k | [openclaw-openclaw/index.md](./openclaw-openclaw/index.md) |
 | kubernetes/kubernetes | 124k | [kubernetes-kubernetes/index.md](./kubernetes-kubernetes/index.md) |
 | docker/compose | 38k | [docker-compose/index.md](./docker-compose/index.md) |
 | cli/cli | 45k | [cli-cli/index.md](./cli-cli/index.md) |
