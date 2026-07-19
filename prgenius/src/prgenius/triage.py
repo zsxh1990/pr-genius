@@ -184,7 +184,78 @@ def _check_policy_rules(title: str, body: str, diff_stat: str, policy: dict) -> 
                 "anchors": rule.get("anchors", []),
             })
 
+    # Rule: Generic duplicate / stack PR detector (Month 2 克莱恩 2026-07-19)
+    # 不依赖 gh search prs API (MCP 不能调), 用 PR text 启发式匹配
+    dup_violation = _check_duplicate_pr(title, body, diff_stat, title_lower, body_lower)
+    if dup_violation:
+        violations.append(dup_violation)
+
     return violations
+
+
+def _check_duplicate_pr(title: str, body: str, diff_stat: str,
+                       title_lower: str, body_lower: str) -> Optional[dict]:
+    """Generic duplicate / stack PR detector.
+
+    不依赖 gh API (MCP stdio 环境不能用). 用 PR text 启发式匹配
+    常见的 duplicate 信号:
+
+    1. Explicit self-declare: "duplicate of #N", "fixes #N (duplicate)"
+    2. Stack PR signals: "depends on #N", "blocked by #N"
+    3. Reference pattern: "see PR #N", "same as #N"
+    4. Reference to recently merged similar fix
+
+    Month 2 P0 #3 克莱恩 2026-07-19 战略评估.
+    """
+    # 1. Self-declare duplicate
+    if re.search(r'duplicate\s+of\s+#?\d+', body_lower):
+        m = re.search(r'#(\d+)', body_lower)
+        ref = m.group(1) if m else "?"
+        return {
+            "rule_number": 99,
+            "rule_title": "duplicate_pr_explicit_declare",
+            "rule_type": "hard",
+            "evidence": f"PR body 明确说 'duplicate of #{ref}'",
+            "anchors": [],
+        }
+
+    # 2. Stack / dependent PR
+    stack_match = re.search(r'(depends on|blocked by|stack on|part of)\s+#?\d+', body_lower)
+    if stack_match:
+        m = re.search(r'#(\d+)', stack_match.group(0))
+        ref = m.group(1) if m else "?"
+        return {
+            "rule_number": 98,
+            "rule_title": "stack_pr_dependent",
+            "rule_type": "soft",
+            "evidence": f"PR 依赖/阻塞 #{ref} (stack PR pattern)",
+            "anchors": [],
+        }
+
+    # 3. Reference to same change ("same as #N", "see PR #N", "duplicate of #N")
+    if re.search(r'\b(same as|see pr|duplicate of)\s+#?\d+', body_lower):
+        m = re.search(r'#(\d+)', body_lower)
+        ref = m.group(1) if m else "?"
+        return {
+            "rule_number": 97,
+            "rule_title": "duplicate_pr_reference",
+            "rule_type": "soft",
+            "evidence": f"PR body 引用 #{ref} (可能是重复 PR)",
+            "anchors": [],
+        }
+
+    # 4. Identical / near-identical commit hash (rare but powerful)
+    hash_match = re.search(r'fixes?\s+#?\d+\s*\(([0-9a-f]{7,40})\)', body_lower)
+    if hash_match:
+        return {
+            "rule_number": 96,
+            "rule_title": "duplicate_pr_same_commit_hash",
+            "rule_type": "hard",
+            "evidence": f"PR body 包含 commit hash {hash_match.group(1)[:7]} (主分支已含同 fix)",
+            "anchors": [],
+        }
+
+    return None
 
 
 def triage_pr(
