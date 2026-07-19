@@ -1,76 +1,78 @@
 ---
 type: PR Case Study
-title: "Flask 'not a real bug' close — ContribAI demo case"
-description: "Demo case showing contribai-not-a-real-bug anti-pattern detection. flask ~35% close 是 not a real bug (by design / intended behavior). 验证 pr-genius v1.4.0 能识别这种 close reason."
+title: Flask 'not a real bug' close — ContribAI demo case
+description: Demo case showing contribai-not-a-real-bug anti-pattern detection. flask ~35% close 是 not a real bug (by design / intended behavior). 验证 pr-genius v1.4.0 能识别这种 close reason.
 repo: pallets/flask
 pr_number: 999999
 pr_url: https://github.com/pallets/flask/pull/999999-demo
 author: contribai-demo
 final_status: closed-not-merged
-opened_at: "2026-07-19T20:00:00Z"
-closed_at: "2026-07-19T20:30:00Z"
-verified_at: "2026-07-19T20:30:00Z"
+opened_at: '2026-07-19T20:00:00Z'
+closed_at: '2026-07-19T20:30:00Z'
+verified_at: '2026-07-19T20:30:00Z'
 evidence_urls:
-  - https://github.com/pallets/flask/pull/999999-demo
-  - https://raw.githubusercontent.com/zsxh1990/pr-genius/main/anti-patterns/contribai-not-a-real-bug.md
-confidence: medium  # 合成 case 基于 ContribAI 实证
+- https://github.com/pallets/flask/pull/999999-demo
+- https://raw.githubusercontent.com/zsxh1990/pr-genius/main/anti-patterns/contribai-not-a-real-bug.md
+confidence: medium
 schema_version: rounds-v0.5.0
 tags:
-  - pr-case-study
-  - demo
-  - contribai
-  - pallets-flask
-  - not-a-real-bug
-  - v1.4.0
+- pr-case-study
+- demo
+- contribai
+- pallets-flask
+- not-a-real-bug
+- v1.4.0
 rounds:
-  - round: 1
-    action: open
-    delta:
-      kind: code_change
-      value: "+12 / -3 / 2 files"
-      verified_at: "2026-07-19T20:00:00Z"
-      confidence: high
-    response_time_h: 0.5
-    maintainer_action: "pallets maintainer reviewed"
-    bot_review: []
-    blocker: null
-    resolution: null
-    commit: "abc1234"
-    timestamp: "2026-07-19T20:00:00Z"
-  - round: 2
-    action: close
-    delta:
-      kind: no_code_change
-      value: null
-      verified_at: "2026-07-19T20:30:00Z"
-      confidence: high
-    response_time_h: 0.5
-    maintainer_action: "maintainer: 'this is by design, not a real bug, working as expected'"
-    bot_review: []
-    blocker: "Not a real bug (35% of Flask close reasons)"
-    resolution: "Author closes. Lesson: read source / search maintainer history before opening."
-    commit: null
-    timestamp: "2026-07-19T20:30:00Z"
+- round: 1
+  action: open
+  delta:
+    kind: code_change
+    value: +12 / -3 / 2 files
+    verified_at: '2026-07-19T20:00:00Z'
+    confidence: high
+  response_time_h: 0.5
+  maintainer_action: pallets maintainer reviewed
+  bot_review: []
+  blocker: null
+  resolution: null
+  commit: abc1234
+  timestamp: '2026-07-19T20:00:00Z'
+- round: 2
+  action: close
+  delta:
+    kind: no_code_change
+    value: null
+    verified_at: '2026-07-19T20:30:00Z'
+    confidence: high
+  response_time_h: 0.5
+  maintainer_action: 'maintainer: ''this is by design, not a real bug, working as expected'''
+  bot_review: []
+  blocker: Not a real bug (35% of Flask close reasons)
+  resolution: 'Author closes. Lesson: read source / search maintainer history before opening.'
+  commit: null
+  timestamp: '2026-07-19T20:30:00Z'
 close_decision:
   status: close
-  reason: "Not a real bug — by design. Flask maintainer policy: behavior is intended."
-  decided_at: "2026-07-19T20:30:00Z"
+  reason: 'Not a real bug — by design. Flask maintainer policy: behavior is intended.'
+  decided_at: '2026-07-19T20:30:00Z'
   actor: contribai-demo
 agent_guidelines_applied:
-  - require_issue_first: true  # 必须先讨论, 改了不一定是 bug
-  - maintainer_vibe: strict
-  - ai_policy: conditional
-  - external_merge_rate_30: 0.15
-  - close_keywords:
-    - "Not a real bug"
-    - "by design"
-    - "intended behavior"
-    - "working as expected"
+- require_issue_first: true
+- maintainer_vibe: strict
+- ai_policy: conditional
+- external_merge_rate_30: 0.15
+- close_keywords:
+  - Not a real bug
+  - by design
+  - intended behavior
+  - working as expected
 links:
-  - type: anti-pattern
-    target: anti-patterns/contribai-not-a-real-bug.md
-  - type: profile
-    target: pallets-flask/index.md
+- type: profile
+  target: pallets-flask/index.md
+- type: anti-pattern
+  target: anti-patterns/contribai-not-a-real-bug.md
+- target: anti-patterns/contribai-out-of-scope.md
+  type: anti-pattern
 ---
 
 # Demo Case — Flask "Not a Real Bug" Close

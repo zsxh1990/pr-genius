@@ -1,79 +1,81 @@
 ---
 type: PR Case Study
-title: "pandas 'out of scope' close — ContribAI demo case"
-description: "Demo case showing contribai-out-of-scope anti-pattern detection. pandas-dev/pandas ~40% close 是 out of scope (跟 3.0 roadmap 不一致). 验证 pr-genius v1.4.0 能识别这种 close reason."
+title: pandas 'out of scope' close — ContribAI demo case
+description: Demo case showing contribai-out-of-scope anti-pattern detection. pandas-dev/pandas ~40% close 是 out of scope (跟 3.0 roadmap 不一致). 验证 pr-genius v1.4.0 能识别这种 close reason.
 repo: pandas-dev/pandas
 pr_number: 999999
 pr_url: https://github.com/pandas-dev/pandas/pull/999999-demo
 author: contribai-demo
 final_status: closed-not-merged
-opened_at: "2026-07-19T20:00:00Z"
-closed_at: "2026-07-19T20:30:00Z"
-verified_at: "2026-07-19T20:30:00Z"
+opened_at: '2026-07-19T20:00:00Z'
+closed_at: '2026-07-19T20:30:00Z'
+verified_at: '2026-07-19T20:30:00Z'
 evidence_urls:
-  - https://github.com/pandas-dev/pandas/pull/999999-demo
-  - https://raw.githubusercontent.com/zsxh1990/pr-genius/main/anti-patterns/contribai-out-of-scope.md
-  - https://pandas.pydata.org/docs/development/roadmap.html
-confidence: medium  # 合成 case 基于 ContribAI 实证
+- https://github.com/pandas-dev/pandas/pull/999999-demo
+- https://raw.githubusercontent.com/zsxh1990/pr-genius/main/anti-patterns/contribai-out-of-scope.md
+- https://pandas.pydata.org/docs/development/roadmap.html
+confidence: medium
 schema_version: rounds-v0.5.0
 tags:
-  - pr-case-study
-  - demo
-  - contribai
-  - pandas-dev-pandas
-  - out-of-scope
-  - roadmap
-  - v1.4.0
+- pr-case-study
+- demo
+- contribai
+- pandas-dev-pandas
+- out-of-scope
+- roadmap
+- v1.4.0
 rounds:
-  - round: 1
-    action: open
-    delta:
-      kind: code_change
-      value: "+245 / -12 / 8 files"
-      verified_at: "2026-07-19T20:00:00Z"
-      confidence: high
-    response_time_h: 0.5
-    maintainer_action: "pandas core team reviewed"
-    bot_review: []
-    blocker: null
-    resolution: null
-    commit: "def5678"
-    timestamp: "2026-07-19T20:00:00Z"
-  - round: 2
-    action: close
-    delta:
-      kind: no_code_change
-      value: null
-      verified_at: "2026-07-19T20:30:00Z"
-      confidence: high
-    response_time_h: 0.5
-    maintainer_action: "pandas core: 'out of scope, not aligned with 3.0 roadmap'"
-    bot_review: []
-    blocker: "Out of scope — 跟 3.0 roadmap 不一致 (40% close 原因)"
-    resolution: "Author closes. Lesson: 看 roadmap / 在 issue 先讨论."
-    commit: null
-    timestamp: "2026-07-19T20:30:00Z"
+- round: 1
+  action: open
+  delta:
+    kind: code_change
+    value: +245 / -12 / 8 files
+    verified_at: '2026-07-19T20:00:00Z'
+    confidence: high
+  response_time_h: 0.5
+  maintainer_action: pandas core team reviewed
+  bot_review: []
+  blocker: null
+  resolution: null
+  commit: def5678
+  timestamp: '2026-07-19T20:00:00Z'
+- round: 2
+  action: close
+  delta:
+    kind: no_code_change
+    value: null
+    verified_at: '2026-07-19T20:30:00Z'
+    confidence: high
+  response_time_h: 0.5
+  maintainer_action: 'pandas core: ''out of scope, not aligned with 3.0 roadmap'''
+  bot_review: []
+  blocker: Out of scope — 跟 3.0 roadmap 不一致 (40% close 原因)
+  resolution: 'Author closes. Lesson: 看 roadmap / 在 issue 先讨论.'
+  commit: null
+  timestamp: '2026-07-19T20:30:00Z'
 close_decision:
   status: close
-  reason: "Out of scope — not aligned with pandas 3.0 roadmap."
-  decided_at: "2026-07-19T20:30:00Z"
+  reason: Out of scope — not aligned with pandas 3.0 roadmap.
+  decided_at: '2026-07-19T20:30:00Z'
   actor: contribai-demo
 agent_guidelines_applied:
-  - require_issue_first: true  # 必须 maintainer triage 后才能提
-  - maintainer_vibe: strict
-  - ai_policy: conditional
-  - external_merge_rate_30: 0.10
-  - close_keywords:
-    - "Out of scope"
-    - "Not in roadmap"
-    - "Off-topic"
-    - "Not aligned with 3.0 roadmap"
-  - one_pr_friendly: false
+- require_issue_first: true
+- maintainer_vibe: strict
+- ai_policy: conditional
+- external_merge_rate_30: 0.1
+- close_keywords:
+  - Out of scope
+  - Not in roadmap
+  - Off-topic
+  - Not aligned with 3.0 roadmap
+- one_pr_friendly: false
 links:
-  - type: anti-pattern
-    target: anti-patterns/contribai-out-of-scope.md
-  - type: profile
-    target: pandas-dev-pandas/index.md
+- type: profile
+  target: pandas-dev-pandas/index.md
+- type: anti-pattern
+  target: anti-patterns/contribai-out-of-scope.md
+- target: anti-patterns/contribai-docs-pr-missing-quickstart.md
+  type: anti-pattern
 ---
 
 # Demo Case — pandas "Out of Scope" Close
