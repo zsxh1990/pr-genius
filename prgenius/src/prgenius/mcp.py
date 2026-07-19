@@ -1,12 +1,17 @@
-"""stdio MCP shell for prgenius — v1.1.1
+"""stdio MCP shell for prgenius — v1.3.0
 
-MCP surface:
+MCP surface (7 tools, all read-only / non-destructive / idempotent):
 - analyze_pr(title, repo, body, ...) → 结构化信号 + 建议 + 三档风险
 - coach_pr(title, repo, body, ...) → pass/fail + checklist
+- triage_pr(title, repo, body, diff_stat, labels) → verdict + violations + recommended_action
 - get_repo_profile(repo) → 仓库画像
 - list_open_prs() → open PR 列表
 - get_case_study(repo, pr_number) → PR 案例
+- search_patterns(query, type, limit) → 按关键词搜 anti-patterns + success-patterns
 - schema_info() → schema 版本
+
+All tools follow MCP tool annotations (readOnlyHint=True, destructiveHint=False,
+idempotentHint=True) — pr-genius 是只读 advisor, 不写任何状态.
 """
 from __future__ import annotations
 import sys
@@ -19,15 +24,20 @@ def _load_tools(repo_root: Path | None = None):
     from mcp.server.fastmcp import FastMCP
     from .parser import iter_case_studies, profile_get, schema_info as _schema_info
     from .evaluator import analyze_pr as _analyze_pr, eval_pr as _eval_pr
+    from .triage import triage_pr as _triage_pr
 
     mcp = FastMCP(name="prgenius", instructions=(
-        "PR Genius — 提交前改进顾问。"
-        "analyze_pr 分析 PR 并给出改进建议，coach_pr 用于 Agent PR Dojo (pass/fail)。"
+        "PR Genius — Evidence-backed PR contribution advisor. "
+        "analyze_pr 分析 PR 并给出改进建议, coach_pr 用于 Agent PR Dojo (pass/fail), "
+        "triage_pr 做 policy-aware screening. 所有 tools 只读 — pr-genius 不写任何状态."
     ))
 
     rr = repo_root or REPO_ROOT_DEFAULT
 
-    @mcp.tool()
+    # Tool annotations: 全是只读 advisor (M1 克莱恩 2026-07-19)
+    READ_ONLY = {"readOnlyHint": True, "destructiveHint": False, "idempotentHint": True}
+
+    @mcp.tool(annotations=READ_ONLY)
     def analyze_pr(
         title: str,
         repo: str,
@@ -50,7 +60,7 @@ def _load_tools(repo_root: Path | None = None):
             author_association=author_association,
         )
 
-    @mcp.tool()
+    @mcp.tool(annotations=READ_ONLY)
     def coach_pr(
         title: str,
         repo: str,
@@ -75,7 +85,59 @@ def _load_tools(repo_root: Path | None = None):
         result["pass"] = result["tier"] != "high_risk"
         return result
 
-    @mcp.tool()
+    @mcp.tool(annotations=READ_ONLY)
+    def triage_pr(
+        title: str,
+        repo: str,
+        body: str = "",
+        diff_stat: str = "",
+        labels: list[str] | None = None,
+    ) -> dict:
+        """Policy-aware PR triage — M1 克莱恩 2026-07-19 新增.
+
+        Reads docs/policies/<org>-<repo>.md and checks the PR against hard/soft rules.
+
+        返回:
+            verdict: pass / needs_preflight / warn / reject
+            policy_loaded: bool
+            violations: list of {rule, severity, evidence}
+            generic_checks: list (only when needs_preflight)
+            recommended_action: str (always)
+
+        Example:
+            triage_pr("docs: typo", "Ikalus1988/MisakaNet", "fix typo", "docs/faq.md | 3 ++-")
+            → {verdict: "pass", policy_loaded: true, ...}
+
+            triage_pr("docs: add installation", "pallets/flask", ...)
+            → {verdict: "needs_preflight", generic_checks: [...6 items...], ...}
+        """
+        result = _triage_pr(
+            title=title,
+            repo=repo,
+            body=body,
+            diff_stat=diff_stat,
+            labels=labels or [],
+            repo_root=rr,
+        )
+        # 补 recommended_action 字段 (M1 评估要求)
+        verdict = result.get("verdict", "unknown")
+        if verdict == "pass":
+            result["recommended_action"] = "safe_to_review"
+        elif verdict == "warn":
+            n_soft = len(result.get("soft_violations", []))
+            result["recommended_action"] = f"needs_human_review ({n_soft} soft rule(s))"
+        elif verdict == "reject":
+            n_hard = len(result.get("hard_violations", []))
+            result["recommended_action"] = f"blocked_by_policy ({n_hard} hard rule(s))"
+        elif verdict == "needs_preflight":
+            result["recommended_action"] = (
+                "no_policy_for_repo — run generic preflight checks before opening PR"
+            )
+        else:
+            result["recommended_action"] = f"unknown_verdict ({verdict})"
+        return result
+
+    @mcp.tool(annotations=READ_ONLY)
     def get_repo_profile(repo: str) -> dict:
         """返回仓库画像 (org/name)。"""
         p = profile_get(rr, repo)
@@ -83,7 +145,7 @@ def _load_tools(repo_root: Path | None = None):
             return {"error": f"profile not found: {repo}"}
         return p["frontmatter"]
 
-    @mcp.tool()
+    @mcp.tool(annotations=READ_ONLY)
     def list_open_prs() -> list:
         """列出所有 final_status=open 的 PR Case Study。"""
         out = []
@@ -98,7 +160,7 @@ def _load_tools(repo_root: Path | None = None):
                 })
         return out
 
-    @mcp.tool()
+    @mcp.tool(annotations=READ_ONLY)
     def get_case_study(repo: str, pr_number: int) -> dict:
         """返回单个 PR Case Study。"""
         for c in iter_case_studies(rr):
@@ -110,7 +172,57 @@ def _load_tools(repo_root: Path | None = None):
                 return {"frontmatter": fm, "body": c["body"], "path": c["path"]}
         return {"error": f"case study not found: {repo}#{pr_number}"}
 
-    @mcp.tool()
+    @mcp.tool(annotations=READ_ONLY)
+    def search_patterns(
+        query: str,
+        pattern_type: str = "all",
+        limit: int = 10,
+    ) -> list:
+        """按关键词搜 anti-patterns + success-patterns (M1 克莱恩 2026-07-19 新增).
+
+        Args:
+            query: 搜的关键词 (e.g. "duplicate PR", "missing tests", "out of scope")
+            pattern_type: "all" / "anti-pattern" / "success-pattern"
+            limit: 最多返回几条 (默认 10)
+
+        Returns: list of {key, title, symptom, fix_action, source_pr, type}
+        """
+        from .parser import _parse_frontmatter_dict
+        results = []
+
+        patterns_dirs = []
+        if pattern_type in ("all", "anti-pattern"):
+            patterns_dirs.append((rr / "anti-patterns", "anti-pattern"))
+        if pattern_type in ("all", "success-pattern"):
+            patterns_dirs.append((rr / "success-patterns", "success-pattern"))
+
+        query_lower = query.lower()
+        for pdir, ptype in patterns_dirs:
+            if not pdir.exists():
+                continue
+            for f in pdir.glob("*.md"):
+                if f.name == "README.md":
+                    continue
+                content = f.read_text(encoding="utf-8")
+                if query_lower not in content.lower():
+                    continue
+                # Parse frontmatter
+                import re
+                m = re.match(r"^---\s*\n(.*?)\n---", content, re.DOTALL)
+                if not m:
+                    continue
+                fm = {}
+                for line in m.group(1).split("\n"):
+                    if ":" in line:
+                        k, _, v = line.partition(":")
+                        fm[k.strip()] = v.strip().strip('"')
+                fm["type"] = ptype
+                fm["file"] = str(f.relative_to(rr))
+                results.append(fm)
+
+        return results[:limit]
+
+    @mcp.tool(annotations=READ_ONLY)
     def schema_info() -> dict:
         """返回支持的 schema 版本和枚举值。"""
         return _schema_info()
