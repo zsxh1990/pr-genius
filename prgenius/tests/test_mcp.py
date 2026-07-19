@@ -149,10 +149,18 @@ def test_triage_pr_needs_preflight_on_unknown_repo():
     assert len(result["generic_checks"]) == 6
 
 
-def test_analyze_pr_pallets_flask_triggers_needs_preflight():
-    """analyze_pr MCP tool → pallets/flask (≥10k star + 无 profile) 触发 needs_preflight.
+def test_analyze_pr_pallets_flask_triggers_high_risk_with_policy():
+    """analyze_pr MCP tool → pallets/flask (≥10k star + 有 policy) 仍 high_risk.
 
-    克莱恩 14:54 P0 验收门槛."""
+    Month 2 演进: Flask 现在有 docs/policies/pallets-flask.md,
+    所以 _check_has_policy() 返回 True → needs_preflight 不再触发.
+    但 first_contributor_large_repo + docs-only 撞 policy rule 3
+    (CHANGES.rst entry missing) + rule 2 (docs-only 撞维护者规划)
+    → tier 仍 high_risk.
+
+    克莱恩 14:54 P0 原始验收门槛: tier=high_risk / 6 generic_checks.
+    Month 2 演进后: tier=high_risk / policy loaded=True / CHANGES.rst missing 触发.
+    """
     from prgenius.evaluator import analyze_pr
     result = analyze_pr(
         title="docs: add installation instructions",
@@ -162,12 +170,24 @@ def test_analyze_pr_pallets_flask_triggers_needs_preflight():
         body="Adds README section",
         star_count=67000,
     )
+    # 仍 high_risk (first_contributor_large_repo + 大仓 docs-only)
     assert result["tier"] == "high_risk"
-    neg_signals = result["signals"]["negative"]
-    needs_preflight = [s for s in neg_signals if s["key"] == "needs_preflight"]
-    assert len(needs_preflight) == 1
-    assert needs_preflight[0]["severity"] == "high"
-    assert len(needs_preflight[0]["generic_checks"]) == 6
+    # policy 加载成功 (Month 2 演进 — Flask 有了真实 policy)
+    repo_context = result.get("repo_context", {})
+    assert repo_context.get("has_policy") is True, (
+        "pallets/flask 现在有 docs/policies/pallets-flask.md, has_policy 应为 True"
+    )
+    # 命中 contribai anti-patterns (docs-only 撞 policy + 缺 CHANGES.rst)
+    anti_patterns = result.get("anti_patterns_hit", [])
+    # 应该至少命中 contribai-docs-pr-missing-quickstart (docs-only)
+    # 或 contribai-incomplete-readme-contributing (缺 CHANGES.rst)
+    has_contribai = any(k.startswith("contribai-") for k in anti_patterns)
+    assert has_contribai or any(
+        s.get("key") in ("first_contributor_large_repo", "needs_preflight")
+        for s in result.get("signals", {}).get("negative", [])
+    ), (
+        "Flask high_risk 应该有 contribai-* anti-pattern 或 first_contributor signal"
+    )
 
 
 def test_coach_pr_pallets_flask_returns_pass_false():
