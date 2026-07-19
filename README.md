@@ -270,6 +270,155 @@ mkdir research/big-repo-pr-knowledge/<org>-<repo>/
 每次提新 PR → 必须补 `PR Case Study`，否则不符合 OKF S3（单职责）。
 每次 close / merge → 更新对应 PR Case Study 的 `status` 字段 + 加教训到 `MEMORY.md`。
 
+## 🤖 MCP 集成（v1.3.0）
+
+pr-genius 是 **evidence-backed PR contribution advisor MCP**：本地只读、证据驱动、OKF 合规，告诉 agent 哪些 PR **不该提**，不是代码 review 工具。
+
+8 个 MCP tools（所有 read-only / non-destructive / idempotent）：
+
+| Tool | 用途 |
+|---|---|
+| `analyze_pr` | 分析 PR 并生成结构化改进建议 + 三档风险 |
+| `coach_pr` | Agent PR Dojo: pass/fail + checklist |
+| `triage_pr` | Policy-aware PR 鉴别：pass / warn / reject / needs_preflight |
+| `get_repo_profile` | 返回仓画像（17 个 agent_guidelines 字段） |
+| `list_open_prs` | 列出所有 open PR Case Study |
+| `get_case_study` | 返回单个 PR Case Study |
+| `search_patterns` | 按关键词搜 anti-patterns + success-patterns |
+| `schema_info` | 返回支持的 OKF schema 版本和枚举值 |
+
+### Claude Code / Cursor / Cline 配置
+
+加到 `~/.claude/mcp.json`（Claude Code）/ `~/.cursor/mcp.json`（Cursor）/ `cline_mcp_settings.json`（Cline）：
+
+```json
+{
+  "mcpServers": {
+    "pr-genius": {
+      "command": "python",
+      "args": ["-m", "prgenius", "mcp", "serve"]
+    }
+  }
+}
+```
+
+Docker 部署：
+
+```bash
+docker run --rm -i ghcr.io/zsxh1990/pr-genius:1.3.0
+```
+
+### 3 个 Demo Prompts（v1.4.0 / Glama public 验收）
+
+**Demo 1：Flask 大仓 PR 风险预审** （P0 验收门槛）
+
+```
+我准备给 pallets/flask 提一个 docs PR："docs: add installation instructions"
+body: "Adds README section"
+
+请用 pr-genius MCP 工具分析这个 PR，并告诉我:
+1. 能不能直接提？
+2. 如果不能，最低要补什么才能过 maintainer review？
+```
+
+预期输出（克莱恩 14:54 验收命令）：
+
+```json
+{
+  "tier": "high_risk",
+  "signals": {
+    "negative": [
+      {"key": "needs_preflight", "severity": "high",
+       "description": "大仓 (67,000⭐) 无 pr-genius profile/policy",
+       "generic_checks": [
+         "confirm real bug (not feature request)",
+         "link issue or maintainer request",
+         "check CONTRIBUTING",
+         "check duplicate PRs",
+         "check archived status",
+         "run tests + check CI"
+       ]}
+    ]
+  },
+  "checklist": [
+    {"action": "preflight_confirm", "priority": "P0", ...},
+    {"action": "preflight_link", "priority": "P0", ...},
+    ...6 条 P0 preflight...
+  ]
+}
+```
+
+结论：docs-only PR 到 67k⭐ Flask = 默认 high_risk，**不要直接提**。
+
+---
+
+**Demo 2：MisakaNet policy triage**（已收录 P0 验收门槛）
+
+```
+我要给 Ikalus1988/MisakaNet 提 PR：
+title: "fix: tiny typo"
+body: "Fix typo in README"
+diff_stat: "docs/faq.md | 3 ++-"
+
+请用 pr-genius 跑 triage_pr，判断是否违反 maintainer policy。
+```
+
+预期输出：
+
+```json
+{
+  "verdict": "pass",
+  "policy_loaded": true,
+  "violations": [],
+  "recommended_action": "safe_to_review"
+}
+```
+
+结论：clean PR 对 MisakaNet 直接 pass，可以提。
+
+---
+
+**Demo 3：uv repo profile 查询 + coach**（v1.3.0 已收录）
+
+```
+我要给 astral-sh/uv 提 PR：
+title: "fix: typo in docs/quickstart.md"
+body: ""
+
+请用 pr-genius:
+1. get_repo_profile astral-sh/uv — 给我维护者政策
+2. coach_pr — 判断能不能提
+```
+
+预期输出：
+
+```json
+// get_repo_profile
+{
+  "repo": "astral-sh/uv",
+  "agent_guidelines": {
+    "ai_policy": "conditional",  // 欢迎但有规则
+    "maintainer_vibe": "responsive",
+    "require_signed_off": false,
+    "external_merge_rate_30": 0.47
+  }
+}
+
+// coach_pr
+{
+  "tier": "low_risk",
+  "pass": true,
+  "checklist": [
+    {"action": "ci_passing", "priority": "P1", ...},
+    {"action": "add_issue_link", "priority": "P2", ...}
+  ]
+}
+```
+
+结论：typo fix + maintainer-responsive = low_risk, 可以提。
+
+---
+
 ## 关联
 
 - [OpenClaw PR 知识库（200 PR 深读）](../openclaw-pr-knowledge/README.md) — 单独归档，OpenClaw 是极端大仓
