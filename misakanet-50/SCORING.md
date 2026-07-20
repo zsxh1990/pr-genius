@@ -182,6 +182,7 @@ def score_lesson_source(source_url, content):
 | 15 Duplicate detector 4→7 | 28 (own-rule) | 24 | 23 | 20 | **95** | A |
 | 16 ContribAI replay 15/15 | 28 (own-eval) | 23 | 22 | 20 | **93** | A |
 | 17 Data snapshot README unify | 27 (own-doc) | 24 | 24 | 20 | **95** | A |
+| 18 Knowledge bundle self-reference | 28 (own-arch) | 24 | 24 | 20 | **96** | A |
 
 ## v0.1 待办
 

@@ -21,7 +21,7 @@ updated: 2026-07-03
 - **75+ 入库**（misakanet `LESSON_QUALITY_SCORING.md` 同步校验）
 - **A/B/D 三档**：A=85+/100, B=75-84, D=<75
 
-## Lesson 分类（17 条 + 评分）
+## Lesson 分类（18 条 + 评分）
 
 ### A. 真实故障 + 高源可信度（lesson-06 ~ 10）✅ 双向合格
 
@@ -48,7 +48,7 @@ updated: 2026-07-03
 |---|---|---|---|---|---|---|
 | 03 | AI Monthly Cost Baseline | forum_thread (V2EX 130 reply) | 20 | 76 | data-survey | ❌ 不属于"踩坑"语义 |
 
-### D. pr-genius 实战沉淀（lesson-11, 13 ~ 17）✅ Month 2/3 P0 — A 级全员
+### D. pr-genius 实战沉淀（lesson-11, 13 ~ 18）✅ Month 2/3 P0 — A 级全员
 
 | # | 标题 | 源类型 | 源分 | 总分 | 主题 | misakanet 收录？ |
 |---|---|---|---|---|---|---|
@@ -58,6 +58,7 @@ updated: 2026-07-03
 | 15 | Duplicate Detector Trigger 4 → 7 扩展 (hard/soft/info) | own-rule-engine | 28 | 95 | rule-engine | ✅ |
 | 16 | ContribAI Replay 15/15 = 100% Hit Rate | own-evaluation | 28 | 93 | evaluation | ✅ |
 | 17 | Data Snapshot / README Metric Unification | own-documentation | 27 | 95 | documentation | ✅ |
+| 18 | Knowledge Bundle Self-Reference Boundary | own-architecture | 28 | 96 | architecture | ✅ |
 
 ### E. 其他（lesson-12）— 占位
 
