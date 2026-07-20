@@ -66,6 +66,9 @@ final_status: closed-not-merged
 closed_at: "2026-06-05"
 close_reason: "woodruffw '等设计共识' 反馈"
 next_action: "参与 issue #19660 讨论，等 maintainer 明确邀请"
+links:
+- type: anti-pattern
+  target: anti-patterns/breaking-change-no-compat.md
 ---
 
 # uv PR #19685: uv audit: SARIF output

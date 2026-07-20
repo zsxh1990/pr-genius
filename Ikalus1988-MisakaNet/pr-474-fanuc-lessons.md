@@ -33,6 +33,9 @@ rounds:
       value: "Remove duplicate agent-web-access-toolchain-selection.md, fix DCO, rebase on upstream/main"
     resolution: merged
     timestamp: "2026-07-15"
+links:
+- type: anti-pattern
+  target: anti-patterns/duplicate-pr-same-author.md
 ---
 
 ## PR #474: FANUC robot lessons

@@ -26,6 +26,11 @@ rounds:
       value: "+147 / -0 (1 file: tests/test_frontmatter_parsing.py)"
     resolution: merged
     timestamp: "2026-07-10"
+links:
+- type: anti-pattern
+  target: anti-patterns/duplicate-pr-same-author.md
+- type: anti-pattern
+  target: anti-patterns/contribai-missing-tests.md
 ---
 
 ## PR #440: frontmatter parsing edge case tests

@@ -91,6 +91,9 @@ risk_notes:
   - "PR mergeable=True, 无冲突"
   - "maintainer 可能根本没看 PR (1-2 人核心, 资源饱和)"
 schema_version: rounds-v0.2.0
+links:
+- type: anti-pattern
+  target: anti-patterns/contribai-missing-tests.md
 ---
 
 # qdrant MCP server PR #143: feat: add Ollama embedding provider for local models

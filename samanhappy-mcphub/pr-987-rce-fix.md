@@ -33,6 +33,9 @@ rounds:
       value: "Block unsafe commands entirely (throw Error), expand sanitization regex"
     resolution: merged
     timestamp: "2026-07-13"
+links:
+- type: anti-pattern
+  target: anti-patterns/contribai-missing-tests.md
 ---
 
 ## PR #987: RCE security fix
