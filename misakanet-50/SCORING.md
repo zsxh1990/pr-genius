@@ -172,6 +172,17 @@ def score_lesson_source(source_url, content):
 | 04 API relay risk | 22 (forum+own) | 23 | 22 | 16 | **83** | B |
 | 05 vless reality blocked | 22 (forum+own) | 23 | 22 | 16 | **83** | B |
 
+## 已用本体系重评分（v0.5.3）— 克莱恩 2026-07-20 拍板追加
+
+| Lesson | 源分 | 细节 | 通用 | 脱敏 | 总分 | 评级 |
+|---|---|---|---|---|---|---|
+| 11 MCP typo-pool x3 | 26 (own-git) | 24 | 22 | 20 | **92** | A |
+| 13 Glama private MCP gate | 28 (own-deploy) | 22 | 22 | 20 | **92** | A |
+| 14 Check tier warning→error | 28 (own-rule) | 23 | 24 | 20 | **95** | A |
+| 15 Duplicate detector 4→7 | 28 (own-rule) | 24 | 23 | 20 | **95** | A |
+| 16 ContribAI replay 15/15 | 28 (own-eval) | 23 | 22 | 20 | **93** | A |
+| 17 Data snapshot README unify | 27 (own-doc) | 24 | 24 | 20 | **95** | A |
+
 ## v0.1 待办
 
 - 自动评分脚本（score_lesson_source）未实装到 .py —— 标记为下一步
