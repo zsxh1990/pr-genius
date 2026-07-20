@@ -1,0 +1,39 @@
+{
+  "id": "fastapi-fastapi-16024",
+  "repo": "fastapi/fastapi",
+  "pr_number": 16024,
+  "title": "🐛 Fix `Form()` with an `Optional` Pydantic model silently discarding submitted data",
+  "author": "evanyang0612",
+  "state": "CLOSED",
+  "merged": false,
+  "category": "closed_rejected",
+  "created_at": "2026-07-19T06:29:59Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": true,
+    "files_changed": 2,
+    "additions": 194,
+    "deletions": 3,
+    "review_count": 1,
+    "comment_count": 1,
+    "change_ratio": 0.02
+  },
+  "metrics": {
+    "files_changed": 2,
+    "additions": 194,
+    "deletions": 3
+  }
+}
