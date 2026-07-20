@@ -490,10 +490,12 @@ def analyze_pr(
         signals_pos.append({"key": "returning_contributor", "description": "历史贡献者，有合并记录"})
     elif assoc_upper == "NONE":
         if star_count > 20000:
+            # High merge rate repos: lower severity
+            first_contrib_severity = "low" if repo_merge_rate >= 0.6 else "medium"
             signals_neg.append({
                 "key": "first_contributor_large_repo",
                 "description": f"首次在大仓 ({star_count:,}⭐) 提 PR，外部贡献者合并率通常较低",
-                "severity": "medium",
+                "severity": first_contrib_severity,
             })
             checklist.append({
                 "action": "build_trust",
@@ -526,13 +528,20 @@ def analyze_pr(
     # P0-A2 克莱恩 验收门槛: 无 policy 仓 默认 需 preflight.
     # star_count 未知 (==0) 也触发, 因用户可能不想传 star 但仍需 preflight.
     if not has_policy and (star_count >= 10000 or star_count == 0):
+        # High merge rate repos: lower severity
+        if repo_merge_rate >= 0.8:
+            preflight_severity = "low"
+        elif repo_merge_rate >= 0.6:
+            preflight_severity = "low"
+        else:
+            preflight_severity = "high"
         signals_neg.append({
             "key": "needs_preflight",
             "description": (
                 f"大仓 ({star_count:,}⭐) 无 pr-genius profile/policy。"
                 "对未知仓, 默认不轻易 pass, 必须跑 preflight 检查。"
             ),
-            "severity": "high",
+            "severity": preflight_severity,
             "generic_checks": [
                 "confirm real bug (not feature request / enhancement only)",
                 "link issue or maintainer request (avoid unsolicited)",
@@ -599,13 +608,14 @@ def analyze_pr(
     # ---- 8. 计算 tier ----
     neg_critical = sum(1 for s in signals_neg if s.get("severity") in ("critical", "high"))
     neg_medium = sum(1 for s in signals_neg if s.get("severity") == "medium")
+    neg_low = sum(1 for s in signals_neg if s.get("severity") == "low")
     pos_count = len(signals_pos)
 
     if neg_critical >= 1:
         tier = "high_risk"
     elif neg_medium >= 2 or (neg_medium >= 1 and pos_count == 0):
         tier = "high_risk"
-    elif neg_medium >= 1 or (pos_count == 0 and len(signals_neu) == 0):
+    elif neg_medium >= 1 or (pos_count == 0 and len(signals_neu) == 0 and neg_low == 0):
         tier = "medium_risk"
     elif pos_count >= 2 and neg_critical == 0:
         tier = "low_risk"
