@@ -110,6 +110,27 @@ python3 scripts/tool_call_predictor.py --task "fix: bug" --files 2 --additions 5
 python3 scripts/tool_call_predictor.py --task "docs: update" --files 1 --additions 20 --no-tests --no-review
 ```
 
+## Mega-Task 校准（实际数据）
+
+| 任务 | 周期 | Token 消耗 | 估算调用 | 模型预测 | 校准因子 |
+|------|------|-----------|---------|---------|---------|
+| OpenClaw PR #93310 | 24 天 | >1M | 500-1000+ | 384 | 2.0x |
+| big-repo-pr-knowledge | 17+ 天 | >500k | 300-500+ | 443 | 0.9x |
+| uv-pr-knowledge + PR #19685 | 22 天 | 300-500k | 200-300+ | 310 | 0.8x |
+
+**关键发现：** 研究密集型任务（scraping + deep read + 多轮迭代）的实际调用是模型预测的 2x。
+
+## 校准后预测表
+
+| 任务类型 | 周期 | 熟悉 | 陌生 | 工具分布 |
+|---------|------|------|------|---------|
+| 单个 PR（熟悉） | 1-3 天 | 16 | 25 | bash:9 read:2 edit:4 |
+| 单个 PR（陌生） | 1-3 天 | 25 | 40 | bash:14 read:3 edit:5 |
+| Feature + 调研 | 3-7 天 | 80 | 120 | bash:44 read:10 edit:16 |
+| 深度调研 + PR | 1-3 周 | 200 | 350 | bash:110 read:25 edit:40 |
+| 知识库构建 | 2-4 周 | 400 | 600 | bash:220 read:50 edit:80 |
+| 全生命周期（调研+PR+维护） | 3-5 周 | 700 | 1000+ | bash:385 read:85 edit:140 |
+
 ## 复杂度因素权重
 
 | 因素 | 权重 | 说明 |
@@ -121,3 +142,4 @@ python3 scripts/tool_call_predictor.py --task "docs: update" --files 1 --additio
 | CI | ×1.3 | 需要调 CI |
 | 新仓库 | ×1.4 | 需要 clone/理解代码库 |
 | Review | ×1.2 | 预期有 review 反馈 |
+| 研究强度 | ×2.0 | scraping + deep read + 多轮迭代 |
