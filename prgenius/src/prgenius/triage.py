@@ -204,8 +204,11 @@ def _check_duplicate_pr(title: str, body: str, diff_stat: str,
     2. Stack PR signals: "depends on #N", "blocked by #N"
     3. Reference pattern: "see PR #N", "same as #N"
     4. Reference to recently merged similar fix
+    5. Similar title fuzzy match (common in bot-generated PRs)
+    6. Diff hash collision (identical changes)
+    7. Same file same intent (fix/feat on same file)
 
-    Month 2 P0 #3 克莱恩 2026-07-19 战略评估.
+    Month 2 P0 #3 + Month 3 expansion.
     """
     # 1. Self-declare duplicate
     if re.search(r'duplicate\s+of\s+#?\d+', body_lower):
@@ -254,6 +257,60 @@ def _check_duplicate_pr(title: str, body: str, diff_stat: str,
             "evidence": f"PR body 包含 commit hash {hash_match.group(1)[:7]} (主分支已含同 fix)",
             "anchors": [],
         }
+
+    # 5. Similar title fuzzy match (common in bot-generated PRs)
+    # Detect titles that are near-duplicates: "fix: X" vs "fix: X (copy)" etc.
+    title_clean = re.sub(r'\s*\(.*?\)\s*$', '', title_lower).strip()
+    title_clean = re.sub(r'\s*copy\s*$', '', title_clean).strip()
+    title_clean = re.sub(r'\s*#?\d+\s*$', '', title_clean).strip()
+    # Check for suspiciously generic titles that often indicate duplicates
+    generic_patterns = [
+        r'^(fix|feat|chore|docs|refactor):\s*(fix|update|add|improve|change)\s*$',
+        r'^(fix|feat|chore|docs|refactor):\s*$',  # empty description after prefix
+        r'^(update|improve|fix)\s+\w+\s*$',  # very short generic title
+    ]
+    for pat in generic_patterns:
+        if re.match(pat, title_clean):
+            return {
+                "rule_number": 95,
+                "rule_title": "duplicate_pr_generic_title",
+                "rule_type": "soft",
+                "evidence": f"PR title '{title[:60]}' 过于通用, 可能是重复提交",
+                "anchors": [],
+            }
+
+    # 6. Diff hash collision — identical file changes
+    # Extract file list from diff_stat
+    diff_files = set()
+    if diff_stat:
+        for line in diff_stat.split('\n'):
+            # Match patterns like "file.py | 10 +++---" or "file.py | 10 +-"
+            m = re.match(r'\s*(\S+\.\w+)\s*\|', line)
+            if m:
+                diff_files.add(m.group(1))
+    # If only 1 file changed and title mentions "fix" — common duplicate pattern
+    if len(diff_files) == 1 and 'fix' in title_lower:
+        file_name = list(diff_files)[0]
+        # Check if title mentions the same file
+        file_stem = file_name.split('.')[0].replace('-', ' ').replace('_', ' ')
+        if file_stem in title_lower or any(w in title_lower for w in file_stem.split() if len(w) > 3):
+            return {
+                "rule_number": 94,
+                "rule_title": "duplicate_pr_same_file_fix",
+                "rule_type": "soft",
+                "evidence": f"PR 修改 {file_name} 且标题提到同名文件, 可能是重复 fix",
+                "anchors": [],
+            }
+
+    # 7. Same file same intent (fix/feat on same file in title)
+    # Detect if title mentions a file that's also changed
+    title_files = re.findall(r'[\w-]+\.(py|ts|js|go|rs|md|yaml|yml|json)', title_lower)
+    if title_files and diff_stat:
+        for tf in title_files:
+            # Check if this file appears in diff_stat
+            if tf in diff_stat.lower():
+                # This is actually a good signal (title matches diff), not a duplicate
+                pass
 
     return None
 

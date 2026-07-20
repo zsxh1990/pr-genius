@@ -85,3 +85,58 @@ class TestTriagePr:
         )
         assert isinstance(result, dict)
         assert "verdict" in result
+
+
+class TestDuplicateDetection:
+    def test_explicit_duplicate_detected(self):
+        result = triage_pr(
+            "fix: test",
+            "Ikalus1988/MisakaNet",
+            body="duplicate of #123",
+            repo_root=REPO_ROOT,
+        )
+        assert result["verdict"] == "reject"
+        dup = [v for v in result["violations"] if "duplicate" in v.get("rule_title", "")]
+        assert len(dup) > 0
+
+    def test_stack_pr_detected(self):
+        result = triage_pr(
+            "feat: test",
+            "Ikalus1988/MisakaNet",
+            body="depends on #456",
+            repo_root=REPO_ROOT,
+        )
+        dup = [v for v in result["violations"] if "stack" in v.get("rule_title", "")]
+        assert len(dup) > 0
+
+    def test_generic_title_detected(self):
+        result = triage_pr(
+            "fix: fix",
+            "Ikalus1988/MisakaNet",
+            body="some fix",
+            repo_root=REPO_ROOT,
+        )
+        dup = [v for v in result["violations"] if "generic_title" in v.get("rule_title", "")]
+        assert len(dup) > 0
+
+    def test_same_file_fix_detected(self):
+        result = triage_pr(
+            "fix: auth header bug",
+            "Ikalus1988/MisakaNet",
+            body="fix auth issue",
+            diff_stat=" auth.py | 10 +++---",
+            repo_root=REPO_ROOT,
+        )
+        dup = [v for v in result["violations"] if "same_file" in v.get("rule_title", "")]
+        assert len(dup) > 0
+
+    def test_clean_pr_no_duplicate(self):
+        result = triage_pr(
+            "feat: add new MCP tool for lesson search",
+            "Ikalus1988/MisakaNet",
+            body="Adds a new tool that searches lessons by keyword",
+            diff_stat=" misakanet/mcp.py | 50 +++---\n tests/test_mcp.py | 20 +++---",
+            repo_root=REPO_ROOT,
+        )
+        dup = [v for v in result["violations"] if "duplicate" in v.get("rule_title", "")]
+        assert len(dup) == 0
