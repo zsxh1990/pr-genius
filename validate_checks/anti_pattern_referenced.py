@@ -1,18 +1,8 @@
-"""Check 6 (Month 2 P0 #5): profile guideline evidence drift detection.
+"""Check 6: profile guideline evidence drift detection.
 
-克莱恩 2026-07-19 路线图: 'repo profile 里的 guideline 必须有证据'.
-
-agent_guidelines 17 字段当前没有 evidence 字段 — agent 无法追溯
-true/false 值来源 (CONTRIBUTING.md / 实测 PR / 调研报告).
-
-新增 v0.2 字段:
-    agent_guidelines_evidence:
-      ai_policy: 'https://github.com/X/Y/blob/main/CONTRIBUTING.md'
-      maintainer_vibe: 'https://github.com/X/Y/issues/N'
-
-当前实现: warning only (现有 49 profile 全 missing,
-一次性 error 会破坏 validate.py 通过状态).
-Month 3 才升级 error.
+v1.5.0 升级:
+- profile 无 agent_guidelines_evidence dict → error
+- 字段缺 evidence_url → warning (Month 4 升级 error)
 """
 from __future__ import annotations
 
@@ -27,12 +17,11 @@ def check_profile_guideline_evidence(
     errors: list[str],
     ROOT: Path,
 ) -> None:
-    """Check 6: profile guideline evidence required.
+    """Check 6: profile guideline evidence required (v1.5.0: error on missing dict).
 
     Scans <org>-<repo>/index.md (Repo Profile schema) for agent_guidelines.
-    Warns if:
-    - profile has agent_guidelines but no agent_guidelines_evidence dict
-    - a guideline field is in agent_guidelines but missing from agent_guidelines_evidence
+    Error if: profile has agent_guidelines but no agent_guidelines_evidence dict
+    Warn if: individual guideline field missing from agent_guidelines_evidence
     """
     print(f"[Check 6] Profile guideline evidence required")
     profile_files = [
@@ -53,6 +42,9 @@ def check_profile_guideline_evidence(
         evidence = fm.get("agent_guidelines_evidence")
         if evidence is None or not isinstance(evidence, dict):
             profiles_without_evidence += 1
+            errors.append(
+                f"{f.relative_to(ROOT)}: agent_guidelines 存在但无 agent_guidelines_evidence dict"
+            )
             continue
         for k in gl.keys():
             if k not in evidence:
@@ -62,5 +54,5 @@ def check_profile_guideline_evidence(
     print(
         f"   profiles: {len(profile_files)}, "
         f"without evidence: {profiles_without_evidence}/{len(profile_files)} "
-        f"(Month 2 过渡期 warning only, Month 3 升级 error)"
+        f"(v1.5.0: error on missing dict, warning on missing fields)"
     )
