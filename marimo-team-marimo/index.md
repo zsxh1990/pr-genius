@@ -49,6 +49,12 @@ agent_guidelines:
     - "Missing tests"
     - "Breaking notebook semantics"
   one_pr_friendly: true  # 偏好分批小 PR
+agent_guidelines_evidence:
+  allow_unsolicited_pr: https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md
+  ai_policy: https://github.com/marimo-team/marimo/blob/main/README.md
+  maintainer_vibe: https://github.com/marimo-team/marimo/pulls?q=is%3Apr+is%3Aclosed
+  external_merge_rate_30: https://github.com/marimo-team/marimo/pulls?q=is%3Apr+is%3Aclosed
+  close_keywords: https://github.com/marimo-team/marimo/pulls?q=is%3Apr+is%3Aclosed
 ---
 
 # marimo-team/marimo PR 模式分析

@@ -52,6 +52,15 @@ agent_guidelines:
     - "Performance impact too high"
     - "Not aligned with 3.0 roadmap"
   one_pr_friendly: false  # 大项目, 偏好分批小 PR
+agent_guidelines_evidence:
+  allow_unsolicited_pr: https://pandas.pydata.org/docs/development/contributing.html
+  require_changeset: https://github.com/pandas-dev/pandas/blob/main/doc/source/whatsnew/index.rst
+  require_issue_first: https://pandas.pydata.org/docs/development/contributing.html#bug-reports-and-enhancement-requests
+  ai_policy: https://github.com/pandas-dev/pandas/blob/main/.github/PULL_REQUEST_TEMPLATE.md
+  maintainer_vibe: https://github.com/pandas-dev/pandas/pulls?q=is%3Apr+is%3Aclosed
+  ci_first_run_needs_approval: https://github.com/pandas-dev/pandas/blob/main/.github/workflows/code-checks.yml
+  external_merge_rate_30: https://github.com/pandas-dev/pandas/pulls?q=is%3Apr+is%3Aclosed
+  close_keywords: https://github.com/pandas-dev/pandas/pulls?q=is%3Apr+is%3Aclosed+label%3A%22Needs+Info%22
 ---
 
 # pandas-dev/pandas PR 模式分析

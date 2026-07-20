@@ -50,6 +50,12 @@ agent_guidelines:
     - "Needs design discussion"
     - "Type system semantics"
   one_pr_friendly: true
+agent_guidelines_evidence:
+  allow_unsolicited_pr: https://docs.astral.sh/ty/contributing/
+  ai_policy: https://github.com/astral-sh/ty/blob/main/CONTRIBUTING.md
+  maintainer_vibe: https://github.com/astral-sh/ty/pulls?q=is%3Apr+is%3Aclosed
+  external_merge_rate_30: https://github.com/astral-sh/ty/pulls?q=is%3Apr+is%3Aclosed
+  close_keywords: https://github.com/astral-sh/ty/pulls?q=is%3Apr+is%3Aclosed
 ---
 
 # astral-sh/ty PR 模式分析

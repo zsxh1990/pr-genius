@@ -49,6 +49,14 @@ agent_guidelines:
     - "Already covered by docs"
     - "Maintenance burden"
   one_pr_friendly: false  # 大改风险高, 偏好小步
+agent_guidelines_evidence:
+  allow_unsolicited_pr: https://palletsprojects.com/contributing/
+  require_changeset: https://github.com/pallets/flask/blob/main/CHANGES.rst
+  require_issue_first: https://palletsprojects.com/contributing/
+  ai_policy: https://github.com/pallets/flask/blob/main/CONTRIBUTING.rst
+  maintainer_vibe: https://github.com/pallets/flask/pulls?q=is%3Apr+is%3Aclosed
+  external_merge_rate_30: https://github.com/pallets/flask/pulls?q=is%3Apr+is%3Aclosed
+  close_keywords: https://github.com/pallets/flask/pulls?q=is%3Apr+is%3Aclosed+label%3Ainvalid
 ---
 
 # pallets/flask PR 模式分析

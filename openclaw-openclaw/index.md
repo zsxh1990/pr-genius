@@ -60,6 +60,13 @@ agent_guidelines:
     - "duplicate"
     - "stale"
   one_pr_friendly: false  # 大 PR 风险高; XS/S + 单 commit 友好
+agent_guidelines_evidence:
+  ai_policy: https://github.com/openclaw/openclaw/blob/main/CONTRIBUTING.md
+  ai_assisted_disclosure: https://github.com/openclaw/openclaw/blob/main/CONTRIBUTING.md
+  maintainer_vibe: https://github.com/openclaw/openclaw/pulls?q=is%3Apr+is%3Aclosed
+  bot_review: https://github.com/openclaw/openclaw/blob/main/.github/workflows/
+  external_merge_rate_30: https://github.com/openclaw/openclaw/pulls?q=is%3Apr+is%3Aclosed
+  close_keywords: https://github.com/openclaw/openclaw/pulls?q=is%3Apr+is%3Aclosed+label%3Astale
 ---
 
 # openclaw/openclaw PR 模式分析
