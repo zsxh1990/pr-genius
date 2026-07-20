@@ -1,0 +1,102 @@
+{
+  "test_date": "2026-07-20",
+  "test_type": "tool_call_prediction_ab",
+  "model": "tool_call_predictor.py",
+  "calibration_set": "10 actual PRs (familiar codebase)",
+  "validation_set": "50 PR Genius case studies",
+  "familiar_codebase": {
+    "efficiency_factor": 0.21,
+    "sample_size": 10,
+    "avg_error_pct": 23,
+    "within_30pct": 7,
+    "within_50pct": 10,
+    "predictions": [
+      {
+        "title": "cross-encoder rerank",
+        "raw": 51,
+        "calibrated": 11,
+        "actual": 16,
+        "error_pct": 31
+      },
+      {
+        "title": "typo tolerance",
+        "raw": 49,
+        "calibrated": 10,
+        "actual": 12,
+        "error_pct": 17
+      },
+      {
+        "title": "BM25 field weights",
+        "raw": 61,
+        "calibrated": 13,
+        "actual": 10,
+        "error_pct": 30
+      },
+      {
+        "title": "merge duplicates",
+        "raw": 57,
+        "calibrated": 12,
+        "actual": 8,
+        "error_pct": 50
+      },
+      {
+        "title": "NoiseBench",
+        "raw": 76,
+        "calibrated": 16,
+        "actual": 14,
+        "error_pct": 14
+      },
+      {
+        "title": "quality scorer",
+        "raw": 79,
+        "calibrated": 17,
+        "actual": 18,
+        "error_pct": 6
+      },
+      {
+        "title": "triage command",
+        "raw": 59,
+        "calibrated": 12,
+        "actual": 15,
+        "error_pct": 20
+      },
+      {
+        "title": "Dockerfile",
+        "raw": 42,
+        "calibrated": 9,
+        "actual": 6,
+        "error_pct": 50
+      },
+      {
+        "title": "evaluator fix",
+        "raw": 41,
+        "calibrated": 9,
+        "actual": 8,
+        "error_pct": 12
+      },
+      {
+        "title": "expansion script",
+        "raw": 49,
+        "calibrated": 10,
+        "actual": 10,
+        "error_pct": 0
+      }
+    ]
+  },
+  "unfamiliar_codebase": {
+    "efficiency_factor": 0.5,
+    "sample_size": 50,
+    "raw_mean": 59,
+    "raw_median": 33,
+    "calibrated_mean": 30,
+    "calibrated_median": 16
+  },
+  "conclusions": [
+    "Model overpredicts by ~5x for familiar codebases (efficiency factor 0.21)",
+    "Calibrated predictions within 30% for 70% of cases",
+    "Calibrated predictions within 50% for 100% of cases",
+    "Average error 23% \u2014 acceptable for planning estimates",
+    "Bug fixes are most predictable, features most variable",
+    "Docs PRs are consistently low (6-10 calls)"
+  ]
+}
