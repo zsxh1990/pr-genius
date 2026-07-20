@@ -51,6 +51,13 @@ confidence: high  # autogen from GH API; bump to medium if human-curated
 last_release: 0.11.26
 last_commit_sha: 32194f49
 stars: 87098
+agent_guidelines_evidence:
+  allow_unsolicited_pr: https://github.com/astral-sh/uv/blob/main/CONTRIBUTING.md
+  require_issue_first: https://github.com/astral-sh/uv/blob/main/CONTRIBUTING.md
+  ai_policy: https://github.com/astral-sh/uv/blob/main/CONTRIBUTING.md
+  maintainer_vibe: https://github.com/astral-sh/uv/pulls?q=is%3Apr+is%3Aclosed
+  external_merge_rate_30: https://github.com/astral-sh/uv/pulls?q=is%3Apr+is%3Aclosed
+  close_keywords: https://github.com/astral-sh/uv/pulls?q=is%3Apr+is%3Aclosed
 ---
 
 

@@ -48,6 +48,13 @@ agent_guidelines:
     - "Out of scope (not OSINT)"
     - "Ethical concern"
   one_pr_friendly: true
+agent_guidelines_evidence:
+  allow_unsolicited_pr: https://github.com/soxoj/maigret/blob/main/CONTRIBUTING.md
+  require_issue_first: https://github.com/soxoj/maigret/blob/main/CONTRIBUTING.md
+  ai_policy: https://github.com/soxoj/maigret/blob/main/CONTRIBUTING.md
+  maintainer_vibe: https://github.com/soxoj/maigret/pulls?q=is%3Apr+is%3Aclosed
+  external_merge_rate_30: https://github.com/soxoj/maigret/pulls?q=is%3Apr+is%3Aclosed
+  close_keywords: https://github.com/soxoj/maigret/pulls?q=is%3Apr+is%3Aclosed
 ---
 
 # soxoj/maigret PR 模式分析

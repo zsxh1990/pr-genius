@@ -53,6 +53,13 @@ misakanet_lessons:
     absorbed_at: 2026-06-21
 federation_status: declared-2026-07-02
 verified_at: 2026-07-02  # 7/2 闭环验证后更新：CLA 核实 + round 4 已发
+agent_guidelines_evidence:
+  allow_unsolicited_pr: https://github.com/plastic-labs/honcho/blob/main/CONTRIBUTING.md
+  require_issue_first: https://github.com/plastic-labs/honcho/blob/main/CONTRIBUTING.md
+  ai_policy: https://github.com/plastic-labs/honcho/blob/main/CONTRIBUTING.md
+  maintainer_vibe: https://github.com/plastic-labs/honcho/pulls?q=is%3Apr+is%3Aclosed
+  external_merge_rate_30: https://github.com/plastic-labs/honcho/pulls?q=is%3Apr+is%3Aclosed
+  close_keywords: https://github.com/plastic-labs/honcho/pulls?q=is%3Apr+is%3Aclosed
 ---
 
 # plastic-labs/honcho

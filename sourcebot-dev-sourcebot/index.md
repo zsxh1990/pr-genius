@@ -47,6 +47,13 @@ confidence: high  # autogen from GH API; bump to medium if human-curated
 last_release: v5.0.4
 last_commit_sha: 9c4780da
 stars: 3563
+agent_guidelines_evidence:
+  allow_unsolicited_pr: https://github.com/sourcebot-dev/sourcebot/blob/main/CONTRIBUTING.md
+  require_issue_first: https://github.com/sourcebot-dev/sourcebot/blob/main/CONTRIBUTING.md
+  ai_policy: https://github.com/sourcebot-dev/sourcebot/blob/main/CONTRIBUTING.md
+  maintainer_vibe: https://github.com/sourcebot-dev/sourcebot/pulls?q=is%3Apr+is%3Aclosed
+  external_merge_rate_30: https://github.com/sourcebot-dev/sourcebot/pulls?q=is%3Apr+is%3Aclosed
+  close_keywords: https://github.com/sourcebot-dev/sourcebot/pulls?q=is%3Apr+is%3Aclosed
 ---
 
 

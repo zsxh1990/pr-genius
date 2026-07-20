@@ -48,6 +48,13 @@ confidence: high  # autogen from GH API; bump to medium if human-curated
 last_release: 0.5.10
 last_commit_sha: ee70af01
 stars: 1304
+agent_guidelines_evidence:
+  allow_unsolicited_pr: https://github.com/future-agi/future-agi/blob/main/CONTRIBUTING.md
+  require_issue_first: https://github.com/future-agi/future-agi/blob/main/CONTRIBUTING.md
+  ai_policy: https://github.com/future-agi/future-agi/blob/main/CONTRIBUTING.md
+  maintainer_vibe: https://github.com/future-agi/future-agi/pulls?q=is%3Apr+is%3Aclosed
+  external_merge_rate_30: https://github.com/future-agi/future-agi/pulls?q=is%3Apr+is%3Aclosed
+  close_keywords: https://github.com/future-agi/future-agi/pulls?q=is%3Apr+is%3Aclosed
 ---
 
 

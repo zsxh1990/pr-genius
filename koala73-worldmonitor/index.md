@@ -49,6 +49,13 @@ agent_guidelines:
     - "Maintainer busy"
     - "Already planned"
   one_pr_friendly: true
+agent_guidelines_evidence:
+  allow_unsolicited_pr: https://github.com/koala73/worldmonitor/blob/main/CONTRIBUTING.md
+  require_issue_first: https://github.com/koala73/worldmonitor/blob/main/CONTRIBUTING.md
+  ai_policy: https://github.com/koala73/worldmonitor/blob/main/CONTRIBUTING.md
+  maintainer_vibe: https://github.com/koala73/worldmonitor/pulls?q=is%3Apr+is%3Aclosed
+  external_merge_rate_30: https://github.com/koala73/worldmonitor/pulls?q=is%3Apr+is%3Aclosed
+  close_keywords: https://github.com/koala73/worldmonitor/pulls?q=is%3Apr+is%3Aclosed
 ---
 
 # koala73/worldmonitor PR 模式分析

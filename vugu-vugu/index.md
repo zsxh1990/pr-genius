@@ -50,6 +50,13 @@ agent_guidelines:
     - "Maintainer busy"
     - "Already in vugu.org docs"
   one_pr_friendly: true
+agent_guidelines_evidence:
+  allow_unsolicited_pr: https://github.com/vugu/vugu/blob/main/CONTRIBUTING.md
+  require_issue_first: https://github.com/vugu/vugu/blob/main/CONTRIBUTING.md
+  ai_policy: https://github.com/vugu/vugu/blob/main/CONTRIBUTING.md
+  maintainer_vibe: https://github.com/vugu/vugu/pulls?q=is%3Apr+is%3Aclosed
+  external_merge_rate_30: https://github.com/vugu/vugu/pulls?q=is%3Apr+is%3Aclosed
+  close_keywords: https://github.com/vugu/vugu/pulls?q=is%3Apr+is%3Aclosed
 ---
 
 # vugu/vugu PR 模式分析

@@ -48,6 +48,13 @@ misakanet_queries:
   - misakanet/lessons/contrib/ponytail-single-source-of-truth.md  # 删过期版本号，让 bicep 当 SSOT
 misakanet_lessons: []
 federation_status: declared-2026-07-03
+agent_guidelines_evidence:
+  allow_unsolicited_pr: https://github.com/mongodb-js/mongodb-mcp-server/blob/main/CONTRIBUTING.md
+  require_issue_first: https://github.com/mongodb-js/mongodb-mcp-server/blob/main/CONTRIBUTING.md
+  ai_policy: https://github.com/mongodb-js/mongodb-mcp-server/blob/main/CONTRIBUTING.md
+  maintainer_vibe: https://github.com/mongodb-js/mongodb-mcp-server/pulls?q=is%3Apr+is%3Aclosed
+  external_merge_rate_30: https://github.com/mongodb-js/mongodb-mcp-server/pulls?q=is%3Apr+is%3Aclosed
+  close_keywords: https://github.com/mongodb-js/mongodb-mcp-server/pulls?q=is%3Apr+is%3Aclosed
 ---
 
 # mongodb-js/mongodb-mcp-server

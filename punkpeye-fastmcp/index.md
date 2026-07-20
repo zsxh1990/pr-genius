@@ -48,6 +48,13 @@ confidence: high  # autogen from GH API; bump to medium if human-curated
 last_release: v4.4.0
 last_commit_sha: b170e78c
 stars: 3215
+agent_guidelines_evidence:
+  allow_unsolicited_pr: https://github.com/punkpeye/fastmcp/blob/main/CONTRIBUTING.md
+  require_issue_first: https://github.com/punkpeye/fastmcp/blob/main/CONTRIBUTING.md
+  ai_policy: https://github.com/punkpeye/fastmcp/blob/main/CONTRIBUTING.md
+  maintainer_vibe: https://github.com/punkpeye/fastmcp/pulls?q=is%3Apr+is%3Aclosed
+  external_merge_rate_30: https://github.com/punkpeye/fastmcp/pulls?q=is%3Apr+is%3Aclosed
+  close_keywords: https://github.com/punkpeye/fastmcp/pulls?q=is%3Apr+is%3Aclosed
 ---
 
 

@@ -47,6 +47,13 @@ misakanet_queries:
   - misakanet/lessons/contrib/stale-pr-handling.md  # 26 天无活动 stale PR 处置策略
 misakanet_lessons: []
 federation_status: declared-2026-07-02
+agent_guidelines_evidence:
+  allow_unsolicited_pr: https://github.com/qdrant/mcp-server-qdrant/blob/main/CONTRIBUTING.md
+  require_issue_first: https://github.com/qdrant/mcp-server-qdrant/blob/main/CONTRIBUTING.md
+  ai_policy: https://github.com/qdrant/mcp-server-qdrant/blob/main/CONTRIBUTING.md
+  maintainer_vibe: https://github.com/qdrant/mcp-server-qdrant/pulls?q=is%3Apr+is%3Aclosed
+  external_merge_rate_30: https://github.com/qdrant/mcp-server-qdrant/pulls?q=is%3Apr+is%3Aclosed
+  close_keywords: https://github.com/qdrant/mcp-server-qdrant/pulls?q=is%3Apr+is%3Aclosed
 ---
 
 # qdrant/mcp-server-qdrant

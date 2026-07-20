@@ -50,6 +50,13 @@ confidence: high  # autogen from GH API; bump to medium if human-curated
 last_release: 1.25.0
 last_commit_sha: 1d2f5d46
 stars: 766
+agent_guidelines_evidence:
+  allow_unsolicited_pr: https://github.com/agentic-community/mcp-gateway-registry/blob/main/CONTRIBUTING.md
+  require_issue_first: https://github.com/agentic-community/mcp-gateway-registry/blob/main/CONTRIBUTING.md
+  ai_policy: https://github.com/agentic-community/mcp-gateway-registry/blob/main/CONTRIBUTING.md
+  maintainer_vibe: https://github.com/agentic-community/mcp-gateway-registry/pulls?q=is%3Apr+is%3Aclosed
+  external_merge_rate_30: https://github.com/agentic-community/mcp-gateway-registry/pulls?q=is%3Apr+is%3Aclosed
+  close_keywords: https://github.com/agentic-community/mcp-gateway-registry/pulls?q=is%3Apr+is%3Aclosed
 ---
 
 

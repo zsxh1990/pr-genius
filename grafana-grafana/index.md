@@ -23,6 +23,13 @@ tags:
   - repo-profile
   - large-repo
   - Go
+agent_guidelines_evidence:
+  allow_unsolicited_pr: https://github.com/grafana/grafana/blob/main/CONTRIBUTING.md
+  require_issue_first: https://github.com/grafana/grafana/blob/main/CONTRIBUTING.md
+  ai_policy: https://github.com/grafana/grafana/blob/main/CONTRIBUTING.md
+  maintainer_vibe: https://github.com/grafana/grafana/pulls?q=is%3Apr+is%3Aclosed
+  external_merge_rate_30: https://github.com/grafana/grafana/pulls?q=is%3Apr+is%3Aclosed
+  close_keywords: https://github.com/grafana/grafana/pulls?q=is%3Apr+is%3Aclosed
 ---
 
 ## PR 文化
