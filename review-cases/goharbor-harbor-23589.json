@@ -1,0 +1,39 @@
+{
+  "id": "goharbor-harbor-23589",
+  "repo": "goharbor/harbor",
+  "pr_number": 23589,
+  "title": "test: fix race condition in health checker test by polling",
+  "author": "Norway-02",
+  "state": "OPEN",
+  "merged": false,
+  "category": "open_pending",
+  "created_at": "2026-07-21T04:46:58Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": true,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 1,
+    "additions": 9,
+    "deletions": 4,
+    "review_count": 0,
+    "comment_count": 2,
+    "change_ratio": 0.44
+  },
+  "metrics": {
+    "files_changed": 1,
+    "additions": 9,
+    "deletions": 4
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "goharbor-harbor-23578",
+  "repo": "goharbor/harbor",
+  "pr_number": 23578,
+  "title": "Add proxy cache hit/miss metrics",
+  "author": "Jason-Lee3",
+  "state": "OPEN",
+  "merged": false,
+  "category": "review_approved_pending",
+  "created_at": "2026-07-18T07:45:55Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": true,
+    "is_refactor": false,
+    "is_small_pr": true,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": true,
+    "files_changed": 2,
+    "additions": 39,
+    "deletions": 1,
+    "review_count": 1,
+    "comment_count": 5,
+    "change_ratio": 0.03
+  },
+  "metrics": {
+    "files_changed": 2,
+    "additions": 39,
+    "deletions": 1
+  }
+}

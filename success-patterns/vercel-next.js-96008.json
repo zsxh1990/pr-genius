@@ -1,0 +1,39 @@
+{
+  "id": "vercel-next.js-96008",
+  "repo": "vercel/next.js",
+  "pr_number": 96008,
+  "title": "fix(incremental-cache): byte-exact fetch cache key for binary bodies",
+  "author": "eps1lon",
+  "state": "MERGED",
+  "merged": true,
+  "category": "merged_success",
+  "created_at": "2026-07-21T16:32:46Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": true,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": true,
+    "files_changed": 10,
+    "additions": 798,
+    "deletions": 77,
+    "review_count": 1,
+    "comment_count": 2,
+    "change_ratio": 0.1
+  },
+  "metrics": {
+    "files_changed": 10,
+    "additions": 798,
+    "deletions": 77
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "pydantic-pydantic-13475",
+  "repo": "pydantic/pydantic",
+  "pr_number": 13475,
+  "title": "Fix grammar typos in docs and pydantic skill",
+  "author": "chinesepowered",
+  "state": "MERGED",
+  "merged": true,
+  "category": "merged_success",
+  "created_at": "2026-07-19T16:16:58Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": true,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": true,
+    "files_changed": 4,
+    "additions": 4,
+    "deletions": 4,
+    "review_count": 1,
+    "comment_count": 3,
+    "change_ratio": 1.0
+  },
+  "metrics": {
+    "files_changed": 4,
+    "additions": 4,
+    "deletions": 4
+  }
+}

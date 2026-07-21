@@ -1,0 +1,39 @@
+{
+  "id": "pydantic-pydantic-13470",
+  "repo": "pydantic/pydantic",
+  "pr_number": 13470,
+  "title": "Docs: Document that Url.build components must be URL-encoded",
+  "author": "Joosboy",
+  "state": "CLOSED",
+  "merged": false,
+  "category": "closed_rejected",
+  "created_at": "2026-07-19T08:41:31Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": true,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": true,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 2,
+    "additions": 10,
+    "deletions": 24,
+    "review_count": 0,
+    "comment_count": 2,
+    "change_ratio": 2.4
+  },
+  "metrics": {
+    "files_changed": 2,
+    "additions": 10,
+    "deletions": 24
+  }
+}
