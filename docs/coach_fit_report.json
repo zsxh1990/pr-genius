@@ -1,13 +1,20 @@
 {
-  "total_cases": 274,
+  "total_cases": 290,
   "counts": {
-    "correct": 97,
+    "correct": 106,
     "close": 134,
-    "wrong": 43,
+    "wrong": 50,
     "skip": 0
   },
-  "accuracy_pct": 84.3,
+  "accuracy_pct": 82.8,
   "by_repo": {
+    "pydantic/pydantic": {
+      "correct": 12,
+      "close": 0,
+      "wrong": 10,
+      "skip": 0,
+      "total": 22
+    },
     "docker/compose": {
       "correct": 11,
       "close": 9,
@@ -36,6 +43,13 @@
       "skip": 0,
       "total": 19
     },
+    "goharbor/harbor": {
+      "correct": 5,
+      "close": 9,
+      "wrong": 3,
+      "skip": 0,
+      "total": 17
+    },
     "huggingface/transformers": {
       "correct": 12,
       "close": 5,
@@ -57,26 +71,12 @@
       "skip": 0,
       "total": 13
     },
-    "pydantic/pydantic": {
-      "correct": 7,
-      "close": 0,
-      "wrong": 6,
-      "skip": 0,
-      "total": 13
-    },
     "microsoft/TypeScript": {
       "correct": 10,
       "close": 3,
       "wrong": 0,
       "skip": 0,
       "total": 13
-    },
-    "microsoft/markitdown": {
-      "correct": 1,
-      "close": 11,
-      "wrong": 0,
-      "skip": 0,
-      "total": 12
     },
     "chroma-core/chroma": {
       "correct": 2,
@@ -134,10 +134,10 @@
       "skip": 0,
       "total": 8
     },
-    "modelcontextprotocol/python-sdk": {
-      "correct": 0,
-      "close": 4,
-      "wrong": 3,
+    "microsoft/markitdown": {
+      "correct": 1,
+      "close": 6,
+      "wrong": 0,
       "skip": 0,
       "total": 7
     },
@@ -155,19 +155,26 @@
       "skip": 0,
       "total": 6
     },
-    "goharbor/harbor": {
-      "correct": 2,
-      "close": 0,
-      "wrong": 3,
-      "skip": 0,
-      "total": 5
-    },
     "rust-lang/rust": {
       "correct": 2,
       "close": 0,
       "wrong": 3,
       "skip": 0,
       "total": 5
+    },
+    "vercel/next.js": {
+      "correct": 2,
+      "close": 0,
+      "wrong": 3,
+      "skip": 0,
+      "total": 5
+    },
+    "modelcontextprotocol/python-sdk": {
+      "correct": 0,
+      "close": 0,
+      "wrong": 3,
+      "skip": 0,
+      "total": 3
     },
     "openai/openai-python": {
       "correct": 0,
@@ -183,26 +190,19 @@
       "skip": 0,
       "total": 2
     },
+    "prometheus/prometheus": {
+      "correct": 1,
+      "close": 0,
+      "wrong": 1,
+      "skip": 0,
+      "total": 2
+    },
     "cli/cli": {
       "correct": 1,
       "close": 1,
       "wrong": 0,
       "skip": 0,
       "total": 2
-    },
-    "vercel/next.js": {
-      "correct": 2,
-      "close": 0,
-      "wrong": 0,
-      "skip": 0,
-      "total": 2
-    },
-    "prometheus/prometheus": {
-      "correct": 0,
-      "close": 0,
-      "wrong": 1,
-      "skip": 0,
-      "total": 1
     },
     "qdrant/qdrant": {
       "correct": 0,
@@ -1352,6 +1352,58 @@
       "success_pattern_hits": []
     },
     {
+      "id": "pydantic-pydantic-13475",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13475,
+      "title": "Fix grammar typos in docs and pydantic skill",
+      "actual_outcome": "merged",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "wrong",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "pydantic-pydantic-13483",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13483,
+      "title": "Fix type variable substitution in `__pydantic_extra__` with ",
+      "actual_outcome": "merged",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "wrong",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "pydantic-pydantic-13488",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13488,
+      "title": "Bump pillow from 12.2.0 to 12.3.0",
+      "actual_outcome": "merged",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "wrong",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "pydantic-pydantic-13489",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13489,
+      "title": "Fix Skill layout",
+      "actual_outcome": "merged",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "wrong",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "qdrant-qdrant-9898",
       "repo": "qdrant/qdrant",
       "pr_number": 9898,
@@ -1421,6 +1473,45 @@
       "repo": "tailwindlabs/tailwindcss",
       "pr_number": 20336,
       "title": "Don't trigger a full page reload for scanned files that Vite",
+      "actual_outcome": "merged",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "wrong",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "vercel-next.js-96002",
+      "repo": "vercel/next.js",
+      "pr_number": 96002,
+      "title": "docs: fix unstable_cache syntax error",
+      "actual_outcome": "merged",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "wrong",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "vercel-next.js-96006",
+      "repo": "vercel/next.js",
+      "pr_number": 96006,
+      "title": "fix(next/image): improve performance of detectContentType() ",
+      "actual_outcome": "merged",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "wrong",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "vercel-next.js-96007",
+      "repo": "vercel/next.js",
+      "pr_number": 96007,
+      "title": "Validate server reference IDs during manifest lookup",
       "actual_outcome": "merged",
       "predicted_risk": "high",
       "predicted_rate": null,
@@ -1746,6 +1837,45 @@
       "repo": "goharbor/harbor",
       "pr_number": 23567,
       "title": "fix: safely type assert filter values when building reposito",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "goharbor-harbor-23581",
+      "repo": "goharbor/harbor",
+      "pr_number": 23581,
+      "title": "fix: safely type assert LDAP group config values",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "goharbor-harbor-23583",
+      "repo": "goharbor/harbor",
+      "pr_number": 23583,
+      "title": "fix: safeguard against panics in Casbin keyMatch2Func",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "goharbor-harbor-23584",
+      "repo": "goharbor/harbor",
+      "pr_number": 23584,
+      "title": "fix: safeguard against missing id_token in OIDC auth",
       "actual_outcome": "closed",
       "predicted_risk": "high",
       "predicted_rate": null,
@@ -2158,6 +2288,19 @@
       "success_pattern_hits": []
     },
     {
+      "id": "prometheus-prometheus-19248",
+      "repo": "prometheus/prometheus",
+      "pr_number": 19248,
+      "title": "storage: add AppendExemplar/UpdateMetadata to AppenderV2",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "psf-requests-7575",
       "repo": "psf/requests",
       "pr_number": 7575,
@@ -2331,6 +2474,71 @@
       "repo": "pydantic/pydantic",
       "pr_number": 13455,
       "title": "fix: align RootModel.model_dump() TYPE_CHECKING signature wi",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "pydantic-pydantic-13463",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13463,
+      "title": "Feature/pydantic aggregate errors submission",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "pydantic-pydantic-13464",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13464,
+      "title": "fix: prevent computed field names from leaking into extras w",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "pydantic-pydantic-13469",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13469,
+      "title": "fix: use an explicit tuple serializer for named tuples",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "pydantic-pydantic-13470",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13470,
+      "title": "Docs: Document that Url.build components must be URL-encoded",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "pydantic-pydantic-13482",
+      "repo": "pydantic/pydantic",
+      "pr_number": 13482,
+      "title": "Enforce Gt constraint in pipeline API when the bound type do",
       "actual_outcome": "closed",
       "predicted_risk": "high",
       "predicted_rate": null,
@@ -3302,6 +3510,123 @@
       "success_pattern_hits": []
     },
     {
+      "id": "goharbor-harbor-23578",
+      "repo": "goharbor/harbor",
+      "pr_number": 23578,
+      "title": "Add proxy cache hit/miss metrics",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "goharbor-harbor-23585",
+      "repo": "goharbor/harbor",
+      "pr_number": 23585,
+      "title": "fix: consolidate type assertion and nil pointer safeguards",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "goharbor-harbor-23586",
+      "repo": "goharbor/harbor",
+      "pr_number": 23586,
+      "title": "Fix: member audit log resolution after transaction commit",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "goharbor-harbor-23587",
+      "repo": "goharbor/harbor",
+      "pr_number": 23587,
+      "title": "chore(deps): bump axios from 1.17.0 to 1.18.1 in /src/portal",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "goharbor-harbor-23588",
+      "repo": "goharbor/harbor",
+      "pr_number": 23588,
+      "title": "fix: safeguard against panics from unsafe type assertions in",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "goharbor-harbor-23589",
+      "repo": "goharbor/harbor",
+      "pr_number": 23589,
+      "title": "test: fix race condition in health checker test by polling",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "goharbor-harbor-23590",
+      "repo": "goharbor/harbor",
+      "pr_number": 23590,
+      "title": "chore(deps): bump github actions to v6",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "goharbor-harbor-23591",
+      "repo": "goharbor/harbor",
+      "pr_number": 23591,
+      "title": "fix: set MaxIdleConnsPerHost on internal HTTP transports",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "goharbor-harbor-23592",
+      "repo": "goharbor/harbor",
+      "pr_number": 23592,
+      "title": "fix(retention): return 404 for missing policies",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "grafana-grafana-128658",
       "repo": "grafana/grafana",
       "pr_number": 128658,
@@ -3657,123 +3982,6 @@
       "repo": "microsoft/markitdown",
       "pr_number": 2212,
       "title": "fix: decode percent-encoded Windows drive letters in file UR",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "microsoft-markitdown-2213",
-      "repo": "microsoft/markitdown",
-      "pr_number": 2213,
-      "title": "feat: add GIF support to ImageConverter",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "microsoft-markitdown-2215",
-      "repo": "microsoft/markitdown",
-      "pr_number": 2215,
-      "title": "docs: clarify built-in PDF conversion limitations",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "microsoft-markitdown-2216",
-      "repo": "microsoft/markitdown",
-      "pr_number": 2216,
-      "title": "Update virtual environment instructions in README",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "microsoft-markitdown-2219",
-      "repo": "microsoft/markitdown",
-      "pr_number": 2219,
-      "title": "docs: add 'Use with AI Agents' section to README",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "microsoft-markitdown-2220",
-      "repo": "microsoft/markitdown",
-      "pr_number": 2220,
-      "title": "Add MarkItDown Flutter Edition — offline Windows/Android/Web",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "modelcontextprotocol-python-sdk-3105",
-      "repo": "modelcontextprotocol/python-sdk",
-      "pr_number": 3105,
-      "title": "Correct stable v2 target date to 2026-07-28",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "modelcontextprotocol-python-sdk-3116",
-      "repo": "modelcontextprotocol/python-sdk",
-      "pr_number": 3116,
-      "title": "chore(deps): bump starlette from 0.49.1 to 1.3.1",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "modelcontextprotocol-python-sdk-3117",
-      "repo": "modelcontextprotocol/python-sdk",
-      "pr_number": 3117,
-      "title": "Isolate the stdio server's stdin and stdout from handler sub",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "modelcontextprotocol-python-sdk-3118",
-      "repo": "modelcontextprotocol/python-sdk",
-      "pr_number": 3118,
-      "title": "fix(server): generate tool output schema in serialization mo",
       "actual_outcome": "open",
       "predicted_risk": "high",
       "predicted_rate": null,
