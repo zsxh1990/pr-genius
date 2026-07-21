@@ -1,0 +1,39 @@
+{
+  "id": "hashicorp-terraform-38893",
+  "repo": "hashicorp/terraform",
+  "pr_number": 38893,
+  "title": "fix: Remove the `@timestamp` field from a golden reference, if it's included, before comparison.",
+  "author": "SarahFrench",
+  "state": "MERGED",
+  "merged": true,
+  "category": "merged_success",
+  "created_at": "2026-07-20T17:12:50Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": true,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": false,
+    "files_changed": 1,
+    "additions": 2,
+    "deletions": 1,
+    "review_count": 2,
+    "comment_count": 0,
+    "change_ratio": 0.5
+  },
+  "metrics": {
+    "files_changed": 1,
+    "additions": 2,
+    "deletions": 1
+  }
+}

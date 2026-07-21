@@ -1,0 +1,39 @@
+{
+  "id": "facebook-react-37060",
+  "repo": "facebook/react",
+  "pr_number": 37060,
+  "title": "[DOM] Scroll to text siblings of empty Fragments instead of the parent",
+  "author": "eps1lon",
+  "state": "MERGED",
+  "merged": true,
+  "category": "merged_success",
+  "created_at": "2026-07-19T10:10:40Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": true,
+    "files_changed": 5,
+    "additions": 267,
+    "deletions": 90,
+    "review_count": 2,
+    "comment_count": 1,
+    "change_ratio": 0.34
+  },
+  "metrics": {
+    "files_changed": 5,
+    "additions": 267,
+    "deletions": 90
+  }
+}
