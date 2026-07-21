@@ -1,19 +1,40 @@
 {
-  "total_cases": 267,
+  "total_cases": 274,
   "counts": {
-    "correct": 83,
-    "close": 128,
-    "wrong": 41,
+    "correct": 97,
+    "close": 134,
+    "wrong": 43,
     "skip": 0
   },
-  "accuracy_pct": 83.7,
+  "accuracy_pct": 84.3,
   "by_repo": {
+    "docker/compose": {
+      "correct": 11,
+      "close": 9,
+      "wrong": 1,
+      "skip": 0,
+      "total": 21
+    },
     "actions/checkout": {
-      "correct": 5,
-      "close": 12,
+      "correct": 7,
+      "close": 13,
       "wrong": 0,
       "skip": 0,
-      "total": 17
+      "total": 20
+    },
+    "facebook/react": {
+      "correct": 2,
+      "close": 15,
+      "wrong": 2,
+      "skip": 0,
+      "total": 19
+    },
+    "fastapi/fastapi": {
+      "correct": 2,
+      "close": 16,
+      "wrong": 1,
+      "skip": 0,
+      "total": 19
     },
     "huggingface/transformers": {
       "correct": 12,
@@ -21,27 +42,6 @@
       "wrong": 0,
       "skip": 0,
       "total": 17
-    },
-    "docker/compose": {
-      "correct": 9,
-      "close": 6,
-      "wrong": 1,
-      "skip": 0,
-      "total": 16
-    },
-    "fastapi/fastapi": {
-      "correct": 1,
-      "close": 13,
-      "wrong": 1,
-      "skip": 0,
-      "total": 15
-    },
-    "pydantic/pydantic": {
-      "correct": 7,
-      "close": 2,
-      "wrong": 6,
-      "skip": 0,
-      "total": 15
     },
     "astral-sh/uv": {
       "correct": 2,
@@ -57,10 +57,17 @@
       "skip": 0,
       "total": 13
     },
-    "prometheus/prometheus": {
-      "correct": 0,
-      "close": 12,
-      "wrong": 1,
+    "pydantic/pydantic": {
+      "correct": 7,
+      "close": 0,
+      "wrong": 6,
+      "skip": 0,
+      "total": 13
+    },
+    "microsoft/TypeScript": {
+      "correct": 10,
+      "close": 3,
+      "wrong": 0,
       "skip": 0,
       "total": 13
     },
@@ -78,24 +85,24 @@
       "skip": 0,
       "total": 11
     },
-    "psf/requests": {
-      "correct": 7,
-      "close": 3,
-      "wrong": 1,
-      "skip": 0,
-      "total": 11
-    },
-    "microsoft/TypeScript": {
-      "correct": 8,
-      "close": 2,
+    "hashicorp/terraform": {
+      "correct": 2,
+      "close": 8,
       "wrong": 0,
       "skip": 0,
       "total": 10
     },
-    "modelcontextprotocol/python-sdk": {
-      "correct": 0,
+    "langchain-ai/langgraph": {
+      "correct": 9,
+      "close": 1,
+      "wrong": 0,
+      "skip": 0,
+      "total": 10
+    },
+    "astral-sh/ruff": {
+      "correct": 1,
       "close": 6,
-      "wrong": 3,
+      "wrong": 2,
       "skip": 0,
       "total": 9
     },
@@ -106,20 +113,6 @@
       "skip": 0,
       "total": 9
     },
-    "langchain-ai/langgraph": {
-      "correct": 8,
-      "close": 1,
-      "wrong": 0,
-      "skip": 0,
-      "total": 9
-    },
-    "astral-sh/ruff": {
-      "correct": 0,
-      "close": 6,
-      "wrong": 2,
-      "skip": 0,
-      "total": 8
-    },
     "grafana/grafana": {
       "correct": 2,
       "close": 6,
@@ -129,8 +122,22 @@
     },
     "kubernetes/kubernetes": {
       "correct": 2,
-      "close": 5,
+      "close": 6,
       "wrong": 0,
+      "skip": 0,
+      "total": 8
+    },
+    "psf/requests": {
+      "correct": 7,
+      "close": 0,
+      "wrong": 1,
+      "skip": 0,
+      "total": 8
+    },
+    "modelcontextprotocol/python-sdk": {
+      "correct": 0,
+      "close": 4,
+      "wrong": 3,
       "skip": 0,
       "total": 7
     },
@@ -156,32 +163,25 @@
       "total": 5
     },
     "rust-lang/rust": {
-      "correct": 1,
-      "close": 1,
+      "correct": 2,
+      "close": 0,
       "wrong": 3,
       "skip": 0,
       "total": 5
     },
     "openai/openai-python": {
       "correct": 0,
-      "close": 1,
+      "close": 0,
       "wrong": 3,
       "skip": 0,
-      "total": 4
+      "total": 3
     },
-    "facebook/react": {
+    "denoland/deno": {
       "correct": 1,
-      "close": 2,
-      "wrong": 0,
+      "close": 0,
+      "wrong": 1,
       "skip": 0,
-      "total": 3
-    },
-    "hashicorp/terraform": {
-      "correct": 0,
-      "close": 3,
-      "wrong": 0,
-      "skip": 0,
-      "total": 3
+      "total": 2
     },
     "cli/cli": {
       "correct": 1,
@@ -197,7 +197,7 @@
       "skip": 0,
       "total": 2
     },
-    "denoland/deno": {
+    "prometheus/prometheus": {
       "correct": 0,
       "close": 0,
       "wrong": 1,
@@ -213,76 +213,6 @@
     },
     "golang/go": {
       "correct": 1,
-      "close": 0,
-      "wrong": 0,
-      "skip": 0,
-      "total": 1
-    },
-    "pallets/flask": {
-      "correct": 0,
-      "close": 0,
-      "wrong": 0,
-      "skip": 0,
-      "total": 4
-    },
-    "pandas-dev/pandas": {
-      "correct": 0,
-      "close": 0,
-      "wrong": 0,
-      "skip": 0,
-      "total": 2
-    },
-    "marimo-team/marimo": {
-      "correct": 0,
-      "close": 0,
-      "wrong": 0,
-      "skip": 0,
-      "total": 1
-    },
-    "moment/moment": {
-      "correct": 0,
-      "close": 0,
-      "wrong": 0,
-      "skip": 0,
-      "total": 1
-    },
-    "OpenBSD/src": {
-      "correct": 0,
-      "close": 0,
-      "wrong": 0,
-      "skip": 0,
-      "total": 1
-    },
-    "HolmesGPT/holmesgpt": {
-      "correct": 0,
-      "close": 0,
-      "wrong": 0,
-      "skip": 0,
-      "total": 1
-    },
-    "django/django": {
-      "correct": 0,
-      "close": 0,
-      "wrong": 0,
-      "skip": 0,
-      "total": 1
-    },
-    "soxoj/maigret": {
-      "correct": 0,
-      "close": 0,
-      "wrong": 0,
-      "skip": 0,
-      "total": 2
-    },
-    "Ikalus1988/MisakaNet": {
-      "correct": 0,
-      "close": 0,
-      "wrong": 0,
-      "skip": 0,
-      "total": 1
-    },
-    "astral-sh/ty": {
-      "correct": 0,
       "close": 0,
       "wrong": 0,
       "skip": 0,
@@ -399,6 +329,19 @@
       "repo": "actions/checkout",
       "pr_number": 2531,
       "title": "prep v7.0.1 release",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "actions-checkout-2537",
+      "repo": "actions/checkout",
+      "pr_number": 2537,
+      "title": "Consolidate dependency updates in CHANGELOG",
       "actual_outcome": "merged",
       "predicted_risk": "medium",
       "predicted_rate": null,
@@ -707,6 +650,32 @@
       "success_pattern_hits": []
     },
     {
+      "id": "docker-compose-13948",
+      "repo": "docker/compose",
+      "pr_number": 13948,
+      "title": "build(deps): bump github.com/mattn/go-shellwords from 1.0.13",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "docker-compose-13949",
+      "repo": "docker/compose",
+      "pr_number": 13949,
+      "title": "fix(build): use platform image-manifest digest, not attested",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "docker-compose-13950",
       "repo": "docker/compose",
       "pr_number": 13950,
@@ -720,10 +689,49 @@
       "success_pattern_hits": []
     },
     {
+      "id": "docker-compose-13953",
+      "repo": "docker/compose",
+      "pr_number": 13953,
+      "title": "build(deps): bump docker/github-builder/.github/workflows/ba",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "encode-httpx-3773",
       "repo": "encode/httpx",
       "pr_number": 3773,
       "title": "Adapt test_response_decode_text_using_autodetect for chardet",
+      "actual_outcome": "merged",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "wrong",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "facebook-react-37060",
+      "repo": "facebook/react",
+      "pr_number": 37060,
+      "title": "[DOM] Scroll to text siblings of empty Fragments instead of ",
+      "actual_outcome": "merged",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "wrong",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "facebook-react-37061",
+      "repo": "facebook/react",
+      "pr_number": 37061,
+      "title": "[DOM] Handle scrolling of empty Fragments below containers",
       "actual_outcome": "merged",
       "predicted_risk": "high",
       "predicted_rate": null,
@@ -919,6 +927,58 @@
       "repo": "grafana/grafana",
       "pr_number": 128726,
       "title": "IAM: Fix totalCount on search teams by teamId filter",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "hashicorp-terraform-38880",
+      "repo": "hashicorp/terraform",
+      "pr_number": 38880,
+      "title": "Cleanup after 1.16.0-alpha20260715 release",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "hashicorp-terraform-38882",
+      "repo": "hashicorp/terraform",
+      "pr_number": 38882,
+      "title": "PSS: Suppress interactive confirmation of state migration wh",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "hashicorp-terraform-38887",
+      "repo": "hashicorp/terraform",
+      "pr_number": 38887,
+      "title": "Fix missing import in test",
+      "actual_outcome": "merged",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "low",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "hashicorp-terraform-38893",
+      "repo": "hashicorp/terraform",
+      "pr_number": 38893,
+      "title": "fix: Remove the `@timestamp` field from a golden reference, ",
       "actual_outcome": "merged",
       "predicted_risk": "medium",
       "predicted_rate": null,
@@ -1422,6 +1482,19 @@
       "success_pattern_hits": []
     },
     {
+      "id": "astral-sh-ruff-27020",
+      "repo": "astral-sh/ruff",
+      "pr_number": 27020,
+      "title": "[ruff] Fix RUF065 false positive after unpacked argument",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "astral-sh-uv-20487",
       "repo": "astral-sh/uv",
       "pr_number": 20487,
@@ -1474,6 +1547,19 @@
       "success_pattern_hits": []
     },
     {
+      "id": "denoland-deno-36164",
+      "repo": "denoland/deno",
+      "pr_number": 36164,
+      "title": "perf(ext/node): cheaper nextTick and keep-alive handle detec",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "docker-compose-13930",
       "repo": "docker/compose",
       "pr_number": 13930,
@@ -1517,6 +1603,19 @@
       "repo": "facebook/react",
       "pr_number": 37042,
       "title": "[Fiber] Detect useSyncExternalStore mutations missed while A",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "facebook-react-37068",
+      "repo": "facebook/react",
+      "pr_number": 37068,
+      "title": "[Flight] Materialize dedupe reference paths lazily",
       "actual_outcome": "closed",
       "predicted_risk": "high",
       "predicted_rate": null,
@@ -1582,6 +1681,45 @@
       "repo": "fastapi/fastapi",
       "pr_number": 16021,
       "title": "Optimize APIRoute handler caching and fix endpoint context c",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "fastapi-fastapi-16023",
+      "repo": "fastapi/fastapi",
+      "pr_number": 16023,
+      "title": "Clarify query parameter validation behavior",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "fastapi-fastapi-16024",
+      "repo": "fastapi/fastapi",
+      "pr_number": 16024,
+      "title": "🐛 Fix `Form()` with an `Optional` Pydantic model silently di",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "fastapi-fastapi-16025",
+      "repo": "fastapi/fastapi",
+      "pr_number": 16025,
+      "title": "Fix UnboundLocalError in OpenAPI generation for custom respo",
       "actual_outcome": "closed",
       "predicted_risk": "medium",
       "predicted_rate": null,
@@ -1708,6 +1846,19 @@
       "success_pattern_hits": []
     },
     {
+      "id": "hashicorp-terraform-38897",
+      "repo": "hashicorp/terraform",
+      "pr_number": 38897,
+      "title": "fix: this dependabot configuration does not set a co... in..",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "kubernetes-kubernetes-140705",
       "repo": "kubernetes/kubernetes",
       "pr_number": 140705,
@@ -1725,6 +1876,19 @@
       "repo": "kubernetes/kubernetes",
       "pr_number": 140711,
       "title": "WIP: Consumable capacity updates",
+      "actual_outcome": "closed",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "kubernetes-kubernetes-140739",
+      "repo": "kubernetes/kubernetes",
+      "pr_number": 140739,
+      "title": "Fix DRA AdminAccess counter checks",
       "actual_outcome": "closed",
       "predicted_risk": "medium",
       "predicted_rate": null,
@@ -1838,6 +2002,19 @@
       "success_pattern_hits": []
     },
     {
+      "id": "langchain-ai-langgraph-8386",
+      "repo": "langchain-ai/langgraph",
+      "pr_number": 8386,
+      "title": "fix: ensure pipeline context is properly managed in AsyncPos",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "microsoft-TypeScript-63622",
       "repo": "microsoft/TypeScript",
       "pr_number": 63622,
@@ -1933,6 +2110,32 @@
       "repo": "microsoft/TypeScript",
       "pr_number": 63638,
       "title": "Fix inconsistent `typeof this` when `this` parameter comes f",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "microsoft-TypeScript-63654",
+      "repo": "microsoft/TypeScript",
+      "pr_number": 63654,
+      "title": "lib.es5.d.ts: accept array-likes (arguments, typed arrays, D",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "microsoft-TypeScript-63662",
+      "repo": "microsoft/TypeScript",
+      "pr_number": 63662,
+      "title": "Add OpenAI workflow for Deno linting and automation",
       "actual_outcome": "closed",
       "predicted_risk": "high",
       "predicted_rate": null,
@@ -2150,6 +2353,19 @@
       "success_pattern_hits": []
     },
     {
+      "id": "rust-lang-rust-159620",
+      "repo": "rust-lang/rust",
+      "pr_number": 159620,
+      "title": "Avoid wrapper layout queries for `MaybeUninit`",
+      "actual_outcome": "closed",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "high",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "tailwindlabs-tailwindcss-20323",
       "repo": "tailwindlabs/tailwindcss",
       "pr_number": 20323,
@@ -2323,6 +2539,32 @@
       "repo": "actions/checkout",
       "pr_number": 2522,
       "title": "Disable automatic Git maintenance",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "actions-checkout-2534",
+      "repo": "actions/checkout",
+      "pr_number": 2534,
+      "title": "Bump the minor-npm-dependencies group across 1 directory wit",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "actions-checkout-2535",
+      "repo": "actions/checkout",
+      "pr_number": 2535,
+      "title": "Bump actions/setup-node from 6 to 7",
       "actual_outcome": "open",
       "predicted_risk": "medium",
       "predicted_rate": null,
@@ -2670,6 +2912,32 @@
       "success_pattern_hits": []
     },
     {
+      "id": "docker-compose-13952",
+      "repo": "docker/compose",
+      "pr_number": 13952,
+      "title": "Add template formatting to compose ls and images",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "docker-compose-13954",
+      "repo": "docker/compose",
+      "pr_number": 13954,
+      "title": "fix: resolve include env_file override via compose-go fork",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "encode-httpx-3768",
       "repo": "encode/httpx",
       "pr_number": 3768,
@@ -2839,10 +3107,192 @@
       "success_pattern_hits": []
     },
     {
+      "id": "facebook-react-37061",
+      "repo": "facebook/react",
+      "pr_number": 37061,
+      "title": "[DOM] Handle scrolling of empty Fragments below containers",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "facebook-react-37062",
+      "repo": "facebook/react",
+      "pr_number": 37062,
+      "title": "[DOM] Handle blur on Fragments below `Document`",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "facebook-react-37063",
+      "repo": "facebook/react",
+      "pr_number": 37063,
+      "title": "[Fiber] Collect Host Singleton children of Fragments",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "facebook-react-37066",
+      "repo": "facebook/react",
+      "pr_number": 37066,
+      "title": "[Flight] Write import chunk lists shared across modules once",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "facebook-react-37067",
+      "repo": "facebook/react",
+      "pr_number": 37067,
+      "title": "Fix hydration mismatch for <script> in <head> when using imp",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "facebook-react-37069",
+      "repo": "facebook/react",
+      "pr_number": 37069,
+      "title": "[Flight] Add an inline data channel",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "facebook-react-37070",
+      "repo": "facebook/react",
+      "pr_number": 37070,
+      "title": "[Flight] Render to object and inline data channel (stack)",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "facebook-react-37072",
+      "repo": "facebook/react",
+      "pr_number": 37072,
+      "title": "[compiler] Fix crash on recursive named function expressions",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "facebook-react-37075",
+      "repo": "facebook/react",
+      "pr_number": 37075,
+      "title": "[DevTools] Buffer Bridge messages during extension reconnect",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "facebook-react-37076",
+      "repo": "facebook/react",
+      "pr_number": 37076,
+      "title": "[DevTools] Shut down standalone Bridge on socket close",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "facebook-react-37079",
+      "repo": "facebook/react",
+      "pr_number": 37079,
+      "title": "Bump brace-expansion from 1.1.11 to 1.1.16 in /scripts/relea",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "facebook-react-37080",
+      "repo": "facebook/react",
+      "pr_number": 37080,
+      "title": "Bump js-yaml from 4.1.0 to 4.3.0 in /compiler/apps/playgroun",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "facebook-react-37082",
+      "repo": "facebook/react",
+      "pr_number": 37082,
+      "title": "Bump shell-quote from 1.7.1 to 1.9.0",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "fastapi-fastapi-16018",
       "repo": "fastapi/fastapi",
       "pr_number": 16018,
       "title": "⬆ Bump mcp from 1.26.0 to 1.28.1",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "fastapi-fastapi-16026",
+      "repo": "fastapi/fastapi",
+      "pr_number": 16026,
+      "title": "📝 Add Chinese terminology for HTTP headers",
       "actual_outcome": "open",
       "predicted_risk": "medium",
       "predicted_rate": null,
@@ -2869,6 +3319,32 @@
       "repo": "grafana/grafana",
       "pr_number": 128659,
       "title": "feat: block serving from unified unless scheme registered",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "hashicorp-terraform-38894",
+      "repo": "hashicorp/terraform",
+      "pr_number": 38894,
+      "title": "Update for Terraform Registry Address Changes",
+      "actual_outcome": "open",
+      "predicted_risk": "medium",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "correct",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
+      "id": "hashicorp-terraform-38896",
+      "repo": "hashicorp/terraform",
+      "pr_number": 38896,
+      "title": "Tf 34724 terraform stacks cli should be easier to use with n",
       "actual_outcome": "open",
       "predicted_risk": "medium",
       "predicted_rate": null,
@@ -3099,6 +3575,19 @@
       "success_pattern_hits": []
     },
     {
+      "id": "microsoft-TypeScript-63660",
+      "repo": "microsoft/TypeScript",
+      "pr_number": 63660,
+      "title": "Bump the github-actions group across 1 directory with 6 upda",
+      "actual_outcome": "open",
+      "predicted_risk": "high",
+      "predicted_rate": null,
+      "actual_risk": "medium",
+      "fit": "close",
+      "anti_pattern_hits": [],
+      "success_pattern_hits": []
+    },
+    {
       "id": "microsoft-markitdown-2204",
       "repo": "microsoft/markitdown",
       "pr_number": 2204,
@@ -3292,526 +3781,6 @@
       "fit": "close",
       "anti_pattern_hits": [],
       "success_pattern_hits": []
-    },
-    {
-      "id": "modelcontextprotocol-python-sdk-3119",
-      "repo": "modelcontextprotocol/python-sdk",
-      "pr_number": 3119,
-      "title": "fix(server): forward tool args under the real parameter name",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "modelcontextprotocol-python-sdk-3120",
-      "repo": "modelcontextprotocol/python-sdk",
-      "pr_number": 3120,
-      "title": "Serve subscriptions/listen over stdio, with era-scoped 2026 ",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "openai-openai-python-3501",
-      "repo": "openai/openai-python",
-      "pr_number": 3501,
-      "title": "release: 2.46.0",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "prometheus-prometheus-19214",
-      "repo": "prometheus/prometheus",
-      "pr_number": 19214,
-      "title": "scrape: raise 'Scrape failed' log level from debug to warn",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "prometheus-prometheus-19215",
-      "repo": "prometheus/prometheus",
-      "pr_number": 19215,
-      "title": "web: fix IPv6 address mangling in TLS handshake error logs",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "prometheus-prometheus-19216",
-      "repo": "prometheus/prometheus",
-      "pr_number": 19216,
-      "title": "tsdb: fix OOO chunk ID overflow via modular wrapping",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "prometheus-prometheus-19217",
-      "repo": "prometheus/prometheus",
-      "pr_number": 19217,
-      "title": "notifier: add test coverage for sendLoop error paths and dra",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "prometheus-prometheus-19218",
-      "repo": "prometheus/prometheus",
-      "pr_number": 19218,
-      "title": "remote_write: Ignore metadata when deciding RWv2 shard count",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "prometheus-prometheus-19219",
-      "repo": "prometheus/prometheus",
-      "pr_number": 19219,
-      "title": "promqltest: improve ST support with absolute and repeat synt",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "prometheus-prometheus-19220",
-      "repo": "prometheus/prometheus",
-      "pr_number": 19220,
-      "title": "tsdb/wlog: avoid shadowing checkpoint metadata",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "prometheus-prometheus-19221",
-      "repo": "prometheus/prometheus",
-      "pr_number": 19221,
-      "title": "model/histogram: trim native histogram buckets in place",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "prometheus-prometheus-19223",
-      "repo": "prometheus/prometheus",
-      "pr_number": 19223,
-      "title": "chore: update client_golang to v1.24.0-rc.0",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "prometheus-prometheus-19225",
-      "repo": "prometheus/prometheus",
-      "pr_number": 19225,
-      "title": "test(api): Fix silent target error in metricMetadata tests",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "prometheus-prometheus-19226",
-      "repo": "prometheus/prometheus",
-      "pr_number": 19226,
-      "title": "tsdb: use bytes.Clone instead of make and copy",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "prometheus-prometheus-19227",
-      "repo": "prometheus/prometheus",
-      "pr_number": 19227,
-      "title": "promql: handle to_nearest=0 and negative values in round()",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "psf-requests-7582",
-      "repo": "psf/requests",
-      "pr_number": 7582,
-      "title": "Fix #7564: raise FileNotFoundError for missing TLS material",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "psf-requests-7585",
-      "repo": "psf/requests",
-      "pr_number": 7585,
-      "title": "Response.content retains and re-raises errors from a broken ",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "psf-requests-7586",
-      "repo": "psf/requests",
-      "pr_number": 7586,
-      "title": "fix: honor ports in IPv4 no_proxy entries",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "pydantic-pydantic-13443",
-      "repo": "pydantic/pydantic",
-      "pr_number": 13443,
-      "title": "docs: expand guidance on troubleshooting validation failures",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "pydantic-pydantic-13446",
-      "repo": "pydantic/pydantic",
-      "pr_number": 13446,
-      "title": "fix: `Gt` constraint silently dropped in experimental pipeli",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "rust-lang-rust-159412",
-      "repo": "rust-lang/rust",
-      "pr_number": 159412,
-      "title": "Reorganize `tests/ui/issues` [26/N]",
-      "actual_outcome": "open",
-      "predicted_risk": "high",
-      "predicted_rate": null,
-      "actual_risk": "medium",
-      "fit": "close",
-      "anti_pattern_hits": [],
-      "success_pattern_hits": []
-    },
-    {
-      "id": "contribai-replay-01",
-      "repo": "pallets/flask",
-      "pr_number": null,
-      "title": "contribai-duplicate-pr",
-      "actual_outcome": "closed-not-merged",
-      "predicted_risk": "high",
-      "predicted_rate": 0.3,
-      "actual_risk": "high",
-      "fit": "n/a",
-      "anti_pattern_hits": [
-        "contribai-duplicate-pr",
-        "duplicate-pr-same-author",
-        "nousresearch-duplicate-pr",
-        "openclaw-duplicate-pr"
-      ],
-      "success_pattern_hits": [],
-      "source": "contribai_replay_v1.4.0"
-    },
-    {
-      "id": "contribai-replay-02",
-      "repo": "pandas-dev/pandas",
-      "pr_number": null,
-      "title": "contribai-out-of-scope",
-      "actual_outcome": "closed-not-merged",
-      "predicted_risk": "high",
-      "predicted_rate": 0.3,
-      "actual_risk": "high",
-      "fit": "n/a",
-      "anti_pattern_hits": [
-        "contribai-docs-pr-missing-quickstart",
-        "contribai-out-of-scope"
-      ],
-      "success_pattern_hits": [],
-      "source": "contribai_replay_v1.4.0"
-    },
-    {
-      "id": "contribai-replay-03",
-      "repo": "pallets/flask",
-      "pr_number": null,
-      "title": "contribai-not-a-real-bug",
-      "actual_outcome": "closed-not-merged",
-      "predicted_risk": "high",
-      "predicted_rate": 0.3,
-      "actual_risk": "high",
-      "fit": "n/a",
-      "anti_pattern_hits": [
-        "contribai-not-a-real-bug"
-      ],
-      "success_pattern_hits": [],
-      "source": "contribai_replay_v1.4.0"
-    },
-    {
-      "id": "contribai-replay-04",
-      "repo": "marimo-team/marimo",
-      "pr_number": null,
-      "title": "contribai-missing-tests",
-      "actual_outcome": "closed-not-merged",
-      "predicted_risk": "high",
-      "predicted_rate": 0.3,
-      "actual_risk": "high",
-      "fit": "n/a",
-      "anti_pattern_hits": [
-        "contribai-missing-tests"
-      ],
-      "success_pattern_hits": [],
-      "source": "contribai_replay_v1.4.0"
-    },
-    {
-      "id": "contribai-replay-05",
-      "repo": "moment/moment",
-      "pr_number": null,
-      "title": "contribai-archived-repo",
-      "actual_outcome": "closed-not-merged",
-      "predicted_risk": "high",
-      "predicted_rate": 0.3,
-      "actual_risk": "high",
-      "fit": "n/a",
-      "anti_pattern_hits": [
-        "contribai-archived-repo"
-      ],
-      "success_pattern_hits": [],
-      "source": "contribai_replay_v1.4.0"
-    },
-    {
-      "id": "contribai-replay-06",
-      "repo": "pallets/flask",
-      "pr_number": null,
-      "title": "contribai-docs-pr-missing-quickstart",
-      "actual_outcome": "closed-not-merged",
-      "predicted_risk": "high",
-      "predicted_rate": 0.3,
-      "actual_risk": "high",
-      "fit": "n/a",
-      "anti_pattern_hits": [
-        "contribai-docs-pr-missing-quickstart"
-      ],
-      "success_pattern_hits": [],
-      "source": "contribai_replay_v1.4.0"
-    },
-    {
-      "id": "contribai-replay-07",
-      "repo": "OpenBSD/src",
-      "pr_number": null,
-      "title": "contribai-design-philosophy-mismatch",
-      "actual_outcome": "closed-not-merged",
-      "predicted_risk": "high",
-      "predicted_rate": 0.3,
-      "actual_risk": "high",
-      "fit": "n/a",
-      "anti_pattern_hits": [
-        "contribai-design-philosophy-mismatch"
-      ],
-      "success_pattern_hits": [],
-      "source": "contribai_replay_v1.4.0"
-    },
-    {
-      "id": "contribai-replay-08",
-      "repo": "HolmesGPT/holmesgpt",
-      "pr_number": null,
-      "title": "contribai-incomplete-readme-contributing",
-      "actual_outcome": "closed-not-merged",
-      "predicted_risk": "high",
-      "predicted_rate": 0.3,
-      "actual_risk": "high",
-      "fit": "n/a",
-      "anti_pattern_hits": [
-        "contribai-incomplete-readme-contributing"
-      ],
-      "success_pattern_hits": [],
-      "source": "contribai_replay_v1.4.0"
-    },
-    {
-      "id": "contribai-replay-09",
-      "repo": "django/django",
-      "pr_number": null,
-      "title": "contribai-first-time-large-repo",
-      "actual_outcome": "closed-not-merged",
-      "predicted_risk": "high",
-      "predicted_rate": 0.3,
-      "actual_risk": "high",
-      "fit": "n/a",
-      "anti_pattern_hits": [
-        "contribai-first-time-large-repo"
-      ],
-      "success_pattern_hits": [],
-      "source": "contribai_replay_v1.4.0"
-    },
-    {
-      "id": "contribai-replay-10",
-      "repo": "pallets/flask",
-      "pr_number": null,
-      "title": "contribai-breaking-change-no-migration",
-      "actual_outcome": "closed-not-merged",
-      "predicted_risk": "high",
-      "predicted_rate": 0.3,
-      "actual_risk": "high",
-      "fit": "n/a",
-      "anti_pattern_hits": [
-        "breaking-change-no-compat",
-        "contribai-breaking-change-no-migration",
-        "openclaw-compatibility-risk",
-        "openclaw-refactor-risk"
-      ],
-      "success_pattern_hits": [],
-      "source": "contribai_replay_v1.4.0"
-    },
-    {
-      "id": "contribai-replay-11",
-      "repo": "pandas-dev/pandas",
-      "pr_number": null,
-      "title": "contribai-performance-benchmark-missing",
-      "actual_outcome": "closed-not-merged",
-      "predicted_risk": "high",
-      "predicted_rate": 0.3,
-      "actual_risk": "high",
-      "fit": "n/a",
-      "anti_pattern_hits": [
-        "contribai-performance-benchmark-missing"
-      ],
-      "success_pattern_hits": [],
-      "source": "contribai_replay_v1.4.0"
-    },
-    {
-      "id": "contribai-replay-12",
-      "repo": "soxoj/maigret",
-      "pr_number": null,
-      "title": "contribai-ethical-review-failed",
-      "actual_outcome": "closed-not-merged",
-      "predicted_risk": "high",
-      "predicted_rate": 0.3,
-      "actual_risk": "high",
-      "fit": "n/a",
-      "anti_pattern_hits": [
-        "contribai-ethical-review-failed"
-      ],
-      "success_pattern_hits": [],
-      "source": "contribai_replay_v1.4.0"
-    },
-    {
-      "id": "contribai-replay-13",
-      "repo": "soxoj/maigret",
-      "pr_number": null,
-      "title": "contribai-site-tos-violation",
-      "actual_outcome": "closed-not-merged",
-      "predicted_risk": "high",
-      "predicted_rate": 0.3,
-      "actual_risk": "high",
-      "fit": "n/a",
-      "anti_pattern_hits": [
-        "contribai-site-tos-violation"
-      ],
-      "success_pattern_hits": [],
-      "source": "contribai_replay_v1.4.0"
-    },
-    {
-      "id": "contribai-replay-14",
-      "repo": "Ikalus1988/MisakaNet",
-      "pr_number": null,
-      "title": "contribai-auto-generated-trash",
-      "actual_outcome": "closed-not-merged",
-      "predicted_risk": "high",
-      "predicted_rate": 0.3,
-      "actual_risk": "high",
-      "fit": "n/a",
-      "anti_pattern_hits": [
-        "contribai-auto-generated-trash"
-      ],
-      "success_pattern_hits": [],
-      "source": "contribai_replay_v1.4.0"
-    },
-    {
-      "id": "contribai-replay-15",
-      "repo": "astral-sh/ty",
-      "pr_number": null,
-      "title": "contribai-needs-rfc-first",
-      "actual_outcome": "closed-not-merged",
-      "predicted_risk": "high",
-      "predicted_rate": 0.3,
-      "actual_risk": "high",
-      "fit": "n/a",
-      "anti_pattern_hits": [
-        "contribai-needs-rfc-first"
-      ],
-      "success_pattern_hits": [],
-      "source": "contribai_replay_v1.4.0"
     }
   ]
 }
