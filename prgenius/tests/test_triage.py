@@ -140,3 +140,15 @@ class TestDuplicateDetection:
         )
         dup = [v for v in result["violations"] if "duplicate" in v.get("rule_title", "")]
         assert len(dup) == 0
+
+    def test_maintainer_internal_handling_detected(self):
+        result = triage_pr(
+            "fix: relax tokenizers upper bound",
+            "huggingface/transformers",
+            body="We'll handle tokenizers version bumps internally! They need to be kept in sync.",
+            repo_root=REPO_ROOT,
+        )
+        internal = [v for v in result["violations"] if "internal" in v.get("rule_title", "")]
+        # The body contains "handle tokenizers version bumps internally" which matches
+        assert len(internal) > 0
+        assert internal[0]["rule_type"] == "hard"
