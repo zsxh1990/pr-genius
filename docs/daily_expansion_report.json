@@ -1,18 +1,16 @@
 {
-  "date": "2026-07-21",
-  "repos_scanned": 31,
-  "prs_fetched": 465,
-  "new_cases": 42,
+  "date": "2026-07-22",
+  "repos_scanned": 32,
+  "prs_fetched": 390,
+  "new_cases": 36,
   "category_counts": {
     "merged_success": 15,
     "closed_rejected": 8,
-    "closed_duplicate": 2,
+    "closed_duplicate": 4,
     "closed_already_done": 3,
     "review_changes_requested": 5,
     "review_approved_pending": 5,
     "open_pending": 10
   },
-  "skipped_repos": [
-    "microsoft/TypeScript"
-  ]
+  "skipped_repos": []
 }

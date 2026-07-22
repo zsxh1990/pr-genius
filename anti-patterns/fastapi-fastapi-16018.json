@@ -1,0 +1,39 @@
+{
+  "id": "fastapi-fastapi-16018",
+  "repo": "fastapi/fastapi",
+  "pr_number": 16018,
+  "title": "⬆ Bump mcp from 1.26.0 to 1.28.1",
+  "author": "app/dependabot",
+  "state": "CLOSED",
+  "merged": false,
+  "category": "closed_rejected",
+  "created_at": "2026-07-16T20:16:56Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": true,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": true,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 1,
+    "additions": 3,
+    "deletions": 3,
+    "review_count": 0,
+    "comment_count": 4,
+    "change_ratio": 1.0
+  },
+  "metrics": {
+    "files_changed": 1,
+    "additions": 3,
+    "deletions": 3
+  }
+}

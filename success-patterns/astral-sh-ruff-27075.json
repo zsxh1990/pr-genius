@@ -1,0 +1,39 @@
+{
+  "id": "astral-sh-ruff-27075",
+  "repo": "astral-sh/ruff",
+  "pr_number": 27075,
+  "title": "Update Rust crate lsp-server to 0.9.0",
+  "author": "app/renovate",
+  "state": "MERGED",
+  "merged": true,
+  "category": "merged_success",
+  "created_at": "2026-07-22T01:26:29Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": true,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 6,
+    "additions": 19,
+    "deletions": 83,
+    "review_count": 0,
+    "comment_count": 3,
+    "change_ratio": 4.37
+  },
+  "metrics": {
+    "files_changed": 6,
+    "additions": 19,
+    "deletions": 83
+  }
+}
