@@ -360,6 +360,20 @@ def main() -> int:
     if check_profile_guideline_evidence:
         check_profile_guideline_evidence(md_files, parse_frontmatter, warnings, errors, ROOT)
 
+    # 35 期评测反哺 (lesson-19 / lesson-21): 接 husk2 的 Check 7 + Check 8
+    # Check 7: policy_freshness — policy/profile 超过 90 天 warn
+    # Check 8: release_audit — pyproject/init/glama/Dockerfile/CHANGELOG 版本对齐
+    try:
+        from validate_checks.policy_freshness import check_policy_freshness
+        check_policy_freshness(md_files, parse_frontmatter, warnings, errors, ROOT)
+    except ImportError as e:
+        print(f"[Check 7] policy_freshness not available: {e}")
+    try:
+        from validate_checks.release_audit import check_release_audit
+        check_release_audit(md_files, parse_frontmatter, warnings, errors, ROOT)
+    except ImportError as e:
+        print(f"[Check 8] release_audit not available: {e}")
+
     # T4: emit snapshot stats (used by validate.py --snapshot and scripts/dashboard.py)
     if "--snapshot" in sys.argv:
         import json as _json

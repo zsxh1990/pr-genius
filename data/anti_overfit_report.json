@@ -1,0 +1,600 @@
+{
+  "schema_version": "anti-overfit-v1",
+  "generated_from": "docs/coach_fit_report.json",
+  "n_cases_total": 290,
+  "threshold_for_warning": 0.15,
+  "pass": false,
+  "warnings": [
+    "LORO: repo mongodb/mongo-python-driver held-out accuracy drops 84.5% below rest (threshold 15%)",
+    "Time-split: astral-sh/ruff newer accuracy drops 35.7%",
+    "Time-split: pydantic/pydantic newer accuracy drops 44.7%",
+    "Time-split: vercel/next.js newer accuracy drops 50.0%"
+  ],
+  "leave_one_repo_out": {
+    "overall_in_sample_accuracy": 0.8276,
+    "overall_usable_cases": 290,
+    "overall_exact_correct": 106,
+    "n_repos_evaluated": 23,
+    "mean_held_out_accuracy": 0.8162,
+    "stdev_held_out_accuracy": 0.2649,
+    "mean_delta_vs_rest": -0.0103,
+    "worst_repo": {
+      "repo": "mongodb/mongo-python-driver",
+      "n_cases": 6,
+      "held_out_accuracy": 0.0,
+      "held_out_correct_exact": 0,
+      "held_out_usable": 6,
+      "rest_accuracy": 0.8451,
+      "delta_vs_rest": -0.8451,
+      "fit_breakdown": {
+        "wrong": 6
+      }
+    },
+    "best_repo": {
+      "repo": "actions/checkout",
+      "n_cases": 20,
+      "held_out_accuracy": 1.0,
+      "held_out_correct_exact": 7,
+      "held_out_usable": 20,
+      "rest_accuracy": 0.8148,
+      "delta_vs_rest": 0.1852,
+      "fit_breakdown": {
+        "close": 13,
+        "correct": 7
+      }
+    },
+    "per_repo": [
+      {
+        "repo": "pydantic/pydantic",
+        "n_cases": 22,
+        "held_out_accuracy": 0.5455,
+        "held_out_correct_exact": 12,
+        "held_out_usable": 22,
+        "rest_accuracy": 0.8507,
+        "delta_vs_rest": -0.3053,
+        "fit_breakdown": {
+          "wrong": 10,
+          "correct": 12
+        }
+      },
+      {
+        "repo": "docker/compose",
+        "n_cases": 21,
+        "held_out_accuracy": 0.9524,
+        "held_out_correct_exact": 11,
+        "held_out_usable": 21,
+        "rest_accuracy": 0.8178,
+        "delta_vs_rest": 0.1345,
+        "fit_breakdown": {
+          "close": 9,
+          "wrong": 1,
+          "correct": 11
+        }
+      },
+      {
+        "repo": "actions/checkout",
+        "n_cases": 20,
+        "held_out_accuracy": 1.0,
+        "held_out_correct_exact": 7,
+        "held_out_usable": 20,
+        "rest_accuracy": 0.8148,
+        "delta_vs_rest": 0.1852,
+        "fit_breakdown": {
+          "close": 13,
+          "correct": 7
+        }
+      },
+      {
+        "repo": "facebook/react",
+        "n_cases": 19,
+        "held_out_accuracy": 0.8947,
+        "held_out_correct_exact": 2,
+        "held_out_usable": 19,
+        "rest_accuracy": 0.8229,
+        "delta_vs_rest": 0.0719,
+        "fit_breakdown": {
+          "wrong": 2,
+          "correct": 2,
+          "close": 15
+        }
+      },
+      {
+        "repo": "fastapi/fastapi",
+        "n_cases": 19,
+        "held_out_accuracy": 0.9474,
+        "held_out_correct_exact": 2,
+        "held_out_usable": 19,
+        "rest_accuracy": 0.8192,
+        "delta_vs_rest": 0.1282,
+        "fit_breakdown": {
+          "close": 16,
+          "wrong": 1,
+          "correct": 2
+        }
+      },
+      {
+        "repo": "goharbor/harbor",
+        "n_cases": 17,
+        "held_out_accuracy": 0.8235,
+        "held_out_correct_exact": 5,
+        "held_out_usable": 17,
+        "rest_accuracy": 0.8278,
+        "delta_vs_rest": -0.0043,
+        "fit_breakdown": {
+          "wrong": 3,
+          "correct": 5,
+          "close": 9
+        }
+      },
+      {
+        "repo": "huggingface/transformers",
+        "n_cases": 17,
+        "held_out_accuracy": 1.0,
+        "held_out_correct_exact": 12,
+        "held_out_usable": 17,
+        "rest_accuracy": 0.8168,
+        "delta_vs_rest": 0.1832,
+        "fit_breakdown": {
+          "close": 5,
+          "correct": 12
+        }
+      },
+      {
+        "repo": "astral-sh/uv",
+        "n_cases": 13,
+        "held_out_accuracy": 1.0,
+        "held_out_correct_exact": 2,
+        "held_out_usable": 13,
+        "rest_accuracy": 0.8195,
+        "delta_vs_rest": 0.1805,
+        "fit_breakdown": {
+          "close": 11,
+          "correct": 2
+        }
+      },
+      {
+        "repo": "encode/httpx",
+        "n_cases": 13,
+        "held_out_accuracy": 0.9231,
+        "held_out_correct_exact": 1,
+        "held_out_usable": 13,
+        "rest_accuracy": 0.8231,
+        "delta_vs_rest": 0.1,
+        "fit_breakdown": {
+          "wrong": 1,
+          "correct": 1,
+          "close": 11
+        }
+      },
+      {
+        "repo": "microsoft/TypeScript",
+        "n_cases": 13,
+        "held_out_accuracy": 1.0,
+        "held_out_correct_exact": 10,
+        "held_out_usable": 13,
+        "rest_accuracy": 0.8195,
+        "delta_vs_rest": 0.1805,
+        "fit_breakdown": {
+          "correct": 10,
+          "close": 3
+        }
+      },
+      {
+        "repo": "chroma-core/chroma",
+        "n_cases": 11,
+        "held_out_accuracy": 0.4545,
+        "held_out_correct_exact": 2,
+        "held_out_usable": 11,
+        "rest_accuracy": 0.8423,
+        "delta_vs_rest": -0.3877,
+        "fit_breakdown": {
+          "wrong": 6,
+          "correct": 2,
+          "close": 3
+        }
+      },
+      {
+        "repo": "hashicorp/terraform",
+        "n_cases": 10,
+        "held_out_accuracy": 1.0,
+        "held_out_correct_exact": 2,
+        "held_out_usable": 10,
+        "rest_accuracy": 0.8214,
+        "delta_vs_rest": 0.1786,
+        "fit_breakdown": {
+          "close": 8,
+          "correct": 2
+        }
+      },
+      {
+        "repo": "langchain-ai/langgraph",
+        "n_cases": 10,
+        "held_out_accuracy": 1.0,
+        "held_out_correct_exact": 9,
+        "held_out_usable": 10,
+        "rest_accuracy": 0.8214,
+        "delta_vs_rest": 0.1786,
+        "fit_breakdown": {
+          "correct": 9,
+          "close": 1
+        }
+      },
+      {
+        "repo": "astral-sh/ruff",
+        "n_cases": 9,
+        "held_out_accuracy": 0.7778,
+        "held_out_correct_exact": 1,
+        "held_out_usable": 9,
+        "rest_accuracy": 0.8292,
+        "delta_vs_rest": -0.0514,
+        "fit_breakdown": {
+          "wrong": 2,
+          "correct": 1,
+          "close": 6
+        }
+      },
+      {
+        "repo": "tailwindlabs/tailwindcss",
+        "n_cases": 9,
+        "held_out_accuracy": 0.7778,
+        "held_out_correct_exact": 7,
+        "held_out_usable": 9,
+        "rest_accuracy": 0.8292,
+        "delta_vs_rest": -0.0514,
+        "fit_breakdown": {
+          "wrong": 2,
+          "correct": 7
+        }
+      },
+      {
+        "repo": "grafana/grafana",
+        "n_cases": 8,
+        "held_out_accuracy": 1.0,
+        "held_out_correct_exact": 2,
+        "held_out_usable": 8,
+        "rest_accuracy": 0.8227,
+        "delta_vs_rest": 0.1773,
+        "fit_breakdown": {
+          "close": 6,
+          "correct": 2
+        }
+      },
+      {
+        "repo": "kubernetes/kubernetes",
+        "n_cases": 8,
+        "held_out_accuracy": 1.0,
+        "held_out_correct_exact": 2,
+        "held_out_usable": 8,
+        "rest_accuracy": 0.8227,
+        "delta_vs_rest": 0.1773,
+        "fit_breakdown": {
+          "close": 6,
+          "correct": 2
+        }
+      },
+      {
+        "repo": "psf/requests",
+        "n_cases": 8,
+        "held_out_accuracy": 0.875,
+        "held_out_correct_exact": 7,
+        "held_out_usable": 8,
+        "rest_accuracy": 0.8262,
+        "delta_vs_rest": 0.0488,
+        "fit_breakdown": {
+          "wrong": 1,
+          "correct": 7
+        }
+      },
+      {
+        "repo": "microsoft/markitdown",
+        "n_cases": 7,
+        "held_out_accuracy": 1.0,
+        "held_out_correct_exact": 1,
+        "held_out_usable": 7,
+        "rest_accuracy": 0.8233,
+        "delta_vs_rest": 0.1767,
+        "fit_breakdown": {
+          "correct": 1,
+          "close": 6
+        }
+      },
+      {
+        "repo": "mongodb/mongo-python-driver",
+        "n_cases": 6,
+        "held_out_accuracy": 0.0,
+        "held_out_correct_exact": 0,
+        "held_out_usable": 6,
+        "rest_accuracy": 0.8451,
+        "delta_vs_rest": -0.8451,
+        "fit_breakdown": {
+          "wrong": 6
+        }
+      },
+      {
+        "repo": "anthropics/anthropic-sdk-python",
+        "n_cases": 6,
+        "held_out_accuracy": 1.0,
+        "held_out_correct_exact": 1,
+        "held_out_usable": 6,
+        "rest_accuracy": 0.8239,
+        "delta_vs_rest": 0.1761,
+        "fit_breakdown": {
+          "correct": 1,
+          "close": 5
+        }
+      },
+      {
+        "repo": "rust-lang/rust",
+        "n_cases": 5,
+        "held_out_accuracy": 0.4,
+        "held_out_correct_exact": 2,
+        "held_out_usable": 5,
+        "rest_accuracy": 0.8351,
+        "delta_vs_rest": -0.4351,
+        "fit_breakdown": {
+          "wrong": 3,
+          "correct": 2
+        }
+      },
+      {
+        "repo": "vercel/next.js",
+        "n_cases": 5,
+        "held_out_accuracy": 0.4,
+        "held_out_correct_exact": 2,
+        "held_out_usable": 5,
+        "rest_accuracy": 0.8351,
+        "delta_vs_rest": -0.4351,
+        "fit_breakdown": {
+          "wrong": 3,
+          "correct": 2
+        }
+      }
+    ]
+  },
+  "time_split": {
+    "pooled_older_accuracy": 0.8443,
+    "pooled_newer_accuracy": 0.875,
+    "pooled_delta": 0.0307,
+    "pooled_older_cases": 212,
+    "pooled_newer_cases": 64,
+    "n_repos_evaluated": 23,
+    "repos_with_large_drop": [
+      {
+        "repo": "astral-sh/ruff",
+        "n_total": 9,
+        "n_older": 7,
+        "n_newer": 2,
+        "older_accuracy": 0.8571,
+        "newer_accuracy": 0.5,
+        "delta_newer_minus_older": -0.3571
+      },
+      {
+        "repo": "pydantic/pydantic",
+        "n_total": 22,
+        "n_older": 17,
+        "n_newer": 5,
+        "older_accuracy": 0.6471,
+        "newer_accuracy": 0.2,
+        "delta_newer_minus_older": -0.4471
+      },
+      {
+        "repo": "vercel/next.js",
+        "n_total": 5,
+        "n_older": 4,
+        "n_newer": 1,
+        "older_accuracy": 0.5,
+        "newer_accuracy": 0.0,
+        "delta_newer_minus_older": -0.5
+      }
+    ],
+    "per_repo": [
+      {
+        "repo": "actions/checkout",
+        "n_total": 20,
+        "n_older": 16,
+        "n_newer": 4,
+        "older_accuracy": 1.0,
+        "newer_accuracy": 1.0,
+        "delta_newer_minus_older": 0.0
+      },
+      {
+        "repo": "astral-sh/ruff",
+        "n_total": 9,
+        "n_older": 7,
+        "n_newer": 2,
+        "older_accuracy": 0.8571,
+        "newer_accuracy": 0.5,
+        "delta_newer_minus_older": -0.3571
+      },
+      {
+        "repo": "astral-sh/uv",
+        "n_total": 13,
+        "n_older": 10,
+        "n_newer": 3,
+        "older_accuracy": 1.0,
+        "newer_accuracy": 1.0,
+        "delta_newer_minus_older": 0.0
+      },
+      {
+        "repo": "chroma-core/chroma",
+        "n_total": 11,
+        "n_older": 8,
+        "n_newer": 3,
+        "older_accuracy": 0.25,
+        "newer_accuracy": 1.0,
+        "delta_newer_minus_older": 0.75
+      },
+      {
+        "repo": "docker/compose",
+        "n_total": 21,
+        "n_older": 16,
+        "n_newer": 5,
+        "older_accuracy": 0.9375,
+        "newer_accuracy": 1.0,
+        "delta_newer_minus_older": 0.0625
+      },
+      {
+        "repo": "encode/httpx",
+        "n_total": 13,
+        "n_older": 10,
+        "n_newer": 3,
+        "older_accuracy": 0.9,
+        "newer_accuracy": 1.0,
+        "delta_newer_minus_older": 0.1
+      },
+      {
+        "repo": "facebook/react",
+        "n_total": 19,
+        "n_older": 15,
+        "n_newer": 4,
+        "older_accuracy": 0.8667,
+        "newer_accuracy": 1.0,
+        "delta_newer_minus_older": 0.1333
+      },
+      {
+        "repo": "fastapi/fastapi",
+        "n_total": 19,
+        "n_older": 15,
+        "n_newer": 4,
+        "older_accuracy": 0.9333,
+        "newer_accuracy": 1.0,
+        "delta_newer_minus_older": 0.0667
+      },
+      {
+        "repo": "goharbor/harbor",
+        "n_total": 17,
+        "n_older": 13,
+        "n_newer": 4,
+        "older_accuracy": 0.7692,
+        "newer_accuracy": 1.0,
+        "delta_newer_minus_older": 0.2308
+      },
+      {
+        "repo": "grafana/grafana",
+        "n_total": 8,
+        "n_older": 6,
+        "n_newer": 2,
+        "older_accuracy": 1.0,
+        "newer_accuracy": 1.0,
+        "delta_newer_minus_older": 0.0
+      },
+      {
+        "repo": "hashicorp/terraform",
+        "n_total": 10,
+        "n_older": 8,
+        "n_newer": 2,
+        "older_accuracy": 1.0,
+        "newer_accuracy": 1.0,
+        "delta_newer_minus_older": 0.0
+      },
+      {
+        "repo": "huggingface/transformers",
+        "n_total": 17,
+        "n_older": 13,
+        "n_newer": 4,
+        "older_accuracy": 1.0,
+        "newer_accuracy": 1.0,
+        "delta_newer_minus_older": 0.0
+      },
+      {
+        "repo": "kubernetes/kubernetes",
+        "n_total": 8,
+        "n_older": 6,
+        "n_newer": 2,
+        "older_accuracy": 1.0,
+        "newer_accuracy": 1.0,
+        "delta_newer_minus_older": 0.0
+      },
+      {
+        "repo": "mongodb/mongo-python-driver",
+        "n_total": 6,
+        "n_older": 4,
+        "n_newer": 2,
+        "older_accuracy": 0.0,
+        "newer_accuracy": 0.0,
+        "delta_newer_minus_older": 0.0
+      },
+      {
+        "repo": "psf/requests",
+        "n_total": 8,
+        "n_older": 6,
+        "n_newer": 2,
+        "older_accuracy": 0.8333,
+        "newer_accuracy": 1.0,
+        "delta_newer_minus_older": 0.1667
+      },
+      {
+        "repo": "pydantic/pydantic",
+        "n_total": 22,
+        "n_older": 17,
+        "n_newer": 5,
+        "older_accuracy": 0.6471,
+        "newer_accuracy": 0.2,
+        "delta_newer_minus_older": -0.4471
+      },
+      {
+        "repo": "rust-lang/rust",
+        "n_total": 5,
+        "n_older": 4,
+        "n_newer": 1,
+        "older_accuracy": 0.25,
+        "newer_accuracy": 1.0,
+        "delta_newer_minus_older": 0.75
+      },
+      {
+        "repo": "tailwindlabs/tailwindcss",
+        "n_total": 9,
+        "n_older": 7,
+        "n_newer": 2,
+        "older_accuracy": 0.7143,
+        "newer_accuracy": 1.0,
+        "delta_newer_minus_older": 0.2857
+      },
+      {
+        "repo": "vercel/next.js",
+        "n_total": 5,
+        "n_older": 4,
+        "n_newer": 1,
+        "older_accuracy": 0.5,
+        "newer_accuracy": 0.0,
+        "delta_newer_minus_older": -0.5
+      },
+      {
+        "repo": "anthropics/anthropic-sdk-python",
+        "n_total": 6,
+        "n_older": 4,
+        "n_newer": 2,
+        "older_accuracy": 1.0,
+        "newer_accuracy": 1.0,
+        "delta_newer_minus_older": 0.0
+      },
+      {
+        "repo": "langchain-ai/langgraph",
+        "n_total": 10,
+        "n_older": 8,
+        "n_newer": 2,
+        "older_accuracy": 1.0,
+        "newer_accuracy": 1.0,
+        "delta_newer_minus_older": 0.0
+      },
+      {
+        "repo": "microsoft/TypeScript",
+        "n_total": 13,
+        "n_older": 10,
+        "n_newer": 3,
+        "older_accuracy": 1.0,
+        "newer_accuracy": 1.0,
+        "delta_newer_minus_older": 0.0
+      },
+      {
+        "repo": "microsoft/markitdown",
+        "n_total": 7,
+        "n_older": 5,
+        "n_newer": 2,
+        "older_accuracy": 1.0,
+        "newer_accuracy": 1.0,
+        "delta_newer_minus_older": 0.0
+      }
+    ]
+  }
+}
