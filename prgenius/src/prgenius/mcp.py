@@ -23,7 +23,9 @@ REPO_ROOT_DEFAULT = Path(__file__).resolve().parents[3]
 def _load_tools(repo_root: Path | None = None):
     from mcp.server.fastmcp import FastMCP
     from .parser import iter_case_studies, profile_get, schema_info as _schema_info
-    from .evaluator import analyze_pr as _analyze_pr, eval_pr as _eval_pr
+    # 35 期评测反哺 (lesson-21 续): eval_pr 是死导入 — mcp.py 内部未调用
+    # 保留给 cli.py (line 192) 使用, 这里只 import analyze_pr
+    from .evaluator import analyze_pr as _analyze_pr
     from .triage import triage_pr as _triage_pr
 
     mcp = FastMCP(name="prgenius", instructions=(
