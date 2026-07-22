@@ -23,6 +23,52 @@ GitHub tag/release compare links per Keep a Changelog guidance.
   - validate.py type 白名单加 Compliance Audit
 - See docs/COMPLIANCE_AUDIT.md for full audit history.
 
+## [1.3.0] - 2026-07-23
+
+### Added (方舟 35 期评测反哺)
+- **Check 7 policy_freshness** (`validate_checks/policy_freshness.py`)
+  - Maintainer Policy + Repo Profile 超过 90 天 = warn
+  - lesson-19 (in-sample 配 holdout) 的评分系统兏底
+- **Check 8 release_audit** (`validate_checks/release_audit.py`)
+  - pyproject / __init__ / glama.json / Dockerfile / CHANGELOG 版本对齐
+  - 课程从 35 期 ether2 REVIEW_FINDINGS.md §1 抓的版本漂移
+- **`scripts/anti_overfit.py`** (双指标 LORO + time-split)
+  - 替换原 `anti_overfit_loro.py` (单 LORO)
+  - 学自 husk2 scripts/anti_overfit.py (v1.5.2)
+  - 跑出 4 仓真问题: mongodb LORO -84.5% / vercel/next.js time-split -50% /
+    pydantic -44.7% / astral-sh/ruff -35.7%
+- **MCP stdio roundtrip 测试** (`prgenius/tests/test_mcp_stdio.py`)
+  - 10 个 test (8 tools 全覆盖 + B1/B2 regression)
+  - 10 passed in 0.47s
+- **data/anti_overfit_report.json** (600 行双指标产物)
+  - 可作 lesson-17 "data snapshot README metric unification" 输入
+- **lesson-19/20/21** (3 条 A 级, misakanet-50/)
+  - lesson-19: Overfit Hard Gate (LORO + time-split required)
+  - lesson-20: Honest Claim vs Runtime Evidence (诚实声明 + 实跑 4 形态分级)
+  - lesson-21: MCP stdio Runtime Bug (static analysis misses field-path failures)
+
+### Fixed (35 期评测抓到)
+- **B1 soft_violations 路径错配** (`prgenius/src/prgenius/mcp.py`)
+  - mcp.py:127 `len(result.get("soft_violations", []))` 改为
+    `int(result.get("soft_violations", 0))` (triage.py 返回的是 int count)
+- **B1' wrapper 漏传 labels** (`prgenius/src/prgenius/mcp.py`)
+  - 底层 `triage.py:318` 不收 labels kwarg, wrapper 去掉 labels=
+- **B2 _parse_frontmatter_dict 死导入** (`prgenius/src/prgenius/mcp.py`)
+  - 改为现存的 `parse_frontmatter` (parser.py:96)
+- **B3 .venv/site-packages 假阳** (`validate.py`)
+  - SKIP_DIRS 加 .venv / venv / .tox / site-packages / dist / build
+- **B5 eval_pr 死导入** (`prgenius/src/prgenius/mcp.py`)
+  - 删 `from .evaluator import analyze_pr as _analyze_pr, eval_pr as _eval_pr`
+    中的 eval_pr (mcp.py 内部不调用, cli.py:192 仍能用)
+
+### Changed
+- **CI gate 升级** (`.github/workflows/validate.yml`)
+  - `--strict` 从 soft gate (`|| echo "::warning::"`) 改为 hard fail
+  - Check 8 drift + Check 7 stale 在 errors.append 路径会硬卡 PR
+- **Version 对齐**: pyproject.toml / __init__.py bump 1.2.0 → 1.3.0
+  - 跟 glama.json / Dockerfile 同步
+  - 35 期评测 ether2 §1 抓的 "glama/Dockerfile 1.3.0 vs init/pyproject 1.2.0" 漂移修复
+
 ## [1.2.0] - 2026-07-18
 
 ### Added

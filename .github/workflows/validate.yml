@@ -39,8 +39,10 @@ jobs:
         run: python3 validate.py
 
       - name: Run validator (strict checks)
-        # Strict mode fails on warnings — soft gate (warning, not red)
-        run: python3 validate.py --strict || echo "::warning::Strict validator reported issues — see logs"
+        # 35 期反哺升级 (lesson-19 硬关): strict 模式现在是 hard gate
+        # Check 7 (policy_freshness) + Check 8 (release_audit) 在 errors.append 路径,
+        # strict 模式下任一 error 直接 exit 1 红块 PR
+        run: python3 validate.py --strict
 
       - name: Run validator (enforce evidence — hard gate)
         # Hard fail: any case lacking verified_at / evidence_urls blocks the
