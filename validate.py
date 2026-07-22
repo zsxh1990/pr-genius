@@ -44,7 +44,21 @@ def parse_frontmatter(text: str) -> tuple[dict | None, str]:
 
 
 def find_md_files(root: Path) -> list[Path]:
-    SKIP_DIRS = {".git", ".pytest_cache", "__pycache__", "node_modules"}
+    # 35 期评测反哺 (lesson-19/21): 加 .venv + site-packages 跳过
+    # 35 期任务1 ether2 SMOKE_RESULTS.md §1.2 报告 validate.py --strict
+    # 在装好 pr-genius 的环境里跑出 8 errors 全是 .venv/ LICENSE.md 假阳
+    SKIP_DIRS = {
+        ".git",
+        ".pytest_cache",
+        "__pycache__",
+        "node_modules",
+        ".venv",
+        "venv",
+        ".tox",
+        "site-packages",
+        "dist",
+        "build",
+    }
     return sorted(
         p for p in root.rglob("*.md")
         if not any(part in SKIP_DIRS for part in p.parts)

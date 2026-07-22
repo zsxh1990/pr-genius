@@ -111,12 +111,14 @@ def _load_tools(repo_root: Path | None = None):
             triage_pr("docs: add installation", "pallets/flask", ...)
             → {verdict: "needs_preflight", generic_checks: [...6 items...], ...}
         """
+        # 35 期评测反哺 (lesson-21): 底层 _triage_pr (triage.py:318) 不收 labels kwarg.
+        # 之前 wrapper 传 labels=labels or [] 会 TypeError. 现在传空 list (policy 检查
+        # 暂未用 labels, 后续若底层支持再补).
         result = _triage_pr(
             title=title,
             repo=repo,
             body=body,
             diff_stat=diff_stat,
-            labels=labels or [],
             repo_root=rr,
         )
         # 补 recommended_action 字段 (M1 评估要求)
@@ -124,10 +126,12 @@ def _load_tools(repo_root: Path | None = None):
         if verdict == "pass":
             result["recommended_action"] = "safe_to_review"
         elif verdict == "warn":
-            n_soft = len(result.get("soft_violations", []))
+            # 35 期评测反哺 (lesson-21): triage.py 返回的是 int count,不是 list
+            n_soft = int(result.get("soft_violations", 0))
             result["recommended_action"] = f"needs_human_review ({n_soft} soft rule(s))"
         elif verdict == "reject":
-            n_hard = len(result.get("hard_violations", []))
+            # 35 期评测反哺 (lesson-21): 同上,读 int count
+            n_hard = int(result.get("hard_violations", 0))
             result["recommended_action"] = f"blocked_by_policy ({n_hard} hard rule(s))"
         elif verdict == "needs_preflight":
             result["recommended_action"] = (
@@ -187,7 +191,10 @@ def _load_tools(repo_root: Path | None = None):
 
         Returns: list of {key, title, symptom, fix_action, source_pr, type}
         """
-        from .parser import _parse_frontmatter_dict
+        # 35 期评测反哺 (lesson-21): _parse_frontmatter_dict 是死导入
+        # (ether2 SMOKE_RESULTS.md §1.4: cannot import name '_parse_frontmatter_dict')
+        # 改用现存的 parse_frontmatter (parser.py:96) — 它返回完整 dict
+        from .parser import parse_frontmatter
         results = []
 
         patterns_dirs = []
@@ -206,16 +213,10 @@ def _load_tools(repo_root: Path | None = None):
                 content = f.read_text(encoding="utf-8")
                 if query_lower not in content.lower():
                     continue
-                # Parse frontmatter
-                import re
-                m = re.match(r"^---\s*\n(.*?)\n---", content, re.DOTALL)
-                if not m:
+                # Parse frontmatter — 用 parser.py 现存函数 (lesson-21)
+                fm = parse_frontmatter(content)
+                if not fm:
                     continue
-                fm = {}
-                for line in m.group(1).split("\n"):
-                    if ":" in line:
-                        k, _, v = line.partition(":")
-                        fm[k.strip()] = v.strip().strip('"')
                 fm["type"] = ptype
                 fm["file"] = str(f.relative_to(rr))
                 results.append(fm)
