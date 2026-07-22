@@ -1,0 +1,39 @@
+{
+  "id": "astral-sh-ruff-27086",
+  "repo": "astral-sh/ruff",
+  "pr_number": 27086,
+  "title": "Fix exe001 shebang line position",
+  "author": "TaelanSakay",
+  "state": "CLOSED",
+  "merged": false,
+  "category": "closed_already_done",
+  "created_at": "2026-07-22T06:07:34Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 5,
+    "additions": 27,
+    "deletions": 19,
+    "review_count": 0,
+    "comment_count": 1,
+    "change_ratio": 0.7
+  },
+  "metrics": {
+    "files_changed": 5,
+    "additions": 27,
+    "deletions": 19
+  }
+}

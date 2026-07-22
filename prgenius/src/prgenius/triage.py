@@ -312,6 +312,23 @@ def _check_duplicate_pr(title: str, body: str, diff_stat: str,
                 # This is actually a good signal (title matches diff), not a duplicate
                 pass
 
+    # 8. Maintainer internal handling (Issue #47429 pattern)
+    # Check if body mentions maintainer will handle internally
+    internal_keywords = [
+        "handle internally", "we'll handle this", "keep in sync",
+        "internal process", "we'll take care of it", "managed internally",
+        "handle tokenizers version bumps internally",
+    ]
+    for kw in internal_keywords:
+        if kw in body_lower:
+            return {
+                "rule_number": 93,
+                "rule_title": "maintainer_internal_handling",
+                "rule_type": "hard",
+                "evidence": f"PR body 或 issue 评论提到维护者会内部处理: '{kw}'",
+                "anchors": [],
+            }
+
     return None
 
 
@@ -337,6 +354,13 @@ def triage_pr(
     root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[3]
 
     policy = _load_policy(repo, root)
+
+    # Run generic checks (duplicate, maintainer internal handling) even without policy
+    generic_violations = []
+    dup_violation = _check_duplicate_pr(title, body, diff_stat, title.lower(), body.lower())
+    if dup_violation:
+        generic_violations.append(dup_violation)
+
     if not policy:
         return {
             "verdict": "needs_preflight",
@@ -354,7 +378,7 @@ def triage_pr(
                 "check repo archived status (gh repo view)",
                 "run tests locally + check CI status",
             ],
-            "violations": [],
+            "violations": generic_violations,
         }
 
     violations = _check_policy_rules(title, body, diff_stat, policy)

@@ -1,0 +1,39 @@
+{
+  "id": "astral-sh-ruff-27082",
+  "repo": "astral-sh/ruff",
+  "pr_number": 27082,
+  "title": "Update Rust crate path-absolutize to v4",
+  "author": "app/renovate",
+  "state": "MERGED",
+  "merged": true,
+  "category": "merged_success",
+  "created_at": "2026-07-22T01:28:45Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": true,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 6,
+    "additions": 17,
+    "deletions": 33,
+    "review_count": 0,
+    "comment_count": 4,
+    "change_ratio": 1.94
+  },
+  "metrics": {
+    "files_changed": 6,
+    "additions": 17,
+    "deletions": 33
+  }
+}
