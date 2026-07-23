@@ -1,0 +1,39 @@
+{
+  "id": "qdrant-qdrant-9927",
+  "repo": "qdrant/qdrant",
+  "pr_number": 9927,
+  "title": "feat: added timestamp in point metadata",
+  "author": "kailash360",
+  "state": "CLOSED",
+  "merged": false,
+  "category": "closed_rejected",
+  "created_at": "2026-07-21T09:06:12Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": true,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": true,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": true,
+    "files_changed": 35,
+    "additions": 319,
+    "deletions": 17,
+    "review_count": 2,
+    "comment_count": 3,
+    "change_ratio": 0.05
+  },
+  "metrics": {
+    "files_changed": 35,
+    "additions": 319,
+    "deletions": 17
+  }
+}

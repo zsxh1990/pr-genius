@@ -1,0 +1,39 @@
+{
+  "id": "huggingface-transformers-47469",
+  "repo": "huggingface/transformers",
+  "pr_number": 47469,
+  "title": "Don't mutate class-level common_kwargs defaults in _merge_kwargs",
+  "author": "rahulrshetty45",
+  "state": "CLOSED",
+  "merged": false,
+  "category": "closed_rejected",
+  "created_at": "2026-07-22T05:07:13Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": true,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 2,
+    "additions": 14,
+    "deletions": 1,
+    "review_count": 0,
+    "comment_count": 1,
+    "change_ratio": 0.07
+  },
+  "metrics": {
+    "files_changed": 2,
+    "additions": 14,
+    "deletions": 1
+  }
+}

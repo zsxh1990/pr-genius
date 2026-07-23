@@ -1,8 +1,8 @@
 {
-  "date": "2026-07-22",
+  "date": "2026-07-23",
   "repos_scanned": 32,
-  "prs_fetched": 390,
-  "new_cases": 36,
+  "prs_fetched": 345,
+  "new_cases": 43,
   "category_counts": {
     "merged_success": 15,
     "closed_rejected": 8,

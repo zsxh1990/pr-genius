@@ -1,0 +1,39 @@
+{
+  "id": "docker-compose-13958",
+  "repo": "docker/compose",
+  "pr_number": 13958,
+  "title": "Push custom project config api at start of Up",
+  "author": "nicksieger",
+  "state": "OPEN",
+  "merged": false,
+  "category": "review_changes_requested",
+  "created_at": "2026-07-21T20:37:48Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": true,
+    "files_changed": 4,
+    "additions": 498,
+    "deletions": 0,
+    "review_count": 4,
+    "comment_count": 1,
+    "change_ratio": 0.0
+  },
+  "metrics": {
+    "files_changed": 4,
+    "additions": 498,
+    "deletions": 0
+  }
+}
