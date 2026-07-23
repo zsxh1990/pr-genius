@@ -1,0 +1,39 @@
+{
+  "id": "fastapi-fastapi-16027",
+  "repo": "fastapi/fastapi",
+  "pr_number": 16027,
+  "title": "👥 Update FastAPI People - Sponsors",
+  "author": "tiangolo",
+  "state": "MERGED",
+  "merged": true,
+  "category": "merged_success",
+  "created_at": "2026-07-20T14:37:08Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": true,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 1,
+    "additions": 111,
+    "deletions": 147,
+    "review_count": 0,
+    "comment_count": 1,
+    "change_ratio": 1.32
+  },
+  "metrics": {
+    "files_changed": 1,
+    "additions": 111,
+    "deletions": 147
+  }
+}
