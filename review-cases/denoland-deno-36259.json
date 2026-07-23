@@ -1,0 +1,39 @@
+{
+  "id": "denoland-deno-36259",
+  "repo": "denoland/deno",
+  "pr_number": 36259,
+  "title": "fix(ffi): reject resizable buffers in nonblocking calls",
+  "author": "nathanwhit",
+  "state": "OPEN",
+  "merged": false,
+  "category": "review_approved_pending",
+  "created_at": "2026-07-22T22:03:52Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": false,
+    "files_changed": 3,
+    "additions": 84,
+    "deletions": 14,
+    "review_count": 1,
+    "comment_count": 0,
+    "change_ratio": 0.17
+  },
+  "metrics": {
+    "files_changed": 3,
+    "additions": 84,
+    "deletions": 14
+  }
+}

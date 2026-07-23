@@ -1,0 +1,39 @@
+{
+  "id": "rust-lang-rust-159762",
+  "repo": "rust-lang/rust",
+  "pr_number": 159762,
+  "title": "Rollup of 18 pull requests",
+  "author": "jhpratt",
+  "state": "CLOSED",
+  "merged": false,
+  "category": "closed_rejected",
+  "created_at": "2026-07-23T10:10:06Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": true,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 242,
+    "additions": 4086,
+    "deletions": 1365,
+    "review_count": 0,
+    "comment_count": 6,
+    "change_ratio": 0.33
+  },
+  "metrics": {
+    "files_changed": 242,
+    "additions": 4086,
+    "deletions": 1365
+  }
+}

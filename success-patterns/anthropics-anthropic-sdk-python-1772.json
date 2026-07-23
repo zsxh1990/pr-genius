@@ -1,0 +1,39 @@
+{
+  "id": "anthropics-anthropic-sdk-python-1772",
+  "repo": "anthropics/anthropic-sdk-python",
+  "pr_number": 1772,
+  "title": "release: 0.118.0",
+  "author": "app/stainless-app",
+  "state": "MERGED",
+  "merged": true,
+  "category": "merged_success",
+  "created_at": "2026-07-22T16:40:56Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": true,
+    "is_backport": true,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": true,
+    "files_changed": 38,
+    "additions": 543,
+    "deletions": 55,
+    "review_count": 1,
+    "comment_count": 1,
+    "change_ratio": 0.1
+  },
+  "metrics": {
+    "files_changed": 38,
+    "additions": 543,
+    "deletions": 55
+  }
+}
