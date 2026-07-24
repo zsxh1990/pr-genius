@@ -2,7 +2,7 @@
 type: Knowledge Bundle
 title: PR Genius — 提交前改进顾问
 description: 大型开源项目 PR 知识库 + 提交前改进顾问，Agent 可读结构化数据
-version: 1.2.0
+version: 1.3.0
 created: 2026-07-01
 updated: 2026-07-17
 author: zsxh1990

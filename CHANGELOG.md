@@ -23,7 +23,14 @@ GitHub tag/release compare links per Keep a Changelog guidance.
   - validate.py type 白名单加 Compliance Audit
 - See docs/COMPLIANCE_AUDIT.md for full audit history.
 
-## [1.3.0] - 2026-07-23
+## [1.3.0] - 2026-07-24
+
+### Added
+- **Daily content expansion** (552+ cases, 33 repos, 87% coach accuracy)
+- **Electron repo profile** (122k stars, C++)
+- **20 Electron PR cases** for training
+- **Glama deployment** (MCP server + Dockerfile)
+- **Tool call prediction table** with A/B testing
 
 ### Added (方舟 35 期评测反哺)
 - **Check 7 policy_freshness** (`validate_checks/policy_freshness.py`)

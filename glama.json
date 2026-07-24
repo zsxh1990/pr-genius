@@ -4,7 +4,7 @@
   "displayName": "PR Genius",
   "version": "1.3.0",
   "description": "Evidence-backed PR contribution advisor MCP — local-only, read-only, OKF v0.1 compliant. Tells agents which PRs NOT to open, based on real accepted/rejected PR histories across 12+ large open-source projects.",
-  "longDescription": "pr-genius is a local-only, evidence-backed PR contribution advisor. It does NOT review code quality; instead it reviews contribution strategy (whether to open the PR at all).\n\nBuilt from real accepted/rejected PR histories of zsxh1990 (~50 PRs across astral-sh/uv, plastic-labs/honcho, qdrant, e2b, fastmcp, harbor, agentic-community, mongodb-js, sourcebot, future-agi, NousResearch/hermes-agent, openclaw/openclaw).\n\nKey features:\n- 12+ repo profiles with maintainer vibe + AI policy + 17 agent_guidelines fields\n- 15 ContribAI closed-PR anti-patterns (duplicate / out-of-scope / not-a-real-bug / etc.)\n- 11 maintainer policies (MisakaNet + planned coverage of other repos)\n- 226 coach cases with 83.2% accuracy (predicted vs actual merge outcomes)\n- OKF v0.1 compliant knowledge bundle (Sudhakaran88/okf-conformance PASS)\n\nPositioning (NOT what this MCP does):\n- NOT a code reviewer (use CodeRabbit / Copilot for that)\n- NOT an auto-PR bot (use ContribAI for that)\n- NOT an issue triage (use Devin / Sweep for that)\n\nWhat this MCP DOES:\n- analyze_pr: structured signals + tier (low/medium/high) + checklist\n- coach_pr: pass/fail (Agent PR Dojo)\n- triage_pr: policy-aware verdict (pass/warn/reject/needs_preflight)\n- get_repo_profile: org/name repo profile\n- get_case_study: specific PR case study with rounds\n- list_open_prs: tracked open PRs\n- search_patterns: search anti-patterns + success-patterns\n- schema_info: OKF schema versions + enum values",
+  "longDescription": "pr-genius is a local-only, evidence-backed PR contribution advisor. It does NOT review code quality; instead it reviews contribution strategy (whether to open the PR at all).\n\nBuilt from real accepted/rejected PR histories of zsxh1990 (~50 PRs across astral-sh/uv, plastic-labs/honcho, qdrant, e2b, fastmcp, harbor, agentic-community, mongodb-js, sourcebot, future-agi, NousResearch/hermes-agent, openclaw/openclaw).\n\nKey features:\n- 58 repo profiles with maintainer vibe + AI policy + 17 agent_guidelines fields\n- 68+ anti-patterns (duplicate / out-of-scope / not-a-real-bug / etc.)\n- 11 maintainer policies (MisakaNet + planned coverage of other repos)\n- 552+ coach cases with 87% accuracy (predicted vs actual merge outcomes)\n- OKF v0.1 compliant knowledge bundle (Sudhakaran88/okf-conformance PASS)\n\nPositioning (NOT what this MCP does):\n- NOT a code reviewer (use CodeRabbit / Copilot for that)\n- NOT an auto-PR bot (use ContribAI for that)\n- NOT an issue triage (use Devin / Sweep for that)\n\nWhat this MCP DOES:\n- analyze_pr: structured signals + tier (low/medium/high) + checklist\n- coach_pr: pass/fail (Agent PR Dojo)\n- triage_pr: policy-aware verdict (pass/warn/reject/needs_preflight)\n- get_repo_profile: org/name repo profile\n- get_case_study: specific PR case study with rounds\n- list_open_prs: tracked open PRs\n- search_patterns: search anti-patterns + success-patterns\n- schema_info: OKF schema versions + enum values",
   "author": {
     "name": "zsxh1990",
     "email": "445655361@qq.com",
@@ -37,7 +37,12 @@
   "transport": {
     "type": "stdio",
     "command": "python",
-    "args": ["-m", "prgenius", "mcp", "serve"],
+    "args": [
+      "-m",
+      "prgenius",
+      "mcp",
+      "serve"
+    ],
     "env": {}
   },
   "docker": {
@@ -50,17 +55,48 @@
       "description": "Analyze a PR and return structured signals + improvement suggestions + 3-tier risk (low/medium/high)",
       "inputSchema": {
         "type": "object",
-        "required": ["title", "repo"],
+        "required": [
+          "title",
+          "repo"
+        ],
         "properties": {
-          "title": {"type": "string"},
-          "repo": {"type": "string", "description": "Target repo (org/name)"},
-          "body": {"type": "string", "default": ""},
-          "description": {"type": "string", "default": ""},
-          "author": {"type": "string", "default": ""},
-          "author_association": {"type": "string", "default": "NONE"},
-          "labels": {"type": "array", "items": {"type": "string"}},
-          "star_count": {"type": "integer", "default": 0},
-          "repo_merge_rate": {"type": "number", "default": 0.0}
+          "title": {
+            "type": "string"
+          },
+          "repo": {
+            "type": "string",
+            "description": "Target repo (org/name)"
+          },
+          "body": {
+            "type": "string",
+            "default": ""
+          },
+          "description": {
+            "type": "string",
+            "default": ""
+          },
+          "author": {
+            "type": "string",
+            "default": ""
+          },
+          "author_association": {
+            "type": "string",
+            "default": "NONE"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "star_count": {
+            "type": "integer",
+            "default": 0
+          },
+          "repo_merge_rate": {
+            "type": "number",
+            "default": 0.0
+          }
         }
       },
       "annotations": {
@@ -74,57 +110,102 @@
       "description": "Agent PR Dojo: pass/fail + checklist. pass=true means OK to submit.",
       "inputSchema": {
         "type": "object",
-        "required": ["title", "repo"]
+        "required": [
+          "title",
+          "repo"
+        ]
       },
-      "annotations": {"readOnlyHint": true, "destructiveHint": false, "idempotentHint": true}
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
     },
     {
       "name": "triage_pr",
       "description": "Policy-aware PR triage. Returns verdict (pass/needs_preflight/warn/reject) + violations + recommended_action.",
       "inputSchema": {
         "type": "object",
-        "required": ["title", "repo"]
+        "required": [
+          "title",
+          "repo"
+        ]
       },
-      "annotations": {"readOnlyHint": true, "destructiveHint": false, "idempotentHint": true}
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
     },
     {
       "name": "get_repo_profile",
       "description": "Return repo profile (org/name) with 17 agent_guidelines fields",
       "inputSchema": {
         "type": "object",
-        "required": ["repo"]
+        "required": [
+          "repo"
+        ]
       },
-      "annotations": {"readOnlyHint": true, "destructiveHint": false, "idempotentHint": true}
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
     },
     {
       "name": "list_open_prs",
       "description": "List all PR case studies with final_status=open",
-      "inputSchema": {"type": "object"},
-      "annotations": {"readOnlyHint": true, "destructiveHint": false, "idempotentHint": true}
+      "inputSchema": {
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
     },
     {
       "name": "get_case_study",
       "description": "Return single PR case study (frontmatter + body) by repo + pr_number",
       "inputSchema": {
         "type": "object",
-        "required": ["repo", "pr_number"]
+        "required": [
+          "repo",
+          "pr_number"
+        ]
       },
-      "annotations": {"readOnlyHint": true, "destructiveHint": false, "idempotentHint": true}
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
     },
     {
       "name": "search_patterns",
       "description": "Search anti-patterns + success-patterns by keyword (e.g. 'duplicate', 'missing tests')",
       "inputSchema": {
         "type": "object",
-        "required": ["query"]
+        "required": [
+          "query"
+        ]
       },
-      "annotations": {"readOnlyHint": true, "destructiveHint": false, "idempotentHint": true}
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
     },
     {
       "name": "schema_info",
       "description": "Return supported OKF schema versions + enum values",
-      "inputSchema": {"type": "object"},
-      "annotations": {"readOnlyHint": true, "destructiveHint": false, "idempotentHint": true}
+      "inputSchema": {
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
     }
   ],
   "safety": {
