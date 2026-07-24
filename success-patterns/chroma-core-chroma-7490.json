@@ -1,0 +1,39 @@
+{
+  "id": "chroma-core-chroma-7490",
+  "repo": "chroma-core/chroma",
+  "pr_number": 7490,
+  "title": "[BUG](worker): Find purged fetch errors",
+  "author": "tanujnay112",
+  "state": "MERGED",
+  "merged": true,
+  "category": "merged_success",
+  "created_at": "2026-07-23T01:11:08Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": true,
+    "files_changed": 1,
+    "additions": 42,
+    "deletions": 15,
+    "review_count": 5,
+    "comment_count": 1,
+    "change_ratio": 0.36
+  },
+  "metrics": {
+    "files_changed": 1,
+    "additions": 42,
+    "deletions": 15
+  }
+}

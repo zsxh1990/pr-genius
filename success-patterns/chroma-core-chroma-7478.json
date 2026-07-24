@@ -1,0 +1,39 @@
+{
+  "id": "chroma-core-chroma-7478",
+  "repo": "chroma-core/chroma",
+  "pr_number": 7478,
+  "title": "[ENH]: Meter foundation search agent usage",
+  "author": "tanujnay112",
+  "state": "MERGED",
+  "merged": true,
+  "category": "merged_success",
+  "created_at": "2026-07-20T23:12:34Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": true,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": true,
+    "files_changed": 22,
+    "additions": 483,
+    "deletions": 61,
+    "review_count": 4,
+    "comment_count": 2,
+    "change_ratio": 0.13
+  },
+  "metrics": {
+    "files_changed": 22,
+    "additions": 483,
+    "deletions": 61
+  }
+}

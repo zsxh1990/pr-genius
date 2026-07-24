@@ -1,0 +1,39 @@
+{
+  "id": "astral-sh-ruff-27139",
+  "repo": "astral-sh/ruff",
+  "pr_number": 27139,
+  "title": "fix(linter): add legacy R rule selector prefix to JSON schema (#17890)",
+  "author": "dhaneshdutta",
+  "state": "CLOSED",
+  "merged": false,
+  "category": "closed_already_done",
+  "created_at": "2026-07-23T19:48:10Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": true,
+    "is_refactor": false,
+    "is_small_pr": true,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 2,
+    "additions": 3,
+    "deletions": 1,
+    "review_count": 0,
+    "comment_count": 1,
+    "change_ratio": 0.33
+  },
+  "metrics": {
+    "files_changed": 2,
+    "additions": 3,
+    "deletions": 1
+  }
+}

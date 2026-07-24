@@ -1,0 +1,39 @@
+{
+  "id": "prometheus-prometheus-19256",
+  "repo": "prometheus/prometheus",
+  "pr_number": 19256,
+  "title": "Update module golang.org/x/text to v0.39.0 [SECURITY]",
+  "author": "app/renovate",
+  "state": "MERGED",
+  "merged": true,
+  "category": "merged_success",
+  "created_at": "2026-07-21T20:32:20Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": true,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": true,
+    "files_changed": 8,
+    "additions": 17,
+    "deletions": 17,
+    "review_count": 1,
+    "comment_count": 1,
+    "change_ratio": 1.0
+  },
+  "metrics": {
+    "files_changed": 8,
+    "additions": 17,
+    "deletions": 17
+  }
+}

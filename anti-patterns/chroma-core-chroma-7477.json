@@ -1,0 +1,39 @@
+{
+  "id": "chroma-core-chroma-7477",
+  "repo": "chroma-core/chroma",
+  "pr_number": 7477,
+  "title": "Add search agent usage metering",
+  "author": "tanujnay112",
+  "state": "CLOSED",
+  "merged": false,
+  "category": "closed_rejected",
+  "created_at": "2026-07-20T23:09:57Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": true,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": true,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 18,
+    "additions": 501,
+    "deletions": 72,
+    "review_count": 0,
+    "comment_count": 2,
+    "change_ratio": 0.14
+  },
+  "metrics": {
+    "files_changed": 18,
+    "additions": 501,
+    "deletions": 72
+  }
+}

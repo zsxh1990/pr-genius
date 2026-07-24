@@ -1,0 +1,39 @@
+{
+  "id": "prometheus-prometheus-19265",
+  "repo": "prometheus/prometheus",
+  "pr_number": 19265,
+  "title": "PromQL: move some test files around",
+  "author": "GiedriusS",
+  "state": "OPEN",
+  "merged": false,
+  "category": "review_approved_pending",
+  "created_at": "2026-07-23T20:34:03Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": false,
+    "files_changed": 4,
+    "additions": 314,
+    "deletions": 165,
+    "review_count": 1,
+    "comment_count": 0,
+    "change_ratio": 0.53
+  },
+  "metrics": {
+    "files_changed": 4,
+    "additions": 314,
+    "deletions": 165
+  }
+}
