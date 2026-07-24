@@ -73,6 +73,7 @@ TARGET_REPOS = [
     "qdrant/qdrant",
     "mongodb/mongo-python-driver",
     "chroma-core/chroma",
+    "electron/electron",
 ]
 
 
