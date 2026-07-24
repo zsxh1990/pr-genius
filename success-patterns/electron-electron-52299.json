@@ -1,0 +1,39 @@
+{
+  "id": "electron-electron-52299",
+  "repo": "electron/electron",
+  "pr_number": 52299,
+  "title": "feat: expose MemAvailable as `process.getSystemMemoryInfo().available`",
+  "author": "codebytere",
+  "state": "closed",
+  "merged": true,
+  "category": "merged_success",
+  "created_at": "2026-07-09",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": true,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": true,
+    "is_refactor": false,
+    "is_small_pr": true,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 3,
+    "additions": 11,
+    "deletions": 0,
+    "review_count": 0,
+    "comment_count": 4,
+    "change_ratio": 0.0
+  },
+  "metrics": {
+    "files_changed": 3,
+    "additions": 11,
+    "deletions": 0
+  }
+}
