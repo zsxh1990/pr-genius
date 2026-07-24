@@ -49,7 +49,7 @@ def fetch_recent_prs(repo: str, state: str = "all", limit: int = 10) -> list[dic
 def get_merge_rate(repo: str, repo_root: Optional[Path] = None) -> float:
     """Read external_merge_rate from repo profile."""
     root = repo_root or REPO_ROOT
-    profile_dir = root / repo.replace("/", "-")
+    profile_dir = root / "profiles" / repo.replace("/", "-")
     index_file = profile_dir / "index.md"
     if not index_file.exists():
         return 0.0
@@ -64,7 +64,7 @@ def get_merge_rate(repo: str, repo_root: Optional[Path] = None) -> float:
 def get_star_count(repo: str, repo_root: Optional[Path] = None) -> int:
     """Read star count from repo profile."""
     root = repo_root or REPO_ROOT
-    profile_dir = root / repo.replace("/", "-")
+    profile_dir = root / "profiles" / repo.replace("/", "-")
     index_file = profile_dir / "index.md"
     if not index_file.exists():
         return 0

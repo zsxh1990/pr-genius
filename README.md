@@ -151,43 +151,43 @@ when you open a PR.
 
 | 仓 | Star | 状态 | Profile |
 |---|---|---|---|
-| astral-sh/uv | 87k | ✅ #19685 | [astral-sh-uv/](./astral-sh-uv/index.md) |
-| plastic-labs/honcho | 5.6k | 🟢 #801 | [plastic-labs-honcho/](./plastic-labs-honcho/index.md) |
-| harbor-framework/harbor | 2.8k | 🟢 #2121 | [harbor-framework-harbor/](./harbor-framework-harbor/index.md) |
-| punkpeye/fastmcp | 3.2k | 🟢 #282 | [punkpeye-fastmcp/](./punkpeye-fastmcp/index.md) |
-| sourcebot-dev/sourcebot | 3.5k | 🟢 #1383 | [sourcebot-dev-sourcebot/](./sourcebot-dev-sourcebot/index.md) |
-| future-agi/future-agi | 1.2k | 🟢 #778 | [future-agi-future-agi/](./future-agi-future-agi/index.md) |
-| qdrant/mcp-server-qdrant | 1.4k | 🟢 #143 | [qdrant-mcp-server-qdrant/](./qdrant-mcp-server-qdrant/index.md) |
-| e2b-dev/E2B | 12.7k | ❌ 教训 | [e2b-dev-e2b/](./e2b-dev-e2b/index.md) |
-| agentic-community/mcp-gateway-registry | 765 | ✅ #1382 | [agentic-community-mcp-gateway-registry/](./agentic-community-mcp-gateway-registry/index.md) |
-| mongodb-js/mongodb-mcp-server | 1.1k | 🟢 #1309 | [mongodb-js-mongodb-mcp-server/](./mongodb-js-mongodb-mcp-server/index.md) |
-| NousResearch/hermes-agent | 208k | ⚪ 仅画像 | [NousResearch-hermes-agent/](./NousResearch-hermes-agent/index.md) |
-| Ikalus1988/MisakaNet | — | 🟢 federation | [Ikalus1988-MisakaNet/](./Ikalus1988-MisakaNet/index.md) |
+| astral-sh/uv | 87k | ✅ #19685 | [astral-sh-uv/](./profiles/astral-sh-uv/index.md) |
+| plastic-labs/honcho | 5.6k | 🟢 #801 | [plastic-labs-honcho/](./profiles/plastic-labs-honcho/index.md) |
+| harbor-framework/harbor | 2.8k | 🟢 #2121 | [harbor-framework-harbor/](./profiles/harbor-framework-harbor/index.md) |
+| punkpeye/fastmcp | 3.2k | 🟢 #282 | [punkpeye-fastmcp/](./profiles/punkpeye-fastmcp/index.md) |
+| sourcebot-dev/sourcebot | 3.5k | 🟢 #1383 | [sourcebot-dev-sourcebot/](./profiles/sourcebot-dev-sourcebot/index.md) |
+| future-agi/future-agi | 1.2k | 🟢 #778 | [future-agi-future-agi/](./profiles/future-agi-future-agi/index.md) |
+| qdrant/mcp-server-qdrant | 1.4k | 🟢 #143 | [qdrant-mcp-server-qdrant/](./profiles/qdrant-mcp-server-qdrant/index.md) |
+| e2b-dev/E2B | 12.7k | ❌ 教训 | [e2b-dev-e2b/](./profiles/e2b-dev-e2b/index.md) |
+| agentic-community/mcp-gateway-registry | 765 | ✅ #1382 | [agentic-community-mcp-gateway-registry/](./profiles/agentic-community-mcp-gateway-registry/index.md) |
+| mongodb-js/mongodb-mcp-server | 1.1k | 🟢 #1309 | [mongodb-js-mongodb-mcp-server/](./profiles/mongodb-js-mongodb-mcp-server/index.md) |
+| NousResearch/hermes-agent | 208k | ⚪ 仅画像 | [NousResearch-hermes-agent/](./profiles/NousResearch-hermes-agent/index.md) |
+| Ikalus1988/MisakaNet | — | 🟢 federation | [Ikalus1988-MisakaNet/](./profiles/Ikalus1988-MisakaNet/index.md) |
 
 ### 大仓画像（每日扩充数据源）
 
 | 仓 | Star | 语言 | 合并率 | Profile |
 |---|---|---|---|---|
-| facebook/react | 247k | JS | 37% | [facebook-react/](./facebook-react/index.md) |
-| huggingface/transformers | 163k | Python | 70% | [huggingface-transformers/](./huggingface-transformers/index.md) |
-| microsoft/markitdown | 167k | Python | 7% | [microsoft-markitdown/](./microsoft-markitdown/index.md) |
-| rust-lang/rust | 115k | Rust | 90% | [rust-lang-rust/](./rust-lang-rust/index.md) |
-| kubernetes/kubernetes | 124k | Go | 77% | [kubernetes-kubernetes/](./kubernetes-kubernetes/index.md) |
-| fastapi/fastapi | 101k | Python | 67% | [fastapi-fastapi/](./fastapi-fastapi/index.md) |
-| tailwindlabs/tailwindcss | 96k | TS | 30% | [tailwindlabs-tailwindcss/](./tailwindlabs-tailwindcss/index.md) |
-| grafana/grafana | 76k | TS | 67% | [grafana-grafana/](./grafana-grafana/index.md) |
-| hashicorp/terraform | 49k | Go | 73% | [hashicorp-terraform/](./hashicorp-terraform/index.md) |
-| cli/cli | 45k | Go | 50% | [cli-cli/](./cli-cli/index.md) |
-| docker/compose | 38k | Go | 67% | [docker-compose/](./docker-compose/index.md) |
-| openai/openai-python | 31k | Python | 30% | [openai-openai-python/](./openai-openai-python/index.md) |
-| pydantic/pydantic | 28k | Python | 57% | [pydantic-pydantic/](./pydantic-pydantic/index.md) |
-| chroma-core/chroma | 29k | Rust | 23% | [chroma-core-chroma/](./chroma-core-chroma/index.md) |
-| qdrant/qdrant | 33k | Rust | 80% | [qdrant-qdrant/](./qdrant-qdrant/index.md) |
-| encode/httpx | 15k | Python | 20% | [encode-httpx/](./encode-httpx/index.md) |
-| actions/checkout | 8.5k | TS | 60% | [actions-checkout/](./actions-checkout/index.md) |
-| microsoft/TypeScript | 103k | TS | 50% | [microsoft-TypeScript/](./microsoft-TypeScript/index.md) |
-| langchain-ai/langchain | 141k | Python | 18% | [langchain-ai-langchain/](./langchain-ai-langchain/index.md) |
-| vercel/next.js | 134k | TS | — | [vercel-next.js/](./vercel-next.js/index.md) |
+| facebook/react | 247k | JS | 37% | [facebook-react/](./profiles/facebook-react/index.md) |
+| huggingface/transformers | 163k | Python | 70% | [huggingface-transformers/](./profiles/huggingface-transformers/index.md) |
+| microsoft/markitdown | 167k | Python | 7% | [microsoft-markitdown/](./profiles/microsoft-markitdown/index.md) |
+| rust-lang/rust | 115k | Rust | 90% | [rust-lang-rust/](./profiles/rust-lang-rust/index.md) |
+| kubernetes/kubernetes | 124k | Go | 77% | [kubernetes-kubernetes/](./profiles/kubernetes-kubernetes/index.md) |
+| fastapi/fastapi | 101k | Python | 67% | [fastapi-fastapi/](./profiles/fastapi-fastapi/index.md) |
+| tailwindlabs/tailwindcss | 96k | TS | 30% | [tailwindlabs-tailwindcss/](./profiles/tailwindlabs-tailwindcss/index.md) |
+| grafana/grafana | 76k | TS | 67% | [grafana-grafana/](./profiles/grafana-grafana/index.md) |
+| hashicorp/terraform | 49k | Go | 73% | [hashicorp-terraform/](./profiles/hashicorp-terraform/index.md) |
+| cli/cli | 45k | Go | 50% | [cli-cli/](./profiles/cli-cli/index.md) |
+| docker/compose | 38k | Go | 67% | [docker-compose/](./profiles/docker-compose/index.md) |
+| openai/openai-python | 31k | Python | 30% | [openai-openai-python/](./profiles/openai-openai-python/index.md) |
+| pydantic/pydantic | 28k | Python | 57% | [pydantic-pydantic/](./profiles/pydantic-pydantic/index.md) |
+| chroma-core/chroma | 29k | Rust | 23% | [chroma-core-chroma/](./profiles/chroma-core-chroma/index.md) |
+| qdrant/qdrant | 33k | Rust | 80% | [qdrant-qdrant/](./profiles/qdrant-qdrant/index.md) |
+| encode/httpx | 15k | Python | 20% | [encode-httpx/](./profiles/encode-httpx/index.md) |
+| actions/checkout | 8.5k | TS | 60% | [actions-checkout/](./profiles/actions-checkout/index.md) |
+| microsoft/TypeScript | 103k | TS | 50% | [microsoft-TypeScript/](./profiles/microsoft-TypeScript/index.md) |
+| langchain-ai/langchain | 141k | Python | 18% | [langchain-ai-langchain/](./profiles/langchain-ai-langchain/index.md) |
+| vercel/next.js | 134k | TS | — | [vercel-next.js/](./profiles/vercel-next.js/index.md) |
 
 ## 📈 每日内容扩充 + Coach 契合度
 

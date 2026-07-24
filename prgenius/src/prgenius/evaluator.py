@@ -121,7 +121,7 @@ def _check_requires_dco(repo: str, repo_root) -> Optional[bool]:
     repo_root = Path(repo_root) if not isinstance(repo_root, Path) else repo_root
     # 尝试加载仓库 profile
     target_folder = repo.replace("/", "-").lower()
-    profile_dir = repo_root / target_folder
+    profile_dir = repo_root / "profiles" / target_folder
     index_file = profile_dir / "index.md"
     if not index_file.exists():
         return None
@@ -156,7 +156,7 @@ def _check_require_issue_first(repo: str, repo_root) -> Optional[bool]:
     # v1.4.0 修复: 接受 str | Path
     repo_root = Path(repo_root) if not isinstance(repo_root, Path) else repo_root
     target_folder = repo.replace("/", "-").lower()
-    index_file = repo_root / target_folder / "index.md"
+    index_file = repo_root / "profiles" / target_folder / "index.md"
     if not index_file.exists():
         return None
 
@@ -188,7 +188,7 @@ def _check_has_policy(repo: str, repo_root) -> bool:
     # v1.4.0 修复: 接受 str | Path
     repo_root = Path(repo_root) if not isinstance(repo_root, Path) else repo_root
     target_folder = repo.replace("/", "-").lower()
-    profile_index = repo_root / target_folder / "index.md"
+    profile_index = repo_root / "profiles" / target_folder / "index.md"
     if not profile_index.exists():
         return False
     policy_file = repo_root / "docs" / "policies" / f"{target_folder}.md"

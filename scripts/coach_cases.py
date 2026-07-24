@@ -20,7 +20,7 @@ REPO = Path(__file__).resolve().parent.parent
 
 def _get_merge_rate(repo: str) -> float:
     """Read external_merge_rate from repo profile."""
-    profile_dir = REPO / repo.replace("/", "-")
+    profile_dir = REPO / "profiles" / repo.replace("/", "-")
     index_file = profile_dir / "index.md"
     if not index_file.exists():
         return 0.0
@@ -35,7 +35,7 @@ def _get_merge_rate(repo: str) -> float:
 
 def _get_star_count(repo: str) -> int:
     """Read star count from repo profile."""
-    profile_dir = REPO / repo.replace("/", "-")
+    profile_dir = REPO / "profiles" / repo.replace("/", "-")
     index_file = profile_dir / "index.md"
     if not index_file.exists():
         return 0

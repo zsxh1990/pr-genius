@@ -31,59 +31,59 @@ federated_at: 2026-07-02
 
 | # | 仓 | Star | 状态 | 文档 |
 |---|---|---|---|---|
-| 1 | [astral-sh/uv](https://github.com/astral-sh/uv) | 87k | ✅ #19685 | [astral-sh-uv/index.md](./astral-sh-uv/index.md) |
-| 2 | [plastic-labs/honcho](https://github.com/plastic-labs/honcho) | 5.6k | 🟢 #801 | [plastic-labs-honcho/index.md](./plastic-labs-honcho/index.md) |
-| 3 | [harbor-framework/harbor](https://github.com/harbor-framework/harbor) | 2.8k | 🟢 #2121 | [harbor-framework-harbor/index.md](./harbor-framework-harbor/index.md) |
-| 4 | [punkpeye/fastmcp](https://github.com/punkpeye/fastmcp) | 3.2k | 🟢 #282 | [punkpeye-fastmcp/index.md](./punkpeye-fastmcp/index.md) |
-| 5 | [sourcebot-dev/sourcebot](https://github.com/sourcebot-dev/sourcebot) | 3.5k | 🟢 #1383 | [sourcebot-dev-sourcebot/index.md](./sourcebot-dev-sourcebot/index.md) |
-| 6 | [future-agi/future-agi](https://github.com/future-agi/future-agi) | 1.2k | 🟢 #778 | [future-agi-future-agi/index.md](./future-agi-future-agi/index.md) |
-| 7 | [qdrant/mcp-server-qdrant](https://github.com/qdrant/mcp-server-qdrant) | 1.4k | 🟢 #143 | [qdrant-mcp-server-qdrant/index.md](./qdrant-mcp-server-qdrant/index.md) |
-| 8 | [e2b-dev/E2B](https://github.com/e2b-dev/E2B) | 12.7k | ❌ 教训 | [e2b-dev-e2b/index.md](./e2b-dev-e2b/index.md) |
-| 9 | [agentic-community/mcp-gateway-registry](https://github.com/agentic-community/mcp-gateway-registry) | 765 | ✅ #1382/#1383 | [agentic-community-mcp-gateway-registry/index.md](./agentic-community-mcp-gateway-registry/index.md) |
-| 10 | [mongodb-js/mongodb-mcp-server](https://github.com/mongodb-js/mongodb-mcp-server) | 1.1k | 🟢 #1309 | [mongodb-js-mongodb-mcp-server/index.md](./mongodb-js-mongodb-mcp-server/index.md) |
-| 11 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 208k | ⚪ 仅画像 | [NousResearch-hermes-agent/index.md](./NousResearch-hermes-agent/index.md) |
-| 12 | [Ikalus1988/MisakaNet](https://github.com/Ikalus1988/MisakaNet) | — | 🟢 federation peer | [Ikalus1988-MisakaNet/index.md](./Ikalus1988-MisakaNet/index.md) |
+| 1 | [astral-sh/uv](https://github.com/astral-sh/uv) | 87k | ✅ #19685 | [astral-sh-uv/index.md](./profiles/astral-sh-uv/index.md) |
+| 2 | [plastic-labs/honcho](https://github.com/plastic-labs/honcho) | 5.6k | 🟢 #801 | [plastic-labs-honcho/index.md](./profiles/plastic-labs-honcho/index.md) |
+| 3 | [harbor-framework/harbor](https://github.com/harbor-framework/harbor) | 2.8k | 🟢 #2121 | [harbor-framework-harbor/index.md](./profiles/harbor-framework-harbor/index.md) |
+| 4 | [punkpeye/fastmcp](https://github.com/punkpeye/fastmcp) | 3.2k | 🟢 #282 | [punkpeye-fastmcp/index.md](./profiles/punkpeye-fastmcp/index.md) |
+| 5 | [sourcebot-dev/sourcebot](https://github.com/sourcebot-dev/sourcebot) | 3.5k | 🟢 #1383 | [sourcebot-dev-sourcebot/index.md](./profiles/sourcebot-dev-sourcebot/index.md) |
+| 6 | [future-agi/future-agi](https://github.com/future-agi/future-agi) | 1.2k | 🟢 #778 | [future-agi-future-agi/index.md](./profiles/future-agi-future-agi/index.md) |
+| 7 | [qdrant/mcp-server-qdrant](https://github.com/qdrant/mcp-server-qdrant) | 1.4k | 🟢 #143 | [qdrant-mcp-server-qdrant/index.md](./profiles/qdrant-mcp-server-qdrant/index.md) |
+| 8 | [e2b-dev/E2B](https://github.com/e2b-dev/E2B) | 12.7k | ❌ 教训 | [e2b-dev-e2b/index.md](./profiles/e2b-dev-e2b/index.md) |
+| 9 | [agentic-community/mcp-gateway-registry](https://github.com/agentic-community/mcp-gateway-registry) | 765 | ✅ #1382/#1383 | [agentic-community-mcp-gateway-registry/index.md](./profiles/agentic-community-mcp-gateway-registry/index.md) |
+| 10 | [mongodb-js/mongodb-mcp-server](https://github.com/mongodb-js/mongodb-mcp-server) | 1.1k | 🟢 #1309 | [mongodb-js-mongodb-mcp-server/index.md](./profiles/mongodb-js-mongodb-mcp-server/index.md) |
+| 11 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 208k | ⚪ 仅画像 | [NousResearch-hermes-agent/index.md](./profiles/NousResearch-hermes-agent/index.md) |
+| 12 | [Ikalus1988/MisakaNet](https://github.com/Ikalus1988/MisakaNet) | — | 🟢 federation peer | [Ikalus1988-MisakaNet/index.md](./profiles/Ikalus1988-MisakaNet/index.md) |
 
 ### 大仓画像（交叉验证用）
 
 | 仓 | Star | 文档 |
 |---|---|---|
-| langchain-ai/langchain | 141k | [langchain-ai-langchain/index.md](./langchain-ai-langchain/index.md) |
-| yt-dlp/yt-dlp | 177k | [yt-dlp-yt-dlp/index.md](./yt-dlp-yt-dlp/index.md) |
-| microsoft/markitdown | 164k | [microsoft-markitdown/index.md](./microsoft-markitdown/index.md) |
-| langchain-ai/langgraph | 37k | [langchain-ai-langgraph/index.md](./langchain-ai-langgraph/index.md) |
-| onyx-dot-app/onyx | 31k | [onyx-dot-app-onyx/index.md](./onyx-dot-app-onyx/index.md) |
-| danny-avila/LibreChat | 40k | [danny-avila-LibreChat/index.md](./danny-avila-LibreChat/index.md) |
-| goreleaser/nfpm | 2.6k | [goreleaser-nfpm/index.md](./goreleaser-nfpm/index.md) |
-| python-jsonschema/jsonschema | 5k | [python-jsonschema-jsonschema/index.md](./python-jsonschema-jsonschema/index.md) |
-| woodruffw/zizmor | 5.8k | [woodruffw-zizmor/index.md](./woodruffw-zizmor/index.md) |
-| encode/httpx | 15k | [encode-httpx/index.md](./encode-httpx/index.md) |
-| actions/checkout | 8.5k | [actions-checkout/index.md](./actions-checkout/index.md) |
-| pydantic/pydantic | 28k | [pydantic-pydantic/index.md](./pydantic-pydantic/index.md) |
-| tailwindlabs/tailwindcss | 96k | [tailwindlabs-tailwindcss/index.md](./tailwindlabs-tailwindcss/index.md) |
-| huggingface/transformers | 163k | [huggingface-transformers/index.md](./huggingface-transformers/index.md) |
-| hashicorp/terraform | 49k | [hashicorp-terraform/index.md](./hashicorp-terraform/index.md) |
-| grafana/grafana | 76k | [grafana-grafana/index.md](./grafana-grafana/index.md) |
-| pallets/flask | 67k | [pallets-flask/index.md](./pallets-flask/index.md) |
-| pandas-dev/pandas | 45k | [pandas-dev-pandas/index.md](./pandas-dev-pandas/index.md) |
-| marimo-team/marimo | 13k | [marimo-team-marimo/index.md](./marimo-team-marimo/index.md) |
-| astral-sh/ty | 12k | [astral-sh-ty/index.md](./astral-sh-ty/index.md) |
-| koala73/worldmonitor | 2.5k | [koala73-worldmonitor/index.md](./koala73-worldmonitor/index.md) |
-| soxoj/maigret | 6.5k | [soxoj-maigret/index.md](./soxoj-maigret/index.md) |
-| HolmesGPT/holmesgpt | 4.5k | [HolmesGPT-holmesgpt/index.md](./HolmesGPT-holmesgpt/index.md) |
-| KnugiHK/WhatsApp-Chat-Exporter | 1.8k | [KnugiHK-WhatsApp-Chat-Exporter/index.md](./KnugiHK-WhatsApp-Chat-Exporter/index.md) |
-| PharMolix/OpenBioMed | 0.8k | [PharMolix-OpenBioMed/index.md](./PharMolix-OpenBioMed/index.md) |
-| vugu/vugu | 3.2k | [vugu-vugu/index.md](./vugu-vugu/index.md) |
-| openclaw/openclaw | 28k | [openclaw-openclaw/index.md](./openclaw-openclaw/index.md) |
-| kubernetes/kubernetes | 124k | [kubernetes-kubernetes/index.md](./kubernetes-kubernetes/index.md) |
-| docker/compose | 38k | [docker-compose/index.md](./docker-compose/index.md) |
-| cli/cli | 45k | [cli-cli/index.md](./cli-cli/index.md) |
-| openai/openai-python | 31k | [openai-openai-python/index.md](./openai-openai-python/index.md) |
-| rust-lang/rust | 115k | [rust-lang-rust/index.md](./rust-lang-rust/index.md) |
-| facebook/react | 247k | [facebook-react/index.md](./facebook-react/index.md) |
-| fastapi/fastapi | 101k | [fastapi-fastapi/index.md](./fastapi-fastapi/index.md) |
-| chroma-core/chroma | 29k | [chroma-core-chroma/index.md](./chroma-core-chroma/index.md) |
-| qdrant/qdrant | 33k | [qdrant-qdrant/index.md](./qdrant-qdrant/index.md) |
+| langchain-ai/langchain | 141k | [langchain-ai-langchain/index.md](./profiles/langchain-ai-langchain/index.md) |
+| yt-dlp/yt-dlp | 177k | [yt-dlp-yt-dlp/index.md](./profiles/yt-dlp-yt-dlp/index.md) |
+| microsoft/markitdown | 164k | [microsoft-markitdown/index.md](./profiles/microsoft-markitdown/index.md) |
+| langchain-ai/langgraph | 37k | [langchain-ai-langgraph/index.md](./profiles/langchain-ai-langgraph/index.md) |
+| onyx-dot-app/onyx | 31k | [onyx-dot-app-onyx/index.md](./profiles/onyx-dot-app-onyx/index.md) |
+| danny-avila/LibreChat | 40k | [danny-avila-LibreChat/index.md](./profiles/danny-avila-LibreChat/index.md) |
+| goreleaser/nfpm | 2.6k | [goreleaser-nfpm/index.md](./profiles/goreleaser-nfpm/index.md) |
+| python-jsonschema/jsonschema | 5k | [python-jsonschema-jsonschema/index.md](./profiles/python-jsonschema-jsonschema/index.md) |
+| woodruffw/zizmor | 5.8k | [woodruffw-zizmor/index.md](./profiles/woodruffw-zizmor/index.md) |
+| encode/httpx | 15k | [encode-httpx/index.md](./profiles/encode-httpx/index.md) |
+| actions/checkout | 8.5k | [actions-checkout/index.md](./profiles/actions-checkout/index.md) |
+| pydantic/pydantic | 28k | [pydantic-pydantic/index.md](./profiles/pydantic-pydantic/index.md) |
+| tailwindlabs/tailwindcss | 96k | [tailwindlabs-tailwindcss/index.md](./profiles/tailwindlabs-tailwindcss/index.md) |
+| huggingface/transformers | 163k | [huggingface-transformers/index.md](./profiles/huggingface-transformers/index.md) |
+| hashicorp/terraform | 49k | [hashicorp-terraform/index.md](./profiles/hashicorp-terraform/index.md) |
+| grafana/grafana | 76k | [grafana-grafana/index.md](./profiles/grafana-grafana/index.md) |
+| pallets/flask | 67k | [pallets-flask/index.md](./profiles/pallets-flask/index.md) |
+| pandas-dev/pandas | 45k | [pandas-dev-pandas/index.md](./profiles/pandas-dev-pandas/index.md) |
+| marimo-team/marimo | 13k | [marimo-team-marimo/index.md](./profiles/marimo-team-marimo/index.md) |
+| astral-sh/ty | 12k | [astral-sh-ty/index.md](./profiles/astral-sh-ty/index.md) |
+| koala73/worldmonitor | 2.5k | [koala73-worldmonitor/index.md](./profiles/koala73-worldmonitor/index.md) |
+| soxoj/maigret | 6.5k | [soxoj-maigret/index.md](./profiles/soxoj-maigret/index.md) |
+| HolmesGPT/holmesgpt | 4.5k | [HolmesGPT-holmesgpt/index.md](./profiles/HolmesGPT-holmesgpt/index.md) |
+| KnugiHK/WhatsApp-Chat-Exporter | 1.8k | [KnugiHK-WhatsApp-Chat-Exporter/index.md](./profiles/KnugiHK-WhatsApp-Chat-Exporter/index.md) |
+| PharMolix/OpenBioMed | 0.8k | [PharMolix-OpenBioMed/index.md](./profiles/PharMolix-OpenBioMed/index.md) |
+| vugu/vugu | 3.2k | [vugu-vugu/index.md](./profiles/vugu-vugu/index.md) |
+| openclaw/openclaw | 28k | [openclaw-openclaw/index.md](./profiles/openclaw-openclaw/index.md) |
+| kubernetes/kubernetes | 124k | [kubernetes-kubernetes/index.md](./profiles/kubernetes-kubernetes/index.md) |
+| docker/compose | 38k | [docker-compose/index.md](./profiles/docker-compose/index.md) |
+| cli/cli | 45k | [cli-cli/index.md](./profiles/cli-cli/index.md) |
+| openai/openai-python | 31k | [openai-openai-python/index.md](./profiles/openai-openai-python/index.md) |
+| rust-lang/rust | 115k | [rust-lang-rust/index.md](./profiles/rust-lang-rust/index.md) |
+| facebook/react | 247k | [facebook-react/index.md](./profiles/facebook-react/index.md) |
+| fastapi/fastapi | 101k | [fastapi-fastapi/index.md](./profiles/fastapi-fastapi/index.md) |
+| chroma-core/chroma | 29k | [chroma-core-chroma/index.md](./profiles/chroma-core-chroma/index.md) |
+| qdrant/qdrant | 33k | [qdrant-qdrant/index.md](./profiles/qdrant-qdrant/index.md) |
 
 > 🟢 = open / ✅ = merged / ❌ = 关闭但有教训 / ⚠️ = 需关注
 > **OpenClaw 单独走自己的知识库**（已在 [openclaw-pr-knowledge/](../openclaw-pr-knowledge/README.md)），不计入本 bundle。
@@ -139,14 +139,14 @@ federated_at: 2026-07-02
 
 **External contributor 准备提 PR 前**：
 
-1. 看 [astral-sh-uv/index.md](./astral-sh-uv/index.md) 确认目标仓是否已覆盖
+1. 看 [astral-sh-uv/index.md](./profiles/astral-sh-uv/index.md) 确认目标仓是否已覆盖
 2. 如果未覆盖：**先写 `Repo Profile` + 跑 5 切片采样 → 再写 PR 候选**
 3. 提 PR 后：补 `PR Case Study`，记录 maintainer 反馈 + 教训
 4. 跨仓模式（如"必须 v1 就带 proof"、"避免 security-boundary 改动"）：写 `Cross-Repo Pattern`
 
 **Maintenance reviewer / AI-assisted tool 调用时**：
 
-1. 看 [astral-sh-uv/index.md](./astral-sh-uv/index.md) 拿"该仓 AI 友好度 + 5 目标 + SOP"
+1. 看 [astral-sh-uv/index.md](./profiles/astral-sh-uv/index.md) 拿"该仓 AI 友好度 + 5 目标 + SOP"
 2. 看 [Cross-Repo Pattern](#)（待建）拿跨仓通用守则
 3. 看 [Risk Registry](#)（待建）确认不要往敌视社区塞 PR
 
@@ -350,13 +350,13 @@ federated_at: 2026-07-02
 
 ### 🎯 MisakaNet PR 案例（5 项）
 
-> [Ikalus1988-MisakaNet/ 仓 Profile](./Ikalus1988-MisakaNet/index.md)
+> [Ikalus1988-MisakaNet/ 仓 Profile](./profiles/Ikalus1988-MisakaNet/index.md)
 
-- [pr-439-pep668-lesson.md](./Ikalus1988-MisakaNet/pr-439-pep668-lesson.md) — MisakaNet #439 — PEP 668 lesson
-- [pr-440-frontmatter-tests.md](./Ikalus1988-MisakaNet/pr-440-frontmatter-tests.md) — MisakaNet #440 — frontmatter 边界测试
-- [pr-441-smart-fallback.md](./Ikalus1988-MisakaNet/pr-441-smart-fallback.md) — MisakaNet #441 — smart fallback with telemetry
-- [pr-452-frontmatter-batch.md](./Ikalus1988-MisakaNet/pr-452-frontmatter-batch.md) — MisakaNet #452 — 20 bare JSON → YAML
-- [pr-474-fanuc-lessons.md](./Ikalus1988-MisakaNet/pr-474-fanuc-lessons.md) — MisakaNet #474 — 7 FANUC 机器人课程
+- [pr-439-pep668-lesson.md](./profiles/Ikalus1988-MisakaNet/pr-439-pep668-lesson.md) — MisakaNet #439 — PEP 668 lesson
+- [pr-440-frontmatter-tests.md](./profiles/Ikalus1988-MisakaNet/pr-440-frontmatter-tests.md) — MisakaNet #440 — frontmatter 边界测试
+- [pr-441-smart-fallback.md](./profiles/Ikalus1988-MisakaNet/pr-441-smart-fallback.md) — MisakaNet #441 — smart fallback with telemetry
+- [pr-452-frontmatter-batch.md](./profiles/Ikalus1988-MisakaNet/pr-452-frontmatter-batch.md) — MisakaNet #452 — 20 bare JSON → YAML
+- [pr-474-fanuc-lessons.md](./profiles/Ikalus1988-MisakaNet/pr-474-fanuc-lessons.md) — MisakaNet #474 — 7 FANUC 机器人课程
 
 ### 🛠️ skill/ — 内部脚本与工具
 
@@ -366,10 +366,10 @@ federated_at: 2026-07-02
 ### 📦 其他孤立文档
 
 - [KNOWN_ISSUES.md](./KNOWN_ISSUES.md) — Known Issues 跟踪表
-- [ag2ai-ag2/RISK.md](./ag2ai-ag2/RISK.md) — ag2ai/ag2 风险决策
-- [datalayer-jupyter-mcp-server/pr-266-configurable-timeout.md](./datalayer-jupyter-mcp-server/pr-266-configurable-timeout.md) — jupyter-mcp-server #266
-- [samanhappy-mcphub/pr-987-rce-fix.md](./samanhappy-mcphub/pr-987-rce-fix.md) — mcphub #987 — proxychains4 RCE fix
-- [yorgai-ORG2/pr-350-linux-downloads.md](./yorgai-ORG2/pr-350-linux-downloads.md) — ORG2 #350 — Linux download links
+- [ag2ai-ag2/RISK.md](./profiles/ag2ai-ag2/RISK.md) — ag2ai/ag2 风险决策
+- [datalayer-jupyter-mcp-server/pr-266-configurable-timeout.md](./profiles/datalayer-jupyter-mcp-server/pr-266-configurable-timeout.md) — jupyter-mcp-server #266
+- [samanhappy-mcphub/pr-987-rce-fix.md](./profiles/samanhappy-mcphub/pr-987-rce-fix.md) — mcphub #987 — proxychains4 RCE fix
+- [yorgai-ORG2/pr-350-linux-downloads.md](./profiles/yorgai-ORG2/pr-350-linux-downloads.md) — ORG2 #350 — Linux download links
 
 ### 📜 归档脚本
 
@@ -395,5 +395,5 @@ federated_at: 2026-07-02
 
 - 创建 OKF bundle 结构（8 仓子目录）
 - 入口 `index.md` + 8 个仓 `index.md` 占位
-- 完整示例：[astral-sh-uv/](./astral-sh-uv/index.md)
+- 完整示例：[astral-sh-uv/](./profiles/astral-sh-uv/index.md)
 - 增量规则：提新 PR → 自动补 PR Case Study
