@@ -1,0 +1,39 @@
+{
+  "id": "denoland-deno-36296",
+  "repo": "denoland/deno",
+  "pr_number": 36296,
+  "title": "fix(npm): filter optional deps by libc field",
+  "author": "app/",
+  "state": "CLOSED",
+  "merged": false,
+  "category": "closed_duplicate",
+  "created_at": "2026-07-24T18:36:18Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": true,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 11,
+    "additions": 79,
+    "deletions": 12,
+    "review_count": 0,
+    "comment_count": 4,
+    "change_ratio": 0.15
+  },
+  "metrics": {
+    "files_changed": 11,
+    "additions": 79,
+    "deletions": 12
+  }
+}

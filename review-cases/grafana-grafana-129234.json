@@ -1,0 +1,39 @@
+{
+  "id": "grafana-grafana-129234",
+  "repo": "grafana/grafana",
+  "pr_number": 129234,
+  "title": "Table: Reduce resize CPU cost in TableNG",
+  "author": "fastfrwrd",
+  "state": "OPEN",
+  "merged": false,
+  "category": "review_approved_pending",
+  "created_at": "2026-07-24T19:07:46Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": true,
+    "files_changed": 7,
+    "additions": 305,
+    "deletions": 19,
+    "review_count": 8,
+    "comment_count": 4,
+    "change_ratio": 0.06
+  },
+  "metrics": {
+    "files_changed": 7,
+    "additions": 305,
+    "deletions": 19
+  }
+}
