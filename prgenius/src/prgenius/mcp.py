@@ -51,9 +51,32 @@ def _load_tools(repo_root: Path | None = None):
         star_count: int = 0,
         repo_merge_rate: float = 0.0,
     ) -> dict:
-        """分析 PR 并生成结构化改进建议。
+        """Analyze a PR and return structured improvement suggestions with 3-tier risk assessment.
 
-        返回 tier (low_risk/medium_risk/high_risk)、signals (positive/negative/neutral)、checklist。
+        Returns: tier (low_risk/medium_risk/high_risk), signals (positive/negative/neutral),
+        checklist (P0/P1/P2 items), and recommended_action.
+
+        Use this before submitting a PR to a large open-source repo to check if your
+        contribution strategy is sound. Combines repo profile data, anti-pattern matching,
+        and success pattern analysis.
+
+        Args:
+            title: PR title (e.g. "feat: add new search endpoint")
+            repo: Target repo in org/name format (e.g. "encode/httpx")
+            body: PR body/description text
+            description: Extended description (optional)
+            author: PR author username
+            author_association: Author's association with repo (NONE/CONTRIBUTOR/COLLABORATOR/MEMBER/OWNER)
+            labels: PR labels (e.g. ["bug", "documentation"])
+            star_count: Repository star count (0 = unknown)
+            repo_merge_rate: Repository's external PR merge rate 0.0-1.0 (0 = unknown)
+
+        Returns:
+            dict with keys: tier, signals, checklist, recommended_action, repo, title
+
+        Example:
+            analyze_pr("fix: timeout in connection pool", "encode/httpx", "Fixes #123")
+            → {"tier": "medium_risk", "signals": {...}, "checklist": [...], "recommended_action": "..."}
         """
         return _analyze_pr(
             title, description, repo, rr,
@@ -74,9 +97,27 @@ def _load_tools(repo_root: Path | None = None):
         star_count: int = 0,
         repo_merge_rate: float = 0.0,
     ) -> dict:
-        """Agent PR Dojo: 返回 pass/fail + checklist。
+        """Agent PR Dojo: pass/fail verdict with actionable checklist.
 
-        pass=true 表示可以提交，pass=false 表示有阻塞问题需先修复。
+        Use this as a final gate before opening a PR. Returns pass=true if safe
+        to submit, pass=false if there are blocking issues to fix first.
+
+        Combines repo profile analysis, anti-pattern matching, and maintainer
+        policy checks into a single go/no-go decision.
+
+        Args:
+            title: PR title
+            repo: Target repo (org/name)
+            body: PR body/description
+            description: Extended description
+            author: PR author username
+            author_association: Author's association (NONE/CONTRIBUTOR/etc.)
+            labels: PR labels
+            star_count: Repo star count
+            repo_merge_rate: External PR merge rate (0.0-1.0)
+
+        Returns:
+            dict with pass (bool), tier, signals, checklist, recommended_action
         """
         result = _analyze_pr(
             title, description, repo, rr,
@@ -145,7 +186,18 @@ def _load_tools(repo_root: Path | None = None):
 
     @mcp.tool(annotations=READ_ONLY)
     def get_repo_profile(repo: str) -> dict:
-        """返回仓库画像 (org/name)。"""
+        """Get repository profile with maintainer guidelines, AI policy, and merge rate.
+
+        Returns 17 agent_guidelines fields including ai_policy, maintainer_vibe,
+        external_merge_rate, close_keywords, and more. Use this to understand a
+        repo's contribution culture before submitting a PR.
+
+        Args:
+            repo: Repository in org/name format (e.g. "encode/httpx")
+
+        Returns:
+            dict with repo metadata and agent_guidelines, or error if not found
+        """
         p = profile_get(rr, repo)
         if p is None:
             return {"error": f"profile not found: {repo}"}
@@ -153,7 +205,14 @@ def _load_tools(repo_root: Path | None = None):
 
     @mcp.tool(annotations=READ_ONLY)
     def list_open_prs() -> list:
-        """列出所有 final_status=open 的 PR Case Study。"""
+        """List all open PR case studies in the knowledge base.
+
+        Returns PRs with final_status=open, useful for tracking ongoing
+        contributions and their current state.
+
+        Returns:
+            list of {repo, pr_number, pr_url, folder} for each open PR
+        """
         out = []
         for c in iter_case_studies(rr):
             fm = c["frontmatter"]
@@ -168,7 +227,19 @@ def _load_tools(repo_root: Path | None = None):
 
     @mcp.tool(annotations=READ_ONLY)
     def get_case_study(repo: str, pr_number: int) -> dict:
-        """返回单个 PR Case Study。"""
+        """Get a specific PR case study with full details and rounds.
+
+        Returns the complete case study including frontmatter, body text,
+        and round-by-round interaction history. Useful for learning from
+        past PR experiences.
+
+        Args:
+            repo: Repository in org/name format
+            pr_number: PR number (integer)
+
+        Returns:
+            dict with frontmatter, body, path, or error if not found
+        """
         for c in iter_case_studies(rr):
             fm = c["frontmatter"]
             if (
@@ -184,14 +255,22 @@ def _load_tools(repo_root: Path | None = None):
         pattern_type: str = "all",
         limit: int = 10,
     ) -> list:
-        """按关键词搜 anti-patterns + success-patterns (M1 克莱恩 2026-07-19 新增).
+        """Search anti-patterns and success-patterns by keyword.
+
+        Use this to find relevant patterns before submitting a PR.
+        Anti-patterns show what NOT to do, success-patterns show what works.
 
         Args:
-            query: 搜的关键词 (e.g. "duplicate PR", "missing tests", "out of scope")
-            pattern_type: "all" / "anti-pattern" / "success-pattern"
-            limit: 最多返回几条 (默认 10)
+            query: Search keyword (e.g. "duplicate PR", "missing tests", "out of scope", "breaking change")
+            pattern_type: Filter type — "all" (default), "anti-pattern", or "success-pattern"
+            limit: Max results to return (default 10)
 
-        Returns: list of {key, title, symptom, fix_action, source_pr, type}
+        Returns:
+            list of dicts with keys: key, title, symptom, fix_action, source_pr, type, file
+
+        Example:
+            search_patterns("duplicate PR") → finds anti-patterns about duplicate submissions
+            search_patterns("timeout", "anti-pattern") → finds timeout-related failure patterns
         """
         # 35 期评测反哺 (lesson-21): _parse_frontmatter_dict 是死导入
         # (ether2 SMOKE_RESULTS.md §1.4: cannot import name '_parse_frontmatter_dict')
