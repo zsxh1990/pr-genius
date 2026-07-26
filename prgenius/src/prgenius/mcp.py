@@ -36,7 +36,7 @@ def _load_tools(repo_root: Path | None = None):
 
     rr = repo_root or REPO_ROOT_DEFAULT
 
-    # Tool annotations: 全是只读 advisor (M1 克莱恩 2026-07-19)
+    # Tool annotations: all read-only advisor
     READ_ONLY = {"readOnlyHint": True, "destructiveHint": False, "idempotentHint": True}
 
     @mcp.tool(annotations=READ_ONLY)
@@ -51,7 +51,7 @@ def _load_tools(repo_root: Path | None = None):
         star_count: int = 0,
         repo_merge_rate: float = 0.0,
     ) -> dict:
-        """Analyze a PR and return structured improvement suggestions with 3-tier risk assessment.
+        """Detailed PR analysis with signals and checklist. Use analyze_pr for deep analysis, coach_pr for quick pass/fail.
 
         Returns: tier (low_risk/medium_risk/high_risk), signals (positive/negative/neutral),
         checklist (P0/P1/P2 items), and recommended_action.
@@ -97,7 +97,7 @@ def _load_tools(repo_root: Path | None = None):
         star_count: int = 0,
         repo_merge_rate: float = 0.0,
     ) -> dict:
-        """Agent PR Dojo: pass/fail verdict with actionable checklist.
+        """Agent PR Dojo: quick pass/fail gate. Use coach_pr for go/no-go decision, analyze_pr for detailed analysis.
 
         Use this as a final gate before opening a PR. Returns pass=true if safe
         to submit, pass=false if there are blocking issues to fix first.
@@ -136,7 +136,7 @@ def _load_tools(repo_root: Path | None = None):
         diff_stat: str = "",
         labels: list[str] | None = None,
     ) -> dict:
-        """Policy-aware PR triage — M1 克莱恩 2026-07-19 新增.
+        """Policy-aware PR screening.
 
         Reads docs/policies/<org>-<repo>.md and checks the PR against hard/soft rules.
 

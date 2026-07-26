@@ -52,7 +52,7 @@
   "tools": [
     {
       "name": "analyze_pr",
-      "description": "Analyze a PR and return structured improvement suggestions with 3-tier risk assessment (low/medium/high). Combines repo profile, anti-pattern matching, and success pattern analysis.",
+      "description": "Detailed PR analysis with signals and checklist. Use analyze_pr for deep analysis with improvement suggestions, coach_pr for quick pass/fail.",
       "inputSchema": {
         "type": "object",
         "required": [
@@ -109,7 +109,7 @@
     },
     {
       "name": "coach_pr",
-      "description": "Agent PR Dojo: pass/fail verdict with actionable checklist. Use as final gate before opening a PR. Returns pass=true if safe to submit.",
+      "description": "Quick pass/fail gate before opening a PR. Use coach_pr for go/no-go decision, analyze_pr for detailed analysis with signals.",
       "inputSchema": {
         "type": "object",
         "required": [
@@ -166,7 +166,7 @@
     },
     {
       "name": "triage_pr",
-      "description": "Policy-aware PR screening. Reads maintainer policy and checks PR against hard/soft rules. Returns verdict (pass/warn/reject/needs_preflight) with violations.",
+      "description": "Policy-aware PR screening against maintainer rules. Returns verdict (pass/warn/reject) with violations and recommended action.",
       "inputSchema": {
         "type": "object",
         "required": [
