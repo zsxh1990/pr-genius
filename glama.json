@@ -52,7 +52,7 @@
   "tools": [
     {
       "name": "analyze_pr",
-      "description": "Analyze a PR and return structured signals + improvement suggestions + 3-tier risk (low/medium/high)",
+      "description": "Analyze a PR and return structured improvement suggestions with 3-tier risk assessment (low/medium/high). Combines repo profile, anti-pattern matching, and success pattern analysis.",
       "inputSchema": {
         "type": "object",
         "required": [
@@ -61,41 +61,43 @@
         ],
         "properties": {
           "title": {
-            "type": "string"
+            "type": "string",
+            "description": "PR title (e.g. \"feat: add search endpoint\")"
           },
           "repo": {
             "type": "string",
-            "description": "Target repo (org/name)"
+            "description": "Target repo in org/name format (e.g. \"encode/httpx\")"
           },
           "body": {
             "type": "string",
-            "default": ""
+            "description": "PR body/description text"
           },
           "description": {
             "type": "string",
-            "default": ""
+            "description": "Extended description"
           },
           "author": {
             "type": "string",
-            "default": ""
+            "description": "PR author username"
           },
           "author_association": {
             "type": "string",
-            "default": "NONE"
+            "description": "Author association (NONE/CONTRIBUTOR/COLLABORATOR/MEMBER/OWNER)"
           },
           "labels": {
             "type": "array",
             "items": {
               "type": "string"
-            }
+            },
+            "description": "PR labels"
           },
           "star_count": {
             "type": "integer",
-            "default": 0
+            "description": "Repository star count (0 = unknown)"
           },
           "repo_merge_rate": {
             "type": "number",
-            "default": 0.0
+            "description": "External PR merge rate 0.0-1.0"
           }
         }
       },
@@ -107,13 +109,54 @@
     },
     {
       "name": "coach_pr",
-      "description": "Agent PR Dojo: pass/fail + checklist. pass=true means OK to submit.",
+      "description": "Agent PR Dojo: pass/fail verdict with actionable checklist. Use as final gate before opening a PR. Returns pass=true if safe to submit.",
       "inputSchema": {
         "type": "object",
         "required": [
           "title",
           "repo"
-        ]
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "PR title"
+          },
+          "repo": {
+            "type": "string",
+            "description": "Target repo (org/name)"
+          },
+          "body": {
+            "type": "string",
+            "description": "PR body/description"
+          },
+          "description": {
+            "type": "string",
+            "description": "Extended description"
+          },
+          "author": {
+            "type": "string",
+            "description": "PR author username"
+          },
+          "author_association": {
+            "type": "string",
+            "description": "Author association"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "PR labels"
+          },
+          "star_count": {
+            "type": "integer",
+            "description": "Repo star count"
+          },
+          "repo_merge_rate": {
+            "type": "number",
+            "description": "External merge rate"
+          }
+        }
       },
       "annotations": {
         "readOnlyHint": true,
@@ -123,13 +166,38 @@
     },
     {
       "name": "triage_pr",
-      "description": "Policy-aware PR triage. Returns verdict (pass/needs_preflight/warn/reject) + violations + recommended_action.",
+      "description": "Policy-aware PR screening. Reads maintainer policy and checks PR against hard/soft rules. Returns verdict (pass/warn/reject/needs_preflight) with violations.",
       "inputSchema": {
         "type": "object",
         "required": [
           "title",
           "repo"
-        ]
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "PR title"
+          },
+          "repo": {
+            "type": "string",
+            "description": "Target repo (org/name)"
+          },
+          "body": {
+            "type": "string",
+            "description": "PR body/description"
+          },
+          "diff_stat": {
+            "type": "string",
+            "description": "git diff --stat output"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "PR labels"
+          }
+        }
       },
       "annotations": {
         "readOnlyHint": true,
@@ -139,12 +207,18 @@
     },
     {
       "name": "get_repo_profile",
-      "description": "Return repo profile (org/name) with 17 agent_guidelines fields",
+      "description": "Get repository profile with 17 agent_guidelines fields: ai_policy, maintainer_vibe, merge_rate, close_keywords, etc.",
       "inputSchema": {
         "type": "object",
         "required": [
           "repo"
-        ]
+        ],
+        "properties": {
+          "repo": {
+            "type": "string",
+            "description": "Repository in org/name format"
+          }
+        }
       },
       "annotations": {
         "readOnlyHint": true,
@@ -154,9 +228,10 @@
     },
     {
       "name": "list_open_prs",
-      "description": "List all PR case studies with final_status=open",
+      "description": "List all open PR case studies in the knowledge base. Returns PRs with current status.",
       "inputSchema": {
-        "type": "object"
+        "type": "object",
+        "properties": {}
       },
       "annotations": {
         "readOnlyHint": true,
@@ -166,13 +241,23 @@
     },
     {
       "name": "get_case_study",
-      "description": "Return single PR case study (frontmatter + body) by repo + pr_number",
+      "description": "Get a specific PR case study with full details and round-by-round interaction history.",
       "inputSchema": {
         "type": "object",
         "required": [
           "repo",
           "pr_number"
-        ]
+        ],
+        "properties": {
+          "repo": {
+            "type": "string",
+            "description": "Repository (org/name)"
+          },
+          "pr_number": {
+            "type": "integer",
+            "description": "PR number"
+          }
+        }
       },
       "annotations": {
         "readOnlyHint": true,
@@ -182,12 +267,26 @@
     },
     {
       "name": "search_patterns",
-      "description": "Search anti-patterns + success-patterns by keyword (e.g. 'duplicate', 'missing tests')",
+      "description": "Search anti-patterns and success-patterns by keyword. Use to find relevant patterns before submitting a PR.",
       "inputSchema": {
         "type": "object",
         "required": [
           "query"
-        ]
+        ],
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search keyword (e.g. \"duplicate PR\", \"missing tests\")"
+          },
+          "pattern_type": {
+            "type": "string",
+            "description": "\"all\" / \"anti-pattern\" / \"success-pattern\""
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Max results (default 10)"
+          }
+        }
       },
       "annotations": {
         "readOnlyHint": true,
@@ -197,9 +296,10 @@
     },
     {
       "name": "schema_info",
-      "description": "Return supported OKF schema versions + enum values",
+      "description": "Return supported OKF schema versions and enum values.",
       "inputSchema": {
-        "type": "object"
+        "type": "object",
+        "properties": {}
       },
       "annotations": {
         "readOnlyHint": true,
