@@ -525,16 +525,18 @@ def analyze_pr(
     # ---- 5.5. 无 policy 大仓 needs_preflight 检查 (克莱恩 2026-07-19 P1) ----
     has_policy = _check_has_policy(repo, repo_root)
     repo_context["has_policy"] = has_policy
-    # P0-A2 克莱恩 验收门槛: 无 policy 仓 默认 需 preflight.
-    # star_count 未知 (==0) 也触发, 因用户可能不想传 star 但仍需 preflight.
-    if not has_policy and (star_count >= 10000 or star_count == 0):
+
+    # Check if repo has a profile (even without policy)
+    from .parser import profile_get
+    has_profile = profile_get(repo_root, repo) is not None
+
+    # Only trigger preflight if no profile AND no policy
+    if not has_policy and not has_profile and (star_count >= 10000 or star_count == 0):
         # High merge rate repos: lower severity
-        if repo_merge_rate >= 0.8:
-            preflight_severity = "low"
-        elif repo_merge_rate >= 0.6:
+        if repo_merge_rate >= 0.6:
             preflight_severity = "low"
         else:
-            preflight_severity = "high"
+            preflight_severity = "medium"  # Reduced from "high" — profile exists
         signals_neg.append({
             "key": "needs_preflight",
             "description": (
@@ -622,10 +624,61 @@ def analyze_pr(
     else:
         tier = "medium_risk"
 
+    # ---- 9. 合并概率估算 + 优化路径 ----
+    merge_rate = repo_context.get("external_merge_rate_30", 0.0)
+    base_probability = merge_rate if merge_rate > 0 else 0.30  # 默认 30%
+
+    # 根据 signals 调整概率
+    prob_adjustment = 0.0
+    optimization_path = []
+
+    for neg in signals_neg:
+        sev = neg.get("severity", "medium")
+        if sev == "critical":
+            prob_adjustment -= 0.40
+            optimization_path.append({
+                "issue": neg["description"],
+                "impact": "阻断性问题，必须修复",
+                "priority": "P0",
+            })
+        elif sev == "high":
+            prob_adjustment -= 0.20
+            optimization_path.append({
+                "issue": neg["description"],
+                "impact": "高风险，建议修复",
+                "priority": "P1",
+            })
+        elif sev == "medium":
+            prob_adjustment -= 0.10
+            optimization_path.append({
+                "issue": neg["description"],
+                "impact": "中等风险，建议改进",
+                "priority": "P2",
+            })
+
+    for pos in signals_pos:
+        prob_adjustment += 0.05
+
+    merge_probability = max(0.01, min(0.99, base_probability + prob_adjustment))
+
+    # 对比同仓库已合并 PR
+    comparison = {}
+    if merge_rate > 0:
+        comparison["repo_merge_rate"] = merge_rate
+        comparison["your_estimate"] = f"{merge_probability:.0%}"
+        if merge_probability < merge_rate * 0.5:
+            optimization_path.append({
+                "issue": "合并概率低于仓库平均值的一半",
+                "impact": "需要显著改进才能达到仓库平均水平",
+                "priority": "P0",
+            })
+
     return {
         "repo": repo,
         "title": title,
         "tier": tier,
+        "merge_probability": round(merge_probability, 3),
+        "optimization_path": optimization_path,
         "signals": {
             "positive": signals_pos,
             "negative": signals_neg,
@@ -634,6 +687,7 @@ def analyze_pr(
         "checklist": checklist,
         "anti_patterns_hit": [m["key"] for m in anti_matches],
         "repo_context": repo_context,
+        "comparison": comparison,
     }
 
 

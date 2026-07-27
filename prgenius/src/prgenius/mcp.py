@@ -78,6 +78,18 @@ def _load_tools(repo_root: Path | None = None):
             analyze_pr("fix: timeout in connection pool", "encode/httpx", "Fixes #123")
             → {"tier": "medium_risk", "signals": {...}, "checklist": [...], "recommended_action": "..."}
         """
+        # Auto-read from profile if not provided
+        if star_count == 0 or repo_merge_rate == 0.0:
+            from .parser import profile_get
+            profile = profile_get(rr, repo)
+            if profile:
+                fm = profile.get("frontmatter", {})
+                gl = fm.get("agent_guidelines", {})
+                if star_count == 0:
+                    star_count = fm.get("star", 0)
+                if repo_merge_rate == 0.0:
+                    repo_merge_rate = gl.get("external_merge_rate_30", gl.get("external_merge_rate", 0.0))
+
         return _analyze_pr(
             title, description, repo, rr,
             body=body, labels=labels or [], author=author,
@@ -119,6 +131,18 @@ def _load_tools(repo_root: Path | None = None):
         Returns:
             dict with pass (bool), tier, signals, checklist, recommended_action
         """
+        # Auto-read from profile if not provided
+        if star_count == 0 or repo_merge_rate == 0.0:
+            from .parser import profile_get
+            profile = profile_get(rr, repo)
+            if profile:
+                fm = profile.get("frontmatter", {})
+                gl = fm.get("agent_guidelines", {})
+                if star_count == 0:
+                    star_count = fm.get("star", 0)
+                if repo_merge_rate == 0.0:
+                    repo_merge_rate = gl.get("external_merge_rate_30", gl.get("external_merge_rate", 0.0))
+
         result = _analyze_pr(
             title, description, repo, rr,
             body=body, labels=labels or [], author=author,

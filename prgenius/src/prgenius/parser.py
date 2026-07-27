@@ -165,13 +165,15 @@ def parse_frontmatter(text: str) -> dict:
 # ---------- higher-level iterators ----------
 
 def iter_profiles(repo_root: str | Path) -> Iterator[dict]:
-    """Yield each Repo Profile dict under `<repo_root>/<folder>/index.md`."""
+    """Yield each Repo Profile dict under `<repo_root>/<folder>/index.md` or `<repo_root>/profiles/<folder>/index.md`."""
     root = Path(repo_root)
     skip = {
         "anti-patterns", "misakanet-50", ".github", "docs",
         "scripts", "prgenius", "__pycache__", ".git",
-        "federation.yaml",
+        "federation.yaml", "profiles", "archive", "validate_checks",
     }
+
+    # Scan root-level profile dirs
     for sub in sorted(root.iterdir()):
         if not sub.is_dir() or sub.name in skip or sub.name.startswith("."):
             continue
@@ -182,6 +184,20 @@ def iter_profiles(repo_root: str | Path) -> Iterator[dict]:
         if loaded["frontmatter"].get("type") == "Repo Profile":
             loaded["folder"] = sub.name
             yield loaded
+
+    # Scan profiles/ subdirectory
+    profiles_dir = root / "profiles"
+    if profiles_dir.is_dir():
+        for sub in sorted(profiles_dir.iterdir()):
+            if not sub.is_dir() or sub.name.startswith("."):
+                continue
+            idx = sub / "index.md"
+            if not idx.exists():
+                continue
+            loaded = load(idx)
+            if loaded["frontmatter"].get("type") == "Repo Profile":
+                loaded["folder"] = sub.name
+                yield loaded
 
 
 def iter_case_studies(repo_root: str | Path) -> Iterator[dict]:
