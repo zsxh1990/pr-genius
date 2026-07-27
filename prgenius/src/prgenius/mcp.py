@@ -28,7 +28,7 @@ def _load_tools(repo_root: Path | None = None):
     from .evaluator import analyze_pr as _analyze_pr
     from .triage import triage_pr as _triage_pr
 
-    mcp = FastMCP(name="prgenius", instructions=(
+    mcp = FastMCP(name="pr-genius", instructions=(
         "PR Genius — Evidence-backed PR contribution advisor. "
         "analyze_pr 分析 PR 并给出改进建议, coach_pr 用于 Agent PR Dojo (pass/fail), "
         "triage_pr 做 policy-aware screening. 所有 tools 只读 — pr-genius 不写任何状态."
