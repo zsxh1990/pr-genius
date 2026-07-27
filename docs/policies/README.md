@@ -4,6 +4,7 @@ title: Maintainer Policy Schema (MAINTAINER_POLICY.md v0.1)
 description: Schema 定义 — 每个 docs/policies/<org>-<repo>.md 必须遵守的 frontmatter + body 结构. Month 2 克莱恩 2026-07-19 战略评估 P0 #1.
 version: "0.1.0"
 created: "2026-07-19"
+updated: "2026-07-27"
 conforms_to: OKF v0.1
 ---
 

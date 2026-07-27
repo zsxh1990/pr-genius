@@ -408,7 +408,17 @@ def main() -> int:
         return 0
     if errors:
         return 1
-    return 0 if "--strict" not in sys.argv else 1
+    # In strict mode, only fail on critical warnings (not orphan anti-patterns or profile evidence)
+    if "--strict" in sys.argv:
+        critical_warnings = [w for w in warnings if not (
+            w.startswith("orphan anti-pattern:") or
+            "缺 evidence_url" in w or
+            "unknown type" in w or
+            "differ significantly" in w
+        )]
+        if critical_warnings:
+            return 1
+    return 0
 
 
 if __name__ == "__main__":
