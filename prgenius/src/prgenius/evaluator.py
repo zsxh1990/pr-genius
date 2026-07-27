@@ -626,40 +626,55 @@ def analyze_pr(
 
     # ---- 9. 合并概率估算 + 优化路径 ----
     merge_rate = repo_context.get("external_merge_rate_30", 0.0)
-    base_probability = merge_rate if merge_rate > 0 else 0.30  # 默认 30%
 
-    # 根据 signals 调整概率
-    prob_adjustment = 0.0
+    # 直接用仓库合并率作为基础概率
+    # 这是最诚实的起点：你在这个仓库提 PR，平均能 merge 多少
+    if merge_rate > 0:
+        base_probability = merge_rate
+    else:
+        # 无数据时用 tier 估算
+        if tier == "low_risk":
+            base_probability = 0.60
+        elif tier == "medium_risk":
+            base_probability = 0.35
+        else:
+            base_probability = 0.15
+
+    # 只对真正区分性的信号做调整（避免和 tier 重复计算）
+    # 这些信号能改变合并概率，不只是风险标记
+    for neg in signals_neg:
+        key = neg.get("key", "")
+        if key == "merge_conflict":
+            base_probability *= 0.3  # 有冲突 → 大幅降低
+        elif key == "duplicate_pr_explicit_declare":
+            base_probability *= 0.1  # 明确重复 → 几乎不可能
+        elif key == "maintainer_internal_handling":
+            base_probability *= 0.05  # 维护者要内部处理 → 不可能
+
+    # 优化路径（所有 negative signals 都列出来供参考）
     optimization_path = []
-
     for neg in signals_neg:
         sev = neg.get("severity", "medium")
         if sev == "critical":
-            prob_adjustment -= 0.40
             optimization_path.append({
                 "issue": neg["description"],
                 "impact": "阻断性问题，必须修复",
                 "priority": "P0",
             })
         elif sev == "high":
-            prob_adjustment -= 0.20
             optimization_path.append({
                 "issue": neg["description"],
                 "impact": "高风险，建议修复",
                 "priority": "P1",
             })
         elif sev == "medium":
-            prob_adjustment -= 0.10
             optimization_path.append({
                 "issue": neg["description"],
                 "impact": "中等风险，建议改进",
                 "priority": "P2",
             })
 
-    for pos in signals_pos:
-        prob_adjustment += 0.05
-
-    merge_probability = max(0.01, min(0.99, base_probability + prob_adjustment))
+    merge_probability = max(0.05, min(0.95, base_probability))
 
     # 对比同仓库已合并 PR
     comparison = {}
