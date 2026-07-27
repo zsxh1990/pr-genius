@@ -12,12 +12,17 @@ conforms_to: OKF v0.1 (Sudhakaran88/okf-conformance) + agent_guidelines extensio
 
 # PR Genius — 知道什么 PR 会被关的顾问
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Glama](https://glama.ai/mcp/servers/zsxh1990/pr-genius/badges/score.svg)](https://glama.ai/mcp/servers/zsxh1990/pr-genius)
-[![OKF v0.1](https://img.shields.io/badge/OKF-v0.1-blue.svg)](https://github.com/Sudhakaran88/okf-conformance)
-[![Validate](https://img.shields.io/badge/validate-pass-brightgreen.svg)](./validate.py)
-[![Cases](https://img.shields.io/badge/cases-550+-blue.svg)](./README.md)
-[![Profiles](https://img.shields.io/badge/profiles-58-blue.svg)](./README.md)
+> **550+ 真实案例，帮你找到合并概率最大的提 PR 路径。**
+> Clone → paste MCP config → ask "Should I open this PR to encode/httpx?"
+
+<p align="center">
+  <a href="https://glama.ai/mcp/servers"><img src="https://glama.ai/mcp/servers/zsxh1990/pr-genius/badge" alt="MCP Server on Glama"/></a>
+  <a href="https://github.com/zsxh1990/pr-genius/blob/main/LICENSE"><img src="https://img.shields.io/github/license/zsxh1990/pr-genius?style=flat&color=blueviolet" alt="License"/></a>
+  <a href="https://github.com/zsxh1990/pr-genius"><img src="https://img.shields.io/badge/cases-550+-blue?label=Cases" alt="Cases"/></a>
+  <a href="https://github.com/zsxh1990/pr-genius"><img src="https://img.shields.io/badge/profiles-58-blue?label=Profiles" alt="Profiles"/></a>
+</p>
+
+---
 
 ## 🛡️ 为什么用 pr-genius
 
@@ -65,7 +70,9 @@ python3 -m prgenius triage "docs: typo" --repo org/repo --diff-stat "docs/faq.md
 }
 ```
 
-8 个 MCP tools：
+Docker: `docker run --rm -i ghcr.io/zsxh1990/pr-genius:1.3.0`
+
+### 8 个 MCP Tools
 
 | Tool | 用途 |
 |------|------|
@@ -87,14 +94,7 @@ python3 -m prgenius triage "docs: typo" --repo org/repo --diff-stat "docs/faq.md
 | Anti-patterns | 68 |
 | Success patterns | 40+ |
 | Coach accuracy | 87% (257 cases, LORO validated) |
-| 已覆盖仓库 | 35+ (含 react, kubernetes, rust, uv, pydantic 等) |
-
-## 🤖 Robots / Agents
-
-1. **[docs/index.md](docs/index.md)** — file map
-2. **[AGENT_GUIDELINES_SCHEMA.md](AGENT_GUIDELINES_SCHEMA.md)** — agent_guidelines schema
-3. **[ROUNDS_SCHEMA.md](ROUNDS_SCHEMA.md)** — rounds schema
-4. **[BLACKLIST.md](BLACKLIST.md)** — repos we don't track
+| 已覆盖仓库 | 35+ |
 
 ## 📖 Contributing
 
@@ -106,11 +106,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). AI-assisted PRs welcome.
 - 🔒 [Security Policy](SECURITY.md)
 - 🐛 [Issue Tracker](../../issues)
 - 📜 [Changelog](CHANGELOG.md)
-- 🚫 [Blacklist](BLACKLIST.md)
-
-## 🔗 Federation
-
-pr-genius is an external PR experience sub-library of [MisakaNet](https://github.com/Ikalus1988/MisakaNet). Declarative federation: no content migration, no tree modification.
 
 ## 引用
 
