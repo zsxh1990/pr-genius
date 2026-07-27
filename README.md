@@ -47,6 +47,7 @@ Repo layout invariants:
 [![Latest release](https://img.shields.io/github/v/release/zsxh1990/pr-genius)](https://github.com/zsxh1990/pr-genius/releases)
 [![prgenius](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/zsxh1990/pr-genius/main/docs/badges/prgenius_version.json&label=prgenius&query=$.message&colorB=blue)](./prgenius/README.md)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Glama](https://glama.ai/mcp/servers/zsxh1990/pr-genius/badges/score.svg)](https://glama.ai/mcp/servers/zsxh1990/pr-genius)
 
 ## 🚀 Quick Start
 
