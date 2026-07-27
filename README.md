@@ -8,6 +8,8 @@ updated: 2026-07-17
 author: zsxh1990
 conforms_to: OKF v0.1 (Sudhakaran88/okf-conformance) + agent_guidelines extension
 ---
+<!-- mcp-name: io.github.zsxh1990/pr-genius -->
+
 
 # PR Genius — 提交前改进顾问
 
