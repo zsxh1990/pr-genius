@@ -490,33 +490,49 @@ misakanet_lessons:
 
 ---
 
-## 📝 更新日志
+## 🛡️ Coach 护城河
 
-### 2026-07-02 v0.5.0（rounds schema 实证升级）
+pr-genius Coach 不是"会写 PR 的 AI"，而是**知道什么 PR 会被关的顾问**。
 
-- ✅ **action 枚举化**（9 值：`open`/`amend`/`bot_review`/`human_review`/`check_in`/`bump`/`close`/`merge`/`decision`）
-- ✅ **delta 对象化**：`{kind, value}` 三类 `code_change` / `no_code_change` / `unknown` 解决裸 null 歧义
-- ✅ **close_decision case-level**：5 status `pending`/`close`/`keep_open`/`merged`/`superseded`，不再野外字段
-- ✅ **2 真实 PR 样本迁移**（honcho #801 4 rounds + qdrant #143 3 rounds）
-- ✅ **validate.py Check 4** + `--strict` 模式（非迁移 = warning，--strict = error）
-- ✅ **6 case 未迁移**（maintainer gate "别全仓大迁移"，保持 warning 状态；— 2026-07-04 v0.6.2 后已迁 0 个剩余，待 v0.7.0 BC 门面后重启）
-- 触发：honcho + qdrant 2 真实样本证明 schema 缺陷不个别 → 升 v0.5.0
+| 能力 | 大模型直接提 PR | 爬虫 Agent | pr-genius Coach |
+|------|----------------|-----------|-----------------|
+| 知识来源 | 训练数据（截止日期） | 实时爬取 | 550+ 结构化 case studies |
+| 仓库理解 | 通用知识 | 表面数据（stars） | 17 字段 agent_guidelines |
+| 失败模式 | 不知道 | 不知道 | 68 个 anti-patterns |
+| 成功模式 | 不知道 | 不知道 | 40 个 success-patterns |
+| 维护者偏好 | 猜 | 看最近 PR | 结构化 policy 文件 |
+| 合并概率 | 无法估算 | 无法估算 | 基于仓库合并率 + 信号 |
 
-### 2026-07-02 v0.4.0（多轮交互日志 rounds）
+### 核心价值
 
-- ✅ **ROUNDS_SCHEMA.md** 新增（PR Case Study `rounds` 字段 schema）
-- ✅ **8/8 PR Case Study** 全加 `rounds` 字段（保留攻防过程，不只是结果）
-- 总 rounds 计数：uv 2 / honcho 3 / harbor 1 / fastmcp 2 / sourcebot 1 / future-agi 3 / qdrant 1 / E2B 2
-- 最终状态：1 merged (E2B #1413) / 1 closed-not-merged (uv #19685) / 6 open（含 1 stale）
-- 触发：5 条升级建议第 3 条「多轮交互逻辑」+ 2026-07-02 23:25 GMT+8 拍板启动
+**Coach 的护城河不是"会写 PR"，而是"知道什么 PR 会被关"。**
 
-### 2026-07-02 v0.3.0（MisakaNet 联邦声明）
+- MisakaNet 不接受 "破坏性 README 重写" — 只有被关过才知道
+- huggingface 要 "内部处理" tokenizers 版本 — 只有被关过才知道
+- encode/httpx 不接受外部贡献者 — 只有被拒过才知道
+- 大模型能写出语法正确的 PR，但不知道这些规则
 
-- ✅ 根 `index.md` 加 `federates_with` 字段 + 2 个查询路径
-- ✅ 8 仓 repo profile 加 `misakanet_queries` + `misakanet_lessons` + `federation_status`
-- ✅ README 加 "MisakaNet Federation" 节（声明原则 + 字段规范 + 受益表）
-- ✅ **不动 MisakaNet 主树 / 不迁移内容 / 不改目录结构**
-- 触发：2026-07-02 23:07 GMT+8 拍板（federation gate）
+### 教训来源
+
+| 教训 | 来源 | 锚点 PR |
+|------|------|---------|
+| 不接受破坏性 README 重写 | MisakaNet | #491, #496 |
+| 不接受生成器残留文件 | MisakaNet | #492, #494, #495 |
+| 维护者内部处理 | huggingface | #47434 |
+| 不接受外部贡献者 | encode/httpx | restricted interactions |
+| Glama badge 是必须的 | awesome-mcp-servers | #10393 |
+| Glama 构建环境特殊 | pr-genius | 7 次 build 失败 |
+
+### Coach 工具链
+
+| 工具 | 用途 | 护城河 |
+|------|------|--------|
+| `analyze_pr` | 合并概率 + 优化路径 | 基于仓库合并率的诚实估算 |
+| `coach_pr` | go/no-go 决策 | 综合 signals + tier |
+| `triage_pr` | 维护者政策检查 | 9 条规则，带锚点 PR |
+| `get_repo_profile` | 仓库画像 | 17 字段 agent_guidelines |
+| `search_patterns` | 反模式/成功模式 | 68+ 条目，持续更新 |
+| `get_case_study` | PR 案例详情 | round-by-round 交互记录 |
 
 ### 2026-07-02 v0.2.0（maintainer 拍板升级 → Agent-first）
 

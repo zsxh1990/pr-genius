@@ -13,7 +13,7 @@ status: auto-generated
 analyzed_at: 2026-07-17
 data_source: GitHub API + 30-PR sample
 agent_guidelines:
-  allow_unsolicited_pr: true
+  allow_unsolicited_pr: false
   require_signed_off: false
   require_cla: false
   require_issue_first: false
