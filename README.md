@@ -74,16 +74,23 @@ Docker: `docker run --rm -i ghcr.io/zsxh1990/pr-genius:1.3.0`
 
 ### 8 MCP Tools
 
-| Tool | Purpose |
-|------|---------|
-| `analyze_pr` | Merge probability + optimization path + 3-tier risk |
-| `coach_pr` | Go/no-go decision (pass/fail) |
-| `triage_pr` | Maintainer policy check (9 rules) |
-| `get_repo_profile` | Repo profile (17 fields) |
-| `list_open_prs` | Open PR list |
-| `get_case_study` | PR case study details |
-| `search_patterns` | Anti-pattern/success-pattern search |
-| `schema_info` | OKF schema versions |
+| Tool | Purpose | Required Args |
+|------|---------|---------------|
+| `analyze_pr` | Merge probability + optimization path + 3-tier risk | `title`, `repo` |
+| `coach_pr` | Go/no-go decision (pass/fail) | `title`, `repo` |
+| `triage_pr` | Maintainer policy check (9 rules) | `title`, `repo` |
+| `get_repo_profile` | Repo profile (17 fields) | `repo` |
+| `list_open_prs` | Open PR list | `repo` |
+| `get_case_study` | PR case study details | `case_id` |
+| `search_patterns` | Anti-pattern/success-pattern search | `query` |
+| `schema_info` | OKF schema versions | *(none)* |
+
+### Tool Parameter Notes
+
+- **`title`** (required for `analyze_pr`, `coach_pr`, `triage_pr`): The PR title, e.g. `"fix: timeout in connection pool"`
+- **`repo`** (required for most tools): Repository in `owner/name` format, e.g. `"encode/httpx"`
+- **`pr_description`** (optional): Additional PR body text for deeper analysis
+- **`query`** (required for `search_patterns`): Search keywords, e.g. `"connection timeout"`
 
 ## 📊 Data Scale
 
