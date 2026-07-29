@@ -6,15 +6,17 @@ pr_number: 282
 pr_url: https://github.com/punkpeye/fastmcp/pull/282
 repo: punkpeye/fastmcp
 author: zsxh1990
-status: open
+status: closed
 opened_at: 2026-06-28
-last_activity: 2026-06-28
+closed_at: 2026-07-24
+last_activity: 2026-07-24
 tags:
   - pr-case-study
-  - open
+  - closed
   - mcp
   - ollama
   - first-time-contributor
+  - lesson:split-pr
 related:
   - ../index.md
 verified_at: "2026-07-05T04:12:46Z"

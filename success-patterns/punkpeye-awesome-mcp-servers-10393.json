@@ -1,0 +1,46 @@
+{
+    "id": "punkpeye-awesome-mcp-servers-10393",
+    "repo": "punkpeye/awesome-mcp-servers",
+    "pr_number": 10393,
+    "title": "Add MisakaNet to Knowledge & Memory",
+    "author": "zsxh1990",
+    "state": "MERGED",
+    "merged": true,
+    "category": "merged_success",
+    "created_at": "2026-07-28T00:00:00Z",
+    "signals": {
+        "has_issue_link": false,
+        "has_description": true,
+        "has_test_mention": false,
+        "has_breaking_change": false,
+        "is_docs_only": true,
+        "is_bug_fix": false,
+        "is_feature": false,
+        "is_refactor": false,
+        "is_small_pr": true,
+        "is_large_pr": false,
+        "is_backport": false,
+        "is_dependency_update": false,
+        "is_bot_pr": false,
+        "has_reviews": false,
+        "has_comments": false,
+        "files_changed": 1,
+        "additions": 1,
+        "deletions": 0,
+        "review_count": 0,
+        "comment_count": 0,
+        "has_glama_badge": true,
+        "is_listing_pr": true
+    },
+    "metrics": {
+        "files_changed": 1,
+        "additions": 1,
+        "deletions": 0
+    },
+    "lessons": [
+        "Glama badge is required for awesome-mcp-servers entries",
+        "Entry format: [repo](url) [![badge](glama-url)] emoji - description",
+        "Category must match existing section (Knowledge & Memory)",
+        "No review needed — punkpeye merges listing PRs directly if badge is present"
+    ]
+}

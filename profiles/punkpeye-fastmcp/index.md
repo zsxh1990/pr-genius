@@ -4,11 +4,11 @@ title: punkpeye/fastmcp PR 模式分析
 description: FastMCP 仓 PR 模式 + zsxh1990 PR #282 进展
 repo: punkpeye/fastmcp
 url: https://github.com/punkpeye/fastmcp
-star: 3211
+star: 3239
 language: TypeScript
 zsxh_pr_count: 1
-status: in-flight
-analyzed_at: 2026-07-01
+status: closed-282
+analyzed_at: 2026-07-29
 tags:
   - repo-profile
   - mcp
@@ -44,10 +44,10 @@ evidence_urls:
   - https://api.github.com/repos/punkpeye/fastmcp
   - https://api.github.com/repos/punkpeye/fastmcp/releases/latest
   - https://api.github.com/repos/punkpeye/fastmcp/commits
-confidence: high  # autogen from GH API; bump to medium if human-curated
+confidence: high
 last_release: v4.4.0
 last_commit_sha: b170e78c
-stars: 3215
+stars: 3239
 agent_guidelines_evidence:
   allow_unsolicited_pr: https://github.com/punkpeye/fastmcp/blob/main/CONTRIBUTING.md
   require_issue_first: https://github.com/punkpeye/fastmcp/blob/main/CONTRIBUTING.md
@@ -77,39 +77,39 @@ agent_guidelines_evidence:
 
 ## 2. zsxh1990 PR 进展
 
-### 🟢 #282 [feat: add testWithOllama() for local LLM testing](https://github.com/punkpeye/fastmcp/pull/282)
+### ❌ #282 [feat: add testWithOllama() for local LLM testing](https://github.com/punkpeye/fastmcp/pull/282)
 
 | 维度 | 数据 |
 |---|---|
-| 创建 | 2026-06-28 08:13 UTC（3 天前） |
-| 状态 | open |
-| +271 / -16 / 1 file | 中等 |
-| 维护者回复 | 1 条（zsxh1990 自己） |
+| 创建 | 2026-06-28 |
+| 状态 | **CLOSED**（2026-07-24） |
+| 结果 | 未 merge |
 
-**关键反馈**：
-- 2026-06-28 09:39 zsxh1990 自报："Fixed the Prettier formatting issue. CI may need maintainer approval for first-time contributors."
-
-**特色**：这是 zsxh1990 **首次向 fastmcp 提 PR**，需要 maintainer 触发 CI。
+**教训**：PR 体量大（+271/-16），punkpeye 时间有限未 review。考虑拆分更小的 PR。
 
 ---
 
 ## 3. 提 PR 方向
 
-### 🥇 MCP server 模板
+### 🥇 Bug fix: npx fastmcp dev broken (#148)
 
-- 加 stdio MCP server 模板
-- 加 HTTP/SSE MCP server 模板
-- 加 OAuth-aware MCP server 模板
+- 已知 bug，用户报告，修复价值高
+- 低竞争（issue 已存在 1 年+）
 
-### 🥈 测试工具扩展
+### 🥈 测试覆盖扩展
 
-- #282 已加 Ollama 测试 → 后续：vLLM / TGI / LM Studio
-- 加 property-based testing（fast-check）
+- 加 ArkType/Valibot tool 参数测试（参考 #293 已 merge 的模式）
+- 加 OAuth proxy 测试（参考 #286）
 
-### 🥉 docs 改进
+### 🥉 Feature: configure default/optional tools (#192)
 
-- API reference 与 example 不齐
-- 加"first MCP server in 5 min" 教程
+- 允许 server 配置哪些 tools 默认启用
+- 功能性 feature，需要讨论设计
+
+### 其他方向
+
+- #160: custom HTTP routes alongside MCP endpoints
+- #42: OpenAPI to MCP converter (TypeScript 版本)
 
 ---
 
