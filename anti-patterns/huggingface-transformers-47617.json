@@ -1,0 +1,1 @@
+{"author":"Kash6","category":"closed_rejected","id":"huggingface-transformers-47617","merged":false,"pr_number":47617,"repo":"huggingface/transformers","signals":{"additions":172,"deletions":12,"files_changed":2,"has_issue_link":true,"is_bug_fix":true},"state":"CLOSED","title":"Fix CANINE dynamic sequence length export (torch.export/ONNX)"}

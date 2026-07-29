@@ -1,0 +1,1 @@
+{"author":"RahilOp","category":"closed_rejected","id":"langchain-ai-langchain-39116","merged":false,"pr_number":39116,"repo":"langchain-ai/langchain","signals":{"additions":41,"deletions":1,"files_changed":2,"has_issue_link":true,"is_bug_fix":true},"state":"CLOSED","title":"fix(openai): omit non-msg_ ids for synthetic AI messages in Responses API input"}

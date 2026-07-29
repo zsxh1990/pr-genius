@@ -1,0 +1,1 @@
+{"author":"eltypical","category":"closed_rejected","id":"kubernetes-kubernetes-140985","merged":false,"pr_number":140985,"repo":"kubernetes/kubernetes","signals":{"additions":84,"deletions":1,"files_changed":2,"has_issue_link":true,"is_bug_fix":true},"state":"CLOSED","title":"fix(nestedpendingoperations): Wait only blocks while pending operations exist"}

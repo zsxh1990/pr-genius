@@ -1,0 +1,1 @@
+{"author":"anupamme","category":"closed_rejected","id":"langchain-ai-langchain-39119","merged":false,"pr_number":39119,"repo":"langchain-ai/langchain","signals":{"additions":2,"deletions":0,"files_changed":1,"has_issue_link":true,"is_bug_fix":true},"state":"CLOSED","title":"fix: add path validation in check_diff.py..."}

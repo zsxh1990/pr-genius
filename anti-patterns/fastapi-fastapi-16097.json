@@ -1,0 +1,1 @@
+{"author":"Maruhsoft","category":"closed_rejected","id":"fastapi-fastapi-16097","merged":false,"pr_number":16097,"repo":"fastapi/fastapi","signals":{"additions":118,"deletions":0,"files_changed":3,"has_issue_link":false,"is_bug_fix":false},"state":"CLOSED","title":"tests: add utils tests + CI"}

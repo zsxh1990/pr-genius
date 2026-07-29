@@ -1,0 +1,22 @@
+---
+type: Anti-Pattern
+key: generic-no-test-coverage-large
+description: "Large repos require test coverage"
+symptom: "Maintainer comments: 'Please add tests'"
+trigger_keywords:
+  - "no tests"
+  - "missing tests"
+fix_action: "1) Add tests; 2) Verify coverage"
+severity: high
+---
+
+# No Test Coverage (Large Repos)
+
+## Pattern
+
+Large repos require test coverage for all changes.
+
+## How to Avoid
+
+1. Add tests
+2. Verify coverage

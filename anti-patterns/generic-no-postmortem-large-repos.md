@@ -1,0 +1,22 @@
+---
+type: Anti-Pattern
+key: generic-no-postmortem-large-repos
+description: "Large repos require postmortem"
+symptom: "Maintainer comments: 'Please build postmortem'"
+trigger_keywords:
+  - "no postmortem"
+  - "missing postmortem"
+fix_action: "1) Build postmortem; 2) Push fix"
+severity: high
+---
+
+# No Postmortem (Large Repos)
+
+## Pattern
+
+Large repos require postmortem for all changes.
+
+## How to Avoid
+
+1) Build postmortem
+2) Push fix
