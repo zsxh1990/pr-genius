@@ -1,0 +1,1 @@
+{"author":"waterWang","category":"closed_rejected","id":"hashicorp-terraform-38940","merged":false,"pr_number":38940,"repo":"hashicorp/terraform","signals":{"additions":42,"deletions":2,"files_changed":2,"has_issue_link":true,"is_bug_fix":true},"state":"CLOSED","title":"fix: prevent provider plugin shutdown hang by adding timeout to Kill()"}

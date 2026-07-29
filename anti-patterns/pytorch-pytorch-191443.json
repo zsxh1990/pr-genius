@@ -1,0 +1,1 @@
+{"author":"weifengpy","category":"closed_rejected","id":"pytorch-pytorch-191443","merged":false,"pr_number":191443,"repo":"pytorch/pytorch","signals":{"additions":985,"deletions":17,"files_changed":8,"has_issue_link":false,"is_bug_fix":false},"state":"CLOSED","title":"[RNG] Share CUDA normal sampling with tensor shard replay"}

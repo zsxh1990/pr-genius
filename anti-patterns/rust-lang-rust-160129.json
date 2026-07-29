@@ -1,0 +1,1 @@
+{"author":"MildyNora","category":"closed_rejected","id":"rust-lang-rust-160129","merged":false,"pr_number":160129,"repo":"rust-lang/rust","signals":{"additions":50,"deletions":0,"files_changed":2,"has_issue_link":true,"is_bug_fix":false},"state":"CLOSED","title":"Add regression test for imperfect derive diagnostic"}

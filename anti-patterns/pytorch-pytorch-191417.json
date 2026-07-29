@@ -1,0 +1,1 @@
+{"author":"ezyang","category":"closed_rejected","id":"pytorch-pytorch-191417","merged":false,"pr_number":191417,"repo":"pytorch/pytorch","signals":{"additions":4,"deletions":0,"files_changed":1,"has_issue_link":false,"is_bug_fix":false},"state":"CLOSED","title":"Add ghstack CI-status guidance to avoid truncated check-run reads"}

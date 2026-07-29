@@ -1,0 +1,1 @@
+{"author":"Cyrax321","category":"closed_rejected","id":"tensorflow-tensorflow-124233","merged":false,"pr_number":124233,"repo":"tensorflow/tensorflow","signals":{"additions":39,"deletions":4,"files_changed":2,"has_issue_link":true,"is_bug_fix":false},"state":"CLOSED","title":"Validate resource variable dtypes in training ops"}

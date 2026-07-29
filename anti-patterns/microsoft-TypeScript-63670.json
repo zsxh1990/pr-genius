@@ -1,0 +1,1 @@
+{"author":"thiagobarbosa","category":"closed_rejected","id":"microsoft-TypeScript-63670","merged":false,"pr_number":63670,"repo":"microsoft/TypeScript","signals":{"additions":130,"deletions":0,"files_changed":4,"has_issue_link":true,"is_bug_fix":true},"state":"CLOSED","title":"fix: Incorrect type resolution with nested constructors"}

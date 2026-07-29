@@ -1,0 +1,1 @@
+{"author":"anupamme","category":"closed_rejected","id":"tailwindlabs-tailwindcss-20359","merged":false,"pr_number":20359,"repo":"tailwindlabs/tailwindcss","signals":{"additions":135,"deletions":1,"files_changed":2,"has_issue_link":true,"is_bug_fix":true},"state":"CLOSED","title":"fix: upgrade next to 16.2.11 (CVE-2026-64642)"}

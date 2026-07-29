@@ -1,0 +1,1 @@
+{"author":"waterWang","category":"closed_rejected","id":"hashicorp-terraform-38943","merged":false,"pr_number":38943,"repo":"hashicorp/terraform","signals":{"additions":8,"deletions":5,"files_changed":2,"has_issue_link":true,"is_bug_fix":true},"state":"CLOSED","title":"fix: redact private key material from SSH error messages (#38577)"}

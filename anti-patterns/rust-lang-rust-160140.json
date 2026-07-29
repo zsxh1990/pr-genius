@@ -1,0 +1,1 @@
+{"author":"MildyNora","category":"closed_rejected","id":"rust-lang-rust-160140","merged":false,"pr_number":160140,"repo":"rust-lang/rust","signals":{"additions":143,"deletions":26,"files_changed":3,"has_issue_link":true,"is_bug_fix":false},"state":"CLOSED","title":"Improve trailing semicolon suggestion for closures"}

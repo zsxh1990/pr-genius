@@ -1,0 +1,1 @@
+{"author":"PannenetsF","category":"closed_rejected","id":"pytorch-pytorch-191479","merged":false,"pr_number":191479,"repo":"pytorch/pytorch","signals":{"additions":129,"deletions":9,"files_changed":2,"has_issue_link":true,"is_bug_fix":true},"state":"CLOSED","title":"[DTensor] Fix loss_parallel log_softmax backward for non-cross-entropy consumers"}

@@ -1,0 +1,1 @@
+{"author":"Vansh1897","category":"closed_rejected","id":"scikit-learn-scikit-learn-34589","merged":false,"pr_number":34589,"repo":"scikit-learn/scikit-learn","signals":{"additions":140,"deletions":27,"files_changed":2,"has_issue_link":false,"is_bug_fix":false},"state":"CLOSED","title":"Separate response and boundary styling in DecisionBoundaryDisplay"}

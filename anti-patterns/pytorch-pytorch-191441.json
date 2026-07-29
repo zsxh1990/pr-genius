@@ -1,0 +1,1 @@
+{"author":"malfet","category":"closed_rejected","id":"pytorch-pytorch-191441","merged":false,"pr_number":191441,"repo":"pytorch/pytorch","signals":{"additions":35,"deletions":40,"files_changed":3,"has_issue_link":true,"is_bug_fix":false},"state":"CLOSED","title":"Avoid closure cycles in `cuda/memory.py` + copypasta"}

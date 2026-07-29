@@ -1,0 +1,1 @@
+{"author":"trop[bot]","category":"closed_rejected","id":"electron-electron-52530","merged":false,"pr_number":52530,"repo":"electron/electron","signals":{"additions":747,"deletions":24,"files_changed":13,"has_issue_link":false,"is_bug_fix":false},"state":"CLOSED","title":"feat: Use system-themed titlebar icons for frameless windows with WCO on Linux"}

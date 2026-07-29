@@ -1,0 +1,1 @@
+{"author":"dependabot[bot]","category":"closed_rejected","id":"pandas-dev-pandas-66528","merged":false,"pr_number":66528,"repo":"pandas-dev/pandas","signals":{"additions":1,"deletions":1,"files_changed":1,"has_issue_link":true,"is_bug_fix":false},"state":"CLOSED","title":"Build(deps): Bump actions/stale from 10.4.0 to 11.0.0"}

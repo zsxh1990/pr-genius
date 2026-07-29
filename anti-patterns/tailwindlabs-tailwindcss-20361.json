@@ -1,0 +1,1 @@
+{"author":"anupamme","category":"closed_rejected","id":"tailwindlabs-tailwindcss-20361","merged":false,"pr_number":20361,"repo":"tailwindlabs/tailwindcss","signals":{"additions":39,"deletions":32,"files_changed":2,"has_issue_link":true,"is_bug_fix":true},"state":"CLOSED","title":"fix: upgrade postcss to 8.5.12 (CVE-2026-45623)"}

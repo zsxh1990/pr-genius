@@ -1,0 +1,1 @@
+{"author":"anupamme","category":"closed_rejected","id":"tailwindlabs-tailwindcss-20360","merged":false,"pr_number":20360,"repo":"tailwindlabs/tailwindcss","signals":{"additions":42,"deletions":35,"files_changed":2,"has_issue_link":true,"is_bug_fix":true},"state":"CLOSED","title":"fix: upgrade postcss to 8.5.18 (GHSA-r28c-9q8g-f849)"}

@@ -1,0 +1,1 @@
+{"author":"CYANO-01","category":"closed_rejected","id":"microsoft-TypeScript-63669","merged":false,"pr_number":63669,"repo":"microsoft/TypeScript","signals":{"additions":3,"deletions":4,"files_changed":1,"has_issue_link":true,"is_bug_fix":true},"state":"CLOSED","title":"docs(compiler): fix four JSDoc @param errors in checker.ts"}

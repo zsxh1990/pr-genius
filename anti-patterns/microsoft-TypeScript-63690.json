@@ -1,0 +1,1 @@
+{"author":"BhariGowda","category":"closed_rejected","id":"microsoft-TypeScript-63690","merged":false,"pr_number":63690,"repo":"microsoft/TypeScript","signals":{"additions":19450,"deletions":19382,"files_changed":7,"has_issue_link":true,"is_bug_fix":true},"state":"CLOSED","title":"fix(parser): disallow optional chaining on import.defer"}
