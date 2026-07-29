@@ -1,0 +1,22 @@
+---
+type: Anti-Pattern
+key: generic-removed-feature
+description: "PR using removed feature"
+symptom: "Maintainer comments: 'Removed feature'"
+trigger_keywords:
+  - "removed feature"
+  - "no longer available"
+fix_action: "1) Use alternative; 2) Update code"
+severity: high
+---
+
+# Removed Feature
+
+## Pattern
+
+PRs using removed feature get rejected.
+
+## How to Avoid
+
+1. Use alternative
+2. Update code

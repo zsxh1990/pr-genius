@@ -1,0 +1,22 @@
+---
+type: Anti-Pattern
+key: generic-low-value-contribution
+description: "Low value contribution"
+symptom: "Maintainer comments: 'Not enough value'"
+trigger_keywords:
+  - "low value"
+  - "trivial"
+fix_action: "1) Add more value; 2) Combine with other changes"
+severity: medium
+---
+
+# Low Value Contribution
+
+## Pattern
+
+Low value contributions get rejected.
+
+## How to Avoid
+
+1. Add more value
+2. Combine with other changes

@@ -1,0 +1,22 @@
+---
+type: Anti-Pattern
+key: generic-behavior-change
+description: "PR with behavior change"
+symptom: "Maintainer comments: 'Behavior change'"
+trigger_keywords:
+  - "behavior change"
+  - "semantic change"
+fix_action: "1) Document change; 2) Get approval"
+severity: high
+---
+
+# Behavior Change
+
+## Pattern
+
+PRs with behavior change get rejected.
+
+## How to Avoid
+
+1. Document change
+2. Get approval
