@@ -1,0 +1,1 @@
+{"author":"gaearon","category":"merged_success","id":"vercel-next.js-96321","merged":true,"pr_number":96321,"repo":"vercel/next.js","signals":{"additions":229,"deletions":229,"files_changed":3,"has_issue_link":true,"is_bug_fix":true,"is_docs_only":false},"state":"MERGED","title":"Bump @types/node to 20.17.7 to fix findSourceMap type"}

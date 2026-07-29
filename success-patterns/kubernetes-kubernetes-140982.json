@@ -1,0 +1,1 @@
+{"author":"soltysh","category":"merged_success","id":"kubernetes-kubernetes-140982","merged":true,"pr_number":140982,"repo":"kubernetes/kubernetes","signals":{"additions":12,"deletions":231,"files_changed":4,"has_issue_link":true,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"Drop mysql-galera and zookeeper statefulset e2e-s"}

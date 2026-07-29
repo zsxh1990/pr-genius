@@ -1,0 +1,1 @@
+{"author":"wangenau","category":"merged_success","id":"numpy-numpy-32137","merged":true,"pr_number":32137,"repo":"numpy/numpy","signals":{"additions":3,"deletions":11,"files_changed":1,"has_issue_link":false,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"MAINT: Remove unused Ruff per-file-ignores"}

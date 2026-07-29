@@ -1,0 +1,1 @@
+{"author":"jeremiedbb","category":"merged_success","id":"scikit-learn-scikit-learn-34584","merged":true,"pr_number":34584,"repo":"scikit-learn/scikit-learn","signals":{"additions":3,"deletions":3,"files_changed":2,"has_issue_link":false,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"CI exclude cython 3.2.9 as well"}

@@ -1,0 +1,1 @@
+{"author":"xigang","category":"merged_success","id":"kubernetes-kubernetes-140990","merged":true,"pr_number":140990,"repo":"kubernetes/kubernetes","signals":{"additions":53,"deletions":133,"files_changed":2,"has_issue_link":true,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"Revert \"client-go: prevent unbounded goroutine growth in EventBroadcaster\""}

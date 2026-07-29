@@ -1,0 +1,1 @@
+{"author":"IlyasMoutawwakil","category":"merged_success","id":"huggingface-transformers-47623","merged":true,"pr_number":47623,"repo":"huggingface/transformers","signals":{"additions":64,"deletions":30,"files_changed":5,"has_issue_link":true,"is_bug_fix":true,"is_docs_only":false},"state":"MERGED","title":"Fix fp8_linear compilability "}

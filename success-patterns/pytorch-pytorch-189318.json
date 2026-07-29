@@ -1,0 +1,1 @@
+{"author":"dependabot[bot]","category":"merged_success","id":"pytorch-pytorch-189318","merged":true,"pr_number":189318,"repo":"pytorch/pytorch","signals":{"additions":1,"deletions":1,"files_changed":1,"has_issue_link":true,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"Bump pip from 26.0.1 to 26.1.2 in /.ci/docker"}

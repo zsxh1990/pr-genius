@@ -1,0 +1,1 @@
+{"author":"ccurme","category":"merged_success","id":"langchain-ai-langchain-39115","merged":true,"pr_number":39115,"repo":"langchain-ai/langchain","signals":{"additions":38,"deletions":1,"files_changed":2,"has_issue_link":true,"is_bug_fix":true,"is_docs_only":false},"state":"MERGED","title":"fix(core): fall back to `LANGSMITH_API_KEY` for gateway"}

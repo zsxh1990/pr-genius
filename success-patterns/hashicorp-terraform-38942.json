@@ -1,0 +1,1 @@
+{"author":"hc-github-team-tf-core","category":"merged_success","id":"hashicorp-terraform-38942","merged":true,"pr_number":38942,"repo":"hashicorp/terraform","signals":{"additions":12,"deletions":2,"files_changed":2,"has_issue_link":false,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"Prepare for 1.17.0-alpha20260729 release"}

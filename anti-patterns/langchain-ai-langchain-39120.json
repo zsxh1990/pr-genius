@@ -1,0 +1,1 @@
+{"author":"Saniyagupte","category":"closed_rejected","id":"langchain-ai-langchain-39120","merged":false,"pr_number":39120,"repo":"langchain-ai/langchain","signals":{"additions":125,"deletions":23,"files_changed":4,"has_issue_link":true,"is_bug_fix":true},"state":"CLOSED","title":"fix(langchain): fix exception swallowing in model retry and fallback middleware"}

@@ -1,0 +1,1 @@
+{"author":"trop[bot]","category":"merged_success","id":"electron-electron-52516","merged":true,"pr_number":52516,"repo":"electron/electron","signals":{"additions":97,"deletions":4,"files_changed":2,"has_issue_link":true,"is_bug_fix":true,"is_docs_only":false},"state":"MERGED","title":"fix: refactor to avoid UAF in NodeStreamLoader"}

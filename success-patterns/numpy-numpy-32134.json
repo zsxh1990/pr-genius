@@ -1,0 +1,1 @@
+{"author":"ngoldbaum","category":"merged_success","id":"numpy-numpy-32134","merged":true,"pr_number":32134,"repo":"numpy/numpy","signals":{"additions":1,"deletions":1,"files_changed":1,"has_issue_link":false,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"BUG: return error in try_reduction if PyObject_Vectorcall fails"}

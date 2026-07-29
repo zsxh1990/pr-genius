@@ -1,0 +1,1 @@
+{"author":"SiddGud","category":"merged_success","id":"microsoft-TypeScript-63608","merged":true,"pr_number":63608,"repo":"microsoft/TypeScript","signals":{"additions":0,"deletions":2,"files_changed":2,"has_issue_link":true,"is_bug_fix":true,"is_docs_only":false},"state":"MERGED","title":"fix(lib): remove callable signature without new from Intl.PluralRules…"}

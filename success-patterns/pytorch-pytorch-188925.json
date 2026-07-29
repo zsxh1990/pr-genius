@@ -1,0 +1,1 @@
+{"author":"atalman","category":"merged_success","id":"pytorch-pytorch-188925","merged":true,"pr_number":188925,"repo":"pytorch/pytorch","signals":{"additions":25,"deletions":7,"files_changed":2,"has_issue_link":true,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"[release/2.13] Strip +PTX from CUDA arch list on release/RC builds (#188914)"}

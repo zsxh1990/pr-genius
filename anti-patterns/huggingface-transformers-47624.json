@@ -1,0 +1,1 @@
+{"author":"ShamSaleem","category":"closed_rejected","id":"huggingface-transformers-47624","merged":false,"pr_number":47624,"repo":"huggingface/transformers","signals":{"additions":14,"deletions":3,"files_changed":2,"has_issue_link":true,"is_bug_fix":true},"state":"CLOSED","title":"Fix Starcoder2 default bos/eos token ids falling outside the vocabulary"}

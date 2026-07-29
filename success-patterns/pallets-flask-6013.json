@@ -1,0 +1,1 @@
+{"author":"davidism","category":"merged_success","id":"pallets-flask-6013","merged":true,"pr_number":6013,"repo":"pallets/flask","signals":{"additions":6,"deletions":1,"files_changed":2,"has_issue_link":false,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"autoescape selection uses case-insensitive comparison"}

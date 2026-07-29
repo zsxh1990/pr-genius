@@ -1,0 +1,1 @@
+{"author":"charris","category":"merged_success","id":"numpy-numpy-32135","merged":true,"pr_number":32135,"repo":"numpy/numpy","signals":{"additions":4,"deletions":0,"files_changed":2,"has_issue_link":true,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"TYP: type capabilities max dimensions"}

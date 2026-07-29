@@ -1,0 +1,1 @@
+{"author":"tiangolo","category":"merged_success","id":"fastapi-fastapi-16104","merged":true,"pr_number":16104,"repo":"fastapi/fastapi","signals":{"additions":4,"deletions":0,"files_changed":1,"has_issue_link":false,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"📝 Document `FASTAPI_ENV` in FastAPI CLI guide"}

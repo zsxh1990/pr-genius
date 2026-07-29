@@ -1,0 +1,1 @@
+{"author":"jbrockmendel","category":"merged_success","id":"pandas-dev-pandas-66506","merged":true,"pr_number":66506,"repo":"pandas-dev/pandas","signals":{"additions":83,"deletions":11,"files_changed":3,"has_issue_link":false,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"BUG: read_pickle dropping Timestamp tz for pandas\u003c=1.2 pickles (GH#61792)"}

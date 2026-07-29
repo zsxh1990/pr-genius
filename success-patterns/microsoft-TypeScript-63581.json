@@ -1,0 +1,1 @@
+{"author":"core-dumpling","category":"merged_success","id":"microsoft-TypeScript-63581","merged":true,"pr_number":63581,"repo":"microsoft/TypeScript","signals":{"additions":14,"deletions":1,"files_changed":2,"has_issue_link":true,"is_bug_fix":true,"is_docs_only":false},"state":"MERGED","title":"Fix infinite loop"}

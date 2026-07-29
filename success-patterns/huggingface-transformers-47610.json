@@ -1,0 +1,1 @@
+{"author":"tarekziade","category":"merged_success","id":"huggingface-transformers-47610","merged":true,"pr_number":47610,"repo":"huggingface/transformers","signals":{"additions":211,"deletions":0,"files_changed":2,"has_issue_link":false,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"CI: Add serge review relay workflow and review rules"}

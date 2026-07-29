@@ -1,0 +1,1 @@
+{"author":"copybara-service[bot]","category":"merged_success","id":"tensorflow-tensorflow-124231","merged":true,"pr_number":124231,"repo":"tensorflow/tensorflow","signals":{"additions":114,"deletions":135,"files_changed":6,"has_issue_link":true,"is_bug_fix":true,"is_docs_only":false},"state":"MERGED","title":"PR #46297: [ROCm] Fix non hermetic rocm toolchain"}

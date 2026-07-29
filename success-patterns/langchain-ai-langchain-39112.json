@@ -1,0 +1,1 @@
+{"author":"mdrxy","category":"merged_success","id":"langchain-ai-langchain-39112","merged":true,"pr_number":39112,"repo":"langchain-ai/langchain","signals":{"additions":8,"deletions":3,"files_changed":1,"has_issue_link":false,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"ci: annotate uv bump workflow with PR links"}

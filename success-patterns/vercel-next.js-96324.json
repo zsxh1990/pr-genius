@@ -1,0 +1,1 @@
+{"author":"gaearon","category":"merged_success","id":"vercel-next.js-96324","merged":true,"pr_number":96324,"repo":"vercel/next.js","signals":{"additions":13,"deletions":1,"files_changed":2,"has_issue_link":false,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"Restore comments dropped during a refactor"}

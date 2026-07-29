@@ -1,0 +1,1 @@
+{"author":"RobinMalfait","category":"merged_success","id":"tailwindlabs-tailwindcss-20357","merged":true,"pr_number":20357,"repo":"tailwindlabs/tailwindcss","signals":{"additions":1,"deletions":1,"files_changed":1,"has_issue_link":true,"is_bug_fix":true,"is_docs_only":false},"state":"MERGED","title":"Fix failing upgrade test in CI"}

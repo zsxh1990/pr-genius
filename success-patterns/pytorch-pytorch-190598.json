@@ -1,0 +1,1 @@
+{"author":"dependabot[bot]","category":"merged_success","id":"pytorch-pytorch-190598","merged":true,"pr_number":190598,"repo":"pytorch/pytorch","signals":{"additions":1,"deletions":1,"files_changed":1,"has_issue_link":true,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"Bump pillow from 12.2.0 to 12.3.0 in /.ci/docker"}

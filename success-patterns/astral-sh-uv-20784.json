@@ -1,0 +1,1 @@
+{"author":"charliermarsh","category":"merged_success","id":"astral-sh-uv-20784","merged":true,"pr_number":20784,"repo":"astral-sh/uv","signals":{"additions":176,"deletions":40,"files_changed":4,"has_issue_link":true,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"Ignore malformed PEP 723 scripts during project checks"}

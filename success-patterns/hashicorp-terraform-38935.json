@@ -1,0 +1,1 @@
+{"author":"austinvalle","category":"merged_success","id":"hashicorp-terraform-38935","merged":true,"pr_number":38935,"repo":"hashicorp/terraform","signals":{"additions":372,"deletions":368,"files_changed":22,"has_issue_link":true,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"chore: Backport dependency bumps related to vuln scans in v1.15"}

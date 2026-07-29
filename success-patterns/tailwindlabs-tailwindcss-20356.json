@@ -1,0 +1,1 @@
+{"author":"RobinMalfait","category":"merged_success","id":"tailwindlabs-tailwindcss-20356","merged":true,"pr_number":20356,"repo":"tailwindlabs/tailwindcss","signals":{"additions":359,"deletions":65,"files_changed":4,"has_issue_link":true,"is_bug_fix":true,"is_docs_only":false},"state":"MERGED","title":"Fix changes to symlinked files outside of the project works"}

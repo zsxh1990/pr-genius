@@ -1,0 +1,1 @@
+{"author":"Darshan060224","category":"closed_rejected","id":"kubernetes-kubernetes-141031","merged":false,"pr_number":141031,"repo":"kubernetes/kubernetes","signals":{"additions":2,"deletions":4,"files_changed":1,"has_issue_link":true,"is_bug_fix":true},"state":"CLOSED","title":"Fix ineffective error assertions in devicemanager test"}

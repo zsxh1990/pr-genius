@@ -1,0 +1,1 @@
+{"author":"trop[bot]","category":"merged_success","id":"electron-electron-52526","merged":true,"pr_number":52526,"repo":"electron/electron","signals":{"additions":23,"deletions":4,"files_changed":5,"has_issue_link":false,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"ci: enable LSan on existing Linux ASan build job"}

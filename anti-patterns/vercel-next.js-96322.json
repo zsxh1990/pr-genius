@@ -1,0 +1,1 @@
+{"author":"wbinnssmith","category":"closed_rejected","id":"vercel-next.js-96322","merged":false,"pr_number":96322,"repo":"vercel/next.js","signals":{"additions":66,"deletions":121,"files_changed":14,"has_issue_link":true,"is_bug_fix":false},"state":"CLOSED","title":"Share one Ecmascript chunk version type between browser and node HMR"}

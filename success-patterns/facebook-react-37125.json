@@ -1,0 +1,1 @@
+{"author":"fallintoplace","category":"merged_success","id":"facebook-react-37125","merged":true,"pr_number":37125,"repo":"facebook/react","signals":{"additions":32,"deletions":2,"files_changed":2,"has_issue_link":true,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"[DOM] Blur focused descendants in Fragment refs"}

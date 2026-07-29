@@ -1,0 +1,1 @@
+{"author":"davidism","category":"merged_success","id":"pallets-flask-5962","merged":true,"pr_number":5962,"repo":"pallets/flask","signals":{"additions":0,"deletions":21,"files_changed":1,"has_issue_link":true,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"remove unicode host test"}

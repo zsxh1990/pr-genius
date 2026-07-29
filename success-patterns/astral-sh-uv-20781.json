@@ -1,0 +1,1 @@
+{"author":"zaniebot","category":"merged_success","id":"astral-sh-uv-20781","merged":true,"pr_number":20781,"repo":"astral-sh/uv","signals":{"additions":21,"deletions":0,"files_changed":1,"has_issue_link":false,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"Prune superseded workspace artifacts on macOS and Windows"}

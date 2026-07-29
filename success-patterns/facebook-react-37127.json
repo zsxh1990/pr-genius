@@ -1,0 +1,1 @@
+{"author":"gaearon","category":"merged_success","id":"facebook-react-37127","merged":true,"pr_number":37127,"repo":"facebook/react","signals":{"additions":143,"deletions":1,"files_changed":4,"has_issue_link":false,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"[Bench] Add JSON output and declare missing dependency"}

@@ -1,0 +1,1 @@
+{"author":"gaearon","category":"merged_success","id":"facebook-react-37135","merged":true,"pr_number":37135,"repo":"facebook/react","signals":{"additions":284,"deletions":0,"files_changed":3,"has_issue_link":true,"is_bug_fix":true,"is_docs_only":false},"state":"MERGED","title":"[Fiber] Fix hang when updating a dehydrated boundary inside a hidden tree"}

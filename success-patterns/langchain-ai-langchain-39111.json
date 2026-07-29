@@ -1,0 +1,1 @@
+{"author":"github-actions[bot]","category":"merged_success","id":"langchain-ai-langchain-39111","merged":true,"pr_number":39111,"repo":"langchain-ai/langchain","signals":{"additions":1,"deletions":1,"files_changed":1,"has_issue_link":false,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"chore(deps): bump uv to 0.12.0"}

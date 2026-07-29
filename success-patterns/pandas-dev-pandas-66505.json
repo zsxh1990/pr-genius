@@ -1,0 +1,1 @@
+{"author":"mroeschke","category":"merged_success","id":"pandas-dev-pandas-66505","merged":true,"pr_number":66505,"repo":"pandas-dev/pandas","signals":{"additions":21,"deletions":71,"files_changed":11,"has_issue_link":false,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"CLN: Remove typings/ directory"}

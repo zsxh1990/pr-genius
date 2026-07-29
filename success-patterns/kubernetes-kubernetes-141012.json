@@ -1,0 +1,1 @@
+{"author":"liggitt","category":"merged_success","id":"kubernetes-kubernetes-141012","merged":true,"pr_number":141012,"repo":"kubernetes/kubernetes","signals":{"additions":22,"deletions":11,"files_changed":3,"has_issue_link":false,"is_bug_fix":false,"is_docs_only":false},"state":"MERGED","title":"Sync supported service account token algorithms to test image"}

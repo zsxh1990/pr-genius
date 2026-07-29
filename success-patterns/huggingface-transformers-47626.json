@@ -1,0 +1,1 @@
+{"author":"stevhliu","category":"merged_success","id":"huggingface-transformers-47626","merged":true,"pr_number":47626,"repo":"huggingface/transformers","signals":{"additions":8,"deletions":3,"files_changed":2,"has_issue_link":false,"is_bug_fix":false,"is_docs_only":true},"state":"MERGED","title":"[docs] response_template when serving"}
