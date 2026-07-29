@@ -1,0 +1,1 @@
+{"author":"commitPirate","category":"closed_rejected","id":"future-agi-future-agi-1853","merged":false,"pr_number":1853,"repo":"future-agi/future-agi","signals":{"additions":619,"deletions":147,"files_changed":11,"has_issue_link":true,"is_bug_fix":true},"state":"CLOSED","title":"fix(oss): replace broken login/signup/reset flows with CLI setup modal [TH-7158]"}

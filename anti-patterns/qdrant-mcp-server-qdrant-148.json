@@ -1,0 +1,1 @@
+{"author":"dependabot[bot]","category":"closed_rejected","id":"qdrant-mcp-server-qdrant-148","merged":false,"pr_number":148,"repo":"qdrant/mcp-server-qdrant","signals":{"additions":1,"deletions":1,"files_changed":1,"has_issue_link":true,"is_bug_fix":false},"state":"CLOSED","title":"Bump fastmcp from 2.7.0 to 3.4.2"}

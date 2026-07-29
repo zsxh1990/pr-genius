@@ -1,0 +1,1 @@
+{"author":"dependabot[bot]","category":"closed_rejected","id":"qdrant-mcp-server-qdrant-160","merged":false,"pr_number":160,"repo":"qdrant/mcp-server-qdrant","signals":{"additions":3,"deletions":3,"files_changed":3,"has_issue_link":true,"is_bug_fix":false},"state":"CLOSED","title":"Bump actions/setup-python from 6.2.0 to 6.3.0 in the version-updates group"}

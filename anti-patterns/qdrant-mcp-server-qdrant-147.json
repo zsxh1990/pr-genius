@@ -1,0 +1,1 @@
+{"author":"dependabot[bot]","category":"closed_rejected","id":"qdrant-mcp-server-qdrant-147","merged":false,"pr_number":147,"repo":"qdrant/mcp-server-qdrant","signals":{"additions":3,"deletions":3,"files_changed":3,"has_issue_link":true,"is_bug_fix":false},"state":"CLOSED","title":"Bump actions/checkout from 6.0.2 to 6.0.3 in the version-updates group"}
