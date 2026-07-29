@@ -16,10 +16,11 @@ mcp-name: io.github.zsxh1990/pr-genius
 > Clone → paste MCP config → ask "Should I open this PR to encode/httpx?"
 
 <p align="center">
-  <a href="https://glama.ai/mcp/servers"><img src="https://glama.ai/mcp/servers/zsxh1990/pr-genius/badge" alt="MCP Server on Glama"/></a>
+  <a href="https://github.com/zsxh1990/pr-genius/actions/workflows/validate.yml"><img src="https://github.com/zsxh1990/pr-genius/actions/workflows/validate.yml/badge.svg" alt="CI"/></a>
+  <a href="https://pypi.org/project/prgenius-core/"><img src="https://img.shields.io/pypi/v/prgenius-core" alt="PyPI"/></a>
+  <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/python-3.10+-blue" alt="Python"/></a>
   <a href="https://github.com/zsxh1990/pr-genius/blob/main/LICENSE"><img src="https://img.shields.io/github/license/zsxh1990/pr-genius?style=flat&color=blueviolet" alt="License"/></a>
-  <a href="https://github.com/zsxh1990/pr-genius"><img src="https://img.shields.io/badge/cases-550+-blue?label=Cases" alt="Cases"/></a>
-  <a href="https://github.com/zsxh1990/pr-genius"><img src="https://img.shields.io/badge/profiles-58-blue?label=Profiles" alt="Profiles"/></a>
+  <a href="https://glama.ai/mcp/servers/zsxh1990/pr-genius"><img src="https://glama.ai/mcp/servers/zsxh1990/pr-genius/badges/score.svg" alt="Glama score"/></a>
 </p>
 
 ---
