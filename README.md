@@ -15,13 +15,11 @@ mcp-name: io.github.zsxh1990/pr-genius
 > **550+ real case studies. Find the path to maximum merge probability.**
 > Clone → paste MCP config → ask "Should I open this PR to encode/httpx?"
 
-<p align="center">
-  <a href="https://github.com/zsxh1990/pr-genius/actions/workflows/validate.yml"><img src="https://github.com/zsxh1990/pr-genius/actions/workflows/validate.yml/badge.svg" alt="CI"/></a>
-  <a href="https://pypi.org/project/prgenius-core/"><img src="https://img.shields.io/pypi/v/prgenius-core" alt="PyPI"/></a>
-  <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/python-3.10+-blue" alt="Python"/></a>
-  <a href="https://github.com/zsxh1990/pr-genius/blob/main/LICENSE"><img src="https://img.shields.io/github/license/zsxh1990/pr-genius?style=flat&color=blueviolet" alt="License"/></a>
-  <a href="https://glama.ai/mcp/servers/zsxh1990/pr-genius"><img src="https://glama.ai/mcp/servers/zsxh1990/pr-genius/badges/score.svg" alt="Glama score"/></a>
-</p>
+[![CI](https://github.com/zsxh1990/pr-genius/actions/workflows/validate.yml/badge.svg)](https://github.com/zsxh1990/pr-genius/actions/workflows/validate.yml)
+[![PyPI](https://img.shields.io/pypi/v/prgenius-core)](https://pypi.org/project/prgenius-core/)
+[![Python](https://img.shields.io/badge/python-3.10+-blue)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/github/license/zsxh1990/pr-genius?style=flat&color=blueviolet)](https://github.com/zsxh1990/pr-genius/blob/main/LICENSE)
+[![Glama score](https://glama.ai/mcp/servers/zsxh1990/pr-genius/badges/score.svg)](https://glama.ai/mcp/servers/zsxh1990/pr-genius)
 
 ---
 
