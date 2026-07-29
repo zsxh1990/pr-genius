@@ -1,0 +1,1 @@
+{"author":"Avi-Robusta","category":"merged_success","id":"HolmesGPT-holmesgpt-2322","merged":true,"pr_number":2322,"repo":"HolmesGPT/holmesgpt","signals":{"additions":54,"deletions":1,"files_changed":2,"has_issue_link":true,"is_bug_fix":false,"is_feature":false},"state":"MERGED","title":"ROB-714 - Restore HTTP proxy support for the Supabase DAL connection"}

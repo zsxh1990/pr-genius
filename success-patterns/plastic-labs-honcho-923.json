@@ -1,0 +1,1 @@
+{"author":"ajspig","category":"merged_success","id":"plastic-labs-honcho-923","merged":true,"pr_number":923,"repo":"plastic-labs/honcho","signals":{"additions":39,"deletions":25,"files_changed":3,"has_issue_link":false,"is_bug_fix":false,"is_feature":true},"state":"MERGED","title":"feat: support OAuth for MCP clients."}

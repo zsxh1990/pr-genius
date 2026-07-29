@@ -1,0 +1,1 @@
+{"author":"naomi-robusta","category":"closed_rejected","id":"HolmesGPT-holmesgpt-2313","merged":false,"pr_number":2313,"repo":"HolmesGPT/holmesgpt","signals":{"additions":682,"deletions":10,"files_changed":9,"has_issue_link":true,"is_bug_fix":false},"state":"CLOSED","title":"Add deterministic tool-result eviction (context editing)"}

@@ -1,0 +1,1 @@
+{"author":"moshemorad","category":"merged_success","id":"HolmesGPT-holmesgpt-2324","merged":true,"pr_number":2324,"repo":"HolmesGPT/holmesgpt","signals":{"additions":262,"deletions":228,"files_changed":16,"has_issue_link":true,"is_bug_fix":false,"is_feature":false},"state":"MERGED","title":"Rebuild Go binaries with Go 1.26.5 and add kubectl build"}

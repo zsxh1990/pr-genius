@@ -1,0 +1,1 @@
+{"author":"ashvinctrl","category":"merged_success","id":"soxoj-maigret-2908","merged":true,"pr_number":2908,"repo":"soxoj/maigret","signals":{"additions":188,"deletions":1,"files_changed":3,"has_issue_link":true,"is_bug_fix":true,"is_small_pr":false},"state":"MERGED","title":"fix: block SSRF / local-file reads via report image URLs during PDF generation"}

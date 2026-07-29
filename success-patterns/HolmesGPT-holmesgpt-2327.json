@@ -1,0 +1,1 @@
+{"author":"Sheeproid","category":"merged_success","id":"HolmesGPT-holmesgpt-2327","merged":true,"pr_number":2327,"repo":"HolmesGPT/holmesgpt","signals":{"additions":343,"deletions":14,"files_changed":9,"has_issue_link":true,"is_bug_fix":false,"is_feature":false},"state":"MERGED","title":"ROB-759 Make conversation-worker slot exhaustion visible; bound reconnect sign-in"}
