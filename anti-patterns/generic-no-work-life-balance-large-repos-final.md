@@ -1,0 +1,27 @@
+---
+type: Anti-Pattern
+key: generic-no-work-life-balance-large-repos-final
+description: "Large repos require work-life balance"
+symptom: "Maintainer comments: 'Please build work-life balance'"
+trigger_keywords:
+  - "no work-life balance"
+  - "missing work-life balance"
+fix_action: "1) Build work-life balance; 2) Push fix"
+created: 2026-07-29
+severity: high
+---
+
+# No Work-Life Balance (Large Repos)
+
+## Pattern
+
+Large repos require work-life balance for all changes.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
+
+## How to Avoid
+
+1) Build work-life balance
+2) Push fix
