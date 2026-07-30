@@ -7,7 +7,7 @@ symptom: "Maintainer comments: 'Please add alerting'"
 trigger_keywords:
   - "no alerting"
   - "missing alerting"
-fix_action: "1) Add alerting; 2) Push fix"
+fix_action: "1) PRs that add monitoring/alerting capabilities are welcome in medium repos. Alerting helps detect issues before they become critical.; 2) Push fix"
 created: 2026-07-29
 severity: high
 ---
@@ -24,5 +24,5 @@ Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 
-1. Add alerting
+1. PRs that add monitoring/alerting capabilities are welcome in medium repos. Alerting helps detect issues before they become critical.
 2. Push fix

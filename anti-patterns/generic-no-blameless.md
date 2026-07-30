@@ -14,4 +14,4 @@ Be blameless
 
 ## Applicability
 
-All repository sizes (large, medium, small) (1k-10k stars)
+All repository sizes, especially medium repos (1k-10k stars) where alerting infrastructure is often missing.

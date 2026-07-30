@@ -10,8 +10,8 @@ created: 2026-07-29
 
 ## Pattern
 
-Add alerting
+PRs that add monitoring/alerting capabilities are welcome in medium repos. Alerting helps detect issues before they become critical.
 
 ## Applicability
 
-All repository sizes (large, medium, small) (1k-10k stars)
+All repository sizes, especially medium repos (1k-10k stars) where alerting infrastructure is often missing.
