@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [anti-pattern, real-case]
 key: upstream-already-implementing
 symptom: |
   "官方自己做了" / "upstream implemented" / "we're already working on this"
@@ -13,6 +14,7 @@ trigger_keywords:
 fix_action: 这不是失败，而是验证！下一步：(1) 等待维护者实现完成 (2) 协助测试或文档 (3) 寻找下一个类似需求
 source_pr: astral-sh/uv#19685
 prevention: "提 PR 前检查：(1) 维护者的 roadmap/TODO (2) 最近 30 天的 commit 历史 (3) 是否有相关 Issue 被 assign 给维护者。如果发现维护者已在做，不要沮丧——你的方向是对的！"
+created: 2026-07-08
 learned_at: 2026-07-08
 value: HIGH  # 最有价值的反模式，证明方向正确
 ---
@@ -38,3 +40,7 @@ value: HIGH  # 最有价值的反模式，证明方向正确
 - [ ] 最近 30 天的 commit 历史是否涉及这个功能？
 - [ ] 是否有相关 Issue 被 assign 给维护者？
 - [ ] 有没有先在 Issue 中问"是否已经在做"？
+
+## Applicability
+
+All repository sizes.

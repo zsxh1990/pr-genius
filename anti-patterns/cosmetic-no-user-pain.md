@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [anti-pattern, real-case]
 key: cosmetic-no-user-pain
 symptom: |
   "we're not seeing any major user pain this PR would solve" / "I don't think this is useful"
@@ -13,6 +14,7 @@ trigger_keywords:
 fix_action: 在提 PR 前，先在 Issue 或 Discussion 中确认维护者认为这是一个需要解决的问题。不要自己假设"这个改进有价值"。
 source_pr: vitejs/vite#22701
 prevention: "提 PR 前问自己：(1) 有没有用户报过这个痛点？(2) 维护者是否认可这是个问题？(3) 改动是否只影响输出格式而非功能？"
+created: 2026-07-08
 learned_at: 2026-07-08
 ---
 
@@ -42,3 +44,7 @@ learned_at: 2026-07-08
 - [ ] 维护者是否认可这是个问题？
 - [ ] 改动是否只影响输出格式？
 - [ ] 如果去掉这个改动，用户会受影响吗？
+
+## Applicability
+
+All repository sizes.

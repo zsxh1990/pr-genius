@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [anti-pattern, real-case]
 key: honcho-default-db-module-trap
 symptom: "FastAPI route 默认参数 `db: AsyncSession = db` 在生产环境报 'coroutine expected' 或 'no attribute execute'"
 root_cause: "Python import 命名冲突：`from src import db` 的 `db` 是 module 本身（无 AsyncSession），而 `from src.dependencies import db` 的 `db` 才是 Depends(get_db) 代理。两者同名，default value 默默选中前者"
@@ -14,6 +15,7 @@ fix_action: "1) 用 basedpyright 验证 default value 类型匹配；2) 改用 A
 fix_command: "basedpyright src/routers/<file>.py && git diff"
 source_pr: plastic-labs/honcho#801
 prevention: "提 PR 前必用 basedpyright 验证；或参考仓里其他 router 的同模式（搜 'AsyncSession = Depends' 看正确写法）"
+created: 2026-07-02
 learned_at: 2026-07-02
 ---
 
@@ -102,3 +104,7 @@ grep -rn "AsyncSession = Depends" src/
 ## 相关反模式
 
 - 无（FastAPI + SQLAlchemy 2.0 特定）
+
+## Applicability
+
+All repository sizes.

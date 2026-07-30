@@ -18,6 +18,7 @@ metrics:
   commits: 1
   review_comments: 0
   time_to_merge: "1天"
+created: 2026-07-09
 learned_at: 2026-07-09
 ---
 
@@ -53,3 +54,7 @@ learned_at: 2026-07-09
 2. **定位根因**: 找到问题的根本原因
 3. **最小化修改**: 只修改必要的代码
 4. **单一 commit**: 保持 PR 干净
+
+## Applicability
+
+All repository sizes.

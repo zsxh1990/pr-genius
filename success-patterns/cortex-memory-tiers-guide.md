@@ -18,6 +18,7 @@ metrics:
   commits: 1
   review_comments: 0
   time_to_merge: "1天"
+created: 2026-07-09
 learned_at: 2026-07-09
 ---
 
@@ -61,3 +62,7 @@ Procedural knowledge and workflows.
 2. **详细解释**: 解释架构的核心概念
 3. **添加示例**: 提供实际的使用示例
 4. **单一 commit**: 保持 PR 干净
+
+## Applicability
+
+All repository sizes.

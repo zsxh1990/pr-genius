@@ -18,6 +18,7 @@ metrics:
   commits: 1
   review_comments: 0
   time_to_merge: "1天"
+created: 2026-07-09
 learned_at: 2026-07-09
 ---
 
@@ -61,3 +62,7 @@ class ClaimGuardMiddleware:
 2. **完整实现**: 实现核心功能 + 文档 + 示例
 3. **单一 commit**: 保持 PR 干净
 4. **解决实际问题**: 解决用户在 Issue 中提出的具体问题
+
+## Applicability
+
+All repository sizes.

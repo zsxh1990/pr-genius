@@ -18,6 +18,7 @@ evidence:
   - "zizmor #2110: ai-policy-violation 标签，维护者直接关闭"
   - "zizmor #2104: ai-policy-violation 标签，同一作者重复提交"
   - "yt-dlp #17181: ai-policy-violation 标签"
+created: 2026-07-09
 learned_at: 2026-07-09
 ---
 
@@ -43,3 +44,7 @@ learned_at: 2026-07-09
 2. 如果使用 AI 辅助，在 PR 描述中明确披露
 3. 确保自己理解并能解释每一行代码
 4. 避免直接粘贴 AI 生成的代码而不修改
+
+## Applicability
+
+All repository sizes.

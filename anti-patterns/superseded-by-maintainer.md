@@ -13,6 +13,7 @@ source_pr: "openclaw/openclaw#104514"
 severity: low
 evidence:
   - "openclaw #104514: 被 #104516 取代，maintainer 自己实现了相同功能"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -32,3 +33,7 @@ learned_at: 2026-07-15
 1. 认领 Issue 后尽快提交
 2. 提 PR 前在 Issue 中确认是否有人在做
 3. 保持与 maintainer 的沟通
+
+## Applicability
+
+All repository sizes.

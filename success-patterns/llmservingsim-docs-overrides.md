@@ -18,6 +18,7 @@ metrics:
   commits: 1
   review_comments: 0
   time_to_merge: "1天"
+created: 2026-07-09
 learned_at: 2026-07-09
 ---
 
@@ -54,3 +55,7 @@ Validation gates: `enable_sub_batch_interleaving: true` requires `enable_attn_of
 2. **详细说明**: 解释配置的语义和规则
 3. **添加示例**: 提供实际可用的示例配置
 4. **单一 commit**: 保持 PR 干净
+
+## Applicability
+
+All repository sizes.

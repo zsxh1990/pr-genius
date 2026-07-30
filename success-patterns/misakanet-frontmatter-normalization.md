@@ -19,6 +19,7 @@ metrics:
   commits: 1
   review_comments: 0
   time_to_merge: "1天"
+created: 2026-07-09
 learned_at: 2026-07-09
 ---
 
@@ -60,3 +61,7 @@ domain: ...
 2. **保持一致性**: 所有文件使用相同的格式
 3. **保留内容**: 只修改格式，不改变内容
 4. **单一 commit**: 保持 PR 干净
+
+## Applicability
+
+All repository sizes.

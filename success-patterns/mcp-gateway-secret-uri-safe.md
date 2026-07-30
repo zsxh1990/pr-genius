@@ -19,6 +19,7 @@ metrics:
   commits: 8
   review_comments: 1
   time_to_merge: "1天"
+created: 2026-07-09
 learned_at: 2026-07-09
 ---
 
@@ -61,3 +62,7 @@ EXCLUDE_CHARACTERS = "/@\"'+:?#&!=% "
 2. **完整修复**: 修复所有相关文件
 3. **测试覆盖**: 验证修复正确性
 4. **CI 修复迭代**: 不要放弃，持续修复直到 CI 通过
+
+## Applicability
+
+All repository sizes.

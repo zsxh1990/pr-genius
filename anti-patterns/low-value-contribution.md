@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [anti-pattern, real-case]
 key: low-value-contribution
 symptom: |
   "we don't accept this type of contribution" / "not aligned with project goals" / "closing"
@@ -13,6 +14,7 @@ trigger_keywords:
 fix_action: 在提 PR 前，先研究：(1) 项目的 CONTRIBUTING.md (2) 维护者最近合并的 PR 类型 (3) 项目的核心价值和优先级
 source_pr: patchwork-dev/patchwork-os#870
 prevention: "提 PR 前检查：(1) 项目的 CONTRIBUTING.md 是否接受这类贡献？(2) 维护者最近合并了什么类型的 PR？(3) 项目的核心价值是什么？"
+created: 2026-07-08
 learned_at: 2026-07-08
 ---
 
@@ -42,3 +44,7 @@ learned_at: 2026-07-08
 - [ ] 维护者最近合并了什么类型的 PR？
 - [ ] 项目的核心价值和优先级是什么？
 - [ ] 贡献是否符合项目当前的关注点？
+
+## Applicability
+
+All repository sizes.

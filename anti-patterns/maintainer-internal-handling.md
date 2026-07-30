@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [anti-pattern, real-case]
 key: maintainer-internal-handling
 symptom: |
   维护者明确表示会内部处理某个 issue，外部 PR 被关闭。Close 关键词: "handle internally", "we'll handle this", "keep in sync", "internal process"
@@ -22,6 +23,7 @@ prevention: |
   - 检查 issue 评论，看维护者是否已表态
   - 如果是依赖/安全相关，先问 "Is this open for external contribution?"
   - 不要假设 open issue = 接受外部 PR
+created: 2026-07-22
 learned_at: 2026-07-22
 ---
 
@@ -60,3 +62,7 @@ learned_at: 2026-07-22
 2. **检查评论**: 看维护者是否已表态
 3. **识别模式**: 依赖/安全/核心配置类 issue 通常不接受外部 PR
 4. **转向其他**: 如果维护者说内部处理，找其他 issue
+
+## Applicability
+
+All repository sizes.

@@ -14,6 +14,7 @@ severity: high
 evidence:
   - "zizmor #2110 和 #2104: 同一作者 Thinking-builder 提交了两个几乎相同的 PR"
   - "两个 PR 都被标记 ai-policy-violation 并关闭"
+created: 2026-07-09
 learned_at: 2026-07-09
 ---
 
@@ -38,3 +39,7 @@ learned_at: 2026-07-09
 1. 在原有 PR 上继续修改，而不是创建新 PR
 2. 如果确实需要重新提交（如分支问题），先关闭旧 PR 并说明原因
 3. 等待维护者响应，不要急于重复提交
+
+## Applicability
+
+All repository sizes.

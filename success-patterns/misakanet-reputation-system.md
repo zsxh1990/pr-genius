@@ -20,6 +20,7 @@ metrics:
   commits: 1
   review_comments: 0
   time_to_merge: "1天"
+created: 2026-07-09
 learned_at: 2026-07-09
 ---
 
@@ -65,3 +66,7 @@ def time_decay(created, now=None):
 2. **完整交付**: 代码 + 测试 + 文档
 3. **单一 commit**: 保持 PR 干净
 4. **测试覆盖**: 覆盖边界情况
+
+## Applicability
+
+All repository sizes.

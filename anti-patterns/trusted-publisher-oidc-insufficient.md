@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [anti-pattern, real-case]
 key: trusted-publisher-oidc-insufficient
 symptom: "Trusted publishing exchange failure: OpenID Connect token retrieval failed: GitHub: missing or insufficient OIDC token permissions, the ACTIONS_ID_TOKEN_REQUEST_TOKEN environment variable was unset"
 root_cause: "publish-pypi.yml workflow 缺 `permissions: id-token: write`，GH 默认不发 OIDC token 给 workflow。PyPI Trusted Publisher 走 OIDC，token 拿不到 = publish 步骤立即 exit"
@@ -13,6 +14,7 @@ fix_action: "在 publish-pypi.yml 的 jobs 级别加 `permissions: id-token: wri
 fix_command: "git apply <<'PATCH'\n--- a/.github/workflows/publish-pypi.yml\n+++ b/.github/workflows/publish-pypi.yml\n@@ -9,6 +9,8 @@ jobs:\n     runs-on: ubuntu-latest\n     environment: pypi\n+    permissions:\n+      id-token: write\n \n     steps:\nPATCH\ngit add .github/workflows/publish-pypi.yml\ngit commit -m \"fix(workflow): add OIDC write permission for PyPI Trusted Publisher\"\ngit push origin main\n# POST /actions/workflows/<wf_id>/dispatches then poll"
 source_pr: zsxh1990/pr-genius#commit a0c33f9
 prevention: "写任何用 Trusted Publisher 的 workflow（PyPI / npm provenance / GH Pages OIDC 等）前，permissions 块必须先写。GitHub UI 在 'Add workflow' 模板里默认不带，需要手动加"
+created: 2026-07-09
 learned_at: 2026-07-09
 ---
 
@@ -108,3 +110,7 @@ jobs:
 
 - 无（OIDC 是 workflow YAML 独立 concern，跟 PR review 反模式正交）
 - 但跟 "提 PR 前必读 issue" 类反模式**同精神**：写之前先查 Trusted Publisher 文档，不是写完再调试
+
+## Applicability
+
+All repository sizes.

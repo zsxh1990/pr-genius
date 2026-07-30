@@ -19,6 +19,7 @@ metrics:
   commits: 1
   review_comments: 0
   time_to_merge: "1天"
+created: 2026-07-09
 learned_at: 2026-07-09
 ---
 
@@ -52,3 +53,7 @@ learned_at: 2026-07-09
 2. **脱敏泛化**: 移除项目特定信息，保留通用解决方案
 3. **完整结构**: Problem → Root Cause → Solution → Verification
 4. **可复用**: 解决方案可以应用到其他项目
+
+## Applicability
+
+All repository sizes.

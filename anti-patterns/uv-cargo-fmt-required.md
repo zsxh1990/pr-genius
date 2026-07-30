@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [anti-pattern, real-case]
 key: uv-cargo-fmt-required
 symptom: "CI 报错 Lint check failed / maintainer 评论 cargo fmt / rustfmt"
 root_cause: "uv 仓使用 cargo fmt (rustfmt nightly) 作为唯一格式规范，外部工具（dprint、prettier、rustfmt stable）输出与 nightly 不一致"
@@ -13,6 +14,7 @@ fix_action: "在本地用与 CI 一致的 toolchain 跑 cargo fmt --all，提交
 fix_command: "cargo +nightly fmt --all && git add -u && git commit --amend --no-edit"
 source_pr: astral-sh/uv#19685
 prevention: "提 PR 前先 cargo +nightly fmt --all；如果本地无 nightly toolchain，先 rustup toolchain install nightly"
+created: 2026-07-02
 learned_at: 2026-07-02
 ---
 
@@ -56,3 +58,7 @@ cargo +nightly fmt --all -- --check  # 只检查，不改
 ## 相关反模式
 
 - 无（uv 特定）
+
+## Applicability
+
+All repository sizes.

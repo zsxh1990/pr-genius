@@ -19,6 +19,7 @@ metrics:
   commits: 3
   review_comments: 0
   time_to_merge: "1天"
+created: 2026-07-09
 learned_at: 2026-07-09
 ---
 
@@ -54,3 +55,7 @@ learned_at: 2026-07-09
 2. **完整文档**: 设置指南 + 配置示例 + README 链接
 3. **测试覆盖**: 覆盖主要功能
 4. **单一 commit**: 保持 PR 干净
+
+## Applicability
+
+All repository sizes.

@@ -13,6 +13,7 @@ source_pr: "openclaw/openclaw#74185"
 severity: high
 evidence:
   - "openclaw #74185: 7,115 commits behind main，冲突无法解决"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -30,3 +31,7 @@ PR 长时间未更新，距离 main 分支太远，导致冲突无法解决。
 2. 保持 PR 小而聚焦，减少冲突面
 3. 如果冲突太多，关闭 PR 重新提交
 4. 使用 `gh pr sync` 保持 fork 更新
+
+## Applicability
+
+All repository sizes.

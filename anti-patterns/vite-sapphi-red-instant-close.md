@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [anti-pattern, real-case]
 key: vite-sapphi-red-instant-close
 symptom: "PR 被 maintainer 在 <2h 内 close + 拒绝语不含具体技术理由"
 root_cause: "Vite 仓 sapphi-red（核心 maintainer）主观拒绝通用基础设施类 PR（如 ERROR_HANDLER / 内部重构），无修复路径"
@@ -12,6 +13,7 @@ fix_action: "立即停止此方向；本仓永久归档，不再尝试"
 fix_command: "gh pr close <PR_NUM> --comment 'Closing per maintainer feedback. Archiving this direction.'"
 source_pr: vitejs/vite#22710
 prevention: "提 PR 前查 BLACKLIST.md（Vite 已在永久拉黑清单）"
+created: 2026-07-02
 learned_at: 2026-07-02
 ---
 
@@ -62,3 +64,7 @@ Vite 在 `BLACKLIST.md` 永久拉黑清单中。任何 Agent 在自动扫描时�
 ## 相关反模式
 
 - [e2b-feature-not-adding-canned-response](./e2b-feature-not-adding-canned-response.md) — 类似拒绝模式但礼貌且可换方向
+
+## Applicability
+
+All repository sizes.

@@ -12,6 +12,7 @@ severity: high
 evidence:
   - "langchain #38736: body 提到 fix 但没有关联 Issue 编号，被标记 missing-issue-link"
   - "langchain #38735: 同上"
+created: 2026-07-09
 learned_at: 2026-07-09
 ---
 
@@ -36,3 +37,7 @@ PR body 中使用了 "fix"、"issue"、"closes" 等词汇，但没有使用标�
 1. 使用标准语法：`Fixes #123`、`Closes #456`、`Resolves #789`
 2. 如果没有对应 Issue，先创建 Issue
 3. 确保 Issue 编号是目标仓库的有效编号
+
+## Applicability
+
+All repository sizes.
