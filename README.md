@@ -12,7 +12,7 @@ mcp-name: io.github.zsxh1990/pr-genius
 
 # PR Genius — The advisor that knows which PRs get closed
 
-> **2320+ patterns across 62 repos. Find the path to maximum merge probability.**
+> **2000+ patterns across 61 repos. Find the path to maximum merge probability.**
 > Clone → paste MCP config → ask "Should I open this PR to encode/httpx?"
 
 [![CI](https://github.com/zsxh1990/pr-genius/actions/workflows/validate.yml/badge.svg)](https://github.com/zsxh1990/pr-genius/actions/workflows/validate.yml)
@@ -29,10 +29,10 @@ mcp-name: io.github.zsxh1990/pr-genius
 
 | Capability | LLM directly | Scraper Agent | PR Genius |
 |------------|-------------|---------------|-----------|
-| Knowledge source | Training data | Real-time scrape | 2320+ structured patterns |
+| Knowledge source | Training data | Real-time scrape | 2000+ structured patterns |
 | Repo understanding | Generic | Surface data (stars) | 17-field agent_guidelines |
-| Failure patterns | Unknown | Unknown | 1185 anti-patterns |
-| Success patterns | Unknown | Unknown | 1135 success patterns |
+| Failure patterns | Unknown | Unknown | 939 anti-patterns |
+| Success patterns | Unknown | Unknown | 1061 success patterns |
 | Maintainer preference | Guess | Recent PRs | Structured policy files |
 | Merge probability | Can't estimate | Can't estimate | Based on repo merge rate + signals |
 
@@ -96,22 +96,22 @@ Docker: `docker run --rm -i ghcr.io/zsxh1990/pr-genius:1.3.0`
 
 | Dimension | Count |
 |-----------|-------|
-| Repo profiles | 62 |
+| Repo profiles | 61 |
 | Case studies | 50+ |
-| Success patterns | 1135 |
-| Anti-patterns | 1185 |
-| Total patterns | 2320 |
-| Quality pass rate | 94.5% (1757/1859 markdown ≥75分) |
+| Success patterns | 1061 |
+| Anti-patterns | 939 |
+| Total patterns | 2000 |
 | Covered repos | 35+ (react, kubernetes, rust, uv, pydantic, etc.) |
 
 ### 按仓库规模分布
 
-| 规模 | Success | Anti | 总计 | 质量通过率 |
-|------|---------|------|------|-----------|
-| 大仓 (>10k ⭐) | 208 | 219 | 427 | 99.5% |
-| 中仓 (1k-10k ⭐) | 204 | 206 | 410 | 100% |
-| 小仓 (<1k ⭐) | 204 | 206 | 410 | 100% |
-| 通用 | 203 | 414 | 617 | 100% |
+| 规模 | Success | Anti | 总计 |
+|------|---------|------|------|
+| 大仓 (>10k ⭐) | 208 | 205 | 413 |
+| 中仓 (1k-10k ⭐) | 169 | 88 | 257 |
+| 小仓 (<1k ⭐) | 169 | 88 | 257 |
+| 通用 | 203 | 414 | 617 |
+| 其他 (特定仓库) | 312 | 260 | 572 |
 
 ## 🤖 Robots / Agents
 
