@@ -7,6 +7,7 @@ trigger_keywords:
   - "gold plating"
   - "unnecessary features"
 fix_action: "1) Remove extras; 2) Focus on requirements"
+created: 2026-07-29
 severity: low
 ---
 
@@ -15,6 +16,10 @@ severity: low
 ## Pattern
 
 PRs with gold plating get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

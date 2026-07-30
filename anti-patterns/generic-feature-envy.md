@@ -7,6 +7,7 @@ trigger_keywords:
   - "feature envy"
   - "method belongs elsewhere"
 fix_action: "1) Move method; 2) Apply SRP"
+created: 2026-07-29
 severity: low
 ---
 
@@ -15,6 +16,10 @@ severity: low
 ## Pattern
 
 PRs with feature envy get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

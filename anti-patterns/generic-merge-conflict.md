@@ -7,6 +7,7 @@ trigger_keywords:
   - "merge conflict"
   - "conflicts"
 fix_action: "1) Resolve conflicts; 2) Rebase on main"
+created: 2026-07-29
 severity: high
 ---
 
@@ -15,6 +16,10 @@ severity: high
 ## Pattern
 
 PRs with merge conflict get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

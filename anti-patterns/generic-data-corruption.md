@@ -7,6 +7,7 @@ trigger_keywords:
   - "data corruption"
   - "data loss"
 fix_action: "1) Add checksums; 2) Add validation"
+created: 2026-07-29
 severity: critical
 ---
 
@@ -15,6 +16,10 @@ severity: critical
 ## Pattern
 
 PRs导致数据损坏 get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

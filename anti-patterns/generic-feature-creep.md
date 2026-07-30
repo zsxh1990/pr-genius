@@ -7,6 +7,7 @@ trigger_keywords:
   - "feature creep"
   - "too many features"
 fix_action: "1) Limit features; 2) Separate PRs"
+created: 2026-07-29
 severity: medium
 ---
 
@@ -15,6 +16,10 @@ severity: medium
 ## Pattern
 
 PRs with feature creep get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

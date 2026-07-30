@@ -7,6 +7,7 @@ trigger_keywords:
   - "alternative classes"
   - "duplicate interfaces"
 fix_action: "1) Unify classes; 2) Use common interface"
+created: 2026-07-29
 severity: low
 ---
 
@@ -15,6 +16,10 @@ severity: low
 ## Pattern
 
 PRs with alternative classes get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

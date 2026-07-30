@@ -7,6 +7,7 @@ trigger_keywords:
   - "data access"
   - "data permissions"
 fix_action: "1) Control access; 2) Add permissions"
+created: 2026-07-29
 severity: high
 ---
 
@@ -15,6 +16,10 @@ severity: high
 ## Pattern
 
 PRs忽视数据访问 get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

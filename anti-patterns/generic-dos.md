@@ -7,6 +7,7 @@ trigger_keywords:
   - "dos"
   - "denial of service"
 fix_action: "1) Add rate limiting; 2) Add timeout"
+created: 2026-07-29
 severity: high
 ---
 
@@ -15,6 +16,10 @@ severity: high
 ## Pattern
 
 PRs introducing DoS vulnerability get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

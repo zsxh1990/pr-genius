@@ -7,6 +7,7 @@ trigger_keywords:
   - "data nullable"
   - "null values"
 fix_action: "1) Handle nulls; 2) Add validation"
+created: 2026-07-29
 severity: medium
 ---
 
@@ -15,6 +16,10 @@ severity: medium
 ## Pattern
 
 PRs忽视数据可空性 get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

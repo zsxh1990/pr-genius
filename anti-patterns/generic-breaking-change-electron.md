@@ -7,6 +7,7 @@ trigger_keywords:
   - "breaking change"
   - "discussion"
 fix_action: "1) Open discussion; 2) Get approval; 3) Then submit PR"
+created: 2026-07-29
 severity: high
 ---
 
@@ -15,6 +16,10 @@ severity: high
 ## Pattern
 
 Electron requires discussion for breaking changes.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

@@ -7,6 +7,7 @@ trigger_keywords:
   - "password leak"
   - "credential leak"
 fix_action: "1) Rotate passwords; 2) Use secure storage"
+created: 2026-07-29
 severity: critical
 ---
 
@@ -15,6 +16,10 @@ severity: critical
 ## Pattern
 
 PRs introducing password leak vulnerability get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

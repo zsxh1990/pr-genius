@@ -7,6 +7,7 @@ trigger_keywords:
   - "force push"
   - "force-with-lease"
 fix_action: "1) Use merge commit; 2) Rebase locally"
+created: 2026-07-29
 severity: high
 ---
 
@@ -15,6 +16,10 @@ severity: high
 ## Pattern
 
 Force push to shared branch gets rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

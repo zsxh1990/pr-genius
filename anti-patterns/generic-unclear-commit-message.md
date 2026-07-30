@@ -7,6 +7,7 @@ trigger_keywords:
   - "unclear message"
   - "bad message"
 fix_action: "1) Improve message; 2) Use conventional format"
+created: 2026-07-29
 severity: low
 ---
 
@@ -15,6 +16,10 @@ severity: low
 ## Pattern
 
 PRs with unclear commit message get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

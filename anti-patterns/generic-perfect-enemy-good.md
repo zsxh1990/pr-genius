@@ -7,6 +7,7 @@ trigger_keywords:
   - "perfect is the enemy of good"
   - "good enough"
 fix_action: "1) Ship iteratively; 2) Improve later"
+created: 2026-07-29
 severity: low
 ---
 
@@ -15,6 +16,10 @@ severity: low
 ## Pattern
 
 PRs追求完美阻碍进展 get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

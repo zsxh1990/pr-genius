@@ -8,6 +8,7 @@ trigger_keywords:
   - "md5"
   - "sha1"
 fix_action: "1) Use strong crypto; 2) Update algorithms"
+created: 2026-07-29
 severity: high
 ---
 
@@ -16,6 +17,10 @@ severity: high
 ## Pattern
 
 PRs using weak cryptography get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

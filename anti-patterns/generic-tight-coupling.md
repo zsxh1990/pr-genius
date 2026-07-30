@@ -7,6 +7,7 @@ trigger_keywords:
   - "tight coupling"
   - "high coupling"
 fix_action: "1) Use interfaces; 2) Apply DIP"
+created: 2026-07-29
 severity: medium
 ---
 
@@ -15,6 +16,10 @@ severity: medium
 ## Pattern
 
 PRs with tight coupling get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

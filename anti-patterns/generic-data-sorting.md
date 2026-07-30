@@ -7,6 +7,7 @@ trigger_keywords:
   - "data sorting"
   - "order by"
 fix_action: "1) Validate sorting; 2) Add tests"
+created: 2026-07-29
 severity: low
 ---
 
@@ -15,6 +16,10 @@ severity: low
 ## Pattern
 
 PRs忽视数据排序 get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

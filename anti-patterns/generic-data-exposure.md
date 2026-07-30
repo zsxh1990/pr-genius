@@ -7,6 +7,7 @@ trigger_keywords:
   - "data exposure"
   - "sensitive data"
 fix_action: "1) Remove exposure; 2) Add encryption"
+created: 2026-07-29
 severity: critical
 ---
 
@@ -15,6 +16,10 @@ severity: critical
 ## Pattern
 
 PRs exposing sensitive data get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

@@ -7,6 +7,7 @@ trigger_keywords:
   - "bike shedding"
   - "trivial discussion"
 fix_action: "1) Focus on important issues; 2) Move on"
+created: 2026-07-29
 severity: low
 ---
 
@@ -15,6 +16,10 @@ severity: low
 ## Pattern
 
 PRs with bike shedding get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

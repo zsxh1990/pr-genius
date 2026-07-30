@@ -1,0 +1,696 @@
+{
+  "okfVersion": "0.1",
+  "bundle": "pr-genius",
+  "strict": false,
+  "conformant": false,
+  "summary": {
+    "concepts": 275,
+    "links": 319,
+    "errors": 50,
+    "warnings": 86
+  },
+  "errors": [
+    {
+      "rule": "M4",
+      "file": "anti-patterns/e2b-feature-not-adding-canned-response.md",
+      "message": "internal link to a missing file: ../e2b-dev-e2b/pr-1413-rich-to-ansi.md"
+    },
+    {
+      "rule": "M4",
+      "file": "anti-patterns/honcho-default-db-module-trap.md",
+      "message": "internal link to a missing file: ../plastic-labs-honcho/pr-801-queue-purge.md"
+    },
+    {
+      "rule": "M4",
+      "file": "anti-patterns/uv-cargo-fmt-required.md",
+      "message": "internal link to a missing file: ../astral-sh-uv/pr-19685-sarif-audit.md"
+    },
+    {
+      "rule": "M4",
+      "file": "index.md",
+      "message": "internal link to a missing file: ../openclaw-pr-knowledge/README.md"
+    },
+    {
+      "rule": "M4",
+      "file": "index.md",
+      "message": "internal link to a missing file: ../openclaw-pr-knowledge/README.md"
+    },
+    {
+      "rule": "M4",
+      "file": "index.md",
+      "message": "internal link to a missing file: ../uv-pr-knowledge/report.md"
+    },
+    {
+      "rule": "M4",
+      "file": "index.md",
+      "message": "internal link to a missing file: ../../MEMORY.md"
+    },
+    {
+      "rule": "M4",
+      "file": "misakanet-50/lesson-11-mcp-typo-pool-x3-merged.md",
+      "message": "internal link to a missing file: ../agentic-community-mcp-gateway-registry/pr-1382-auth-md-mermaid-token.md"
+    },
+    {
+      "rule": "M4",
+      "file": "misakanet-50/lesson-11-mcp-typo-pool-x3-merged.md",
+      "message": "internal link to a missing file: ../agentic-community-mcp-gateway-registry/pr-1383-egress-vault-mermaid-placeholders.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/NousResearch-hermes-agent/index.md",
+      "message": "internal link to a missing file: ../../hermes-agent-pr-knowledge/report.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/NousResearch-hermes-agent/index.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/NousResearch-hermes-agent/index.md",
+      "message": "internal link to a missing file: ../BLACKLIST.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/NousResearch-hermes-agent/index.md",
+      "message": "internal link to a missing file: ../../openclaw-pr-knowledge/README.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/NousResearch-hermes-agent/index.md",
+      "message": "internal link to a missing file: ../../../MEMORY.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/astral-sh-uv/index.md",
+      "message": "internal link to a missing file: ../../uv-pr-knowledge/README.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/astral-sh-uv/index.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/astral-sh-uv/index.md",
+      "message": "internal link to a missing file: ../../openclaw-pr-knowledge/README.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/astral-sh-uv/pr-19685-sarif-audit.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/astral-sh-uv/pr-19685-sarif-audit.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/astral-sh-uv/pr-19685-sarif-audit.md",
+      "message": "internal link to a missing file: ../../uv-pr-knowledge/report.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/e2b-dev-e2b/index.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/e2b-dev-e2b/index.md",
+      "message": "internal link to a missing file: ../../../MEMORY.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/e2b-dev-e2b/pr-1413-rich-to-ansi.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/e2b-dev-e2b/pr-1413-rich-to-ansi.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/e2b-dev-e2b/pr-1413-rich-to-ansi.md",
+      "message": "internal link to a missing file: ../../../MEMORY.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/future-agi-future-agi/index.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/future-agi-future-agi/pr-778-span-list-without-project-id.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/future-agi-future-agi/pr-778-span-list-without-project-id.md",
+      "message": "internal link to a missing file: ../../../MEMORY.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/harbor-framework-harbor/index.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/harbor-framework-harbor/pr-2121-optional-deps.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/harbor-framework-harbor/pr-2121-optional-deps.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/mongodb-js-mongodb-mcp-server/index.md",
+      "message": "internal link to a missing file: ../BLACKLIST.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/mongodb-js-mongodb-mcp-server/index.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/mongodb-js-mongodb-mcp-server/pr-1309-azure-readme-version.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/mongodb-js-mongodb-mcp-server/pr-1309-azure-readme-version.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/mongodb-js-mongodb-mcp-server/pr-1309-azure-readme-version.md",
+      "message": "internal link to a missing file: ../BLACKLIST.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/plastic-labs-honcho/index.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/plastic-labs-honcho/pr-801-queue-purge.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/plastic-labs-honcho/pr-801-queue-purge.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/plastic-labs-honcho/pr-801-queue-purge.md",
+      "message": "internal link to a missing file: ../../../MEMORY.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/plastic-labs-honcho/pr-801-queue-purge.md",
+      "message": "internal link to a missing file: ../../../MEMORY.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/punkpeye-fastmcp/index.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/punkpeye-fastmcp/pr-282-test-with-ollama.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/punkpeye-fastmcp/pr-282-test-with-ollama.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/qdrant-mcp-server-qdrant/index.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/qdrant-mcp-server-qdrant/pr-143-ollama-provider.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/qdrant-mcp-server-qdrant/pr-143-ollama-provider.md",
+      "message": "internal link to a missing file: ../../../MEMORY.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/sourcebot-dev-sourcebot/index.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/sourcebot-dev-sourcebot/pr-1383-ctags-failure-detection.md",
+      "message": "internal link to a missing file: ../index.md"
+    },
+    {
+      "rule": "M4",
+      "file": "profiles/sourcebot-dev-sourcebot/pr-1383-ctags-failure-detection.md",
+      "message": "internal link to a missing file: ../../../MEMORY.md"
+    }
+  ],
+  "warnings": [
+    {
+      "rule": "S2",
+      "file": "docs/index.md",
+      "message": "index does not link sibling concept `contribai_replay_report.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "docs/index.md",
+      "message": "index does not link sibling concept `tool_call_prediction_table.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "index.md",
+      "message": "index does not link sibling concept `README.zh-CN.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/NousResearch-hermes-agent/index.md",
+      "message": "index does not link sibling concept `pr-42920-cron-risk.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/NousResearch-hermes-agent/index.md",
+      "message": "index does not link sibling concept `pr-52917-comp-desktop-platform-windows.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/NousResearch-hermes-agent/index.md",
+      "message": "index does not link sibling concept `pr-64639-duplicate-pr.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/actions-checkout/index.md",
+      "message": "index does not link sibling concept `pr-2518-auto.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/astral-sh-ty/index.md",
+      "message": "index does not link sibling concept `pr-999993-breaking-change-demo.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/astral-sh-ty/index.md",
+      "message": "index does not link sibling concept `pr-NEEDS-RFC-demo.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/chroma-core-chroma/index.md",
+      "message": "index does not link sibling concept `pr-7453-auto.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/docker-compose/index.md",
+      "message": "index does not link sibling concept `pr-13931-auto.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/encode-httpx/index.md",
+      "message": "index does not link sibling concept `pr-3773-auto.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/fastapi-fastapi/index.md",
+      "message": "index does not link sibling concept `pr-16004-auto.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/grafana-grafana/index.md",
+      "message": "index does not link sibling concept `pr-128722-auto.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/huggingface-transformers/index.md",
+      "message": "index does not link sibling concept `pr-47361-auto.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/kubernetes-kubernetes/index.md",
+      "message": "index does not link sibling concept `pr-999995-first-time-large-repo-demo.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/langchain-ai-langgraph/index.md",
+      "message": "index does not link sibling concept `pr-8362-auto.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/marimo-team-marimo/index.md",
+      "message": "index does not link sibling concept `pr-999992-auto-generated-trash-demo.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/marimo-team-marimo/index.md",
+      "message": "index does not link sibling concept `pr-MISSING-TESTS-demo.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/microsoft-TypeScript/index.md",
+      "message": "index does not link sibling concept `pr-63615-auto.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/microsoft-markitdown/index.md",
+      "message": "index does not link sibling concept `pr-2204-auto.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/pallets-flask/index.md",
+      "message": "index does not link sibling concept `pr-999990-duplicate-demo.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/pallets-flask/index.md",
+      "message": "index does not link sibling concept `pr-999994-design-philosophy-demo.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/pallets-flask/index.md",
+      "message": "index does not link sibling concept `pr-NOT-A-REAL-BUG-demo.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/pandas-dev-pandas/index.md",
+      "message": "index does not link sibling concept `pr-999991-archived-repo-demo.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/pandas-dev-pandas/index.md",
+      "message": "index does not link sibling concept `pr-OUT-OF-SCOPE-demo.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/pydantic-pydantic/index.md",
+      "message": "index does not link sibling concept `pr-13441-auto.md`"
+    },
+    {
+      "rule": "S2",
+      "file": "profiles/tailwindlabs-tailwindcss/index.md",
+      "message": "index does not link sibling concept `pr-20335-auto.md`"
+    },
+    {
+      "rule": "S4",
+      "file": "anti-patterns/maintainer-internal-handling.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "docs/contribai_replay_report.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "docs/demo/archived-repo-detection-demo.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "docs/demo/auto-generated-trash-detection-demo.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "docs/demo/breaking-change-detection-demo.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "docs/demo/design-philosophy-mismatch-demo.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "docs/demo/duplicate-pr-detection-demo.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "docs/demo/first-time-large-repo-demo.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "docs/demo/flask-not-a-real-bug-demo.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "docs/demo/marimo-missing-tests-demo.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "docs/demo/pandas-out-of-scope-demo.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "docs/demo/ty-needs-rfc-demo.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "docs/policies/README.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "docs/policies/openclaw-openclaw.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "docs/policies/pallets-flask.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "docs/policies/pandas-dev-pandas.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "docs/tool_call_prediction_table.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "misakanet-50/lesson-13-glama-private-mcp-verification-gate.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "misakanet-50/lesson-14-check-tier-upgrade-warning-to-error.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "misakanet-50/lesson-15-duplicate-detector-trigger-extension.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "misakanet-50/lesson-16-contribai-replay-regression-test.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "misakanet-50/lesson-17-data-snapshot-readme-metric-unification.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "misakanet-50/lesson-18-knowledge-bundle-self-reference-boundary.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "misakanet-50/lesson-19-overfit-hard-gate-holdout-required.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "misakanet-50/lesson-20-honest-claim-vs-runtime-evidence.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "misakanet-50/lesson-21-mcp-stdio-runtime-bug-must-test.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/NousResearch-hermes-agent/pr-42920-cron-risk.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/NousResearch-hermes-agent/pr-52917-comp-desktop-platform-windows.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/NousResearch-hermes-agent/pr-64639-duplicate-pr.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/actions-checkout/pr-2518-auto.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/astral-sh-ruff/pr-26929-auto.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/astral-sh-ty/pr-999993-breaking-change-demo.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/astral-sh-ty/pr-NEEDS-RFC-demo.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/chroma-core-chroma/pr-7453-auto.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/docker-compose/pr-13931-auto.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/electron-electron/index.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/encode-httpx/pr-3773-auto.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/fastapi-fastapi/pr-16004-auto.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/grafana-grafana/pr-128722-auto.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/huggingface-transformers/pr-47361-auto.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/kubernetes-kubernetes/pr-999995-first-time-large-repo-demo.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/langchain-ai-langgraph/pr-8362-auto.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/marimo-team-marimo/pr-999992-auto-generated-trash-demo.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/marimo-team-marimo/pr-MISSING-TESTS-demo.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/microsoft-TypeScript/index.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/microsoft-TypeScript/pr-63615-auto.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/microsoft-markitdown/pr-2204-auto.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/pallets-flask/pr-999990-duplicate-demo.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/pallets-flask/pr-999994-design-philosophy-demo.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/pallets-flask/pr-NOT-A-REAL-BUG-demo.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/pandas-dev-pandas/pr-999991-archived-repo-demo.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/pandas-dev-pandas/pr-OUT-OF-SCOPE-demo.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/prometheus-prometheus/pr-19213-auto.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/psf-requests/pr-7576-auto.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/pydantic-pydantic/pr-13441-auto.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/tailwindlabs-tailwindcss/pr-20335-auto.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "profiles/vercel-next.js/index.md",
+      "message": "orphan concept (no links in or out)"
+    },
+    {
+      "rule": "S4",
+      "file": "scripts/README.md",
+      "message": "orphan concept (no links in or out)"
+    }
+  ]
+}

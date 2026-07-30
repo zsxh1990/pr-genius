@@ -7,6 +7,7 @@ trigger_keywords:
   - "missing issue"
   - "no issue"
 fix_action: "1) Create issue first; 2) Link PR to issue"
+created: 2026-07-29
 severity: high
 ---
 
@@ -15,6 +16,10 @@ severity: high
 ## Pattern
 
 PRs without linked issues get rejected in repos that require issue-first workflow.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

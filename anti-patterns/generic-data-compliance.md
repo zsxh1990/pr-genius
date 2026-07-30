@@ -7,6 +7,7 @@ trigger_keywords:
   - "data compliance"
   - "regulatory"
 fix_action: "1) Ensure compliance; 2) Add controls"
+created: 2026-07-29
 severity: critical
 ---
 
@@ -15,6 +16,10 @@ severity: critical
 ## Pattern
 
 PRs忽视数据合规 get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

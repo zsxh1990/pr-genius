@@ -7,6 +7,7 @@ trigger_keywords:
   - "improper error handling"
   - "swallowing exceptions"
 fix_action: "1) Handle errors properly; 2) Log errors"
+created: 2026-07-29
 severity: medium
 ---
 
@@ -15,6 +16,10 @@ severity: medium
 ## Pattern
 
 PRs with improper error handling get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

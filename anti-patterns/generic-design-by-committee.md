@@ -7,6 +7,7 @@ trigger_keywords:
   - "design by committee"
   - "too many opinions"
 fix_action: "1) Simplify design; 2) Make decisions"
+created: 2026-07-29
 severity: medium
 ---
 
@@ -15,6 +16,10 @@ severity: medium
 ## Pattern
 
 PRs with design by committee get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

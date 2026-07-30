@@ -7,6 +7,7 @@ trigger_keywords:
   - "temporal coupling"
   - "order dependency"
 fix_action: "1) Remove order dependency; 2) Use factory"
+created: 2026-07-29
 severity: medium
 ---
 
@@ -15,6 +16,10 @@ severity: medium
 ## Pattern
 
 PRs with temporal coupling get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

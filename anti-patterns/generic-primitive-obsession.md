@@ -7,6 +7,7 @@ trigger_keywords:
   - "primitive obsession"
   - "using primitives"
 fix_action: "1) Use value objects; 2) Extract class"
+created: 2026-07-29
 severity: low
 ---
 
@@ -15,6 +16,10 @@ severity: low
 ## Pattern
 
 PRs with primitive obsession get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

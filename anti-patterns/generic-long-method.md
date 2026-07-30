@@ -7,6 +7,7 @@ trigger_keywords:
   - "long method"
   - "too many lines"
 fix_action: "1) Extract method; 2) Apply SRP"
+created: 2026-07-29
 severity: low
 ---
 
@@ -15,6 +16,10 @@ severity: low
 ## Pattern
 
 PRs with long method get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

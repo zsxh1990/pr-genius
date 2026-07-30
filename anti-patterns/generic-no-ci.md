@@ -7,6 +7,7 @@ trigger_keywords:
   - "no ci"
   - "missing ci"
 fix_action: "1) Run CI; 2) Fix failures"
+created: 2026-07-29
 severity: medium
 ---
 
@@ -15,6 +16,10 @@ severity: medium
 ## Pattern
 
 PRs without CI get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

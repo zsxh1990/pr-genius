@@ -7,6 +7,7 @@ trigger_keywords:
   - "auth bypass"
   - "authentication bypass"
 fix_action: "1) Fix auth; 2) Add checks"
+created: 2026-07-29
 severity: critical
 ---
 
@@ -15,6 +16,10 @@ severity: critical
 ## Pattern
 
 PRs introducing auth bypass get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

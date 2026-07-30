@@ -7,6 +7,7 @@ trigger_keywords:
   - "singleton"
   - "global instance"
 fix_action: "1) Use dependency injection; 2) Remove singleton"
+created: 2026-07-29
 severity: medium
 ---
 
@@ -15,6 +16,10 @@ severity: medium
 ## Pattern
 
 PRs with singleton pattern get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

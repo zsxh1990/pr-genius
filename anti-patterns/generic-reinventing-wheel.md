@@ -7,6 +7,7 @@ trigger_keywords:
   - "reinventing the wheel"
   - "duplicate functionality"
 fix_action: "1) Use existing library; 2) Contribute upstream"
+created: 2026-07-29
 severity: medium
 ---
 
@@ -15,6 +16,10 @@ severity: medium
 ## Pattern
 
 PRs reinventing the wheel get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

@@ -7,6 +7,7 @@ trigger_keywords:
   - "breaking change"
   - "RFC"
 fix_action: "1) Open RFC; 2) Get approval; 3) Then submit PR"
+created: 2026-07-29
 severity: high
 ---
 
@@ -15,6 +16,10 @@ severity: high
 ## Pattern
 
 PyTorch requires RFC for breaking changes.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

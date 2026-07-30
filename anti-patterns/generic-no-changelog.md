@@ -7,6 +7,7 @@ trigger_keywords:
   - "no changelog"
   - "missing changelog"
 fix_action: "1) Update changelog; 2) Add entry"
+created: 2026-07-29
 severity: low
 ---
 
@@ -15,6 +16,10 @@ severity: low
 ## Pattern
 
 PRs without changelog get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

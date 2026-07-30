@@ -7,6 +7,7 @@ trigger_keywords:
   - "breaking change"
   - "backward incompatible"
 fix_action: "1) Add deprecation warnings; 2) Provide migration path"
+created: 2026-07-29
 severity: high
 ---
 
@@ -15,6 +16,10 @@ severity: high
 ## Pattern
 
 Breaking changes without backward compatibility get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

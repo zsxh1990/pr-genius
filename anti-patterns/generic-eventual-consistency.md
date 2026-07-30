@@ -7,6 +7,7 @@ trigger_keywords:
   - "eventual consistency"
   - "weak consistency"
 fix_action: "1) Understand tradeoffs; 2) Get approval"
+created: 2026-07-29
 severity: medium
 ---
 
@@ -15,6 +16,10 @@ severity: medium
 ## Pattern
 
 PRs忽视eventual consistency get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

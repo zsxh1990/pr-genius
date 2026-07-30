@@ -7,6 +7,7 @@ trigger_keywords:
   - "no issue template"
   - "missing issue template"
 fix_action: "1) Use issue template; 2) Push fix"
+created: 2026-07-29
 severity: high
 ---
 
@@ -15,6 +16,10 @@ severity: high
 ## Pattern
 
 Large repos require issue template for all changes.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

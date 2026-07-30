@@ -7,6 +7,7 @@ trigger_keywords:
   - "no equity"
   - "missing equity"
 fix_action: "1) Ensure equity; 2) Push fix"
+created: 2026-07-29
 severity: high
 ---
 
@@ -15,6 +16,10 @@ severity: high
 ## Pattern
 
 Large repos require equity for all changes.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

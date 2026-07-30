@@ -7,6 +7,7 @@ trigger_keywords:
   - "deadlock"
   - "lock issue"
 fix_action: "1) Fix deadlock; 2) Use timeout"
+created: 2026-07-29
 severity: high
 ---
 
@@ -15,6 +16,10 @@ severity: high
 ## Pattern
 
 PRs introducing deadlock get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

@@ -7,6 +7,7 @@ trigger_keywords:
   - "no psychological safety"
   - "missing psychological safety"
 fix_action: "1) Ensure psychological safety; 2) Push fix"
+created: 2026-07-29
 severity: high
 ---
 
@@ -15,6 +16,10 @@ severity: high
 ## Pattern
 
 Large repos require psychological safety for all changes.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

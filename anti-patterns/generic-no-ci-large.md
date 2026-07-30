@@ -7,6 +7,7 @@ trigger_keywords:
   - "no ci"
   - "missing ci"
 fix_action: "1) Run CI; 2) Fix failures"
+created: 2026-07-29
 severity: high
 ---
 
@@ -15,6 +16,10 @@ severity: high
 ## Pattern
 
 Large repos require CI for all changes.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

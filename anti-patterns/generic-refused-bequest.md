@@ -7,6 +7,7 @@ trigger_keywords:
   - "refused bequest"
   - "broken inheritance"
 fix_action: "1) Fix inheritance; 2) Use composition"
+created: 2026-07-29
 severity: medium
 ---
 
@@ -15,6 +16,10 @@ severity: medium
 ## Pattern
 
 PRs with refused bequest get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

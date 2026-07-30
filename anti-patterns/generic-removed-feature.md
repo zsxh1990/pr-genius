@@ -7,6 +7,7 @@ trigger_keywords:
   - "removed feature"
   - "no longer available"
 fix_action: "1) Use alternative; 2) Update code"
+created: 2026-07-29
 severity: high
 ---
 
@@ -15,6 +16,10 @@ severity: high
 ## Pattern
 
 PRs using removed feature get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

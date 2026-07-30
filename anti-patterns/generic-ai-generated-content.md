@@ -8,6 +8,7 @@ trigger_keywords:
   - "ChatGPT"
   - "copilot"
 fix_action: "1) Add human review; 2) Verify accuracy; 3) Add personal touches"
+created: 2026-07-29
 severity: critical
 ---
 
@@ -16,6 +17,10 @@ severity: critical
 ## Pattern
 
 PRs with obviously AI-generated content without human review get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

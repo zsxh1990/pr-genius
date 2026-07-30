@@ -7,6 +7,7 @@ trigger_keywords:
   - "clickjacking"
   - "ui redress"
 fix_action: "1) Add X-Frame-Options; 2) Add CSP frame-ancestors"
+created: 2026-07-29
 severity: medium
 ---
 
@@ -15,6 +16,10 @@ severity: medium
 ## Pattern
 
 PRs introducing clickjacking vulnerability get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

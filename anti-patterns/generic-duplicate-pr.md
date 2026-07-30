@@ -7,6 +7,7 @@ trigger_keywords:
   - "duplicate"
   - "already exists"
 fix_action: "1) Check existing PRs; 2) Close duplicate"
+created: 2026-07-29
 severity: high
 ---
 
@@ -15,6 +16,10 @@ severity: high
 ## Pattern
 
 Duplicate PRs from same author get closed.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

@@ -7,6 +7,7 @@ trigger_keywords:
   - "switch statements"
   - "large switch"
 fix_action: "1) Use polymorphism; 2) Use strategy pattern"
+created: 2026-07-29
 severity: low
 ---
 
@@ -15,6 +16,10 @@ severity: low
 ## Pattern
 
 PRs with switch statements get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

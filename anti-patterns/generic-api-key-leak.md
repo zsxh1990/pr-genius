@@ -7,6 +7,7 @@ trigger_keywords:
   - "api key leak"
   - "secret leak"
 fix_action: "1) Rotate keys; 2) Use secure storage"
+created: 2026-07-29
 severity: critical
 ---
 
@@ -15,6 +16,10 @@ severity: critical
 ## Pattern
 
 PRs introducing API key leak vulnerability get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

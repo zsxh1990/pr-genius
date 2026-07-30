@@ -7,6 +7,7 @@ trigger_keywords:
   - "commits behind"
   - "far behind"
 fix_action: "1) Rebase on main; 2) Resolve conflicts"
+created: 2026-07-29
 severity: high
 ---
 
@@ -15,6 +16,10 @@ severity: high
 ## Pattern
 
 PRs far behind main get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

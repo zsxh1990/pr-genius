@@ -7,6 +7,7 @@ trigger_keywords:
   - "stack overflow"
   - "infinite recursion"
 fix_action: "1) Add recursion limit; 2) Use iteration"
+created: 2026-07-29
 severity: high
 ---
 
@@ -15,6 +16,10 @@ severity: high
 ## Pattern
 
 PRs introducing stack overflow get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

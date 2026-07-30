@@ -7,6 +7,7 @@ trigger_keywords:
   - "no review"
   - "missing review"
 fix_action: "1) Request review; 2) Wait for approval"
+created: 2026-07-29
 severity: medium
 ---
 
@@ -15,6 +16,10 @@ severity: medium
 ## Pattern
 
 PRs without review get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

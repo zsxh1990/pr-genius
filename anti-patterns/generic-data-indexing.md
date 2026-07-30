@@ -7,6 +7,7 @@ trigger_keywords:
   - "data indexing"
   - "database index"
 fix_action: "1) Add index; 2) Optimize queries"
+created: 2026-07-29
 severity: medium
 ---
 
@@ -15,6 +16,10 @@ severity: medium
 ## Pattern
 
 PRs忽视数据索引 get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

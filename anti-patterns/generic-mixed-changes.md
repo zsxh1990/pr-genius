@@ -7,6 +7,7 @@ trigger_keywords:
   - "mixed changes"
   - "unrelated changes"
 fix_action: "1) Separate changes; 2) Create multiple PRs"
+created: 2026-07-29
 severity: medium
 ---
 
@@ -15,6 +16,10 @@ severity: medium
 ## Pattern
 
 PRs with mixed changes get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

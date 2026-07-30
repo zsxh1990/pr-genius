@@ -7,6 +7,7 @@ trigger_keywords:
   - "wrong repo"
   - "incorrect repo"
 fix_action: "1) Close PR; 2) Submit to correct repo"
+created: 2026-07-29
 severity: high
 ---
 
@@ -15,6 +16,10 @@ severity: high
 ## Pattern
 
 PRs to wrong repo get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

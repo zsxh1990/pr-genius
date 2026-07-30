@@ -7,6 +7,7 @@ trigger_keywords:
   - "no comments"
   - "missing comments"
 fix_action: "1) Add comments; 2) Explain logic"
+created: 2026-07-29
 severity: low
 ---
 
@@ -15,6 +16,10 @@ severity: low
 ## Pattern
 
 PRs without comments get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

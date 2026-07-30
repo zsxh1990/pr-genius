@@ -7,6 +7,7 @@ trigger_keywords:
   - "middle man"
   - "delegation only"
 fix_action: "1) Remove middle man; 2) Direct call"
+created: 2026-07-29
 severity: low
 ---
 
@@ -15,6 +16,10 @@ severity: low
 ## Pattern
 
 PRs with middle man get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

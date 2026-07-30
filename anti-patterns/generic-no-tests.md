@@ -7,6 +7,7 @@ trigger_keywords:
   - "no tests"
   - "missing tests"
 fix_action: "1) Add tests; 2) Verify coverage"
+created: 2026-07-29
 severity: medium
 ---
 
@@ -15,6 +16,10 @@ severity: medium
 ## Pattern
 
 PRs without tests get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

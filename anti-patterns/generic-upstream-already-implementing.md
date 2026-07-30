@@ -7,6 +7,7 @@ trigger_keywords:
   - "upstream"
   - "already implementing"
 fix_action: "1) Check upstream issues; 2) Coordinate with upstream"
+created: 2026-07-29
 severity: medium
 ---
 
@@ -15,6 +16,10 @@ severity: medium
 ## Pattern
 
 Features already being implemented upstream get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

@@ -7,6 +7,7 @@ trigger_keywords:
   - "magic numbers"
   - "hardcoded values"
 fix_action: "1) Extract constants; 2) Use named values"
+created: 2026-07-29
 severity: low
 ---
 
@@ -15,6 +16,10 @@ severity: low
 ## Pattern
 
 PRs with magic numbers get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 

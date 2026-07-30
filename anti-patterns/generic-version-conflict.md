@@ -7,6 +7,7 @@ trigger_keywords:
   - "version conflict"
   - "dependency conflict"
 fix_action: "1) Resolve conflict; 2) Update versions"
+created: 2026-07-29
 severity: high
 ---
 
@@ -15,6 +16,10 @@ severity: high
 ## Pattern
 
 PRs with version conflict get rejected.
+
+## Applicability
+
+Universal — applies to all repository sizes (large, medium, small).
 
 ## How to Avoid
 
