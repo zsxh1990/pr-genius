@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [contribai, archived, repo-status]
 key: contribai-site-tos-violation
 symptom: |
   改动违反目标站点的服务条款 (ToS), 例如 bypass rate limit / scrape forbidden pages / automated login。Close 关键词: "violates site ToS", "this is illegal scraping", "we don't bypass rate limits"
@@ -23,6 +24,7 @@ prevention: |
   - 用官方 API (避免 scraping)
   - 不 bypass rate limit / captcha / auth
   - User-Agent 标明 bot
+created: 2026-07-19
 learned_at: 2026-07-19
 ---
 
@@ -33,7 +35,7 @@ learned_at: 2026-07-19
 - 反爬绕过 PR: 几乎必拒 (GitHub DMCA + 法律风险)
 - 大型社交平台 (Twitter / Reddit / LinkedIn): 几乎所有 scraping PR 拒
 
-## 反模式特征
+## Pattern
 
 1. **未读 ToS** — 直接爬, 不查 robots.txt
 2. **Bypass rate limit** — 多线程 + retry storm
@@ -55,3 +57,7 @@ learned_at: 2026-07-19
 
 - KnugiHK/WhatsApp-Chat-Exporter profile
 - soxoj/maigret profile
+
+## Applicability
+
+All repository sizes.

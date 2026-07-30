@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [contribai, archived, repo-status]
 key: contribai-breaking-change-no-migration
 symptom: |
   提交了 breaking change 但没提供 migration path / feature flag / 讨论。Close 关键词: "breaking change", "compatibility issues", "would need a deprecation cycle"
@@ -25,6 +26,7 @@ prevention: |
   - 能否用 feature flag 默认关?
   - 有没有 migration 路径?
   - 至少 2 release 周期才移除旧 API
+created: 2026-07-19
 learned_at: 2026-07-19
 ---
 
@@ -35,7 +37,7 @@ learned_at: 2026-07-19
 - 大型 framework: 5-10% close 是 breaking change
 - microG / systemd: breaking change 几乎必 close (产品决策)
 
-## 反模式特征
+## Pattern
 
 1. **改默认行为** — 现有用户依赖旧行为
 2. **移除 API 不弃用** — 没 deprecation warning
@@ -56,3 +58,7 @@ learned_at: 2026-07-19
 ## 关联
 
 - 已有: `anti-patterns/breaking-change-no-compat.md` (honcho#798)
+
+## Applicability
+
+All repository sizes.

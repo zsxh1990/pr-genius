@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [contribai, archived, repo-status]
 key: contribai-auto-generated-trash
 symptom: |
   PR 含 AI agent 自动生成残留文件 (README.md --- / search_knowledge.py --- 这类奇怪文件名), 或 markdown patch 粘进源码。Close 关键词: "contains generated files", "diff artifacts", "please remove generated files"
@@ -21,6 +22,7 @@ prevention: |
   - 检查文件名是否正常 (.py / .md / .ts 等)
   - 清理临时文件 (output.txt / patch.diff 等)
   - 不用 Write 工具覆盖整个 README (用 Edit 增量)
+created: 2026-07-19
 learned_at: 2026-07-19
 ---
 
@@ -30,7 +32,7 @@ learned_at: 2026-07-19
 - AI agent PRs: ~5-10% 有类似残留
 - Claude Code / Codex agent: 默认会清, 但 prompt 不到位会留
 
-## 反模式特征
+## Pattern
 
 1. **README.md --- 文件** — 工具把 diff 输出当文件名
 2. **search_knowledge.py --- 同样问题
@@ -50,3 +52,7 @@ learned_at: 2026-07-19
 ## 关联
 
 - MisakaNet maintainer policy: `docs/policies/Ikalus1988-MisakaNet.md` (rule 2: 不接受生成器残留文件)
+
+## Applicability
+
+All repository sizes.

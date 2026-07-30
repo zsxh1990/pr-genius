@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [contribai, archived, repo-status]
 key: contribai-needs-rfc-first
 symptom: |
   改动涉及 API 设计 / 架构 / type system 语义, 但没 RFC / design doc / 提前讨论。Close 关键词: "needs RFC", "open an issue first", "please discuss design", "this is too big for a PR"
@@ -23,6 +24,7 @@ prevention: |
   - maintainer 同意后再提 PR
   - PR body 必含 RFC 链接
   - 不直接提大改 PR (信用负分 + close)
+created: 2026-07-19
 learned_at: 2026-07-19
 ---
 
@@ -33,7 +35,7 @@ learned_at: 2026-07-19
 - pandas-dev/pandas (3.0 roadmap): 类似比例
 - 大型 framework: 15-25% close 是 RFC 流程未走
 
-## 反模式特征
+## Pattern
 
 1. **跳过 RFC** — 大改直接提 PR
 2. **未在 issue 讨论** — maintainer 没参与设计
@@ -53,3 +55,7 @@ learned_at: 2026-07-19
 
 - astral-sh-ty profile: type system 改动需 RFC
 - HolmesGPT profile: operator mode 改动需 RFC
+
+## Applicability
+
+All repository sizes.

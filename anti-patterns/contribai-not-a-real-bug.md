@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [contribai, archived, repo-status]
 key: contribai-not-a-real-bug
 symptom: |
   提交的"bug"实际是设计如此或预期行为。Close 关键词: "not a real bug", "this is by design", "intended behavior", "working as expected"
@@ -21,6 +22,7 @@ prevention: |
   - 找 maintainer 历史 issue / 邮件列表对该行为的解释
   - 在 issue 区先讨论 "is this a bug or by design?"
   - 写 failing test 复现, 不靠"我觉得"
+created: 2026-07-19
 learned_at: 2026-07-19
 ---
 
@@ -30,7 +32,7 @@ learned_at: 2026-07-19
 - React / Vue / Angular 等 UI 库: 类似比例
 - 大型 framework 通用: 20-35% close 是 Not a real bug
 
-## 反模式特征
+## Pattern
 
 1. **未读源码** — 直接看 README / 示例推断 "bug"
 2. **未理解设计意图** — 框架的 "限制" 是 deliberate 设计
@@ -48,3 +50,7 @@ learned_at: 2026-07-19
 ## 关联
 
 - pallets profile: `pallets-flask/index.md` (Not a real bug 占 35%)
+
+## Applicability
+
+All repository sizes.

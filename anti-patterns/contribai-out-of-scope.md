@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [contribai, archived, repo-status]
 key: contribai-out-of-scope
 symptom: |
   改动跟维护者路线 / 项目目标不一致。Close 关键词: "out of scope", "not in roadmap", "off-topic"
@@ -20,6 +21,7 @@ prevention: |
   - 读 CONTRIBUTING.md 找 "out of scope" / "not accepted" 章节
   - 看最近 closed PR 找 close 关键词 top 5
   - 跟 3.0 / 2.0 roadmap 对齐 (大项目)
+created: 2026-07-19
 learned_at: 2026-07-19
 ---
 
@@ -29,7 +31,7 @@ learned_at: 2026-07-19
 - pallets/flask: ~25% (vs 改文档撞规划)
 - 大仓通用: 10-40% close 是 Out of scope
 
-## 反模式特征
+## Pattern
 
 1. **跟维护者路线冲突** — 改动不在 roadmap
 2. **想加新功能但项目不收** — "想加 feature X, 但维护者已决定不做"
@@ -48,3 +50,7 @@ learned_at: 2026-07-19
 
 - pandas profile: `pandas-dev-pandas/index.md` (Out of scope 占 40%)
 - policy: docs/policies/pandas-dev-pandas.md (待 P1 扩)
+
+## Applicability
+
+All repository sizes.

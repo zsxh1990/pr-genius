@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [contribai, archived, repo-status]
 key: contribai-missing-tests
 symptom: |
   PR 改了代码但没补 / 没改测试。Close 关键词: "needs tests", "missing tests", "test coverage", "please add tests"
@@ -21,6 +22,7 @@ prevention: |
   - 找到项目 test 模式
   - 至少补 1 个 failing test + 1 个 passing test
   - 跑 coverage 报告不降
+created: 2026-07-19
 learned_at: 2026-07-19
 ---
 
@@ -31,7 +33,7 @@ learned_at: 2026-07-19
 - marimo-team/marimo: ~30%
 - 通用: 15-30% close 提 missing tests
 
-## 反模式特征
+## Pattern
 
 1. **只改 src 不改 test** — 一半 PR 都有这问题
 2. **没复现 test** — 改完代码, 没证明之前是坏的
@@ -49,3 +51,7 @@ learned_at: 2026-07-19
 ## 关联
 
 - honcho: `anti-patterns/honcho-default-db-module-trap.md`
+
+## Applicability
+
+All repository sizes.

@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [contribai, archived, repo-status]
 key: contribai-duplicate-pr
 symptom: |
   提交的 PR 跟已有 PR / Issue 重复, 或 main 分支已修复。Close 关键词: "duplicate", "already exists", "implemented in main"
@@ -22,6 +23,7 @@ prevention: |
   - gh search issues --state all "<keyword>"  (搜 Issue)
   - git fetch origin main && git log origin/main  (看 main)
   - 在 Issue 评论问 "is anyone working on this?"  (24h 等回)
+created: 2026-07-19
 learned_at: 2026-07-19
 ---
 
@@ -31,7 +33,7 @@ learned_at: 2026-07-19
 - NousResearch/hermes-agent: ~25% (anti-patterns/nousresearch-duplicate-pr.md 实证)
 - Vite / OpenClaw: ~10% close 提到 duplicate
 
-## 反模式特征
+## Pattern
 
 1. **未搜已有 PR** — 直接提 PR, 跟别人撞
 2. **未查 main 分支** — main 已修, 但 PR 还按旧版修
@@ -50,3 +52,7 @@ learned_at: 2026-07-19
 
 - NousResearch: `anti-patterns/nousresearch-duplicate-pr.md`
 - reaper rule: 必查 search + main + Issue 三件套
+
+## Applicability
+
+All repository sizes.

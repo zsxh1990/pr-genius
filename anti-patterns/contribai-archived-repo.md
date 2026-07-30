@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [contribai, archived, repo-status]
 key: contribai-archived-repo
 symptom: |
   PR 提到 archived repo (维护者标记 archived = 不再维护). Close 关键词: "repo archived", "no longer maintained", "use <new> instead"
@@ -19,6 +20,7 @@ prevention: |
   提 PR 前必查:
   - gh repo view org/repo --json isArchived,isDisabled
   - 看 README 顶部是否有 "This project is no longer maintained" 横幅
+created: 2026-07-19
 learned_at: 2026-07-19
 ---
 
@@ -28,7 +30,7 @@ learned_at: 2026-07-19
 - 常见 successor: moment/moment → date-fns, request/request → axios/ky, node-inspect/node-inspect → 内置 util.inspect
 - 大仓 archived 通常有 README 顶部横幅明确说明
 
-## 反模式特征
+## Pattern
 
 1. **未查 repo 状态** — 直接提 PR, 不知道 archived
 2. **fork 出来还 @upstream** — archived 仓不接受
@@ -46,3 +48,7 @@ learned_at: 2026-07-19
 ## 关联
 
 - needs_preflight check: docs/policies/ 模板可加 "check archived status"
+
+## Applicability
+
+All repository sizes.

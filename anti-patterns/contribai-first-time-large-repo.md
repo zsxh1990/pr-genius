@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [contribai, archived, repo-status]
 key: contribai-first-time-large-repo
 symptom: |
   首次贡献者向 ≥10k star 仓提 PR, 信用未建立。Close 关键词: "first contribution, please discuss in issue first", "out of scope for new contributor", "this is too complex"
@@ -21,6 +22,7 @@ prevention: |
   - 先提 typo / docs 补 example 简单 PR
   - 再提功能 / bug fix 复杂 PR
   - 信用需要时间积累
+created: 2026-07-19
 learned_at: 2026-07-19
 ---
 
@@ -31,7 +33,7 @@ learned_at: 2026-07-19
 - NousResearch/hermes-agent: 首次贡献者合并率 ~20% (友好社区)
 - OpenClaw: 首次贡献者合并率 ~10% (ClawSweeper 评分严)
 
-## 反模式特征
+## Pattern
 
 1. **首次就提大改** — 没信用就改 core
 2. **未参与 issue 区** — 没建立 maintainer 信任
@@ -50,3 +52,7 @@ learned_at: 2026-07-19
 
 - evaluator signal: first_contributor_large_repo (severity=medium)
 - pallets/pandas profile: 信用模型
+
+## Applicability
+
+All repository sizes.

@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [contribai, archived, repo-status]
 key: contribai-incomplete-readme-contributing
 symptom: |
   提 PR 时没读完整 README / CONTRIBUTING, 漏了关键 setup / testing / commit 规范。Close 关键词: "please read CONTRIBUTING", "missing setup", "wrong commit format", "CI failed because of missing setup"
@@ -22,6 +23,7 @@ prevention: |
   - 看最近 merged PR 格式
   - 跑项目 setup 脚本
   - DCO / CHANGES / commit format 必查
+created: 2026-07-19
 learned_at: 2026-07-19
 ---
 
@@ -31,7 +33,7 @@ learned_at: 2026-07-19
 - HolmesGPT/holmesgpt: ~25% close 是 DCO missing (CNCF 标准)
 - 通用: 15-25% close 提到 incomplete setup
 
-## 反模式特征
+## Pattern
 
 1. **未读 CONTRIBUTING** — 漏项目特定 setup
 2. **缺 CHANGES entry** — 类似 crates.io / flask 要求
@@ -52,3 +54,7 @@ learned_at: 2026-07-19
 
 - HolmesGPT: `HolmesGPT-holmesgpt/index.md` (DCO 门票)
 - pallets-flask: `pallets-flask/index.md` (CHANGES.rst 门票)
+
+## Applicability
+
+All repository sizes.

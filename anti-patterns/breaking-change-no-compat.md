@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [contribai, archived, repo-status]
 key: breaking-change-no-compat
 symptom: |
   "pretty big breaking change" / "has its own set of compatibility issues" / "unnecessary at the moment"
@@ -13,6 +14,7 @@ trigger_keywords:
 fix_action: 如果改动是 breaking change，必须：(1) 提供迁移路径 (2) 保持向后兼容 (3) 在 Issue 中先讨论方案 (4) 考虑 feature flag
 source_pr: plastic-labs/honcho#798
 prevention: "提 PR 前检查：(1) 改动是否改变现有 API 行为？(2) 现有用户代码是否需要修改？(3) 能否通过 feature flag 保持兼容？"
+created: 2026-07-08
 learned_at: 2026-07-08
 ---
 
@@ -23,7 +25,7 @@ learned_at: 2026-07-08
 - **拒绝原因**: akattelu: "The way this is written right now, it is a pretty big breaking change that also has its own set of compatibility issues. This seems unnecessary at the moment but would visit this in the future if it becomes an issue. Closing this."
 - **教训**: 即使改动是"修复"，如果改变了现有行为，也会被认为是 breaking change
 
-## 反模式特征
+## Pattern
 
 1. **改变现有 API 行为**: 函数返回值、参数、异常类型发生变化
 2. **没有迁移路径**: 现有用户代码会因为升级而崩溃
@@ -38,3 +40,7 @@ learned_at: 2026-07-08
 - [ ] 能否通过 feature flag 保持兼容？
 - [ ] 有没有在 Issue 中先讨论方案？
 - [ ] 有没有提供迁移文档？
+
+## Applicability
+
+All repository sizes.

@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [contribai, archived, repo-status]
 key: contribai-docs-pr-missing-quickstart
 symptom: |
   docs-only PR 但缺 quickstart / install / 关键示例, 撞维护者已有规划。Close 关键词: "docs already planned", "contribute to docs PR #N", "in our roadmap"
@@ -21,6 +22,7 @@ prevention: |
   - 看 maintainer 是否有 docs 重写计划
   - 问 "should I contribute to existing effort?"
   - docs PR 优先作为 supplement (补 missing example), 不重写
+created: 2026-07-19
 learned_at: 2026-07-19
 ---
 
@@ -30,7 +32,7 @@ learned_at: 2026-07-19
 - pandas-dev/pandas: docs PR 占 close ~10%
 - 大型 framework 通用: docs PR 失败率 30-50%
 
-## 反模式特征
+## Pattern
 
 1. **docs-only 改动** — 没代码, 只改 README / docs
 2. **撞维护者已有规划** — maintainer 已经在重写 docs
@@ -48,3 +50,7 @@ learned_at: 2026-07-19
 ## 关联
 
 - pallets-flask/index.md: docs-only 是 top 3 close 原因
+
+## Applicability
+
+All repository sizes.

@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [contribai, archived, repo-status]
 key: contribai-ethical-review-failed
 symptom: |
   改动有 ethical concern (隐私 / OSINT / 监控 / security research), maintainer 或 maintainer 委员会拒绝。Close 关键词: "ethical concern", "we can't take this", "out of scope (ethics)", "consider implications"
@@ -22,6 +23,7 @@ prevention: |
   - 加 ethics statement + AUP
   - README 强调 responsible disclosure
   - opt-in vs opt-out 设计
+created: 2026-07-19
 learned_at: 2026-07-19
 ---
 
@@ -32,7 +34,7 @@ learned_at: 2026-07-19
 - AI training data scraping: 越来越多 maintainer 拒绝
 - facial recognition / biometric: 几乎必拒
 
-## 反模式特征
+## Pattern
 
 1. **未考虑伦理** — 改动是 dual-use (善意 + 恶意)
 2. **未加 ethics statement** — README 没写 acceptable use
@@ -52,3 +54,7 @@ learned_at: 2026-07-19
 ## 关联
 
 - soxoj-maigret profile: ethical review 是 close 原因之一
+
+## Applicability
+
+All repository sizes.

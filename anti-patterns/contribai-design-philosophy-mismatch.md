@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [contribai, archived, repo-status]
 key: contribai-design-philosophy-mismatch
 symptom: |
   改动跟项目设计哲学 / 架构原则冲突。Close 关键词: "doesn't fit our design", "violates our architecture", "out of scope (philosophy)"
@@ -21,6 +22,7 @@ prevention: |
   - 看 maintainer 写的设计 blog / talk / RFC
   - 问 maintainer "how does this fit?"
   - 跟哲学不符的 PR 别提 (避免 close + 信用负分)
+created: 2026-07-19
 learned_at: 2026-07-19
 ---
 
@@ -30,7 +32,7 @@ learned_at: 2026-07-19
 - 大型 framework (React / Vue / Angular): 类似比例
 - 系统软件 (Linux kernel / OpenBSD / systemd): 比例更高
 
-## 反模式特征
+## Pattern
 
 1. **未读 ARCHITECTURE.md** — 改动跟核心设计冲突
 2. **AI 误判项目风格** — LLM 看 README 就提, 不读 design
@@ -49,3 +51,7 @@ learned_at: 2026-07-19
 
 - OpenClaw profile: `openclaw-openclaw/index.md` (security-boundary = 哲学)
 - honcho: `anti-patterns/honcho-default-db-module-trap.md`
+
+## Applicability
+
+All repository sizes.

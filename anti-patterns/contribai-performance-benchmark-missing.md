@@ -1,5 +1,6 @@
 ---
 type: Anti-Pattern
+tags: [contribai, archived, repo-status]
 key: contribai-performance-benchmark-missing
 symptom: |
   改了性能敏感代码但没附 benchmark, 维护者无法判断 perf 影响。Close 关键词: "needs benchmark", "perf impact unknown", "please provide before/after"
@@ -21,6 +22,7 @@ prevention: |
   - 跑项目 benchmark before/after
   - PR body 附数字 + 命令 + 环境
   - 性能退化 > 5% 直接 reject
+created: 2026-07-19
 learned_at: 2026-07-19
 ---
 
@@ -30,7 +32,7 @@ learned_at: 2026-07-19
 - astral-sh/ty: ~15% close 是 perf benchmark (核心卖点 10x)
 - hot path 项目通用: 10-15% close 是 perf
 
-## 反模式特征
+## Pattern
 
 1. **改 hot path 没 benchmark** — 改了 parser / loop / render
 2. **没 before/after 数字** — "感觉快了" 不算
@@ -49,3 +51,7 @@ learned_at: 2026-07-19
 
 - pandas profile: ~15% close 是 perf
 - astral-sh/ty profile: "10x faster" 是核心卖点
+
+## Applicability
+
+All repository sizes.
