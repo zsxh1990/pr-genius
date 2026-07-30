@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-dco-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require DCO"
 symptom: "Maintainer comments: 'Please sign DCO'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-perfect-enemy-good
+tags: [cron, scheduling, reliability]
 description: "PR追求完美阻碍进展"
 symptom: "Maintainer comments: 'Perfect is the enemy of good'"
 trigger_keywords:

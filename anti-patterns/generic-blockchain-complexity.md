@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-blockchain-complexity
+tags: [cron, scheduling, reliability]
 description: "PR忽视区块链复杂性"
 symptom: "Maintainer comments: 'Blockchain complexity'"
 trigger_keywords:

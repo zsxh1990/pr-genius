@@ -1,6 +1,7 @@
 ---
 type: Success Pattern
 key: openclaw-scripts-fix
+tags: [cron, scheduling, reliability]
 description: "OpenClaw 脚本修复"
 success_factors:
   - "scripts 标签"

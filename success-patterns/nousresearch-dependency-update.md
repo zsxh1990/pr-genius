@@ -1,6 +1,7 @@
 ---
 type: Success Pattern
 key: nousresearch-dependency-update
+tags: [cron, scheduling, reliability]
 description: "NousResearch 依赖更新"
 success_factors:
   - "dependencies 标签"

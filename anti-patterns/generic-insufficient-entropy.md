@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-insufficient-entropy
+tags: [cron, scheduling, reliability]
 description: "PR with insufficient entropy"
 symptom: "Maintainer comments: 'Insufficient entropy'"
 trigger_keywords:

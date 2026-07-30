@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-security
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据安全"
 symptom: "Maintainer comments: 'Data security issue'"
 trigger_keywords:

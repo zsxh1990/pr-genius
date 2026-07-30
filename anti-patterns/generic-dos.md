@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-dos
+tags: [cron, scheduling, reliability]
 description: "PR introducing DoS vulnerability"
 symptom: "Maintainer comments: 'DoS vulnerability'"
 trigger_keywords:

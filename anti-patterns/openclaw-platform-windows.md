@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: openclaw-platform-windows
+tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 涉及 Windows 平台兼容性"
 symptom: "标签包含 platform/windows"
 trigger_keywords:

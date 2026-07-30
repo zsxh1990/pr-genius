@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-cloud-complexity
+tags: [cron, scheduling, reliability]
 description: "PR忽视云复杂性"
 symptom: "Maintainer comments: 'Cloud complexity'"
 trigger_keywords:

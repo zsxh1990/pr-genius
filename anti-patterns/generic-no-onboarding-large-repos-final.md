@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-onboarding-large-repos-final
+tags: [cron, scheduling, reliability]
 description: "Large repos require onboarding"
 symptom: "Maintainer comments: 'Please build onboarding'"
 trigger_keywords:

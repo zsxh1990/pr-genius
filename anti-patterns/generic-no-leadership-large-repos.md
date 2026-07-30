@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-leadership-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require leadership"
 symptom: "Maintainer comments: 'Please build leadership'"
 trigger_keywords:

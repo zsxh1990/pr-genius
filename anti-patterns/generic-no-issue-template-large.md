@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-issue-template-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require issue template"
 symptom: "Maintainer comments: 'Please use issue template'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: nousresearch-provider-specific
+tags: [cron, scheduling, reliability]
 description: "NousResearch PR 涉及特定 provider 问题"
 symptom: "标签包含 provider/openai, provider/anthropic, provider/gemini"
 trigger_keywords:

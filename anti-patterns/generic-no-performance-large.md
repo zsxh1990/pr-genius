@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-performance-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require performance"
 symptom: "Maintainer comments: 'Please build performance'"
 trigger_keywords:

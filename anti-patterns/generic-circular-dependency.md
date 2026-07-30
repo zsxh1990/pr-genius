@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-circular-dependency
+tags: [cron, scheduling, reliability]
 description: "PR with circular dependency"
 symptom: "Maintainer comments: 'Circular dependency'"
 trigger_keywords:

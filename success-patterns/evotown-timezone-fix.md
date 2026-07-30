@@ -1,6 +1,7 @@
 ---
 type: Success Pattern
 key: evotown-timezone-fix
+tags: [cron, scheduling, reliability]
 description: "Bug 修复：修复未定义变量导致的时区问题"
 success_factors:
   - "修复 Issue #88 中明确的 bug"

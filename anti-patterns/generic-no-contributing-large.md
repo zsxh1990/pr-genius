@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-contributing-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require contributing guide"
 symptom: "Maintainer comments: 'Please follow contributing guide'"
 trigger_keywords:

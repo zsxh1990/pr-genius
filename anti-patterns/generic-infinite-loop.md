@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-infinite-loop
+tags: [cron, scheduling, reliability]
 description: "PR introducing infinite loop"
 symptom: "Maintainer comments: 'Infinite loop'"
 trigger_keywords:

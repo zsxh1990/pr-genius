@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-unnecessary-complexity
+tags: [cron, scheduling, reliability]
 description: "PR with unnecessary complexity"
 symptom: "Maintainer comments: 'Unnecessary complexity'"
 trigger_keywords:

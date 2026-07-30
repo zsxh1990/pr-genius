@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: openclaw-message-delivery-risk
+tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 涉及消息投递，风险较高"
 symptom: "标签包含 merge-risk: message-delivery"
 trigger_keywords:

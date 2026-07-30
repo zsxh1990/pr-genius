@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-breaking-change-facebook-react
+tags: [cron, scheduling, reliability]
 description: "Facebook React rejects breaking changes without RFC"
 symptom: "Maintainer comments: 'Please open an RFC first'"
 trigger_keywords:

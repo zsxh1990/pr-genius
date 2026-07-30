@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-speculative-generality
+tags: [cron, scheduling, reliability]
 description: "PR with speculative generality"
 symptom: "Maintainer comments: 'Speculative generality'"
 trigger_keywords:

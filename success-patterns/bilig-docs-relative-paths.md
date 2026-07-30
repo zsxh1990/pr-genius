@@ -1,6 +1,7 @@
 ---
 type: Success Pattern
 key: bilig-docs-relative-paths
+tags: [cron, scheduling, reliability]
 description: "文档修复：替换绝对路径为相对路径"
 success_factors:
   - "修复文档中的绝对路径问题"

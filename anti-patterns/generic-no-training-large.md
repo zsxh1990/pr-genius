@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-training-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require training"
 symptom: "Maintainer comments: 'Please provide training'"
 trigger_keywords:

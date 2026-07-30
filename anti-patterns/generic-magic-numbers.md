@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-magic-numbers
+tags: [cron, scheduling, reliability]
 description: "PR with magic numbers"
 symptom: "Maintainer comments: 'Magic numbers'"
 trigger_keywords:

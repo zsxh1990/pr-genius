@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-indexing
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据索引"
 symptom: "Maintainer comments: 'Data indexing issue'"
 trigger_keywords:

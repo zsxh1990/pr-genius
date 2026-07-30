@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-resilience-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require resilience"
 symptom: "Maintainer comments: 'Please build resilience'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-deployment-change
+tags: [cron, scheduling, reliability]
 description: "PR with deployment change"
 symptom: "Maintainer comments: 'Deployment change'"
 trigger_keywords:

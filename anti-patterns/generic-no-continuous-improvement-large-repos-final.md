@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-continuous-improvement-large-repos-final
+tags: [cron, scheduling, reliability]
 description: "Large repos require continuous improvement"
 symptom: "Maintainer comments: 'Please build continuous improvement'"
 trigger_keywords:

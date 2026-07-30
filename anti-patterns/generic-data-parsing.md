@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-parsing
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据解析"
 symptom: "Maintainer comments: 'Data parsing issue'"
 trigger_keywords:

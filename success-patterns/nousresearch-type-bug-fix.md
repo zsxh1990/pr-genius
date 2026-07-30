@@ -1,6 +1,7 @@
 ---
 type: Success Pattern
 key: nousresearch-type-bug-fix
+tags: [cron, scheduling, reliability]
 description: "NousResearch type/bug 修复"
 success_factors:
   - "type/bug 标签"

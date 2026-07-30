@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-ai-generated-content
+tags: [cron, scheduling, reliability]
 description: "AI-generated content without human review"
 symptom: "Maintainer comments: 'This looks AI-generated'"
 trigger_keywords:

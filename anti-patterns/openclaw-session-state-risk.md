@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: openclaw-session-state-risk
+tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 涉及会话状态，风险较高"
 symptom: "标签包含 merge-risk: session-state"
 trigger_keywords:

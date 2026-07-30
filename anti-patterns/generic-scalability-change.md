@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-scalability-change
+tags: [cron, scheduling, reliability]
 description: "PR with scalability change"
 symptom: "Maintainer comments: 'Scalability change'"
 trigger_keywords:

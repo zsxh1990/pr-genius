@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-discovery
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据发现"
 symptom: "Maintainer comments: 'Data discovery issue'"
 trigger_keywords:

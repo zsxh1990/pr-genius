@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-compliance
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据合规"
 symptom: "Maintainer comments: 'Data compliance issue'"
 trigger_keywords:

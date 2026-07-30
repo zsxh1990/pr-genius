@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-behavior-change
+tags: [cron, scheduling, reliability]
 description: "PR with behavior change"
 symptom: "Maintainer comments: 'Behavior change'"
 trigger_keywords:

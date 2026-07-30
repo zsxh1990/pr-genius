@@ -1,6 +1,7 @@
 ---
 type: Success Pattern
 key: openclaw-small-focused-fix
+tags: [cron, scheduling, reliability]
 description: "OpenClaw 小而聚焦的修复 PR"
 success_factors:
   - "size: XS 或 S"

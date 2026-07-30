@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-scope-creep
+tags: [cron, scheduling, reliability]
 description: "PR with scope creep"
 symptom: "Maintainer comments: 'Scope creep'"
 trigger_keywords:

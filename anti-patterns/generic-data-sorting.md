@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-sorting
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据排序"
 symptom: "Maintainer comments: 'Data sorting issue'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-feedback-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require feedback"
 symptom: "Maintainer comments: 'Please build feedback'"
 trigger_keywords:

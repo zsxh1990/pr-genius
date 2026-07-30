@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-equity-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require equity"
 symptom: "Maintainer comments: 'Please ensure equity'"
 trigger_keywords:

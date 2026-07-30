@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-low-cohesion
+tags: [cron, scheduling, reliability]
 description: "PR with low cohesion"
 symptom: "Maintainer comments: 'Low cohesion'"
 trigger_keywords:

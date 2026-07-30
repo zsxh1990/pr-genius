@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-comments
+tags: [cron, scheduling, reliability]
 description: "PR without comments"
 symptom: "Maintainer comments: 'Please add comments'"
 trigger_keywords:

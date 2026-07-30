@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-ci-failure
+tags: [cron, scheduling, reliability]
 description: "PR with CI failure"
 symptom: "CI failed"
 trigger_keywords:

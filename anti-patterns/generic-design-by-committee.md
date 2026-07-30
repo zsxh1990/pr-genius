@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-design-by-committee
+tags: [cron, scheduling, reliability]
 description: "PR with design by committee"
 symptom: "Maintainer comments: 'Design by committee'"
 trigger_keywords:

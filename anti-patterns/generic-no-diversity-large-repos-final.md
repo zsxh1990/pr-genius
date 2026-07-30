@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-diversity-large-repos-final
+tags: [cron, scheduling, reliability]
 description: "Large repos require diversity"
 symptom: "Maintainer comments: 'Please build diversity'"
 trigger_keywords:

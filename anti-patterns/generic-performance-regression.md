@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-performance-regression
+tags: [cron, scheduling, reliability]
 description: "PR causing performance regression"
 symptom: "Maintainer comments: 'Performance regression'"
 trigger_keywords:

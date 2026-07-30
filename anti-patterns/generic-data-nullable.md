@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-nullable
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据可空性"
 symptom: "Maintainer comments: 'Data nullable issue'"
 trigger_keywords:

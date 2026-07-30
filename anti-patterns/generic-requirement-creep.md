@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-requirement-creep
+tags: [cron, scheduling, reliability]
 description: "PR with requirement creep"
 symptom: "Maintainer comments: 'Requirement creep'"
 trigger_keywords:

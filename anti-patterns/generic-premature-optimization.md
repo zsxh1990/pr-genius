@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-premature-optimization
+tags: [cron, scheduling, reliability]
 description: "PR with premature optimization"
 symptom: "Maintainer comments: 'Premature optimization'"
 trigger_keywords:

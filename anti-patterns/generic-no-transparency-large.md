@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-transparency-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require transparency"
 symptom: "Maintainer comments: 'Please be transparent'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Success Pattern
 key: openclaw-app-fix
+tags: [cron, scheduling, reliability]
 description: "OpenClaw 应用修复"
 success_factors:
   - "app 标签"

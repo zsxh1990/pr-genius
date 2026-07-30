@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-type-error
+tags: [cron, scheduling, reliability]
 description: "PR with type error"
 symptom: "Type check failed"
 trigger_keywords:

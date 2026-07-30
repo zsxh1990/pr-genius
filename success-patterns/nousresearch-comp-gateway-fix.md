@@ -1,6 +1,7 @@
 ---
 type: Success Pattern
 key: nousresearch-comp-gateway-fix
+tags: [cron, scheduling, reliability]
 description: "NousResearch Gateway 组件修复"
 success_factors:
   - "comp/gateway 标签"

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-ownership-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require ownership"
 symptom: "Maintainer comments: 'Please build ownership'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-retention
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据保留"
 symptom: "Maintainer comments: 'Data retention issue'"
 trigger_keywords:

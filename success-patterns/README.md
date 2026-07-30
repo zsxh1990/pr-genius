@@ -1,6 +1,7 @@
 ---
 type: Success Pattern Bundle
 title: 成功模式索引
+tags: [cron, scheduling, reliability]
 description: PR 成功合并的正向样本（可复用的成功信号）
 version: 0.1.0
 created: 2026-07-09
@@ -19,6 +20,7 @@ created: 2026-07-09
 ---
 type: Success Pattern
 key: <unique-slug>
+tags: [cron, scheduling, reliability]
 description: "<一句话描述成功模式>"
 success_factors: [<string>]  # 成功的关键因素
 repo_requirements: "<仓库的具体要求>"

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-compliance-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require compliance"
 symptom: "Maintainer comments: 'Please build compliance'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-singleton
+tags: [cron, scheduling, reliability]
 description: "PR with singleton pattern"
 symptom: "Maintainer comments: 'Singleton pattern'"
 trigger_keywords:

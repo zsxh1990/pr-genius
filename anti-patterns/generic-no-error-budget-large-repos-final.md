@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-error-budget-large-repos-final
+tags: [cron, scheduling, reliability]
 description: "Large repos require error budget"
 symptom: "Maintainer comments: 'Please build error budget'"
 trigger_keywords:

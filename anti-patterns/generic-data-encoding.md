@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-encoding
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据编码"
 symptom: "Maintainer comments: 'Data encoding issue'"
 trigger_keywords:

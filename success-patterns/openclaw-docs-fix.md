@@ -1,6 +1,7 @@
 ---
 type: Success Pattern
 key: openclaw-docs-fix
+tags: [cron, scheduling, reliability]
 description: "OpenClaw 文档修复 PR"
 success_factors:
   - "docs 标签"

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: openclaw-needs-real-behavior-proof
+tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 需要真实行为证明"
 symptom: "标签包含 triage: needs-real-behavior-proof"
 trigger_keywords:

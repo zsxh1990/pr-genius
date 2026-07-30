@@ -1,6 +1,7 @@
 ---
 type: Success Pattern
 key: misakanet-frontmatter-normalization
+tags: [cron, scheduling, reliability]
 description: "批量修复同一类问题：保持一致性，单个 PR 包含多个文件"
 success_factors:
   - "修复 Issue #380/379/378 中明确的问题"

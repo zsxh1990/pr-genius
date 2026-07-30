@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-partitioning
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据分区"
 symptom: "Maintainer comments: 'Data partitioning issue'"
 trigger_keywords:

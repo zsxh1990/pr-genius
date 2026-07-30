@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: stale-pr-far-behind-main
+tags: [cron, scheduling, reliability]
 description: "PR 距离 main 太远，冲突无法解决"
 symptom: "maintainer 评论: N commits behind main, conflicts in X surface"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Success Pattern
 key: nousresearch-platform-fix
+tags: [cron, scheduling, reliability]
 description: "NousResearch 平台修复"
 success_factors:
   - "platform 标签"

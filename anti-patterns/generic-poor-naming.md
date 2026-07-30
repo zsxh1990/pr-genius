@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-poor-naming
+tags: [cron, scheduling, reliability]
 description: "PR with poor naming"
 symptom: "Maintainer comments: 'Poor naming'"
 trigger_keywords:

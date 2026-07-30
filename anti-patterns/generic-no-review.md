@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-review
+tags: [cron, scheduling, reliability]
 description: "PR without review"
 symptom: "Maintainer comments: 'Please request review'"
 trigger_keywords:

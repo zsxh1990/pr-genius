@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-nosql-injection
+tags: [cron, scheduling, reliability]
 description: "PR introducing NoSQL injection vulnerability"
 symptom: "Maintainer comments: 'NoSQL injection vulnerability'"
 trigger_keywords:

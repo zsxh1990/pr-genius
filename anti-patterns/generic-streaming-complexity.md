@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-streaming-complexity
+tags: [cron, scheduling, reliability]
 description: "PR忽视流处理复杂性"
 symptom: "Maintainer comments: 'Streaming complexity'"
 trigger_keywords:

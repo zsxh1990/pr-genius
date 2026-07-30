@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: nousresearch-sweeper-implemented-on-main
+tags: [cron, scheduling, reliability]
 description: "NousResearch PR 已在 main 实现"
 symptom: "标签包含 sweeper: implemented-on-main"
 trigger_keywords:

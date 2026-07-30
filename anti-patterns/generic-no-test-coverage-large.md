@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-test-coverage-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require test coverage"
 symptom: "Maintainer comments: 'Please add tests'"
 trigger_keywords:

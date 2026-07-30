@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-pipeline
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据管道复杂性"
 symptom: "Maintainer comments: 'Data pipeline complexity'"
 trigger_keywords:

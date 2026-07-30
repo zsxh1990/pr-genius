@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-config-change
+tags: [cron, scheduling, reliability]
 description: "PR with config change"
 symptom: "Maintainer comments: 'Config change'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-governance
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据治理复杂性"
 symptom: "Maintainer comments: 'Data governance complexity'"
 trigger_keywords:

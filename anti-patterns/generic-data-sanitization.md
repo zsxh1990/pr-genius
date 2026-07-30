@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-sanitization
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据清理"
 symptom: "Maintainer comments: 'Data sanitization issue'"
 trigger_keywords:

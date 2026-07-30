@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-audit-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require audit"
 symptom: "Maintainer comments: 'Please build audit'"
 trigger_keywords:

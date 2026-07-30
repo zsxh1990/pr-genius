@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-container-complexity
+tags: [cron, scheduling, reliability]
 description: "PR忽视容器复杂性"
 symptom: "Maintainer comments: 'Container complexity'"
 trigger_keywords:

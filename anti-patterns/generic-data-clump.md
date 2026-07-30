@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-clump
+tags: [cron, scheduling, reliability]
 description: "PR with data clump"
 symptom: "Maintainer comments: 'Data clump'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-deprecated-api
+tags: [cron, scheduling, reliability]
 description: "PR using deprecated API"
 symptom: "Maintainer comments: 'Deprecated API'"
 trigger_keywords:

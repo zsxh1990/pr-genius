@@ -1,6 +1,7 @@
 ---
 type: Success Pattern
 key: nousresearch-comp-agent-fix
+tags: [cron, scheduling, reliability]
 description: "NousResearch Agent 组件修复"
 success_factors:
   - "comp/agent 标签"

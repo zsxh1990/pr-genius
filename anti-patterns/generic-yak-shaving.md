@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-yak-shaving
+tags: [cron, scheduling, reliability]
 description: "PR with yak shaving"
 symptom: "Maintainer comments: 'Yak shaving'"
 trigger_keywords:

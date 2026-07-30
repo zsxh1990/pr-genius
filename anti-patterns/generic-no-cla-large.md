@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-cla-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require CLA"
 symptom: "Maintainer comments: 'Please sign CLA'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-migration
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据迁移"
 symptom: "Maintainer comments: 'Data migration issue'"
 trigger_keywords:

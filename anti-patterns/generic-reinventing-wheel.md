@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-reinventing-wheel
+tags: [cron, scheduling, reliability]
 description: "PR reinventing the wheel"
 symptom: "Maintainer comments: 'Reinventing the wheel'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-autonomy-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require autonomy"
 symptom: "Maintainer comments: 'Please build autonomy'"
 trigger_keywords:

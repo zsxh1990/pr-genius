@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-breaking-change-no-compat
+tags: [cron, scheduling, reliability]
 description: "Breaking changes without backward compatibility"
 symptom: "Maintainer comments: 'This breaks existing users'"
 trigger_keywords:

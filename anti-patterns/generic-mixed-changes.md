@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-mixed-changes
+tags: [cron, scheduling, reliability]
 description: "PR with mixed changes"
 symptom: "Maintainer comments: 'Please separate changes'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-eventual-consistency
+tags: [cron, scheduling, reliability]
 description: "PR忽视eventual consistency"
 symptom: "Maintainer comments: 'Eventual consistency'"
 trigger_keywords:

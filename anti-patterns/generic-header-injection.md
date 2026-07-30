@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-header-injection
+tags: [cron, scheduling, reliability]
 description: "PR introducing header injection vulnerability"
 symptom: "Maintainer comments: 'Header injection vulnerability'"
 trigger_keywords:

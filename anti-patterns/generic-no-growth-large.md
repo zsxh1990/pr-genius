@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-growth-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require growth"
 symptom: "Maintainer comments: 'Please provide growth'"
 trigger_keywords:

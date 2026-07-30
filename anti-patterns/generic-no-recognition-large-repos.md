@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-recognition-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require recognition"
 symptom: "Maintainer comments: 'Please build recognition'"
 trigger_keywords:

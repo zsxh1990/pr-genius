@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-monitoring-change
+tags: [cron, scheduling, reliability]
 description: "PR with monitoring change"
 symptom: "Maintainer comments: 'Monitoring change'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: openclaw-compatibility-risk
+tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 存在兼容性风险"
 symptom: "标签包含 merge-risk: compatibility"
 trigger_keywords:

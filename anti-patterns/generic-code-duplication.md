@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-code-duplication
+tags: [cron, scheduling, reliability]
 description: "PR with code duplication"
 symptom: "Maintainer comments: 'Code duplication'"
 trigger_keywords:

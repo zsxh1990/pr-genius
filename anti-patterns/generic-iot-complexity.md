@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-iot-complexity
+tags: [cron, scheduling, reliability]
 description: "PR忽视IoT复杂性"
 symptom: "Maintainer comments: 'IoT complexity'"
 trigger_keywords:

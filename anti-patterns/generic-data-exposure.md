@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-exposure
+tags: [cron, scheduling, reliability]
 description: "PR exposing sensitive data"
 symptom: "Maintainer comments: 'Data exposure'"
 trigger_keywords:

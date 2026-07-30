@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-privacy-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require privacy"
 symptom: "Maintainer comments: 'Please build privacy'"
 trigger_keywords:

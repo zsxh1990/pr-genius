@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-offboarding-large-repos-final
+tags: [cron, scheduling, reliability]
 description: "Large repos require offboarding"
 symptom: "Maintainer comments: 'Please build offboarding'"
 trigger_keywords:

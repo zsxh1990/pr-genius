@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-loss
+tags: [cron, scheduling, reliability]
 description: "PR导致数据丢失"
 symptom: "Maintainer comments: 'Data loss'"
 trigger_keywords:

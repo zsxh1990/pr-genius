@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-ci
+tags: [cron, scheduling, reliability]
 description: "PR without CI"
 symptom: "Maintainer comments: 'Please run CI'"
 trigger_keywords:

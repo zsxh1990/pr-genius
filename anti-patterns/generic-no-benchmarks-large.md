@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-benchmarks-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require benchmarks"
 symptom: "Maintainer comments: 'Please add benchmarks'"
 trigger_keywords:

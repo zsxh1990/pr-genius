@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-recovery
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据恢复"
 symptom: "Maintainer comments: 'Data recovery issue'"
 trigger_keywords:

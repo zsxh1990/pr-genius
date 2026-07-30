@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-constraints
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据约束"
 symptom: "Maintainer comments: 'Data constraints issue'"
 trigger_keywords:

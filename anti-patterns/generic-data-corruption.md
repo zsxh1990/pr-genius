@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-corruption
+tags: [cron, scheduling, reliability]
 description: "PR导致数据损坏"
 symptom: "Maintainer comments: 'Data corruption'"
 trigger_keywords:

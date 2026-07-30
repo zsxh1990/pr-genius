@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-nihsyndrome
+tags: [cron, scheduling, reliability]
 description: "PR with NIH syndrome"
 symptom: "Maintainer comments: 'NIH syndrome'"
 trigger_keywords:

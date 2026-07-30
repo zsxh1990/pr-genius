@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-profiling-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require profiling"
 symptom: "Maintainer comments: 'Please add profiling'"
 trigger_keywords:

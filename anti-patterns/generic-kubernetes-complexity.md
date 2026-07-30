@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-kubernetes-complexity
+tags: [cron, scheduling, reliability]
 description: "PR忽视Kubernetes复杂性"
 symptom: "Maintainer comments: 'Kubernetes complexity'"
 trigger_keywords:

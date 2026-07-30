@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-documentation-culture-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require documentation culture"
 symptom: "Maintainer comments: 'Please build documentation culture'"
 trigger_keywords:

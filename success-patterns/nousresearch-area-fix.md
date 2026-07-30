@@ -1,6 +1,7 @@
 ---
 type: Success Pattern
 key: nousresearch-area-fix
+tags: [cron, scheduling, reliability]
 description: "NousResearch 领域修复"
 success_factors:
   - "area 标签"

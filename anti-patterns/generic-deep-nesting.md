@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-deep-nesting
+tags: [cron, scheduling, reliability]
 description: "PR with deep nesting"
 symptom: "Maintainer comments: 'Deep nesting'"
 trigger_keywords:

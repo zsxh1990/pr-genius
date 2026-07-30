@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-knowledge-transfer-large-repos-final
+tags: [cron, scheduling, reliability]
 description: "Large repos require knowledge transfer"
 symptom: "Maintainer comments: 'Please build knowledge transfer'"
 trigger_keywords:

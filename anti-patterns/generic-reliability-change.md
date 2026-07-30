@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-reliability-change
+tags: [cron, scheduling, reliability]
 description: "PR with reliability change"
 symptom: "Maintainer comments: 'Reliability change'"
 trigger_keywords:

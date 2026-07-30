@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-improper-error-handling
+tags: [cron, scheduling, reliability]
 description: "PR with improper error handling"
 symptom: "Maintainer comments: 'Improper error handling'"
 trigger_keywords:

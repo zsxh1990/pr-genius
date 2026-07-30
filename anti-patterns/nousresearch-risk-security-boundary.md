@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: nousresearch-risk-security-boundary
+tags: [cron, scheduling, reliability]
 description: "NousResearch PR 涉及安全边界改动"
 symptom: "标签包含 sweeper:risk-security-boundary"
 trigger_keywords:

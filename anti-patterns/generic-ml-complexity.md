@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-ml-complexity
+tags: [cron, scheduling, reliability]
 description: "PR忽视ML复杂性"
 symptom: "Maintainer comments: 'ML complexity'"
 trigger_keywords:

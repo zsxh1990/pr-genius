@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-security-change
+tags: [cron, scheduling, reliability]
 description: "PR with security change"
 symptom: "Maintainer comments: 'Security change'"
 trigger_keywords:

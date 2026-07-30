@@ -1,6 +1,7 @@
 ---
 type: Success Pattern
 key: misakanet-mcp-quickstart
+tags: [cron, scheduling, reliability]
 description: "文档+测试+配置示例：完整的功能文档化"
 success_factors:
   - "解决 Issue #353 中明确的需求"

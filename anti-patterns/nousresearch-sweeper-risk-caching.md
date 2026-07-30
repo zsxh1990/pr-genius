@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: nousresearch-sweeper-risk-caching
+tags: [cron, scheduling, reliability]
 description: "NousResearch PR 涉及缓存风险"
 symptom: "标签包含 sweeper: risk-caching"
 trigger_keywords:

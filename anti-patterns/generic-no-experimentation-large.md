@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-experimentation-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require experimentation"
 symptom: "Maintainer comments: 'Please experiment'"
 trigger_keywords:

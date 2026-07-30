@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-formats
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据格式"
 symptom: "Maintainer comments: 'Data formats issue'"
 trigger_keywords:

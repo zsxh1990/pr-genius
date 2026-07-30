@@ -1,6 +1,7 @@
 ---
 type: Success Pattern
 key: misakanet-reputation-system
+tags: [cron, scheduling, reliability]
 description: "完整功能模块：算法实现 + 单元测试 + 文档"
 success_factors:
   - "解决 Issue #356 中明确的需求"

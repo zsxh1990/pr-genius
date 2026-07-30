@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-knowledge-sharing-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require knowledge sharing"
 symptom: "Maintainer comments: 'Please build knowledge sharing'"
 trigger_keywords:

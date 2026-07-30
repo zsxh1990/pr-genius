@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-approval-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require approval"
 symptom: "Maintainer comments: 'Please get approval'"
 trigger_keywords:

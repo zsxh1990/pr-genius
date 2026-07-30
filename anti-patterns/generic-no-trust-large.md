@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-trust-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require trust"
 symptom: "Maintainer comments: 'Please build trust'"
 trigger_keywords:

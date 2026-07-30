@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-inclusion-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require inclusion"
 symptom: "Maintainer comments: 'Please build inclusion'"
 trigger_keywords:

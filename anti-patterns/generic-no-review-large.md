@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-review-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require review"
 symptom: "Maintainer comments: 'Please request review'"
 trigger_keywords:

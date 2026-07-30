@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: nousresearch-sweeper-risk-message-delivery
+tags: [cron, scheduling, reliability]
 description: "NousResearch PR 涉及消息投递"
 symptom: "标签包含 sweeper: risk-message-delivery"
 trigger_keywords:

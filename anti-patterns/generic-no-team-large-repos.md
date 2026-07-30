@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-team-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require team"
 symptom: "Maintainer comments: 'Please build team'"
 trigger_keywords:

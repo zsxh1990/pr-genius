@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-lake
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据湖复杂性"
 symptom: "Maintainer comments: 'Data lake complexity'"
 trigger_keywords:

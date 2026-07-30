@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-testing-culture-large-repos-final
+tags: [cron, scheduling, reliability]
 description: "Large repos require testing culture"
 symptom: "Maintainer comments: 'Please build testing culture'"
 trigger_keywords:

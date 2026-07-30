@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-sre-culture-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require SRE culture"
 symptom: "Maintainer comments: 'Please follow SRE'"
 trigger_keywords:

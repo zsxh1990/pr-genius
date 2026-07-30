@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-collaboration-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require collaboration"
 symptom: "Maintainer comments: 'Please build collaboration'"
 trigger_keywords:

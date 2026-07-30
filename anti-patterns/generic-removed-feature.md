@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-removed-feature
+tags: [cron, scheduling, reliability]
 description: "PR using removed feature"
 symptom: "Maintainer comments: 'Removed feature'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-unnecessary-dependency
+tags: [cron, scheduling, reliability]
 description: "PR adding unnecessary dependency"
 symptom: "Maintainer comments: 'Unnecessary dependency'"
 trigger_keywords:

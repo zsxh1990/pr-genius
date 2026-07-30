@@ -1,6 +1,7 @@
 ---
 type: Success Pattern
 key: openclaw-channel-fix
+tags: [cron, scheduling, reliability]
 description: "OpenClaw 渠道修复"
 success_factors:
   - "channel 标签"

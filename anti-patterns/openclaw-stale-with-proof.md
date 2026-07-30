@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: openclaw-stale-with-proof
+tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 有 proof 但被标记 stale"
 symptom: "标签包含 stale 和 proof: supplied"
 trigger_keywords:

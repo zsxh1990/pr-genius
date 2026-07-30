@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-approval
+tags: [cron, scheduling, reliability]
 description: "PR without approval"
 symptom: "Maintainer comments: 'Please get approval'"
 trigger_keywords:

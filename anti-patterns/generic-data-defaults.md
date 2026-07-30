@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-defaults
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据默认值"
 symptom: "Maintainer comments: 'Data defaults issue'"
 trigger_keywords:

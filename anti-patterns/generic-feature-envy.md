@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-feature-envy
+tags: [cron, scheduling, reliability]
 description: "PR with feature envy"
 symptom: "Maintainer comments: 'Feature envy'"
 trigger_keywords:

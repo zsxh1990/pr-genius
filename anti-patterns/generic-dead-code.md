@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-dead-code
+tags: [cron, scheduling, reliability]
 description: "PR with dead code"
 symptom: "Maintainer comments: 'Dead code'"
 trigger_keywords:

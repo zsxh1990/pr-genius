@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-missing-issue-reference
+tags: [cron, scheduling, reliability]
 description: "PR without linked issue"
 symptom: "Maintainer comments: 'Please link to an issue'"
 trigger_keywords:

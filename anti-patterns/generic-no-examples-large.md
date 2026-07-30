@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-examples-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require examples"
 symptom: "Maintainer comments: 'Please add examples'"
 trigger_keywords:

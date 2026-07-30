@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-acid-properties
+tags: [cron, scheduling, reliability]
 description: "PR忽视ACID属性"
 symptom: "Maintainer comments: 'ACID properties'"
 trigger_keywords:

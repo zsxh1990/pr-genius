@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-caching
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据缓存"
 symptom: "Maintainer comments: 'Data caching issue'"
 trigger_keywords:

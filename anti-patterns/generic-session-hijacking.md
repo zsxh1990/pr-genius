@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-session-hijacking
+tags: [cron, scheduling, reliability]
 description: "PR introducing session hijacking vulnerability"
 symptom: "Maintainer comments: 'Session hijacking vulnerability'"
 trigger_keywords:

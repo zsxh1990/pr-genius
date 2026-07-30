@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-complex-code
+tags: [cron, scheduling, reliability]
 description: "PR with overly complex code"
 symptom: "Maintainer comments: 'Too complex'"
 trigger_keywords:

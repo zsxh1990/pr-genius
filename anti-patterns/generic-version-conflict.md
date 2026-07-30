@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-version-conflict
+tags: [cron, scheduling, reliability]
 description: "PR with version conflict"
 symptom: "Maintainer comments: 'Version conflict'"
 trigger_keywords:

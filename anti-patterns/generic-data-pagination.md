@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-pagination
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据分页"
 symptom: "Maintainer comments: 'Data pagination issue'"
 trigger_keywords:

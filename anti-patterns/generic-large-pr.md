@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-large-pr
+tags: [cron, scheduling, reliability]
 description: "PR too large to review"
 symptom: "Maintainer comments: 'PR too large'"
 trigger_keywords:

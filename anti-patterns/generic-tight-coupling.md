@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-tight-coupling
+tags: [cron, scheduling, reliability]
 description: "PR with tight coupling"
 symptom: "Maintainer comments: 'Tight coupling'"
 trigger_keywords:

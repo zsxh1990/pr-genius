@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-failure-tolerance-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require failure tolerance"
 symptom: "Maintainer comments: 'Please build failure tolerance'"
 trigger_keywords:

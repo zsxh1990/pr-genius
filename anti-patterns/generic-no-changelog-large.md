@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-changelog-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require changelog"
 symptom: "Maintainer comments: 'Please update changelog'"
 trigger_keywords:

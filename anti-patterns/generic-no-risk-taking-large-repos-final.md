@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-risk-taking-large-repos-final
+tags: [cron, scheduling, reliability]
 description: "Large repos require risk-taking"
 symptom: "Maintainer comments: 'Please build risk-taking'"
 trigger_keywords:

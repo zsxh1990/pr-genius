@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: nousresearch-risk-platform-windows
+tags: [cron, scheduling, reliability]
 description: "NousResearch PR 涉及 Windows 平台兼容性"
 symptom: "标签包含 sweeper:risk-platform-windows"
 trigger_keywords:

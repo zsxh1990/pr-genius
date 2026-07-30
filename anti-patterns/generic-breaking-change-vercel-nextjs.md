@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-breaking-change-vercel-nextjs
+tags: [cron, scheduling, reliability]
 description: "Vercel Next.js rejects breaking changes without discussion"
 symptom: "Maintainer comments: 'Please discuss first'"
 trigger_keywords:

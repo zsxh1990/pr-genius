@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: openclaw-stale-pr
+tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 长时间无更新被标记 stale"
 symptom: "标签包含 stale，状态变为 waiting on author"
 trigger_keywords:

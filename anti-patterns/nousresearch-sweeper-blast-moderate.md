@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: nousresearch-sweeper-blast-moderate
+tags: [cron, scheduling, reliability]
 description: "NousResearch PR 影响范围中等"
 symptom: "标签包含 sweeper: blast-moderate"
 trigger_keywords:

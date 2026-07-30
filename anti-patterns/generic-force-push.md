@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-force-push
+tags: [cron, scheduling, reliability]
 description: "Force push to shared branch"
 symptom: "Maintainer comments: 'Please don't force push'"
 trigger_keywords:

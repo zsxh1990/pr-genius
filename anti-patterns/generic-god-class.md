@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-god-class
+tags: [cron, scheduling, reliability]
 description: "PR with god class"
 symptom: "Maintainer comments: 'God class'"
 trigger_keywords:

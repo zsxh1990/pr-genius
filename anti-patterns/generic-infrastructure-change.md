@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-infrastructure-change
+tags: [cron, scheduling, reliability]
 description: "PR with infrastructure change"
 symptom: "Maintainer comments: 'Infrastructure change'"
 trigger_keywords:

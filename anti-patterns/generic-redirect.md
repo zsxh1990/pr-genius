@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-redirect
+tags: [cron, scheduling, reliability]
 description: "PR introducing open redirect vulnerability"
 symptom: "Maintainer comments: 'Open redirect vulnerability'"
 trigger_keywords:

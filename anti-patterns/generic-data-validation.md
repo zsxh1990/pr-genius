@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-validation
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据验证"
 symptom: "Maintainer comments: 'Data validation issue'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-proprietary-dependency
+tags: [cron, scheduling, reliability]
 description: "PR adding proprietary dependency"
 symptom: "Maintainer comments: 'Proprietary dependency'"
 trigger_keywords:

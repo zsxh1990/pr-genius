@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-dashboard-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require dashboard"
 symptom: "Maintainer comments: 'Please add dashboard'"
 trigger_keywords:

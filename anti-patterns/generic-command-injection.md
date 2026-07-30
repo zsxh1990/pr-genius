@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-command-injection
+tags: [cron, scheduling, reliability]
 description: "PR introducing command injection vulnerability"
 symptom: "Maintainer comments: 'Command injection vulnerability'"
 trigger_keywords:

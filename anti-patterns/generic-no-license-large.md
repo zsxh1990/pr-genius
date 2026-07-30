@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-license-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require license"
 symptom: "Maintainer comments: 'Please add license'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: nousresearch-sweeper-not-planned
+tags: [cron, scheduling, reliability]
 description: "NousResearch PR 被标记为 not-planned"
 symptom: "标签包含 sweeper:not-planned"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-message-chains
+tags: [cron, scheduling, reliability]
 description: "PR with message chains"
 symptom: "Maintainer comments: 'Message chains'"
 trigger_keywords:

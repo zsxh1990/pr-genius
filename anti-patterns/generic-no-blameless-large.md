@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-blameless-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require blameless culture"
 symptom: "Maintainer comments: 'Please follow blameless culture'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-breaking-change-pandas
+tags: [cron, scheduling, reliability]
 description: "Pandas rejects breaking changes without deprecation"
 symptom: "Maintainer comments: 'Please add deprecation warning first'"
 trigger_keywords:

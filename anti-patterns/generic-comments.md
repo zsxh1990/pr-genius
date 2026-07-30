@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-comments
+tags: [cron, scheduling, reliability]
 description: "PR with excessive comments"
 symptom: "Maintainer comments: 'Too many comments'"
 trigger_keywords:

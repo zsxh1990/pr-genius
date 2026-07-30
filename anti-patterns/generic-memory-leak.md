@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-memory-leak
+tags: [cron, scheduling, reliability]
 description: "PR introducing memory leak"
 symptom: "Maintainer comments: 'Memory leak'"
 trigger_keywords:

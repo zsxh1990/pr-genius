@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-purpose-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require purpose"
 symptom: "Maintainer comments: 'Please show purpose'"
 trigger_keywords:

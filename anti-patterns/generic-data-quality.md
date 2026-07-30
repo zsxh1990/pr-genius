@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-quality
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据质量"
 symptom: "Maintainer comments: 'Data quality issue'"
 trigger_keywords:

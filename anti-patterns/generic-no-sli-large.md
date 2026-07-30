@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-sli-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require SLI"
 symptom: "Maintainer comments: 'Please add SLI'"
 trigger_keywords:

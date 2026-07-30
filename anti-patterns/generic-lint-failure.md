@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-lint-failure
+tags: [cron, scheduling, reliability]
 description: "PR with lint failure"
 symptom: "Lint failed"
 trigger_keywords:

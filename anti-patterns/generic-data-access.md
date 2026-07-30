@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-access
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据访问"
 symptom: "Maintainer comments: 'Data access issue'"
 trigger_keywords:

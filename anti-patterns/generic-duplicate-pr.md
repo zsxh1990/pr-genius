@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-duplicate-pr
+tags: [cron, scheduling, reliability]
 description: "Duplicate PR from same author"
 symptom: "Maintainer comments: 'Duplicate of #NNN'"
 trigger_keywords:

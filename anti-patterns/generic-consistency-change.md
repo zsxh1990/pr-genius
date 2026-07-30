@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-consistency-change
+tags: [cron, scheduling, reliability]
 description: "PR with consistency change"
 symptom: "Maintainer comments: 'Consistency change'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-innovation-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require innovation"
 symptom: "Maintainer comments: 'Please innovate'"
 trigger_keywords:

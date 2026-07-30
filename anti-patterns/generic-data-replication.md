@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-replication
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据复制"
 symptom: "Maintainer comments: 'Data replication issue'"
 trigger_keywords:

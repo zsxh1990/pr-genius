@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-monitoring-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require monitoring"
 symptom: "Maintainer comments: 'Please add monitoring'"
 trigger_keywords:

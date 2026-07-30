@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-token-leak
+tags: [cron, scheduling, reliability]
 description: "PR introducing token leak vulnerability"
 symptom: "Maintainer comments: 'Token leak vulnerability'"
 trigger_keywords:

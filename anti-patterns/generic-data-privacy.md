@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-privacy
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据隐私"
 symptom: "Maintainer comments: 'Data privacy issue'"
 trigger_keywords:

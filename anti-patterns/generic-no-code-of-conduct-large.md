@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-code-of-conduct-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require code of conduct"
 symptom: "Maintainer comments: 'Please follow code of conduct'"
 trigger_keywords:

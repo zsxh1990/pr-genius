@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-flexibility-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require flexibility"
 symptom: "Maintainer comments: 'Please build flexibility'"
 trigger_keywords:

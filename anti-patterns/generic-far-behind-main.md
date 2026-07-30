@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-far-behind-main
+tags: [cron, scheduling, reliability]
 description: "PR far behind main"
 symptom: "Maintainer comments: 'X commits behind main'"
 trigger_keywords:

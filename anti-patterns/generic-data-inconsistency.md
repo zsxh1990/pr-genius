@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-inconsistency
+tags: [cron, scheduling, reliability]
 description: "PR导致数据不一致"
 symptom: "Maintainer comments: 'Data inconsistency'"
 trigger_keywords:

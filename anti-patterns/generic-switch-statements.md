@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-switch-statements
+tags: [cron, scheduling, reliability]
 description: "PR with switch statements"
 symptom: "Maintainer comments: 'Switch statements'"
 trigger_keywords:

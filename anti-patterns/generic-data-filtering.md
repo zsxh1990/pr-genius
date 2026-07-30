@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-filtering
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据过滤"
 symptom: "Maintainer comments: 'Data filtering issue'"
 trigger_keywords:

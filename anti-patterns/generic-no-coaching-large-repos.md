@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-coaching-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require coaching"
 symptom: "Maintainer comments: 'Please build coaching'"
 trigger_keywords:

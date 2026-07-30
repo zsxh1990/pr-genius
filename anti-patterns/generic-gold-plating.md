@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-gold-plating
+tags: [cron, scheduling, reliability]
 description: "PR with gold plating"
 symptom: "Maintainer comments: 'Gold plating'"
 trigger_keywords:

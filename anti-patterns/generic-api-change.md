@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-api-change
+tags: [cron, scheduling, reliability]
 description: "PR with API change"
 symptom: "Maintainer comments: 'API change'"
 trigger_keywords:

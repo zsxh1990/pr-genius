@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-outdated-dependency
+tags: [cron, scheduling, reliability]
 description: "PR with outdated dependency"
 symptom: "Maintainer comments: 'Outdated dependency'"
 trigger_keywords:

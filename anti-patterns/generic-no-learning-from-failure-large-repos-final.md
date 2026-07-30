@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-learning-from-failure-large-repos-final
+tags: [cron, scheduling, reliability]
 description: "Large repos require learning from failure"
 symptom: "Maintainer comments: 'Please build learning from failure'"
 trigger_keywords:

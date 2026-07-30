@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-psychological-safety-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require psychological safety"
 symptom: "Maintainer comments: 'Please build psychological safety'"
 trigger_keywords:

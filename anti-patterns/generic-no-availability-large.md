@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-availability-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require availability"
 symptom: "Maintainer comments: 'Please build availability'"
 trigger_keywords:

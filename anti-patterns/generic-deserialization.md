@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-deserialization
+tags: [cron, scheduling, reliability]
 description: "PR introducing deserialization vulnerability"
 symptom: "Maintainer comments: 'Deserialization vulnerability'"
 trigger_keywords:

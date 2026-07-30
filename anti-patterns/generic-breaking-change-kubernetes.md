@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-breaking-change-kubernetes
+tags: [cron, scheduling, reliability]
 description: "Kubernetes rejects breaking changes without KEP"
 symptom: "Maintainer comments: 'Please open a KEP first'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-transformation
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据转换"
 symptom: "Maintainer comments: 'Data transformation issue'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: superseded-by-maintainer
+tags: [cron, scheduling, reliability]
 description: "PR 被 maintainer 的并行 PR 取代"
 symptom: "maintainer 评论: Superseded by #NNN, merged on main"
 trigger_keywords:

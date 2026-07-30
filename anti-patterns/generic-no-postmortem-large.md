@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-postmortem-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require postmortem"
 symptom: "Maintainer comments: 'Please add postmortem'"
 trigger_keywords:

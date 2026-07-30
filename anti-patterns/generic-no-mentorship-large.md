@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-mentorship-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require mentorship"
 symptom: "Maintainer comments: 'Please mentor others'"
 trigger_keywords:

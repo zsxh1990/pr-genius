@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: openclaw-availability-risk
+tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 涉及可用性，风险较高"
 symptom: "标签包含 merge-risk: availability"
 trigger_keywords:

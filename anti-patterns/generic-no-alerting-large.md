@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-alerting-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require alerting"
 symptom: "Maintainer comments: 'Please add alerting'"
 trigger_keywords:

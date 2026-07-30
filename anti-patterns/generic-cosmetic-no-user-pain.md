@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-cosmetic-no-user-pain
+tags: [cron, scheduling, reliability]
 description: "Cosmetic changes without user pain"
 symptom: "Maintainer comments: 'No user-facing benefit'"
 trigger_keywords:

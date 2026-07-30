@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-documentation
+tags: [cron, scheduling, reliability]
 description: "PR without documentation"
 symptom: "Maintainer comments: 'Please update docs'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-auth-bypass
+tags: [cron, scheduling, reliability]
 description: "PR introducing auth bypass"
 symptom: "Maintainer comments: 'Auth bypass'"
 trigger_keywords:

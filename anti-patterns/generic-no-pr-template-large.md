@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-pr-template-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require PR template"
 symptom: "Maintainer comments: 'Please use PR template'"
 trigger_keywords:

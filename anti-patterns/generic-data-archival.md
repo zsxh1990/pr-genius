@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-archival
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据归档"
 symptom: "Maintainer comments: 'Data archival issue'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-code-review-culture-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require code review culture"
 symptom: "Maintainer comments: 'Please build code review culture'"
 trigger_keywords:

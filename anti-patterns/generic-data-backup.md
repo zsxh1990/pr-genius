@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-backup
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据备份"
 symptom: "Maintainer comments: 'Data backup issue'"
 trigger_keywords:

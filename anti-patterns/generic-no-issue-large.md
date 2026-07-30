@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-issue-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require issue"
 symptom: "Maintainer comments: 'Please link issue'"
 trigger_keywords:

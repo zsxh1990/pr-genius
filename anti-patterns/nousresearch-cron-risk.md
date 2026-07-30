@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: nousresearch-cron-risk
+tags: [cron, scheduling, reliability]
 description: "NousResearch PR 涉及定时任务"
 symptom: "标签包含 comp/cron"
 trigger_keywords:

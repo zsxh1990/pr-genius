@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-vendor-lock-in
+tags: [cron, scheduling, reliability]
 description: "PR introducing vendor lock-in"
 symptom: "Maintainer comments: 'Vendor lock-in'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-continuous-learning-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require continuous learning"
 symptom: "Maintainer comments: 'Please follow continuous learning'"
 trigger_keywords:

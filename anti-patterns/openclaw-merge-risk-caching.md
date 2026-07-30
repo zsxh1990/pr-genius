@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: openclaw-merge-risk-caching
+tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 涉及缓存风险"
 symptom: "标签包含 merge-risk: risk-caching"
 trigger_keywords:

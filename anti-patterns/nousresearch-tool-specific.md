@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: nousresearch-tool-specific
+tags: [cron, scheduling, reliability]
 description: "NousResearch PR 涉及特定工具问题"
 symptom: "标签包含 tool/web, tool/tts, tool/delegate"
 trigger_keywords:

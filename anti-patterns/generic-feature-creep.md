@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-feature-creep
+tags: [cron, scheduling, reliability]
 description: "PR with feature creep"
 symptom: "Maintainer comments: 'Feature creep'"
 trigger_keywords:

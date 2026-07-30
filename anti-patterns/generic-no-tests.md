@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-tests
+tags: [cron, scheduling, reliability]
 description: "PR without tests"
 symptom: "Maintainer comments: 'Please add tests'"
 trigger_keywords:

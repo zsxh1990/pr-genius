@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-primitive-obsession
+tags: [cron, scheduling, reliability]
 description: "PR with primitive obsession"
 symptom: "Maintainer comments: 'Primitive obsession'"
 trigger_keywords:

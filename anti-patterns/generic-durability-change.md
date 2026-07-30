@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-durability-change
+tags: [cron, scheduling, reliability]
 description: "PR with durability change"
 symptom: "Maintainer comments: 'Durability change'"
 trigger_keywords:

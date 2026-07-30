@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-heavy-dependency
+tags: [cron, scheduling, reliability]
 description: "PR adding heavy dependency"
 symptom: "Maintainer comments: 'Heavy dependency'"
 trigger_keywords:

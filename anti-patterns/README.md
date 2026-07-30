@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern Bundle
 title: Anti-Patterns 索引
+tags: [cron, scheduling, reliability]
 description: PR 提交流程中的反模式（可检索的失败信号）
 version: 0.2.0
 created: 2026-07-02

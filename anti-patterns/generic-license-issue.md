@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-license-issue
+tags: [cron, scheduling, reliability]
 description: "PR with license issue"
 symptom: "Maintainer comments: 'License issue'"
 trigger_keywords:

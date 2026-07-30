@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-breaking-change-rust
+tags: [cron, scheduling, reliability]
 description: "Rust rejects breaking changes without RFC"
 symptom: "Maintainer comments: 'Please open an RFC first'"
 trigger_keywords:

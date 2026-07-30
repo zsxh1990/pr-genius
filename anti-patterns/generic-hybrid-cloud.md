@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-hybrid-cloud
+tags: [cron, scheduling, reliability]
 description: "PR忽视混合云复杂性"
 symptom: "Maintainer comments: 'Hybrid cloud complexity'"
 trigger_keywords:

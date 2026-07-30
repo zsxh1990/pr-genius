@@ -1,6 +1,7 @@
 ---
 type: Success Pattern
 key: openclaw-p1-priority-fix
+tags: [cron, scheduling, reliability]
 description: "OpenClaw P1 优先级修复"
 success_factors:
   - "P1 标签"

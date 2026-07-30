@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-missing-dependency
+tags: [cron, scheduling, reliability]
 description: "PR with missing dependency"
 symptom: "Maintainer comments: 'Missing dependency'"
 trigger_keywords:

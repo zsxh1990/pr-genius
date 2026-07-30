@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-null-pointer
+tags: [cron, scheduling, reliability]
 description: "PR introducing null pointer exception"
 symptom: "Maintainer comments: 'Null pointer exception'"
 trigger_keywords:

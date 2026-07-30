@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-communication-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require communication"
 symptom: "Maintainer comments: 'Please build communication'"
 trigger_keywords:

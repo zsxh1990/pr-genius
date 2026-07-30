@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-logging-large-repos-final
+tags: [cron, scheduling, reliability]
 description: "Large repos require logging"
 symptom: "Maintainer comments: 'Please build logging'"
 trigger_keywords:

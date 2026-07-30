@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-serverless-complexity
+tags: [cron, scheduling, reliability]
 description: "PR忽视serverless复杂性"
 symptom: "Maintainer comments: 'Serverless complexity'"
 trigger_keywords:

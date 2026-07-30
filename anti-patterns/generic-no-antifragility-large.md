@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-antifragility-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require antifragility"
 symptom: "Maintainer comments: 'Please build antifragility'"
 trigger_keywords:

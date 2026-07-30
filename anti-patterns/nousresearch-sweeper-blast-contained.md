@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: nousresearch-sweeper-blast-contained
+tags: [cron, scheduling, reliability]
 description: "NousResearch PR 影响范围可控"
 symptom: "标签包含 sweeper: blast-contained"
 trigger_keywords:

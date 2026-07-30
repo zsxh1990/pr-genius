@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-merge-conflict
+tags: [cron, scheduling, reliability]
 description: "PR with merge conflict"
 symptom: "PR has conflicts"
 trigger_keywords:

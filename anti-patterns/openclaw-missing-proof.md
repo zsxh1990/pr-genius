@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: openclaw-missing-proof
+tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 缺少 proof of work"
 symptom: "标签包含 needs proof 或 status: needs proof"
 trigger_keywords:

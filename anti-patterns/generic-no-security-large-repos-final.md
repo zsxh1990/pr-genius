@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-security-large-repos-final
+tags: [cron, scheduling, reliability]
 description: "Large repos require security"
 symptom: "Maintainer comments: 'Please build security'"
 trigger_keywords:

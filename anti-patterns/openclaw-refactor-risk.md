@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: openclaw-refactor-risk
+tags: [cron, scheduling, reliability]
 description: "OpenClaw 重构 PR 风险较高"
 symptom: "标签包含 size: L/XL"
 trigger_keywords:

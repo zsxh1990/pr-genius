@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-unclear-commit-message
+tags: [cron, scheduling, reliability]
 description: "PR with unclear commit message"
 symptom: "Maintainer comments: 'Please improve commit message'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: openclaw-waiting-on-author
+tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 等待作者响应"
 symptom: "状态变为 waiting on author"
 trigger_keywords:

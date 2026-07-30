@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-hardcoded-secret
+tags: [cron, scheduling, reliability]
 description: "PR with hardcoded secret"
 symptom: "Maintainer comments: 'Hardcoded secret'"
 trigger_keywords:

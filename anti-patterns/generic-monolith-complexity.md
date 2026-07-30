@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-monolith-complexity
+tags: [cron, scheduling, reliability]
 description: "PR忽视单体应用复杂性"
 symptom: "Maintainer comments: 'Monolith complexity'"
 trigger_keywords:

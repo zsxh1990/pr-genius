@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-ssrf
+tags: [cron, scheduling, reliability]
 description: "PR introducing SSRF vulnerability"
 symptom: "Maintainer comments: 'SSRF vulnerability'"
 trigger_keywords:

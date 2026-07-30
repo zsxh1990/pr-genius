@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-breaking-change-tensorflow
+tags: [cron, scheduling, reliability]
 description: "TensorFlow rejects breaking changes without discussion"
 symptom: "Maintainer comments: 'Please discuss first'"
 trigger_keywords:

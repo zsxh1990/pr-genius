@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-slo-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require SLO"
 symptom: "Maintainer comments: 'Please build SLO'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-aggregation
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据聚合"
 symptom: "Maintainer comments: 'Data aggregation issue'"
 trigger_keywords:

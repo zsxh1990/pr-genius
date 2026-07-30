@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-duplication
+tags: [cron, scheduling, reliability]
 description: "PR导致数据重复"
 symptom: "Maintainer comments: 'Data duplication'"
 trigger_keywords:

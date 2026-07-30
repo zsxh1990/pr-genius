@@ -1,6 +1,7 @@
 ---
 type: Success Pattern
 key: openclaw-plugin-fix
+tags: [cron, scheduling, reliability]
 description: "OpenClaw 插件修复"
 success_factors:
   - "plugin 标签"

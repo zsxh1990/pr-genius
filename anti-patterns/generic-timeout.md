@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-timeout
+tags: [cron, scheduling, reliability]
 description: "PR introducing timeout"
 symptom: "Maintainer comments: 'Timeout'"
 trigger_keywords:

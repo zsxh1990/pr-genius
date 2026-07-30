@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-global-state
+tags: [cron, scheduling, reliability]
 description: "PR with global state"
 symptom: "Maintainer comments: 'Global state'"
 trigger_keywords:

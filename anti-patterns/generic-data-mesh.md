@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-mesh
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据网格复杂性"
 symptom: "Maintainer comments: 'Data mesh complexity'"
 trigger_keywords:

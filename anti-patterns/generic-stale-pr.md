@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-stale-pr
+tags: [cron, scheduling, reliability]
 description: "PR marked as stale"
 symptom: "PR labeled as 'stale'"
 trigger_keywords:

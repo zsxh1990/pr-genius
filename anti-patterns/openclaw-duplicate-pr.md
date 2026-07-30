@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: openclaw-duplicate-pr
+tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 与已有实现重复"
 symptom: "标签包含 duplicate 或 sweeper:implemented-on-main"
 trigger_keywords:

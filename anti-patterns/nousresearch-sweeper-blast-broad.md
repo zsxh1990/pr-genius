@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: nousresearch-sweeper-blast-broad
+tags: [cron, scheduling, reliability]
 description: "NousResearch PR 影响范围太广，标记 blast-broad"
 symptom: "标签包含 sweeper:blast-broad"
 trigger_keywords:

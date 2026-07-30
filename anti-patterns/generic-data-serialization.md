@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-serialization
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据序列化"
 symptom: "Maintainer comments: 'Data serialization issue'"
 trigger_keywords:

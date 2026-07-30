@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-catalog
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据目录"
 symptom: "Maintainer comments: 'Data catalog issue'"
 trigger_keywords:

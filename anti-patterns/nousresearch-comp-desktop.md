@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: nousresearch-comp-desktop
+tags: [cron, scheduling, reliability]
 description: "NousResearch 桌面端 PR 风险较高"
 symptom: "标签包含 comp/desktop"
 trigger_keywords:

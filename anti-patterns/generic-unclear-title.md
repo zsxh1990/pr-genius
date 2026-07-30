@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-unclear-title
+tags: [cron, scheduling, reliability]
 description: "PR with unclear title"
 symptom: "Maintainer comments: 'Please improve title'"
 trigger_keywords:

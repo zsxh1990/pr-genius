@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-succession-planning-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require succession planning"
 symptom: "Maintainer comments: 'Please plan succession'"
 trigger_keywords:

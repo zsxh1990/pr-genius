@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-xxe
+tags: [cron, scheduling, reliability]
 description: "PR introducing XXE vulnerability"
 symptom: "Maintainer comments: 'XXE vulnerability'"
 trigger_keywords:

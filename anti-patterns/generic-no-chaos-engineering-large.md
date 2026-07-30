@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-chaos-engineering-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require chaos engineering"
 symptom: "Maintainer comments: 'Please add chaos engineering'"
 trigger_keywords:

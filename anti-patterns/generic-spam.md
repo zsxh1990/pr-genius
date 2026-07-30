@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-spam
+tags: [cron, scheduling, reliability]
 description: "Spam PRs with no value"
 symptom: "PR closed immediately as spam"
 trigger_keywords:

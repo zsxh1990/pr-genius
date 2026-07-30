@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-stack-overflow
+tags: [cron, scheduling, reliability]
 description: "PR introducing stack overflow"
 symptom: "Maintainer comments: 'Stack overflow'"
 trigger_keywords:

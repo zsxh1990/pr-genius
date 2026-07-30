@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-api-key-leak
+tags: [cron, scheduling, reliability]
 description: "PR introducing API key leak vulnerability"
 symptom: "Maintainer comments: 'API key leak vulnerability'"
 trigger_keywords:

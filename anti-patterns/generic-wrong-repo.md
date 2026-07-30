@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-wrong-repo
+tags: [cron, scheduling, reliability]
 description: "PR to wrong repo"
 symptom: "Maintainer comments: 'Wrong repo'"
 trigger_keywords:

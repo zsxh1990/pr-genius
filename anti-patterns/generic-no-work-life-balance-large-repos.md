@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-work-life-balance-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require work-life balance"
 symptom: "Maintainer comments: 'Please build work-life balance'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-game-day-large-repos-final
+tags: [cron, scheduling, reliability]
 description: "Large repos require game day"
 symptom: "Maintainer comments: 'Please build game day'"
 trigger_keywords:

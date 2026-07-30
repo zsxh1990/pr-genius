@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-inappropriate-intimacy
+tags: [cron, scheduling, reliability]
 description: "PR with inappropriate intimacy"
 symptom: "Maintainer comments: 'Inappropriate intimacy'"
 trigger_keywords:

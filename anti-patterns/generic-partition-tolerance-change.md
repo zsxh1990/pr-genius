@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-partition-tolerance-change
+tags: [cron, scheduling, reliability]
 description: "PR with partition tolerance change"
 symptom: "Maintainer comments: 'Partition tolerance change'"
 trigger_keywords:

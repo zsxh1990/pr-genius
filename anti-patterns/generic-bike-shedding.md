@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-bike-shedding
+tags: [cron, scheduling, reliability]
 description: "PR with bike shedding"
 symptom: "Maintainer comments: 'Bike shedding'"
 trigger_keywords:

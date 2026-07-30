@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-clickjacking
+tags: [cron, scheduling, reliability]
 description: "PR introducing clickjacking vulnerability"
 symptom: "Maintainer comments: 'Clickjacking vulnerability'"
 trigger_keywords:

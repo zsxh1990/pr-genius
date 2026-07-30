@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-edge-computing
+tags: [cron, scheduling, reliability]
 description: "PR忽视边缘计算复杂性"
 symptom: "Maintainer comments: 'Edge computing complexity'"
 trigger_keywords:

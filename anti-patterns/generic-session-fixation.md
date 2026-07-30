@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-session-fixation
+tags: [cron, scheduling, reliability]
 description: "PR introducing session fixation vulnerability"
 symptom: "Maintainer comments: 'Session fixation vulnerability'"
 trigger_keywords:

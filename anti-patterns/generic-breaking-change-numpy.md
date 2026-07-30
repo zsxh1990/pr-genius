@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-breaking-change-numpy
+tags: [cron, scheduling, reliability]
 description: "NumPy rejects breaking changes without NEP"
 symptom: "Maintainer comments: 'Please open a NEP first'"
 trigger_keywords:

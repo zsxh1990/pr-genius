@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-devops-culture-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require DevOps culture"
 symptom: "Maintainer comments: 'Please follow DevOps'"
 trigger_keywords:

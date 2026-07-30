@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-science-complexity
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据科学复杂性"
 symptom: "Maintainer comments: 'Data science complexity'"
 trigger_keywords:

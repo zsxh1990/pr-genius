@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-deadlock
+tags: [cron, scheduling, reliability]
 description: "PR introducing deadlock"
 symptom: "Maintainer comments: 'Deadlock'"
 trigger_keywords:

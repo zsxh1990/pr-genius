@@ -1,6 +1,7 @@
 ---
 type: Success Pattern
 key: nousresearch-p3-priority-fix
+tags: [cron, scheduling, reliability]
 description: "NousResearch P3 优先级修复"
 success_factors:
   - "P3 标签"

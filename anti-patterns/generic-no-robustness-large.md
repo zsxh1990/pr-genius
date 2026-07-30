@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-robustness-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require robustness"
 symptom: "Maintainer comments: 'Please build robustness'"
 trigger_keywords:

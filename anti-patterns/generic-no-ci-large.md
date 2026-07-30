@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-ci-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require CI"
 symptom: "Maintainer comments: 'Please run CI'"
 trigger_keywords:

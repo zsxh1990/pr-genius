@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-orphaning
+tags: [cron, scheduling, reliability]
 description: "PR导致数据孤立"
 symptom: "Maintainer comments: 'Data orphaning'"
 trigger_keywords:

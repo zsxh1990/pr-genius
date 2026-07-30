@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-belonging-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require belonging"
 symptom: "Maintainer comments: 'Please ensure belonging'"
 trigger_keywords:

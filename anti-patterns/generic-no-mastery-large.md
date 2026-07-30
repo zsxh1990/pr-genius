@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-mastery-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require mastery"
 symptom: "Maintainer comments: 'Please show mastery'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-changelog
+tags: [cron, scheduling, reliability]
 description: "PR without changelog"
 symptom: "Maintainer comments: 'Please update changelog'"
 trigger_keywords:

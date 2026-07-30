@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-mitm
+tags: [cron, scheduling, reliability]
 description: "PR introducing MITM vulnerability"
 symptom: "Maintainer comments: 'MITM vulnerability'"
 trigger_keywords:

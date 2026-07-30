@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-governance-large-repos
+tags: [cron, scheduling, reliability]
 description: "Large repos require governance"
 symptom: "Maintainer comments: 'Please build governance'"
 trigger_keywords:

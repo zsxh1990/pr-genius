@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-integrity
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据完整性"
 symptom: "Maintainer comments: 'Data integrity issue'"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: openclaw-security-boundary-risk
+tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 涉及安全边界改动，审查更严格"
 symptom: "标签包含 merge-risk: security-boundary"
 trigger_keywords:

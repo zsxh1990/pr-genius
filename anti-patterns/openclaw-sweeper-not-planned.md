@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: openclaw-sweeper-not-planned
+tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 被标记为 not-planned，不会被合并"
 symptom: "标签包含 sweeper:not-planned"
 trigger_keywords:

@@ -1,6 +1,7 @@
 ---
 type: Success Pattern
 key: mcp-gateway-secret-uri-safe
+tags: [cron, scheduling, reliability]
 description: "安全修复：URI-safe 字符约束 + 测试覆盖"
 success_factors:
   - "修复 Issue #1354 中明确的安全问题"

@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-no-documentation-large
+tags: [cron, scheduling, reliability]
 description: "Large repos require documentation"
 symptom: "Maintainer comments: 'Please update docs'"
 trigger_keywords:

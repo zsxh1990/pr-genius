@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-data-lineage
+tags: [cron, scheduling, reliability]
 description: "PR忽视数据血缘"
 symptom: "Maintainer comments: 'Data lineage issue'"
 trigger_keywords:

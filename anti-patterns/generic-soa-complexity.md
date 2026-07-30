@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-soa-complexity
+tags: [cron, scheduling, reliability]
 description: "PR忽视SOA复杂性"
 symptom: "Maintainer comments: 'SOA complexity'"
 trigger_keywords:

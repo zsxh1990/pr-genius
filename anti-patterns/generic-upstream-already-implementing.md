@@ -1,6 +1,7 @@
 ---
 type: Anti-Pattern
 key: generic-upstream-already-implementing
+tags: [cron, scheduling, reliability]
 description: "Upstream already implementing same feature"
 symptom: "Maintainer comments: 'Upstream is already working on this'"
 trigger_keywords:
