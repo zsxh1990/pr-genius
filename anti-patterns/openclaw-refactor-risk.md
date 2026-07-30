@@ -12,6 +12,7 @@ source_pr: "openclaw/openclaw#108026"
 severity: medium
 evidence:
   - "openclaw #108026: 重构 telegram 插件，size: XL"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -28,3 +29,7 @@ learned_at: 2026-07-15
 1. 拆分为多个小 PR
 2. 提供详细测试
 3. 提供回滚方案
+
+## Applicability
+
+All repository sizes.

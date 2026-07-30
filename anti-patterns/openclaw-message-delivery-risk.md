@@ -12,6 +12,7 @@ severity: high
 evidence:
   - "NousResearch #52958: 涉及消息投递，标记 risk-message-delivery"
   - "NousResearch #53148: 涉及消息投递，标记 risk-message-delivery"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -28,3 +29,7 @@ learned_at: 2026-07-15
 1. 测试消息投递可靠性
 2. 提供回滚方案
 3. 测试边界情况（网络中断、服务重启等）
+
+## Applicability
+
+All repository sizes.

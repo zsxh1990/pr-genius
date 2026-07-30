@@ -12,6 +12,7 @@ severity: medium
 evidence:
   - "NousResearch #52917: 涉及 Windows 平台"
   - "NousResearch #53124: 涉及 Windows 平台"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -28,3 +29,7 @@ learned_at: 2026-07-15
 1. 测试 Windows 平台兼容性
 2. 提供 Windows 特定测试
 3. 考虑跨平台差异
+
+## Applicability
+
+All repository sizes.

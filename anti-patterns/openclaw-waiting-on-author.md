@@ -12,6 +12,7 @@ severity: medium
 evidence:
   - "openclaw #90421: 等待作者响应"
   - "openclaw #87304: 等待作者响应"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -28,3 +29,7 @@ PR 等待作者响应 maintainer 的评论或要求。
 1. 及时回复 maintainer 评论
 2. 按要求修改代码
 3. 提供补充信息
+
+## Applicability
+
+All repository sizes.

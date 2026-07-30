@@ -12,6 +12,7 @@ severity: medium
 evidence:
   - "NousResearch #64639: 标记 duplicate"
   - "NousResearch #53124: 标记 sweeper:implemented-on-main"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -28,3 +29,7 @@ learned_at: 2026-07-15
 1. 提 PR 前搜索已有 PR 和 Issue
 2. 基于最新 main 分支创建分支
 3. 在 Issue 中确认是否有人在做
+
+## Applicability
+
+All repository sizes.

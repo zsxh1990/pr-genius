@@ -11,6 +11,7 @@ source_pr: "NousResearch/hermes-agent#42920"
 severity: medium
 evidence:
   - "NousResearch #42920: 涉及 cron 定时任务"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -27,3 +28,7 @@ learned_at: 2026-07-15
 1. 测试定时任务可靠性
 2. 测试边界情况（时区、夏令时、服务重启）
 3. 提供回滚方案
+
+## Applicability
+
+All repository sizes.

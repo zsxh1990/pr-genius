@@ -12,6 +12,7 @@ source_pr: "openclaw/openclaw#102368"
 severity: medium
 evidence:
   - "openclaw #102368: crestodian 模块被重构到 system-agent，PR 方案失效"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -33,3 +34,7 @@ PR 方案基于的代码模块在提交后被重构或移动，导致方案不�
 1. PR 打开后尽快完成，避免长时间挂起
 2. 定期 rebase on latest main
 3. 提 PR 前检查目标模块最近是否有重构
+
+## Applicability
+
+All repository sizes.

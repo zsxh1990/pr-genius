@@ -12,6 +12,7 @@ severity: high
 evidence:
   - "openclaw #90421: 涉及会话状态，标记 risk-session-state"
   - "NousResearch #53611: 涉及会话拆分，标记 risk-session-state"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -28,3 +29,7 @@ learned_at: 2026-07-15
 1. 测试会话状态迁移
 2. 测试边界情况（并发、崩溃、恢复）
 3. 提供回滚方案
+
+## Applicability
+
+All repository sizes.

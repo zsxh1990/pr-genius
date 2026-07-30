@@ -8,6 +8,7 @@ trigger_keywords:
 fix_action: "保持影响范围可控"
 source_pr: "NousResearch/hermes-agent#52865"
 severity: low
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -20,3 +21,7 @@ OpenClaw PR 影响范围可控。
 
 ### 如何避免
 1. 保持影响范围可控
+
+## Applicability
+
+All repository sizes.

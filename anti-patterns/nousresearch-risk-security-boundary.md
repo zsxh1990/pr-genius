@@ -12,6 +12,7 @@ severity: high
 evidence:
   - "NousResearch #52865: 涉及安全边界，标记 risk-security-boundary"
   - "NousResearch #52958: 涉及安全边界，标记 risk-security-boundary"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -29,3 +30,7 @@ learned_at: 2026-07-15
 2. 包含 PoC 或测试证明安全性
 3. 遵循最小权限原则
 4. 避免修改核心认证逻辑，除非必要
+
+## Applicability
+
+All repository sizes.

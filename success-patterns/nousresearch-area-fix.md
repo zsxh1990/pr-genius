@@ -10,10 +10,11 @@ repo_requirements:
 source_pr: "NousResearch/hermes-agent#52865"
 metrics:
   merge_rate: 0.75
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
-## 成功案例
+## Pattern
 
 ### NousResearch 领域修复
 
@@ -21,3 +22,7 @@ learned_at: 2026-07-15
 1. area 标签, 领域问题, 包含测试
 2. 包含测试
 3. 风险可控
+
+## Applicability
+
+All repository sizes.

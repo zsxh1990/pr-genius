@@ -13,10 +13,11 @@ repo_requirements:
 source_pr: "NousResearch/hermes-agent#64639, NousResearch/hermes-agent#63970"
 metrics:
   merge_rate: 0.75
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
-## 成功案例
+## Pattern
 
 ### PR #64639: fix(telegram): attach polling instrumentation without inspecting closed sessions
 
@@ -31,3 +32,7 @@ learned_at: 2026-07-15
 1. 标签包含 `type/refactor`
 2. 依赖升级，风险较低
 3. 包含测试
+
+## Applicability
+
+All repository sizes.

@@ -13,10 +13,11 @@ repo_requirements:
 source_pr: "openclaw/openclaw#106395, openclaw/openclaw#106826"
 metrics:
   merge_rate: 0.85
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
-## 成功案例
+## Pattern
 
 ### PR #106395: fix(device-pair): bound notifier polling overlap
 
@@ -31,3 +32,7 @@ learned_at: 2026-07-15
 1. 提供了详细的测试证据
 2. 标签包含 `proof: sufficient`
 3. 标签包含 `P0` 优先级
+
+## Applicability
+
+All repository sizes.

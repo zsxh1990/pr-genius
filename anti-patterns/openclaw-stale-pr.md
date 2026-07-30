@@ -12,6 +12,7 @@ severity: medium
 evidence:
   - "openclaw #90421: 1个月无更新，标记 stale"
   - "openclaw #87304: 2个月无更新，标记 stale"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -28,3 +29,7 @@ OpenClaw 更新极快（日均 100+ commits），PR 如果长时间不更新会�
 1. 每周 rebase on latest main
 2. 及时回复 maintainer 评论
 3. 提供 proof of work（测试截图、日志等）
+
+## Applicability
+
+All repository sizes.

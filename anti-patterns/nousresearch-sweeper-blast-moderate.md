@@ -8,6 +8,7 @@ trigger_keywords:
 fix_action: "控制影响范围"
 source_pr: "NousResearch/hermes-agent#52958"
 severity: medium
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -20,3 +21,7 @@ NousResearch PR 影响范围中等。
 
 ### 如何避免
 1. 控制影响范围
+
+## Applicability
+
+All repository sizes.

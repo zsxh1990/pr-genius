@@ -8,6 +8,7 @@ trigger_keywords:
 fix_action: "提供 PR 背景和动机"
 source_pr: "openclaw/openclaw#107829"
 severity: medium
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -20,3 +21,7 @@ OpenClaw PR 缺少上下文。
 
 ### 如何避免
 1. 提供 PR 背景和动机
+
+## Applicability
+
+All repository sizes.

@@ -11,6 +11,7 @@ source_pr: "openclaw/openclaw#62338"
 severity: medium
 evidence:
   - "openclaw #62338: 标记 needs-real-behavior-proof"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -27,3 +28,7 @@ PR 需要提供真实环境下的行为证明，而不仅仅是理论分析。
 1. 提供真实环境测试结果
 2. 提供复现步骤
 3. 提供测试截图或日志
+
+## Applicability
+
+All repository sizes.

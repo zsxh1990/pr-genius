@@ -13,6 +13,7 @@ severity: medium
 evidence:
   - "NousResearch #53149: 涉及 web 工具"
   - "NousResearch #45522: 涉及 TTS 工具"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -29,3 +30,7 @@ learned_at: 2026-07-15
 1. 测试特定工具兼容性
 2. 提供工具特定测试
 3. 考虑跨工具差异
+
+## Applicability
+
+All repository sizes.

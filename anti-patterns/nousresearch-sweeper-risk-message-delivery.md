@@ -8,6 +8,7 @@ trigger_keywords:
 fix_action: "测试消息投递可靠性"
 source_pr: "NousResearch/hermes-agent#53148"
 severity: high
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -20,3 +21,7 @@ NousResearch PR 涉及消息投递。
 
 ### 如何避免
 1. 测试消息投递可靠性
+
+## Applicability
+
+All repository sizes.

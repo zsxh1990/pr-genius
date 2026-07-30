@@ -8,6 +8,7 @@ trigger_keywords:
 fix_action: "定期更新 PR"
 source_pr: "openclaw/openclaw#87304"
 severity: medium
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -20,3 +21,7 @@ OpenClaw PR 有 proof 但被标记 stale。
 
 ### 如何避免
 1. 定期更新 PR
+
+## Applicability
+
+All repository sizes.

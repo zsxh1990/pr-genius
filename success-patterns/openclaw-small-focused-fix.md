@@ -13,10 +13,11 @@ repo_requirements:
 source_pr: "openclaw/openclaw#106737, openclaw/openclaw#107771"
 metrics:
   merge_rate: 0.90
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
-## 成功案例
+## Pattern
 
 ### PR #106737: fix(android): attachment remove control is hard to tap
 
@@ -32,3 +33,7 @@ learned_at: 2026-07-15
 1. 标签包含 `size: S`
 2. 单一组件修改
 3. 清晰的 bug 描述
+
+## Applicability
+
+All repository sizes.

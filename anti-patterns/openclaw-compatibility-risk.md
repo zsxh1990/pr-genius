@@ -12,6 +12,7 @@ severity: medium
 evidence:
   - "openclaw #104514: 存在兼容性风险"
   - "openclaw #62338: 存在兼容性风险"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -28,3 +29,7 @@ PR 改动可能破坏现有功能的兼容性。
 1. 测试向后兼容性
 2. 提供迁移指南
 3. 使用 feature flag 控制新行为
+
+## Applicability
+
+All repository sizes.

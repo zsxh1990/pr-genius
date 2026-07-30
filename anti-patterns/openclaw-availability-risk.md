@@ -11,6 +11,7 @@ source_pr: "openclaw/openclaw#90421"
 severity: high
 evidence:
   - "openclaw #90421: 涉及可用性，标记 risk-availability"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -27,3 +28,7 @@ learned_at: 2026-07-15
 1. 测试服务可用性
 2. 提供降级方案
 3. 测试高并发场景
+
+## Applicability
+
+All repository sizes.

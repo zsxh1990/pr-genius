@@ -12,6 +12,7 @@ severity: medium
 evidence:
   - "NousResearch #52917: 涉及桌面端"
   - "NousResearch #63970: 涉及桌面端"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -28,3 +29,7 @@ learned_at: 2026-07-15
 1. 测试桌面端兼容性
 2. 提供桌面端特定测试
 3. 考虑跨平台差异
+
+## Applicability
+
+All repository sizes.

@@ -8,6 +8,7 @@ trigger_keywords:
 fix_action: "检查 main 分支最新代码"
 source_pr: "NousResearch/hermes-agent#53124"
 severity: medium
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -20,3 +21,7 @@ NousResearch PR 已在 main 实现。
 
 ### 如何避免
 1. 检查 main 分支最新代码
+
+## Applicability
+
+All repository sizes.

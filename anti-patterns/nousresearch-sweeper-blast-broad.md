@@ -12,6 +12,7 @@ severity: medium
 evidence:
   - "NousResearch #52866: 修改 skill_utils 提取上限，标记 blast-broad"
   - "NousResearch #52958: 修改 signal 格式化，标记 blast-moderate"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -28,3 +29,7 @@ PR 改动影响范围太广，可能引入回归风险。
 1. 保持 PR 小而聚焦
 2. 拆分为多个独立 PR
 3. 提供回滚方案
+
+## Applicability
+
+All repository sizes.

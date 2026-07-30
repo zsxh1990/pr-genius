@@ -12,6 +12,7 @@ severity: high
 evidence:
   - "NousResearch #50839: 新 provider 插件，标记 not-planned"
   - "NousResearch #53149: 9 个搜索 provider，标记 not-planned"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -28,3 +29,7 @@ learned_at: 2026-07-15
 1. 提 PR 前先开 Issue 讨论
 2. 关注项目的 roadmap 和优先级标签
 3. 避免提交过于"创意"的功能
+
+## Applicability
+
+All repository sizes.

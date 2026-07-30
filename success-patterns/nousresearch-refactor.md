@@ -13,10 +13,11 @@ repo_requirements:
 source_pr: "NousResearch/hermes-agent#63970, NousResearch/hermes-agent#107066"
 metrics:
   merge_rate: 0.80
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
-## 成功案例
+## Pattern
 
 ### PR #63970: chore(desktop): upgrade @assistant-ui to 0.14 + use built-in voice picker
 
@@ -31,3 +32,7 @@ learned_at: 2026-07-15
 1. 标签包含 `type/refactor`
 2. 代码重构，不改变功能
 3. 提高代码可维护性
+
+## Applicability
+
+All repository sizes.

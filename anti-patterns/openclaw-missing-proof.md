@@ -11,6 +11,7 @@ source_pr: "openclaw/openclaw#104817"
 severity: medium
 evidence:
   - "openclaw #104817: 标记 needs proof"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -27,3 +28,7 @@ OpenClaw 要求外部 PR 提供 proof of work（测试截图、日志、PoC 代�
 1. 提供测试截图或日志
 2. 提供 PoC 代码
 3. 描述测试环境和复现步骤
+
+## Applicability
+
+All repository sizes.

@@ -13,6 +13,7 @@ severity: high
 evidence:
   - "openclaw #103118: 涉及 auth-provider，审查更严格"
   - "NousResearch #52865: 涉及 Google AI Studio 认证"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -30,3 +31,7 @@ learned_at: 2026-07-15
 2. 包含 PoC 或测试证明安全性
 3. 遵循最小权限原则
 4. 避免修改核心认证逻辑，除非必要
+
+## Applicability
+
+All repository sizes.

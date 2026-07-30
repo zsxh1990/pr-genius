@@ -13,6 +13,7 @@ severity: medium
 evidence:
   - "NousResearch #52865: 涉及 Google AI Studio provider"
   - "NousResearch #52866: 涉及 Gemini provider"
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -29,3 +30,7 @@ learned_at: 2026-07-15
 1. 测试特定 provider 兼容性
 2. 提供 provider 特定测试
 3. 考虑跨 provider 差异
+
+## Applicability
+
+All repository sizes.

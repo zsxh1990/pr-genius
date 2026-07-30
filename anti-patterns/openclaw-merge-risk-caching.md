@@ -8,6 +8,7 @@ trigger_keywords:
 fix_action: "测试缓存一致性"
 source_pr: "NousResearch/hermes-agent#53213"
 severity: medium
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
@@ -20,3 +21,7 @@ OpenClaw PR 涉及缓存风险。
 
 ### 如何避免
 1. 测试缓存一致性
+
+## Applicability
+
+All repository sizes.

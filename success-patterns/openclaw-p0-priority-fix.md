@@ -13,10 +13,11 @@ repo_requirements:
 source_pr: "openclaw/openclaw#104516, openclaw/openclaw#107063"
 metrics:
   merge_rate: 0.90
+created: 2026-07-15
 learned_at: 2026-07-15
 ---
 
-## 成功案例
+## Pattern
 
 ### PR #104516: fix(config): reject zero-value resetArchiveRetention to prevent data loss
 
@@ -31,3 +32,7 @@ learned_at: 2026-07-15
 1. 标签包含 `P0` 优先级
 2. 防止插件状态丢失
 3. 包含测试
+
+## Applicability
+
+All repository sizes.
