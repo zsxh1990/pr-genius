@@ -4,7 +4,9 @@ repo: punkpeye/awesome-mcp-servers
 created: 2026-07-18
 anchors: [10044]
 tags: [glama-badge, mcp-server, listing-requirement, bot-gate]
----
+
+trigger_keywords:
+  - no-keywords---
 
 # awesome-mcp-servers: Glama Badge Required
 

@@ -4,7 +4,9 @@ key: generic-no-flexibility
 description: "Large repos reject PRs without flexibility"
 tags: [generic, anti-pattern]
 created: 2026-07-29
----
+
+trigger_keywords:
+  - large---
 
 # Large repos reject PRs without flexibility
 

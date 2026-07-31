@@ -4,7 +4,9 @@ key: generic-no-transparency
 description: "Medium repos reject PRs without transparency"
 tags: [generic, anti-pattern]
 created: 2026-07-29
----
+
+trigger_keywords:
+  - medium---
 
 # Medium repos reject PRs without transparency
 

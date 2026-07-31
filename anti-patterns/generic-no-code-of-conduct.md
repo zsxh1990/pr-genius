@@ -4,7 +4,9 @@ key: generic-no-code-of-conduct
 description: "Small repos reject PRs without CoC"
 tags: [generic, anti-pattern]
 created: 2026-07-29
----
+
+trigger_keywords:
+  - small---
 
 # Small repos reject PRs without CoC
 

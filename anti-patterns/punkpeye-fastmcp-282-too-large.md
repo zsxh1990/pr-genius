@@ -4,7 +4,9 @@ repo: punkpeye/fastmcp
 created: 2026-07-29
 anchors: [282]
 tags: [pr-size, first-contribution, maintainer-bandwidth]
----
+
+trigger_keywords:
+  - no-keywords---
 
 # fastmcp: PR Too Large for First Contribution
 

@@ -7,7 +7,9 @@ version: 0.2.0
 created: 2026-07-02
 updated: 2026-07-19
 auto_generated: true
----
+
+trigger_keywords:
+  - anti---
 
 # Anti-Patterns 反模式库
 

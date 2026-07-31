@@ -210,9 +210,15 @@ def _parse_label(label: str) -> Tuple[str, str]:
 # 模式加载
 # ============================================================
 
+_anti_patterns_cache: Dict[str, Dict[str, dict]] = {}
+_success_patterns_cache: Dict[str, Dict[str, dict]] = {}
+
 def load_anti_patterns(repo_root) -> Dict[str, dict]:
     # v1.4.0 修复: 接受 str | Path (MCP smoke test 发现)
     repo_root = Path(repo_root) if not isinstance(repo_root, Path) else repo_root
+    cache_key = str(repo_root)
+    if cache_key in _anti_patterns_cache:
+        return _anti_patterns_cache[cache_key]
     patterns = {}
     anti_patterns_dir = repo_root / "anti-patterns"
     if not anti_patterns_dir.exists():
@@ -255,6 +261,7 @@ def load_anti_patterns(repo_root) -> Dict[str, dict]:
             patterns[file.stem] = fm
         except Exception:
             continue
+    _anti_patterns_cache[cache_key] = patterns
     return patterns
 
 
@@ -264,9 +271,13 @@ def check_anti_patterns(title: str, description: str, repo: str, repo_root, body
     repo_root = Path(repo_root) if not isinstance(repo_root, Path) else repo_root
     anti_patterns = load_anti_patterns(repo_root)
     matches = []
+    seen_keys = set()  # 防止同一 pattern 重复命中
     text = f"{title} {description} {body}".lower()
     for key, pattern in anti_patterns.items():
+        if key in seen_keys:
+            continue
         keywords = pattern.get("trigger_keywords", [])
+        matched = False
         if isinstance(keywords, list):
             for keyword in keywords:
                 if keyword.lower() in text:
@@ -276,14 +287,18 @@ def check_anti_patterns(title: str, description: str, repo: str, repo_root, body
                         "fix_action": pattern.get("fix_action", ""),
                         "source_pr": pattern.get("source_pr", ""),
                     })
+                    seen_keys.add(key)
+                    matched = True
                     break
-        symptom = pattern.get("symptom", "")
-        if symptom and symptom.lower() in text:
-            matches.append({
-                "key": key, "symptom": symptom,
-                "fix_action": pattern.get("fix_action", ""),
-                "source_pr": pattern.get("source_pr", ""),
-            })
+        if not matched:
+            symptom = pattern.get("symptom", "")
+            if symptom and symptom.lower() in text:
+                matches.append({
+                    "key": key, "symptom": symptom,
+                    "fix_action": pattern.get("fix_action", ""),
+                    "source_pr": pattern.get("source_pr", ""),
+                })
+                seen_keys.add(key)
     return matches
 
 
@@ -291,6 +306,9 @@ def load_success_patterns(repo_root) -> Dict[str, dict]:
     """保留加载但不再用于评分 — 仅作参考"""
     # v1.4.0 修复: 接受 str | Path
     repo_root = Path(repo_root) if not isinstance(repo_root, Path) else repo_root
+    cache_key = str(repo_root)
+    if cache_key in _success_patterns_cache:
+        return _success_patterns_cache[cache_key]
     patterns = {}
     success_patterns_dir = repo_root / "success-patterns"
     if not success_patterns_dir.exists():
@@ -332,6 +350,7 @@ def load_success_patterns(repo_root) -> Dict[str, dict]:
             patterns[file.stem] = fm
         except Exception:
             continue
+    _success_patterns_cache[cache_key] = patterns
     return patterns
 
 
@@ -530,8 +549,8 @@ def analyze_pr(
     from .parser import profile_get
     has_profile = profile_get(repo_root, repo) is not None
 
-    # Only trigger preflight if no profile AND no policy
-    if not has_policy and not has_profile and (star_count >= 10000 or star_count == 0):
+    # Only trigger preflight if no profile AND no policy AND genuinely large repo
+    if not has_policy and not has_profile and star_count >= 10000:
         # High merge rate repos: lower severity
         if repo_merge_rate >= 0.6:
             preflight_severity = "low"
