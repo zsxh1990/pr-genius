@@ -12,7 +12,7 @@ mcp-name: io.github.zsxh1990/pr-genius
 
 # PR Genius — The advisor that knows which PRs get closed
 
-> **992 loaded patterns across 61 repos. 100% quality pass rate.**
+> **1355 loaded patterns across 61 repos. 100% quality pass rate.**
 > Clone → paste MCP config → ask "Should I open this PR to encode/httpx?"
 
 [![CI](https://github.com/zsxh1990/pr-genius/actions/workflows/validate.yml/badge.svg)](https://github.com/zsxh1990/pr-genius/actions/workflows/validate.yml)
@@ -29,7 +29,7 @@ mcp-name: io.github.zsxh1990/pr-genius
 
 | Capability | LLM directly | Scraper Agent | PR Genius |
 |------------|-------------|---------------|-----------|
-| Knowledge source | Training data | Real-time scrape | 992 structured patterns |
+| Knowledge source | Training data | Real-time scrape | 1355 structured patterns |
 | Repo understanding | Generic | Surface data (stars) | 17-field agent_guidelines |
 | Failure patterns | Unknown | Unknown | 752 anti-patterns |
 | Success patterns | Unknown | Unknown | 703 success patterns |
@@ -98,9 +98,9 @@ Docker: `docker run --rm -i ghcr.io/zsxh1990/pr-genius:1.3.0`
 |-----------|-------|
 | Repo profiles | 61 |
 | Case studies | 50+ |
-| Success patterns | 431 (.md loaded) |
-| Anti-patterns | 561 (.md loaded) |
-| Total patterns | 992 (loaded) + 461 (JSON, unused) |
+| Success patterns | 687 (431 .md + 256 .json) |
+| Anti-patterns | 668 (561 .md + 107 .json) |
+| Total patterns | 1355 (all loaded) |
 | Quality pass rate | 100% (994/994 markdown ≥75分) |
 | Covered repos | 35+ (react, kubernetes, rust, uv, pydantic, etc.) |
 
