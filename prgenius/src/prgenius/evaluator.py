@@ -261,6 +261,31 @@ def load_anti_patterns(repo_root) -> Dict[str, dict]:
             patterns[file.stem] = fm
         except Exception:
             continue
+
+    # Load JSON patterns (from API/automation)
+    import json as _json
+    for file in anti_patterns_dir.glob("*.json"):
+        try:
+            data = _json.loads(file.read_text(encoding="utf-8"))
+            if isinstance(data, dict) and "id" in data:
+                # Normalize JSON pattern to match MD format
+                fm = {
+                    "key": data.get("id", file.stem),
+                    "description": data.get("title", data.get("description", "")),
+                    "trigger_keywords": [],
+                    "symptom": "",
+                    "fix_action": "",
+                    "source_pr": data.get("source_pr", ""),
+                }
+                # Extract keywords from title/description
+                title = data.get("title", "")
+                for word in re.findall(r'[a-z]+', title.lower()):
+                    if len(word) > 3:
+                        fm["trigger_keywords"].append(word)
+                patterns[file.stem] = fm
+        except Exception:
+            continue
+
     _anti_patterns_cache[cache_key] = patterns
     return patterns
 
@@ -350,6 +375,24 @@ def load_success_patterns(repo_root) -> Dict[str, dict]:
             patterns[file.stem] = fm
         except Exception:
             continue
+
+    # Load JSON patterns (from API/automation)
+    import json as _json
+    for file in success_patterns_dir.glob("*.json"):
+        try:
+            data = _json.loads(file.read_text(encoding="utf-8"))
+            if isinstance(data, dict) and "id" in data:
+                # Normalize JSON pattern to match MD format
+                fm = {
+                    "key": data.get("id", file.stem),
+                    "description": data.get("title", data.get("description", "")),
+                    "tags": data.get("tags", []),
+                    "source_pr": data.get("source_pr", ""),
+                }
+                patterns[file.stem] = fm
+        except Exception:
+            continue
+
     _success_patterns_cache[cache_key] = patterns
     return patterns
 
