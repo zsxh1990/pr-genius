@@ -14,7 +14,7 @@ analyzed_at: 2026-07-09
 data_source: 内部项目，直接访问
 agent_guidelines:
   allow_unsolicited_pr: true
-  require_signed_off: false
+  require_signed_off: true
   require_cla: false
   require_issue_first: true
   ai_policy: welcoming
