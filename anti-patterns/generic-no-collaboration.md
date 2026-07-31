@@ -6,7 +6,8 @@ tags: [generic, anti-pattern]
 created: 2026-07-29
 
 trigger_keywords:
-  - small---
+  - small
+---
 
 # Small repos reject PRs without collaboration
 

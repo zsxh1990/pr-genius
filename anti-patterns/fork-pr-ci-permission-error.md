@@ -18,7 +18,8 @@ confidence: 0.9
 created: 2026-07-08
 
 trigger_keywords:
-  - fork---
+  - fork
+---
 
 ## Problem
 

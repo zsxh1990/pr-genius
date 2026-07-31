@@ -33,6 +33,10 @@ agent_guidelines:
 confidence: medium
 last_release: null
 stars: 272
+agent_guidelines_evidence:
+  allow_unsolicited_pr: https://github.com/punkpeye
+  maintainer_vibe: https://github.com/punkpeye
+
 ---
 
 # punkpeye/mcp-proxy

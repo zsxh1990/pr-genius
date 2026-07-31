@@ -31,6 +31,10 @@ agent_guidelines:
   one_pr_friendly: true
 confidence: high
 stars: 91532
+agent_guidelines_evidence:
+  allow_unsolicited_pr: https://github.com/punkpeye
+  maintainer_vibe: https://github.com/punkpeye
+
 ---
 
 # punkpeye/awesome-mcp-servers

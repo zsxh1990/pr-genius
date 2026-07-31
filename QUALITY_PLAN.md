@@ -1,3 +1,11 @@
+---
+type: Document
+key: QUALITY_PLAN
+description: "QUALITY_PLAN.md"
+tags: [meta]
+created: 2026-07-31
+---
+
 # Pattern Quality Improvement Plan
 
 ## Current Status (2026-07-30)
