@@ -308,10 +308,12 @@ def _load_tools(repo_root: Path | None = None):
         if pattern_type in ("all", "success-pattern"):
             patterns_dirs.append((rr / "success-patterns", "success-pattern"))
 
+        import json as _json
         query_lower = query.lower()
         for pdir, ptype in patterns_dirs:
             if not pdir.exists():
                 continue
+            # Search .md files
             for f in pdir.glob("*.md"):
                 if f.name == "README.md":
                     continue
@@ -325,6 +327,23 @@ def _load_tools(repo_root: Path | None = None):
                 fm["type"] = ptype
                 fm["file"] = str(f.relative_to(rr))
                 results.append(fm)
+            # Search .json files (from API/automation)
+            for f in pdir.glob("*.json"):
+                try:
+                    content = f.read_text(encoding="utf-8")
+                    if query_lower not in content.lower():
+                        continue
+                    data = _json.loads(content)
+                    if isinstance(data, dict) and "id" in data:
+                        fm = {
+                            "key": data.get("id", f.stem),
+                            "title": data.get("title", data.get("description", "")),
+                            "type": ptype,
+                            "file": str(f.relative_to(rr)),
+                        }
+                        results.append(fm)
+                except Exception:
+                    continue
 
         return results[:limit]
 
