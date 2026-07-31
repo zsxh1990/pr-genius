@@ -5,6 +5,7 @@ repo: punkpeye/awesome-mcp-devtools
 created: 2026-07-29
 anchors: [248]
 tags: [listing-pr, pending, devtools]
+---
 
 trigger_keywords:
   - no-keywords---
