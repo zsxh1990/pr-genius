@@ -1,5 +1,4 @@
----
-type: Success Pattern
+---type: Success Pattern
 key: nousresearch-dependency-update
 tags: [cron, scheduling, reliability]
 description: "NousResearch 依赖更新"
@@ -13,6 +12,9 @@ metrics:
   merge_rate: 0.80
 created: 2026-07-15
 learned_at: 2026-07-15
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/success-patterns/nousresearch-dependency-update.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## Pattern

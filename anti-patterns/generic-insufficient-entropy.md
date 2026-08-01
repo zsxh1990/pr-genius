@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-insufficient-entropy
 tags: [cron, scheduling, reliability]
 description: "PR with insufficient entropy"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Use secure random; 2) Increase entropy"
 created: 2026-07-29
 severity: high
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-insufficient-entropy.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Insufficient Entropy

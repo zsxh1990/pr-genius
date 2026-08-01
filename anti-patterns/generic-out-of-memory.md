@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-out-of-memory
 tags: [cron, scheduling, reliability]
 description: "PR introducing out of memory"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Optimize memory; 2) Add limits"
 created: 2026-07-29
 severity: high
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-out-of-memory.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Out of Memory

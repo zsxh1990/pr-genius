@@ -1,5 +1,4 @@
----
-type: Success Pattern
+---type: Success Pattern
 key: openclaw-p0-priority-fix
 tags: [cron, scheduling, reliability]
 description: "OpenClaw P0 优先级修复 PR"
@@ -16,6 +15,9 @@ metrics:
   merge_rate: 0.90
 created: 2026-07-15
 learned_at: 2026-07-15
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/success-patterns/openclaw-p0-priority-fix.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## Pattern

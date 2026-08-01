@@ -1,9 +1,11 @@
----
-type: Success Pattern
+---type: Success Pattern
 key: generic-small-pr-high-success
 description: "PRs under 100 lines have significantly higher merge rate"
 tags: [generic, pr-size, statistics]
 created: 2026-07-29
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/success-patterns/generic-small-pr-high-success.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Small PRs Have Higher Success Rate

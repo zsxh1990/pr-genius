@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 tags: [anti-pattern, real-case]
 key: upstream-already-implementing
 symptom: |
@@ -17,6 +16,9 @@ prevention: "提 PR 前检查：(1) 维护者的 roadmap/TODO (2) 最近 30 天�
 created: 2026-07-08
 learned_at: 2026-07-08
 value: HIGH  # 最有价值的反模式，证明方向正确
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/upstream-already-implementing.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 案例

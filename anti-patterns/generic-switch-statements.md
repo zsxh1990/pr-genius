@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-switch-statements
 tags: [cron, scheduling, reliability]
 description: "PR with switch statements"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Use polymorphism; 2) Use strategy pattern"
 created: 2026-07-29
 severity: low
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-switch-statements.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Switch Statements

@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 tags: [anti-pattern, real-case]
 key: low-value-contribution
 symptom: |
@@ -16,6 +15,9 @@ source_pr: patchwork-dev/patchwork-os#870
 prevention: "提 PR 前检查：(1) 项目的 CONTRIBUTING.md 是否接受这类贡献？(2) 维护者最近合并了什么类型的 PR？(3) 项目的核心价值是什么？"
 created: 2026-07-08
 learned_at: 2026-07-08
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/low-value-contribution.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 案例

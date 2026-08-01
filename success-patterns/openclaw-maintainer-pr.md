@@ -1,5 +1,4 @@
----
-type: Success Pattern
+---type: Success Pattern
 key: openclaw-maintainer-pr
 tags: [cron, scheduling, reliability]
 description: "OpenClaw Maintainer PR"
@@ -14,6 +13,9 @@ metrics:
   merge_rate: 0.95
 created: 2026-07-15
 learned_at: 2026-07-15
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/success-patterns/openclaw-maintainer-pr.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## Pattern

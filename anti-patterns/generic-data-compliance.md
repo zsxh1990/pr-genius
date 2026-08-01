@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-data-compliance
 tags: [cron, scheduling, reliability]
 description: "PR忽视数据合规"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Ensure compliance; 2) Add controls"
 created: 2026-07-29
 severity: critical
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-data-compliance.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Data Compliance

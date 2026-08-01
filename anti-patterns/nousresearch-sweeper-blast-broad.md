@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: nousresearch-sweeper-blast-broad
 tags: [cron, scheduling, reliability]
 description: "NousResearch PR 影响范围太广，标记 blast-broad"
@@ -15,6 +14,9 @@ evidence:
   - "NousResearch #52958: 修改 signal 格式化，标记 blast-moderate"
 created: 2026-07-15
 learned_at: 2026-07-15
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/nousresearch-sweeper-blast-broad.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 反模式说明

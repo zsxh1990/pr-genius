@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-no-compliance-large-repos
 tags: [cron, scheduling, reliability]
 description: "Large repos require compliance"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Build compliance; 2) Push fix"
 created: 2026-07-29
 severity: high
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-no-compliance-large-repos.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # No Compliance (Large Repos)

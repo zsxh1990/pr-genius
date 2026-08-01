@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: openclaw-stale-with-proof
 tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 有 proof 但被标记 stale"
@@ -11,6 +10,9 @@ source_pr: "openclaw/openclaw#87304"
 severity: medium
 created: 2026-07-15
 learned_at: 2026-07-15
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/openclaw-stale-with-proof.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 反模式说明

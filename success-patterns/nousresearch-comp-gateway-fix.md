@@ -1,5 +1,4 @@
----
-type: Success Pattern
+---type: Success Pattern
 key: nousresearch-comp-gateway-fix
 tags: [cron, scheduling, reliability]
 description: "NousResearch Gateway 组件修复"
@@ -13,6 +12,9 @@ metrics:
   merge_rate: 0.75
 created: 2026-07-15
 learned_at: 2026-07-15
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/success-patterns/nousresearch-comp-gateway-fix.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## Pattern

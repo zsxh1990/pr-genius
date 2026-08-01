@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 tags: [anti-pattern, real-case]
 key: maintainer-internal-handling
 symptom: |
@@ -25,6 +24,9 @@ prevention: |
   - 不要假设 open issue = 接受外部 PR
 created: 2026-07-22
 learned_at: 2026-07-22
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/maintainer-internal-handling.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 详细说明

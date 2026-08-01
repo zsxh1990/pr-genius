@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: missing-issue-reference
 tags: [cron, scheduling, reliability]
 description: "PR body 提到 'fix' 但没有关联具体的 Issue 编号"
@@ -14,6 +13,9 @@ evidence:
   - "langchain #38735: 同上"
 created: 2026-07-09
 learned_at: 2026-07-09
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/missing-issue-reference.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 反模式说明

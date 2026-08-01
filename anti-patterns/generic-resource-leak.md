@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-resource-leak
 tags: [cron, scheduling, reliability]
 description: "PR introducing resource leak"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Close resources; 2) Use try-with-resources"
 created: 2026-07-29
 severity: high
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-resource-leak.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Resource Leak

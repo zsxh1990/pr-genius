@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-data-orphaning
 tags: [cron, scheduling, reliability]
 description: "PR导致数据孤立"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Add foreign keys; 2) Add cascading"
 created: 2026-07-29
 severity: medium
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-data-orphaning.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Data Orphaning

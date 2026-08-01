@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: nousresearch-risk-platform-windows
 tags: [cron, scheduling, reliability]
 description: "NousResearch PR 涉及 Windows 平台兼容性"
@@ -15,6 +14,9 @@ evidence:
   - "NousResearch #53124: 涉及 Windows 平台，标记 risk-platform-windows"
 created: 2026-07-15
 learned_at: 2026-07-15
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/nousresearch-risk-platform-windows.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 反模式说明

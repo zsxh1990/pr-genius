@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 tags: [anti-pattern, real-case]
 key: honcho-default-db-module-trap
 symptom: "FastAPI route 默认参数 `db: AsyncSession = db` 在生产环境报 'coroutine expected' 或 'no attribute execute'"
@@ -17,6 +16,9 @@ source_pr: plastic-labs/honcho#801
 prevention: "提 PR 前必用 basedpyright 验证；或参考仓里其他 router 的同模式（搜 'AsyncSession = Depends' 看正确写法）"
 created: 2026-07-02
 learned_at: 2026-07-02
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/honcho-default-db-module-trap.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # honcho-default-db-module-trap

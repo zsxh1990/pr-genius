@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: openclaw-missing-proof
 tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 缺少 proof of work"
@@ -14,6 +13,9 @@ evidence:
   - "openclaw #104817: 标记 needs proof"
 created: 2026-07-15
 learned_at: 2026-07-15
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/openclaw-missing-proof.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 反模式说明

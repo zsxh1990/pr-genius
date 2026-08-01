@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 tags: [contribai, archived, repo-status]
 key: contribai-needs-rfc-first
 symptom: |
@@ -26,6 +25,9 @@ prevention: |
   - 不直接提大改 PR (信用负分 + close)
 created: 2026-07-19
 learned_at: 2026-07-19
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/contribai-needs-rfc-first.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## ContribAI 实证 close 数据

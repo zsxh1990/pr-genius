@@ -1,9 +1,11 @@
----
-type: Success Pattern
+---type: Success Pattern
 key: generic-test-addition
 description: "Test additions are low-risk and welcome in most repos"
 tags: [generic, test, low-risk]
 created: 2026-07-29
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/success-patterns/generic-test-addition.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Generic Test Addition Contribution

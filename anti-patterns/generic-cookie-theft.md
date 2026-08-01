@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-cookie-theft
 tags: [cron, scheduling, reliability]
 description: "PR introducing cookie theft vulnerability"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Use secure cookies; 2) Add HttpOnly flag"
 created: 2026-07-29
 severity: high
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-cookie-theft.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Cookie Theft

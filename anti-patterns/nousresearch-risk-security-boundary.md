@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: nousresearch-risk-security-boundary
 tags: [cron, scheduling, reliability]
 description: "NousResearch PR 涉及安全边界改动"
@@ -15,6 +14,9 @@ evidence:
   - "NousResearch #52958: 涉及安全边界，标记 risk-security-boundary"
 created: 2026-07-15
 learned_at: 2026-07-15
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/nousresearch-risk-security-boundary.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 反模式说明

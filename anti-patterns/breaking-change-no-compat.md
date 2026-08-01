@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 tags: [contribai, archived, repo-status]
 key: breaking-change-no-compat
 symptom: |
@@ -16,6 +15,9 @@ source_pr: plastic-labs/honcho#798
 prevention: "提 PR 前检查：(1) 改动是否改变现有 API 行为？(2) 现有用户代码是否需要修改？(3) 能否通过 feature flag 保持兼容？"
 created: 2026-07-08
 learned_at: 2026-07-08
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/breaking-change-no-compat.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 案例

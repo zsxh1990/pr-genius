@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-global-state
 tags: [cron, scheduling, reliability]
 description: "PR with global state"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Remove global state; 2) Use dependency injection"
 created: 2026-07-29
 severity: medium
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-global-state.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Global State

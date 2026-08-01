@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 tags: [contribai, archived, repo-status]
 key: contribai-duplicate-pr
 symptom: |
@@ -25,6 +24,9 @@ prevention: |
   - 在 Issue 评论问 "is anyone working on this?"  (24h 等回)
 created: 2026-07-19
 learned_at: 2026-07-19
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/contribai-duplicate-pr.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## ContribAI 实证 close 数据

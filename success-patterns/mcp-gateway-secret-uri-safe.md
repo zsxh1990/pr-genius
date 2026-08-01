@@ -1,5 +1,4 @@
----
-type: Success Pattern
+---type: Success Pattern
 key: mcp-gateway-secret-uri-safe
 tags: [cron, scheduling, reliability]
 description: "安全修复：URI-safe 字符约束 + 测试覆盖"
@@ -21,6 +20,9 @@ metrics:
   time_to_merge: "1天"
 created: 2026-07-09
 learned_at: 2026-07-09
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/success-patterns/mcp-gateway-secret-uri-safe.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 成功案例

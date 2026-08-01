@@ -1,5 +1,4 @@
----
-type: Success Pattern
+---type: Success Pattern
 key: agentclaimguard-langchain-middleware
 tags: [cron, scheduling, reliability]
 description: "功能贡献：从 Issue 中实现中间件适配器"
@@ -20,6 +19,9 @@ metrics:
   time_to_merge: "1天"
 created: 2026-07-09
 learned_at: 2026-07-09
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/success-patterns/agentclaimguard-langchain-middleware.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 成功案例

@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: openclaw-waiting-on-author
 tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 等待作者响应"
@@ -15,6 +14,9 @@ evidence:
   - "openclaw #87304: 等待作者响应"
 created: 2026-07-15
 learned_at: 2026-07-15
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/openclaw-waiting-on-author.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 反模式说明

@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-no-ci-large
 tags: [cron, scheduling, reliability]
 description: "Large repos require CI"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Run CI; 2) Fix failures"
 created: 2026-07-29
 severity: high
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-no-ci-large.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # No CI (Large Repos)

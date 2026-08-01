@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: superseded-by-maintainer
 tags: [cron, scheduling, reliability]
 description: "PR 被 maintainer 的并行 PR 取代"
@@ -15,6 +14,9 @@ evidence:
   - "openclaw #104514: 被 #104516 取代，maintainer 自己实现了相同功能"
 created: 2026-07-15
 learned_at: 2026-07-15
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/superseded-by-maintainer.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 反模式说明

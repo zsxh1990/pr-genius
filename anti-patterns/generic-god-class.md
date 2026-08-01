@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-god-class
 tags: [cron, scheduling, reliability]
 description: "PR with god class"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Split class; 2) Apply SRP"
 created: 2026-07-29
 severity: medium
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-god-class.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # God Class

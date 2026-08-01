@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-no-changelog-large
 tags: [cron, scheduling, reliability]
 description: "Large repos require changelog"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Update changelog; 2) Add entry"
 created: 2026-07-29
 severity: high
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-no-changelog-large.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # No Changelog (Large Repos)

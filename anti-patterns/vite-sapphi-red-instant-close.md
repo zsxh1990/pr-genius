@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 tags: [anti-pattern, real-case]
 key: vite-sapphi-red-instant-close
 symptom: "PR 被 maintainer 在 <2h 内 close + 拒绝语不含具体技术理由"
@@ -15,6 +14,9 @@ source_pr: vitejs/vite#22710
 prevention: "提 PR 前查 BLACKLIST.md（Vite 已在永久拉黑清单）"
 created: 2026-07-02
 learned_at: 2026-07-02
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/vite-sapphi-red-instant-close.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # vite-sapphi-red-instant-close

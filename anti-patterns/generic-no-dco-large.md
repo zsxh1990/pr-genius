@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-no-dco-large
 tags: [cron, scheduling, reliability]
 description: "Large repos require DCO"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Sign DCO; 2) Push fix"
 created: 2026-07-29
 severity: high
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-no-dco-large.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # No DCO (Large Repos)

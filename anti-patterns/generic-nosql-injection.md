@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-nosql-injection
 tags: [cron, scheduling, reliability]
 description: "PR introducing NoSQL injection vulnerability"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Validate input; 2) Use parameterized queries"
 created: 2026-07-29
 severity: high
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-nosql-injection.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # NoSQL Injection

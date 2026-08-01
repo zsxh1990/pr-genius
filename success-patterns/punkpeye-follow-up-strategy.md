@@ -1,9 +1,11 @@
----
-type: Success Pattern
+---type: Success Pattern
 key: punkpeye-follow-up-strategy
 description: "When and how to ping punkpeye on stale PRs"
 tags: [follow-up, ping, stale, maintainer-engagement, punkpeye]
 created: 2026-07-29
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/success-patterns/punkpeye-follow-up-strategy.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # punkpeye Follow-Up Strategy

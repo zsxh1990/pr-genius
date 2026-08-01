@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: openclaw-refactor-risk
 tags: [cron, scheduling, reliability]
 description: "OpenClaw 重构 PR 风险较高"
@@ -15,6 +14,9 @@ evidence:
   - "openclaw #108026: 重构 telegram 插件，size: XL"
 created: 2026-07-15
 learned_at: 2026-07-15
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/openclaw-refactor-risk.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 反模式说明

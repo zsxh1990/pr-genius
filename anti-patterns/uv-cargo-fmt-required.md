@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 tags: [anti-pattern, real-case]
 key: uv-cargo-fmt-required
 symptom: "CI 报错 Lint check failed / maintainer 评论 cargo fmt / rustfmt"
@@ -16,6 +15,9 @@ source_pr: astral-sh/uv#19685
 prevention: "提 PR 前先 cargo +nightly fmt --all；如果本地无 nightly toolchain，先 rustup toolchain install nightly"
 created: 2026-07-02
 learned_at: 2026-07-02
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/uv-cargo-fmt-required.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # uv-cargo-fmt-required

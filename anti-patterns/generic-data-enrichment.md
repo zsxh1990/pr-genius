@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-data-enrichment
 tags: [cron, scheduling, reliability]
 description: "PR忽视数据丰富"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Add enrichment; 2) Add tests"
 created: 2026-07-29
 severity: medium
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-data-enrichment.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Data Enrichment

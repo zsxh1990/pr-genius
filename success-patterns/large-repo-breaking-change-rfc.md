@@ -1,9 +1,11 @@
----
-type: Success Pattern
+---type: Success Pattern
 key: large-repo-breaking-change-rfc
 description: "Large repos require RFC for breaking changes — follow the process"
 tags: [large-repo, breaking-change, rfc, process]
 created: 2026-07-29
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/success-patterns/large-repo-breaking-change-rfc.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Large Repo: RFC for Breaking Changes

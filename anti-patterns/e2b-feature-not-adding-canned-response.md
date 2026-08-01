@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 tags: [anti-pattern, real-case]
 key: e2b-feature-not-adding-canned-response
 symptom: "PR 被 mishushakov 礼貌 close + 评论含 'we're not adding' / 'not seeing major user pain' / 'appreciate the initiative'"
@@ -16,6 +15,9 @@ source_pr: e2b-dev/E2B#1458
 prevention: "提 PR 前必读 e2b-dev-e2b/index.md §3 '_ERROR_HANDLER 方向永久归档'；新方向前先在 issue 区观察 maintainer 关注点"
 created: 2026-07-02
 learned_at: 2026-07-02
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/e2b-feature-not-adding-canned-response.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # e2b-feature-not-adding-canned-response

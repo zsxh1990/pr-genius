@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-api-key-leak
 tags: [cron, scheduling, reliability]
 description: "PR introducing API key leak vulnerability"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Rotate keys; 2) Use secure storage"
 created: 2026-07-29
 severity: critical
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-api-key-leak.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # API Key Leak

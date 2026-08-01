@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-no-test-coverage-large
 tags: [cron, scheduling, reliability]
 description: "Large repos require test coverage"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Add tests; 2) Verify coverage"
 created: 2026-07-29
 severity: high
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-no-test-coverage-large.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # No Test Coverage (Large Repos)

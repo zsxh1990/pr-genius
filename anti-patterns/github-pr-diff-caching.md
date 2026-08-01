@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: github-pr-diff-caching
 symptom: |
   force push 之后 PR review 显示的还是旧 diff / reviewer 看不出改动
@@ -18,6 +17,7 @@ created: 2026-07-08
 
 trigger_keywords:
   - github
+updated: 2026-08-01
 ---
 
 ## Problem

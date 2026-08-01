@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: nousresearch-tool-specific
 tags: [cron, scheduling, reliability]
 description: "NousResearch PR 涉及特定工具问题"
@@ -16,6 +15,9 @@ evidence:
   - "NousResearch #45522: 涉及 TTS 工具"
 created: 2026-07-15
 learned_at: 2026-07-15
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/nousresearch-tool-specific.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 反模式说明

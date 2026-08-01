@@ -1,9 +1,11 @@
----
-type: Success Pattern
+---type: Success Pattern
 key: generic-small-diff-size
 description: "Smaller diffs are easier to review and merge"
 tags: [generic, diff-size, statistics]
 created: 2026-07-29
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/success-patterns/generic-small-diff-size.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Small Diff Size

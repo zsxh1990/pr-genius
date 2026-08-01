@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-alternative-classes
 tags: [cron, scheduling, reliability]
 description: "PR with alternative classes"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Unify classes; 2) Use common interface"
 created: 2026-07-29
 severity: low
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-alternative-classes.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Alternative Classes

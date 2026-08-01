@@ -1,5 +1,4 @@
----
-type: Success Pattern
+---type: Success Pattern
 key: evotown-timezone-fix
 tags: [cron, scheduling, reliability]
 description: "Bug 修复：修复未定义变量导致的时区问题"
@@ -20,6 +19,9 @@ metrics:
   time_to_merge: "1天"
 created: 2026-07-09
 learned_at: 2026-07-09
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/success-patterns/evotown-timezone-fix.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 成功案例

@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-perfect-enemy-good
 tags: [cron, scheduling, reliability]
 description: "PR追求完美阻碍进展"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Ship iteratively; 2) Improve later"
 created: 2026-07-29
 severity: low
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-perfect-enemy-good.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Perfect is the Enemy of Good

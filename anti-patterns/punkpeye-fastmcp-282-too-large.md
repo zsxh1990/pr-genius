@@ -1,10 +1,12 @@
----
-key: punkpeye-fastmcp-282-too-large
+---key: punkpeye-fastmcp-282-too-large
 type: Anti-Pattern
 repo: punkpeye/fastmcp
 created: 2026-07-29
 anchors: [282]
 tags: [pr-size, first-contribution, maintainer-bandwidth]
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/punkpeye-fastmcp-282-too-large.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 trigger_keywords:

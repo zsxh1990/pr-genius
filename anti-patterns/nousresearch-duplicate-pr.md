@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: nousresearch-duplicate-pr
 tags: [cron, scheduling, reliability]
 description: "NousResearch PR 与已有实现重复"
@@ -15,6 +14,9 @@ evidence:
   - "NousResearch #53124: 标记 sweeper:implemented-on-main"
 created: 2026-07-15
 learned_at: 2026-07-15
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/nousresearch-duplicate-pr.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 反模式说明

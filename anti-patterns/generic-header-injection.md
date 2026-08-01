@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-header-injection
 tags: [cron, scheduling, reliability]
 description: "PR introducing header injection vulnerability"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Validate headers; 2) Sanitize output"
 created: 2026-07-29
 severity: high
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-header-injection.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Header Injection

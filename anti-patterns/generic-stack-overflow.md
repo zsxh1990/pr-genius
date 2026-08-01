@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-stack-overflow
 tags: [cron, scheduling, reliability]
 description: "PR introducing stack overflow"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Add recursion limit; 2) Use iteration"
 created: 2026-07-29
 severity: high
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-stack-overflow.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Stack Overflow

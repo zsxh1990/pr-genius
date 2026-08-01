@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-gold-plating
 tags: [cron, scheduling, reliability]
 description: "PR with gold plating"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Remove extras; 2) Focus on requirements"
 created: 2026-07-29
 severity: low
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-gold-plating.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Gold Plating

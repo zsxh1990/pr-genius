@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: openclaw-stale-pr
 tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 长时间无更新被标记 stale"
@@ -15,6 +14,9 @@ evidence:
   - "openclaw #87304: 2个月无更新，标记 stale"
 created: 2026-07-15
 learned_at: 2026-07-15
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/openclaw-stale-pr.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 反模式说明

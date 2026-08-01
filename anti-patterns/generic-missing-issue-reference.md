@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-missing-issue-reference
 tags: [cron, scheduling, reliability]
 description: "PR without linked issue"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Create issue first; 2) Link PR to issue"
 created: 2026-07-29
 severity: high
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-missing-issue-reference.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Missing Issue Reference

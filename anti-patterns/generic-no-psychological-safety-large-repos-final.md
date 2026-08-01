@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-no-psychological-safety-large-repos-final
 tags: [cron, scheduling, reliability]
 description: "Large repos require psychological safety"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Build psychological safety; 2) Push fix"
 created: 2026-07-29
 severity: high
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-no-psychological-safety-large-repos-final.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # No Psychological Safety (Large Repos)

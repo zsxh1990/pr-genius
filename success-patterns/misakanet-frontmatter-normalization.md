@@ -1,5 +1,4 @@
----
-type: Success Pattern
+---type: Success Pattern
 key: misakanet-frontmatter-normalization
 tags: [cron, scheduling, reliability]
 description: "批量修复同一类问题：保持一致性，单个 PR 包含多个文件"
@@ -21,6 +20,9 @@ metrics:
   time_to_merge: "1天"
 created: 2026-07-09
 learned_at: 2026-07-09
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/success-patterns/misakanet-frontmatter-normalization.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 成功案例

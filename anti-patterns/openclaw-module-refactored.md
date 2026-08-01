@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: module-refactored-approach-obsolete
 tags: [cron, scheduling, reliability]
 description: "PR 方案因目标模块被重构而失效"
@@ -15,6 +14,9 @@ evidence:
   - "openclaw #102368: crestodian 模块被重构到 system-agent，PR 方案失效"
 created: 2026-07-15
 learned_at: 2026-07-15
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/openclaw-module-refactored.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 反模式说明

@@ -1,5 +1,4 @@
----
-type: Success Pattern
+---type: Success Pattern
 key: misakanet-reputation-system
 tags: [cron, scheduling, reliability]
 description: "完整功能模块：算法实现 + 单元测试 + 文档"
@@ -22,6 +21,9 @@ metrics:
   time_to_merge: "1天"
 created: 2026-07-09
 learned_at: 2026-07-09
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/success-patterns/misakanet-reputation-system.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 成功案例

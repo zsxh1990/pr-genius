@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: openclaw-message-delivery-risk
 tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 涉及消息投递，风险较高"
@@ -15,6 +14,9 @@ evidence:
   - "NousResearch #53148: 涉及消息投递，标记 risk-message-delivery"
 created: 2026-07-15
 learned_at: 2026-07-15
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/openclaw-message-delivery-risk.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 反模式说明

@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-ai-generated-content
 tags: [cron, scheduling, reliability]
 description: "AI-generated content without human review"
@@ -11,6 +10,9 @@ trigger_keywords:
 fix_action: "1) Add human review; 2) Verify accuracy; 3) Add personal touches"
 created: 2026-07-29
 severity: critical
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-ai-generated-content.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # AI-Generated Content

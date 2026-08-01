@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 tags: [contribai, archived, repo-status]
 key: contribai-not-a-real-bug
 symptom: |
@@ -24,6 +23,9 @@ prevention: |
   - 写 failing test 复现, 不靠"我觉得"
 created: 2026-07-19
 learned_at: 2026-07-19
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/contribai-not-a-real-bug.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## ContribAI 实证 close 数据

@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-data-exposure
 tags: [cron, scheduling, reliability]
 description: "PR exposing sensitive data"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Remove exposure; 2) Add encryption"
 created: 2026-07-29
 severity: critical
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-data-exposure.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Data Exposure

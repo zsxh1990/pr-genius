@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: stale-pr-far-behind-main
 tags: [cron, scheduling, reliability]
 description: "PR 距离 main 太远，冲突无法解决"
@@ -15,6 +14,9 @@ evidence:
   - "openclaw #74185: 7,115 commits behind main，冲突无法解决"
 created: 2026-07-15
 learned_at: 2026-07-15
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/stale-pr-far-behind-main.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 反模式说明

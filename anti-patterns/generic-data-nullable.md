@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-data-nullable
 tags: [cron, scheduling, reliability]
 description: "PR忽视数据可空性"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Handle nulls; 2) Add validation"
 created: 2026-07-29
 severity: medium
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-data-nullable.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Data Nullable

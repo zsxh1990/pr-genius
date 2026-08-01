@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-auth-bypass
 tags: [cron, scheduling, reliability]
 description: "PR introducing auth bypass"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Fix auth; 2) Add checks"
 created: 2026-07-29
 severity: critical
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-auth-bypass.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Auth Bypass

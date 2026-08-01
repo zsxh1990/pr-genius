@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-deep-nesting
 tags: [cron, scheduling, reliability]
 description: "PR with deep nesting"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Flatten nesting; 2) Use early returns"
 created: 2026-07-29
 severity: low
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-deep-nesting.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Deep Nesting

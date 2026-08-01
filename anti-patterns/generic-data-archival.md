@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-data-archival
 tags: [cron, scheduling, reliability]
 description: "PR忽视数据归档"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Archive data; 2) Add storage"
 created: 2026-07-29
 severity: medium
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-data-archival.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Data Archival

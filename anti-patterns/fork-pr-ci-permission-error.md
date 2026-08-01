@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: fork-pr-ci-permission-error
 symptom: |
   CI 检查报 "Resource not accessible by integration"（DCO / star-request / audit / lint 全部红）
@@ -19,6 +18,7 @@ created: 2026-07-08
 
 trigger_keywords:
   - fork
+updated: 2026-08-01
 ---
 
 ## Problem

@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-no-contributing-large
 tags: [cron, scheduling, reliability]
 description: "Large repos require contributing guide"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Follow contributing guide; 2) Push fix"
 created: 2026-07-29
 severity: high
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-no-contributing-large.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # No Contributing Guide (Large Repos)

@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-no-dco
 description: "Repos requiring DCO reject PRs without Signed-off-by"
 tags: [generic, anti-pattern, dco]
@@ -11,6 +10,9 @@ trigger_keywords:
   - "dco check failed"
   - "dco fail"
   - "dco sign-off"
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-no-dco.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Repos Reject PRs Without DCO Sign-Off

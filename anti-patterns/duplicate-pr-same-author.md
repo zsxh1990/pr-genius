@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: duplicate-pr-same-author
 tags: [cron, scheduling, reliability]
 description: "同一作者提交多个几乎相同的 PR"
@@ -16,6 +15,9 @@ evidence:
   - "两个 PR 都被标记 ai-policy-violation 并关闭"
 created: 2026-07-09
 learned_at: 2026-07-09
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/duplicate-pr-same-author.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 反模式说明

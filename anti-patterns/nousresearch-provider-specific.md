@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: nousresearch-provider-specific
 tags: [cron, scheduling, reliability]
 description: "NousResearch PR 涉及特定 provider 问题"
@@ -16,6 +15,9 @@ evidence:
   - "NousResearch #52866: 涉及 Gemini provider"
 created: 2026-07-15
 learned_at: 2026-07-15
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/nousresearch-provider-specific.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 反模式说明

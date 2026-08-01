@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 tags: [anti-pattern, real-case]
 key: cosmetic-no-user-pain
 symptom: |
@@ -16,6 +15,9 @@ source_pr: vitejs/vite#22701
 prevention: "提 PR 前问自己：(1) 有没有用户报过这个痛点？(2) 维护者是否认可这是个问题？(3) 改动是否只影响输出格式而非功能？"
 created: 2026-07-08
 learned_at: 2026-07-08
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/cosmetic-no-user-pain.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 案例

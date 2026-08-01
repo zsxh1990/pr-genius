@@ -1,9 +1,11 @@
----
-type: Success Pattern
+---type: Success Pattern
 key: large-repo-performance-benchmark
 description: "Performance improvements need benchmarks"
 tags: [large-repo, performance, benchmark]
 created: 2026-07-29
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/success-patterns/large-repo-performance-benchmark.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Large Repo: Performance Improvements Need Benchmarks

@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-far-behind-main
 tags: [cron, scheduling, reliability]
 description: "PR far behind main"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Rebase on main; 2) Resolve conflicts"
 created: 2026-07-29
 severity: high
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-far-behind-main.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Far Behind Main

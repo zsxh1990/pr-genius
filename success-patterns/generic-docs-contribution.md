@@ -1,9 +1,11 @@
----
-type: Success Pattern
+---type: Success Pattern
 key: generic-docs-contribution
 description: "Documentation-only PRs have high merge rate across all repos"
 tags: [generic, docs, high-success-rate]
 created: 2026-07-29
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/success-patterns/generic-docs-contribution.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Generic Documentation Contribution

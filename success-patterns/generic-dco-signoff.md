@@ -1,9 +1,11 @@
----
-type: Success Pattern
+---type: Success Pattern
 key: generic-dco-signoff
 description: "DCO sign-off required for many repos"
 tags: [generic, dco, requirement]
 created: 2026-07-29
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/success-patterns/generic-dco-signoff.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # DCO Sign-off Requirement

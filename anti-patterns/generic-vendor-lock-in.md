@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: generic-vendor-lock-in
 tags: [cron, scheduling, reliability]
 description: "PR introducing vendor lock-in"
@@ -10,6 +9,9 @@ trigger_keywords:
 fix_action: "1) Use open standards; 2) Abstract vendor"
 created: 2026-07-29
 severity: high
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-vendor-lock-in.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # Vendor Lock-in

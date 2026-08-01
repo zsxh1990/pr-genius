@@ -1,5 +1,4 @@
----
-type: Success Pattern
+---type: Success Pattern
 key: bilig-docs-relative-paths
 tags: [cron, scheduling, reliability]
 description: "文档修复：替换绝对路径为相对路径"
@@ -20,6 +19,9 @@ metrics:
   time_to_merge: "1天"
 created: 2026-07-09
 learned_at: 2026-07-09
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/success-patterns/bilig-docs-relative-paths.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 成功案例

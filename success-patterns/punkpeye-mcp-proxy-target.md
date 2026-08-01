@@ -1,8 +1,10 @@
----
-type: Target Pattern
+---type: Target Pattern
 repo: punkpeye/mcp-proxy
 created: 2026-07-29
 tags: [target, mcp-proxy, typescript]
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/success-patterns/punkpeye-mcp-proxy-target.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 # mcp-proxy: Contribution Target

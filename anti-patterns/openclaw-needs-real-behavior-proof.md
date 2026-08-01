@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: openclaw-needs-real-behavior-proof
 tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 需要真实行为证明"
@@ -14,6 +13,9 @@ evidence:
   - "openclaw #62338: 标记 needs-real-behavior-proof"
 created: 2026-07-15
 learned_at: 2026-07-15
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/openclaw-needs-real-behavior-proof.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 反模式说明

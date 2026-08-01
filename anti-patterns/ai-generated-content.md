@@ -1,5 +1,4 @@
----
-type: Anti-Pattern
+---type: Anti-Pattern
 key: ai-generated-content
 tags: [cron, scheduling, reliability]
 description: "AI 生成内容被维护者标记为违反 AI 使用政策"
@@ -20,6 +19,9 @@ evidence:
   - "yt-dlp #17181: ai-policy-violation 标签"
 created: 2026-07-09
 learned_at: 2026-07-09
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/ai-generated-content.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 反模式说明

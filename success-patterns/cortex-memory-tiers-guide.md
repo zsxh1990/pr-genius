@@ -1,5 +1,4 @@
----
-type: Success Pattern
+---type: Success Pattern
 key: cortex-memory-tiers-guide
 tags: [cron, scheduling, reliability]
 description: "文档贡献：补充缺失的架构指南"
@@ -20,6 +19,9 @@ metrics:
   time_to_merge: "1天"
 created: 2026-07-09
 learned_at: 2026-07-09
+source_url: https://github.com/zsxh1990/pr-genius/tree/main/success-patterns/cortex-memory-tiers-guide.md
+updated: 2026-08-01
+confidence: medium
 ---
 
 ## 成功案例
