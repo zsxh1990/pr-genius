@@ -1,0 +1,53 @@
+name: 'PR Genius Check'
+description: 'Analyze PR contribution strategy using PR Genius'
+author: 'zsxh1990'
+
+inputs:
+  title:
+    description: 'PR title'
+    required: true
+  repo:
+    description: 'Target repo (org/name)'
+    required: true
+  body:
+    description: 'PR body/description'
+    required: false
+    default: ''
+  star_count:
+    description: 'Repo star count'
+    required: false
+    default: '0'
+
+outputs:
+  tier:
+    description: 'Risk tier (low_risk/medium_risk/high_risk)'
+    value: ${{ steps.analysis.outputs.tier }}
+  result:
+    description: 'Full analysis JSON'
+    value: ${{ steps.analysis.outputs.result }}
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install pr-genius
+      shell: bash
+      run: pip install prgenius-core
+
+    - name: Run PR Genius
+      id: analysis
+      shell: bash
+      run: |
+        RESULT=$(python3 -m prgenius eval "${{ inputs.title }}" \
+          --repo "${{ inputs.repo }}" \
+          -d "${{ inputs.body }}" 2>/dev/null || echo '{"error": "analysis failed"}')
+        
+        TIER=$(echo "$RESULT" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('tier','unknown'))" 2>/dev/null || echo "unknown")
+        
+        echo "tier=$TIER" >> $GITHUB_OUTPUT
+        echo "result<<EOF" >> $GITHUB_OUTPUT
+        echo "$RESULT" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT

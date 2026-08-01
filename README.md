@@ -63,7 +63,7 @@ python3 -m prgenius triage "docs: typo" --repo org/repo --diff-stat "docs/faq.md
 
 ## 🤖 GitHub Action
 
-Add PR Genius as a GitHub Action to automatically analyze PRs:
+Use PR Genius as a GitHub Action in any repo:
 
 ```yaml
 # .github/workflows/pr-genius.yml
@@ -77,15 +77,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: zsxh1990/pr-genius/.github/actions/pr-genius-check@main
+        id: pr-genius
         with:
-          python-version: '3.11'
-      - run: pip install prgenius-core
-      - name: Analyze PR
-        run: |
-          python3 -m prgenius eval "${{ github.event.pull_request.title }}" \
-            --repo "${{ github.repository }}" \
-            -d "${{ github.event.pull_request.body }}"
+          title: ${{ github.event.pull_request.title }}
+          repo: ${{ github.repository }}
+          body: ${{ github.event.pull_request.body }}
+      - name: Comment on PR
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const tier = '${{ steps.pr-genius.outputs.tier }}';
+            const emoji = tier === 'high_risk' ? '🔴' : tier === 'medium_risk' ? '🟡' : '🟢';
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## ${emoji} PR Genius: ${tier}`
+            });
 ```
 
 ## 🤖 MCP Configuration
