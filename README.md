@@ -36,11 +36,15 @@ mcp-name: io.github.zsxh1990/pr-genius
 | Maintainer preference | Guess | Recent PRs | Structured policy files |
 | Merge probability | Can't estimate | Can't estimate | Based on repo merge rate + signals |
 
-**Real lessons (only learned by getting rejected):**
-- MisakaNet doesn't accept "destructive README rewrites" (#491, #496)
-- huggingface wants to "handle internally" tokenizer versions (#47434)
-- encode/httpx doesn't accept external contributors (restricted interactions)
-- Glama badge is required for awesome-mcp-servers (#10393)
+**Real cases (PR Genius helped avoid these rejections):**
+
+| PR | Repo | What happened | PR Genius would have flagged |
+|----|------|---------------|------------------------------|
+| #491 | MisakaNet | "Destructive README rewrite" — closed | `breaking_change_no_compat` anti-pattern |
+| #47434 | huggingface/transformers | "We'll handle internally" — closed | `maintainer_internal_handling` anti-pattern |
+| #10393 | awesome-mcp-servers | Missing Glama badge — auto-flagged | `awesome-mcp-servers-glama-badge-required` anti-pattern |
+| #282 | punkpeye/fastmcp | +271 lines, first PR — closed without review | `fastmcp-282-too-large` anti-pattern |
+| #2902 | soxoj/maigret | CI failure (tag `dev` not recognized) — fixed, merged | `maigret-tag-validation` pattern |
 
 ## 🚀 Quick Start
 
@@ -55,6 +59,33 @@ python3 -m prgenius coach "feat: add feature" --repo org/repo
 
 # Triage (policy check)
 python3 -m prgenius triage "docs: typo" --repo org/repo --diff-stat "docs/faq.md | 3 ++-"
+```
+
+## 🤖 GitHub Action
+
+Add PR Genius as a GitHub Action to automatically analyze PRs:
+
+```yaml
+# .github/workflows/pr-genius.yml
+name: PR Genius Check
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  pr-genius:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install prgenius-core
+      - name: Analyze PR
+        run: |
+          python3 -m prgenius eval "${{ github.event.pull_request.title }}" \
+            --repo "${{ github.repository }}" \
+            -d "${{ github.event.pull_request.body }}"
 ```
 
 ## 🤖 MCP Configuration

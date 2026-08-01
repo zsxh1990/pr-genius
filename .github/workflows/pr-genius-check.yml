@@ -1,0 +1,63 @@
+name: PR Genius Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  pr-genius:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install pr-genius
+        run: pip install prgenius-core
+
+      - name: Run PR Genius analysis
+        id: analysis
+        run: |
+          TITLE="${{ github.event.pull_request.title }}"
+          REPO="${{ github.repository }}"
+          BODY="${{ github.event.pull_request.body }}"
+          
+          RESULT=$(python3 -m prgenius eval "$TITLE" --repo "$REPO" -d "$BODY" 2>/dev/null || echo '{"error": "analysis failed"}')
+          echo "result=$RESULT" >> $GITHUB_OUTPUT
+          
+          # Extract tier
+          TIER=$(echo "$RESULT" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('tier','unknown'))" 2>/dev/null || echo "unknown")
+          echo "tier=$TIER" >> $GITHUB_OUTPUT
+
+      - name: Comment on PR
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const tier = '${{ steps.analysis.outputs.tier }}';
+            const result = '${{ steps.analysis.outputs.result }}';
+            
+            let emoji = '🟢';
+            let status = 'Safe to submit';
+            if (tier === 'high_risk') {
+              emoji = '🔴';
+              status = 'High risk — review checklist before submitting';
+            } else if (tier === 'medium_risk') {
+              emoji = '🟡';
+              status = 'Medium risk — review suggestions';
+            }
+            
+            const body = `## ${emoji} PR Genius Analysis\n\n**Risk Level:** ${tier}\n**Status:** ${status}\n\n<details>\n<summary>Full Analysis</summary>\n\n\`\`\`json\n${result}\n\`\`\`\n</details>\n\n---\n*Powered by [PR Genius](https://github.com/zsxh1990/pr-genius)*`;
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: body
+            });
