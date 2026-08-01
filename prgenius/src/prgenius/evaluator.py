@@ -311,6 +311,9 @@ def check_anti_patterns(title: str, description: str, repo: str, repo_root, body
                         "symptom": pattern.get("symptom", ""),
                         "fix_action": pattern.get("fix_action", ""),
                         "source_pr": pattern.get("source_pr", ""),
+                        "source_url": pattern.get("source_url", ""),
+                        "updated": pattern.get("updated", ""),
+                        "confidence": pattern.get("confidence", ""),
                     })
                     seen_keys.add(key)
                     matched = True
@@ -322,6 +325,9 @@ def check_anti_patterns(title: str, description: str, repo: str, repo_root, body
                     "key": key, "symptom": symptom,
                     "fix_action": pattern.get("fix_action", ""),
                     "source_pr": pattern.get("source_pr", ""),
+                    "source_url": pattern.get("source_url", ""),
+                    "updated": pattern.get("updated", ""),
+                    "confidence": pattern.get("confidence", ""),
                 })
                 seen_keys.add(key)
     return matches
