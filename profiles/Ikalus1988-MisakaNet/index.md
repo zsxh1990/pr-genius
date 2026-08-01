@@ -4,7 +4,7 @@ title: Ikalus1988/MisakaNet PR 模式分析
 description: MisakaNet — 热心市民的御坂网络知识库，pr-genius 的 federation peer
 repo: Ikalus1988/MisakaNet
 url: https://github.com/Ikalus1988/MisakaNet
-star: 0
+star: 348
 language: Python
 license: MIT
 default_branch: main
