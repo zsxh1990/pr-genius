@@ -769,6 +769,7 @@ def analyze_pr(
         },
         "checklist": checklist,
         "anti_patterns_hit": [m["key"] for m in anti_matches],
+        "anti_patterns_detail": anti_matches,
         "repo_context": repo_context,
         "comparison": comparison,
     }
