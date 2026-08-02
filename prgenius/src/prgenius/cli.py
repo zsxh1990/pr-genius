@@ -23,6 +23,7 @@ from .parser import (
     schema_info,
 )
 from .evaluator import analyze_pr, eval_pr
+from .status import check_status, format_table
 
 
 REPO_ROOT_DEFAULT = Path(__file__).resolve().parents[3]
@@ -377,6 +378,30 @@ def cmd_triage(args) -> int:
     return 1 if result["verdict"] == "reject" else 0
 
 
+def cmd_status(args) -> int:
+    """Check health of in-flight PRs."""
+    if not args.author and not args.repo:
+        print("Error: specify --author or --repo", file=sys.stderr)
+        return 1
+
+    try:
+        result = check_status(
+            author=args.author,
+            repo=args.repo,
+            stale_days=args.stale_days,
+        )
+    except RuntimeError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        return 1
+
+    if args.format == "json":
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+    else:
+        print(format_table(result))
+
+    return 0
+
+
 # ============================================================
 # main
 # ============================================================
@@ -486,6 +511,15 @@ def main(argv: list[str] | None = None) -> int:
     s_info_sub = s_info.add_subparsers(dest="schema_cmd", required=True)
     si = s_info_sub.add_parser("info", help="Show supported schema versions")
     si.set_defaults(func=cmd_schema_info)
+
+    # ---- status ----
+    st = sub.add_parser("status", help="Check health of in-flight PRs")
+    st.add_argument("--author", help="GitHub username to check PRs for")
+    st.add_argument("--repo", help="Repository to check PRs in (org/repo)")
+    st.add_argument("--stale-days", type=int, default=14, help="Days without update to consider stale (default: 14)")
+    st.add_argument("--format", choices=["table", "json"], default="table", help="Output format")
+    st.add_argument("--repo-root", help="Path to pr-genius repo root")
+    st.set_defaults(func=cmd_status)
 
     # ---- dump ----
     dmp = sub.add_parser("dump", help="NDJSON dump of all cases")

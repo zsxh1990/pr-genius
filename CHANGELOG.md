@@ -11,6 +11,15 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 
 ## [Unreleased]
 
+### Added
+- **Status Mode MVP** (`prgenius status`): In-flight PR health monitoring.
+  - 9 status types: NEEDS_REBASE, CI_FAILING, STALE_REVIEW, CHANGES_REQUESTED, STALE_NO_REVIEW, BLOCKED, CLEAN, UNKNOWN, WAITING
+  - Priority-based classification (STALE_REVIEW > CHANGES_REQUESTED when fix pushed)
+  - OWN_REPO auto-filtering
+  - `--author` / `--repo` / `--stale-days` / `--format json|table`
+  - 22 unit tests locking down classifier rules
+  - PRD: https://feishu.cn/docx/LSDRdqmcTo57m5xkgXAcooqEn3g
+
 ### Compliance
 - **OKF v0.1 合规审计** (克莱恩 2026-07-19 拍板): upstream
   [Sudhakaran88/okf-conformance](https://github.com/Sudhakaran88/okf-conformance)
