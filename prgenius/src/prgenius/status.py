@@ -14,7 +14,12 @@ import subprocess
 from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
 from enum import Enum
+from pathlib import Path
 from typing import Optional
+
+from .parser import profile_get
+
+DEFAULT_STALE_DAYS = 14
 
 
 class PRStatus(str, Enum):
@@ -393,18 +398,87 @@ def classify_pr(pr: PRInfo, stale_days: int = 14) -> PRStatusResult:
     )
 
 
+def _resolve_stale_days(
+    repo: str,
+    cli_stale_days: Optional[int] = None,
+    repo_root: Optional[Path] = None,
+) -> tuple[int, str]:
+    """Resolve stale_days threshold with priority: CLI > profile > default.
+
+    Returns (stale_days, source) where source is 'cli', 'profile', or 'default'.
+    """
+    # 1. CLI parameter takes priority
+    if cli_stale_days is not None:
+        return cli_stale_days, "cli"
+
+    # 2. Try repo profile
+    if repo_root:
+        try:
+            profile = profile_get(str(repo_root), repo)
+            if profile:
+                guidelines = profile.get("frontmatter", {}).get("agent_guidelines", {})
+                threshold = guidelines.get("stale_days_threshold")
+                if threshold is not None:
+                    return int(threshold), "profile"
+        except Exception:
+            pass
+
+    # 3. Default
+    return DEFAULT_STALE_DAYS, "default"
+
+
+def _load_profile_stale_days(repos: set[str], repo_root: Optional[Path]) -> dict[str, int]:
+    """Load stale_days_threshold for all unique repos from profiles."""
+    result = {}
+    if not repo_root:
+        return result
+    for repo in repos:
+        try:
+            profile = profile_get(str(repo_root), repo)
+            if profile:
+                guidelines = profile.get("frontmatter", {}).get("agent_guidelines", {})
+                threshold = guidelines.get("stale_days_threshold")
+                if threshold is not None:
+                    result[repo] = int(threshold)
+        except Exception:
+            pass
+    return result
+
+
 def check_status(
     author: Optional[str] = None,
     repo: Optional[str] = None,
-    stale_days: int = 14,
+    stale_days: Optional[int] = None,
+    repo_root: Optional[Path] = None,
 ) -> dict:
-    """Main entry point: fetch PRs, classify, return structured result."""
+    """Main entry point: fetch PRs, classify, return structured result.
+
+    Priority: CLI stale_days > repo profile stale_days_threshold > default 14.
+    """
     prs = fetch_open_prs(author=author, repo=repo)
+
+    # Resolve stale_days per repo
+    unique_repos = {pr.repo for pr in prs if not pr.is_own_repo}
+    profile_thresholds = _load_profile_stale_days(unique_repos, repo_root)
+
+    # Determine overall stale_days and source for output
+    if stale_days is not None:
+        effective_stale_days = stale_days
+        stale_days_source = "cli"
+    elif profile_thresholds:
+        # Use the first profile threshold found (most common case: single repo)
+        effective_stale_days = next(iter(profile_thresholds.values()))
+        stale_days_source = "profile"
+    else:
+        effective_stale_days = DEFAULT_STALE_DAYS
+        stale_days_source = "default"
 
     classified = []
     ignored = []
     for pr in prs:
-        result = classify_pr(pr, stale_days=stale_days)
+        # Per-PR stale_days (profile may differ per repo)
+        pr_stale_days = stale_days or profile_thresholds.get(pr.repo, DEFAULT_STALE_DAYS)
+        result = classify_pr(pr, stale_days=pr_stale_days)
         if result.ignored_reason:
             ignored.append(result)
         else:
@@ -431,7 +505,12 @@ def check_status(
         "author": author,
         "repo": repo,
         "checked_at": datetime.now(timezone.utc).isoformat(),
-        "stale_days": stale_days,
+        "stale_days": effective_stale_days,
+        "stale_days_source": stale_days_source,
+        "profile": {
+            "stale_days_threshold": effective_stale_days,
+            "stale_days_source": stale_days_source,
+        },
         "prs": [asdict(r) for r in classified],
         "ignored": [asdict(r) for r in ignored],
         "summary": summary,

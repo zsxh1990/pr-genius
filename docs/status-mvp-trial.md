@@ -61,8 +61,19 @@ python3 -m prgenius status --author zsxh1990 --stale-days 14
 - 漏检率：手动 3/10（status 全部检出）
 - 耗时 ~3min（可接受，阶段二 P0 优化到 <10s）
 
+### P0 GraphQL 批量查询（✅ 完成）
+
+- 单次 `gh api graphql` 替代 2×N 次 CLI 调用
+- 13 PR: ~3min → **5s**
+- statusCheckRollup.state 为 CI source-of-truth
+
+### 试运行发现
+
+1. **holmesgpt #2305**：GraphQL 返回 BEHIND（CLI 返回 BLOCKED）→ GraphQL 更准确，BEHIND → NEEDS_REBASE
+   - **规则：GraphQL source-of-truth 优先级高于旧 CLI 路径**
+2. **harbor #2121**：rebase 后 CI 状态 → FAILURE 则 CI_FAILING，PENDING/EXPECTED 则 BLOCKED
+
 ### 下一步
 
-1. 连续跑 3 天（08-02 ~ 08-04），保存快照
-2. 阶段二 P0：GraphQL 批量查询
-3. 阶段二 P1：repo profile 接入 stale_days_threshold
+1. 阶段二 P1：repo profile 接入 stale_days_threshold
+2. 连续跑 3 天（08-02 ~ 08-04），保存快照

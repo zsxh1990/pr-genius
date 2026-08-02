@@ -5,7 +5,7 @@ Locks down priority rules to prevent regressions.
 import unittest
 from datetime import datetime, timezone, timedelta
 
-from prgenius.status import PRStatus, PRInfo, classify_pr
+from prgenius.status import PRStatus, PRInfo, classify_pr, _resolve_stale_days
 
 
 def _make_pr(**overrides) -> PRInfo:
@@ -223,6 +223,30 @@ class TestPriorityOrder(unittest.TestCase):
         pr = _make_pr(merge_state="UNSTABLE", review_decision="CHANGES_REQUESTED")
         result = classify_pr(pr)
         self.assertEqual(result.status, PRStatus.CI_FAILING)
+
+
+class TestStaleDaysResolution(unittest.TestCase):
+    """Priority: CLI > profile > default 14."""
+
+    def test_cli_overrides_all(self):
+        stale, source = _resolve_stale_days("org/repo", cli_stale_days=7)
+        self.assertEqual(stale, 7)
+        self.assertEqual(source, "cli")
+
+    def test_default_when_no_profile(self):
+        stale, source = _resolve_stale_days("org/repo", cli_stale_days=None, repo_root=None)
+        self.assertEqual(stale, 14)
+        self.assertEqual(source, "default")
+
+    def test_default_when_profile_not_found(self):
+        """When repo_root is given but no profile exists, use default."""
+        from pathlib import Path
+        stale, source = _resolve_stale_days(
+            "nonexistent/repo", cli_stale_days=None,
+            repo_root=Path(__file__).resolve().parents[2],
+        )
+        self.assertEqual(stale, 14)
+        self.assertEqual(source, "default")
 
 
 if __name__ == "__main__":

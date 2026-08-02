@@ -384,11 +384,16 @@ def cmd_status(args) -> int:
         print("Error: specify --author or --repo", file=sys.stderr)
         return 1
 
+    repo_root = _get_repo_root(args)
+    # stale_days: None means "use profile or default", int means "CLI override"
+    cli_stale_days = args.stale_days if args.stale_days is not None else None
+
     try:
         result = check_status(
             author=args.author,
             repo=args.repo,
-            stale_days=args.stale_days,
+            stale_days=cli_stale_days,
+            repo_root=repo_root,
         )
     except RuntimeError as e:
         print(f"Error: {e}", file=sys.stderr)
@@ -516,7 +521,7 @@ def main(argv: list[str] | None = None) -> int:
     st = sub.add_parser("status", help="Check health of in-flight PRs")
     st.add_argument("--author", help="GitHub username to check PRs for")
     st.add_argument("--repo", help="Repository to check PRs in (org/repo)")
-    st.add_argument("--stale-days", type=int, default=14, help="Days without update to consider stale (default: 14)")
+    st.add_argument("--stale-days", type=int, default=None, help="Days without update to consider stale (default: profile or 14)")
     st.add_argument("--format", choices=["table", "json"], default="table", help="Output format")
     st.add_argument("--repo-root", help="Path to pr-genius repo root")
     st.set_defaults(func=cmd_status)
