@@ -388,12 +388,16 @@ def cmd_status(args) -> int:
     # stale_days: None means "use profile or default", int means "CLI override"
     cli_stale_days = args.stale_days if args.stale_days is not None else None
 
+    snapshot_dir = Path(args.snapshot_dir) if args.snapshot_dir else None
+
     try:
         result = check_status(
             author=args.author,
             repo=args.repo,
             stale_days=cli_stale_days,
             repo_root=repo_root,
+            save_snapshot=args.save_snapshot,
+            snapshot_dir=snapshot_dir,
         )
     except RuntimeError as e:
         print(f"Error: {e}", file=sys.stderr)
@@ -523,6 +527,8 @@ def main(argv: list[str] | None = None) -> int:
     st.add_argument("--repo", help="Repository to check PRs in (org/repo)")
     st.add_argument("--stale-days", type=int, default=None, help="Days without update to consider stale (default: profile or 14)")
     st.add_argument("--format", choices=["table", "json"], default="table", help="Output format")
+    st.add_argument("--save-snapshot", action="store_true", help="Save snapshot and compute transitions from previous")
+    st.add_argument("--snapshot-dir", help="Directory for snapshots (default: data/status-snapshots)")
     st.add_argument("--repo-root", help="Path to pr-genius repo root")
     st.set_defaults(func=cmd_status)
 

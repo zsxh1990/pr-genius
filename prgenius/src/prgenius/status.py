@@ -9,6 +9,7 @@ Usage:
 """
 from __future__ import annotations
 
+import glob
 import json
 import subprocess
 from dataclasses import dataclass, field, asdict
@@ -445,15 +446,137 @@ def _load_profile_stale_days(repos: set[str], repo_root: Optional[Path]) -> dict
     return result
 
 
+# ============================================================
+# Snapshot & Transition tracking
+# ============================================================
+
+# Status changes that warrant a transition alert
+_TRANSITION_ALERTS = {
+    # Escalations: WAITING/BLOCKED → critical
+    ("WAITING", "NEEDS_REBASE"),
+    ("WAITING", "CI_FAILING"),
+    ("BLOCKED", "NEEDS_REBASE"),
+    ("BLOCKED", "CI_FAILING"),
+    # De-escalations: STALE_* → resolved
+    ("STALE_REVIEW", "CLEAN"),
+    ("STALE_NO_REVIEW", "CLEAN"),
+    ("CHANGES_REQUESTED", "CLEAN"),
+}
+
+
+def _find_latest_snapshot(snapshot_dir: Path) -> Optional[Path]:
+    """Find the most recent snapshot file in the directory."""
+    pattern = str(snapshot_dir / "*.json")
+    files = sorted(glob.glob(pattern), reverse=True)
+    for f in files:
+        # Skip non-snapshot files (e.g. graphql test snapshots)
+        name = Path(f).name
+        if name[0:4].isdigit() and len(name) >= 14:  # YYYY-MM-DD*.json
+            return Path(f)
+    return None
+
+
+def _load_previous_snapshot(snapshot_dir: Path) -> Optional[dict]:
+    """Load the most recent snapshot for comparison."""
+    path = _find_latest_snapshot(snapshot_dir)
+    if not path:
+        return None
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return None
+
+
+def _build_pr_key(pr: dict) -> str:
+    """Build a unique key for a PR: repo#number."""
+    return f"{pr['repo']}#{pr['number']}"
+
+
+def _compute_transitions(current: dict, previous: Optional[dict]) -> list[dict]:
+    """Compare current vs previous snapshot, return transition list.
+
+    Each transition: {repo, number, title, previous_status, current_status, changed, alert}
+    """
+    if not previous:
+        return []
+
+    # Build lookup from previous snapshot
+    prev_lookup = {}
+    for pr in previous.get("prs", []):
+        key = _build_pr_key(pr)
+        prev_lookup[key] = pr
+
+    transitions = []
+    for pr in current.get("prs", []):
+        key = _build_pr_key(pr)
+        prev = prev_lookup.get(key)
+
+        if not prev:
+            # New PR (wasn't in previous snapshot)
+            transitions.append({
+                "repo": pr["repo"],
+                "number": pr["number"],
+                "title": pr["title"],
+                "previous_status": None,
+                "current_status": pr["status"],
+                "changed": True,
+                "alert": False,
+            })
+            continue
+
+        prev_status = prev.get("status")
+        curr_status = pr["status"]
+        changed = prev_status != curr_status
+        alert = (prev_status, curr_status) in _TRANSITION_ALERTS
+
+        transitions.append({
+            "repo": pr["repo"],
+            "number": pr["number"],
+            "title": pr["title"],
+            "previous_status": prev_status,
+            "current_status": curr_status,
+            "changed": changed,
+            "alert": alert,
+        })
+
+    # Check for PRs that disappeared (merged/closed)
+    curr_keys = {_build_pr_key(pr) for pr in current.get("prs", [])}
+    for key, pr in prev_lookup.items():
+        if key not in curr_keys:
+            transitions.append({
+                "repo": pr["repo"],
+                "number": pr["number"],
+                "title": pr["title"],
+                "previous_status": pr.get("status"),
+                "current_status": "CLOSED_OR_MERGED",
+                "changed": True,
+                "alert": False,
+            })
+
+    return transitions
+
+
+def _save_snapshot(result: dict, snapshot_dir: Path) -> Path:
+    """Save current result as a snapshot file."""
+    snapshot_dir.mkdir(parents=True, exist_ok=True)
+    filename = f"{datetime.now(timezone.utc).strftime('%Y-%m-%d')}.json"
+    path = snapshot_dir / filename
+    path.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
+    return path
+
+
 def check_status(
     author: Optional[str] = None,
     repo: Optional[str] = None,
     stale_days: Optional[int] = None,
     repo_root: Optional[Path] = None,
+    save_snapshot: bool = False,
+    snapshot_dir: Optional[Path] = None,
 ) -> dict:
     """Main entry point: fetch PRs, classify, return structured result.
 
     Priority: CLI stale_days > repo profile stale_days_threshold > default 14.
+    If save_snapshot=True, saves result and computes transitions from previous snapshot.
     """
     prs = fetch_open_prs(author=author, repo=repo)
 
@@ -501,7 +624,7 @@ def check_status(
         if r.severity in ("high", "medium"):
             actions.append(f"{r.suggested_action} {r.repo}#{r.number}")
 
-    return {
+    result = {
         "author": author,
         "repo": repo,
         "checked_at": datetime.now(timezone.utc).isoformat(),
@@ -516,6 +639,22 @@ def check_status(
         "summary": summary,
         "actions": actions,
     }
+
+    # Snapshot & transition tracking
+    if save_snapshot:
+        if snapshot_dir is None:
+            snapshot_dir = Path("data/status-snapshots")
+        previous = _load_previous_snapshot(snapshot_dir)
+        transitions = _compute_transitions(result, previous)
+        result["transitions"] = transitions
+        result["transition_summary"] = {
+            "total": len(transitions),
+            "changed": sum(1 for t in transitions if t["changed"]),
+            "alerts": sum(1 for t in transitions if t["alert"]),
+        }
+        _save_snapshot(result, snapshot_dir)
+
+    return result
 
 
 def format_table(result: dict) -> str:
@@ -564,6 +703,19 @@ def format_table(result: dict) -> str:
         if key in summary:
             summary_parts.append(f"{summary[key]} {STATUS_LABELS[status]}")
     lines.append(f"Summary: {', '.join(summary_parts)}")
+
+    # Transitions
+    transitions = result.get("transitions", [])
+    alerts = [t for t in transitions if t.get("alert")]
+    changes = [t for t in transitions if t.get("changed") and not t.get("alert")]
+    if alerts or changes:
+        lines.append("🔄 TRANSITIONS")
+        for t in alerts:
+            lines.append(f"  ⚠️ {t['repo']} #{t['number']}: {t['previous_status']} → {t['current_status']}")
+        for t in changes:
+            prev = t['previous_status'] or "NEW"
+            lines.append(f"  · {t['repo']} #{t['number']}: {prev} → {t['current_status']}")
+        lines.append("")
 
     # Actions
     actions = result.get("actions", [])

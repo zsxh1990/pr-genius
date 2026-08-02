@@ -5,7 +5,7 @@ Locks down priority rules to prevent regressions.
 import unittest
 from datetime import datetime, timezone, timedelta
 
-from prgenius.status import PRStatus, PRInfo, classify_pr, _resolve_stale_days
+from prgenius.status import PRStatus, PRInfo, classify_pr, _resolve_stale_days, _compute_transitions
 
 
 def _make_pr(**overrides) -> PRInfo:
@@ -247,6 +247,100 @@ class TestStaleDaysResolution(unittest.TestCase):
         )
         self.assertEqual(stale, 14)
         self.assertEqual(source, "default")
+
+
+class TestTransitions(unittest.TestCase):
+    """Transition tracking: compare current vs previous snapshot."""
+
+    def _make_result(self, prs):
+        """Helper to build a minimal result dict."""
+        return {"prs": prs}
+
+    def test_no_previous_snapshot(self):
+        """First run: no transitions."""
+        current = self._make_result([
+            {"repo": "org/repo", "number": 1, "title": "PR1", "status": "WAITING"},
+        ])
+        transitions = _compute_transitions(current, previous=None)
+        self.assertEqual(transitions, [])
+
+    def test_unchanged_status(self):
+        """Same status: changed=False."""
+        pr = {"repo": "org/repo", "number": 1, "title": "PR1", "status": "WAITING"}
+        current = self._make_result([pr])
+        previous = self._make_result([pr])
+        transitions = _compute_transitions(current, previous)
+        self.assertEqual(len(transitions), 1)
+        self.assertFalse(transitions[0]["changed"])
+
+    def test_changed_status(self):
+        """Status changed: changed=True."""
+        current = self._make_result([
+            {"repo": "org/repo", "number": 1, "title": "PR1", "status": "NEEDS_REBASE"},
+        ])
+        previous = self._make_result([
+            {"repo": "org/repo", "number": 1, "title": "PR1", "status": "WAITING"},
+        ])
+        transitions = _compute_transitions(current, previous)
+        self.assertEqual(len(transitions), 1)
+        self.assertTrue(transitions[0]["changed"])
+        self.assertEqual(transitions[0]["previous_status"], "WAITING")
+        self.assertEqual(transitions[0]["current_status"], "NEEDS_REBASE")
+
+    def test_alert_escalation(self):
+        """WAITING → NEEDS_REBASE triggers alert."""
+        current = self._make_result([
+            {"repo": "org/repo", "number": 1, "title": "PR1", "status": "NEEDS_REBASE"},
+        ])
+        previous = self._make_result([
+            {"repo": "org/repo", "number": 1, "title": "PR1", "status": "WAITING"},
+        ])
+        transitions = _compute_transitions(current, previous)
+        self.assertTrue(transitions[0]["alert"])
+
+    def test_alert_deescalation(self):
+        """STALE_REVIEW → CLEAN triggers alert."""
+        current = self._make_result([
+            {"repo": "org/repo", "number": 1, "title": "PR1", "status": "CLEAN"},
+        ])
+        previous = self._make_result([
+            {"repo": "org/repo", "number": 1, "title": "PR1", "status": "STALE_REVIEW"},
+        ])
+        transitions = _compute_transitions(current, previous)
+        self.assertTrue(transitions[0]["alert"])
+
+    def test_no_alert_for_minor_change(self):
+        """WAITING → BLOCKED: no alert (not in alert set)."""
+        current = self._make_result([
+            {"repo": "org/repo", "number": 1, "title": "PR1", "status": "BLOCKED"},
+        ])
+        previous = self._make_result([
+            {"repo": "org/repo", "number": 1, "title": "PR1", "status": "WAITING"},
+        ])
+        transitions = _compute_transitions(current, previous)
+        self.assertFalse(transitions[0]["alert"])
+
+    def test_disappeared_pr(self):
+        """PR in previous but not current → CLOSED_OR_MERGED."""
+        current = self._make_result([])
+        previous = self._make_result([
+            {"repo": "org/repo", "number": 1, "title": "PR1", "status": "WAITING"},
+        ])
+        transitions = _compute_transitions(current, previous)
+        self.assertEqual(len(transitions), 1)
+        self.assertEqual(transitions[0]["current_status"], "CLOSED_OR_MERGED")
+        self.assertTrue(transitions[0]["changed"])
+
+    def test_new_pr(self):
+        """PR in current but not previous → NEW."""
+        current = self._make_result([
+            {"repo": "org/repo", "number": 1, "title": "PR1", "status": "WAITING"},
+        ])
+        previous = self._make_result([])
+        transitions = _compute_transitions(current, previous)
+        self.assertEqual(len(transitions), 1)
+        self.assertIsNone(transitions[0]["previous_status"])
+        self.assertTrue(transitions[0]["changed"])
 
 
 if __name__ == "__main__":
