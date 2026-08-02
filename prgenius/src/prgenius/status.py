@@ -141,46 +141,81 @@ def _days_since(s: str) -> int:
     return max(0, (now - dt).days)
 
 
-def fetch_open_prs(author: Optional[str] = None, repo: Optional[str] = None) -> list[PRInfo]:
-    """Fetch open PRs from GitHub using gh CLI."""
-    args = ["search", "prs", "--state=open", "--json", "repository,number,title,url,author,createdAt,updatedAt", "--limit", "50"]
-    if author:
-        args.extend(["--author", author])
-    if repo:
-        args.extend(["--repo", repo])
+_GRAPHQL_QUERY = """query {
+  search(query: "SEARCH_QUERY", type: ISSUE, first: 50) {
+    nodes {
+      ... on PullRequest {
+        number
+        title
+        url
+        repository { nameWithOwner }
+        author { login }
+        createdAt
+        updatedAt
+        mergeable
+        mergeStateStatus
+        reviewDecision
+        commits(last: 1) {
+          nodes { commit { committedDate } }
+        }
+        reviews(last: 1) {
+          nodes { submittedAt state }
+        }
+        statusCheckRollup { state }
+      }
+    }
+  }
+}"""
 
-    raw = _run_gh(args)
-    prs_basic = json.loads(raw)
+
+def _build_search_query(author: Optional[str] = None, repo: Optional[str] = None) -> str:
+    """Build GitHub search query string."""
+    parts = ["is:pr", "is:open"]
+    if author:
+        parts.append(f"author:{author}")
+    if repo:
+        parts.append(f"repo:{repo}")
+    return " ".join(parts)
+
+
+def _map_check_state(state: Optional[str]) -> str:
+    """Map GraphQL statusCheckRollup.state to checks_status."""
+    if not state:
+        return ""
+    state = state.upper()
+    if state == "FAILURE":
+        return "failure"
+    if state in ("PENDING", "EXPECTED"):
+        return "pending"
+    if state == "SUCCESS":
+        return "success"
+    return ""
+
+
+def fetch_open_prs(author: Optional[str] = None, repo: Optional[str] = None) -> list[PRInfo]:
+    """Fetch open PRs from GitHub using a single GraphQL query."""
+    search_query = _build_search_query(author, repo)
+    query = _GRAPHQL_QUERY.replace("SEARCH_QUERY", search_query.replace('"', '\\"'))
+
+    raw = _run_gh(["api", "graphql", "-f", f"query={query}"])
+    data = json.loads(raw)
+    nodes = data.get("data", {}).get("search", {}).get("nodes", [])
 
     results = []
-    for pr in prs_basic:
+    for pr in nodes:
         repo_name = pr["repository"]["nameWithOwner"]
-        number = pr["number"]
-
-        # Get detailed PR info
-        try:
-            detail_raw = _run_gh([
-                "pr", "view", str(number),
-                "--repo", repo_name,
-                "--json", "mergeable,mergeStateStatus,reviewDecision,state,createdAt,updatedAt,commits,reviews",
-            ])
-            detail = json.loads(detail_raw)
-        except RuntimeError:
-            detail = {}
 
         # Extract last commit time
         last_commit_at = ""
-        commits = detail.get("commits", [])
+        commits = pr.get("commits", {}).get("nodes", [])
         if commits:
-            last_commit = commits[-1]
-            last_commit_at = last_commit.get("committedDate", "") or last_commit.get("oid", "")
+            last_commit_at = commits[-1].get("commit", {}).get("committedDate", "")
 
         # Extract last review time
         last_review_at = ""
-        reviews = detail.get("reviews", [])
+        reviews = pr.get("reviews", {}).get("nodes", [])
         if reviews:
-            last_review = reviews[-1]
-            last_review_at = last_review.get("submittedAt", "")
+            last_review_at = reviews[-1].get("submittedAt", "")
 
         # Determine if own repo
         is_own_repo = False
@@ -188,35 +223,24 @@ def fetch_open_prs(author: Optional[str] = None, repo: Optional[str] = None) -> 
             repo_owner = repo_name.split("/")[0].lower()
             is_own_repo = repo_owner == author.lower()
 
-        checks_status = ""
-        # Try to get check status
-        try:
-            checks_raw = _run_gh([
-                "pr", "checks", str(number),
-                "--repo", repo_name,
-                "--json", "name,bucket",
-            ])
-            checks = json.loads(checks_raw)
-            if any(c.get("bucket") == "failure" for c in checks):
-                checks_status = "failure"
-            elif any(c.get("bucket") == "pending" for c in checks):
-                checks_status = "pending"
-            elif all(c.get("bucket") == "success" for c in checks):
-                checks_status = "success"
-        except RuntimeError:
-            pass
+        # Map statusCheckRollup
+        rollup = pr.get("statusCheckRollup")
+        checks_status = _map_check_state(rollup.get("state") if rollup else None)
+
+        # Map reviewDecision (null → "")
+        review_decision = pr.get("reviewDecision") or ""
 
         results.append(PRInfo(
             repo=repo_name,
-            number=number,
+            number=pr["number"],
             title=pr["title"],
             url=pr["url"],
-            author=author or "",
+            author=pr.get("author", {}).get("login", ""),
             created_at=pr.get("createdAt", ""),
             updated_at=pr.get("updatedAt", ""),
-            mergeable=detail.get("mergeable", "UNKNOWN"),
-            merge_state=detail.get("mergeStateStatus", "UNKNOWN"),
-            review_decision=detail.get("reviewDecision", ""),
+            mergeable=pr.get("mergeable", "UNKNOWN"),
+            merge_state=pr.get("mergeStateStatus", "UNKNOWN"),
+            review_decision=review_decision,
             checks_status=checks_status,
             last_commit_at=last_commit_at,
             last_review_at=last_review_at,
