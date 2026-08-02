@@ -48,11 +48,19 @@ runs:
         # Write body to temp file to avoid shell escaping issues
         echo "$PR_BODY" > /tmp/pr_body.txt
 
-        RESULT=$(python3 -m prgenius eval "$PR_TITLE" \
+        RESULT=$(python3 -m prgenius analyze "$PR_TITLE" \
           --repo "$PR_REPO" \
-          -d "$(cat /tmp/pr_body.txt)" 2>/dev/null || echo '{"error": "analysis failed"}')
+          --body "$(cat /tmp/pr_body.txt)" \
+          --format json 2>&1)
 
-        TIER=$(echo "$RESULT" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('tier','unknown'))" 2>/dev/null || echo "unknown")
+        # Validate JSON output
+        if ! echo "$RESULT" | python3 -m json.tool >/dev/null 2>&1; then
+          echo "::error::PR Genius did not return valid JSON"
+          echo "$RESULT"
+          exit 1
+        fi
+
+        TIER=$(echo "$RESULT" | python3 -c "import json,sys; print(json.load(sys.stdin).get('tier','unknown'))")
 
         echo "tier=$TIER" >> $GITHUB_OUTPUT
         echo "result<<EOF" >> $GITHUB_OUTPUT
