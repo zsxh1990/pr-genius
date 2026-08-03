@@ -230,6 +230,103 @@ class TestPriorityOrder(unittest.TestCase):
         self.assertEqual(result.status, PRStatus.CI_FAILING)
 
 
+class TestSnapshotDiscovery(unittest.TestCase):
+    """Snapshot file discovery must be strict to avoid picking test fixtures."""
+
+    def _write(self, d, name, content):
+        from pathlib import Path
+        p = Path(d) / name
+        p.write_text(content, encoding="utf-8")
+        return p
+
+    def test_strict_date_match_skips_fixtures(self, tmp_path=None):
+        import tempfile
+        from pathlib import Path
+        from prgenius.status import _find_latest_snapshot, _SNAPSHOT_NAME
+        with tempfile.TemporaryDirectory() as td:
+            # Real snapshot for today
+            self._write(td, "2026-08-02.json", '{"prs": []}')
+            # Test fixture that shares the date prefix — must NOT be selected
+            self._write(td, "2026-08-02-graphql.json", '{"fixture": true}')
+            # Older real snapshot
+            self._write(td, "2026-08-01.json", '{"prs": []}')
+            # Non-date filename — must NOT be selected
+            self._write(td, "README.json", '{"readme": true}')
+
+            latest = _find_latest_snapshot(Path(td))
+            self.assertIsNotNone(latest)
+            self.assertEqual(latest.name, "2026-08-02.json")
+
+    def test_empty_dir_returns_none(self):
+        import tempfile
+        from pathlib import Path
+        from prgenius.status import _find_latest_snapshot
+        with tempfile.TemporaryDirectory() as td:
+            self.assertIsNone(_find_latest_snapshot(Path(td)))
+
+    def test_snapshot_name_regex_shape(self):
+        from prgenius.status import _SNAPSHOT_NAME
+        # Strict YYYY-MM-DD.json only
+        self.assertIsNotNone(_SNAPSHOT_NAME.match("2026-08-02.json"))
+        self.assertIsNone(_SNAPSHOT_NAME.match("2026-08-02-graphql.json"))
+        self.assertIsNone(_SNAPSHOT_NAME.match("2026-8-2.json"))  # zero-pad required
+        self.assertIsNone(_SNAPSHOT_NAME.match("2026-08-02.JSON"))  # case-sensitive
+        self.assertIsNone(_SNAPSHOT_NAME.match("README.json"))
+
+
+class TestSnapshotSaveTimestamp(unittest.TestCase):
+    """Snapshot save should include HHMM so multiple runs per day are kept."""
+
+    def test_save_snapshot_filename_has_hhmm(self):
+        import tempfile
+        from pathlib import Path
+        from prgenius.status import _save_snapshot
+        with tempfile.TemporaryDirectory() as td:
+            p = _save_snapshot({"prs": []}, Path(td))
+            # Pattern: YYYY-MM-DD-HHMM.json
+            self.assertRegex(p.name, r"^\d{4}-\d{2}-\d{2}-\d{4}\.json$")
+
+    def test_save_snapshot_distinct_files_across_runs(self):
+        """Two save calls produce different filenames (HHMM keeps collisions
+        to within 1 minute, which cron never hits)."""
+        import tempfile
+        from pathlib import Path
+        from prgenius.status import _save_snapshot
+        with tempfile.TemporaryDirectory() as td:
+            d = Path(td)
+            p1 = _save_snapshot({"prs": [], "n": 1}, d)
+            # Force a different minute by renaming the first file
+            stem = p1.name[:-5]  # strip .json
+            new_first = d / (stem[:-4] + "0000.json")  # rewrite HHMM to 0000
+            p1.rename(new_first)
+            p2 = _save_snapshot({"prs": [], "n": 2}, d)
+            self.assertNotEqual(new_first.name, p2.name)
+
+
+class TestStaleDaysSourceReporting(unittest.TestCase):
+    """check_status must report the actual stale_days_source per run."""
+
+    def _run_with_empty_fetch(self, **kwargs):
+        from prgenius import status as st_mod
+        original = st_mod.fetch_open_prs
+        st_mod.fetch_open_prs = lambda **kw: []
+        try:
+            from prgenius.status import check_status
+            return check_status(save_snapshot=False, **kwargs)
+        finally:
+            st_mod.fetch_open_prs = original
+
+    def test_cli_source(self):
+        r = self._run_with_empty_fetch(author="zsxh1990", stale_days=7, repo_root=None)
+        self.assertEqual(r["stale_days_source"], "cli")
+        self.assertEqual(r["stale_days"], 7)
+
+    def test_default_source_when_no_profile(self):
+        r = self._run_with_empty_fetch(author="zsxh1990", repo_root=None)
+        self.assertEqual(r["stale_days_source"], "default")
+        self.assertEqual(r["stale_days"], 14)
+
+
 class TestStaleDaysResolution(unittest.TestCase):
     """Priority: CLI > profile > default 14."""
 
