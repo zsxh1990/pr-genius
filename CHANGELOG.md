@@ -9,16 +9,64 @@ All notable changes to pr-genius are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this repo uses
 GitHub tag/release compare links per Keep a Changelog guidance.
 
+**版本口径说明**：本文档区分三种版本标识——
+- **Package Version**：PyPI 发布版本号（`prgenius-core`）
+- **Git Tag**：仓库标签
+- **Milestone**：功能里程碑（可能跨多个 tag）
+
 ## [Unreleased]
 
+（无）
+
+## [1.4.0] — Package + Git Tag
+
+### Milestone: Phase 1 稳定运营 ✅
+
 ### Added
-- **Status Mode MVP** (`prgenius status`): In-flight PR health monitoring.
-  - 9 status types: NEEDS_REBASE, CI_FAILING, STALE_REVIEW, CHANGES_REQUESTED, STALE_NO_REVIEW, BLOCKED, CLEAN, UNKNOWN, WAITING
-  - Priority-based classification (STALE_REVIEW > CHANGES_REQUESTED when fix pushed)
-  - OWN_REPO auto-filtering
-  - `--author` / `--repo` / `--stale-days` / `--format json|table`
-  - 22 unit tests locking down classifier rules
-  - PRD: https://feishu.cn/docx/LSDRdqmcTo57m5xkgXAcooqEn3g
+- **Outbound PR Heartbeat** (`scripts/pr_status_heartbeat.sh`): 双账号心跳脚本
+  - `--author` / `--all` 参数
+  - 人类可读表格 + JSON 快照
+  - exit code 0=无行动, 1=有可执行行动
+- **Profile Data Boundary**: PUBLIC/PRIVATE 字段分类
+  - `PROFILE_PUBLIC_FIELDS` / `PROFILE_PRIVATE_FIELDS` 常量
+  - `profile writeback` 子命令（dry-run 模式）
+- **Profile Writeback Suggestions**: 基于 PR 状态自动推断
+  - `--writeback-mode suggest|auto`
+  - confidence 门控（< 0.6 拒绝, ≥ 0.8 auto 模式自动写入）
+  - evidence/source/confidence 字段完整
+- **Transition Alert Enhancement**: 告警增强
+  - `--alert-only` flag: 只输出有状态变化的 PR
+  - severity 级别: critical（WAITING→NEEDS_REBASE）/ info（STALE→CLEAN）
+  - 🚨/ℹ️ 图标区分
+- **MCP Tools**: 2 个新工具（总计 10 个）
+  - `status_prs`: outbound PR 健康检查
+  - `profile_writeback_suggestions`: profile 更新建议
+- **MisakaNet #773 合并**: PR Genius v1.3.1 advisory observation
+  - 12 PR 观察, 100% 准确率
+  - Workflow 硬化: 去 checkout, pin SHA, continue-on-error
+  - Closes #756
+
+### Changed
+- 版本号: 1.3.0 → 1.4.0（pyproject.toml / __init__.py / server.json / glama.json / README）
+- 描述更新: "Outbound PR CRM", 62 repos, 1455 patterns
+- 测试覆盖: 33 → 39 全绿
+
+## [1.3.1] — Git Tag only (Package: 1.3.0)
+
+> ⚠️ 此 tag 仅修复 Action JSON 契约，未发布到 PyPI。Package version 仍为 1.3.0。
+
+### Fixed
+- **P0 Action JSON Contract**: `analyze --format json` 输出稳定
+  - `tier` 不再是 `unknown`
+  - JSON 无效时 `::error::` + `exit 1`
+  - MisakaNet #773 验证通过（tier=high_risk）
+
+### Milestone: Status Mode MVP ✅
+- 9 状态分类 + 优先级规则
+- GraphQL 批量查询（13 PR, 5s）
+- Repo profile 接入 `stale_days_threshold`
+- `--save-snapshot` + transition 侦测
+- 33 单元测试全绿
 
 ### Compliance
 - **OKF v0.1 合规审计** (克莱恩 2026-07-19 拍板): upstream

@@ -385,9 +385,7 @@ def cmd_status(args) -> int:
         return 1
 
     repo_root = _get_repo_root(args)
-    # stale_days: None means "use profile or default", int means "CLI override"
     cli_stale_days = args.stale_days if args.stale_days is not None else None
-
     snapshot_dir = Path(args.snapshot_dir) if args.snapshot_dir else None
 
     try:
@@ -403,10 +401,49 @@ def cmd_status(args) -> int:
         print(f"Error: {e}", file=sys.stderr)
         return 1
 
+    # Alert-only mode: filter to only changed/alerted PRs
+    if args.alert_only:
+        transitions = result.get("transitions", [])
+        alert_keys = {f"{t['repo']}#{t['number']}" for t in transitions if t.get("changed")}
+        if alert_keys:
+            result["prs"] = [p for p in result["prs"] if f"{p['repo']}#{p['number']}" in alert_keys]
+        else:
+            result["prs"] = []
+
+    # Writeback suggestions
+    if args.writeback_mode != "off":
+        from .status import suggest_profile_writeback, format_writeback_suggestions
+        suggestions = suggest_profile_writeback(result, repo_root=repo_root, mode=args.writeback_mode)
+        result["writeback_suggestions"] = suggestions
+        if args.format == "table" and suggestions:
+            print(format_writeback_suggestions(suggestions))
+            print()
+
     if args.format == "json":
         print(json.dumps(result, indent=2, ensure_ascii=False))
     else:
         print(format_table(result))
+
+    return 0
+
+
+def cmd_profile_writeback(args) -> int:
+    """Show profile writeback suggestions."""
+    from .status import check_status, suggest_profile_writeback, format_writeback_suggestions
+
+    repo_root = _get_repo_root(args)
+    try:
+        result = check_status(author=args.author, repo_root=repo_root, save_snapshot=False)
+    except RuntimeError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        return 1
+
+    suggestions = suggest_profile_writeback(result, repo_root=repo_root, mode=args.mode)
+
+    if args.format == "json":
+        print(json.dumps(suggestions, indent=2, ensure_ascii=False))
+    else:
+        print(format_writeback_suggestions(suggestions))
 
     return 0
 
@@ -507,6 +544,11 @@ def main(argv: list[str] | None = None) -> int:
     pp = p_get_sub.add_parser("get", help="Get one profile")
     pp.add_argument("repo", help="org/name")
     pp.set_defaults(func=cmd_profile_get)
+    pw = p_get_sub.add_parser("writeback", help="Show profile writeback suggestions (dry-run)")
+    pw.add_argument("--author", required=True, help="GitHub username")
+    pw.add_argument("--mode", choices=["suggest", "auto"], default="suggest", help="Writeback mode")
+    pw.add_argument("--format", choices=["text", "json"], default="text", help="Output format")
+    pw.set_defaults(func=cmd_profile_writeback)
 
     # ---- case ----
     c_list = sub.add_parser("case", help="Case study operations")
@@ -529,6 +571,8 @@ def main(argv: list[str] | None = None) -> int:
     st.add_argument("--format", choices=["table", "json"], default="table", help="Output format")
     st.add_argument("--save-snapshot", action="store_true", help="Save snapshot and compute transitions from previous")
     st.add_argument("--snapshot-dir", help="Directory for snapshots (default: data/status-snapshots)")
+    st.add_argument("--writeback-mode", choices=["off", "suggest", "auto"], default="off", help="Profile writeback mode (default: off)")
+    st.add_argument("--alert-only", action="store_true", help="Only output PRs with status changes or alerts")
     st.add_argument("--repo-root", help="Path to pr-genius repo root")
     st.set_defaults(func=cmd_status)
 

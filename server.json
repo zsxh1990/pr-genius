@@ -1,14 +1,14 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.zsxh1990/pr-genius",
-  "title": "PR Genius",
-  "description": "Evidence-backed PR contribution advisor. Analyzes PR strategy using 550+ real case studies across 33 repos. Provides risk assessment, anti-pattern detection, and maintainer policy guidance.",
-  "version": "1.3.0",
+  "title": "PR Genius — Outbound PR CRM",
+  "description": "Outbound PR lifecycle advisor for OSS contributors and AI agents. 1455 patterns across 62 repos. Analyzes PR risk, monitors in-flight PR health (9-status classification), suggests profile writebacks, and harvests lessons from rejected PRs.",
+  "version": "1.4.0",
   "packages": [
     {
       "registryType": "pypi",
       "identifier": "prgenius-core",
-      "version": "1.3.0",
+      "version": "1.4.0",
       "transport": {
         "type": "stdio"
       }

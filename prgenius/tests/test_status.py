@@ -342,6 +342,92 @@ class TestTransitions(unittest.TestCase):
         self.assertIsNone(transitions[0]["previous_status"])
         self.assertTrue(transitions[0]["changed"])
 
+    def test_severity_critical(self):
+        """WAITING → NEEDS_REBASE has severity=critical."""
+        current = self._make_result([
+            {"repo": "org/repo", "number": 1, "title": "PR1", "status": "NEEDS_REBASE"},
+        ])
+        previous = self._make_result([
+            {"repo": "org/repo", "number": 1, "title": "PR1", "status": "WAITING"},
+        ])
+        transitions = _compute_transitions(current, previous)
+        self.assertTrue(transitions[0]["alert"])
+        self.assertEqual(transitions[0]["severity"], "critical")
+
+    def test_severity_info(self):
+        """STALE_REVIEW → CLEAN has severity=info."""
+        current = self._make_result([
+            {"repo": "org/repo", "number": 1, "title": "PR1", "status": "CLEAN"},
+        ])
+        previous = self._make_result([
+            {"repo": "org/repo", "number": 1, "title": "PR1", "status": "STALE_REVIEW"},
+        ])
+        transitions = _compute_transitions(current, previous)
+        self.assertTrue(transitions[0]["alert"])
+        self.assertEqual(transitions[0]["severity"], "info")
+
+    def test_no_severity_for_non_alert(self):
+        """WAITING → BLOCKED has no severity (not an alert)."""
+        current = self._make_result([
+            {"repo": "org/repo", "number": 1, "title": "PR1", "status": "BLOCKED"},
+        ])
+        previous = self._make_result([
+            {"repo": "org/repo", "number": 1, "title": "PR1", "status": "WAITING"},
+        ])
+        transitions = _compute_transitions(current, previous)
+        self.assertFalse(transitions[0]["alert"])
+        self.assertNotIn("severity", transitions[0])
+
+
+class TestProfileWriteback(unittest.TestCase):
+    """Profile writeback suggestions."""
+
+    def test_stale_no_review_suggests_threshold(self):
+        """STALE_NO_REVIEW with >21d suggests stale_days_threshold."""
+        from prgenius.status import suggest_profile_writeback
+        result = {
+            "prs": [{
+                "repo": "org/repo",
+                "number": 1,
+                "title": "old PR",
+                "status": "STALE_NO_REVIEW",
+                "days_since_update": 30,
+            }],
+        }
+        suggestions = suggest_profile_writeback(result, mode="suggest")
+        self.assertTrue(any(s["field"] == "stale_days_threshold" for s in suggestions))
+
+    def test_auto_mode_filters_low_confidence(self):
+        """auto mode only returns suggestions with confidence >= 0.8."""
+        from prgenius.status import suggest_profile_writeback
+        result = {
+            "prs": [{
+                "repo": "org/repo",
+                "number": 1,
+                "title": "old PR",
+                "status": "STALE_NO_REVIEW",
+                "days_since_update": 30,
+            }],
+        }
+        suggestions = suggest_profile_writeback(result, mode="auto")
+        for s in suggestions:
+            self.assertGreaterEqual(s["confidence"], 0.8)
+
+    def test_no_suggestions_for_healthy_prs(self):
+        """No writeback suggestions for WAITING/BLOCKED PRs."""
+        from prgenius.status import suggest_profile_writeback
+        result = {
+            "prs": [{
+                "repo": "org/repo",
+                "number": 1,
+                "title": "healthy PR",
+                "status": "WAITING",
+                "days_since_update": 3,
+            }],
+        }
+        suggestions = suggest_profile_writeback(result, mode="suggest")
+        self.assertEqual(len(suggestions), 0)
+
 
 if __name__ == "__main__":
     unittest.main()

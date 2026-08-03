@@ -352,6 +352,65 @@ def _load_tools(repo_root: Path | None = None):
         """返回支持的 schema 版本和枚举值。"""
         return _schema_info()
 
+    @mcp.tool(annotations=READ_ONLY)
+    def status_prs(
+        author: str | None = None,
+        repo: str | None = None,
+        stale_days: int | None = None,
+    ) -> dict:
+        """Check health of in-flight PRs (outbound PR heartbeat).
+
+        Classifies open PRs into 9 statuses: NEEDS_REBASE, CI_FAILING,
+        STALE_REVIEW, CHANGES_REQUESTED, STALE_NO_REVIEW, BLOCKED,
+        CLEAN, UNKNOWN, WAITING. Suggests actions for each.
+
+        Args:
+            author: GitHub username to check PRs for
+            repo: Repository to check (org/name)
+            stale_days: Days without update to consider stale (default: profile or 14)
+
+        Returns:
+            dict with prs, ignored, summary, actions, transitions
+        """
+        from .status import check_status
+        if not author and not repo:
+            return {"error": "specify author or repo"}
+        try:
+            return check_status(
+                author=author,
+                repo=repo,
+                stale_days=stale_days,
+                repo_root=rr,
+                save_snapshot=True,
+            )
+        except RuntimeError as e:
+            return {"error": str(e)}
+
+    @mcp.tool(annotations=READ_ONLY)
+    def profile_writeback_suggestions(
+        author: str,
+        mode: str = "suggest",
+    ) -> list:
+        """Get profile writeback suggestions based on PR status analysis.
+
+        Analyzes PR health data and suggests profile updates (e.g.,
+        stale_days_threshold, response_time). Returns suggestions with
+        evidence, source, and confidence score.
+
+        Args:
+            author: GitHub username
+            mode: 'suggest' (all suggestions) or 'auto' (confidence >= 0.8 only)
+
+        Returns:
+            list of {field, value, repo, evidence, source, confidence, private}
+        """
+        from .status import check_status, suggest_profile_writeback
+        try:
+            result = check_status(author=author, repo_root=rr, save_snapshot=False)
+            return suggest_profile_writeback(result, repo_root=rr, mode=mode)
+        except RuntimeError as e:
+            return [{"error": str(e)}]
+
     return mcp
 
 

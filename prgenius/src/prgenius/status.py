@@ -463,6 +463,17 @@ _TRANSITION_ALERTS = {
     ("CHANGES_REQUESTED", "CLEAN"),
 }
 
+# Alert severity for transition alerts
+_TRANSITION_SEVERITY = {
+    ("WAITING", "NEEDS_REBASE"): "critical",
+    ("WAITING", "CI_FAILING"): "critical",
+    ("BLOCKED", "NEEDS_REBASE"): "critical",
+    ("BLOCKED", "CI_FAILING"): "critical",
+    ("STALE_REVIEW", "CLEAN"): "info",
+    ("STALE_NO_REVIEW", "CLEAN"): "info",
+    ("CHANGES_REQUESTED", "CLEAN"): "info",
+}
+
 
 def _find_latest_snapshot(snapshot_dir: Path) -> Optional[Path]:
     """Find the most recent snapshot file in the directory."""
@@ -527,9 +538,11 @@ def _compute_transitions(current: dict, previous: Optional[dict]) -> list[dict]:
         prev_status = prev.get("status")
         curr_status = pr["status"]
         changed = prev_status != curr_status
-        alert = (prev_status, curr_status) in _TRANSITION_ALERTS
+        alert_key = (prev_status, curr_status)
+        alert = alert_key in _TRANSITION_ALERTS
+        severity = _TRANSITION_SEVERITY.get(alert_key) if alert else None
 
-        transitions.append({
+        entry = {
             "repo": pr["repo"],
             "number": pr["number"],
             "title": pr["title"],
@@ -537,7 +550,10 @@ def _compute_transitions(current: dict, previous: Optional[dict]) -> list[dict]:
             "current_status": curr_status,
             "changed": changed,
             "alert": alert,
-        })
+        }
+        if severity:
+            entry["severity"] = severity
+        transitions.append(entry)
 
     # Check for PRs that disappeared (merged/closed)
     curr_keys = {_build_pr_key(pr) for pr in current.get("prs", [])}
@@ -711,7 +727,9 @@ def format_table(result: dict) -> str:
     if alerts or changes:
         lines.append("🔄 TRANSITIONS")
         for t in alerts:
-            lines.append(f"  ⚠️ {t['repo']} #{t['number']}: {t['previous_status']} → {t['current_status']}")
+            sev = t.get("severity", "")
+            sev_icon = "🚨" if sev == "critical" else "ℹ️"
+            lines.append(f"  {sev_icon} {t['repo']} #{t['number']}: {t['previous_status']} → {t['current_status']} [{sev}]")
         for t in changes:
             prev = t['previous_status'] or "NEW"
             lines.append(f"  · {t['repo']} #{t['number']}: {prev} → {t['current_status']}")
@@ -721,5 +739,110 @@ def format_table(result: dict) -> str:
     actions = result.get("actions", [])
     if actions:
         lines.append(f"Action: {', '.join(actions)}")
+
+    return "\n".join(lines)
+
+
+# ============================================================
+# Profile Data Boundary & Writeback
+# ============================================================
+
+# Fields that can be shared publicly (schema + community knowledge)
+PROFILE_PUBLIC_FIELDS = {
+    "allow_unsolicited_pr", "require_signed_off", "require_cla",
+    "require_issue_first", "ai_policy", "ai_assisted_disclosure",
+    "maintainer_vibe", "bot_review", "ci_first_run_needs_approval",
+    "default_branch", "stale_days_threshold", "max_pings",
+    "abandon_after_days", "rebase_on_conflict", "one_pr_friendly",
+    "close_keywords", "human_required_in",
+}
+
+# Fields that are private operational records (never auto-write)
+PROFILE_PRIVATE_FIELDS = {
+    "last_ping_at", "ping_count", "abandon_history",
+    "pr_status_snapshots", "transition_log",
+    "response_time_h_median", "external_merge_rate_30",
+}
+
+
+def suggest_profile_writeback(
+    result: dict,
+    repo_root: Optional[Path] = None,
+    mode: str = "suggest",
+) -> list[dict]:
+    """Analyze PR status results and suggest profile updates.
+
+    Args:
+        result: check_status() output
+        repo_root: path to pr-genius repo
+        mode: 'suggest' (output only) or 'auto' (write if confidence >= 0.8)
+
+    Returns list of writeback suggestions:
+        [{field, value, repo, evidence, source, confidence}]
+    """
+    suggestions = []
+
+    for pr in result.get("prs", []):
+        repo = pr.get("repo", "")
+        status = pr.get("status", "")
+
+        # Detect CLA/DCO requirements from CI checks
+        if status == "CI_FAILING":
+            title_lower = pr.get("title", "").lower()
+            # If we see CLA/DCO failures, suggest require_signed_off
+            # (actual detection would need CI check details)
+            pass
+
+        # Detect maintainer response time from review patterns
+        if pr.get("last_review_at") and pr.get("created_at"):
+            try:
+                from datetime import datetime as _dt
+                created = _dt.fromisoformat(pr["created_at"].replace("Z", "+00:00"))
+                reviewed = _dt.fromisoformat(pr["last_review_at"].replace("Z", "+00:00"))
+                hours = (reviewed - created).total_seconds() / 3600
+                if hours > 0:
+                    suggestions.append({
+                        "field": "response_time_h_median",
+                        "value": round(hours),
+                        "repo": repo,
+                        "evidence": f"PR #{pr['number']} reviewed after {round(hours)}h",
+                        "source": "status_snapshot",
+                        "confidence": 0.6,  # single data point = low confidence
+                        "private": True,
+                    })
+            except (ValueError, TypeError):
+                pass
+
+        # Detect stale_days from STALE_NO_REVIEW patterns
+        if status == "STALE_NO_REVIEW" and pr.get("days_since_update", 0) > 21:
+            suggestions.append({
+                "field": "stale_days_threshold",
+                "value": max(pr["days_since_update"] - 7, 14),
+                "repo": repo,
+                "evidence": f"PR #{pr['number']} stale for {pr['days_since_update']}d with no review",
+                "source": "status_pattern",
+                "confidence": 0.5,  # needs more data points
+                "private": False,
+            })
+
+    # Filter by mode
+    if mode == "auto":
+        suggestions = [s for s in suggestions if s["confidence"] >= 0.8]
+
+    return suggestions
+
+
+def format_writeback_suggestions(suggestions: list[dict]) -> str:
+    """Format writeback suggestions as human-readable text."""
+    if not suggestions:
+        return "No profile writeback suggestions."
+
+    lines = ["Profile Writeback Suggestions (dry-run):", ""]
+    for s in suggestions:
+        privacy = "🔒 private" if s.get("private") else "🌐 public"
+        lines.append(f"  {s['repo']}: {s['field']} = {s['value']}")
+        lines.append(f"    evidence: {s['evidence']}")
+        lines.append(f"    source: {s['source']} | confidence: {s['confidence']} | {privacy}")
+        lines.append("")
 
     return "\n".join(lines)

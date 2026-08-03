@@ -2,7 +2,7 @@
 type: Knowledge Bundle
 title: PR Genius — Pre-submission PR Advisor
 description: Evidence-backed PR contribution advisor for large open-source projects
-version: 1.3.0
+version: 1.4.0
 created: 2026-07-01
 updated: 2026-07-22
 author: zsxh1990
@@ -20,6 +20,29 @@ mcp-name: io.github.zsxh1990/pr-genius
 [![Python](https://img.shields.io/badge/python-3.10+-blue)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/github/license/zsxh1990/pr-genius?style=flat&color=blueviolet)](https://github.com/zsxh1990/pr-genius/blob/main/LICENSE)
 [![Glama score](https://glama.ai/mcp/servers/zsxh1990/pr-genius/badges/score.svg)](https://glama.ai/mcp/servers/zsxh1990/pr-genius)
+
+---
+
+## 🎯 What is PR Genius?
+
+PR Genius is **not** a PR dashboard. It's an **Outbound PR CRM** for professional OSS contributors and AI agents:
+
+> Manage PRs you've *submitted to other repos* — when to fix CI, rebase, wait, ping, or abandon.
+
+| Capability | `gh` CLI | PR Genius |
+|---|---|---|
+| Cross-repo PR list | ✅ | ✅ |
+| Status classification | ❌ | ✅ (9 states) |
+| Stale detection | ❌ | ✅ |
+| Action suggestions | ❌ | ✅ |
+| Repo-specific policy | ❌ | ✅ |
+| Snapshot & transitions | ❌ | ✅ |
+
+**Status heartbeat** runs daily via cron, auto-detecting:
+- 🔴 `NEEDS_REBASE` / `CI_FAILING` — fix immediately
+- 🟡 `STALE_REVIEW` — ping after threshold
+- 🟡 `STALE_NO_REVIEW` — consider abandoning
+- 🟢 `CLEAN` / `WAITING` — continue waiting
 
 ---
 
@@ -59,6 +82,13 @@ python3 -m prgenius coach "feat: add feature" --repo org/repo
 
 # Triage (policy check)
 python3 -m prgenius triage "docs: typo" --repo org/repo --diff-stat "docs/faq.md | 3 ++-"
+
+# Status heartbeat (outbound PR monitoring)
+python3 -m prgenius status --author zsxh1990
+python3 -m prgenius status --author zsxh1990 --format json --save-snapshot
+
+# Profile writeback suggestions (dry-run)
+python3 -m prgenius profile writeback --author zsxh1990
 ```
 
 ## 🤖 GitHub Action
