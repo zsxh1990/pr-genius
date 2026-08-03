@@ -1,6 +1,6 @@
-"""stdio MCP shell for prgenius — v1.3.0
+"""stdio MCP shell for prgenius — v1.4.1
 
-MCP surface (7 tools, all read-only / non-destructive / idempotent):
+MCP surface (10 tools, all read-only / non-destructive / idempotent):
 - analyze_pr(title, repo, body, ...) → 结构化信号 + 建议 + 三档风险
 - coach_pr(title, repo, body, ...) → pass/fail + checklist
 - triage_pr(title, repo, body, diff_stat, labels) → verdict + violations + recommended_action
@@ -9,6 +9,8 @@ MCP surface (7 tools, all read-only / non-destructive / idempotent):
 - get_case_study(repo, pr_number) → PR 案例
 - search_patterns(query, type, limit) → 按关键词搜 anti-patterns + success-patterns
 - schema_info() → schema 版本
+- status_prs(author, repo, stale_days, save_snapshot) → outbound PR health check
+- profile_writeback_suggestions(author, mode) → profile update proposals
 
 All tools follow MCP tool annotations (readOnlyHint=True, destructiveHint=False,
 idempotentHint=True) — pr-genius 是只读 advisor, 不写任何状态.
@@ -357,6 +359,7 @@ def _load_tools(repo_root: Path | None = None):
         author: str | None = None,
         repo: str | None = None,
         stale_days: int | None = None,
+        save_snapshot: bool = False,
     ) -> dict:
         """Check health of in-flight PRs (outbound PR heartbeat).
 
@@ -368,6 +371,10 @@ def _load_tools(repo_root: Path | None = None):
             author: GitHub username to check PRs for
             repo: Repository to check (org/name)
             stale_days: Days without update to consider stale (default: profile or 14)
+            save_snapshot: If True, persist the result to data/status-snapshots/
+                for transition detection across runs. Default False because MCP
+                callers (Cursor, Claude Code) may poll frequently and would
+                otherwise flood the snapshot directory.
 
         Returns:
             dict with prs, ignored, summary, actions, transitions
@@ -381,7 +388,7 @@ def _load_tools(repo_root: Path | None = None):
                 repo=repo,
                 stale_days=stale_days,
                 repo_root=rr,
-                save_snapshot=True,
+                save_snapshot=save_snapshot,
             )
         except RuntimeError as e:
             return {"error": str(e)}
