@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import glob
 import json
+import re
 import subprocess
 from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
@@ -21,6 +22,10 @@ from typing import Optional
 from .parser import profile_get
 
 DEFAULT_STALE_DAYS = 14
+
+# Strict filename match: YYYY-MM-DD.json only (excludes test fixtures like
+# "2026-08-02-graphql.json" that share the prefix but are not real snapshots).
+_SNAPSHOT_NAME = re.compile(r"^\d{4}-\d{2}-\d{2}\.json$")
 
 
 class PRStatus(str, Enum):
@@ -529,13 +534,17 @@ _TRANSITION_ACTIONS = {
 
 
 def _find_latest_snapshot(snapshot_dir: Path) -> Optional[Path]:
-    """Find the most recent snapshot file in the directory."""
+    """Find the most recent snapshot file in the directory.
+
+    Strict match on `YYYY-MM-DD.json` so test fixtures like
+    `2026-08-02-graphql.json` (which share the date prefix) are not
+    silently selected as the latest real snapshot.
+    """
     pattern = str(snapshot_dir / "*.json")
     files = sorted(glob.glob(pattern), reverse=True)
     for f in files:
-        # Skip non-snapshot files (e.g. graphql test snapshots)
         name = Path(f).name
-        if name[0:4].isdigit() and len(name) >= 14:  # YYYY-MM-DD*.json
+        if _SNAPSHOT_NAME.match(name):
             return Path(f)
     return None
 
@@ -626,9 +635,15 @@ def _compute_transitions(current: dict, previous: Optional[dict]) -> list[dict]:
 
 
 def _save_snapshot(result: dict, snapshot_dir: Path) -> Path:
-    """Save current result as a snapshot file."""
+    """Save current result as a snapshot file.
+
+    Filename is `YYYY-MM-DD-HHMM.json` so multiple runs per day do not
+    overwrite each other; transition detection then has historical data
+    to diff against instead of only "today's last run".
+    """
     snapshot_dir.mkdir(parents=True, exist_ok=True)
-    filename = f"{datetime.now(timezone.utc).strftime('%Y-%m-%d')}.json"
+    timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d-%H%M")
+    filename = f"{timestamp}.json"
     path = snapshot_dir / filename
     path.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
     return path
@@ -695,15 +710,29 @@ def check_status(
         if r.severity in ("high", "medium"):
             actions.append(f"{r.suggested_action} {r.repo}#{r.number}")
 
+    # Resolve per-PR stale_days_source so the report is accurate even when
+    # multiple repos with different thresholds are scanned together.
+    # Priority: CLI > profile > default (same as _resolve_stale_days).
+    pr_stale_days_source = stale_days_source
+    if not pr_stale_days_source or pr_stale_days_source == "profile":
+        # Confirm: did the CLI override win, or did we fall through to profile?
+        if stale_days is not None:
+            pr_stale_days_source = "cli"
+        elif profile_thresholds:
+            # Per-PR: profile threshold was applied to at least one repo.
+            pr_stale_days_source = "profile"
+        else:
+            pr_stale_days_source = "default"
+
     result = {
         "author": author,
         "repo": repo,
         "checked_at": datetime.now(timezone.utc).isoformat(),
         "stale_days": effective_stale_days,
-        "stale_days_source": stale_days_source,
+        "stale_days_source": pr_stale_days_source,
         "profile": {
             "stale_days_threshold": effective_stale_days,
-            "stale_days_source": stale_days_source,
+            "stale_days_source": pr_stale_days_source,
         },
         "prs": [asdict(r) for r in classified],
         "ignored": [asdict(r) for r in ignored],
@@ -1173,7 +1202,9 @@ def suggest_profile_writeback(
                         "evidence": f"PR #{pr['number']} reviewed after {round(hours)}h",
                         "source": "status_snapshot",
                         "confidence": 0.6,  # single data point = low confidence
-                        "private": True,
+                        # Privacy: derived from private operational record,
+                        # not safe to share publicly.
+                        "private": "response_time_h_median" in PROFILE_PRIVATE_FIELDS,
                     })
             except (ValueError, TypeError):
                 pass
@@ -1187,7 +1218,9 @@ def suggest_profile_writeback(
                 "evidence": f"PR #{pr['number']} stale for {pr['days_since_update']}d with no review",
                 "source": "status_pattern",
                 "confidence": 0.5,  # needs more data points
-                "private": False,
+                # Privacy: a public guideline about how long to wait for review
+                # is fine to share — let other contributors calibrate too.
+                "private": "stale_days_threshold" in PROFILE_PRIVATE_FIELDS,
             })
 
     # Filter by mode
