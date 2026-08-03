@@ -21,7 +21,10 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(dirname "$SCRIPT_DIR")"
-SNAPSHOT_DIR="${REPO_ROOT}/data/snapshots"
+# Use prgenius status's default snapshot dir so transition detection works
+# across cron runs. Previously this script wrote to data/snapshots/ which
+# prgenius never read, so the snapshot was dead data.
+SNAPSHOT_DIR="${REPO_ROOT}/data/status-snapshots"
 PRGENIUS_SRC="${REPO_ROOT}/prgenius/src"
 mkdir -p "$SNAPSHOT_DIR"
 
@@ -56,13 +59,12 @@ for AUTHOR in "${AUTHORS[@]}"; do
     }
     echo ""
 
-    # JSON snapshot
-    SNAPSHOT_FILE="${SNAPSHOT_DIR}/${AUTHOR}_${DATE}.json"
+    # JSON snapshot — let prgenius write to its own default location
+    # (data/status-snapshots/YYYY-MM-DD.json). We do not write a separate
+    # heartbeat-side snapshot anymore — it was dead data prgenius never read.
     JSON_OUTPUT=$(python3 -m prgenius status --author "$AUTHOR" --format json --save-snapshot 2>&1) || true
 
     if [[ -n "$JSON_OUTPUT" ]]; then
-        echo "$JSON_OUTPUT" > "$SNAPSHOT_FILE"
-
         # Check for actionable items
         ACTION_COUNT=$(echo "$JSON_OUTPUT" | python3 -c "
 import sys, json
@@ -80,7 +82,11 @@ except:
             echo "⚡ ${ACTION_COUNT} actionable item(s) for ${AUTHOR}"
         fi
 
-        echo "📸 Snapshot: ${SNAPSHOT_FILE}"
+        # Locate the snapshot prgenius just wrote so the user knows where to find it
+        SNAPSHOT_FILE="${SNAPSHOT_DIR}/${DATE}.json"
+        if [[ -f "$SNAPSHOT_FILE" ]]; then
+            echo "📸 Snapshot: ${SNAPSHOT_FILE}"
+        fi
     fi
     echo ""
 done
