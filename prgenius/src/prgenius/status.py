@@ -474,6 +474,17 @@ _TRANSITION_SEVERITY = {
     ("CHANGES_REQUESTED", "CLEAN"): "info",
 }
 
+# Recommended action per transition
+_TRANSITION_ACTIONS = {
+    ("WAITING", "NEEDS_REBASE"): "rebase / update branch",
+    ("WAITING", "CI_FAILING"): "investigate CI failure",
+    ("BLOCKED", "NEEDS_REBASE"): "rebase to unblock merge queue",
+    ("BLOCKED", "CI_FAILING"): "fix CI to unblock",
+    ("STALE_REVIEW", "CLEAN"): "ready for merge",
+    ("STALE_NO_REVIEW", "CLEAN"): "ready for merge",
+    ("CHANGES_REQUESTED", "CLEAN"): "re-request review",
+}
+
 
 def _find_latest_snapshot(snapshot_dir: Path) -> Optional[Path]:
     """Find the most recent snapshot file in the directory."""
@@ -673,6 +684,32 @@ def check_status(
     return result
 
 
+def format_transitions(transitions: list[dict]) -> str:
+    """Format transition alerts as human-readable text with recommended actions."""
+    alerts = [t for t in transitions if t.get("alert")]
+    changes = [t for t in transitions if t.get("changed") and not t.get("alert")]
+
+    if not alerts and not changes:
+        return ""
+
+    lines = ["🔄 TRANSITIONS"]
+
+    for t in alerts:
+        sev = t.get("severity", "")
+        sev_icon = "🚨" if sev == "critical" else "ℹ️"
+        key = (t["previous_status"], t["current_status"])
+        action = _TRANSITION_ACTIONS.get(key, "")
+        action_str = f" → {action}" if action else ""
+        lines.append(f"  {sev_icon} {t['repo']} #{t['number']}: {t['previous_status']} → {t['current_status']} [{sev}]{action_str}")
+
+    for t in changes:
+        prev = t['previous_status'] or "NEW"
+        lines.append(f"  · {t['repo']} #{t['number']}: {prev} → {t['current_status']}")
+
+    lines.append("")
+    return "\n".join(lines)
+
+
 def format_table(result: dict) -> str:
     """Format status result as human-readable table."""
     lines = []
@@ -722,18 +759,8 @@ def format_table(result: dict) -> str:
 
     # Transitions
     transitions = result.get("transitions", [])
-    alerts = [t for t in transitions if t.get("alert")]
-    changes = [t for t in transitions if t.get("changed") and not t.get("alert")]
-    if alerts or changes:
-        lines.append("🔄 TRANSITIONS")
-        for t in alerts:
-            sev = t.get("severity", "")
-            sev_icon = "🚨" if sev == "critical" else "ℹ️"
-            lines.append(f"  {sev_icon} {t['repo']} #{t['number']}: {t['previous_status']} → {t['current_status']} [{sev}]")
-        for t in changes:
-            prev = t['previous_status'] or "NEW"
-            lines.append(f"  · {t['repo']} #{t['number']}: {prev} → {t['current_status']}")
-        lines.append("")
+    if transitions:
+        lines.append(format_transitions(transitions))
 
     # Actions
     actions = result.get("actions", [])
@@ -772,13 +799,15 @@ def format_step_summary(result: dict) -> str:
     if alerts:
         lines.append("### 🚨 Transition Alerts")
         lines.append("")
-        lines.append("| PR | Previous | Current | Severity |")
-        lines.append("|-----|----------|---------|----------|")
+        lines.append("| PR | Previous | Current | Severity | Action |")
+        lines.append("|-----|----------|---------|----------|--------|")
         for t in alerts:
             sev = t.get("severity", "")
             sev_icon = "🚨" if sev == "critical" else "ℹ️"
             prev = t["previous_status"] or "NEW"
-            lines.append(f"| {t['repo']}#{t['number']} | {prev} | {t['current_status']} | {sev_icon} {sev} |")
+            key = (t["previous_status"], t["current_status"])
+            action = _TRANSITION_ACTIONS.get(key, "—")
+            lines.append(f"| {t['repo']}#{t['number']} | {prev} | {t['current_status']} | {sev_icon} {sev} | {action} |")
         lines.append("")
 
     # PR table by status
@@ -810,6 +839,106 @@ def format_step_summary(result: dict) -> str:
         lines.append("")
 
     return "\n".join(lines)
+
+
+def notify_webhook(result: dict, webhook_url: str, *, dry_run: bool = False) -> dict:
+    """Send status result to a webhook (飞书/Slack/generic).
+
+    Args:
+        result: check_status() output
+        webhook_url: webhook URL (飞书 bot, Slack incoming webhook, or generic)
+        dry_run: if True, only return payload without sending
+
+    Returns:
+        {ok: bool, status_code: int, payload: dict}
+    """
+    import urllib.request
+    import urllib.error
+
+    transitions = result.get("transitions", [])
+    alerts = [t for t in transitions if t.get("alert")]
+    summary = result.get("summary", {})
+    author = result.get("author", "")
+
+    # Build summary line
+    summary_parts = []
+    for status in PRStatus:
+        key = status.value.lower()
+        if key in summary:
+            summary_parts.append(f"{summary[key]} {status.value}")
+    summary_str = ", ".join(summary_parts) if summary_parts else "no open PRs"
+
+    # Build alert lines
+    alert_lines = []
+    for t in alerts:
+        sev = t.get("severity", "")
+        key = (t.get("previous_status"), t.get("current_status"))
+        action = _TRANSITION_ACTIONS.get(key, "")
+        alert_lines.append(f"{'🚨' if sev == 'critical' else 'ℹ️'} {t['repo']}#{t['number']}: {t['previous_status']} → {t['current_status']}")
+        if action:
+            alert_lines.append(f"  → {action}")
+
+    # Detect webhook type from URL
+    is_feishu = "feishu.cn" in webhook_url or "larksuite.com" in webhook_url
+    is_slack = "hooks.slack.com" in webhook_url
+
+    if is_feishu:
+        # 飞书 bot message format
+        content = f"**PR Genius Status — {author}**\n{summary_str}"
+        if alert_lines:
+            content += "\n\n**🚨 Alerts:**\n" + "\n".join(alert_lines)
+        payload = {
+            "msg_type": "interactive",
+            "card": {
+                "header": {
+                    "title": {"tag": "plain_text", "content": f"🧬 PR Genius — {author}"},
+                    "template": "red" if alerts else "green",
+                },
+                "elements": [
+                    {"tag": "markdown", "content": content},
+                ],
+            },
+        }
+    elif is_slack:
+        # Slack incoming webhook format
+        blocks = [
+            {"type": "header", "text": {"type": "plain_text", "text": f"🧬 PR Genius — {author}"}},
+            {"type": "section", "text": {"type": "mrkdwn", "text": summary_str}},
+        ]
+        if alert_lines:
+            blocks.append({"type": "section", "text": {"type": "mrkdwn", "text": "*🚨 Alerts:*\n" + "\n".join(alert_lines)}})
+        payload = {"blocks": blocks}
+    else:
+        # Generic webhook
+        payload = {
+            "author": author,
+            "summary": summary_str,
+            "alerts": [
+                {"repo": t["repo"], "number": t["number"],
+                 "previous": t.get("previous_status"), "current": t["current_status"],
+                 "severity": t.get("severity"), "action": _TRANSITION_ACTIONS.get((t.get("previous_status"), t["current_status"]), "")}
+                for t in alerts
+            ],
+            "checked_at": result.get("checked_at"),
+        }
+
+    if dry_run:
+        return {"ok": True, "status_code": 0, "payload": payload, "dry_run": True}
+
+    try:
+        data = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+        req = urllib.request.Request(
+            webhook_url,
+            data=data,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            return {"ok": True, "status_code": resp.status, "payload": payload}
+    except urllib.error.HTTPError as e:
+        return {"ok": False, "status_code": e.code, "error": str(e), "payload": payload}
+    except Exception as e:
+        return {"ok": False, "status_code": 0, "error": str(e), "payload": payload}
 
 
 def format_step_summary_analyze(result: dict) -> str:

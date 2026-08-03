@@ -436,6 +436,15 @@ def cmd_status(args) -> int:
         else:
             print("Warning: GITHUB_STEP_SUMMARY not set, skipping step summary", file=sys.stderr)
 
+    # Webhook notification
+    if args.webhook:
+        from .status import notify_webhook
+        webhook_result = notify_webhook(result, args.webhook, dry_run=args.webhook_dry_run)
+        if args.webhook_dry_run:
+            print(json.dumps(webhook_result, indent=2, ensure_ascii=False), file=sys.stderr)
+        elif not webhook_result["ok"]:
+            print(f"Webhook failed: {webhook_result.get('error', webhook_result.get('status_code'))}", file=sys.stderr)
+
     return 0
 
 
@@ -586,6 +595,8 @@ def main(argv: list[str] | None = None) -> int:
     st.add_argument("--writeback-mode", choices=["off", "suggest", "auto"], default="off", help="Profile writeback mode (default: off)")
     st.add_argument("--alert-only", action="store_true", help="Only output PRs with status changes or alerts")
     st.add_argument("--step-summary", action="store_true", help="Write GitHub Step Summary to $GITHUB_STEP_SUMMARY")
+    st.add_argument("--webhook", help="Webhook URL for notifications (飞书/Slack/generic)")
+    st.add_argument("--webhook-dry-run", action="store_true", help="Show webhook payload without sending")
     st.add_argument("--repo-root", help="Path to pr-genius repo root")
     st.set_defaults(func=cmd_status)
 
