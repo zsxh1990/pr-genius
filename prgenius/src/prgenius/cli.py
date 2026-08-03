@@ -409,6 +409,8 @@ def cmd_status(args) -> int:
             result["prs"] = [p for p in result["prs"] if f"{p['repo']}#{p['number']}" in alert_keys]
         else:
             result["prs"] = []
+        # Also surface NEW and CLOSED_OR_MERGED transitions in transitions[];
+        # --alert-only filters classified PRs but never hides transition events.
 
     # Writeback suggestions
     if args.writeback_mode != "off":
@@ -748,15 +750,43 @@ def main(argv: list[str] | None = None) -> int:
     si.set_defaults(func=cmd_schema_info)
 
     # ---- status ----
-    st = sub.add_parser("status", help="Check health of in-flight PRs")
+    st = sub.add_parser(
+        "status",
+        help="Check health of in-flight PRs",
+        description=(
+            "Scan open PRs for an author or repo and classify each by health "
+            "status (9 categories: NEEDS_REBASE / CI_FAILING / STALE_REVIEW / "
+            "CHANGES_REQUESTED / STALE_NO_REVIEW / BLOCKED / CLEAN / UNKNOWN / "
+            "WAITING). Optional --save-snapshot records results and detects "
+            "transitions (e.g. WAITING -> NEEDS_REBASE) against the previous run."
+        ),
+        epilog=(
+            "Examples:\n"
+            "  prgenius status --author zsxh1990\n"
+            "  prgenius status --repo Ikalus1988/MisakaNet --stale-days 7\n"
+            "  prgenius status --author zsxh1990 --save-snapshot --alert-only\n"
+            "  prgenius status --author zsxh1990 --writeback-mode suggest\n"
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
     st.add_argument("--author", help="GitHub username to check PRs for")
     st.add_argument("--repo", help="Repository to check PRs in (org/repo)")
-    st.add_argument("--stale-days", type=int, default=None, help="Days without update to consider stale (default: profile or 14)")
-    st.add_argument("--format", choices=["table", "json"], default="table", help="Output format")
-    st.add_argument("--save-snapshot", action="store_true", help="Save snapshot and compute transitions from previous")
-    st.add_argument("--snapshot-dir", help="Directory for snapshots (default: data/status-snapshots)")
-    st.add_argument("--writeback-mode", choices=["off", "suggest", "auto"], default="off", help="Profile writeback mode (default: off)")
-    st.add_argument("--alert-only", action="store_true", help="Only output PRs with status changes or alerts")
+    st.add_argument("--stale-days", type=int, default=None,
+                    help="Days without update to consider stale (priority: CLI > profile > default 14)")
+    st.add_argument("--format", choices=["table", "json"], default="table",
+                    help="Output format (default: table)")
+    st.add_argument("--save-snapshot", action="store_true",
+                    help="Persist result to data/status-snapshots/ and diff against previous snapshot")
+    st.add_argument("--snapshot-dir",
+                    help="Directory for snapshots (default: data/status-snapshots)")
+    st.add_argument("--writeback-mode", choices=["off", "suggest", "auto"], default="off",
+                    help=(
+                        "Profile writeback mode. 'suggest' lists all proposals; "
+                        "'auto' keeps only confidence>=0.8 (currently always empty "
+                        "because all rule confidences are <0.8 by design — see docs)."
+                    ))
+    st.add_argument("--alert-only", action="store_true",
+                    help="Only output PRs whose status changed since the previous snapshot")
     st.add_argument("--step-summary", action="store_true", help="Write GitHub Step Summary to $GITHUB_STEP_SUMMARY")
     st.add_argument("--webhook", help="Webhook URL for notifications (飞书/Slack/generic)")
     st.add_argument("--webhook-dry-run", action="store_true", help="Show webhook payload without sending")
