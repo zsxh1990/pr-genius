@@ -34,7 +34,7 @@ def _load_tools(repo_root: Path | None = None):
         "triage_pr 做 policy-aware screening. 所有 tools 只读 — pr-genius 不写任何状态."
     ))
 
-    rr = repo_root or REPO_ROOT_DEFAULT
+    rr = Path(repo_root) if repo_root else REPO_ROOT_DEFAULT
 
     # Tool annotations: all read-only advisor
     READ_ONLY = {"readOnlyHint": True, "destructiveHint": False, "idempotentHint": True}
