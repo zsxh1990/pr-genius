@@ -510,6 +510,125 @@ def cmd_update_issue(args) -> int:
 
     return 0
 
+
+def cmd_auto_ping(args) -> int:
+    """Suggest ping actions for stale PRs (dry-run by default)."""
+    from .status import check_status, PRStatus
+
+    repo_root = _get_repo_root(args)
+    try:
+        result = check_status(author=args.author, repo_root=repo_root, save_snapshot=False)
+    except RuntimeError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        return 1
+
+    pingable = [p for p in result["prs"] if p.get("ping_suggested")]
+    abandonable = [p for p in result["prs"] if p.get("abandon_candidate")]
+
+    if not pingable and not abandonable:
+        print("No PRs need pinging or abandoning.")
+        return 0
+
+    if args.format == "json":
+        output = {
+            "ping": [{"repo": p["repo"], "number": p["number"], "title": p["title"],
+                       "status": p["status"], "days_since_update": p["days_since_update"]}
+                      for p in pingable],
+            "abandon": [{"repo": p["repo"], "number": p["number"], "title": p["title"],
+                         "status": p["status"], "days_since_update": p["days_since_update"]}
+                        for p in abandonable],
+        }
+        print(json.dumps(output, indent=2, ensure_ascii=False))
+        return 0
+
+    if pingable:
+        print(f"📢 Suggested pings ({len(pingable)} PRs):")
+        for p in pingable:
+            print(f"  {p['repo']}#{p['number']} — {p['status']} ({p['days_since_update']}d)")
+            print(f"    → {p['suggested_action']}")
+        print()
+
+    if abandonable:
+        print(f"🗑️  Abandon candidates ({len(abandonable)} PRs):")
+        for p in abandonable:
+            print(f"  {p['repo']}#{p['number']} — {p['status']} ({p['days_since_update']}d)")
+            print(f"    → {p['suggested_action']}")
+        print()
+
+    if not args.confirm:
+        print("Dry-run mode. Use --confirm to execute pings.")
+        return 0
+
+    # Execute pings (only for ping_suggested, not abandon)
+    import subprocess
+    for p in pingable:
+        try:
+            # Add a comment to ping the maintainer
+            comment = f"👋 Friendly ping — this PR has been waiting for review for {p['days_since_update']} days. Is there anything I can do to help move this forward?"
+            subprocess.run(
+                ["gh", "pr", "comment", str(p["number"]),
+                 "--repo", p["repo"],
+                 "--body", comment],
+                check=True, capture_output=True, text=True,
+            )
+            print(f"  ✅ Pinged {p['repo']}#{p['number']}")
+        except subprocess.CalledProcessError as e:
+            print(f"  ❌ Failed to ping {p['repo']}#{p['number']}: {e.stderr.strip()}", file=sys.stderr)
+
+    return 0
+
+
+def cmd_auto_rebase(args) -> int:
+    """Suggest rebase actions for PRs that need it (dry-run by default)."""
+    from .status import check_status, PRStatus
+
+    repo_root = _get_repo_root(args)
+    try:
+        result = check_status(author=args.author, repo_root=repo_root, save_snapshot=False)
+    except RuntimeError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        return 1
+
+    rebaseable = [p for p in result["prs"] if p.get("rebase_suggested")]
+
+    if not rebaseable:
+        print("No PRs need rebasing.")
+        return 0
+
+    if args.format == "json":
+        output = [{"repo": p["repo"], "number": p["number"], "title": p["title"],
+                    "mergeable": p["mergeable"], "merge_state": p["merge_state"]}
+                   for p in rebaseable]
+        print(json.dumps(output, indent=2, ensure_ascii=False))
+        return 0
+
+    print(f"🔄 PRs needing rebase ({len(rebaseable)}):")
+    for p in rebaseable:
+        print(f"  {p['repo']}#{p['number']} — {p['mergeable']}/{p['merge_state']}")
+        print(f"    → {p['suggested_action']}")
+    print()
+
+    if not args.confirm:
+        print("Dry-run mode. Use --confirm to attempt rebases.")
+        return 0
+
+    # Execute rebases via GitHub API (update branch)
+    import subprocess
+    for p in rebaseable:
+        try:
+            # Use gh to update the branch (equivalent to clicking "Update branch" in UI)
+            result = subprocess.run(
+                ["gh", "api", f"repos/{p['repo']}/pulls/{p['number']}/update-branch",
+                 "-X", "PUT"],
+                capture_output=True, text=True,
+            )
+            if result.returncode == 0:
+                print(f"  ✅ Rebased {p['repo']}#{p['number']}")
+            else:
+                print(f"  ❌ Failed {p['repo']}#{p['number']}: {result.stderr.strip()}")
+        except Exception as e:
+            print(f"  ❌ Error {p['repo']}#{p['number']}: {e}", file=sys.stderr)
+
     return 0
 
 
@@ -656,6 +775,22 @@ def main(argv: list[str] | None = None) -> int:
     ui.add_argument("--dry-run", action="store_true", help="Print issue body without updating")
     ui.add_argument("--repo-root", help="Path to pr-genius repo root")
     ui.set_defaults(func=cmd_update_issue)
+
+    # ---- auto-ping ----
+    ap = sub.add_parser("auto-ping", help="Suggest ping actions for stale PRs (dry-run by default)")
+    ap.add_argument("--author", required=True, help="GitHub username")
+    ap.add_argument("--format", choices=["text", "json"], default="text", help="Output format")
+    ap.add_argument("--confirm", action="store_true", help="Actually post ping comments (default: dry-run)")
+    ap.add_argument("--repo-root", help="Path to pr-genius repo root")
+    ap.set_defaults(func=cmd_auto_ping)
+
+    # ---- auto-rebase ----
+    ar = sub.add_parser("auto-rebase", help="Suggest rebase actions for PRs that need it (dry-run by default)")
+    ar.add_argument("--author", required=True, help="GitHub username")
+    ar.add_argument("--format", choices=["text", "json"], default="text", help="Output format")
+    ar.add_argument("--confirm", action="store_true", help="Actually attempt rebases via GitHub API (default: dry-run)")
+    ar.add_argument("--repo-root", help="Path to pr-genius repo root")
+    ar.set_defaults(func=cmd_auto_rebase)
 
     # ---- dump ----
     dmp = sub.add_parser("dump", help="NDJSON dump of all cases")

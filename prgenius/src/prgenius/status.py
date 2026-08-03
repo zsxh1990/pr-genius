@@ -111,6 +111,10 @@ class PRStatusResult:
     last_review_at: str
     suggested_action: str
     ignored_reason: str = ""
+    # Phase 4 flags
+    abandon_candidate: bool = False
+    ping_suggested: bool = False
+    rebase_suggested: bool = False
 
 
 def _run_gh(args: list[str]) -> str:
@@ -399,6 +403,44 @@ def classify_pr(pr: PRInfo, stale_days: int = 14) -> PRStatusResult:
     )
 
 
+# Default abandon threshold (days)
+DEFAULT_ABANDON_DAYS = 56
+
+
+def enrich_pr_flags(
+    result: PRStatusResult,
+    abandon_days: int = DEFAULT_ABANDON_DAYS,
+) -> PRStatusResult:
+    """Add Phase 4 flags: abandon_candidate, ping_suggested, rebase_suggested.
+
+    Args:
+        result: classified PR status
+        abandon_days: days after which a stale PR is considered abandon candidate
+    """
+    # abandon_candidate: STALE_NO_REVIEW or CI_FAILING or CHANGES_REQUESTED for too long
+    if result.status == PRStatus.STALE_NO_REVIEW and result.days_since_update > abandon_days:
+        result.abandon_candidate = True
+        result.suggested_action = f"abandon candidate — no review for {result.days_since_update}d (threshold: {abandon_days}d)"
+    elif result.status == PRStatus.CI_FAILING and result.days_since_update > abandon_days:
+        result.abandon_candidate = True
+        result.suggested_action = f"abandon candidate — CI failing for {result.days_since_update}d"
+    elif result.status == PRStatus.CHANGES_REQUESTED and result.days_since_update > abandon_days:
+        result.abandon_candidate = True
+        result.suggested_action = f"abandon candidate — changes requested {result.days_since_update}d ago, no activity"
+
+    # ping_suggested: STALE_NO_REVIEW or STALE_REVIEW (not yet abandon candidate)
+    if result.status == PRStatus.STALE_NO_REVIEW and not result.abandon_candidate:
+        result.ping_suggested = True
+    elif result.status == PRStatus.STALE_REVIEW:
+        result.ping_suggested = True
+
+    # rebase_suggested: NEEDS_REBASE
+    if result.status == PRStatus.NEEDS_REBASE:
+        result.rebase_suggested = True
+
+    return result
+
+
 def _resolve_stale_days(
     repo: str,
     cli_stale_days: Optional[int] = None,
@@ -629,6 +671,8 @@ def check_status(
         # Per-PR stale_days (profile may differ per repo)
         pr_stale_days = stale_days or profile_thresholds.get(pr.repo, DEFAULT_STALE_DAYS)
         result = classify_pr(pr, stale_days=pr_stale_days)
+        # Phase 4: enrich with abandon/ping/rebase flags
+        result = enrich_pr_flags(result)
         if result.ignored_reason:
             ignored.append(result)
         else:

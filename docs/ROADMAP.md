@@ -39,22 +39,22 @@
 | 8 | webhook / 飞书 / Slack | `notify_webhook()` 飞书/Slack/generic + `--webhook` flag | ✅ |
 | 9 | 固定 issue 心跳更新 | `update-issue` 命令 + `format_issue_body()` | ✅ |
 
-## Phase 4 📋 Agent 化
+## Phase 4 🔄 Agent 化
 
-| # | 待办 | 说明 |
-|---|------|------|
-| 10 | auto-ping --dry-run | 默认关闭，respect `max_pings` |
-| 11 | auto-rebase --confirm | 默认关闭 |
-| 12 | abandon_candidate 标记 | 只建议，不自动 close |
+| # | 待办 | 说明 | 状态 |
+|---|------|------|------|
+| 10 | auto-ping --dry-run | `auto-ping` 命令，默认 dry-run，`--confirm` 执行 | ✅ |
+| 11 | auto-rebase --confirm | `auto-rebase` 命令，默认 dry-run，`--confirm` 调 GitHub API | ✅ |
+| 12 | abandon_candidate 标记 | `enrich_pr_flags()` 超阈值标记，只建议不自动 close | ✅ |
 
-## 当前实现优先级（从易到难）
+## 实现状态
 
-1. **#5 Step Summary** — ✅ `format_step_summary()` + `--step-summary`
-2. **#6 PR labels** — ✅ Action 自动打标
-3. **#7 high_risk 评论** — ✅ Action 非阻塞 advisory
-4. **#4 transition 告警格式** — ✅ `_TRANSITION_ACTIONS` + `format_transitions()`
-5. **#8 webhook 通知** — ✅ `notify_webhook()` 飞书/Slack/generic
-6. **#9 固定 issue** — ✅ `update-issue` 命令
-7. **#10 auto-ping dry-run** — 读 profile + gh api
-8. **#11 auto-rebase** — git operations
-9. **#12 abandon_candidate** — 阈值判断 + 建议
+所有 Phase 0-4 功能已实现 ✅
+
+| Phase | 功能 | 状态 |
+|-------|------|------|
+| 0 | Status MVP, GraphQL, Profile, Transitions | ✅ |
+| 1 | 稳定运营（snapshot, 误判记录） | 🔄 持续观察 |
+| 2 | transition 告警 + 推荐行动 | ✅ |
+| 3 | Step Summary, Labels, 评论, Webhook, Issue | ✅ |
+| 4 | auto-ping, auto-rebase, abandon_candidate | ✅ |
