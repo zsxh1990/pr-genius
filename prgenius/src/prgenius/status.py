@@ -743,6 +743,125 @@ def format_table(result: dict) -> str:
     return "\n".join(lines)
 
 
+def format_step_summary(result: dict) -> str:
+    """Format status result as GitHub Step Summary markdown."""
+    lines = []
+    author = result.get("author", "")
+    lines.append(f"## 🧬 PR Genius Status — {author}")
+    lines.append(f"*{result['checked_at'][:10]} | stale_days={result['stale_days']} ({result['stale_days_source']})*")
+    lines.append("")
+
+    prs = result["prs"]
+    ignored = result.get("ignored", [])
+    summary = result.get("summary", {})
+    transitions = result.get("transitions", [])
+    alerts = [t for t in transitions if t.get("alert")]
+
+    # Summary badges
+    if summary:
+        badges = []
+        for status in PRStatus:
+            key = status.value.lower()
+            if key in summary:
+                icon = STATUS_ICONS[status]
+                badges.append(f"{icon} {summary[key]} {STATUS_LABELS[status]}")
+        lines.append(" | ".join(badges))
+        lines.append("")
+
+    # Alerts (critical)
+    if alerts:
+        lines.append("### 🚨 Transition Alerts")
+        lines.append("")
+        lines.append("| PR | Previous | Current | Severity |")
+        lines.append("|-----|----------|---------|----------|")
+        for t in alerts:
+            sev = t.get("severity", "")
+            sev_icon = "🚨" if sev == "critical" else "ℹ️"
+            prev = t["previous_status"] or "NEW"
+            lines.append(f"| {t['repo']}#{t['number']} | {prev} | {t['current_status']} | {sev_icon} {sev} |")
+        lines.append("")
+
+    # PR table by status
+    if prs:
+        lines.append("### PRs")
+        lines.append("")
+        lines.append("| Status | PR | Title | Days |")
+        lines.append("|--------|-----|-------|------|")
+        for status in PRStatus:
+            group = [p for p in prs if p["status"] == status.value]
+            for pr in group:
+                icon = STATUS_ICONS[status]
+                days = pr.get("days_since_update", "?")
+                lines.append(f"| {icon} {status.value} | {pr['repo']}#{pr['number']} | {pr['title'][:50]} | {days}d |")
+        lines.append("")
+
+    # Ignored
+    if ignored:
+        lines.append(f"⏭️ **{len(ignored)} own-repo PRs skipped**")
+        lines.append("")
+
+    # Actions
+    actions = result.get("actions", [])
+    if actions:
+        lines.append("### 🎯 Recommended Actions")
+        lines.append("")
+        for a in actions:
+            lines.append(f"- `{a}`")
+        lines.append("")
+
+    return "\n".join(lines)
+
+
+def format_step_summary_analyze(result: dict) -> str:
+    """Format analyze result as GitHub Step Summary markdown."""
+    lines = []
+    tier = result.get("tier", "unknown")
+    TIER_ICONS = {"low_risk": "🟢", "medium_risk": "🟡", "high_risk": "🔴"}
+    TIER_LABELS = {"low_risk": "Low Risk", "medium_risk": "Medium Risk", "high_risk": "High Risk"}
+
+    icon = TIER_ICONS.get(tier, "⚪")
+    label = TIER_LABELS.get(tier, tier)
+    repo = result.get("repo", "")
+
+    lines.append(f"## {icon} PR Genius: {label}")
+    lines.append(f"*{repo}*")
+    lines.append("")
+
+    signals = result.get("signals", {})
+
+    # Negative signals
+    if signals.get("negative"):
+        lines.append("### ⚠️ Issues")
+        lines.append("")
+        for s in signals["negative"]:
+            sev = s.get("severity", "")
+            sev_icon = {"critical": "🚨", "high": "⚠️", "medium": "📋"}.get(sev, "•")
+            lines.append(f"- {sev_icon} **{s['description']}**")
+            if s.get("fix_action"):
+                lines.append(f"  - → {s['fix_action']}")
+        lines.append("")
+
+    # Positive signals
+    if signals.get("positive"):
+        lines.append("### ✅ Positive")
+        lines.append("")
+        for s in signals["positive"]:
+            lines.append(f"- {s['description']}")
+        lines.append("")
+
+    # Checklist
+    checklist = result.get("checklist", [])
+    if checklist:
+        lines.append("### 📋 Checklist")
+        lines.append("")
+        for item in checklist:
+            mark = "✅" if item["done"] else "☐"
+            lines.append(f"- [{mark}] **[{item['priority']}]** {item['hint']}")
+        lines.append("")
+
+    return "\n".join(lines)
+
+
 # ============================================================
 # Profile Data Boundary & Writeback
 # ============================================================

@@ -18,6 +18,38 @@ inputs:
     required: false
     default: '0'
 
+inputs:
+  title:
+    description: 'PR title'
+    required: true
+  repo:
+    description: 'Target repo (org/name)'
+    required: true
+  body:
+    description: 'PR body/description'
+    required: false
+    default: ''
+  star_count:
+    description: 'Repo star count'
+    required: false
+    default: '0'
+  apply_labels:
+    description: 'Apply pr-genius risk labels to PR'
+    required: false
+    default: 'false'
+  comment_on_high_risk:
+    description: 'Post comment on high-risk PRs'
+    required: false
+    default: 'false'
+  github_token:
+    description: 'GitHub token for label/comment operations'
+    required: false
+    default: ${{ github.token }}
+  pr_number:
+    description: 'PR number (required for labels/comments)'
+    required: false
+    default: ''
+
 outputs:
   tier:
     description: 'Risk tier (low_risk/medium_risk/high_risk)'
@@ -66,3 +98,73 @@ runs:
         echo "result<<EOF" >> $GITHUB_OUTPUT
         echo "$RESULT" >> $GITHUB_OUTPUT
         echo "EOF" >> $GITHUB_OUTPUT
+
+        # Write GitHub Step Summary
+        echo "$RESULT" | python3 -c "
+        import json, sys
+        from prgenius.status import format_step_summary_analyze
+        data = json.load(sys.stdin)
+        print(format_step_summary_analyze(data))
+        " >> $GITHUB_STEP_SUMMARY 2>/dev/null || true
+
+    - name: Apply risk labels
+      if: inputs.apply_labels == 'true' && inputs.pr_number != ''
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github_token }}
+        PR_NUMBER: ${{ inputs.pr_number }}
+        TIER: ${{ steps.analysis.outputs.tier }}
+        REPO: ${{ inputs.repo }}
+      run: |
+        # Remove old pr-genius labels
+        for label in "pr-genius:low-risk" "pr-genius:medium-risk" "pr-genius:high-risk"; do
+          gh pr edit "$PR_NUMBER" --repo "$REPO" --remove-label "$label" 2>/dev/null || true
+        done
+        # Add current tier label
+        LABEL="pr-genius:${TIER//_/-}"
+        gh pr edit "$PR_NUMBER" --repo "$REPO" --add-label "$LABEL" 2>/dev/null || \
+          echo "::warning::Could not apply label $LABEL (label may not exist in repo)"
+
+    - name: Comment on high-risk PR
+      if: inputs.comment_on_high_risk == 'true' && inputs.pr_number != '' && steps.analysis.outputs.tier == 'high_risk'
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github_token }}
+        PR_NUMBER: ${{ inputs.pr_number }}
+        REPO: ${{ inputs.repo }}
+        RESULT: ${{ steps.analysis.outputs.result }}
+      run: |
+        COMMENT=$(echo "$RESULT" | python3 -c "
+        import json, sys
+        data = json.load(sys.stdin)
+        lines = ['## 🧬 PR Genius Advisory', '']
+        lines.append(f'**Risk tier: 🔴 high_risk**')
+        lines.append('')
+        neg = data.get('signals', {}).get('negative', [])
+        if neg:
+            lines.append('### Issues found:')
+            for s in neg:
+                sev_icon = {'critical': '🚨', 'high': '⚠️', 'medium': '📋'}.get(s.get('severity', ''), '•')
+                lines.append(f'- {sev_icon} {s[\"description\"]}')
+                if s.get('fix_action'):
+                    lines.append(f'  - → {s[\"fix_action\"]}')
+            lines.append('')
+        checklist = [c for c in data.get('checklist', []) if not c.get('done')]
+        if checklist:
+            lines.append('### Checklist:')
+            for item in checklist:
+                lines.append(f'- [{item[\"priority\"]}] {item[\"hint\"]}')
+            lines.append('')
+        lines.append('*This is a non-blocking advisory. It does not request changes or block merge.*')
+        print(chr(10).join(lines))
+        ")
+
+        # Check for existing pr-genius comment to update
+        EXISTING=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json comments \
+          --jq '.comments[] | select(.author.login == "github-actions[bot]") | select(.body | contains("PR Genius Advisory")) | .id' 2>/dev/null | head -1)
+
+        if [ -n "$EXISTING" ]; then
+          gh api "repos/$REPO/issues/comments/$EXISTING" -X PATCH -f body="$COMMENT" 2>/dev/null || true
+        else
+          gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$COMMENT" 2>/dev/null || true
+        fi

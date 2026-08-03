@@ -424,6 +424,18 @@ def cmd_status(args) -> int:
     else:
         print(format_table(result))
 
+    # Write GitHub Step Summary
+    if args.step_summary:
+        import os
+        summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
+        if summary_path:
+            from .status import format_step_summary
+            with open(summary_path, "a", encoding="utf-8") as f:
+                f.write(format_step_summary(result))
+                f.write("\n")
+        else:
+            print("Warning: GITHUB_STEP_SUMMARY not set, skipping step summary", file=sys.stderr)
+
     return 0
 
 
@@ -573,6 +585,7 @@ def main(argv: list[str] | None = None) -> int:
     st.add_argument("--snapshot-dir", help="Directory for snapshots (default: data/status-snapshots)")
     st.add_argument("--writeback-mode", choices=["off", "suggest", "auto"], default="off", help="Profile writeback mode (default: off)")
     st.add_argument("--alert-only", action="store_true", help="Only output PRs with status changes or alerts")
+    st.add_argument("--step-summary", action="store_true", help="Write GitHub Step Summary to $GITHUB_STEP_SUMMARY")
     st.add_argument("--repo-root", help="Path to pr-genius repo root")
     st.set_defaults(func=cmd_status)
 
