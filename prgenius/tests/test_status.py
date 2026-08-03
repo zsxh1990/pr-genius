@@ -5,7 +5,12 @@ Locks down priority rules to prevent regressions.
 import unittest
 from datetime import datetime, timezone, timedelta
 
-from prgenius.status import PRStatus, PRInfo, classify_pr, _resolve_stale_days, _compute_transitions
+from prgenius.status import (
+    PRStatus, PRInfo, classify_pr, _resolve_stale_days, _compute_transitions,
+    enrich_pr_flags, format_transitions, format_step_summary,
+    format_step_summary_analyze, format_issue_body, notify_webhook,
+    DEFAULT_ABANDON_DAYS,
+)
 
 
 def _make_pr(**overrides) -> PRInfo:
@@ -427,6 +432,303 @@ class TestProfileWriteback(unittest.TestCase):
         }
         suggestions = suggest_profile_writeback(result, mode="suggest")
         self.assertEqual(len(suggestions), 0)
+
+
+class TestEnrichPrFlags(unittest.TestCase):
+    """Phase 4: enrich_pr_flags adds abandon/ping/rebase flags."""
+
+    def test_stale_no_review_becomes_ping(self):
+        now = datetime.now(timezone.utc)
+        pr = _make_pr(
+            last_review_at="",
+            updated_at=(now - timedelta(days=20)).isoformat(),
+        )
+        result = classify_pr(pr, stale_days=14)
+        result = enrich_pr_flags(result)
+        self.assertTrue(result.ping_suggested)
+        self.assertFalse(result.abandon_candidate)
+        self.assertFalse(result.rebase_suggested)
+
+    def test_stale_no_review_becomes_abandon(self):
+        now = datetime.now(timezone.utc)
+        pr = _make_pr(
+            last_review_at="",
+            updated_at=(now - timedelta(days=60)).isoformat(),
+        )
+        result = classify_pr(pr, stale_days=14)
+        result = enrich_pr_flags(result)
+        self.assertTrue(result.abandon_candidate)
+        self.assertFalse(result.ping_suggested)  # abandon overrides ping
+
+    def test_stale_review_becomes_ping(self):
+        now = datetime.now(timezone.utc)
+        pr = _make_pr(
+            review_decision="CHANGES_REQUESTED",
+            last_commit_at=(now - timedelta(days=20)).isoformat(),
+            last_review_at=(now - timedelta(days=25)).isoformat(),
+            updated_at=(now - timedelta(days=1)).isoformat(),
+        )
+        result = classify_pr(pr, stale_days=14)
+        result = enrich_pr_flags(result)
+        self.assertTrue(result.ping_suggested)
+        self.assertFalse(result.abandon_candidate)
+
+    def test_needs_rebase_becomes_rebase(self):
+        pr = _make_pr(mergeable="CONFLICTING")
+        result = classify_pr(pr)
+        result = enrich_pr_flags(result)
+        self.assertTrue(result.rebase_suggested)
+        self.assertFalse(result.ping_suggested)
+        self.assertFalse(result.abandon_candidate)
+
+    def test_ci_failing_becomes_abandon_after_threshold(self):
+        now = datetime.now(timezone.utc)
+        pr = _make_pr(
+            checks_status="failure",
+            updated_at=(now - timedelta(days=60)).isoformat(),
+        )
+        result = classify_pr(pr, stale_days=14)
+        result = enrich_pr_flags(result)
+        self.assertTrue(result.abandon_candidate)
+
+    def test_changes_requested_becomes_abandon_after_threshold(self):
+        now = datetime.now(timezone.utc)
+        pr = _make_pr(
+            review_decision="CHANGES_REQUESTED",
+            # last_commit < last_review → classify_pr picks CHANGES_REQUESTED (not STALE_REVIEW)
+            last_commit_at=(now - timedelta(days=70)).isoformat(),
+            last_review_at=(now - timedelta(days=60)).isoformat(),
+            updated_at=(now - timedelta(days=60)).isoformat(),
+        )
+        result = classify_pr(pr, stale_days=14)
+        self.assertEqual(result.status, PRStatus.CHANGES_REQUESTED)
+        result = enrich_pr_flags(result)
+        self.assertTrue(result.abandon_candidate)
+
+    def test_waiting_no_flags(self):
+        pr = _make_pr()
+        result = classify_pr(pr)
+        result = enrich_pr_flags(result)
+        self.assertFalse(result.abandon_candidate)
+        self.assertFalse(result.ping_suggested)
+        self.assertFalse(result.rebase_suggested)
+
+    def test_clean_no_flags(self):
+        pr = _make_pr(
+            mergeable="MERGEABLE", merge_state="CLEAN", review_decision="APPROVED",
+        )
+        result = classify_pr(pr)
+        result = enrich_pr_flags(result)
+        self.assertFalse(result.abandon_candidate)
+        self.assertFalse(result.ping_suggested)
+        self.assertFalse(result.rebase_suggested)
+
+    def test_custom_abandon_days(self):
+        now = datetime.now(timezone.utc)
+        pr = _make_pr(
+            last_review_at="",
+            updated_at=(now - timedelta(days=30)).isoformat(),
+        )
+        result = classify_pr(pr, stale_days=14)
+        # With default threshold (56d), 30d is not abandon
+        result_no_abandon = enrich_pr_flags(result)
+        self.assertFalse(result_no_abandon.abandon_candidate)
+        self.assertTrue(result_no_abandon.ping_suggested)
+
+        # With custom threshold (21d), 30d is abandon
+        result_abandon = enrich_pr_flags(result, abandon_days=21)
+        self.assertTrue(result_abandon.abandon_candidate)
+
+
+class TestFormatTransitions(unittest.TestCase):
+    """Phase 2: format_transitions with recommended actions."""
+
+    def test_critical_alert_has_action(self):
+        transitions = [{
+            "repo": "org/repo", "number": 1, "title": "PR",
+            "previous_status": "WAITING", "current_status": "CI_FAILING",
+            "changed": True, "alert": True, "severity": "critical",
+        }]
+        text = format_transitions(transitions)
+        self.assertIn("🚨", text)
+        self.assertIn("investigate CI failure", text)
+
+    def test_info_alert_has_action(self):
+        transitions = [{
+            "repo": "org/repo", "number": 1, "title": "PR",
+            "previous_status": "STALE_REVIEW", "current_status": "CLEAN",
+            "changed": True, "alert": True, "severity": "info",
+        }]
+        text = format_transitions(transitions)
+        self.assertIn("ℹ️", text)
+        self.assertIn("ready for merge", text)
+
+    def test_non_alert_no_action(self):
+        transitions = [{
+            "repo": "org/repo", "number": 1, "title": "PR",
+            "previous_status": None, "current_status": "WAITING",
+            "changed": True, "alert": False,
+        }]
+        text = format_transitions(transitions)
+        self.assertIn("NEW", text)
+        self.assertNotIn("🚨", text)
+
+    def test_empty_transitions(self):
+        text = format_transitions([])
+        self.assertEqual(text, "")
+
+
+class TestFormatStepSummary(unittest.TestCase):
+    """Phase 3: GitHub Step Summary formatting."""
+
+    def _make_result(self):
+        return {
+            "author": "testuser",
+            "checked_at": "2026-08-03T12:00:00+00:00",
+            "stale_days": 14,
+            "stale_days_source": "default",
+            "prs": [
+                {"status": "CI_FAILING", "repo": "org/repo", "number": 1,
+                 "title": "fix CI", "days_since_update": 3},
+            ],
+            "ignored": [],
+            "summary": {"ci_failing": 1},
+            "transitions": [],
+            "actions": ["fix CI org/repo#1"],
+        }
+
+    def test_contains_header(self):
+        text = format_step_summary(self._make_result())
+        self.assertIn("PR Genius Status", text)
+        self.assertIn("testuser", text)
+
+    def test_contains_pr_table(self):
+        text = format_step_summary(self._make_result())
+        self.assertIn("org/repo#1", text)
+        self.assertIn("CI_FAILING", text)
+
+    def test_contains_actions(self):
+        text = format_step_summary(self._make_result())
+        self.assertIn("fix CI org/repo#1", text)
+
+    def test_transition_table_with_action(self):
+        result = self._make_result()
+        result["transitions"] = [{
+            "repo": "org/repo", "number": 1, "title": "fix CI",
+            "previous_status": "WAITING", "current_status": "CI_FAILING",
+            "changed": True, "alert": True, "severity": "critical",
+        }]
+        text = format_step_summary(result)
+        self.assertIn("Transition Alerts", text)
+        self.assertIn("investigate CI failure", text)
+
+
+class TestFormatStepSummaryAnalyze(unittest.TestCase):
+    """Phase 3: analyze Step Summary formatting."""
+
+    def test_high_risk_shows_issues(self):
+        result = {
+            "tier": "high_risk",
+            "repo": "org/repo",
+            "signals": {
+                "negative": [{"description": "Missing tests", "severity": "high", "fix_action": "Add tests"}],
+                "positive": [{"description": "Good message"}],
+                "neutral": [],
+            },
+            "checklist": [{"hint": "Add tests", "priority": "P1", "done": False}],
+        }
+        text = format_step_summary_analyze(result)
+        self.assertIn("High Risk", text)
+        self.assertIn("Missing tests", text)
+        self.assertIn("Add tests", text)
+        self.assertIn("Good message", text)
+
+
+class TestFormatIssueBody(unittest.TestCase):
+    """Phase 3: issue body formatting."""
+
+    def test_contains_title_and_table(self):
+        result = {
+            "author": "testuser",
+            "checked_at": "2026-08-03T12:00:00+00:00",
+            "summary": {"waiting": 1},
+            "prs": [
+                {"status": "WAITING", "repo": "org/repo", "number": 1,
+                 "title": "feat", "days_since_update": 3},
+            ],
+            "ignored": [],
+            "transitions": [],
+            "actions": [],
+        }
+        text = format_issue_body(result)
+        self.assertIn("PR Genius Heartbeat", text)
+        self.assertIn("org/repo#1", text)
+        self.assertIn("Auto-updated", text)
+
+    def test_alerts_section_present(self):
+        result = {
+            "author": "testuser",
+            "checked_at": "2026-08-03T12:00:00+00:00",
+            "summary": {},
+            "prs": [],
+            "ignored": [],
+            "transitions": [{
+                "repo": "org/repo", "number": 1, "title": "PR",
+                "previous_status": "WAITING", "current_status": "CI_FAILING",
+                "changed": True, "alert": True, "severity": "critical",
+            }],
+            "actions": [],
+        }
+        text = format_issue_body(result)
+        self.assertIn("Needs Attention", text)
+        self.assertIn("investigate CI failure", text)
+
+
+class TestNotifyWebhook(unittest.TestCase):
+    """Phase 3: webhook notification (dry-run)."""
+
+    def _make_result(self):
+        return {
+            "author": "testuser",
+            "checked_at": "2026-08-03T12:00:00Z",
+            "summary": {"ci_failing": 1},
+            "transitions": [{
+                "repo": "org/repo", "number": 1, "title": "PR",
+                "previous_status": "WAITING", "current_status": "CI_FAILING",
+                "changed": True, "alert": True, "severity": "critical",
+            }],
+            "prs": [],
+            "ignored": [],
+        }
+
+    def test_feishu_dry_run(self):
+        r = notify_webhook(self._make_result(), "https://open.feishu.cn/open-apis/bot/v2/hook/xxx", dry_run=True)
+        self.assertTrue(r["ok"])
+        self.assertTrue(r["dry_run"])
+        self.assertIn("card", r["payload"])
+
+    def test_slack_dry_run(self):
+        r = notify_webhook(self._make_result(), "https://hooks.slack.com/services/xxx", dry_run=True)
+        self.assertTrue(r["ok"])
+        self.assertIn("blocks", r["payload"])
+
+    def test_generic_dry_run(self):
+        r = notify_webhook(self._make_result(), "https://example.com/webhook", dry_run=True)
+        self.assertTrue(r["ok"])
+        self.assertEqual(len(r["payload"]["alerts"]), 1)
+
+    def test_no_alerts_generic(self):
+        result = {
+            "author": "testuser",
+            "checked_at": "2026-08-03T12:00:00Z",
+            "summary": {},
+            "transitions": [],
+            "prs": [],
+            "ignored": [],
+        }
+        r = notify_webhook(result, "https://example.com/hook", dry_run=True)
+        self.assertTrue(r["ok"])
+        self.assertEqual(len(r["payload"]["alerts"]), 0)
 
 
 if __name__ == "__main__":
