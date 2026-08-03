@@ -77,3 +77,39 @@ python3 -m prgenius status --author zsxh1990 --stale-days 14
 
 1. 阶段二 P1：repo profile 接入 stale_days_threshold
 2. 连续跑 3 天（08-02 ~ 08-04），保存快照
+
+---
+
+## Phase 4 Smoke Test — 2026-08-03
+
+### 单元测试
+
+```
+63 passed in 0.08s
+```
+
+| 测试类 | 数量 | 覆盖 |
+|--------|------|------|
+| TestEnrichPrFlags | 9 | abandon/ping/rebase 标记逻辑 |
+| TestFormatTransitions | 4 | 告警格式 + 推荐行动 |
+| TestFormatStepSummary | 4 | GitHub Step Summary |
+| TestFormatStepSummaryAnalyze | 1 | analyze Step Summary |
+| TestFormatIssueBody | 2 | Issue body 格式 |
+| TestNotifyWebhook | 4 | 飞书/Slack/generic dry-run |
+| 原有测试 | 39 | 分类器+transition+writeback |
+
+### 端到端 Smoke
+
+| 命令 | 结果 |
+|------|------|
+| `status --author zsxh1990 --format json` | ✅ 10 PRs, flags 正确 |
+| `auto-ping --author zsxh1990` | ✅ 2 pingable PRs |
+| `auto-rebase --author zsxh1990` | ✅ 1 rebaseable PR |
+| `status --webhook ... --webhook-dry-run` | ✅ payload 正确 |
+| `update-issue --dry-run` | ✅ issue body 正确 |
+
+### Phase 4 实时数据
+
+- ping_suggested: 2 (mongodb#1309 STALE_REVIEW 27d, openlumara#38 STALE_NO_REVIEW 20d)
+- rebase_suggested: 1 (holmesgpt#2305 BEHIND)
+- abandon_candidate: 0 (无超阈值)
