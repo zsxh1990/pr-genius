@@ -941,6 +941,79 @@ def notify_webhook(result: dict, webhook_url: str, *, dry_run: bool = False) -> 
         return {"ok": False, "status_code": 0, "error": str(e), "payload": payload}
 
 
+def format_issue_body(result: dict) -> str:
+    """Format status result as a GitHub issue body for pinned heartbeat updates."""
+    lines = []
+    author = result.get("author", "")
+    checked = result.get("checked_at", "")[:10]
+    summary = result.get("summary", {})
+    prs = result["prs"]
+    ignored = result.get("ignored", [])
+    transitions = result.get("transitions", [])
+    alerts = [t for t in transitions if t.get("alert")]
+
+    lines.append(f"# 🧬 PR Genius Heartbeat — {author}")
+    lines.append(f"*Last updated: {checked}*")
+    lines.append("")
+
+    # Summary
+    if summary:
+        badges = []
+        for status in PRStatus:
+            key = status.value.lower()
+            if key in summary:
+                icon = STATUS_ICONS[status]
+                badges.append(f"{icon} {summary[key]} {STATUS_LABELS[status]}")
+        lines.append(" | ".join(badges))
+        lines.append("")
+
+    # Critical alerts
+    if alerts:
+        lines.append("## 🚨 Needs Attention")
+        lines.append("")
+        for t in alerts:
+            sev = t.get("severity", "")
+            key = (t.get("previous_status"), t.get("current_status"))
+            action = _TRANSITION_ACTIONS.get(key, "")
+            icon = "🚨" if sev == "critical" else "ℹ️"
+            lines.append(f"- {icon} **{t['repo']}#{t['number']}**: {t['previous_status']} → {t['current_status']}")
+            if action:
+                lines.append(f"  - → {action}")
+        lines.append("")
+
+    # All PRs table
+    if prs:
+        lines.append("## Open PRs")
+        lines.append("")
+        lines.append("| Status | PR | Title | Days |")
+        lines.append("|--------|-----|-------|------|")
+        for status in PRStatus:
+            group = [p for p in prs if p["status"] == status.value]
+            for pr in group:
+                icon = STATUS_ICONS[status]
+                days = pr.get("days_since_update", "?")
+                lines.append(f"| {icon} {status.value} | {pr['repo']}#{pr['number']} | {pr['title'][:60]} | {days}d |")
+        lines.append("")
+
+    if ignored:
+        lines.append(f"⏭️ *{len(ignored)} own-repo PRs excluded*")
+        lines.append("")
+
+    # Actions
+    actions = result.get("actions", [])
+    if actions:
+        lines.append("## 🎯 Actions")
+        lines.append("")
+        for a in actions:
+            lines.append(f"- `{a}`")
+        lines.append("")
+
+    lines.append("---")
+    lines.append(f"*Auto-updated by [PR Genius](https://github.com/zsxh1990/pr-genius) — {checked}*")
+
+    return "\n".join(lines)
+
+
 def format_step_summary_analyze(result: dict) -> str:
     """Format analyze result as GitHub Step Summary markdown."""
     lines = []

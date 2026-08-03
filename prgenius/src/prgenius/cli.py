@@ -466,6 +466,50 @@ def cmd_profile_writeback(args) -> int:
     else:
         print(format_writeback_suggestions(suggestions))
 
+
+def cmd_update_issue(args) -> int:
+    """Update a pinned GitHub issue with heartbeat status."""
+    import subprocess
+    from .status import check_status, format_issue_body
+
+    repo_root = _get_repo_root(args)
+
+    try:
+        result = check_status(
+            author=args.author,
+            repo=args.repo,
+            stale_days=args.stale_days,
+            repo_root=repo_root,
+            save_snapshot=args.save_snapshot,
+            snapshot_dir=Path(args.snapshot_dir) if args.snapshot_dir else None,
+        )
+    except RuntimeError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        return 1
+
+    body = format_issue_body(result)
+
+    if args.dry_run:
+        print(body)
+        return 0
+
+    # Update issue via gh CLI
+    try:
+        subprocess.run(
+            ["gh", "issue", "edit", str(args.issue_number),
+             "--repo", args.issue_repo,
+             "--body", body],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        print(f"Updated {args.issue_repo}#{args.issue_number}")
+    except subprocess.CalledProcessError as e:
+        print(f"Error updating issue: {e.stderr}", file=sys.stderr)
+        return 1
+
+    return 0
+
     return 0
 
 
@@ -599,6 +643,19 @@ def main(argv: list[str] | None = None) -> int:
     st.add_argument("--webhook-dry-run", action="store_true", help="Show webhook payload without sending")
     st.add_argument("--repo-root", help="Path to pr-genius repo root")
     st.set_defaults(func=cmd_status)
+
+    # ---- update-issue ----
+    ui = sub.add_parser("update-issue", help="Update a pinned GitHub issue with heartbeat status")
+    ui.add_argument("--author", help="GitHub username to check PRs for")
+    ui.add_argument("--repo", help="Repository to check PRs in (org/repo)")
+    ui.add_argument("--stale-days", type=int, default=None, help="Stale days threshold")
+    ui.add_argument("--save-snapshot", action="store_true", help="Save snapshot")
+    ui.add_argument("--snapshot-dir", help="Directory for snapshots")
+    ui.add_argument("--issue-repo", required=True, help="Repo containing the issue (org/repo)")
+    ui.add_argument("--issue-number", required=True, type=int, help="Issue number to update")
+    ui.add_argument("--dry-run", action="store_true", help="Print issue body without updating")
+    ui.add_argument("--repo-root", help="Path to pr-genius repo root")
+    ui.set_defaults(func=cmd_update_issue)
 
     # ---- dump ----
     dmp = sub.add_parser("dump", help="NDJSON dump of all cases")
