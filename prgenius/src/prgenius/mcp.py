@@ -418,6 +418,89 @@ def _load_tools(repo_root: Path | None = None):
         except RuntimeError as e:
             return [{"error": str(e)}]
 
+    @mcp.tool(annotations=READ_ONLY)
+    def maintainer_view(
+        title: str,
+        repo: str,
+        body: str = "",
+        description: str = "",
+        author: str = "",
+        author_association: str = "NONE",
+        labels: list[str] | None = None,
+        star_count: int = 0,
+        repo_merge_rate: float = 0.0,
+    ) -> dict:
+        """Maintainer-facing action decision for a single PR (v1.5.0).
+
+        Output answers: 'What should I do with this PR right now?'
+        Maps analyze_pr signals to 5 actions: READY_FOR_REVIEW,
+        WAIT_FOR_AUTHOR, CLOSE_DUPLICATE, CLOSE_STALE_OR_RISKY,
+        HOLD_MAINTAINER_DECISION.
+
+        Args:
+            title: PR title
+            repo: Target repo (org/name)
+            body: PR body
+            description: Extended description
+            author: PR author username
+            author_association: Author's association (NONE/CONTRIBUTOR/etc.)
+            labels: PR labels
+            star_count: Repo star count
+            repo_merge_rate: External PR merge rate 0.0-1.0
+
+        Returns:
+            dict with keys: persona, repo, title, author, action, reason,
+            blocking_signals, next_step, review_ready, context (shared with
+            contributor view: tier, signals).
+        """
+        from .maintainer_view import maintainer_view as _maintainer_view
+        return _maintainer_view(
+            title=title,
+            description=description,
+            repo=repo,
+            body=body,
+            labels=labels or [],
+            author=author,
+            author_association=author_association,
+            star_count=star_count,
+            repo_merge_rate=repo_merge_rate,
+            repo_root=rr,
+        )
+
+    @mcp.tool(annotations=READ_ONLY)
+    def review_queue(
+        prs: list[dict] | None = None,
+        prs_file: str = "",
+    ) -> dict:
+        """Build maintainer review queue digest from a list of PRs (v1.5.0).
+
+        Groups PRs by maintainer action (5 classes) and produces a digest
+        suitable for Actions summary or git-trackable markdown file.
+
+        Args:
+            prs: List of {repo, number, title, body, author, labels, star_count, repo_merge_rate}
+            prs_file: Alternative — path to JSON file containing the PR list
+
+        Returns:
+            dict with keys: generated_at, total, summary (action -> count),
+            results (per-PR maintainer_view), digest_markdown
+        """
+        from .maintainer_view import build_review_queue
+        from pathlib import Path
+        import json as _json
+
+        if prs is None and prs_file:
+            try:
+                prs = _json.loads(Path(prs_file).read_text(encoding="utf-8"))
+            except (OSError, FileNotFoundError, _json.JSONDecodeError) as e:
+                return {"error": f"prs_file read failed: {e}"}
+        if prs is None:
+            return {"error": "specify prs (list) or prs_file (path)"}
+        if not isinstance(prs, list):
+            return {"error": "prs must be a list"}
+
+        return build_review_queue(prs, repo_root=rr)
+
     return mcp
 
 
