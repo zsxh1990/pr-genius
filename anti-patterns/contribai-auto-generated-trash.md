@@ -2,12 +2,10 @@
 type: Anti-Pattern
 tags: [contribai, archived, repo-status]
 key: contribai-auto-generated-trash
-symptom: |
-  PR 含 AI agent 自动生成残留文件 (README.md
+symptom: "PR 含 AI agent 自动生成残留文件 (README.md / search_knowledge.py 这类奇怪文件名), 或 markdown patch 粘进源码。Close 关键词: contains generated files, diff artifacts, please remove generated files"
 source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/contribai-auto-generated-trash.md
 updated: 2026-08-01
 confidence: medium
---- / search_knowledge.py --- 这类奇怪文件名), 或 markdown patch 粘进源码。Close 关键词: "contains generated files", "diff artifacts", "please remove generated files"
 root_cause: AI agent 生成 diff 时没清理, 把工具产物当成源码提交。
 trigger_keywords:
   - "contains generated files"

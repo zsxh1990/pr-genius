@@ -17,6 +17,8 @@ tags:
 related:
   - ./pr-1242-cross-agent-experience.md
 agent_guidelines:
+agent_guidelines_evidence: {}
+agent_guidelines_evidence:
   allow_unsolicited_pr: true
   require_signed_off: false
   require_cla: true  # CLA-signed check in CI

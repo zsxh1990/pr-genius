@@ -18,6 +18,18 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 
 （无）
 
+## [1.4.1] — Bug Fixes
+
+### Fixed
+- **CLI `--repo-root` for harvest/profile subcommands**: `harvest`, `profile get`, `profile writeback` now accept `--repo-root` (previously resolved to wrong path in installed mode)
+- **YAML inline comment stripping**: `_coerce()` now strips inline comments (`0.15  # comment` → `0.15`) before type coercion, fixing `TypeError` in evaluator when comparing `repo_merge_rate`
+- **Anti-pattern YAML parse errors**: Fixed broken frontmatter in `contribai-auto-generated-trash.md` and `trusted-publisher-oidc-insufficient.md`
+- **Missing frontmatter**: Added frontmatter to `docs/ROADMAP.md` and `docs/status-mvp-trial.md`
+- **Profile evidence dict**: Added `agent_guidelines_evidence` to 4 profiles that had guidelines but no evidence dict
+
+### Changed
+- **Test count**: 110 tests (was 63 in v1.4.0 trial, +47 from Phase 3-4 additions)
+
 ## [1.4.0] — Package + Git Tag
 
 ### Milestone: Phase 1 稳定运营 ✅

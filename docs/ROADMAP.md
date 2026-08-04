@@ -1,3 +1,9 @@
+---
+type: Documentation
+title: PR Genius Roadmap
+updated: 2026-08-03
+---
+
 # PR Genius Roadmap
 
 > 源文档：[PRD 评审稿](https://mi.feishu.cn/docx/LSDRdqmcTo57m5xkgXAcooqEn3g)

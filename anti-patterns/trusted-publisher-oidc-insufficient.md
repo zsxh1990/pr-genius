@@ -11,11 +11,10 @@ trigger_keywords:
   - "missing or insufficient OIDC token permissions"
   - "id-token: write"
 fix_action: "在 publish-pypi.yml 的 jobs 级别加 `permissions: id-token: write`（与 runs-on 同级），然后 git push + dispatch"
-fix_command: "git apply <<'PATCH'\n
+fix_command: "Add 'permissions: id-token: write' to jobs level in publish-pypi.yml, then git push + dispatch"
 source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/trusted-publisher-oidc-insufficient.md
 updated: 2026-08-01
 confidence: medium
---- a/.github/workflows/publish-pypi.yml\n+++ b/.github/workflows/publish-pypi.yml\n@@ -9,6 +9,8 @@ jobs:\n     runs-on: ubuntu-latest\n     environment: pypi\n+    permissions:\n+      id-token: write\n \n     steps:\nPATCH\ngit add .github/workflows/publish-pypi.yml\ngit commit -m \"fix(workflow): add OIDC write permission for PyPI Trusted Publisher\"\ngit push origin main\n# POST /actions/workflows/<wf_id>/dispatches then poll"
 source_pr: zsxh1990/pr-genius#commit a0c33f9
 prevention: "写任何用 Trusted Publisher 的 workflow（PyPI / npm provenance / GH Pages OIDC 等）前，permissions 块必须先写。GitHub UI 在 'Add workflow' 模板里默认不带，需要手动加"
 created: 2026-07-09

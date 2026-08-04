@@ -17,6 +17,8 @@ tags:
 related:
   - ./pr-248-pr-genius.md
 agent_guidelines:
+agent_guidelines_evidence: {}
+agent_guidelines_evidence:
   allow_unsolicited_pr: true
   require_signed_off: false
   require_cla: false

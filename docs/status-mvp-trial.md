@@ -1,3 +1,9 @@
+---
+type: Documentation
+title: Status MVP Trial
+updated: 2026-08-02
+---
+
 # Status MVP Trial — 2026-08-02
 
 ## 试运行概况

@@ -10,6 +10,8 @@ zsxh_pr_count: 1
 status: abandoned
 analyzed_at: 2026-08-03
 agent_guidelines:
+agent_guidelines_evidence: {}
+agent_guidelines_evidence:
   allow_unsolicited_pr: true
   maintainer_vibe: slow
   response_time_h_median: null
