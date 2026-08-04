@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-transformation
 description: "Large repos document transformation"
 tags: [large-repo, success]

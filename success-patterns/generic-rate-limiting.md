@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-rate-limiting
 description: "Rate limiting prevents abuse"
 tags: [generic, rate-limiting, security]

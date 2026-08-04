@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-continuous-learning
 description: "Medium repos reject PRs without learning"
 tags: [generic, anti-pattern]

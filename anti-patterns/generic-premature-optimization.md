@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-premature-optimization
 tags: [cron, scheduling, reliability]
 description: "PR with premature optimization"

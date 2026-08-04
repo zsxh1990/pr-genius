@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-scalability-change
 tags: [cron, scheduling, reliability]
 description: "PR with scalability change"

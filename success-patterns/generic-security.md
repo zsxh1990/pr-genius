@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-security
 description: "Large repos build security"
 tags: [generic, success]

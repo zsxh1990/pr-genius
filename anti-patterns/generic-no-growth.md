@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-growth
 description: "Large repos reject PRs without growth"
 tags: [generic, anti-pattern]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-inappropriate-intimacy
 tags: [cron, scheduling, reliability]
 description: "PR with inappropriate intimacy"

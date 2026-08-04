@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-magic-numbers
 tags: [cron, scheduling, reliability]
 description: "PR with magic numbers"

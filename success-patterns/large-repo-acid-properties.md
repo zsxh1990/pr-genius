@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-acid-properties
 description: "Large repos ensure ACID"
 tags: [large-repo, success]

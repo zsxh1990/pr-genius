@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-slo
 description: "SLOs define reliability targets"
 tags: [generic, slo, reliability]

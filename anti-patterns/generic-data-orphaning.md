@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-data-orphaning
 tags: [cron, scheduling, reliability]
 description: "PR导致数据孤立"

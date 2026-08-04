@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: openclaw-auth-provider-risk
 tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 涉及认证提供者，风险较高"

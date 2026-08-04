@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-recognition
 description: "Recognition improves motivation"
 tags: [generic, recognition, culture]

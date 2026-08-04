@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-code-splitting
 description: "Code splitting reduces bundle size"
 tags: [generic, code-splitting, performance]

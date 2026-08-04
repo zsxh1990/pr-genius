@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-middle-man
 tags: [cron, scheduling, reliability]
 description: "PR with middle man"

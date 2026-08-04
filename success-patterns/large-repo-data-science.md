@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-data-science
 description: "Large repos document data science"
 tags: [large-repo, success]

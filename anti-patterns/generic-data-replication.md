@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-data-replication
 tags: [cron, scheduling, reliability]
 description: "PR忽视数据复制"

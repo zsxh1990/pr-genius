@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-breaking-change-numpy
 tags: [cron, scheduling, reliability]
 description: "NumPy rejects breaking changes without NEP"

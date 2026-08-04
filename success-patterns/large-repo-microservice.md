@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-microservice
 description: "Large repos document microservice patterns"
 tags: [large-repo, success]

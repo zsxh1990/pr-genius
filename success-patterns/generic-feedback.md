@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-feedback
 description: "Large repos give feedback"
 tags: [generic, success]

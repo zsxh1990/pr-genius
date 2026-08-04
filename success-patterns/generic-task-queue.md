@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-task-queue
 description: "Task queues manage background work"
 tags: [generic, task-queue, background]

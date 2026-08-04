@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-flexibility
 description: "Large repos reject PRs without flexibility"
 tags: [generic, anti-pattern]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-governance
 description: "Small repos build governance"
 tags: [generic, success]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-missing-issue-reference
 tags: [cron, scheduling, reliability]
 description: "PR without linked issue"

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-succession-planning
 description: "Succession planning ensures continuity"
 tags: [generic, succession-planning, culture]

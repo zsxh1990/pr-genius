@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 tags: [anti-pattern, real-case]
 key: low-value-contribution
 symptom: |

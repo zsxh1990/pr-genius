@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-code-of-conduct
 description: "Small repos reject PRs without CoC"
 tags: [generic, anti-pattern]

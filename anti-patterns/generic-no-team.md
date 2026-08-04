@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-team
 description: "Large repos reject PRs without teamwork"
 tags: [generic, anti-pattern]

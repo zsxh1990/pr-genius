@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-psychological-safety
 description: "Medium repos reject PRs without safety"
 tags: [generic, anti-pattern]

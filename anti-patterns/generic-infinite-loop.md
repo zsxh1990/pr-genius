@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-infinite-loop
 tags: [cron, scheduling, reliability]
 description: "PR introducing infinite loop"

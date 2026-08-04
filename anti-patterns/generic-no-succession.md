@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-succession
 description: "Medium repos reject PRs without succession"
 tags: [generic, anti-pattern]

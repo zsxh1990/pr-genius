@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-type-system
 description: "Type systems catch errors early"
 tags: [generic, type-system, safety]

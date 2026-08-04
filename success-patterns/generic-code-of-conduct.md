@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-code-of-conduct
 description: "Code of conduct sets community expectations"
 tags: [generic, code-of-conduct, community]

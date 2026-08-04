@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-profiling
 description: "Profiling helps identify bottlenecks"
 tags: [generic, profiling, performance]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: punkpeye-follow-up-strategy
 description: "When and how to ping punkpeye on stale PRs"
 tags: [follow-up, ping, stale, maintainer-engagement, punkpeye]

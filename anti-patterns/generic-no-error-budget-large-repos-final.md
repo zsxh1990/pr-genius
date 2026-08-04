@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-error-budget-large-repos-final
 tags: [cron, scheduling, reliability]
 description: "Large repos require error budget"

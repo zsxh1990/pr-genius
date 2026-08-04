@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-content-security-policy
 description: "Content Security Policy prevents XSS"
 tags: [generic, csp, security]

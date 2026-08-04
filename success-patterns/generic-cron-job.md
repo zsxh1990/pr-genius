@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-cron-job
 description: "Cron jobs schedule recurring tasks"
 tags: [generic, cron, scheduling]

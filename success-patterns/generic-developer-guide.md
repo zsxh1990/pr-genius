@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-developer-guide
 description: "Developer guides help contributors"
 tags: [generic, developer-guide, documentation]

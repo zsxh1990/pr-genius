@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-data-residency
 description: "Small repos comply with data residency"
 tags: [generic, success]

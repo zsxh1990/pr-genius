@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-rollback
 description: "Small repos support rollback"
 tags: [generic, success]

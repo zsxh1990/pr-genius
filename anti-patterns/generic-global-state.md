@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-global-state
 tags: [cron, scheduling, reliability]
 description: "PR with global state"

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-no-breaking-change
 description: "Large repos reject unannounced breaking changes"
 tags: [generic, success]

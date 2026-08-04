@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-dco-signoff
 description: "Large repos require DCO sign-off"
 tags: [large-repo, success]

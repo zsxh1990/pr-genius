@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-small-pr
 description: "Large repos prefer small PRs"
 tags: [generic, success]

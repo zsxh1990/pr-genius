@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-data-loss
 description: "Large repos prevent data loss"
 tags: [large-repo, success]

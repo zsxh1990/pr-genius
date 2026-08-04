@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-business-continuity
 description: "Small repos have BC"
 tags: [generic, success]

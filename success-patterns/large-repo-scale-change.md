@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-scale-change
 description: "Large repos require scale testing"
 tags: [large-repo, success]

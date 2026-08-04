@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-privacy
 description: "Large repos document data privacy"
 tags: [generic, success]

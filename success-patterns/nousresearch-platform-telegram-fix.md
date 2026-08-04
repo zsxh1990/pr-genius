@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: nousresearch-platform-telegram-fix
 tags: [cron, scheduling, reliability]
 description: "NousResearch Telegram 平台修复"

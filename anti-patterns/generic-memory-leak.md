@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-memory-leak
 tags: [cron, scheduling, reliability]
 description: "PR introducing memory leak"

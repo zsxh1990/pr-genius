@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-code-review-culture
 description: "Large repos reject PRs without review culture"
 tags: [generic, anti-pattern]

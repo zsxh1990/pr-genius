@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-backward-compatibility
 description: "Maintaining backward compatibility prevents breaking changes"
 tags: [generic, compatibility, breaking-change]

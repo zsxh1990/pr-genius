@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-no-deprecated-api
 description: "Large repos reject deprecated API usage"
 tags: [large-repo, success]

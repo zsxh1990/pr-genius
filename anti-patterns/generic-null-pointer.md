@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-null-pointer
 tags: [cron, scheduling, reliability]
 description: "PR introducing null pointer exception"

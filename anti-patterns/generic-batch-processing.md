@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-batch-processing
 tags: [cron, scheduling, reliability]
 description: "PR忽视批处理复杂性"

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-version-conflict
 tags: [cron, scheduling, reliability]
 description: "PR with version conflict"

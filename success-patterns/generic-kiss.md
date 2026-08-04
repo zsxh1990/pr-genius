@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-kiss
 description: "KISS keeps code simple"
 tags: [generic, kiss, principle]

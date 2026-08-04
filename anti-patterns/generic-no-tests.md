@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-tests
 tags: [cron, scheduling, reliability]
 description: "PR without tests"

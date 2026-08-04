@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-monorepo
 description: "Monorepo simplifies code sharing"
 tags: [generic, monorepo, architecture]

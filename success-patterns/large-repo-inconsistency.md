@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-inconsistency
 description: "Large repos prevent inconsistency"
 tags: [large-repo, success]

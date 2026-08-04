@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-disaster-recovery
 description: "Small repos have DR"
 tags: [generic, success]

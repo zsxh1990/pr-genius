@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-authorization
 description: "Authorization controls access"
 tags: [generic, authorization, security]

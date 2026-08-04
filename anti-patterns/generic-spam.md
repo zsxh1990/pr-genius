@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-spam
 tags: [cron, scheduling, reliability]
 description: "Spam PRs with no value"

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-robustness
 description: "Small repos reject PRs without robustness"
 tags: [generic, anti-pattern]

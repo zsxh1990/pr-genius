@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-test
 description: "Large repos reject PRs without tests"
 tags: [generic, anti-pattern]

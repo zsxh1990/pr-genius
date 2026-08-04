@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-minification
 description: "Minification reduces file size"
 tags: [generic, minification, performance]

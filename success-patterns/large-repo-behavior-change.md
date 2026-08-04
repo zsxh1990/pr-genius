@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-behavior-change
 description: "Large repos document behavior changes"
 tags: [large-repo, success]

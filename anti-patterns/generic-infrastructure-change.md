@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-infrastructure-change
 tags: [cron, scheduling, reliability]
 description: "PR with infrastructure change"

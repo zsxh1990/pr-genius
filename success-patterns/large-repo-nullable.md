@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-nullable
 description: "Large repos handle nulls"
 tags: [large-repo, success]

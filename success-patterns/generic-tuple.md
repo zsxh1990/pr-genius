@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-tuple
 description: "Tuples group values"
 tags: [generic, tuple, type-system]

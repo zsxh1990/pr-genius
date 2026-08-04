@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-yagni
 description: "YAGNI avoids unnecessary features"
 tags: [generic, yagni, principle]

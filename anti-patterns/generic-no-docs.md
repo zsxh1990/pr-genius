@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-docs
 description: "Small repos reject PRs without docs"
 tags: [generic, anti-pattern]

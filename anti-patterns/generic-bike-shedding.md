@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-bike-shedding
 tags: [cron, scheduling, reliability]
 description: "PR with bike shedding"

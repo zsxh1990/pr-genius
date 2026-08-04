@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: cortex-memory-tiers-guide
 tags: [cron, scheduling, reliability]
 description: "文档贡献：补充缺失的架构指南"

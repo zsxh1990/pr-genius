@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-duplicate-pr
 tags: [cron, scheduling, reliability]
 description: "Duplicate PR from same author"

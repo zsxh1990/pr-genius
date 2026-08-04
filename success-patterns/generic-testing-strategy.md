@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-testing-strategy
 description: "Good testing strategy ensures code quality"
 tags: [generic, testing, quality]

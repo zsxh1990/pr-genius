@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-graceful-degradation
 description: "Graceful degradation maintains partial functionality"
 tags: [generic, graceful-degradation, resilience]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-performance
 description: "Performance improvements are always welcome"
 tags: [generic, performance, optimization]

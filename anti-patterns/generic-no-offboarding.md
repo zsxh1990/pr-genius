@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-offboarding
 description: "Small repos reject PRs without offboarding"
 tags: [generic, anti-pattern]

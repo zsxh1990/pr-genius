@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-monad
 description: "Monads chain computations"
 tags: [generic, monad, paradigm]

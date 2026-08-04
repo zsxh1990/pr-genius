@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-contributing
 description: "Small repos reject PRs without contributing"
 tags: [generic, anti-pattern]

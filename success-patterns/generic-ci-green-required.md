@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-ci-green-required
 description: "CI must pass before PR can be merged"
 tags: [generic, ci, requirement]

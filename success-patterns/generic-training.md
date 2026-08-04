@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-training
 description: "Training improves skills"
 tags: [generic, training, culture]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-antifragility
 description: "Small repos build antifragility"
 tags: [generic, success]

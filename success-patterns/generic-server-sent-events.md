@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-server-sent-events
 description: "SSE enables server push"
 tags: [generic, sse, real-time]

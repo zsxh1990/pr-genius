@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-vendor-lock-in
 tags: [cron, scheduling, reliability]
 description: "PR introducing vendor lock-in"

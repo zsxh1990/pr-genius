@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-mvc
 description: "MVC separates concerns"
 tags: [generic, mvc, architecture]

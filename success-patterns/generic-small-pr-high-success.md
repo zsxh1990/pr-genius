@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-small-pr-high-success
 description: "PRs under 100 lines have significantly higher merge rate"
 tags: [generic, pr-size, statistics]

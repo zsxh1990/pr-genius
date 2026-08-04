@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-integrity
 description: "Large repos ensure integrity"
 tags: [large-repo, success]

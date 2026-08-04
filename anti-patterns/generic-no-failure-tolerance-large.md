@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-failure-tolerance-large
 tags: [cron, scheduling, reliability]
 description: "Large repos require failure tolerance"

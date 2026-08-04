@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: nousresearch-type-bug-fix
 tags: [cron, scheduling, reliability]
 description: "NousResearch type/bug 修复"

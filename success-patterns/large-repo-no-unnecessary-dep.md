@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-no-unnecessary-dep
 description: "Large repos reject unnecessary dependencies"
 tags: [large-repo, success]

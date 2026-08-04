@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-switch-statements
 tags: [cron, scheduling, reliability]
 description: "PR with switch statements"

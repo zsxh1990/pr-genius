@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-authentication
 description: "Authentication verifies user identity"
 tags: [generic, authentication, security]

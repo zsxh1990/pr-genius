@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-semigroup
 description: "Semigroups combine values"
 tags: [generic, semigroup, paradigm]

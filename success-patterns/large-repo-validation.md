@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-validation
 description: "Large repos document validation"
 tags: [large-repo, success]

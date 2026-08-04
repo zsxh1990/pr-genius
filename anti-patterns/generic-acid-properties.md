@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-acid-properties
 tags: [cron, scheduling, reliability]
 description: "PR忽视ACID属性"

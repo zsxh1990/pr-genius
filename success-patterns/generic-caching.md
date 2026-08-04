@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-caching
 description: "Caching improves performance"
 tags: [generic, caching, performance]

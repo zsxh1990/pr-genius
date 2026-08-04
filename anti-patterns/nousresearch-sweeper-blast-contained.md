@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: nousresearch-sweeper-blast-contained
 tags: [cron, scheduling, reliability]
 description: "NousResearch PR 影响范围可控"

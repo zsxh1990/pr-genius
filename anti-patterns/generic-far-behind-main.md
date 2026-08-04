@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-far-behind-main
 tags: [cron, scheduling, reliability]
 description: "PR far behind main"

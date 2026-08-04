@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-regulatory
 description: "Medium repos comply with regulations"
 tags: [generic, success]

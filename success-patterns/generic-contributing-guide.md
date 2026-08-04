@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-contributing-guide
 description: "Contributing guides help new contributors"
 tags: [generic, contributing, documentation]

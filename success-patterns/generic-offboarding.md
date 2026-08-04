@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-offboarding
 description: "Offboarding ensures smooth transitions"
 tags: [generic, offboarding, culture]

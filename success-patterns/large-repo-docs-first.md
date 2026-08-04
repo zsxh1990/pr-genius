@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-docs-first
 description: "Large repos accept docs-only PRs with high merge rate"
 tags: [large-repo, docs, high-merge-rate]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-no-proprietary
 description: "Large repos reject proprietary dependencies"
 tags: [large-repo, success]

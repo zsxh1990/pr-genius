@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-xstate
 description: "XState manages finite state machines"
 tags: [generic, xstate, state-management]

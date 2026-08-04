@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-dashboard
 description: "Dashboards visualize metrics"
 tags: [generic, dashboard, monitoring]

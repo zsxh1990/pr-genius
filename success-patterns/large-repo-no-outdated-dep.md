@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-no-outdated-dep
 description: "Large repos reject outdated dependencies"
 tags: [large-repo, success]

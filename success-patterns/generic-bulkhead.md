@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-bulkhead
 description: "Bulkheads isolate failures"
 tags: [generic, bulkhead, resilience]

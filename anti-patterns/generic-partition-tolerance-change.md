@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-partition-tolerance-change
 tags: [cron, scheduling, reliability]
 description: "PR with partition tolerance change"

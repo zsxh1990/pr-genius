@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-documentation
 description: "Documentation helps users understand code"
 tags: [generic, documentation, quality]

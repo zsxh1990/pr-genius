@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-best-practices
 description: "Small repos follow best practices"
 tags: [generic, success]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-feature-flags
 description: "Small repos use feature flags"
 tags: [generic, success]

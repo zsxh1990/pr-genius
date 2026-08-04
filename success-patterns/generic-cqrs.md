@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-cqrs
 description: "CQRS separates reads and writes"
 tags: [generic, cqrs, architecture]

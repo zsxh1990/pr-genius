@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-blameless
 description: "Blameless culture improves learning"
 tags: [generic, blameless, culture]

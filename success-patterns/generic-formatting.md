@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-formatting
 description: "Formatting fixes (linting, style) are welcome"
 tags: [generic, formatting, style]

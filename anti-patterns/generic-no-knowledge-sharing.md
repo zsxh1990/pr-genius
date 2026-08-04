@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-knowledge-sharing
 description: "Small repos reject PRs without knowledge sharing"
 tags: [generic, anti-pattern]

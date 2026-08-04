@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: nousresearch-sweeper-not-planned
 tags: [cron, scheduling, reliability]
 description: "NousResearch PR 被标记为 not-planned"

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-sorting
 description: "Large repos document sorting"
 tags: [large-repo, success]

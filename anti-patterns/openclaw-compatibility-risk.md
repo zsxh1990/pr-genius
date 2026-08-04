@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: openclaw-compatibility-risk
 tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 存在兼容性风险"

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-changelog
 description: "Changelogs document what changed"
 tags: [generic, changelog, documentation]

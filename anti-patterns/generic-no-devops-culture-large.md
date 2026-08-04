@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-devops-culture-large
 tags: [cron, scheduling, reliability]
 description: "Large repos require DevOps culture"

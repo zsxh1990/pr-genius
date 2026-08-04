@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-soa-complexity
 tags: [cron, scheduling, reliability]
 description: "PR忽视SOA复杂性"

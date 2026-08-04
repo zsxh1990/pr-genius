@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-availability-change
 description: "Large repos require availability testing"
 tags: [large-repo, success]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-warehouse
 description: "Large repos document warehouse patterns"
 tags: [large-repo, success]

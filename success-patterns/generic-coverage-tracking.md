@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-coverage-tracking
 description: "Large repos track coverage"
 tags: [generic, success]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-orphaning
 description: "Large repos prevent orphaning"
 tags: [large-repo, success]

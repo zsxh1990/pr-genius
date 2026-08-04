@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-security-change
 description: "Large repos require security review"
 tags: [large-repo, success]

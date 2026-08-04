@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-dependency-injection
 description: "Dependency injection improves testability"
 tags: [generic, dependency-injection, architecture]

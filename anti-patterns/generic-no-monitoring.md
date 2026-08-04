@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-monitoring
 description: "Large repos reject PRs without monitoring"
 tags: [generic, anti-pattern]

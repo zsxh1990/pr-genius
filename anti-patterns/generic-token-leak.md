@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-token-leak
 tags: [cron, scheduling, reliability]
 description: "PR introducing token leak vulnerability"

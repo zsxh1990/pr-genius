@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-rest
 description: "REST is standard API architecture"
 tags: [generic, rest, api]

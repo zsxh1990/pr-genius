@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-design-patterns
 description: "Medium repos use design patterns"
 tags: [generic, success]

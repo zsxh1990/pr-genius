@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: misakanet-lesson-contribution
 tags: [cron, scheduling, reliability]
 description: "脱敏泛化的技术教训：从真实案例中提取可复用的解决方案"

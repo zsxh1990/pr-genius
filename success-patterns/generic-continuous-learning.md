@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-continuous-learning
 description: "Continuous learning improves skills"
 tags: [generic, continuous-learning, culture]

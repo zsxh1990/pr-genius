@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-cost-optimization
 description: "Medium repos optimize costs"
 tags: [generic, success]

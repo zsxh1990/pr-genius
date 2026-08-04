@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: nousresearch-duplicate-pr
 tags: [cron, scheduling, reliability]
 description: "NousResearch PR 与已有实现重复"

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-data-enrichment
 tags: [cron, scheduling, reliability]
 description: "PR忽视数据丰富"

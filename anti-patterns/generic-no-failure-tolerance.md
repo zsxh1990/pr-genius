@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-failure-tolerance
 description: "Large repos reject PRs without failure tolerance"
 tags: [generic, anti-pattern]

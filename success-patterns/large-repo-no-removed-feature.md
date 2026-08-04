@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-no-removed-feature
 description: "Large repos reject removed feature usage"
 tags: [large-repo, success]

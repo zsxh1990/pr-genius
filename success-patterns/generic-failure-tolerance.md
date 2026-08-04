@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-failure-tolerance
 description: "Small repos tolerate failure"
 tags: [generic, success]

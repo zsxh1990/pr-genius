@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-large-pr
 tags: [cron, scheduling, reliability]
 description: "PR too large to review"

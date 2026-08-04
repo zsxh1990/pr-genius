@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-breaking-change-tailwindcss
 tags: [cron, scheduling, reliability]
 description: "Tailwind CSS rejects breaking changes without discussion"

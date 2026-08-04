@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-containerization
 description: "Containerization simplifies deployment"
 tags: [generic, container, docker]

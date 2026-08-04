@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-succession
 description: "Large repos plan succession"
 tags: [generic, success]

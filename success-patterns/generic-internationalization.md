@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-internationalization
 description: "Internationalization (i18n) improvements expand user base"
 tags: [generic, i18n, internationalization]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: nousresearch-risk-session-state
 tags: [cron, scheduling, reliability]
 description: "NousResearch PR 涉及会话状态，风险较高"

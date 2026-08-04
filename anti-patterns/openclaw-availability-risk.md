@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: openclaw-availability-risk
 tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 涉及可用性，风险较高"

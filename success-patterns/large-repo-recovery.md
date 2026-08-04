@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-recovery
 description: "Large repos document recovery"
 tags: [large-repo, success]

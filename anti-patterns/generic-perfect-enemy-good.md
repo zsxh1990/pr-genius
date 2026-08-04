@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-perfect-enemy-good
 tags: [cron, scheduling, reliability]
 description: "PR追求完美阻碍进展"

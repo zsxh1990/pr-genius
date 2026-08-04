@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-conventional-commits
 description: "Large repos use conventional commit format"
 tags: [generic, success]

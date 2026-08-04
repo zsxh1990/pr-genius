@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-ownership
 description: "Small repos reject PRs without ownership"
 tags: [generic, anti-pattern]

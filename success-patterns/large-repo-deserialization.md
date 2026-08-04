@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-deserialization
 description: "Large repos document deserialization"
 tags: [large-repo, success]

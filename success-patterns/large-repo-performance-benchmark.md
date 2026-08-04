@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-performance-benchmark
 description: "Performance improvements need benchmarks"
 tags: [large-repo, performance, benchmark]

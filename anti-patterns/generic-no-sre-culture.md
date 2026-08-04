@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-sre-culture
 description: "Large repos reject PRs without SRE culture"
 tags: [generic, anti-pattern]

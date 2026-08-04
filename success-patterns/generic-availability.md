@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-availability
 description: "Medium repos build availability"
 tags: [generic, success]

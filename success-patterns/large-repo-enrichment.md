@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-enrichment
 description: "Large repos document enrichment"
 tags: [large-repo, success]

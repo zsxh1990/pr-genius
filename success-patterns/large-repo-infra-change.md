@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-infra-change
 description: "Large repos require infra review"
 tags: [large-repo, success]

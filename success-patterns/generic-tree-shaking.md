@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-tree-shaking
 description: "Tree shaking removes unused code"
 tags: [generic, tree-shaking, performance]

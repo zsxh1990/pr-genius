@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-index-out-of-bounds
 tags: [cron, scheduling, reliability]
 description: "PR introducing index out of bounds"

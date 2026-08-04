@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: module-refactored-approach-obsolete
 tags: [cron, scheduling, reliability]
 description: "PR 方案因目标模块被重构而失效"

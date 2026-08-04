@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-knowledge-transfer
 description: "Medium repos reject PRs without knowledge transfer"
 tags: [generic, anti-pattern]

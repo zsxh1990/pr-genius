@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-aggregation
 description: "Large repos document aggregation"
 tags: [large-repo, success]

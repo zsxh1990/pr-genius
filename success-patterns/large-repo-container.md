@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-container
 description: "Large repos document container patterns"
 tags: [large-repo, success]

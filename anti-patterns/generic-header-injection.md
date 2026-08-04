@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-header-injection
 tags: [cron, scheduling, reliability]
 description: "PR introducing header injection vulnerability"

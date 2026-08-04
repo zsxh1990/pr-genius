@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-architecture-decision-record
 description: "ADRs document architectural decisions"
 tags: [generic, adr, documentation]

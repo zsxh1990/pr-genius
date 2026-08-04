@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-game-day
 description: "Large repos reject PRs without game day"
 tags: [generic, anti-pattern]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-e2e-testing
 description: "End-to-end tests verify complete flows"
 tags: [generic, e2e-testing, quality]

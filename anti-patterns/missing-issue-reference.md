@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: missing-issue-reference
 tags: [cron, scheduling, reliability]
 description: "PR body 提到 'fix' 但没有关联具体的 Issue 编号"

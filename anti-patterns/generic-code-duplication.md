@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-code-duplication
 tags: [cron, scheduling, reliability]
 description: "PR with code duplication"

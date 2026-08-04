@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-unclear-commit-message
 tags: [cron, scheduling, reliability]
 description: "PR with unclear commit message"

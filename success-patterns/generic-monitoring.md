@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-monitoring
 description: "Small repos have monitoring"
 tags: [generic, success]

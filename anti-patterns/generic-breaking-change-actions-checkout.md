@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-breaking-change-actions-checkout
 tags: [cron, scheduling, reliability]
 description: "Actions Checkout rejects breaking changes without discussion"

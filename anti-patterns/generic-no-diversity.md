@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-diversity
 description: "Medium repos reject PRs without diversity"
 tags: [generic, anti-pattern]

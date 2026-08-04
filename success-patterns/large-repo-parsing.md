@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-parsing
 description: "Large repos document parsing"
 tags: [large-repo, success]

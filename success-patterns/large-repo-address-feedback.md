@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-address-feedback
 description: "Large repos require feedback addressing"
 tags: [large-repo, success]

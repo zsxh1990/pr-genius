@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-real-time-complexity
 tags: [cron, scheduling, reliability]
 description: "PR忽视实时处理复杂性"

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: openclaw-duplicate-pr
 tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 与已有实现重复"

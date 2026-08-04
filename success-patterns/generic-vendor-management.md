@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-vendor-management
 description: "Medium repos manage vendors"
 tags: [generic, success]

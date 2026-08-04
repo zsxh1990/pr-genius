@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-knowledge-sharing-culture
 description: "Knowledge sharing culture improves team"
 tags: [generic, knowledge-sharing, culture]

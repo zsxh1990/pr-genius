@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-continuous-deployment
 description: "CD automates deployment"
 tags: [generic, cd, automation]

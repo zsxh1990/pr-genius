@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-record
 description: "Records are structured data"
 tags: [generic, record, type-system]

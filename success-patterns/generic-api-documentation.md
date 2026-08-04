@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-api-documentation
 description: "API documentation helps developers integrate"
 tags: [generic, api-documentation, quality]

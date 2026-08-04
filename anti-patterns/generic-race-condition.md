@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-race-condition
 tags: [cron, scheduling, reliability]
 description: "PR introducing race condition"

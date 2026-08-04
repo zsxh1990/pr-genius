@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-deprecated-api
 tags: [cron, scheduling, reliability]
 description: "PR using deprecated API"

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-eventual-consistency
 tags: [cron, scheduling, reliability]
 description: "PR忽视eventual consistency"

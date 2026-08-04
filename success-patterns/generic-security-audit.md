@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-security-audit
 description: "Security audit finds vulnerabilities"
 tags: [generic, security-audit, security]

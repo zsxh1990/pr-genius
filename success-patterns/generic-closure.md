@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-closure
 description: "Closures capture variables"
 tags: [generic, closure, paradigm]

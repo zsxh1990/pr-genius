@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-governance
 description: "Small repos reject PRs without governance"
 tags: [generic, anti-pattern]

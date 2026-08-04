@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-pipeline
 description: "Large repos document pipeline patterns"
 tags: [large-repo, success]

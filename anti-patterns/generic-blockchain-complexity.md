@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-blockchain-complexity
 tags: [cron, scheduling, reliability]
 description: "PR忽视区块链复杂性"

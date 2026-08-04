@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-audit-logging
 description: "Audit logging tracks security events"
 tags: [generic, audit-logging, security]

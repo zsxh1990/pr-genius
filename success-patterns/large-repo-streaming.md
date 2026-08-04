@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-streaming
 description: "Large repos document streaming patterns"
 tags: [large-repo, success]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-leadership
 description: "Large repos reject PRs without leadership"
 tags: [generic, anti-pattern]

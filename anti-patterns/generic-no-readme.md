@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-readme
 description: "Large repos reject PRs without readme"
 tags: [generic, anti-pattern]

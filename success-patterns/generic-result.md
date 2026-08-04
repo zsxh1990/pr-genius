@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-result
 description: "Results handle success/failure"
 tags: [generic, result, error-handling]

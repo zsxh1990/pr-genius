@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-either
 description: "Eithers handle two outcomes"
 tags: [generic, either, error-handling]

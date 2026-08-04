@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-no-circular-dep
 description: "Large repos reject circular dependencies"
 tags: [large-repo, success]

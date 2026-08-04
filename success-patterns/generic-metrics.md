@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-metrics
 description: "Metrics track performance"
 tags: [generic, metrics, monitoring]

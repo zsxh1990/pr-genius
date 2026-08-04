@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-nda-compliance
 description: "Medium repos comply with NDAs"
 tags: [generic, success]

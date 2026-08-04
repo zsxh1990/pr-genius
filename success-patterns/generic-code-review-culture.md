@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-code-review-culture
 description: "Code review culture improves quality"
 tags: [generic, code-review, culture]

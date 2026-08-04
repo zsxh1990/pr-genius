@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-chaos-engineering
 description: "Chaos engineering tests resilience"
 tags: [generic, chaos-engineering, reliability]

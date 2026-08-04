@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-vendor-lock-in
 description: "Large repos reject vendor lock-in"
 tags: [large-repo, success]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-scalability
 description: "Small repos build scalability"
 tags: [generic, success]

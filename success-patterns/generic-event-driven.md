@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-event-driven
 description: "Event-driven architecture improves scalability"
 tags: [generic, event-driven, architecture]

@@ -1,4 +1,5 @@
----key: punkpeye-awesome-mcp-devtools-248-pending
+---
+key: punkpeye-awesome-mcp-devtools-248-pending
 type: Case Study
 repo: punkpeye/awesome-mcp-devtools
 created: 2026-07-29

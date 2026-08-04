@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-microservice-complexity
 tags: [cron, scheduling, reliability]
 description: "PR忽视微服务复杂性"

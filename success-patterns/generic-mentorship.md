@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-mentorship
 description: "Mentorship develops talent"
 tags: [generic, mentorship, culture]

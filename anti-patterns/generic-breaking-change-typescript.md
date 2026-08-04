@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-breaking-change-typescript
 tags: [cron, scheduling, reliability]
 description: "TypeScript rejects breaking changes without discussion"

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-consistency-change
 description: "Large repos document consistency changes"
 tags: [large-repo, success]

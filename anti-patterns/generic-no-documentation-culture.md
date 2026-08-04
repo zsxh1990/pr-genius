@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-documentation-culture
 description: "Small repos reject PRs without docs culture"
 tags: [generic, anti-pattern]

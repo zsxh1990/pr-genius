@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-hexagonal-architecture
 description: "Hexagonal architecture improves testability"
 tags: [generic, hexagonal-architecture, architecture]

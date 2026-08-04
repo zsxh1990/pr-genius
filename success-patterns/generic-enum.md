@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-enum
 description: "Enums define named constants"
 tags: [generic, enum, type-system]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-proprietary-dependency
 tags: [cron, scheduling, reliability]
 description: "PR adding proprietary dependency"

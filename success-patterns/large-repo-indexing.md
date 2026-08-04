@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-indexing
 description: "Large repos document indexing"
 tags: [large-repo, success]

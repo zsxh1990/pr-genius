@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-work-life-balance
 description: "Medium repos reject PRs without work-life balance"
 tags: [generic, anti-pattern]

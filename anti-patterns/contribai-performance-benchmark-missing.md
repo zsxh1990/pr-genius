@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 tags: [contribai, archived, repo-status]
 key: contribai-performance-benchmark-missing
 symptom: |

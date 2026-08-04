@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-docs-contribution
 description: "Documentation-only PRs have high merge rate across all repos"
 tags: [generic, docs, high-success-rate]

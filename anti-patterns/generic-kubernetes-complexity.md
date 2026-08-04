@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-kubernetes-complexity
 tags: [cron, scheduling, reliability]
 description: "PR忽视Kubernetes复杂性"

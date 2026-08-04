@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-callback
 description: "Callbacks are basic async pattern"
 tags: [generic, callback, async]

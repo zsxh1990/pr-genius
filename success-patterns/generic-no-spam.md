@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-no-spam
 description: "Medium repos reject spam"
 tags: [generic, success]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-postmortem
 description: "Postmortems learn from incidents"
 tags: [generic, postmortem, reliability]

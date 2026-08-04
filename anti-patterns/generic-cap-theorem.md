@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-cap-theorem
 tags: [cron, scheduling, reliability]
 description: "PR忽视CAP定理"

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-ab-testing
 description: "Medium repos use A/B testing"
 tags: [generic, success]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-industry-standards
 description: "Small repos follow standards"
 tags: [generic, success]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-feature-request
 description: "Small repos accept feature requests"
 tags: [generic, success]

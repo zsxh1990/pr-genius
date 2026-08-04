@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-real-time
 description: "Large repos document real-time patterns"
 tags: [large-repo, success]

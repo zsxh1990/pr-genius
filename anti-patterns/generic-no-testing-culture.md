@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-testing-culture
 description: "Medium repos reject PRs without testing culture"
 tags: [generic, anti-pattern]

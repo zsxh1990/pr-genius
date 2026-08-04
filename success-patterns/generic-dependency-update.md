@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-dependency-update
 description: "Dependency updates are low-risk and often auto-merged"
 tags: [generic, dependency, low-risk]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-review-required
 description: "Large repos require code review"
 tags: [large-repo, success]

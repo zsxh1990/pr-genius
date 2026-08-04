@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-redux
 description: "Redux manages application state"
 tags: [generic, redux, state-management]

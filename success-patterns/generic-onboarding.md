@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-onboarding
 description: "Onboarding integrates new members"
 tags: [generic, onboarding, culture]

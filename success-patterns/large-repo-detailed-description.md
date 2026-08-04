@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-detailed-description
 description: "Large repos require detailed descriptions"
 tags: [large-repo, success]

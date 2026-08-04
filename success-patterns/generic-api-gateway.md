@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-api-gateway
 description: "Large repos use API gateway"
 tags: [generic, success]

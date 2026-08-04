@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-inclusion
 description: "Inclusion improves belonging"
 tags: [generic, inclusion, culture]

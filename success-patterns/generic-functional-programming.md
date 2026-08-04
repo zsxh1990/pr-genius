@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-functional-programming
 description: "FP improves code predictability"
 tags: [generic, fp, paradigm]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-complex-code
 tags: [cron, scheduling, reliability]
 description: "PR with overly complex code"

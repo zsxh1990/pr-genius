@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-incident-response
 description: "Incident response handles security breaches"
 tags: [generic, incident-response, security]

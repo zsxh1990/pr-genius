@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-review
 tags: [cron, scheduling, reliability]
 description: "PR without review"

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-hybrid-cloud
 tags: [cron, scheduling, reliability]
 description: "PR忽视混合云复杂性"

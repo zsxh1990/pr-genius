@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-test-coverage-tracking
 description: "Tracking test coverage ensures quality"
 tags: [generic, test-coverage, quality]

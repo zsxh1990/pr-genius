@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-mentorship
 description: "Small repos reject PRs without mentorship"
 tags: [generic, anti-pattern]

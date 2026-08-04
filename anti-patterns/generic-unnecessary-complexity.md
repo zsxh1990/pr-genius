@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-unnecessary-complexity
 tags: [cron, scheduling, reliability]
 description: "PR with unnecessary complexity"

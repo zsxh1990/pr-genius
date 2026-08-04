@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: openclaw-waiting-on-author
 tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 等待作者响应"

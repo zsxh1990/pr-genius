@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-sli
 description: "Small repos reject PRs without SLI"
 tags: [generic, anti-pattern]

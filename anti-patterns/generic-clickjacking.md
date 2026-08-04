@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-clickjacking
 tags: [cron, scheduling, reliability]
 description: "PR introducing clickjacking vulnerability"

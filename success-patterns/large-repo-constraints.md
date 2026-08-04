@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-constraints
 description: "Large repos enforce constraints"
 tags: [large-repo, success]

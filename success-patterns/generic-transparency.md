@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-transparency
 description: "Transparency improves trust"
 tags: [generic, transparency, culture]

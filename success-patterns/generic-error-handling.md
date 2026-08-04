@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-error-handling
 description: "Improving error handling makes code more robust"
 tags: [generic, error-handling, robustness]

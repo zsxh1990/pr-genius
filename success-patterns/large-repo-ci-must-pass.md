@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-ci-must-pass
 description: "Large repos require CI to pass"
 tags: [large-repo, success]

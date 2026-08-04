@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-profiling
 description: "Medium repos reject PRs without profiling"
 tags: [generic, anti-pattern]

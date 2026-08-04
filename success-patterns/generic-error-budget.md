@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-error-budget
 description: "Error budgets balance reliability and velocity"
 tags: [generic, error-budget, reliability]

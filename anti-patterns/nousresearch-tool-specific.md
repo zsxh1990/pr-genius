@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: nousresearch-tool-specific
 tags: [cron, scheduling, reliability]
 description: "NousResearch PR 涉及特定工具问题"

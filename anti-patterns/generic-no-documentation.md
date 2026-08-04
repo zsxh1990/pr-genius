@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-documentation
 tags: [cron, scheduling, reliability]
 description: "PR without documentation"

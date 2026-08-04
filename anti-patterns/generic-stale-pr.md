@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-stale-pr
 tags: [cron, scheduling, reliability]
 description: "PR marked as stale"

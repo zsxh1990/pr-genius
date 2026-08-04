@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-readme
 description: "Good README improves project adoption"
 tags: [generic, readme, documentation]

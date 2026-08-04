@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: openclaw-session-state-risk
 tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 涉及会话状态，风险较高"

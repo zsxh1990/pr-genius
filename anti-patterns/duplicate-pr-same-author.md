@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: duplicate-pr-same-author
 tags: [cron, scheduling, reliability]
 description: "同一作者提交多个几乎相同的 PR"

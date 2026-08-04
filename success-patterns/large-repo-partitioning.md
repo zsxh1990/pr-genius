@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-partitioning
 description: "Large repos document partitioning"
 tags: [large-repo, success]

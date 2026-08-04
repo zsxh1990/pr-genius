@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-static-analysis
 description: "Static analysis finds code quality issues"
 tags: [generic, static-analysis, quality]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-logging-improvement
 description: "Improving logging helps debugging and is welcome"
 tags: [generic, logging, debugging]

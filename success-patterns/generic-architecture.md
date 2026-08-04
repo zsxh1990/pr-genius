@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-architecture
 description: "Medium repos have architecture"
 tags: [generic, success]

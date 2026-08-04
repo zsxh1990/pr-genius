@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-performance
 description: "Large repos reject PRs without performance"
 tags: [generic, anti-pattern]

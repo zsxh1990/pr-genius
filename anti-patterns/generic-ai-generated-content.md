@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-ai-generated-content
 tags: [cron, scheduling, reliability]
 description: "AI-generated content without human review"

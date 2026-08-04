@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-swr
 description: "SWR is stale-while-revalidate data fetching"
 tags: [generic, swr, data-fetching]

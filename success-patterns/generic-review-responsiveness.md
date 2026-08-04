@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-review-responsiveness
 description: "Small repos value review responsiveness"
 tags: [generic, success]

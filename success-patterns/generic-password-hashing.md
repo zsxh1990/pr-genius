@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-password-hashing
 description: "Password hashing protects credentials"
 tags: [generic, password-hashing, security]

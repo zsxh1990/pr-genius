@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-code-quality
 description: "Medium repos maintain quality"
 tags: [generic, success]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-alerting
 description: "Medium repos reject PRs without alerting"
 tags: [generic, anti-pattern]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-webhook
 description: "Webhooks enable event notifications"
 tags: [generic, webhook, integration]

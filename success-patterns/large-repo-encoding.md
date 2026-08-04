@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-encoding
 description: "Large repos enforce encoding"
 tags: [large-repo, success]

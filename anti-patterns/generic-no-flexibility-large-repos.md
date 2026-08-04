@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-flexibility-large-repos
 tags: [cron, scheduling, reliability]
 description: "Large repos require flexibility"

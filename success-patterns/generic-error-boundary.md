@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-error-boundary
 description: "Error boundaries catch UI errors"
 tags: [generic, error-boundary, error-handling]

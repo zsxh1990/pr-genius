@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-health-check
 description: "Health checks monitor service status"
 tags: [generic, health-check, monitoring]

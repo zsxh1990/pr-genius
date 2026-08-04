@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-linked-issue
 description: "Large repos require linked issues"
 tags: [large-repo, success]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-observable
 description: "Observables handle streams of data"
 tags: [generic, observable, reactive]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-dashboard-large-repos-final
 tags: [cron, scheduling, reliability]
 description: "Large repos require dashboard"

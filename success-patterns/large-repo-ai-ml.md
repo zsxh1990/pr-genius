@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-ai-ml
 description: "Large repos document AI/ML patterns"
 tags: [large-repo, success]

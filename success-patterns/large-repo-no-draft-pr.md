@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-no-draft-pr
 description: "Large repos discourage draft PRs"
 tags: [large-repo, success]

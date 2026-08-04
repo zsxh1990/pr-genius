@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-small-diff-size
 description: "Smaller diffs are easier to review and merge"
 tags: [generic, diff-size, statistics]

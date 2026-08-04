@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-long-polling
 description: "Long polling simulates real-time"
 tags: [generic, long-polling, real-time]

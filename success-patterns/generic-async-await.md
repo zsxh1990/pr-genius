@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-async-await
 description: "Async/await simplifies async code"
 tags: [generic, async-await, async]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-monolith-complexity
 tags: [cron, scheduling, reliability]
 description: "PR忽视单体应用复杂性"

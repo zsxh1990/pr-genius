@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-schema-change
 description: "Large repos require schema migrations"
 tags: [large-repo, success]

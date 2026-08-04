@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-accessibility
 description: "Accessibility improvements are welcome"
 tags: [generic, accessibility, a11y]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-logging-large-repos
 tags: [cron, scheduling, reliability]
 description: "Large repos require logging"

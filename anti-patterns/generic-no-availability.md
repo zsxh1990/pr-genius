@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-availability
 description: "Medium repos reject PRs without availability"
 tags: [generic, anti-pattern]

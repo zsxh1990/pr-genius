@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-reinventing-wheel
 tags: [cron, scheduling, reliability]
 description: "PR reinventing the wheel"

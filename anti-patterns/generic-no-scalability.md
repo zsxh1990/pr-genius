@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-scalability
 description: "Large repos reject PRs without scalability"
 tags: [generic, anti-pattern]

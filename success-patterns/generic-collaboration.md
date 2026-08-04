@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-collaboration
 description: "Collaboration improves outcomes"
 tags: [generic, collaboration, culture]

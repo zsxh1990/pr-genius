@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-growth
 description: "Growth opportunities improve retention"
 tags: [generic, growth, culture]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-inclusion
 description: "Medium repos reject PRs without inclusion"
 tags: [generic, anti-pattern]

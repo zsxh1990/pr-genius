@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-risk-taking
 description: "Small repos reject PRs without risk-taking"
 tags: [generic, anti-pattern]

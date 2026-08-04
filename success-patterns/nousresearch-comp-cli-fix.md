@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: nousresearch-comp-cli-fix
 tags: [cron, scheduling, reliability]
 description: "NousResearch CLI 组件修复"

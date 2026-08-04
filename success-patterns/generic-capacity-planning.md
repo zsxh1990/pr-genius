@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-capacity-planning
 description: "Small repos plan capacity"
 tags: [generic, success]

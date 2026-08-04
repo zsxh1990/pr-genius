@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-ssrf
 tags: [cron, scheduling, reliability]
 description: "PR introducing SSRF vulnerability"

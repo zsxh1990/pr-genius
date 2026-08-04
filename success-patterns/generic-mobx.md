@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-mobx
 description: "MobX manages reactive state"
 tags: [generic, mobx, state-management]

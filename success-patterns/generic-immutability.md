@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-immutability
 description: "Immutability prevents side effects"
 tags: [generic, immutability, paradigm]

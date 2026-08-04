@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-data-deserialization
 tags: [cron, scheduling, reliability]
 description: "PR忽视数据反序列化"

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-risk-taking
 description: "Large repos take risks"
 tags: [generic, success]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-testing-culture
 description: "Testing culture improves reliability"
 tags: [generic, testing, culture]

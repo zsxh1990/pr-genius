@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-no-force-push
 description: "Large repos discourage force push"
 tags: [large-repo, success]

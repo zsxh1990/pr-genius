@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-dco-signoff
 description: "DCO sign-off required for many repos"
 tags: [generic, dco, requirement]

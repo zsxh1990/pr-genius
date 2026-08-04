@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-postmortem
 description: "Medium repos reject PRs without postmortem"
 tags: [generic, anti-pattern]

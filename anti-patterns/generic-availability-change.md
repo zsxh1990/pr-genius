@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-availability-change
 tags: [cron, scheduling, reliability]
 description: "PR with availability change"

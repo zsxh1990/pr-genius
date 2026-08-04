@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-lazy-loading
 description: "Lazy loading improves initial load time"
 tags: [generic, lazy-loading, performance]

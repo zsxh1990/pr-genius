@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-no-heavy-dep
 description: "Large repos reject heavy dependencies"
 tags: [large-repo, success]

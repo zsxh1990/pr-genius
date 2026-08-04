@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-clean-architecture
 description: "Clean architecture improves maintainability"
 tags: [generic, clean-architecture, architecture]

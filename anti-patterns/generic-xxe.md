@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-xxe
 tags: [cron, scheduling, reliability]
 description: "PR introducing XXE vulnerability"

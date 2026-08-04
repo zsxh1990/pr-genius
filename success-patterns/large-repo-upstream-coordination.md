@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-upstream-coordination
 description: "Large repos require upstream coordination"
 tags: [large-repo, success]

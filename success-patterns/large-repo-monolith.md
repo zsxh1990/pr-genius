@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-monolith
 description: "Large repos document monolith patterns"
 tags: [large-repo, success]

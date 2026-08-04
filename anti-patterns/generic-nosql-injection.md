@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-nosql-injection
 tags: [cron, scheduling, reliability]
 description: "PR introducing NoSQL injection vulnerability"

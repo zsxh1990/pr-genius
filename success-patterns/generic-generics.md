@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-generics
 description: "Generics enable code reuse"
 tags: [generic, generics, type-system]

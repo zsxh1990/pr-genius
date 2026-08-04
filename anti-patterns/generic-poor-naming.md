@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-poor-naming
 tags: [cron, scheduling, reliability]
 description: "PR with poor naming"

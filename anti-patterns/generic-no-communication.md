@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-communication
 description: "Small repos reject PRs without communication"
 tags: [generic, anti-pattern]

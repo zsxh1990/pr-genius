@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-knowledge-sharing-large-repos-final
 tags: [cron, scheduling, reliability]
 description: "Large repos require knowledge sharing"

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-sre-culture
 description: "SRE culture improves reliability"
 tags: [generic, sre, culture]

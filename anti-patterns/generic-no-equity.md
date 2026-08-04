@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-equity
 description: "Large repos reject PRs without equity"
 tags: [generic, anti-pattern]

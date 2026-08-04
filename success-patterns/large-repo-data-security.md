@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-data-security
 description: "Large repos document data security"
 tags: [large-repo, success]

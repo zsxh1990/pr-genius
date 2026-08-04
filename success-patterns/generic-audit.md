@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-audit
 description: "Medium repos support audit"
 tags: [generic, success]

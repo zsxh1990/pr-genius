@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-circuit-breaker
 description: "Circuit breakers prevent cascading failures"
 tags: [generic, circuit-breaker, resilience]

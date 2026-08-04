@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-mastery
 description: "Mastery improves skill"
 tags: [generic, mastery, culture]

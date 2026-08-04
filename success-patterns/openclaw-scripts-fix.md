@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: openclaw-scripts-fix
 tags: [cron, scheduling, reliability]
 description: "OpenClaw 脚本修复"

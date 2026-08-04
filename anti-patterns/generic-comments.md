@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-comments
 tags: [cron, scheduling, reliability]
 description: "PR with excessive comments"

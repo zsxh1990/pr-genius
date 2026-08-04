@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-compression
 description: "Compression reduces transfer size"
 tags: [generic, compression, performance]

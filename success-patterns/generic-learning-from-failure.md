@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-learning-from-failure
 description: "Medium repos learn from failure"
 tags: [generic, success]

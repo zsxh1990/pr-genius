@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: nousresearch-p1-priority-fix
 tags: [cron, scheduling, reliability]
 description: "NousResearch P1 优先级修复"

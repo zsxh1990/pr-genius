@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: agentclaimguard-langchain-middleware
 tags: [cron, scheduling, reliability]
 description: "功能贡献：从 Issue 中实现中间件适配器"

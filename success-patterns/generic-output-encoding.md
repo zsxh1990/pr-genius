@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-output-encoding
 description: "Output encoding prevents XSS attacks"
 tags: [generic, output-encoding, security]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-mastery
 description: "Small repos reject PRs without mastery"
 tags: [generic, anti-pattern]

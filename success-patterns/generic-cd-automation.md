@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-cd-automation
 description: "Small repos automate CD"
 tags: [generic, success]

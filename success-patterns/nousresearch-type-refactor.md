@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: nousresearch-type-refactor
 tags: [cron, scheduling, reliability]
 description: "NousResearch type/refactor 重构"

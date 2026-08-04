@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-design-by-committee
 tags: [cron, scheduling, reliability]
 description: "PR with design by committee"

@@ -1,4 +1,5 @@
----key: awesome-mcp-servers-glama-badge-required
+---
+key: awesome-mcp-servers-glama-badge-required
 type: Anti-Pattern
 repo: punkpeye/awesome-mcp-servers
 created: 2026-07-18

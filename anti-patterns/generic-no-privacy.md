@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-privacy
 description: "Large repos reject PRs without privacy"
 tags: [generic, anti-pattern]

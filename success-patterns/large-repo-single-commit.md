@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-single-commit
 description: "Large repos prefer single commits"
 tags: [large-repo, success]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-breaking-change-flask
 tags: [cron, scheduling, reliability]
 description: "Flask rejects breaking changes without discussion"

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-benchmark
 description: "Benchmarks track performance over time"
 tags: [generic, benchmark, performance]

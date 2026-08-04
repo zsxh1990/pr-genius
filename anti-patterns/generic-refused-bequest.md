@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-refused-bequest
 tags: [cron, scheduling, reliability]
 description: "PR with refused bequest"

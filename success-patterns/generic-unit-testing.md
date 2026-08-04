@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-unit-testing
 description: "Unit tests verify individual components"
 tags: [generic, unit-testing, quality]

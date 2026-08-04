@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-graphql
 description: "GraphQL provides flexible data querying"
 tags: [generic, graphql, api]

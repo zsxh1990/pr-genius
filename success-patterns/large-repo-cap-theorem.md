@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-cap-theorem
 description: "Large repos consider CAP theorem"
 tags: [large-repo, success]

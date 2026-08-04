@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-auto-scaling
 description: "Large repos use auto-scaling"
 tags: [generic, success]

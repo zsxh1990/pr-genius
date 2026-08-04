@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-observability
 description: "Large repos have observability"
 tags: [generic, success]

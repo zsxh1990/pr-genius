@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-hardcoded-secret
 tags: [cron, scheduling, reliability]
 description: "PR with hardcoded secret"

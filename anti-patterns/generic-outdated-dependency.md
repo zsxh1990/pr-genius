@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-outdated-dependency
 tags: [cron, scheduling, reliability]
 description: "PR with outdated dependency"

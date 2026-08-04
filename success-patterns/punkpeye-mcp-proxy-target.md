@@ -1,4 +1,5 @@
----type: Target Pattern
+---
+type: Target Pattern
 repo: punkpeye/mcp-proxy
 created: 2026-07-29
 tags: [target, mcp-proxy, typescript]

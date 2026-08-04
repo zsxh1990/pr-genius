@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-communication
 description: "Communication improves alignment"
 tags: [generic, communication, culture]

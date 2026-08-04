@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-cosmetic-no-user-pain
 tags: [cron, scheduling, reliability]
 description: "Cosmetic changes without user pain"

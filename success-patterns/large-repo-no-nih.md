@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-no-nih
 description: "Large repos reject NIH syndrome"
 tags: [large-repo, success]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-tracing
 description: "Tracing tracks request flow"
 tags: [generic, tracing, observability]

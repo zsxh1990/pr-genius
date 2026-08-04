@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-behavior-driven-development
 description: "BDD aligns code with business requirements"
 tags: [generic, bdd, methodology]

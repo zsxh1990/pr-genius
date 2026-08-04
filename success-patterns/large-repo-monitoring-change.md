@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-monitoring-change
 description: "Large repos document monitoring changes"
 tags: [large-repo, success]

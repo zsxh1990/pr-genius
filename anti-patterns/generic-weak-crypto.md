@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-weak-crypto
 tags: [cron, scheduling, reliability]
 description: "PR using weak cryptography"

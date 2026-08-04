@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-knowledge-transfer
 description: "Knowledge transfer preserves expertise"
 tags: [generic, knowledge-transfer, culture]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-big-data-complexity
 tags: [cron, scheduling, reliability]
 description: "PR忽视大数据复杂性"

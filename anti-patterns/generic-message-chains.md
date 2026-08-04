@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-message-chains
 tags: [cron, scheduling, reliability]
 description: "PR with message chains"

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-wrong-branch
 tags: [cron, scheduling, reliability]
 description: "PR targeting wrong branch"

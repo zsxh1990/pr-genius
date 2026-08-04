@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-continuous-improvement
 description: "Small repos improve continuously"
 tags: [generic, success]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: openclaw-refactor-risk
 tags: [cron, scheduling, reliability]
 description: "OpenClaw 重构 PR 风险较高"

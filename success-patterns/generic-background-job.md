@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-background-job
 description: "Background jobs handle async work"
 tags: [generic, background-job, async]

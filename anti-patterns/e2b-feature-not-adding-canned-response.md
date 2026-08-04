@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 tags: [anti-pattern, real-case]
 key: e2b-feature-not-adding-canned-response
 symptom: "PR 被 mishushakov 礼貌 close + 评论含 'we're not adding' / 'not seeing major user pain' / 'appreciate the initiative'"

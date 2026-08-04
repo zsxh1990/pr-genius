@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 tags: [anti-pattern, real-case]
 key: trusted-publisher-oidc-insufficient
 symptom: "Trusted publishing exchange failure: OpenID Connect token retrieval failed: GitHub: missing or insufficient OIDC token permissions, the ACTIONS_ID_TOKEN_REQUEST_TOKEN environment variable was unset"

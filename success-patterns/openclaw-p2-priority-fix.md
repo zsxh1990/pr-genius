@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: openclaw-p2-priority-fix
 tags: [cron, scheduling, reliability]
 description: "OpenClaw P2 优先级修复"

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-learning-from-failure-large
 tags: [cron, scheduling, reliability]
 description: "Large repos require learning from failure"

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-try-catch
 description: "Try/catch handles exceptions"
 tags: [generic, try-catch, error-handling]

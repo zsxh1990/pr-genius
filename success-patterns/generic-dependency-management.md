@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-dependency-management
 description: "Medium repos manage dependencies"
 tags: [generic, success]

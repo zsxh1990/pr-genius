@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-kubernetes
 description: "Large repos document K8s patterns"
 tags: [large-repo, success]

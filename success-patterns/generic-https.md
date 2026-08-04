@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-https
 description: "HTTPS encrypts data in transit"
 tags: [generic, https, security]

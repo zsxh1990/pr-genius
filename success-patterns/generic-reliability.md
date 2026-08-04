@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-reliability
 description: "Large repos build reliability"
 tags: [generic, success]

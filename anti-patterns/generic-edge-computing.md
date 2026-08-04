@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-edge-computing
 tags: [cron, scheduling, reliability]
 description: "PR忽视边缘计算复杂性"

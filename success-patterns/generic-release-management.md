@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-release-management
 description: "Small repos manage releases"
 tags: [generic, success]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-distributed-system
 description: "Large repos document distributed patterns"
 tags: [large-repo, success]

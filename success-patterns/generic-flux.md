@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-flux
 description: "Flux manages data flow"
 tags: [generic, flux, architecture]

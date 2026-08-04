@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-issue-template-large
 tags: [cron, scheduling, reliability]
 description: "Large repos require issue template"

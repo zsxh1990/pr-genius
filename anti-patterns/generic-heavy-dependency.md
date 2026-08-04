@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-heavy-dependency
 tags: [cron, scheduling, reliability]
 description: "PR adding heavy dependency"

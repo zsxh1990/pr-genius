@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-deployment-change
 tags: [cron, scheduling, reliability]
 description: "PR with deployment change"

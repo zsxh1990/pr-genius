@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-types
 description: "Large repos enforce types"
 tags: [large-repo, success]

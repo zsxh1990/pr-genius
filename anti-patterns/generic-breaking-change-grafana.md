@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-breaking-change-grafana
 tags: [cron, scheduling, reliability]
 description: "Grafana rejects breaking changes without discussion"

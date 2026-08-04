@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-i18n
 description: "Medium repos accept i18n improvements"
 tags: [generic, success]

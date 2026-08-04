@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-out-of-memory
 tags: [cron, scheduling, reliability]
 description: "PR introducing out of memory"

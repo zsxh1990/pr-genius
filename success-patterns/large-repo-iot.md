@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-iot
 description: "Large repos document IoT patterns"
 tags: [large-repo, success]

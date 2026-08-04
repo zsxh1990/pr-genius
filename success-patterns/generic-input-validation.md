@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-input-validation
 description: "Input validation prevents injection attacks"
 tags: [generic, input-validation, security]

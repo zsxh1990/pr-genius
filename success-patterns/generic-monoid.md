@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-monoid
 description: "Monoids have identity element"
 tags: [generic, monoid, paradigm]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-api-change
 tags: [cron, scheduling, reliability]
 description: "PR with API change"

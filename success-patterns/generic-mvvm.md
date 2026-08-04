@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-mvvm
 description: "MVVM separates UI from logic"
 tags: [generic, mvvm, architecture]

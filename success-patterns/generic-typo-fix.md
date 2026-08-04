@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-typo-fix
 description: "Typo fixes are quick wins with high merge rate"
 tags: [generic, typo, quick-win]

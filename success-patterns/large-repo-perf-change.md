@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-perf-change
 description: "Large repos require perf review"
 tags: [large-repo, success]

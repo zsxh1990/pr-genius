@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-duplication
 description: "Large repos prevent duplication"
 tags: [large-repo, success]

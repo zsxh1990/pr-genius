@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-resilience
 description: "Small repos build resilience"
 tags: [generic, success]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-abstract-class
 description: "Abstract classes define base behavior"
 tags: [generic, abstract-class, oop]

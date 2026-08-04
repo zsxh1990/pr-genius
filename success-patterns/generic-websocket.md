@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-websocket
 description: "WebSocket enables real-time communication"
 tags: [generic, websocket, real-time]

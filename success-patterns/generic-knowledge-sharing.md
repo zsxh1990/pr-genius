@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-knowledge-sharing
 description: "Knowledge sharing improves team capability"
 tags: [generic, knowledge-sharing, collaboration]

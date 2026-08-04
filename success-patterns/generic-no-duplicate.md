@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-no-duplicate
 description: "Medium repos reject duplicates"
 tags: [generic, success]

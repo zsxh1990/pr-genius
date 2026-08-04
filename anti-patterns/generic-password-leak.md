@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-password-leak
 tags: [cron, scheduling, reliability]
 description: "PR introducing password leak vulnerability"

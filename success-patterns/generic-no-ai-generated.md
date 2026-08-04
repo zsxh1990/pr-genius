@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-no-ai-generated
 description: "Large repos reject AI-generated content"
 tags: [generic, success]

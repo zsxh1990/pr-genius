@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-technical-debt
 description: "Medium repos manage debt"
 tags: [generic, success]

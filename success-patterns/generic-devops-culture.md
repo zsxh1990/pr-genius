@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-devops-culture
 description: "DevOps culture improves delivery"
 tags: [generic, devops, culture]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-examples
 description: "Small repos reject PRs without examples"
 tags: [generic, anti-pattern]

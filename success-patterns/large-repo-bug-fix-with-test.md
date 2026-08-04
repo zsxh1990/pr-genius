@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-bug-fix-with-test
 description: "Bug fixes with regression tests merge faster"
 tags: [large-repo, bug-fix, test, regression]

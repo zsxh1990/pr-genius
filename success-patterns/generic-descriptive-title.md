@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-descriptive-title
 description: "Clear, descriptive PR titles improve merge rate"
 tags: [generic, title, best-practice]

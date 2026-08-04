@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-jotai
 description: "Jotai is primitive atomic state"
 tags: [generic, jotai, state-management]

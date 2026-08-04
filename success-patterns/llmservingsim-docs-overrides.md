@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: llmservingsim-docs-overrides
 tags: [cron, scheduling, reliability]
 description: "文档贡献：补充缺失的配置文档 + 示例"

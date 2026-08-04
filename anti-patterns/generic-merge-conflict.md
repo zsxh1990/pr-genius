@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-merge-conflict
 tags: [cron, scheduling, reliability]
 description: "PR with merge conflict"

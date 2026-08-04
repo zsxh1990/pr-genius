@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-rebase-main
 description: "Large repos require rebasing on main"
 tags: [large-repo, success]

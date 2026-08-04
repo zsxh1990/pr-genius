@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-corruption
 description: "Large repos prevent data corruption"
 tags: [large-repo, success]

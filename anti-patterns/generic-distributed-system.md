@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-distributed-system
 tags: [cron, scheduling, reliability]
 description: "PR忽视分布式系统复杂性"

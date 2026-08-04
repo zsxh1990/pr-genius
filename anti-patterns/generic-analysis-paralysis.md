@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-analysis-paralysis
 tags: [cron, scheduling, reliability]
 description: "PR with analysis paralysis"

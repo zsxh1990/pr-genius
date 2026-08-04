@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-feedback
 description: "Large repos reject PRs without feedback"
 tags: [generic, anti-pattern]

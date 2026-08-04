@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-export-control
 description: "Small repos comply with export controls"
 tags: [generic, success]

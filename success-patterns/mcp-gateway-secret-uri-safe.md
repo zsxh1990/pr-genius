@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: mcp-gateway-secret-uri-safe
 tags: [cron, scheduling, reliability]
 description: "安全修复：URI-safe 字符约束 + 测试覆盖"

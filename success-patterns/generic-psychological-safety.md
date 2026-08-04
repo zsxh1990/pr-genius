@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-psychological-safety
 description: "Psychological safety enables risk-taking"
 tags: [generic, psychological-safety, culture]

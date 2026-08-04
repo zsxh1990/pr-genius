@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-path-traversal
 tags: [cron, scheduling, reliability]
 description: "PR introducing path traversal vulnerability"

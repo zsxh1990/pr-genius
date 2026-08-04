@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-speculative-generality
 tags: [cron, scheduling, reliability]
 description: "PR with speculative generality"

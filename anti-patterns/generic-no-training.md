@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-training
 description: "Medium repos reject PRs without training"
 tags: [generic, anti-pattern]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-redirect
 tags: [cron, scheduling, reliability]
 description: "PR introducing open redirect vulnerability"

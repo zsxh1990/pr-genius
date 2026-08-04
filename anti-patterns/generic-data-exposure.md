@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-data-exposure
 tags: [cron, scheduling, reliability]
 description: "PR exposing sensitive data"

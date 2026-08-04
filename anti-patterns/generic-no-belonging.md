@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-belonging
 description: "Small repos reject PRs without belonging"
 tags: [generic, anti-pattern]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 tags: [anti-pattern, real-case]
 key: honcho-default-db-module-trap
 symptom: "FastAPI route 默认参数 `db: AsyncSession = db` 在生产环境报 'coroutine expected' 或 'no attribute execute'"

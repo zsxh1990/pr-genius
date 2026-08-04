@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-gold-plating
 tags: [cron, scheduling, reliability]
 description: "PR with gold plating"

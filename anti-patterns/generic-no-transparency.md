@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-transparency
 description: "Medium repos reject PRs without transparency"
 tags: [generic, anti-pattern]

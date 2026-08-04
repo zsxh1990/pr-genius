@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-recognition-large-repos-final
 tags: [cron, scheduling, reliability]
 description: "Large repos require recognition"

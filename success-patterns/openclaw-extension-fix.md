@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: openclaw-extension-fix
 tags: [cron, scheduling, reliability]
 description: "OpenClaw 扩展修复"

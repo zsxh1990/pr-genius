@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-perf-improvement
 description: "Medium repos accept perf improvements"
 tags: [generic, success]

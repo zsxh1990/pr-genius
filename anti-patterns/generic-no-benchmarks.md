@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-benchmarks
 description: "Small repos reject PRs without benchmarks"
 tags: [generic, anti-pattern]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-alerting
 description: "Alerting notifies on issues"
 tags: [generic, alerting, monitoring]

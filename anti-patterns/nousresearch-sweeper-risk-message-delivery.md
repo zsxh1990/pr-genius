@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: nousresearch-sweeper-risk-message-delivery
 tags: [cron, scheduling, reliability]
 description: "NousResearch PR 涉及消息投递"

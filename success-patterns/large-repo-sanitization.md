@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-sanitization
 description: "Large repos document sanitization"
 tags: [large-repo, success]

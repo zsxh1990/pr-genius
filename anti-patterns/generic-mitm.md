@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-mitm
 tags: [cron, scheduling, reliability]
 description: "PR introducing MITM vulnerability"

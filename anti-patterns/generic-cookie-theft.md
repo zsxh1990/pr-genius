@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-cookie-theft
 tags: [cron, scheduling, reliability]
 description: "PR introducing cookie theft vulnerability"

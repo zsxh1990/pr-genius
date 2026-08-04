@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-security
 description: "Large repos reject PRs without security"
 tags: [generic, anti-pattern]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-edge
 description: "Large repos document edge computing"
 tags: [large-repo, success]

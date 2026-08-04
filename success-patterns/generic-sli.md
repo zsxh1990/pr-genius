@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-sli
 description: "SLIs measure reliability"
 tags: [generic, sli, reliability]

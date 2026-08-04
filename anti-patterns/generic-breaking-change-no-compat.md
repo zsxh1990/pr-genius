@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-breaking-change-no-compat
 tags: [cron, scheduling, reliability]
 description: "Breaking changes without backward compatibility"

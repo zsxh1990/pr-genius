@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-timeout
 description: "Timeouts prevent hanging"
 tags: [generic, timeout, resilience]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-api-design
 description: "Good API design improves developer experience"
 tags: [generic, api, design]

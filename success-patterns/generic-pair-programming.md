@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-pair-programming
 description: "Pair programming shares knowledge"
 tags: [generic, pair-programming, collaboration]

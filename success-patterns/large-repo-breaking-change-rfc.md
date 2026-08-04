@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-breaking-change-rfc
 description: "Large repos require RFC for breaking changes — follow the process"
 tags: [large-repo, breaking-change, rfc, process]

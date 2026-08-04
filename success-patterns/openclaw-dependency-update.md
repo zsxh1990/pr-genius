@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: openclaw-dependency-update
 tags: [cron, scheduling, reliability]
 description: "OpenClaw 依赖更新"

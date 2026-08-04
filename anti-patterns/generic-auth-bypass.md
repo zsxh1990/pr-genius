@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-auth-bypass
 tags: [cron, scheduling, reliability]
 description: "PR introducing auth bypass"

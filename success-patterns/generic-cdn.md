@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-cdn
 description: "CDN improves global access speed"
 tags: [generic, cdn, performance]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-onboarding
 description: "Large repos reject PRs without onboarding"
 tags: [generic, anti-pattern]

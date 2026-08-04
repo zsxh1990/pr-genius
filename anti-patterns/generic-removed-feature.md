@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-removed-feature
 tags: [cron, scheduling, reliability]
 description: "PR using removed feature"

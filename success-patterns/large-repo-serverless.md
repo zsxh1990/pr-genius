@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-serverless
 description: "Large repos document serverless patterns"
 tags: [large-repo, success]

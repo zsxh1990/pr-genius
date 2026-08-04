@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: ai-generated-content
 tags: [cron, scheduling, reliability]
 description: "AI 生成内容被维护者标记为违反 AI 使用政策"

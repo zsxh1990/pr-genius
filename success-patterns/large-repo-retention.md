@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-retention
 description: "Large repos document retention"
 tags: [large-repo, success]

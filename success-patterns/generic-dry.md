@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-dry
 description: "DRY reduces code duplication"
 tags: [generic, dry, principle]

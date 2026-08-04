@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-fallback
 description: "Fallbacks provide default behavior"
 tags: [generic, fallback, resilience]

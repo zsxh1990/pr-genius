@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-resolve-conflicts
 description: "PRs with merge conflicts cannot be merged"
 tags: [generic, conflicts, blocker]

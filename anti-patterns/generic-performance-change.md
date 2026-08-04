@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-performance-change
 tags: [cron, scheduling, reliability]
 description: "PR with performance change"

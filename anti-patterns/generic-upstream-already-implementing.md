@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-upstream-already-implementing
 tags: [cron, scheduling, reliability]
 description: "Upstream already implementing same feature"

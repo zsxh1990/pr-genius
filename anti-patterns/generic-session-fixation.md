@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-session-fixation
 tags: [cron, scheduling, reliability]
 description: "PR introducing session fixation vulnerability"

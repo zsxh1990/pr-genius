@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-game-day
 description: "Game days practice incident response"
 tags: [generic, game-day, reliability]

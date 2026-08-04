@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-test-automation
 description: "Test automation saves time"
 tags: [generic, test-automation, efficiency]

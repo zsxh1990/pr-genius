@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-data-warehouse
 tags: [cron, scheduling, reliability]
 description: "PR忽视数据仓库复杂性"

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-reliability-change
 description: "Large repos require reliability testing"
 tags: [large-repo, success]

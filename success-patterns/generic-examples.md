@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-examples
 description: "Examples help users understand usage"
 tags: [generic, examples, documentation]

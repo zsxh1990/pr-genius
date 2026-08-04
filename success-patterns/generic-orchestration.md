@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-orchestration
 description: "Small repos use orchestration"
 tags: [generic, success]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: nousresearch-risk-security-boundary
 tags: [cron, scheduling, reliability]
 description: "NousResearch PR 涉及安全边界改动"

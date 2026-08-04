@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-resolve-conflicts
 description: "Large repos require conflict resolution"
 tags: [large-repo, success]

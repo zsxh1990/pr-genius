@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: nousresearch-comp-desktop
 tags: [cron, scheduling, reliability]
 description: "NousResearch 桌面端 PR 风险较高"

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-god-class
 tags: [cron, scheduling, reliability]
 description: "PR with god class"

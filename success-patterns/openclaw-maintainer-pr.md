@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: openclaw-maintainer-pr
 tags: [cron, scheduling, reliability]
 description: "OpenClaw Maintainer PR"

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-autonomy
 description: "Large repos reject PRs without autonomy"
 tags: [generic, anti-pattern]

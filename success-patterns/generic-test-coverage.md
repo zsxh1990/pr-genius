@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-test-coverage
 description: "Adding tests improves merge rate"
 tags: [generic, test, coverage]

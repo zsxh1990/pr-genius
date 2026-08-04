@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-singleton
 tags: [cron, scheduling, reliability]
 description: "PR with singleton pattern"

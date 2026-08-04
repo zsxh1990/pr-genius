@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-message-queue
 description: "Message queues decouple components"
 tags: [generic, message-queue, architecture]

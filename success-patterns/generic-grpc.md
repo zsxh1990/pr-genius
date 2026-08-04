@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-grpc
 description: "gRPC is high-performance RPC"
 tags: [generic, grpc, api]

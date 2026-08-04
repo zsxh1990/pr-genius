@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-breaking-change-facebook-react
 tags: [cron, scheduling, reliability]
 description: "Facebook React rejects breaking changes without RFC"

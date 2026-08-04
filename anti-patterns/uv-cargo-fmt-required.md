@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 tags: [anti-pattern, real-case]
 key: uv-cargo-fmt-required
 symptom: "CI 报错 Lint check failed / maintainer 评论 cargo fmt / rustfmt"

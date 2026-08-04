@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-sre-culture-large
 tags: [cron, scheduling, reliability]
 description: "Large repos require SRE culture"

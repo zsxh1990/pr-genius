@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-retry
 description: "Retries handle transient failures"
 tags: [generic, retry, resilience]

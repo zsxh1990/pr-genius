@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-onboarding-large
 tags: [cron, scheduling, reliability]
 description: "Large repos require onboarding"

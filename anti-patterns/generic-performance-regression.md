@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-performance-regression
 tags: [cron, scheduling, reliability]
 description: "PR causing performance regression"

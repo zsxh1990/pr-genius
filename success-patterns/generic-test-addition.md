@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-test-addition
 description: "Test additions are low-risk and welcome in most repos"
 tags: [generic, test, low-risk]

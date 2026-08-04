@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-coaching
 description: "Small repos reject PRs without coaching"
 tags: [generic, anti-pattern]

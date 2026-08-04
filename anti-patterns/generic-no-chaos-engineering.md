@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-chaos-engineering
 description: "Medium repos reject PRs without chaos testing"
 tags: [generic, anti-pattern]

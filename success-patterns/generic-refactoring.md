@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-refactoring
 description: "Medium repos refactor"
 tags: [generic, success]

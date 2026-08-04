@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-dco
 description: "Repos requiring DCO reject PRs without Signed-off-by"
 tags: [generic, anti-pattern, dco]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-integration-testing
 description: "Integration tests verify component interactions"
 tags: [generic, integration-testing, quality]

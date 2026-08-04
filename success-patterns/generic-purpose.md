@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-purpose
 description: "Purpose improves motivation"
 tags: [generic, purpose, culture]

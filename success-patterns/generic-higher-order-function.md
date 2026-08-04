@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-higher-order-function
 description: "HOFs take or return functions"
 tags: [generic, hof, paradigm]

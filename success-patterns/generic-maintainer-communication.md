@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-maintainer-communication
 description: "Small repos value communication"
 tags: [generic, success]

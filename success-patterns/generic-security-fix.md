@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-security-fix
 description: "Security fixes are high priority and merge quickly"
 tags: [generic, security, high-priority]

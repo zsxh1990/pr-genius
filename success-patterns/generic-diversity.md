@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-diversity
 description: "Diversity improves innovation"
 tags: [generic, diversity, culture]

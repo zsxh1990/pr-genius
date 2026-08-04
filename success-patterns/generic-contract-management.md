@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-contract-management
 description: "Small repos manage contracts"
 tags: [generic, success]

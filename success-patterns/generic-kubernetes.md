@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-kubernetes
 description: "Kubernetes orchestrates containers"
 tags: [generic, kubernetes, orchestration]

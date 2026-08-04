@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-traffic-management
 description: "Small repos manage traffic"
 tags: [generic, success]

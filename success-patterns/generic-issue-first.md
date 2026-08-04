@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-issue-first
 description: "Medium repos prefer issue first"
 tags: [generic, success]

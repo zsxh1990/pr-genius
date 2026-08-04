@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-innovation
 description: "Small repos reject PRs without innovation"
 tags: [generic, anti-pattern]

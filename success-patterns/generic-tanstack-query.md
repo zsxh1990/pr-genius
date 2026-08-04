@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-tanstack-query
 description: "TanStack Query manages server state"
 tags: [generic, tanstack-query, state-management]

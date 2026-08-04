@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-dashboard
 description: "Medium repos reject PRs without dashboard"
 tags: [generic, anti-pattern]

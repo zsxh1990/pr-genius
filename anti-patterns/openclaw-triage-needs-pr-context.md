@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: openclaw-triage-needs-pr-context
 tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 缺少上下文"

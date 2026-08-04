@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-blockchain
 description: "Large repos document blockchain patterns"
 tags: [large-repo, success]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-focused-pr
 description: "Large repos prefer focused PRs"
 tags: [large-repo, success]

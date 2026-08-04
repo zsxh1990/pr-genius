@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-work-life-balance
 description: "Work-life balance prevents burnout"
 tags: [generic, work-life-balance, culture]

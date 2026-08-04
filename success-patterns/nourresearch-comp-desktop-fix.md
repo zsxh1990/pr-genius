@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: nourresearch-comp-desktop-fix
 tags: [cron, scheduling, reliability]
 description: "NousResearch Desktop 组件修复"

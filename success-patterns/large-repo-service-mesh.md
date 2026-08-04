@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-service-mesh
 description: "Large repos use service mesh"
 tags: [large-repo, success]

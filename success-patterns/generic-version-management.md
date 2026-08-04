@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-version-management
 description: "Medium repos manage versions"
 tags: [generic, success]

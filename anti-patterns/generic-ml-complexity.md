@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-ml-complexity
 tags: [cron, scheduling, reliability]
 description: "PR忽视ML复杂性"

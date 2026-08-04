@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-logging
 description: "Medium repos reject PRs without logging"
 tags: [generic, anti-pattern]

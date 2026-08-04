@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-secret-management
 description: "Secret management protects sensitive data"
 tags: [generic, secret-management, security]

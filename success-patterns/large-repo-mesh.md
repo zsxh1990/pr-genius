@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-mesh
 description: "Large repos document mesh patterns"
 tags: [large-repo, success]

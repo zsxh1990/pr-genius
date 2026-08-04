@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-rxjs
 description: "RxJS implements reactive programming"
 tags: [generic, rxjs, reactive]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-coaching
 description: "Coaching improves performance"
 tags: [generic, coaching, culture]

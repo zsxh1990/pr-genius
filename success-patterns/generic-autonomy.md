@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-autonomy
 description: "Autonomy improves motivation"
 tags: [generic, autonomy, culture]

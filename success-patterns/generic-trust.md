@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-trust
 description: "Trust improves collaboration"
 tags: [generic, trust, culture]

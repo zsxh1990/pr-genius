@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-continuous-improvement
 description: "Medium repos reject PRs without improvement"
 tags: [generic, anti-pattern]

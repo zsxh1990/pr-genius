@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-pr-description
 description: "Detailed PR descriptions improve review speed"
 tags: [generic, description, best-practice]

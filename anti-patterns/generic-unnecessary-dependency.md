@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-unnecessary-dependency
 tags: [cron, scheduling, reliability]
 description: "PR adding unnecessary dependency"

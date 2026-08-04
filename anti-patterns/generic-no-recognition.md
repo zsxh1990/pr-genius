@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-recognition
 description: "Small repos reject PRs without recognition"
 tags: [generic, anti-pattern]

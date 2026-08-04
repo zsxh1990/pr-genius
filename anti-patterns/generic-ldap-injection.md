@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-ldap-injection
 tags: [cron, scheduling, reliability]
 description: "PR introducing LDAP injection vulnerability"

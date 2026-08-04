@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-no-reinventing
 description: "Large repos reject reinventing the wheel"
 tags: [large-repo, success]

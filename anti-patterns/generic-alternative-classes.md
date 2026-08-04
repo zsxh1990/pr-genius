@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-alternative-classes
 tags: [cron, scheduling, reliability]
 description: "PR with alternative classes"

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-breaking-change-scikit-learn
 tags: [cron, scheduling, reliability]
 description: "Scikit-learn rejects breaking changes without discussion"

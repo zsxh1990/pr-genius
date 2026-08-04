@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-license
 description: "Large repos reject PRs without license"
 tags: [generic, anti-pattern]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-low-value-contribution
 tags: [cron, scheduling, reliability]
 description: "Low value contribution"

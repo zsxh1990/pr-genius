@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-data-quality
 description: "Large repos document data quality"
 tags: [large-repo, success]

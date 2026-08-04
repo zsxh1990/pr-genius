@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-data-filtering
 tags: [cron, scheduling, reliability]
 description: "PR忽视数据过滤"

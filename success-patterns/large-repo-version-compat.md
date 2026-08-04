@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-version-compat
 description: "Large repos require version compatibility"
 tags: [large-repo, success]

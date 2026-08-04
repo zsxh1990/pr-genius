@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-separation-of-concerns
 description: "Separation of concerns improves maintainability"
 tags: [generic, separation-of-concerns, architecture]

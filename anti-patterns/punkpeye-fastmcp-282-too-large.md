@@ -1,4 +1,5 @@
----key: punkpeye-fastmcp-282-too-large
+---
+key: punkpeye-fastmcp-282-too-large
 type: Anti-Pattern
 repo: punkpeye/fastmcp
 created: 2026-07-29

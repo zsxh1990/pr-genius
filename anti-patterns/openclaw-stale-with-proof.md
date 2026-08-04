@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: openclaw-stale-with-proof
 tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 有 proof 但被标记 stale"

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-no-low-value
 description: "Large repos reject low-value contributions"
 tags: [generic, success]

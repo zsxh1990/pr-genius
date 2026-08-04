@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-test-driven-development
 description: "TDD ensures code meets requirements"
 tags: [generic, tdd, methodology]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-serverless
 description: "Serverless reduces operational overhead"
 tags: [generic, serverless, cloud]

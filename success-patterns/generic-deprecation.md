@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-deprecation
 description: "Deprecating old features gracefully is good practice"
 tags: [generic, deprecation, migration]

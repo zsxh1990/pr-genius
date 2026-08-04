@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-cloud
 description: "Large repos document cloud patterns"
 tags: [large-repo, success]

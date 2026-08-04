@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-readme-large
 tags: [cron, scheduling, reliability]
 description: "Large repos require README"

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-devops-culture
 description: "Large repos reject PRs without DevOps culture"
 tags: [generic, anti-pattern]

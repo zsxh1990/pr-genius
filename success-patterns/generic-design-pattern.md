@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-design-pattern
 description: "Design patterns solve common problems"
 tags: [generic, design-pattern, architecture]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-lint-failure
 tags: [cron, scheduling, reliability]
 description: "PR with lint failure"

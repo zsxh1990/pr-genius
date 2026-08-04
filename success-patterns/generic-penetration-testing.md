@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-penetration-testing
 description: "Penetration testing finds security weaknesses"
 tags: [generic, penetration-testing, security]

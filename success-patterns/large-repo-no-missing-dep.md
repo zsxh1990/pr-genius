@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-no-missing-dep
 description: "Large repos reject missing dependencies"
 tags: [large-repo, success]

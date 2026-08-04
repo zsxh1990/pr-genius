@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-bug-fix
 description: "Bug fixes with clear reproduction steps have high merge rate"
 tags: [generic, bug-fix, high-success-rate]

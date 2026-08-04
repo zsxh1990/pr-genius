@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-composition
 description: "Composition combines functions"
 tags: [generic, composition, paradigm]

@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-work-life-balance-large-repos
 tags: [cron, scheduling, reliability]
 description: "Large repos require work-life balance"

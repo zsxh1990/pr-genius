@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-config-improvement
 description: "Configuration improvements add flexibility"
 tags: [generic, config, flexibility]

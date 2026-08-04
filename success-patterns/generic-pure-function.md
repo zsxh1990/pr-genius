@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-pure-function
 description: "Pure functions have no side effects"
 tags: [generic, pure-function, paradigm]

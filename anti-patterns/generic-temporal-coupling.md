@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-temporal-coupling
 tags: [cron, scheduling, reliability]
 description: "PR with temporal coupling"

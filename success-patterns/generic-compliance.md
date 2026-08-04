@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-compliance
 description: "Large repos document compliance"
 tags: [generic, success]

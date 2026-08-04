@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-discovery
 description: "Large repos document data discovery"
 tags: [large-repo, success]

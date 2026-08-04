@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: nousresearch-sweeper-implemented-on-main
 tags: [cron, scheduling, reliability]
 description: "NousResearch PR 已在 main 实现"

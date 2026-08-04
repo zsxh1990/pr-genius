@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-rfc
 description: "Medium repos reject PRs without RFC"
 tags: [generic, anti-pattern]

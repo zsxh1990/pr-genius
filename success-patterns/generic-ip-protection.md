@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-ip-protection
 description: "Small repos protect IP"
 tags: [generic, success]

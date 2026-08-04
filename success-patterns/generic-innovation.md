@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-innovation
 description: "Small repos innovate"
 tags: [generic, success]

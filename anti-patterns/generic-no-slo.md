@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-slo
 description: "Large repos reject PRs without SLO"
 tags: [generic, anti-pattern]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-functor
 description: "Functors map over values"
 tags: [generic, functor, paradigm]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-lineage
 description: "Large repos document data lineage"
 tags: [large-repo, success]

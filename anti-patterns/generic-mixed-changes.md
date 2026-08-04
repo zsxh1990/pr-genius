@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-mixed-changes
 tags: [cron, scheduling, reliability]
 description: "PR with mixed changes"

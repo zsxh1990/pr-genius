@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-promise
 description: "Promises manage async operations"
 tags: [generic, promise, async]

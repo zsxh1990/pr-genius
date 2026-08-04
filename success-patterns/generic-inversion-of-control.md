@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-inversion-of-control
 description: "Inversion of control improves flexibility"
 tags: [generic, ioc, architecture]

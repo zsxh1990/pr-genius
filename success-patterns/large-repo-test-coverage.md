@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-test-coverage
 description: "Large repos value test coverage improvements"
 tags: [large-repo, test, coverage, quality]

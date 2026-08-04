@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-license-compliance
 description: "Small repos comply with licenses"
 tags: [generic, success]

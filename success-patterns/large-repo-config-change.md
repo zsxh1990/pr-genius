@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-config-change
 description: "Large repos document config changes"
 tags: [large-repo, success]

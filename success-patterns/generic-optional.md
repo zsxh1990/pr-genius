@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-optional
 description: "Optionals handle absence safely"
 tags: [generic, optional, type-system]

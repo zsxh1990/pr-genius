@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-blameless
 description: "Medium repos reject PRs without blameless culture"
 tags: [generic, anti-pattern]

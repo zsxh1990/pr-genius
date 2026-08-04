@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-team
 description: "Teams achieve more than individuals"
 tags: [generic, team, culture]

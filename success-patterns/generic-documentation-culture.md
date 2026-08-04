@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-documentation-culture
 description: "Documentation culture preserves knowledge"
 tags: [generic, documentation, culture]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-filtering
 description: "Large repos document filtering"
 tags: [large-repo, success]

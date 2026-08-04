@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-interface
 description: "Interfaces define contracts"
 tags: [generic, interface, type-system]

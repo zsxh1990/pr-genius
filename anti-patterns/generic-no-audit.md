@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-audit
 description: "Medium repos reject PRs without audit"
 tags: [generic, anti-pattern]

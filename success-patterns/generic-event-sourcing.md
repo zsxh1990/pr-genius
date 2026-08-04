@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-event-sourcing
 description: "Event sourcing tracks all changes"
 tags: [generic, event-sourcing, architecture]

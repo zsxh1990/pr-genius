@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-defaults
 description: "Large repos set defaults"
 tags: [large-repo, success]

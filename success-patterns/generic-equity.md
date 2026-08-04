@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-equity
 description: "Equity improves fairness"
 tags: [generic, equity, culture]

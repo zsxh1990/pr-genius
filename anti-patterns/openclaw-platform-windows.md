@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: openclaw-platform-windows
 tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 涉及 Windows 平台兼容性"

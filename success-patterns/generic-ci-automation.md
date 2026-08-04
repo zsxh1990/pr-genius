@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-ci-automation
 description: "Small repos automate CI"
 tags: [generic, success]

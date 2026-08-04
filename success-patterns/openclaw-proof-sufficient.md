@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: openclaw-proof-sufficient
 tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 提供充分的 proof of work"

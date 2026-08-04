@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-api-change
 description: "Large repos document API changes"
 tags: [large-repo, success]

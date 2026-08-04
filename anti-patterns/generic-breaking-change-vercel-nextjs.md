@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-breaking-change-vercel-nextjs
 tags: [cron, scheduling, reliability]
 description: "Vercel Next.js rejects breaking changes without discussion"

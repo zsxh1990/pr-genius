@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-belonging
 description: "Belonging improves retention"
 tags: [generic, belonging, culture]

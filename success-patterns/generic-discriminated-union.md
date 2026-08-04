@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-discriminated-union
 description: "Discriminated unions model variants"
 tags: [generic, discriminated-union, type-system]

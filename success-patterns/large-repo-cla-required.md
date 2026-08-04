@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-cla-required
 description: "Large repos require CLA"
 tags: [large-repo, success]

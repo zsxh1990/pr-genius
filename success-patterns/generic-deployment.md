@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-deployment
 description: "Medium repos manage deployments"
 tags: [generic, success]

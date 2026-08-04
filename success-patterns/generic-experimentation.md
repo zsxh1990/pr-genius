@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-experimentation
 description: "Large repos experiment"
 tags: [generic, success]

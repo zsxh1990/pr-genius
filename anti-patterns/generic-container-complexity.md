@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-container-complexity
 tags: [cron, scheduling, reliability]
 description: "PR忽视容器复杂性"

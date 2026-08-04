@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-collaboration
 description: "Small repos reject PRs without collaboration"
 tags: [generic, anti-pattern]

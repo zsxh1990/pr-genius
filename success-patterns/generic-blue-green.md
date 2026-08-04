@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-blue-green
 description: "Small repos use blue-green"
 tags: [generic, success]

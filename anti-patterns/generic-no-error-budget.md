@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-error-budget
 description: "Small repos reject PRs without error budget"
 tags: [generic, anti-pattern]

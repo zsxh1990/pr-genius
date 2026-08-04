@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-leadership-large-repos-final
 tags: [cron, scheduling, reliability]
 description: "Large repos require leadership"

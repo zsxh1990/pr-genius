@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-cla
 description: "Small repos reject PRs without CLA"
 tags: [generic, anti-pattern]

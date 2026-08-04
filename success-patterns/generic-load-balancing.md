@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-load-balancing
 description: "Large repos use load balancing"
 tags: [generic, success]

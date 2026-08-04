@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: large-repo-deploy-change
 description: "Large repos require deploy review"
 tags: [large-repo, success]

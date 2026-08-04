@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: openclaw-missing-proof
 tags: [cron, scheduling, reliability]
 description: "OpenClaw PR 缺少 proof of work"

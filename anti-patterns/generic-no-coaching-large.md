@@ -1,4 +1,5 @@
----type: Anti-Pattern
+---
+type: Anti-Pattern
 key: generic-no-coaching-large
 tags: [cron, scheduling, reliability]
 description: "Large repos require coaching"

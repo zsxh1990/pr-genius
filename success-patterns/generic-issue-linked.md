@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-issue-linked
 description: "PRs linked to issues have higher merge rate"
 tags: [generic, issue-link, best-practice]

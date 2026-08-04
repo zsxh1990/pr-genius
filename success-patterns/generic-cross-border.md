@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-cross-border
 description: "Medium repos handle cross-border"
 tags: [generic, success]

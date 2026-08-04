@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-health-checks
 description: "Large repos have health checks"
 tags: [generic, success]

@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-currying
 description: "Currying transforms functions"
 tags: [generic, currying, paradigm]

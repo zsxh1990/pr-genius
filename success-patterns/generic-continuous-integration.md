@@ -1,4 +1,5 @@
----type: Success Pattern
+---
+type: Success Pattern
 key: generic-continuous-integration
 description: "CI automates testing and deployment"
 tags: [generic, ci, automation]
