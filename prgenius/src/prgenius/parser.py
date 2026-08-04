@@ -48,6 +48,9 @@ def _unquote(s: str) -> str:
 
 def _coerce(v: str):
     """Coerce a scalar string to a Python value."""
+    # Strip inline YAML comments (e.g. "0.15  # comment" → "0.15")
+    if isinstance(v, str) and "  #" in v:
+        v = v[:v.index("  #")].strip()
     if v == "" or v in ("null", "~"):
         return None
     if v == "true":
