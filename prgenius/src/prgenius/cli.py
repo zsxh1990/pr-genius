@@ -720,6 +720,7 @@ def main(argv: list[str] | None = None) -> int:
     hv.add_argument("number", nargs="?", type=int, help="PR number")
     hv.add_argument("--type", "-t", choices=["anti-pattern", "lesson"], default="anti-pattern", help="输出类型")
     hv.add_argument("--output", "-o", help="输出文件路径")
+    hv.add_argument("--repo-root", help="Path to pr-genius repo root")
     hv.set_defaults(func=cmd_harvest)
 
     # ---- profile ----
@@ -727,11 +728,13 @@ def main(argv: list[str] | None = None) -> int:
     p_get_sub = p_get.add_subparsers(dest="profile_cmd", required=True)
     pp = p_get_sub.add_parser("get", help="Get one profile")
     pp.add_argument("repo", help="org/name")
+    pp.add_argument("--repo-root", help="Path to pr-genius repo root")
     pp.set_defaults(func=cmd_profile_get)
     pw = p_get_sub.add_parser("writeback", help="Show profile writeback suggestions (dry-run)")
     pw.add_argument("--author", required=True, help="GitHub username")
     pw.add_argument("--mode", choices=["suggest", "auto"], default="suggest", help="Writeback mode")
     pw.add_argument("--format", choices=["text", "json"], default="text", help="Output format")
+    pw.add_argument("--repo-root", help="Path to pr-genius repo root")
     pw.set_defaults(func=cmd_profile_writeback)
 
     # ---- case ----
