@@ -32,7 +32,9 @@ desktop.ini
 .tmp/
 cache/
 *.log
-/data/  # validate.py --snapshot output (regenerated on each run)
+# validate.py --snapshot output (regenerated on each run)
+/data/
+/prgenius/data/
 
 # Sensitive
 secrets.txt
