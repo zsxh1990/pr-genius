@@ -58,6 +58,7 @@ agent_guidelines_evidence:
   maintainer_vibe: https://github.com/HolmesGPT/holmesgpt/pulls?q=is%3Apr+is%3Aclosed
   external_merge_rate_30: https://github.com/HolmesGPT/holmesgpt/pulls?q=is%3Apr+is%3Aclosed
   close_keywords: https://github.com/HolmesGPT/holmesgpt/pulls?q=is%3Apr+is%3Aclosed
+  require_signed_off: https://github.com/HolmesGPT/holmesgpt/blob/main/CONTRIBUTING.md
 ---
 
 # HolmesGPT/holmesgpt PR 模式分析

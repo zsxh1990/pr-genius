@@ -57,6 +57,7 @@ agent_guidelines_evidence:
   maintainer_vibe: https://github.com/pallets/flask/pulls?q=is%3Apr+is%3Aclosed
   external_merge_rate_30: https://github.com/pallets/flask/pulls?q=is%3Apr+is%3Aclosed
   close_keywords: https://github.com/pallets/flask/pulls?q=is%3Apr+is%3Aclosed+label%3Ainvalid
+  human_required_in: https://github.com/pallets/flask/blob/main/CONTRIBUTING.md
 ---
 
 # pallets/flask PR 模式分析

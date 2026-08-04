@@ -197,3 +197,21 @@ NousResearch scout-phase。**首次 PR 避免碰 cron**（除非有完整时区 
 - ✅ rounds + close_decision
 - ✅ agent_guidelines_applied
 - ✅ cron PR 模板（时区 + DST + 重启 + 回滚）
+
+
+## Related Anti-Patterns
+
+- `nousresearch-sweeper-not-planned`
+- `nousresearch-risk-session-state`
+- `nousresearch-sweeper-risk-message-delivery`
+- `nousresearch-duplicate-pr`
+- `nousresearch-sweeper-blast-moderate`
+- `nousresearch-comp-desktop`
+- `nousresearch-sweeper-blast-broad`
+- `nousresearch-sweeper-implemented-on-main`
+- `nousresearch-provider-specific`
+- `nousresearch-sweeper-risk-caching`
+- `nousresearch-risk-platform-windows`
+- `nousresearch-sweeper-blast-contained`
+- `nousresearch-tool-specific`
+- `nousresearch-risk-security-boundary`

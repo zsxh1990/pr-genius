@@ -129,3 +129,7 @@ links:
 - [astral-sh-uv 仓 Profile](../index.md)
 - [OKF bundle 根入口](../index.md)
 - [uv 调研完整数据](../../uv-pr-knowledge/report.md)
+
+## Related Anti-Patterns
+
+- `uv-cargo-fmt-required`

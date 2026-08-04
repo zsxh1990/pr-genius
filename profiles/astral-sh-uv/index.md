@@ -58,6 +58,8 @@ agent_guidelines_evidence:
   maintainer_vibe: https://github.com/astral-sh/uv/pulls?q=is%3Apr+is%3Aclosed
   external_merge_rate_30: https://github.com/astral-sh/uv/pulls?q=is%3Apr+is%3Aclosed
   close_keywords: https://github.com/astral-sh/uv/pulls?q=is%3Apr+is%3Aclosed
+  ai_assisted_disclosure: https://github.com/astral-sh/uv/blob/main/CONTRIBUTING.md
+  human_required_in: https://github.com/astral-sh/uv/blob/main/CONTRIBUTING.md
 ---
 
 

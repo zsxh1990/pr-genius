@@ -113,3 +113,8 @@ next_action: "等 punkpeye 授权 CI + 真实 review"
 
 - [fastmcp 仓 Profile](../index.md)
 - [OKF bundle 根入口](../index.md)
+
+## Related Anti-Patterns
+
+- `punkpeye-fastmcp-282-too-large`
+- `punkpeye-awesome-mcp-devtools-248-pending`

@@ -64,6 +64,8 @@ agent_guidelines_evidence:
   maintainer_vibe: https://github.com/NousResearch/hermes-agent/pulls?q=is%3Apr+is%3Aclosed
   external_merge_rate_30: https://github.com/NousResearch/hermes-agent/pulls?q=is%3Apr+is%3Aclosed
   close_keywords: https://github.com/NousResearch/hermes-agent/pulls?q=is%3Apr+is%3Aclosed
+  supply_chain_strict: https://github.com/NousResearch/hermes-agent/blob/main/CONTRIBUTING.md
+  cross_platform_required: https://github.com/NousResearch/hermes-agent/blob/main/CONTRIBUTING.md
 ---
 
 # NousResearch/hermes-agent

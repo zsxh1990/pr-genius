@@ -44,3 +44,8 @@ rounds:
 **Anti-pattern**: None — straightforward docs fix.
 
 **Success Factor**: Clear gap identification, minimal change, no risk.
+
+
+## Related Anti-Patterns
+
+- `ai-generated-content`

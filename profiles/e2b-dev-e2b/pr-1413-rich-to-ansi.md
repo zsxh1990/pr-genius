@@ -145,3 +145,7 @@ next_action: "已合并；与 #1458 对比: refactor + stdlib 减法 走通，�
 - [E2B 仓 Profile](../index.md)
 - [OKF bundle 根入口](../index.md)
 - [MEMORY.md Ponytail 内化守则 §4 "stdlib 有就用"](../../../MEMORY.md)
+
+## Related Anti-Patterns
+
+- `e2b-feature-not-adding-canned-response`

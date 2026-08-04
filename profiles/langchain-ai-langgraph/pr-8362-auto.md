@@ -44,3 +44,8 @@ close_decision:
 PR #8362 by ccurme — open.
 
 Signals: is_feature, has_reviews
+
+
+## Related Anti-Patterns
+
+- `ai-generated-content`

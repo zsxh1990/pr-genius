@@ -186,3 +186,20 @@ NousResearch scout-phase。**首次 PR 避免碰桌面端**（除非有完整跨
 - ✅ 双 anti-pattern 关联
 - ✅ 桌面端 PR 模板
 - ✅ agent_guidelines_applied
+
+
+## Related Anti-Patterns
+
+- `nousresearch-sweeper-not-planned`
+- `nousresearch-risk-session-state`
+- `nousresearch-sweeper-risk-message-delivery`
+- `nousresearch-cron-risk`
+- `nousresearch-duplicate-pr`
+- `nousresearch-sweeper-blast-moderate`
+- `nousresearch-sweeper-blast-broad`
+- `nousresearch-sweeper-implemented-on-main`
+- `nousresearch-provider-specific`
+- `nousresearch-sweeper-risk-caching`
+- `nousresearch-sweeper-blast-contained`
+- `nousresearch-tool-specific`
+- `nousresearch-risk-security-boundary`

@@ -236,3 +236,25 @@ ClawSweeper 主动 ─► scope 路由
 - ✅ 4 个 evidence_urls（含 ClawSweeper close 原文链接）
 - ✅ close_decision + actor=clawsweeper[bot]
 - ✅ 3-PR 对比表（close 触发者 × 延迟 × 原因）
+
+
+## Related Anti-Patterns
+
+- `openclaw-platform-windows`
+- `openclaw-compatibility-risk`
+- `openclaw-sweeper-not-planned`
+- `openclaw-missing-proof`
+- `openclaw-merge-risk-blast-contained`
+- `openclaw-merge-risk-caching`
+- `openclaw-triage-needs-pr-context`
+- `openclaw-waiting-on-author`
+- `openclaw-availability-risk`
+- `openclaw-refactor-risk`
+- `openclaw-needs-real-behavior-proof`
+- `openclaw-duplicate-pr`
+- `openclaw-message-delivery-risk`
+- `openclaw-session-state-risk`
+- `openclaw-auth-provider-risk`
+- `openclaw-security-boundary-risk`
+- `openclaw-stale-pr`
+- `openclaw-stale-with-proof`

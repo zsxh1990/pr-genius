@@ -37,6 +37,7 @@ agent_guidelines_evidence:
   allow_unsolicited_pr: https://github.com/punkpeye
   maintainer_vibe: https://github.com/punkpeye
 
+  ai_policy: https://github.com/punkpeye/awesome-mcp-servers/blob/main/CONTRIBUTING.md
 ---
 
 # punkpeye/mcp-proxy

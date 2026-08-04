@@ -59,6 +59,10 @@ agent_guidelines_evidence:
   maintainer_vibe: https://github.com/e2b-dev/E2B/pulls?q=is%3Apr+is%3Aclosed
   external_merge_rate_30: https://github.com/e2b-dev/E2B/pulls?q=is%3Apr+is%3Aclosed
   close_keywords: https://github.com/e2b-dev/E2B/pulls?q=is%3Apr+is%3Aclosed
+  require_cla: https://github.com/e2b-dev/e2b/blob/main/CONTRIBUTING.md
+  require_changeset: https://github.com/e2b-dev/e2b/blob/main/CONTRIBUTING.md
+  ai_assisted_disclosure: https://github.com/e2b-dev/e2b/blob/main/CONTRIBUTING.md
+  human_required_in: https://github.com/e2b-dev/e2b/blob/main/CONTRIBUTING.md
 ---
 
 

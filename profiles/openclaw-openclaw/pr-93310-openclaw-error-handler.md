@@ -210,3 +210,25 @@ zsxh1990 提给 OpenClaw 的功能 PR：通过 `OPENCLAW_ERROR_HANDLER` 环境�
 - ✅ close_decision 完整
 - ✅ agent_guidelines_applied 对照 OpenClaw profile
 - ⚠️ confidence=high（基于本地 deep_read.jsonl + report.md 二手验证，GitHub API 限流期间未做实时核对）
+
+
+## Related Anti-Patterns
+
+- `openclaw-platform-windows`
+- `openclaw-compatibility-risk`
+- `openclaw-sweeper-not-planned`
+- `openclaw-missing-proof`
+- `openclaw-merge-risk-blast-contained`
+- `openclaw-merge-risk-caching`
+- `openclaw-triage-needs-pr-context`
+- `openclaw-waiting-on-author`
+- `openclaw-availability-risk`
+- `openclaw-refactor-risk`
+- `openclaw-needs-real-behavior-proof`
+- `openclaw-duplicate-pr`
+- `openclaw-message-delivery-risk`
+- `openclaw-session-state-risk`
+- `openclaw-auth-provider-risk`
+- `openclaw-security-boundary-risk`
+- `openclaw-stale-pr`
+- `openclaw-stale-with-proof`

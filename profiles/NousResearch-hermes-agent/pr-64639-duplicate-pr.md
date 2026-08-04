@@ -153,3 +153,21 @@ gh pr list --repo NousResearch/hermes-agent --state closed --limit 100 \
 - ✅ rounds + close_decision
 - ✅ agent_guidelines_applied
 - ✅ 实操 checklist
+
+
+## Related Anti-Patterns
+
+- `nousresearch-sweeper-not-planned`
+- `nousresearch-risk-session-state`
+- `nousresearch-sweeper-risk-message-delivery`
+- `nousresearch-cron-risk`
+- `nousresearch-sweeper-blast-moderate`
+- `nousresearch-comp-desktop`
+- `nousresearch-sweeper-blast-broad`
+- `nousresearch-sweeper-implemented-on-main`
+- `nousresearch-provider-specific`
+- `nousresearch-sweeper-risk-caching`
+- `nousresearch-risk-platform-windows`
+- `nousresearch-sweeper-blast-contained`
+- `nousresearch-tool-specific`
+- `nousresearch-risk-security-boundary`

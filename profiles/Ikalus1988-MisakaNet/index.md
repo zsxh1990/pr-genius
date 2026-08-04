@@ -41,6 +41,7 @@ agent_guidelines_evidence:
   maintainer_vibe: https://github.com/Ikalus1988/MisakaNet/pulls?q=is%3Apr+is%3Aclosed
   external_merge_rate_30: https://github.com/Ikalus1988/MisakaNet/pulls?q=is%3Apr+is%3Aclosed
   close_keywords: https://github.com/Ikalus1988/MisakaNet/pulls?q=is%3Apr+is%3Aclosed
+  require_signed_off: https://github.com/Ikalus1988/MisakaNet/blob/main/CONTRIBUTING.md
 ---
 
 ## PR 文化

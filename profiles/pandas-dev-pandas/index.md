@@ -61,6 +61,7 @@ agent_guidelines_evidence:
   ci_first_run_needs_approval: https://github.com/pandas-dev/pandas/blob/main/.github/workflows/code-checks.yml
   external_merge_rate_30: https://github.com/pandas-dev/pandas/pulls?q=is%3Apr+is%3Aclosed
   close_keywords: https://github.com/pandas-dev/pandas/pulls?q=is%3Apr+is%3Aclosed+label%3A%22Needs+Info%22
+  human_required_in: https://github.com/pandas-dev/pandas/blob/main/CONTRIBUTING.md
 ---
 
 # pandas-dev/pandas PR 模式分析

@@ -203,3 +203,7 @@ zsxh1990 在 7/1 发条："Friendly check-in — addressed all CodeRabbit findin
 - [OKF bundle 根入口](../index.md)
 - [MEMORY.md §8 PR 默认参数陷阱](../../../MEMORY.md)
 - [MEMORY.md §9 select().scalars().all() ORM anti-pattern](../../../MEMORY.md)
+
+## Related Anti-Patterns
+
+- `honcho-default-db-module-trap`

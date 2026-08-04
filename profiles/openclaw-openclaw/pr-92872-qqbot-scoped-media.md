@@ -192,3 +192,25 @@ QQBot 是 OpenClaw 8 个 channel 之一。OpenClaw 团队政策：**channel-spec
 - ✅ close_decision + actor=vincentkoc
 - ✅ agent_guidelines_applied
 - ✅ 跨案例对比表（#93310 vs #92872）
+
+
+## Related Anti-Patterns
+
+- `openclaw-platform-windows`
+- `openclaw-compatibility-risk`
+- `openclaw-sweeper-not-planned`
+- `openclaw-missing-proof`
+- `openclaw-merge-risk-blast-contained`
+- `openclaw-merge-risk-caching`
+- `openclaw-triage-needs-pr-context`
+- `openclaw-waiting-on-author`
+- `openclaw-availability-risk`
+- `openclaw-refactor-risk`
+- `openclaw-needs-real-behavior-proof`
+- `openclaw-duplicate-pr`
+- `openclaw-message-delivery-risk`
+- `openclaw-session-state-risk`
+- `openclaw-auth-provider-risk`
+- `openclaw-security-boundary-risk`
+- `openclaw-stale-pr`
+- `openclaw-stale-with-proof`

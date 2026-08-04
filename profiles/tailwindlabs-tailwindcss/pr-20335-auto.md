@@ -44,3 +44,8 @@ close_decision:
 PR #20335 by RobinMalfait — merged.
 
 Signals: none detected
+
+
+## Related Anti-Patterns
+
+- `ai-generated-content`
