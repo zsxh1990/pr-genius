@@ -64,3 +64,26 @@ updated: 2026-08-03
 | 2 | transition 告警 + 推荐行动 | ✅ |
 | 3 | Step Summary, Labels, 评论, Webhook, Issue | ✅ |
 | 4 | auto-ping, auto-rebase, abandon_candidate | ✅ |
+
+## Phase 5 ✅ v1.5.0 — Maintainer View (已合 branch, 待 PR 评审)
+
+| # | 待办 | 说明 | 状态 |
+|---|------|------|------|
+| 13 | maintainer_view 模块 | `maintainer_view.py` (427 行) — 5-action routing | ✅ |
+| 14 | review queue digest | `docs/maintainer/pr-review-queue.md` 示例 + checklist | ✅ |
+| 15 | MCP 暴露 maintainer tools | `mcp.py` +83 行 | ✅ |
+| 16 | maintainer_view 单元测试 | 20 测试，覆盖 5 actions + filters + next_step + e2e mock | ✅ |
+
+**安全边界**（学自 OpenClaw PR #93310 复盘）：
+- read-only / advisory-only
+- **never auto-close / auto-label / auto-comment / auto-merge**
+- `--write-digest` opt-in
+
+## Phase 6 🔄 v1.6.0 — Contributor View (计划中)
+
+| # | 待办 | 说明 | 状态 |
+|---|------|------|------|
+| 17 | contributor view 模块 | 共享 v1.5.0 tier / signals 基础设施 | 计划 |
+| 18 | persona-specific 决策层 | action / next_step / review_ready / blocking_signals | 计划 |
+| 19 | contributor unit tests | 跟 v1.5.0 测试同覆盖深度 | 计划 |
+| 20 | docs/contributor/ 示例 | 跟 v1.5.0 文档同结构 | 计划 |
