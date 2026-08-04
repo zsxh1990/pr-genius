@@ -756,10 +756,19 @@ def analyze_pr(
                 "priority": "P0",
             })
 
+    # Positive confirmation (borrowed from Cubic AI pattern)
+    if tier == "low_risk":
+        summary = f"🟢 No issues found — {len(signals_pos)} positive signal(s), {len(signals_neg)} concern(s)"
+    elif tier == "medium_risk":
+        summary = f"🟡 {len(signals_neg)} concern(s) to review — see checklist"
+    else:
+        summary = f"🔴 {len(signals_neg)} blocking issue(s) — fix before submitting"
+
     return {
         "repo": repo,
         "title": title,
         "tier": tier,
+        "summary": summary,
         "merge_probability": round(merge_probability, 3),
         "optimization_path": optimization_path,
         "signals": {
