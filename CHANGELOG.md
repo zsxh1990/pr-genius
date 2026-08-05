@@ -36,6 +36,20 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 
 ### Changed
 - **Test count**: 137 tests (was 110, +27 from Phase 5)
+## [1.5.1] — Phase 5.1: Maintainer Decision Support Fields
+
+### Added
+- **`impact` field**: files_changed, lines_added/deleted, scope, breaking_change, security_sensitive, dependency_changes
+- **`review` field**: complexity (low/medium/high), estimated_minutes, needs_domain_expert
+- **`author_info` field**: association, first_time
+- **`pr_metadata` module**: Impact/review assessment without GitHub API calls
+- **18 new tests**: Full coverage for pr_metadata module
+
+### Changed
+- **maintainer_view**: Now returns impact/review/author_info fields
+- **MCP maintainer_view tool**: Now accepts diff_stat parameter
+- **Test count**: 159 tests (was 141, +18)
+
 
 ## [1.4.3] — Anti-pattern False Positive Fix
 
