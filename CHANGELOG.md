@@ -18,6 +18,19 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 
 （无）
 
+## [1.4.3] — Anti-pattern False Positive Fix
+
+### Fixed
+- **Anti-pattern false positives**: Added stopwords filter for generic PR words (file, test, this, etc.) and repo filter to only match anti-patterns from same repo or generic patterns. Reduced false positives from 14 to 0 for typical PR titles.
+- **Regression test**: Added `scripts/regression_test.py` to verify summary field exists for all 63 profiles.
+
+## [1.4.2] — Positive Confirmation + Auto-trigger
+
+### Added
+- **Positive confirmation summary**: Added `summary` field to coach output with emoji indicators (🟢/🟡/🔴). Borrowed from Cubic AI pattern.
+- **GitHub Actions auto-check workflow**: `.github/workflows/pr-genius-check.yml` automatically comments on PRs with risk analysis.
+- **Shell injection prevention**: Use `env:` vars instead of inline interpolation to avoid backticks/dollar-parens in PR body breaking shell.
+
 ## [1.4.1] — Bug Fixes
 
 ### Fixed
