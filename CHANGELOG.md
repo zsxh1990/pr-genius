@@ -86,6 +86,20 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 
 ### Changed
 - **Test count**: 110 tests (was 63 in v1.4.0 trial, +47 from Phase 3-4 additions)
+## [1.6.0] — Phase 6: Contributor View
+
+### Added
+- **Contributor View** (`prgenius/src/prgenius/contributor_view.py`): 5-action decision for contributors
+  - READY_TO_SUBMIT, FIX_BEFORE_SUBMIT, NEEDS_DISCUSSION, IMPROVE_CHANCE, ASK_MAINTAINER
+  - Checklist generation (issue link, migration path, tests, security review)
+  - Confidence level (low/medium/high)
+  - Merge probability from shared evaluator
+- **MCP contributor_view tool**: Exposed via MCP server
+- **17 new tests**: Full coverage for contributor view
+
+### Changed
+- **Test count**: 176 tests (was 159, +17)
+
 
 ## [1.4.0] — Package + Git Tag
 

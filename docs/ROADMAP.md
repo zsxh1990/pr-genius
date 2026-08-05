@@ -65,7 +65,7 @@ updated: 2026-08-03
 | 5 | Maintainer View (5-action routing) | ✅ v1.5.0 |
 | 5.1 | Maintainer 增强 (impact/review/author/conflicts) | ✅ v1.5.1 |
 | 5.2 | Action 复用性改造 (多仓库支持) | ✅ v1.5.2 |
-| 6 | Contributor View | 📋 v1.6.0 |
+| 6 | Contributor View (5-action + checklist) | ✅ v1.6.0 |
 
 ## Phase 5 ✅ v1.5.0 — Maintainer View
 
@@ -123,11 +123,11 @@ prgenius/
     └── custom/     # 仓库专属
 ```
 
-## Phase 6 🔄 v1.6.0 — Contributor View (计划中)
+## Phase 6 ✅ v1.6.0 — Contributor View
 
 | # | 待办 | 说明 | 状态 |
 |---|------|------|------|
-| 32 | contributor view 模块 | 共享 v1.5.0 tier / signals / impact / review 基础设施 | 计划 |
-| 33 | persona-specific 决策层 | action / next_step / review_ready / blocking_signals | 计划 |
-| 34 | contributor unit tests | 跟 v1.5.0 测试同覆盖深度 | 计划 |
-| 35 | docs/contributor/ 示例 | 跟 v1.5.0 文档同结构 | 计划 |
+| 32 | contributor view 模块 | 共享 v1.5.0 tier / signals / impact / review 基础设施 | ✅ |
+| 33 | persona-specific 决策层 | action / next_step / checklist / confidence | ✅ |
+| 34 | contributor unit tests | 17 测试，覆盖 5 actions + checklist + e2e | ✅ |
+| 35 | MCP contributor_view tool | `mcp.py` +50 行 | ✅ |

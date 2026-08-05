@@ -1,4 +1,4 @@
-# Dockerfile for pr-genius MCP server — v1.5.2 Glama private deploy
+# Dockerfile for pr-genius MCP server — v1.6.0 Glama private deploy
 # 克莱恩 2026-07-19 M4 指示
 
 FROM python:3.12-slim
@@ -6,7 +6,7 @@ FROM python:3.12-slim
 # 标签 — 给 Glama 目录展示用
 LABEL maintainer="zsxh1990 <445655361@qq.com>"
 LABEL project="pr-genius"
-LABEL version="1.5.2"
+LABEL version="1.6.0"
 LABEL description="Evidence-backed PR contribution advisor MCP — local-only, read-only, OKF v0.1 compliant"
 LABEL license="MIT"
 
