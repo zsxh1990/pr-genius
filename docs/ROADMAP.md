@@ -63,8 +63,8 @@ updated: 2026-08-03
 | 3 | Step Summary, Labels, 评论, Webhook, Issue | ✅ |
 | 4 | auto-ping, auto-rebase, abandon_candidate | ✅ |
 | 5 | Maintainer View (5-action routing) | ✅ v1.5.0 |
-| 5.1 | Maintainer 增强 (impact/review/author/conflicts) | 📋 v1.5.1 |
-| 5.2 | Action 复用性改造 (多仓库支持) | 📋 v1.5.2 |
+| 5.1 | Maintainer 增强 (impact/review/author/conflicts) | ✅ v1.5.1 |
+| 5.2 | Action 复用性改造 (多仓库支持) | ✅ v1.5.2 |
 | 6 | Contributor View | 📋 v1.6.0 |
 
 ## Phase 5 ✅ v1.5.0 — Maintainer View
@@ -98,15 +98,15 @@ updated: 2026-08-03
 - `author`: GitHub API (`author_association` + 历史 PR 统计)
 - `conflicts`: GitHub API (`mergeable` + `merge_commit_sha`)
 
-## Phase 5.2 🔄 v1.5.2 — Action 复用性改造（多仓库支持）
+## Phase 5.2 ✅ v1.5.2 — Action 复用性改造（多仓库支持）
 
 | # | 待办 | 说明 | 状态 |
 |---|------|------|------|
-| 27 | Action workflow 参数化 | 去掉 `zsxh1990/pr-genius` 硬编码，用 `${{ env.PR_GENIUS_URL }}` | 计划 |
-| 28 | 无画像降级 | 没有 repo profile 时用通用规则（star/merge_rate 默认值） | 计划 |
-| 29 | 通用 anti-patterns | 只保留通用反模式，去掉仓库专属的 | 计划 |
+| 27 | Action workflow 参数化 | 去掉 `zsxh1990/pr-genius` 硬编码，用 `${{ env.PR_GENIUS_URL }}` | ✅ |
+| 28 | 无画像降级 | 没有 repo profile 时用通用规则（star/merge_rate 默认值） | ✅ 已有 |
+| 29 | 通用 anti-patterns | 只保留通用反模式，去掉仓库专属的 | ✅ 已有（559/562 通用） |
 | 30 | Policy 模板 | 预置常见 policy 模板（Python/JS/Rust/Go） | 计划 |
-| 31 | 复用文档 | `docs/setup/README.md` — 5 分钟接入指南 | 计划 |
+| 31 | 复用文档 | `docs/setup/README.md` — 5 分钟接入指南 | ✅ |
 
 **复用架构**：
 ```
