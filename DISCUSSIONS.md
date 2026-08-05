@@ -6,7 +6,11 @@ version: 0.1.0
 created: 2026-07-04
 ---
 
-# Discussions (placeholder)
+# Discussions (Legacy)
+
+> **Status**: Legacy — This file was a placeholder for GitHub Discussions (never enabled).
+> Content has been superseded by `docs/ROADMAP.md` and `CHANGELOG.md`.
+> Kept for historical reference only.
 
 Until maintainer enables GitHub Discussions in repo settings → General,
 this file documents intended category structure so the README/sidebar can

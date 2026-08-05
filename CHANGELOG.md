@@ -18,6 +18,25 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 
 （无）
 
+## [1.5.0] — Phase 5: Maintainer View
+
+### Added
+- **Maintainer View** (`prgenius/src/prgenius/maintainer_view.py`): 5-action routing for maintainer PR review
+  - `review_ready` / `action` / `next_step` / `blocking_signals` / `review_queue_digest`
+  - 20 unit tests (`tests/test_maintainer_view.py`)
+- **CLI `maintainer-review` subcommand**: Quick maintainer review from CLI
+- **MCP `maintainer_review` tool**: Exposed via MCP server
+- **GitHub Actions auto-check workflow**: `.github/workflows/pr-genius-check.yml` with shell injection prevention
+- **Positive confirmation summary**: `summary` field in coach output with 🟢/🟡/🔴 indicators
+
+### Fixed
+- **Anti-pattern false positives**: Stopwords filter + repo filter (14→0 false positives)
+- **Validate version drift**: Synced Dockerfile/glama.json version
+- **Missing frontmatter**: Added to `docs/maintainer/pr-review-queue.md`
+
+### Changed
+- **Test count**: 137 tests (was 110, +27 from Phase 5)
+
 ## [1.4.3] — Anti-pattern False Positive Fix
 
 ### Fixed
