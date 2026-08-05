@@ -474,6 +474,57 @@ def _load_tools(repo_root: Path | None = None):
         )
 
     @mcp.tool(annotations=READ_ONLY)
+    def contributor_view(
+        title: str,
+        repo: str,
+        body: str = "",
+        description: str = "",
+        author: str = "",
+        author_association: str = "NONE",
+        labels: list[str] | None = None,
+        star_count: int = 0,
+        repo_merge_rate: float = 0.0,
+        diff_stat: str = "",
+    ) -> dict:
+        """Contributor-facing action decision for a single PR (v1.6.0).
+
+        Output answers: 'Is my PR ready to submit? What should I fix?'
+        Maps analyze_pr signals to 5 actions: READY_TO_SUBMIT,
+        FIX_BEFORE_SUBMIT, NEEDS_DISCUSSION, IMPROVE_CHANCE, ASK_MAINTAINER.
+
+        Args:
+            title: PR title
+            repo: Target repo (org/name)
+            body: PR body
+            description: Extended description
+            author: PR author username
+            author_association: Author's association (NONE/CONTRIBUTOR/etc.)
+            labels: PR labels
+            star_count: Repo star count
+            repo_merge_rate: External PR merge rate 0.0-1.0
+            diff_stat: Diff stat string
+
+        Returns:
+            dict with keys: persona, repo, title, author, action, action_label,
+            action_icon, reason, next_step, checklist, confidence,
+            merge_probability, impact, review, author_info, context.
+        """
+        from .contributor_view import contributor_view as _contributor_view
+        return _contributor_view(
+            title=title,
+            description=description,
+            repo=repo,
+            body=body,
+            labels=labels or [],
+            author=author,
+            author_association=author_association,
+            star_count=star_count,
+            repo_merge_rate=repo_merge_rate,
+            diff_stat=diff_stat,
+            repo_root=rr,
+        )
+
+    @mcp.tool(annotations=READ_ONLY)
     def review_queue(
         prs: list[dict] | None = None,
         prs_file: str = "",
