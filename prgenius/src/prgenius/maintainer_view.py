@@ -276,11 +276,13 @@ def maintainer_view(
     author_association: str = "NONE",
     star_count: int = 0,
     repo_merge_rate: float = 0.0,
+    diff_stat: str = "",
     repo_root: Optional[Path] = None,
 ) -> dict:
     """Build a maintainer-facing decision for one PR.
 
-    Returns dict with action, reason, blocking_signals, next_step, review_ready.
+    Returns dict with action, reason, blocking_signals, next_step, review_ready,
+    impact, review, and author metadata.
     Reuses analyze_pr for shared tier/signals.
     """
     if repo_root is None:
@@ -297,6 +299,15 @@ def maintainer_view(
     next_step = _build_next_step(action, blocking)
     review_ready = action == MaintainerAction.READY_FOR_REVIEW
 
+    # Phase 5.1: Impact / review / author metadata
+    from .pr_metadata import assess_impact, assess_review_complexity
+    impact = assess_impact(title, body, diff_stat)
+    review = assess_review_complexity(impact, title, body)
+
+    # Author metadata (from analysis signals)
+    assoc_upper = author_association.upper().strip()
+    is_first_time = assoc_upper in ("NONE", "FIRST_TIMER", "FIRST_TIME_CONTRIBUTOR")
+
     return {
         "persona": "maintainer",
         "repo": repo,
@@ -307,9 +318,17 @@ def maintainer_view(
         "blocking_signals": blocking,
         "next_step": next_step,
         "review_ready": review_ready,
+        # Phase 5.1: maintainer decision support fields
+        "impact": asdict(impact),
+        "review": asdict(review),
+        "author_info": {
+            "association": assoc_upper,
+            "first_time": is_first_time,
+        },
         "context": {
             "tier": analysis.get("tier", "unknown"),
             "signals": analysis.get("signals", {}),
+            "merge_probability": analysis.get("merge_probability", 0.0),
         },
         "generated_at": datetime.now(timezone.utc).isoformat(),
     }

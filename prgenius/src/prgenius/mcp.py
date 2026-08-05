@@ -429,13 +429,17 @@ def _load_tools(repo_root: Path | None = None):
         labels: list[str] | None = None,
         star_count: int = 0,
         repo_merge_rate: float = 0.0,
+        diff_stat: str = "",
     ) -> dict:
-        """Maintainer-facing action decision for a single PR (v1.5.0).
+        """Maintainer-facing action decision for a single PR (v1.5.1).
 
         Output answers: 'What should I do with this PR right now?'
         Maps analyze_pr signals to 5 actions: READY_FOR_REVIEW,
         WAIT_FOR_AUTHOR, CLOSE_DUPLICATE, CLOSE_STALE_OR_RISKY,
         HOLD_MAINTAINER_DECISION.
+
+        Phase 5.1: Adds impact (files/lines/breaking/security),
+        review (complexity/estimated_minutes), and author_info fields.
 
         Args:
             title: PR title
@@ -447,11 +451,12 @@ def _load_tools(repo_root: Path | None = None):
             labels: PR labels
             star_count: Repo star count
             repo_merge_rate: External PR merge rate 0.0-1.0
+            diff_stat: Diff stat string (e.g. "3 files changed, 10 insertions(+), 5 deletions(-)")
 
         Returns:
             dict with keys: persona, repo, title, author, action, reason,
-            blocking_signals, next_step, review_ready, context (shared with
-            contributor view: tier, signals).
+            blocking_signals, next_step, review_ready, impact, review,
+            author_info, context.
         """
         from .maintainer_view import maintainer_view as _maintainer_view
         return _maintainer_view(
@@ -464,6 +469,7 @@ def _load_tools(repo_root: Path | None = None):
             author_association=author_association,
             star_count=star_count,
             repo_merge_rate=repo_merge_rate,
+            diff_stat=diff_stat,
             repo_root=rr,
         )
 
