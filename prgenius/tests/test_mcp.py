@@ -47,8 +47,7 @@ async def test_mcp_loads():
 
 @pytest.mark.asyncio
 async def test_mcp_8_tools_registered():
-    """All 8 tools register (analyze_pr / coach_pr / triage_pr / get_repo_profile /
-    list_open_prs / get_case_study / search_patterns / schema_info)."""
+    """All 12 tools register (Phase 0-5)."""
     if not _has_mcp_dep():
         pytest.skip("mcp package not installed (pip install mcp>=1.0)")
     from prgenius.mcp import _load_tools
@@ -56,9 +55,14 @@ async def test_mcp_8_tools_registered():
     tools = await mcp.list_tools()
     tool_names = {t.name for t in tools}
     expected = {
+        # Phase 0-4
         "analyze_pr", "coach_pr", "triage_pr",
         "get_repo_profile", "list_open_prs", "get_case_study",
         "search_patterns", "schema_info",
+        # Phase 3
+        "status_prs", "profile_writeback_suggestions",
+        # Phase 5
+        "maintainer_view", "review_queue",
     }
     assert expected.issubset(tool_names), (
         f"missing tools: {expected - tool_names}; got {sorted(tool_names)}"
