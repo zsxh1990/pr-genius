@@ -49,6 +49,17 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 - **maintainer_view**: Now returns impact/review/author_info fields
 - **MCP maintainer_view tool**: Now accepts diff_stat parameter
 - **Test count**: 159 tests (was 141, +18)
+## [1.5.2] — Phase 5.2: Action Multi-Repo Support
+
+### Added
+- **Setup guide**: `docs/setup/README.md` — 5-minute guide to add PR Genius to any repo
+- **Action parameterization**: Workflow uses `${{ vars.PR_GENIUS_URL }}` instead of hardcoded URL
+- **Diff stat extraction**: Workflow extracts diff stat for impact assessment
+
+### Fixed
+- **No profile graceful degradation**: Already handled (returns medium_risk with no concerns)
+- **Generic anti-patterns**: 559/562 anti-patterns are already generic (no repo field)
+
 
 
 ## [1.4.3] — Anti-pattern False Positive Fix
