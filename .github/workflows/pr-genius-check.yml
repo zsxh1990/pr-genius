@@ -23,36 +23,40 @@ jobs:
 
       - name: Run PR Genius coach
         id: genius
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          PR_REPO: ${{ github.repository }}
         run: |
-          TITLE="${{ github.event.pull_request.title }}"
-          REPO="${{ github.repository }}"
-          BODY="${{ github.event.pull_request.body }}"
-
-          # Run coach (exit 0=pass, exit 1=fail)
-          RESULT=$(python3 -m prgenius coach "$TITLE" \
-            --repo "$REPO" \
-            --body "$BODY" \
+          # Run coach — use env vars to avoid shell injection from PR body
+          RESULT=$(python3 -m prgenius coach "$PR_TITLE" \
+            --repo "$PR_REPO" \
+            --body "$PR_BODY" \
             --format json 2>/dev/null || echo '{"tier":"unknown","summary":"Analysis failed"}')
 
-          echo "result<<EOF" >> $GITHUB_OUTPUT
-          echo "$RESULT" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          echo "result<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$RESULT" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
 
           # Extract tier and summary
           TIER=$(echo "$RESULT" | python3 -c "import json,sys; print(json.load(sys.stdin).get('tier','unknown'))" 2>/dev/null || echo "unknown")
           SUMMARY=$(echo "$RESULT" | python3 -c "import json,sys; print(json.load(sys.stdin).get('summary','No summary'))" 2>/dev/null || echo "No summary")
 
-          echo "tier=$TIER" >> $GITHUB_OUTPUT
-          echo "summary=$SUMMARY" >> $GITHUB_OUTPUT
+          echo "tier=$TIER" >> "$GITHUB_OUTPUT"
+          echo "summary=$SUMMARY" >> "$GITHUB_OUTPUT"
 
       - name: Comment on PR
         if: always()
         uses: actions/github-script@v7
+        env:
+          TIER: ${{ steps.genius.outputs.tier }}
+          SUMMARY: ${{ steps.genius.outputs.summary }}
+          RESULT: ${{ steps.genius.outputs.result }}
         with:
           script: |
-            const tier = '${{ steps.genius.outputs.tier }}';
-            const summary = '${{ steps.genius.outputs.summary }}';
-            const result = `${{ steps.genius.outputs.result }}`;
+            const tier = process.env.TIER || 'unknown';
+            const summary = process.env.SUMMARY || 'No summary';
+            const result = process.env.RESULT || '{}';
 
             let emoji = '🟢';
             let status = 'Safe to submit';
