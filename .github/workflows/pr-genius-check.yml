@@ -8,6 +8,11 @@ permissions:
   contents: read
   pull-requests: write
 
+env:
+  # Configuration — override in repo settings > Secrets > Actions
+  PR_GENIUS_URL: ${{ vars.PR_GENIUS_URL || 'https://github.com/zsxh1990/pr-genius' }}
+  PR_GENIUS_VERSION: ${{ vars.PR_GENIUS_VERSION || 'prgenius-core' }}
+
 jobs:
   pr-genius:
     runs-on: ubuntu-latest
@@ -19,7 +24,16 @@ jobs:
           python-version: '3.11'
 
       - name: Install pr-genius
-        run: pip install prgenius-core
+        run: pip install ${{ env.PR_GENIUS_VERSION }}
+
+      - name: Get diff stat
+        id: diff
+        run: |
+          # Get diff stat for impact assessment
+          DIFF_STAT=$(git diff --stat HEAD~1 HEAD 2>/dev/null || echo "")
+          echo "stat<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$DIFF_STAT" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
 
       - name: Run PR Genius coach
         id: genius
@@ -27,6 +41,9 @@ jobs:
           PR_TITLE: ${{ github.event.pull_request.title }}
           PR_BODY: ${{ github.event.pull_request.body }}
           PR_REPO: ${{ github.repository }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          PR_ASSOCIATION: ${{ github.event.pull_request.author_association }}
+          DIFF_STAT: ${{ steps.diff.outputs.stat }}
         run: |
           # Run coach — use env vars to avoid shell injection from PR body
           RESULT=$(python3 -m prgenius coach "$PR_TITLE" \
@@ -52,11 +69,13 @@ jobs:
           TIER: ${{ steps.genius.outputs.tier }}
           SUMMARY: ${{ steps.genius.outputs.summary }}
           RESULT: ${{ steps.genius.outputs.result }}
+          PR_GENIUS_URL: ${{ env.PR_GENIUS_URL }}
         with:
           script: |
             const tier = process.env.TIER || 'unknown';
             const summary = process.env.SUMMARY || 'No summary';
             const result = process.env.RESULT || '{}';
+            const prGeniusUrl = process.env.PR_GENIUS_URL;
 
             let emoji = '🟢';
             let status = 'Safe to submit';
@@ -68,7 +87,7 @@ jobs:
               status = 'Review suggestions';
             }
 
-            const body = `## ${emoji} PR Genius\n\n${summary}\n\n<details><summary>Full Analysis</summary>\n\n\`\`\`json\n${result}\n\`\`\`\n</details>\n\n---\n*Powered by [PR Genius](https://github.com/zsxh1990/pr-genius)*`;
+            const body = `## ${emoji} PR Genius\n\n${summary}\n\n<details><summary>Full Analysis</summary>\n\n\`\`\`json\n${result}\n\`\`\`\n</details>\n\n---\n*Powered by [PR Genius](${prGeniusUrl})*`;
 
             await github.rest.issues.createComment({
               owner: context.repo.owner,
