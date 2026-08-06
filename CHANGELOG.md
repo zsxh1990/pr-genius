@@ -32,6 +32,19 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 
 ### Changed
 - **Test count**: 176 tests (was 159, +17)
+## [1.6.1] — Diff Stat Integration + New Profiles
+
+### Added
+- **coach --diff-stat flag**: Pass git diff --stat for impact/review assessment
+- **Action workflow diff_stat**: Workflow now extracts and passes diff_stat to coach
+- **New profiles**: railtracks (144 stars), memex (17 stars)
+
+### Fixed
+- **Workflow diff_stat extraction**: Fall back to origin/main when HEAD~1 doesn't exist
+
+### Changed
+- **Test count**: 221 tests (unchanged)
+
 
 
 
