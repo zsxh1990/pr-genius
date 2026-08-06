@@ -3,12 +3,12 @@
   "name": "io.github.zsxh1990/pr-genius",
   "title": "PR Genius — Outbound PR CRM",
   "description": "Outbound PR lifecycle advisor for OSS contributors and AI agents. 1455 patterns across 62 repos. Analyzes PR risk, monitors in-flight PR health (9-status classification), suggests profile writebacks, and harvests lessons from rejected PRs.",
-  "version": "1.4.1",
+  "version": "1.6.0",
   "packages": [
     {
       "registryType": "pypi",
       "identifier": "prgenius-core",
-      "version": "1.4.1",
+      "version": "1.6.0",
       "transport": {
         "type": "stdio"
       }
