@@ -17,22 +17,6 @@ inputs:
     description: 'Repo star count'
     required: false
     default: '0'
-
-inputs:
-  title:
-    description: 'PR title'
-    required: true
-  repo:
-    description: 'Target repo (org/name)'
-    required: true
-  body:
-    description: 'PR body/description'
-    required: false
-    default: ''
-  star_count:
-    description: 'Repo star count'
-    required: false
-    default: '0'
   apply_labels:
     description: 'Apply pr-genius risk labels to PR'
     required: false
