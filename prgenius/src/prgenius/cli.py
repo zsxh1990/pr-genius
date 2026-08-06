@@ -142,6 +142,16 @@ def cmd_coach(args) -> int:
         mergeable=args.mergeable or "MERGEABLE",
     )
 
+    # Phase 5.1: Add impact/review assessment if diff_stat provided
+    diff_stat = getattr(args, 'diff_stat', '') or ""
+    if diff_stat:
+        from .pr_metadata import assess_impact, assess_review_complexity
+        from dataclasses import asdict
+        impact = assess_impact(args.title, args.body or "", diff_stat)
+        review = assess_review_complexity(impact, args.title, args.body or "")
+        result["impact"] = asdict(impact)
+        result["review"] = asdict(review)
+
     tier = result["tier"]
     icon = TIER_ICONS.get(tier, "⚪")
     label = TIER_LABELS.get(tier, tier)
@@ -799,6 +809,7 @@ def main(argv: list[str] | None = None) -> int:
     ch.add_argument("--repo-merge-rate", type=float, default=0.0, help="仓库 merge 率")
     ch.add_argument("--author-association", default="NONE", help="作者身份")
     ch.add_argument("--mergeable", default="MERGEABLE", help="合并状态 (MERGEABLE/CONFLICTING/UNKNOWN)")
+    ch.add_argument("--diff-stat", default="", help="git diff --stat 输出 (用于 impact 评估)")
     ch.add_argument("--format", "-f", choices=["text", "json"], default="text", help="输出格式")
     ch.set_defaults(func=cmd_coach)
 

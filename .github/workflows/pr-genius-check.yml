@@ -46,9 +46,11 @@ jobs:
           DIFF_STAT: ${{ steps.diff.outputs.stat }}
         run: |
           # Run coach — use env vars to avoid shell injection from PR body
+          # Pass diff_stat for impact assessment (files_changed, breaking_change, etc.)
           RESULT=$(python3 -m prgenius coach "$PR_TITLE" \
             --repo "$PR_REPO" \
             --body "$PR_BODY" \
+            --diff-stat "$DIFF_STAT" \
             --format json 2>/dev/null || echo '{"tier":"unknown","summary":"Analysis failed"}')
 
           echo "result<<EOF" >> "$GITHUB_OUTPUT"
