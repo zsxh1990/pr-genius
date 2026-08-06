@@ -122,15 +122,80 @@ class PRStatusResult:
     rebase_suggested: bool = False
 
 
-def _run_gh(args: list[str]) -> str:
-    """Run gh CLI and return stdout."""
+def _read_token() -> str | None:
+    """Read GitHub token from env or ~/.git-credentials (matches friendly_watch.py)."""
+    import os
+    tok = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+    if tok:
+        return tok.strip()
+    creds_path = Path.home() / ".git-credentials"
+    if creds_path.is_file():
+        for line in creds_path.read_text().splitlines():
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            if "@github.com" in line and ":" in line:
+                after_scheme = line.split("://", 1)[1]
+                creds = after_scheme.split("@", 1)[0]
+                if ":" in creds:
+                    return creds.split(":", 1)[1]
+    return None
+
+
+def _curl_gh(args: list[str]) -> str:
+    """Fallback: replicate gh CLI via curl + GITHUB_TOKEN.
+
+    Handles `gh api graphql -f query=...` only — that's the only call site in
+    status.py. Other gh invocations are CLI sugar for human use.
+    """
+    tok = _read_token()
+    if not tok:
+        raise RuntimeError("gh CLI not found and GITHUB_TOKEN unavailable")
+    if len(args) < 3 or args[0] != "api" or args[1] != "graphql":
+        raise RuntimeError(f"_curl_gh: unsupported gh invocation: {args}")
+    # Parse `-f key=value` pairs from remaining args
+    fields: dict[str, str] = {}
+    i = 2
+    while i < len(args):
+        a = args[i]
+        if a in ("-f", "--field"):
+            kv = args[i + 1]
+            k, v = kv.split("=", 1)
+            fields[k] = v
+            i += 2
+        else:
+            raise RuntimeError(f"_curl_gh: unsupported gh flag: {a}")
     result = subprocess.run(
-        ["gh"] + args,
-        capture_output=True, text=True, timeout=30,
+        [
+            "curl", "-sS", "--max-time", "30",
+            "-H", f"Authorization: Bearer {tok}",
+            "-H", "Accept: application/vnd.github+json",
+            "-H", "X-GitHub-Api-Version: 2022-11-28",
+            "-H", "Content-Type: application/json",
+            "-X", "POST",
+            "https://api.github.com/graphql",
+            "--data-raw", json.dumps({"query": fields.get("query", "")}),
+        ],
+        capture_output=True, text=True, timeout=35,
     )
     if result.returncode != 0:
-        raise RuntimeError(f"gh {' '.join(args[:3])}... failed: {result.stderr.strip()}")
+        raise RuntimeError(f"curl gh graphql failed: {result.stderr.strip()}")
     return result.stdout
+
+
+def _run_gh(args: list[str]) -> str:
+    """Run gh CLI and return stdout. Falls back to curl+GITHUB_TOKEN when gh unavailable."""
+    try:
+        result = subprocess.run(
+            ["gh"] + args,
+            capture_output=True, text=True, timeout=30,
+        )
+        if result.returncode != 0:
+            raise RuntimeError(f"gh {' '.join(args[:3])}... failed: {result.stderr.strip()}")
+        return result.stdout
+    except FileNotFoundError:
+        # gh CLI missing (e.g. WSL without gh installed) → use curl fallback
+        return _curl_gh(args)
 
 
 def _parse_datetime(s: str) -> Optional[datetime]:

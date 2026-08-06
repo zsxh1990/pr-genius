@@ -1,8 +1,9 @@
 ---
-type: Documentation
+type: Retrospective
 title: PR Genius PRD Review — 2026-08-04
 description: Review of pr-genius v1.4.0 → v1.4.1 against ROADMAP
-updated: 2026-08-04
+updated: 2026-08-06
+tags: [review, meta]
 ---
 
 # pr-genius PRD Review — 2026-08-04
