@@ -18,20 +18,11 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 
 （无）
 
+## [1.6.2] — Composite Action Fix
 
-## [1.6.0] — Phase 6: Contributor View
+### Fixed
+- **action.yml duplicate inputs**: Remove duplicate `inputs:` section in composite action that caused `'inputs' is already defined` error for repos reusing PR Genius GitHub Action
 
-### Added
-- **Contributor View** (`prgenius/src/prgenius/contributor_view.py`): 5-action decision for contributors
-  - READY_TO_SUBMIT, FIX_BEFORE_SUBMIT, NEEDS_DISCUSSION, IMPROVE_CHANCE, ASK_MAINTAINER
-  - Checklist generation (issue link, migration path, tests, security review)
-  - Confidence level (low/medium/high)
-  - Merge probability from shared evaluator
-- **MCP contributor_view tool**: Exposed via MCP server
-- **17 new tests**: Full coverage for contributor view
-
-### Changed
-- **Test count**: 176 tests (was 159, +17)
 ## [1.6.1] — Diff Stat Integration + New Profiles
 
 ### Added
@@ -48,6 +39,21 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 
 
 
+
+## [1.6.0] — Phase 6: Contributor View
+
+### Added
+- **Contributor View** (`prgenius/src/prgenius/contributor_view.py`): 5-action decision for contributors
+  - READY_TO_SUBMIT, FIX_BEFORE_SUBMIT, NEEDS_DISCUSSION, IMPROVE_CHANCE, ASK_MAINTAINER
+  - Checklist generation (issue link, migration path, tests, security review)
+  - Confidence level (low/medium/high)
+  - Merge probability from shared evaluator
+- **MCP contributor_view tool**: Exposed via MCP server
+- **17 new tests**: Full coverage for contributor view
+
+### Changed
+- **Test count**: 176 tests (was 159, +17)
+
 ## [1.5.2] — Phase 5.2: Action Multi-Repo Support
 
 ### Added
@@ -58,6 +64,7 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 ### Fixed
 - **No profile graceful degradation**: Already handled (returns medium_risk with no concerns)
 - **Generic anti-patterns**: 559/562 anti-patterns are already generic (no repo field)
+
 
 
 
@@ -75,6 +82,7 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 - **maintainer_view**: Now returns impact/review/author_info fields
 - **MCP maintainer_view tool**: Now accepts diff_stat parameter
 - **Test count**: 159 tests (was 141, +18)
+
 
 ## [1.5.0] — Phase 5: Maintainer View
 
@@ -95,11 +103,13 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 ### Changed
 - **Test count**: 137 tests (was 110, +27 from Phase 5)
 
+
 ## [1.4.3] — Anti-pattern False Positive Fix
 
 ### Fixed
 - **Anti-pattern false positives**: Added stopwords filter for generic PR words (file, test, this, etc.) and repo filter to only match anti-patterns from same repo or generic patterns. Reduced false positives from 14 to 0 for typical PR titles.
 - **Regression test**: Added `scripts/regression_test.py` to verify summary field exists for all 63 profiles.
+
 
 
 ## [1.4.2] — Positive Confirmation + Auto-trigger
@@ -108,6 +118,7 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 - **Positive confirmation summary**: Added `summary` field to coach output with emoji indicators (🟢/🟡/🔴). Borrowed from Cubic AI pattern.
 - **GitHub Actions auto-check workflow**: `.github/workflows/pr-genius-check.yml` automatically comments on PRs with risk analysis.
 - **Shell injection prevention**: Use `env:` vars instead of inline interpolation to avoid backticks/dollar-parens in PR body breaking shell.
+
 
 
 ## [1.4.1] — Bug Fixes
@@ -121,6 +132,7 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 
 ### Changed
 - **Test count**: 110 tests (was 63 in v1.4.0 trial, +47 from Phase 3-4 additions)
+
 
 ## [1.4.0] — Package + Git Tag
 
@@ -156,6 +168,7 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 - 测试覆盖: 33 → 39 全绿
 
 
+
 ## [1.3.1] — Git Tag only (Package: 1.3.0)
 
 > ⚠️ 此 tag 仅修复 Action JSON 契约，未发布到 PyPI。Package version 仍为 1.3.0。
@@ -184,6 +197,7 @@ GitHub tag/release compare links per Keep a Changelog guidance.
   - 新增 archive/scripts/pr-genius-landscape-search/ (5 search/fetch 脚本)
   - validate.py type 白名单加 Compliance Audit
 - See docs/COMPLIANCE_AUDIT.md for full audit history.
+
 
 
 ## [1.3.0] - 2026-07-24
@@ -240,6 +254,7 @@ GitHub tag/release compare links per Keep a Changelog guidance.
   - 35 期评测 ether2 §1 抓的 "glama/Dockerfile 1.3.0 vs init/pyproject 1.2.0" 漂移修复
 
 
+
 ## [1.2.0] - 2026-07-18
 
 ### Added
@@ -273,6 +288,7 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 - 根 index.md 同步 35 个仓库画像
 
 
+
 ## [1.1.1] - 2026-07-09
 
 ### Fixed
@@ -289,6 +305,7 @@ GitHub tag/release compare links per Keep a Changelog guidance.
   - `my-custom[bot]` 等未知 bot 也能正确识别
   - Bot PR 跳过 issue link 检查
 - **predict_success_rate** docstring 标注 deprecated，仅供 cross_validate 历史兼容
+
 
 
 ## [1.1.0] - 2026-07-09
@@ -313,6 +330,7 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 - Version unified to 1.1.0 across __init__.py, pyproject.toml, CHANGELOG
 
 
+
 ## [1.0.0] - 2026-07-09
 
 ### Changed (BREAKING)
@@ -322,6 +340,7 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 - 砍掉成功模式匹配从评分中移除（语义太粗，泛化差）
 - 反模式检测 + 标签信号 + author 历史 → 直接输出 actionable 建议
 - `predict_success_rate` 保留为内部兼容函数仅供 cross_validate 使用
+
 
 
 ## [0.8.0] - 2026-07-09
@@ -339,6 +358,7 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 - Merged recall: 86.0% → **95.9%**
 - FN (漏报): 14 → **4**
 - LibreChat: 45% → **85%**, langchain: 80% → **95%**
+
 
 
 ## [0.7.9] - 2026-07-09
@@ -369,6 +389,7 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 - Rejected recall: 50.0% → **72.5%**
 
 
+
 ## [0.7.8] - 2026-07-07
 
 ### Changed
@@ -376,6 +397,7 @@ GitHub tag/release compare links per Keep a Changelog guidance.
   (drop the awkward `kb` suffix; align with `misakanet-core` naming
   convention). CLI entry point `prgenius-kb` → `prgenius-core`; import
   path `prgenius.cli` unchanged. PyPI publish still pending.
+
 
 
 ## [0.7.5] - 2026-07-05
@@ -389,6 +411,7 @@ GitHub tag/release compare links per Keep a Changelog guidance.
   profiles / cases / lessons / releases / latest-release / prgenius version)
 - `docs/INDEX.md` synced with current counts (was stale on agentic #1382/#1383
   double-counted as 12 PRs instead of 11 case studies)
+
 
 
 ## [0.7.4] - 2026-07-05
@@ -406,6 +429,7 @@ GitHub tag/release compare links per Keep a Changelog guidance.
   `src/prgenius/__init__.py` and `pyproject.toml`
 
 Compare: [0.7.3...0.7.4](https://github.com/zsxh1990/pr-genius/compare/v0.7.3...0.7.4)
+
 
 
 ## [0.7.3] - 2026-07-05
@@ -428,6 +452,7 @@ Compare: [0.7.3...0.7.4](https://github.com/zsxh1990/pr-genius/compare/v0.7.3...
   helpers using the GitHub API
 
 Compare: [0.7.1...0.7.3](https://github.com/zsxh1990/pr-genius/compare/v0.7.1...0.7.3)
+
 
 
 ## [0.7.1] - 2026-07-05
@@ -470,6 +495,7 @@ Compare: [0.7.1...0.7.3](https://github.com/zsxh1990/pr-genius/compare/v0.7.1...
 Compare: [0.7.0...0.7.1](https://github.com/zsxh1990/pr-genius/compare/v0.7.0...0.7.1)
 
 
+
 ## [0.7.0] - 2026-07-04
 
 ### Added (BREAKING for delta shape, but BC over v0.5.0)
@@ -486,6 +512,7 @@ Compare: [0.7.0...0.7.1](https://github.com/zsxh1990/pr-genius/compare/v0.7.0...
 Compare: [0.6.4...0.7.0](https://github.com/zsxh1990/pr-genius/compare/v0.6.4...v0.7.0)
 
 
+
 ## [0.6.4] - 2026-07-04
 
 ### Added
@@ -493,6 +520,7 @@ Compare: [0.6.4...0.7.0](https://github.com/zsxh1990/pr-genius/compare/v0.6.4...
 - `scripts/heartbeat.py` snapshot tool + `validate.py --heartbeat` mode
 
 Compare: [0.6.3...0.6.4](https://github.com/zsxh1990/pr-genius/compare/v0.6.3...v0.6.4)
+
 
 
 ## [0.6.3] - 2026-07-04
@@ -504,6 +532,7 @@ Compare: [0.6.3...0.6.4](https://github.com/zsxh1990/pr-genius/compare/v0.6.3...
 Compare: [0.6.2...0.6.3](https://github.com/zsxh1990/pr-genius/compare/v0.6.2...v0.6.3)
 
 
+
 ## [0.6.2] - 2026-07-04
 
 ### Changed
@@ -511,6 +540,7 @@ Compare: [0.6.2...0.6.3](https://github.com/zsxh1990/pr-genius/compare/v0.6.2...
   delta object + close_decision case-level)
 
 Compare: [0.6.1...0.6.2](https://github.com/zsxh1990/pr-genius/compare/v0.6.1...0.6.2)
+
 
 
 ## [0.6.1] - 2026-07-04
@@ -531,6 +561,7 @@ Compare: [0.6.1...0.6.2](https://github.com/zsxh1990/pr-genius/compare/v0.6.1...
 Compare: [0.6.0...0.6.1](https://github.com/zsxh1990/pr-genius/compare/v0.6.0...0.6.1)
 
 
+
 ## [0.6.0] - 2026-07-03
 
 ### Added
@@ -545,6 +576,7 @@ Compare: [0.6.0...0.6.1](https://github.com/zsxh1990/pr-genius/compare/v0.6.0...
 Compare: [0.5.3...0.6.0](https://github.com/zsxh1990/pr-genius/compare/v0.5.3...v0.6.0)
 
 
+
 ## [0.5.3] - 2026-07-02
 
 ### Added
@@ -557,6 +589,7 @@ Compare: [0.5.3...0.6.0](https://github.com/zsxh1990/pr-genius/compare/v0.5.3...
 Compare: [0.5.2...0.5.3](https://github.com/zsxh1990/pr-genius/compare/v0.5.2...v0.5.3)
 
 
+
 ## [0.5.2] - 2026-07-02
 
 ### Added
@@ -566,6 +599,7 @@ Compare: [0.5.2...0.5.3](https://github.com/zsxh1990/pr-genius/compare/v0.5.2...
 Compare: [0.5.1...0.5.2](https://github.com/zsxh1990/pr-genius/compare/v0.5.1...v0.5.2)
 
 
+
 ## [0.5.1] - 2026-07-02
 
 ### Added
@@ -573,6 +607,7 @@ Compare: [0.5.1...0.5.2](https://github.com/zsxh1990/pr-genius/compare/v0.5.1...
 - `misakanet-50/lesson-01` through `lesson-05`
 
 Compare: [0.5.0...0.5.1](https://github.com/zsxh1990/pr-genius/compare/v0.5.0...v0.5.1)
+
 
 
 ## [0.5.0] - 2026-07-02
@@ -588,12 +623,14 @@ Compare: [0.5.0...0.5.1](https://github.com/zsxh1990/pr-genius/compare/v0.5.0...
 Compare: [0.4.2...0.5.0](https://github.com/zsxh1990/pr-genius/compare/v0.4.2...v0.5.0)
 
 
+
 ## [0.4.2] - 2026-07-01
 
 ### Added
 - Real PR loop #2 on `qdrant/mcp-server-qdrant#143` — stale + close-decision sample
 
 Compare: [0.4.1...0.4.2](https://github.com/zsxh1990/pr-genius/compare/v0.4.1...v0.4.2)
+
 
 
 ## [0.4.1] - 2026-07-01
@@ -604,12 +641,14 @@ Compare: [0.4.1...0.4.2](https://github.com/zsxh1990/pr-genius/compare/v0.4.1...
 Compare: [0.4.0...0.4.1](https://github.com/zsxh1990/pr-genius/compare/v0.4.0...v0.4.1)
 
 
+
 ## [0.4.0] - 2026-07-01
 
 ### Changed
 - Review: track 4 known data issues + verification plan
 
 Compare: [0.3.0...0.4.0](https://github.com/zsxh1990/pr-genius/compare/v0.3.0...v0.4.0)
+
 
 
 ## [0.3.0] - 2026-07-01
@@ -621,6 +660,7 @@ Compare: [0.3.0...0.4.0](https://github.com/zsxh1990/pr-genius/compare/v0.3.0...
 Compare: [0.2.0...0.3.0](https://github.com/zsxh1990/pr-genius/compare/v0.2.0...v0.3.0)
 
 
+
 ## [0.2.0] - 2026-07-01
 
 ### Added
@@ -628,6 +668,7 @@ Compare: [0.2.0...0.3.0](https://github.com/zsxh1990/pr-genius/compare/v0.2.0...
 - Blacklist schema + 6 initially-blacklisted repos
 
 Compare: [0.1.0...0.2.0](https://github.com/zsxh1990/pr-genius/compare/v0.1.0...v0.2.0)
+
 
 
 ## [0.1.0] - 2026-07-01
@@ -639,4 +680,5 @@ Compare: [0.1.0...0.2.0](https://github.com/zsxh1990/pr-genius/compare/v0.1.0...
 - OKF v0.1 compliance
 
 [0.1.0]: https://github.com/zsxh1990/pr-genius/releases/tag/v0.1.0
+
 
