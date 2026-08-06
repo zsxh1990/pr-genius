@@ -27,6 +27,19 @@ agent_guidelines:
   external_merge_rate_30: 0.25
   close_keywords: ["stale", "out of scope", "duplicate"]
   one_pr_friendly: false
+agent_guidelines_evidence:
+  allow_unsolicited_pr:
+    evidence_urls: ["https://github.com/modelcontextprotocol/python-sdk/pulls"]
+    verified_at: "2026-08-06"
+    confidence: high
+  ai_policy:
+    evidence_urls: ["https://github.com/modelcontextprotocol/python-sdk"]
+    verified_at: "2026-08-06"
+    confidence: medium
+  require_signed_off:
+    evidence_urls: ["https://github.com/modelcontextprotocol/python-sdk/blob/main/CONTRIBUTING.md"]
+    verified_at: "2026-08-06"
+    confidence: medium
 ---
 
 # modelcontextprotocol/python-sdk
@@ -51,17 +64,3 @@ agent_guidelines:
 - 需要关联 issue（Fixes #NNN）
 - Cubic AI review 是自动的，不需要手动触发
 - License FOSSA 检查是项目级问题，不影响单个 PR
-
-agent_guidelines_evidence:
-  allow_unsolicited_pr:
-    evidence_urls: ["https://github.com/modelcontextprotocol/python-sdk/pulls"]
-    verified_at: "2026-08-06"
-    confidence: high
-  ai_policy:
-    evidence_urls: ["https://github.com/modelcontextprotocol/python-sdk"]
-    verified_at: "2026-08-06"
-    confidence: medium
-  require_signed_off:
-    evidence_urls: ["https://github.com/modelcontextprotocol/python-sdk/blob/main/CONTRIBUTING.md"]
-    verified_at: "2026-08-06"
-    confidence: medium
