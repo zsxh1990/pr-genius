@@ -292,6 +292,7 @@ def load_anti_patterns(repo_root) -> Dict[str, dict]:
 
 # Generic words that appear in almost any PR — skip to avoid false positives
 _ANTI_PATTERN_STOPWORDS = frozenset({
+    # Common English words
     "small", "medium", "large", "from", "with", "when", "type", "values",
     "model", "file", "test", "this", "that", "for", "and", "the", "not",
     "but", "are", "was", "has", "have", "been", "will", "would", "could",
@@ -301,20 +302,40 @@ _ANTI_PATTERN_STOPWORDS = frozenset({
     "which", "who", "whom", "whose", "all", "each", "every", "both",
     "few", "more", "most", "other", "some", "such", "no", "any",
     "new", "old", "first", "last", "long", "great", "little", "own",
-    "other", "old", "right", "big", "high", "different", "small",
-    "large", "next", "early", "young", "important", "public", "bad",
-    "same", "able", "add", "update", "change", "make", "use", "run",
-    "set", "get", "put", "see", "way", "may", "day", "got", "back",
-    "much", "go", "come", "made", "find", "here", "thing", "many",
-    "people", "take", "year", "them", "some", "time", "very", "just",
-    "know", "give", "most", "us", "about", "build", "pull", "requests",
-    "discussion", "docs", "bump", "junk", "rollup", "avoid",
+    "right", "big", "high", "different", "next", "early", "young",
+    "important", "public", "bad", "same", "able", "back", "much",
+    "go", "come", "made", "find", "thing", "many", "people", "take",
+    "year", "them", "time", "very", "know", "give", "us", "about",
     # PR-specific generic words
     "readme", "fixes", "typo", "issue", "bug", "error", "fix", "update",
     "add", "remove", "delete", "rename", "move", "copy", "merge", "split",
     "refactor", "improve", "enhance", "optimize", "clean", "format",
     "lint", "style", "indent", "whitespace", "comment", "documentation",
     "example", "sample", "demo", "tutorial", "guide", "instructions",
+    "build", "pull", "requests", "discussion", "docs", "bump", "junk",
+    "rollup", "avoid", "set", "get", "put", "see", "way", "day", "got",
+    # Code/technical generic words
+    "check", "path", "diff", "site", "call", "stack", "field", "names",
+    "into", "extras", "extra", "allow", "prevent", "computed", "leaking",
+    "instant", "validation", "witness", "throw", "mount", "labelling",
+    "error", "handle", "response", "request", "status", "code", "line",
+    "function", "method", "class", "module", "import", "return", "value",
+    "data", "key", "name", "id", "number", "string", "list",
+    "dict", "object", "array", "null", "true", "false", "none",
+    "config", "setting", "env", "environment", "server", "client",
+    "token", "auth", "login", "session", "user", "password",
+    "database", "table", "column", "row", "index", "query",
+    # More generic technical words
+    "description", "parameter", "undocumented", "meaningful",
+    "timeout", "redirect", "nginx", "slash", "hang", "endpoint",
+    "feat", "fix", "chore", "docs", "test", "ci", "refactor",
+    "connection", "request", "response", "status", "code", "line",
+    "function", "method", "class", "module", "import", "return",
+    "value", "data", "key", "name", "id", "number", "string",
+    "list", "dict", "object", "array", "null", "true", "false",
+    "none", "config", "setting", "env", "environment", "server",
+    "client", "token", "auth", "login", "session", "user", "password",
+    "database", "table", "column", "row", "index", "query",
 })
 
 
