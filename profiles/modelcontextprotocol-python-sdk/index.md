@@ -17,6 +17,10 @@ agent_guidelines:
   require_signed_off: false
   require_cla: false
   require_issue_first: false
+  maintainer_vibe:
+    evidence_urls: ["https://github.com/modelcontextprotocol-python-sdk"]
+    verified_at: "2026-08-06"
+    confidence: medium
   ai_policy: welcoming
   ai_assisted_disclosure: false
   maintainer_vibe: responsive
@@ -32,6 +36,10 @@ agent_guidelines_evidence:
     evidence_urls: ["https://github.com/modelcontextprotocol/python-sdk/pulls"]
     verified_at: "2026-08-06"
     confidence: high
+  maintainer_vibe:
+    evidence_urls: ["https://github.com/modelcontextprotocol-python-sdk"]
+    verified_at: "2026-08-06"
+    confidence: medium
   ai_policy:
     evidence_urls: ["https://github.com/modelcontextprotocol/python-sdk"]
     verified_at: "2026-08-06"
