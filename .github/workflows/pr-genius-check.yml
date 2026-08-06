@@ -30,7 +30,8 @@ jobs:
         id: diff
         run: |
           # Get diff stat for impact assessment
-          DIFF_STAT=$(git diff --stat HEAD~1 HEAD 2>/dev/null || echo "")
+          # Try HEAD~1 first (single commit), fall back to origin/main (multi-commit)
+          DIFF_STAT=$(git diff --stat HEAD~1 HEAD 2>/dev/null || git diff --stat origin/main HEAD 2>/dev/null || echo "")
           echo "stat<<EOF" >> "$GITHUB_OUTPUT"
           echo "$DIFF_STAT" >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
