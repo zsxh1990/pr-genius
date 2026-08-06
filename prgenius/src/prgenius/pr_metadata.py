@@ -129,21 +129,22 @@ def assess_scope(diff_stat: str, title: str, body: str) -> str:
     text = f"{diff_stat} {title} {body}".lower()
     scopes = []
 
-    if any(kw in text for kw in ["test", "spec", "pytest", "jest", "unittest"]):
+    # Use word boundary matching to avoid false positives (e.g., "guide" contains "ui")
+    if any(re.search(r'\b' + kw + r'\b', text) for kw in ["test", "spec", "pytest", "jest", "unittest"]):
         scopes.append("tests")
-    if any(kw in text for kw in ["doc", "readme", "changelog", "guide", "tutorial"]):
+    if any(re.search(r'\b' + kw + r'\b', text) for kw in ["doc", "readme", "changelog", "guide", "tutorial"]):
         scopes.append("docs")
-    if any(kw in text for kw in ["ci", "cd", "workflow", "action", "pipeline", ".github"]):
+    if any(re.search(r'\b' + kw + r'\b', text) for kw in ["ci", "cd", "workflow", "action", "pipeline", ".github"]):
         scopes.append("ci/cd")
-    if any(kw in text for kw in ["auth", "login", "session", "token", "oauth"]):
+    if any(re.search(r'\b' + kw + r'\b', text) for kw in ["auth", "login", "session", "token", "oauth"]):
         scopes.append("auth")
-    if any(kw in text for kw in ["api", "endpoint", "route", "handler"]):
+    if any(re.search(r'\b' + kw + r'\b', text) for kw in ["api", "endpoint", "route", "handler"]):
         scopes.append("api")
-    if any(kw in text for kw in ["ui", "frontend", "component", "style", "css"]):
+    if any(re.search(r'\b' + kw + r'\b', text) for kw in ["ui", "frontend", "component", "style", "css"]):
         scopes.append("ui")
-    if any(kw in text for kw in ["db", "database", "migration", "schema", "sql"]):
+    if any(re.search(r'\b' + kw + r'\b', text) for kw in ["db", "database", "migration", "schema", "sql"]):
         scopes.append("database")
-    if any(kw in text for kw in ["config", "setting", "env", "environment"]):
+    if any(re.search(r'\b' + kw + r'\b', text) for kw in ["config", "setting", "env", "environment"]):
         scopes.append("config")
 
     return " + ".join(scopes) if scopes else "general"
