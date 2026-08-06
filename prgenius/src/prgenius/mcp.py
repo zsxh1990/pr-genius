@@ -1,6 +1,6 @@
-"""stdio MCP shell for prgenius — v1.3.0
+"""stdio MCP shell for prgenius — v1.4.1
 
-MCP surface (7 tools, all read-only / non-destructive / idempotent):
+MCP surface (10 tools, all read-only / non-destructive / idempotent):
 - analyze_pr(title, repo, body, ...) → 结构化信号 + 建议 + 三档风险
 - coach_pr(title, repo, body, ...) → pass/fail + checklist
 - triage_pr(title, repo, body, diff_stat, labels) → verdict + violations + recommended_action
@@ -9,6 +9,8 @@ MCP surface (7 tools, all read-only / non-destructive / idempotent):
 - get_case_study(repo, pr_number) → PR 案例
 - search_patterns(query, type, limit) → 按关键词搜 anti-patterns + success-patterns
 - schema_info() → schema 版本
+- status_prs(author, repo, stale_days, save_snapshot) → outbound PR health check
+- profile_writeback_suggestions(author, mode) → profile update proposals
 
 All tools follow MCP tool annotations (readOnlyHint=True, destructiveHint=False,
 idempotentHint=True) — pr-genius 是只读 advisor, 不写任何状态.
@@ -357,6 +359,7 @@ def _load_tools(repo_root: Path | None = None):
         author: str | None = None,
         repo: str | None = None,
         stale_days: int | None = None,
+        save_snapshot: bool = False,
     ) -> dict:
         """Check health of in-flight PRs (outbound PR heartbeat).
 
@@ -368,6 +371,10 @@ def _load_tools(repo_root: Path | None = None):
             author: GitHub username to check PRs for
             repo: Repository to check (org/name)
             stale_days: Days without update to consider stale (default: profile or 14)
+            save_snapshot: If True, persist the result to data/status-snapshots/
+                for transition detection across runs. Default False because MCP
+                callers (Cursor, Claude Code) may poll frequently and would
+                otherwise flood the snapshot directory.
 
         Returns:
             dict with prs, ignored, summary, actions, transitions
@@ -381,7 +388,7 @@ def _load_tools(repo_root: Path | None = None):
                 repo=repo,
                 stale_days=stale_days,
                 repo_root=rr,
-                save_snapshot=True,
+                save_snapshot=save_snapshot,
             )
         except RuntimeError as e:
             return {"error": str(e)}
@@ -410,6 +417,146 @@ def _load_tools(repo_root: Path | None = None):
             return suggest_profile_writeback(result, repo_root=rr, mode=mode)
         except RuntimeError as e:
             return [{"error": str(e)}]
+
+    @mcp.tool(annotations=READ_ONLY)
+    def maintainer_view(
+        title: str,
+        repo: str,
+        body: str = "",
+        description: str = "",
+        author: str = "",
+        author_association: str = "NONE",
+        labels: list[str] | None = None,
+        star_count: int = 0,
+        repo_merge_rate: float = 0.0,
+        diff_stat: str = "",
+    ) -> dict:
+        """Maintainer-facing action decision for a single PR (v1.5.1).
+
+        Output answers: 'What should I do with this PR right now?'
+        Maps analyze_pr signals to 5 actions: READY_FOR_REVIEW,
+        WAIT_FOR_AUTHOR, CLOSE_DUPLICATE, CLOSE_STALE_OR_RISKY,
+        HOLD_MAINTAINER_DECISION.
+
+        Phase 5.1: Adds impact (files/lines/breaking/security),
+        review (complexity/estimated_minutes), and author_info fields.
+
+        Args:
+            title: PR title
+            repo: Target repo (org/name)
+            body: PR body
+            description: Extended description
+            author: PR author username
+            author_association: Author's association (NONE/CONTRIBUTOR/etc.)
+            labels: PR labels
+            star_count: Repo star count
+            repo_merge_rate: External PR merge rate 0.0-1.0
+            diff_stat: Diff stat string (e.g. "3 files changed, 10 insertions(+), 5 deletions(-)")
+
+        Returns:
+            dict with keys: persona, repo, title, author, action, reason,
+            blocking_signals, next_step, review_ready, impact, review,
+            author_info, context.
+        """
+        from .maintainer_view import maintainer_view as _maintainer_view
+        return _maintainer_view(
+            title=title,
+            description=description,
+            repo=repo,
+            body=body,
+            labels=labels or [],
+            author=author,
+            author_association=author_association,
+            star_count=star_count,
+            repo_merge_rate=repo_merge_rate,
+            diff_stat=diff_stat,
+            repo_root=rr,
+        )
+
+    @mcp.tool(annotations=READ_ONLY)
+    def contributor_view(
+        title: str,
+        repo: str,
+        body: str = "",
+        description: str = "",
+        author: str = "",
+        author_association: str = "NONE",
+        labels: list[str] | None = None,
+        star_count: int = 0,
+        repo_merge_rate: float = 0.0,
+        diff_stat: str = "",
+    ) -> dict:
+        """Contributor-facing action decision for a single PR (v1.6.0).
+
+        Output answers: 'Is my PR ready to submit? What should I fix?'
+        Maps analyze_pr signals to 5 actions: READY_TO_SUBMIT,
+        FIX_BEFORE_SUBMIT, NEEDS_DISCUSSION, IMPROVE_CHANCE, ASK_MAINTAINER.
+
+        Args:
+            title: PR title
+            repo: Target repo (org/name)
+            body: PR body
+            description: Extended description
+            author: PR author username
+            author_association: Author's association (NONE/CONTRIBUTOR/etc.)
+            labels: PR labels
+            star_count: Repo star count
+            repo_merge_rate: External PR merge rate 0.0-1.0
+            diff_stat: Diff stat string
+
+        Returns:
+            dict with keys: persona, repo, title, author, action, action_label,
+            action_icon, reason, next_step, checklist, confidence,
+            merge_probability, impact, review, author_info, context.
+        """
+        from .contributor_view import contributor_view as _contributor_view
+        return _contributor_view(
+            title=title,
+            description=description,
+            repo=repo,
+            body=body,
+            labels=labels or [],
+            author=author,
+            author_association=author_association,
+            star_count=star_count,
+            repo_merge_rate=repo_merge_rate,
+            diff_stat=diff_stat,
+            repo_root=rr,
+        )
+
+    @mcp.tool(annotations=READ_ONLY)
+    def review_queue(
+        prs: list[dict] | None = None,
+        prs_file: str = "",
+    ) -> dict:
+        """Build maintainer review queue digest from a list of PRs (v1.5.0).
+
+        Groups PRs by maintainer action (5 classes) and produces a digest
+        suitable for Actions summary or git-trackable markdown file.
+
+        Args:
+            prs: List of {repo, number, title, body, author, labels, star_count, repo_merge_rate}
+            prs_file: Alternative — path to JSON file containing the PR list
+
+        Returns:
+            dict with keys: generated_at, total, summary (action -> count),
+            results (per-PR maintainer_view), digest_markdown
+        """
+        from .maintainer_view import build_review_queue
+        from pathlib import Path
+        import json as _json
+
+        if prs is None and prs_file:
+            try:
+                prs = _json.loads(Path(prs_file).read_text(encoding="utf-8"))
+            except (OSError, FileNotFoundError, _json.JSONDecodeError) as e:
+                return {"error": f"prs_file read failed: {e}"}
+        if prs is None:
+            return {"error": "specify prs (list) or prs_file (path)"}
+        if not isinstance(prs, list):
+            return {"error": "prs must be a list"}
+
+        return build_review_queue(prs, repo_root=rr)
 
     return mcp
 

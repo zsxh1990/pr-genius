@@ -55,8 +55,6 @@ updated: 2026-08-03
 
 ## 实现状态
 
-所有 Phase 0-4 功能已实现 ✅
-
 | Phase | 功能 | 状态 |
 |-------|------|------|
 | 0 | Status MVP, GraphQL, Profile, Transitions | ✅ |
@@ -64,3 +62,72 @@ updated: 2026-08-03
 | 2 | transition 告警 + 推荐行动 | ✅ |
 | 3 | Step Summary, Labels, 评论, Webhook, Issue | ✅ |
 | 4 | auto-ping, auto-rebase, abandon_candidate | ✅ |
+| 5 | Maintainer View (5-action routing) | ✅ v1.5.0 |
+| 5.1 | Maintainer 增强 (impact/review/author/conflicts) | ✅ v1.5.1 |
+| 5.2 | Action 复用性改造 (多仓库支持) | ✅ v1.5.2 |
+| 6 | Contributor View (5-action + checklist) | ✅ v1.6.0 |
+
+## Phase 5 ✅ v1.5.0 — Maintainer View
+
+| # | 待办 | 说明 | 状态 |
+|---|------|------|------|
+| 13 | maintainer_view 模块 | `maintainer_view.py` (427 行) — 5-action routing | ✅ |
+| 14 | review queue digest | `docs/maintainer/pr-review-queue.md` 示例 + checklist | ✅ |
+| 15 | MCP 暴露 maintainer tools | `mcp.py` +83 行 | ✅ |
+| 16 | maintainer_view 单元测试 | 20 测试，覆盖 5 actions + filters + next_step + e2e mock | ✅ |
+
+**安全边界**（学自 OpenClaw PR #93310 复盘）：
+- read-only / advisory-only
+- **never auto-close / auto-label / auto-comment / auto-merge**
+- `--write-digest` opt-in
+
+## Phase 5.1 🔄 v1.5.1 — Maintainer View 增强（维护者决策辅助字段）
+
+| # | 待办 | 说明 | 状态 |
+|---|------|------|------|
+| 21 | `impact` 字段 | files_changed / lines_added / lines_deleted / scope / breaking_change / security_sensitive / dependency_changes | 计划 |
+| 22 | `review` 字段 | complexity (low/medium/high) / estimated_minutes / needs_domain_expert | 计划 |
+| 23 | `author` 字段 | association / previous_prs / merge_rate / first_time | 计划 |
+| 24 | `conflicts` 字段 | has_conflicts / conflicting_prs | 计划 |
+| 25 | 更新 Bot 评论格式 | 展示 impact / review / author 字段 | 计划 |
+| 26 | 更新 MCP 输出 | maintainer_view 返回新字段 | 计划 |
+
+**数据来源**：
+- `impact`: `gh pr diff --stat` + 标题 `!` / `BREAKING CHANGE` + 文件路径匹配
+- `review`: 文件数 + 行数启发式
+- `author`: GitHub API (`author_association` + 历史 PR 统计)
+- `conflicts`: GitHub API (`mergeable` + `merge_commit_sha`)
+
+## Phase 5.2 ✅ v1.5.2 — Action 复用性改造（多仓库支持）
+
+| # | 待办 | 说明 | 状态 |
+|---|------|------|------|
+| 27 | Action workflow 参数化 | 去掉 `zsxh1990/pr-genius` 硬编码，用 `${{ env.PR_GENIUS_URL }}` | ✅ |
+| 28 | 无画像降级 | 没有 repo profile 时用通用规则（star/merge_rate 默认值） | ✅ 已有 |
+| 29 | 通用 anti-patterns | 只保留通用反模式，去掉仓库专属的 | ✅ 已有（559/562 通用） |
+| 30 | Policy 模板 | 预置常见 policy 模板（Python/JS/Rust/Go） | 计划 |
+| 31 | 复用文档 | `docs/setup/README.md` — 5 分钟接入指南 | ✅ |
+
+**复用架构**：
+```
+prgenius/
+├── core/           # 核心逻辑（可复用）
+├── profiles/
+│   ├── builtin/    # 预置画像（热门仓库）
+│   └── custom/     # 用户自定义
+├── anti-patterns/
+│   ├── builtin/    # 通用反模式
+│   └── custom/     # 仓库专属
+└── policies/
+    ├── builtin/    # 通用策略
+    └── custom/     # 仓库专属
+```
+
+## Phase 6 ✅ v1.6.0 — Contributor View
+
+| # | 待办 | 说明 | 状态 |
+|---|------|------|------|
+| 32 | contributor view 模块 | 共享 v1.5.0 tier / signals / impact / review 基础设施 | ✅ |
+| 33 | persona-specific 决策层 | action / next_step / checklist / confidence | ✅ |
+| 34 | contributor unit tests | 17 测试，覆盖 5 actions + checklist + e2e | ✅ |
+| 35 | MCP contributor_view tool | `mcp.py` +50 行 | ✅ |

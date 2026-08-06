@@ -1,4 +1,4 @@
-name: PR Genius Check
+name: PR Genius Auto Check
 
 on:
   pull_request:
@@ -7,6 +7,11 @@ on:
 permissions:
   contents: read
   pull-requests: write
+
+env:
+  # Configuration — override in repo settings > Secrets > Actions
+  PR_GENIUS_URL: ${{ vars.PR_GENIUS_URL || 'https://github.com/zsxh1990/pr-genius' }}
+  PR_GENIUS_VERSION: ${{ vars.PR_GENIUS_VERSION || 'prgenius-core' }}
 
 jobs:
   pr-genius:
@@ -19,42 +24,74 @@ jobs:
           python-version: '3.11'
 
       - name: Install pr-genius
-        run: pip install prgenius-core
+        run: pip install ${{ env.PR_GENIUS_VERSION }}
 
-      - name: Run PR Genius analysis
-        id: analysis
+      - name: Get diff stat
+        id: diff
         run: |
-          TITLE="${{ github.event.pull_request.title }}"
-          REPO="${{ github.repository }}"
-          BODY="${{ github.event.pull_request.body }}"
-          
-          RESULT=$(python3 -m prgenius eval "$TITLE" --repo "$REPO" -d "$BODY" 2>/dev/null || echo '{"error": "analysis failed"}')
-          echo "result=$RESULT" >> $GITHUB_OUTPUT
-          
-          # Extract tier
-          TIER=$(echo "$RESULT" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('tier','unknown'))" 2>/dev/null || echo "unknown")
-          echo "tier=$TIER" >> $GITHUB_OUTPUT
+          # Get diff stat for impact assessment
+          # Try HEAD~1 first (single commit), fall back to origin/main (multi-commit)
+          DIFF_STAT=$(git diff --stat HEAD~1 HEAD 2>/dev/null || git diff --stat origin/main HEAD 2>/dev/null || echo "")
+          echo "stat<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$DIFF_STAT" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Run PR Genius coach
+        id: genius
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          PR_REPO: ${{ github.repository }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          PR_ASSOCIATION: ${{ github.event.pull_request.author_association }}
+          DIFF_STAT: ${{ steps.diff.outputs.stat }}
+        run: |
+          # Run coach — use env vars to avoid shell injection from PR body
+          # Pass diff_stat for impact assessment (files_changed, breaking_change, etc.)
+          RESULT=$(python3 -m prgenius coach "$PR_TITLE" \
+            --repo "$PR_REPO" \
+            --body "$PR_BODY" \
+            --diff-stat "$DIFF_STAT" \
+            --format json 2>/dev/null || echo '{"tier":"unknown","summary":"Analysis failed"}')
+
+          echo "result<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$RESULT" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+          # Extract tier and summary
+          TIER=$(echo "$RESULT" | python3 -c "import json,sys; print(json.load(sys.stdin).get('tier','unknown'))" 2>/dev/null || echo "unknown")
+          SUMMARY=$(echo "$RESULT" | python3 -c "import json,sys; print(json.load(sys.stdin).get('summary','No summary'))" 2>/dev/null || echo "No summary")
+
+          echo "tier=$TIER" >> "$GITHUB_OUTPUT"
+          echo "summary=$SUMMARY" >> "$GITHUB_OUTPUT"
 
       - name: Comment on PR
         if: always()
         uses: actions/github-script@v7
+        env:
+          TIER: ${{ steps.genius.outputs.tier }}
+          SUMMARY: ${{ steps.genius.outputs.summary }}
+          RESULT: ${{ steps.genius.outputs.result }}
+          PR_GENIUS_URL: ${{ env.PR_GENIUS_URL }}
         with:
           script: |
-            const tier = '${{ steps.analysis.outputs.tier }}';
-            const result = '${{ steps.analysis.outputs.result }}';
-            
+            const tier = process.env.TIER || 'unknown';
+            const summary = process.env.SUMMARY || 'No summary';
+            const result = process.env.RESULT || '{}';
+            const prGeniusUrl = process.env.PR_GENIUS_URL;
+
             let emoji = '🟢';
             let status = 'Safe to submit';
             if (tier === 'high_risk') {
               emoji = '🔴';
-              status = 'High risk — review checklist before submitting';
+              status = 'Blocking issues found';
             } else if (tier === 'medium_risk') {
               emoji = '🟡';
-              status = 'Medium risk — review suggestions';
+              status = 'Review suggestions';
             }
-            
-            const body = `## ${emoji} PR Genius Analysis\n\n**Risk Level:** ${tier}\n**Status:** ${status}\n\n<details>\n<summary>Full Analysis</summary>\n\n\`\`\`json\n${result}\n\`\`\`\n</details>\n\n---\n*Powered by [PR Genius](https://github.com/zsxh1990/pr-genius)*`;
-            
+
+            const body = `## ${emoji} PR Genius\n\n${summary}\n\n<details><summary>Full Analysis</summary>\n\n\`\`\`json\n${result}\n\`\`\`\n</details>\n\n---\n*Powered by [PR Genius](${prGeniusUrl})*`;
+
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,

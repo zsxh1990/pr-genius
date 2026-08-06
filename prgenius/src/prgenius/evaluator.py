@@ -290,6 +290,34 @@ def load_anti_patterns(repo_root) -> Dict[str, dict]:
     return patterns
 
 
+# Generic words that appear in almost any PR — skip to avoid false positives
+_ANTI_PATTERN_STOPWORDS = frozenset({
+    "small", "medium", "large", "from", "with", "when", "type", "values",
+    "model", "file", "test", "this", "that", "for", "and", "the", "not",
+    "but", "are", "was", "has", "have", "been", "will", "would", "could",
+    "should", "may", "might", "can", "shall", "must", "need", "want",
+    "like", "just", "also", "only", "even", "still", "already", "yet",
+    "now", "then", "here", "there", "where", "why", "how", "what",
+    "which", "who", "whom", "whose", "all", "each", "every", "both",
+    "few", "more", "most", "other", "some", "such", "no", "any",
+    "new", "old", "first", "last", "long", "great", "little", "own",
+    "other", "old", "right", "big", "high", "different", "small",
+    "large", "next", "early", "young", "important", "public", "bad",
+    "same", "able", "add", "update", "change", "make", "use", "run",
+    "set", "get", "put", "see", "way", "may", "day", "got", "back",
+    "much", "go", "come", "made", "find", "here", "thing", "many",
+    "people", "take", "year", "them", "some", "time", "very", "just",
+    "know", "give", "most", "us", "about", "build", "pull", "requests",
+    "discussion", "docs", "bump", "junk", "rollup", "avoid",
+    # PR-specific generic words
+    "readme", "fixes", "typo", "issue", "bug", "error", "fix", "update",
+    "add", "remove", "delete", "rename", "move", "copy", "merge", "split",
+    "refactor", "improve", "enhance", "optimize", "clean", "format",
+    "lint", "style", "indent", "whitespace", "comment", "documentation",
+    "example", "sample", "demo", "tutorial", "guide", "instructions",
+})
+
+
 def check_anti_patterns(title: str, description: str, repo: str, repo_root, body: str = "") -> List[dict]:
     """检查 PR 是否命中反模式"""
     # v1.4.0 修复: 接受 str | Path
@@ -298,14 +326,23 @@ def check_anti_patterns(title: str, description: str, repo: str, repo_root, body
     matches = []
     seen_keys = set()  # 防止同一 pattern 重复命中
     text = f"{title} {description} {body}".lower()
+    repo_lower = repo.strip("/").lower()
     for key, pattern in anti_patterns.items():
         if key in seen_keys:
+            continue
+        # Only match anti-patterns from the same repo or generic patterns (no repo)
+        pattern_repo = pattern.get("repo", "").strip("/").lower()
+        if pattern_repo and pattern_repo != repo_lower:
             continue
         keywords = pattern.get("trigger_keywords", [])
         matched = False
         if isinstance(keywords, list):
             for keyword in keywords:
-                if keyword.lower() in text:
+                kw = keyword.lower()
+                # Skip generic stopwords to reduce false positives
+                if kw in _ANTI_PATTERN_STOPWORDS:
+                    continue
+                if kw in text:
                     matches.append({
                         "key": key, "keyword": keyword,
                         "symptom": pattern.get("symptom", ""),
@@ -756,10 +793,19 @@ def analyze_pr(
                 "priority": "P0",
             })
 
+    # Positive confirmation (borrowed from Cubic AI pattern)
+    if tier == "low_risk":
+        summary = f"🟢 No issues found — {len(signals_pos)} positive signal(s), {len(signals_neg)} concern(s)"
+    elif tier == "medium_risk":
+        summary = f"🟡 {len(signals_neg)} concern(s) to review — see checklist"
+    else:
+        summary = f"🔴 {len(signals_neg)} blocking issue(s) — fix before submitting"
+
     return {
         "repo": repo,
         "title": title,
         "tier": tier,
+        "summary": summary,
         "merge_probability": round(merge_probability, 3),
         "optimization_path": optimization_path,
         "signals": {

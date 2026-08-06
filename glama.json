@@ -1,6 +1,6 @@
 {
   "$schema": "https://glama.ai/mcp/schemas/server.json",
   "name": "pr-genius",
-  "version": "1.4.1",
+  "version": "1.6.1",
   "maintainers": ["zsxh1990"]
 }

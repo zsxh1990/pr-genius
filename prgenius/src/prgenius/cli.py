@@ -142,6 +142,16 @@ def cmd_coach(args) -> int:
         mergeable=args.mergeable or "MERGEABLE",
     )
 
+    # Phase 5.1: Add impact/review assessment if diff_stat provided
+    diff_stat = getattr(args, 'diff_stat', '') or ""
+    if diff_stat:
+        from .pr_metadata import assess_impact, assess_review_complexity
+        from dataclasses import asdict
+        impact = assess_impact(args.title, args.body or "", diff_stat)
+        review = assess_review_complexity(impact, args.title, args.body or "")
+        result["impact"] = asdict(impact)
+        result["review"] = asdict(review)
+
     tier = result["tier"]
     icon = TIER_ICONS.get(tier, "⚪")
     label = TIER_LABELS.get(tier, tier)
@@ -409,6 +419,8 @@ def cmd_status(args) -> int:
             result["prs"] = [p for p in result["prs"] if f"{p['repo']}#{p['number']}" in alert_keys]
         else:
             result["prs"] = []
+        # Also surface NEW and CLOSED_OR_MERGED transitions in transitions[];
+        # --alert-only filters classified PRs but never hides transition events.
 
     # Writeback suggestions
     if args.writeback_mode != "off":
@@ -633,6 +645,116 @@ def cmd_auto_rebase(args) -> int:
 
 
 # ============================================================
+# maintainer — Maintainer view (v1.5.0)
+# ============================================================
+
+def cmd_maintainer_view(args) -> int:
+    """Maintainer-facing action decision for a single PR.
+
+    Output answers: "What should I do with this PR right now?"
+    Actions: READY_FOR_REVIEW | WAIT_FOR_AUTHOR | CLOSE_DUPLICATE |
+             CLOSE_STALE_OR_RISKY | HOLD_MAINTAINER_DECISION
+    """
+    from .maintainer_view import maintainer_view
+
+    repo_root = _get_repo_root(args)
+    body = args.body or ""
+    if args.body_file:
+        try:
+            body = Path(args.body_file).read_text(encoding="utf-8")
+        except (OSError, FileNotFoundError) as e:
+            print(f"Error reading body file: {e}", file=sys.stderr)
+            return 1
+
+    result = maintainer_view(
+        title=args.title,
+        description=args.description or "",
+        repo=args.repo,
+        body=body,
+        labels=args.labels or [],
+        author=args.author or "",
+        author_association=args.author_association or "NONE",
+        star_count=args.star_count or 0,
+        repo_merge_rate=args.repo_merge_rate or 0.0,
+        repo_root=repo_root,
+    )
+
+    if args.format == "json":
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+    else:
+        from .maintainer_view import MaintainerAction
+        action = result["action"]
+        icon_map = {
+            "READY_FOR_REVIEW": "✅",
+            "WAIT_FOR_AUTHOR": "⏸️",
+            "CLOSE_DUPLICATE": "🗑️",
+            "CLOSE_STALE_OR_RISKY": "🛑",
+            "HOLD_MAINTAINER_DECISION": "🤔",
+        }
+        icon = icon_map.get(action, "•")
+        print(f"{icon} Maintainer Action: {action}")
+        print(f"   Repo: {result['repo']}")
+        print(f"   Title: {result['title']}")
+        print(f"   Reason: {result['reason']}")
+        print(f"   Blocking: {', '.join(result['blocking_signals']) or 'none'}")
+        print(f"   Next step: {result['next_step']}")
+        print(f"   Review ready: {result['review_ready']}")
+        print(f"   Tier: {result['context'].get('tier', '?')}")
+    return 0
+
+
+def cmd_review_queue(args) -> int:
+    """Build maintainer review queue from a list of PR dicts.
+
+    Input: --prs-file (JSON list of {repo, number, title, body, author, labels})
+           OR stdin (JSON list)
+    Output: --format json|markdown, default markdown
+    """
+    from .maintainer_view import build_review_queue, write_review_queue_md
+
+    repo_root = _get_repo_root(args)
+
+    # Load PRs from file or stdin
+    if args.prs_file:
+        try:
+            prs = json.loads(Path(args.prs_file).read_text(encoding="utf-8"))
+        except (OSError, FileNotFoundError, json.JSONDecodeError) as e:
+            print(f"Error reading PRs file: {e}", file=sys.stderr)
+            return 1
+    elif not sys.stdin.isatty():
+        try:
+            prs = json.loads(sys.stdin.read())
+        except json.JSONDecodeError as e:
+            print(f"Error parsing stdin JSON: {e}", file=sys.stderr)
+            return 1
+    else:
+        print("Error: specify --prs-file or pipe JSON to stdin", file=sys.stderr)
+        return 1
+
+    if not isinstance(prs, list):
+        print("Error: PRs must be a JSON list", file=sys.stderr)
+        return 1
+
+    queue = build_review_queue(prs, repo_root=repo_root)
+
+    # Output
+    if args.format == "json":
+        print(json.dumps(queue, indent=2, ensure_ascii=False))
+    else:
+        # markdown
+        if args.write_digest:
+            output_path = Path(args.write_digest)
+            if not output_path.is_absolute():
+                output_path = repo_root / output_path
+            write_review_queue_md(queue, output_path)
+            print(f"✅ Digest written to: {output_path}", file=sys.stderr)
+        # also print to stdout
+        print(queue["digest_markdown"])
+
+    return 0
+
+
+# ============================================================
 # main
 # ============================================================
 
@@ -687,6 +809,7 @@ def main(argv: list[str] | None = None) -> int:
     ch.add_argument("--repo-merge-rate", type=float, default=0.0, help="仓库 merge 率")
     ch.add_argument("--author-association", default="NONE", help="作者身份")
     ch.add_argument("--mergeable", default="MERGEABLE", help="合并状态 (MERGEABLE/CONFLICTING/UNKNOWN)")
+    ch.add_argument("--diff-stat", default="", help="git diff --stat 输出 (用于 impact 评估)")
     ch.add_argument("--format", "-f", choices=["text", "json"], default="text", help="输出格式")
     ch.set_defaults(func=cmd_coach)
 
@@ -751,15 +874,43 @@ def main(argv: list[str] | None = None) -> int:
     si.set_defaults(func=cmd_schema_info)
 
     # ---- status ----
-    st = sub.add_parser("status", help="Check health of in-flight PRs")
+    st = sub.add_parser(
+        "status",
+        help="Check health of in-flight PRs",
+        description=(
+            "Scan open PRs for an author or repo and classify each by health "
+            "status (9 categories: NEEDS_REBASE / CI_FAILING / STALE_REVIEW / "
+            "CHANGES_REQUESTED / STALE_NO_REVIEW / BLOCKED / CLEAN / UNKNOWN / "
+            "WAITING). Optional --save-snapshot records results and detects "
+            "transitions (e.g. WAITING -> NEEDS_REBASE) against the previous run."
+        ),
+        epilog=(
+            "Examples:\n"
+            "  prgenius status --author zsxh1990\n"
+            "  prgenius status --repo Ikalus1988/MisakaNet --stale-days 7\n"
+            "  prgenius status --author zsxh1990 --save-snapshot --alert-only\n"
+            "  prgenius status --author zsxh1990 --writeback-mode suggest\n"
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
     st.add_argument("--author", help="GitHub username to check PRs for")
     st.add_argument("--repo", help="Repository to check PRs in (org/repo)")
-    st.add_argument("--stale-days", type=int, default=None, help="Days without update to consider stale (default: profile or 14)")
-    st.add_argument("--format", choices=["table", "json"], default="table", help="Output format")
-    st.add_argument("--save-snapshot", action="store_true", help="Save snapshot and compute transitions from previous")
-    st.add_argument("--snapshot-dir", help="Directory for snapshots (default: data/status-snapshots)")
-    st.add_argument("--writeback-mode", choices=["off", "suggest", "auto"], default="off", help="Profile writeback mode (default: off)")
-    st.add_argument("--alert-only", action="store_true", help="Only output PRs with status changes or alerts")
+    st.add_argument("--stale-days", type=int, default=None,
+                    help="Days without update to consider stale (priority: CLI > profile > default 14)")
+    st.add_argument("--format", choices=["table", "json"], default="table",
+                    help="Output format (default: table)")
+    st.add_argument("--save-snapshot", action="store_true",
+                    help="Persist result to data/status-snapshots/ and diff against previous snapshot")
+    st.add_argument("--snapshot-dir",
+                    help="Directory for snapshots (default: data/status-snapshots)")
+    st.add_argument("--writeback-mode", choices=["off", "suggest", "auto"], default="off",
+                    help=(
+                        "Profile writeback mode. 'suggest' lists all proposals; "
+                        "'auto' keeps only confidence>=0.8 (currently always empty "
+                        "because all rule confidences are <0.8 by design — see docs)."
+                    ))
+    st.add_argument("--alert-only", action="store_true",
+                    help="Only output PRs whose status changed since the previous snapshot")
     st.add_argument("--step-summary", action="store_true", help="Write GitHub Step Summary to $GITHUB_STEP_SUMMARY")
     st.add_argument("--webhook", help="Webhook URL for notifications (飞书/Slack/generic)")
     st.add_argument("--webhook-dry-run", action="store_true", help="Show webhook payload without sending")
@@ -804,6 +955,56 @@ def main(argv: list[str] | None = None) -> int:
     m_serve_sub = m_serve.add_subparsers(dest="mcp_cmd", required=True)
     ms = m_serve_sub.add_parser("serve", help="Run stdio MCP shell")
     ms.set_defaults(func=cmd_mcp_serve)
+
+    # ---- maintainer (v1.5.0) ----
+    mv = sub.add_parser(
+        "maintainer",
+        help="Maintainer view — action decision for a single PR (5 actions: READY_FOR_REVIEW / WAIT_FOR_AUTHOR / CLOSE_DUPLICATE / CLOSE_STALE_OR_RISKY / HOLD_MAINTAINER_DECISION)",
+        description=(
+            "Maintainer-facing decision: 'What should I do with this PR right now?'\n"
+            "Reuses analyze_pr signals, maps to 5 maintainer actions.\n"
+            "read-only / advisory-only — never auto-closes, labels, or comments."
+        ),
+        epilog=(
+            "Examples:\n"
+            "  prgenius maintainer 'fix: typo' --repo Ikalus1988/MisakaNet\n"
+            "  prgenius maintainer 'fix: DCO' --repo org/repo --body 'fixes bug' --author test --format json\n"
+        ),
+    )
+    mv.add_argument("title", help="PR title")
+    mv.add_argument("--repo", "-r", required=True, help="Target repo (org/name)")
+    mv.add_argument("--body", "-b", default="", help="PR body")
+    mv.add_argument("--body-file", default="", help="Read PR body from file")
+    mv.add_argument("--description", "-d", default="", help="PR description")
+    mv.add_argument("--labels", "-l", nargs="*", default=[], help="PR labels")
+    mv.add_argument("--author", "-a", default="", help="PR author")
+    mv.add_argument("--author-association", default="NONE", help="Author association")
+    mv.add_argument("--star-count", type=int, default=0, help="Repo star count")
+    mv.add_argument("--repo-merge-rate", type=float, default=0.0, help="Repo merge rate 0-1")
+    mv.add_argument("--format", "-f", choices=["text", "json"], default="text", help="Output format")
+    mv.set_defaults(func=cmd_maintainer_view)
+
+    # ---- review-queue (v1.5.0) ----
+    rq = sub.add_parser(
+        "review-queue",
+        help="Build maintainer review queue digest from a list of PRs",
+        description=(
+            "Aggregate multiple PRs into a maintainer-facing digest grouped by action.\n"
+            "Input: --prs-file (JSON list) or stdin (JSON list).\n"
+            "Output: --format json|markdown (default markdown).\n"
+            "Optional: --write-digest <path> to write git-trackable markdown digest.\n"
+            "read-only by default; --write-digest is opt-in."
+        ),
+        epilog=(
+            "Examples:\n"
+            "  prgenius review-queue --prs-file open-prs.json --format markdown\n"
+            "  cat open-prs.json | prgenius review-queue --write-digest docs/maintainer/pr-review-queue.md\n"
+        ),
+    )
+    rq.add_argument("--prs-file", help="JSON file with PR list [{repo, number, title, body, author, labels}, ...]")
+    rq.add_argument("--format", "-f", choices=["json", "markdown"], default="markdown", help="Output format")
+    rq.add_argument("--write-digest", help="Write digest to this path (git-trackable, opt-in)")
+    rq.set_defaults(func=cmd_review_queue)
 
     args = parser.parse_args(argv)
     return args.func(args)
