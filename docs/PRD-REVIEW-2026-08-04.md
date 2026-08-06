@@ -1,3 +1,10 @@
+---
+type: Documentation
+title: PR Genius PRD Review — 2026-08-04
+description: Review of pr-genius v1.4.0 → v1.4.1 against ROADMAP
+updated: 2026-08-04
+---
+
 # pr-genius PRD Review — 2026-08-04
 
 > 评审目标：昨天 push 的 pr-genius 改动（v1.4.0 → v1.4.1，11 commits ahead）对照 ROADMAP 评审  

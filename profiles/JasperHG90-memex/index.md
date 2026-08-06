@@ -37,3 +37,13 @@ agent_guidelines:
 | PR | 内容 | 状态 |
 |-----|------|------|
 | #221 | add chunk_id field to TOCNodeDTO | 等 review |
+
+agent_guidelines_evidence:
+  allow_unsolicited_pr:
+    evidence_urls: ["https://github.com/JasperHG90/memex/pulls"]
+    verified_at: "2026-08-06"
+    confidence: high
+  ai_policy:
+    evidence_urls: ["https://github.com/JasperHG90/memex"]
+    verified_at: "2026-08-06"
+    confidence: medium

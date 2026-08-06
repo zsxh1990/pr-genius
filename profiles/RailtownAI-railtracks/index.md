@@ -37,3 +37,13 @@ agent_guidelines:
 | PR | 内容 | 状态 |
 |-----|------|------|
 | #1190 | prevent data loss on partial re-ingest failure | 等 review |
+
+agent_guidelines_evidence:
+  allow_unsolicited_pr:
+    evidence_urls: ["https://github.com/RailtownAI/railtracks/pulls"]
+    verified_at: "2026-08-06"
+    confidence: high
+  ai_policy:
+    evidence_urls: ["https://github.com/RailtownAI/railtracks"]
+    verified_at: "2026-08-06"
+    confidence: medium
