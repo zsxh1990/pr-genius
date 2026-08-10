@@ -263,25 +263,23 @@ def load_anti_patterns(repo_root) -> Dict[str, dict]:
             continue
 
     # Load JSON patterns (from API/automation)
+    # v1.6.3 修复: JSON patterns 仅用于 search_patterns() 查询,
+    # 不参与 check_anti_patterns() 匹配 — 标题提取的 keywords 太泛化导致假阳性
     import json as _json
     for file in anti_patterns_dir.glob("*.json"):
         try:
             data = _json.loads(file.read_text(encoding="utf-8"))
             if isinstance(data, dict) and "id" in data:
-                # Normalize JSON pattern to match MD format
                 fm = {
                     "key": data.get("id", file.stem),
                     "description": data.get("title", data.get("description", "")),
-                    "trigger_keywords": [],
+                    "trigger_keywords": [],  # JSON patterns 不提取 keywords — 避免假阳性
                     "symptom": "",
                     "fix_action": "",
                     "source_pr": data.get("source_pr", ""),
+                    "source_url": data.get("source_url", ""),
+                    "_is_json_pattern": True,  # 标记来源, check_anti_patterns 跳过
                 }
-                # Extract keywords from title/description
-                title = data.get("title", "")
-                for word in re.findall(r'[a-z]+', title.lower()):
-                    if len(word) > 3:
-                        fm["trigger_keywords"].append(word)
                 patterns[file.stem] = fm
         except Exception:
             continue
@@ -350,6 +348,9 @@ def check_anti_patterns(title: str, description: str, repo: str, repo_root, body
     repo_lower = repo.strip("/").lower()
     for key, pattern in anti_patterns.items():
         if key in seen_keys:
+            continue
+        # v1.6.3: JSON patterns 仅用于搜索, 不参与匹配 (关键词太泛化)
+        if pattern.get("_is_json_pattern"):
             continue
         # Only match anti-patterns from the same repo or generic patterns (no repo)
         pattern_repo = pattern.get("repo", "").strip("/").lower()
@@ -562,19 +563,34 @@ def analyze_pr(
     for match in anti_matches:
         key = match["key"]
         severity = ANTI_PATTERN_SEVERITY.get(key, "medium")
+        symptom = match.get("symptom", "")
+        fix_action = match.get("fix_action", "")
+        source_pr = match.get("source_pr", "")
+
+        # 建设性信号描述: 症状 + 改进方向 + 案例来源
+        desc_parts = []
+        if symptom:
+            desc_parts.append(symptom)
+        else:
+            desc_parts.append(f"反模式风险: {key}")
+        if fix_action:
+            desc_parts.append(f"改进: {fix_action}")
+        if source_pr:
+            desc_parts.append(f"(参考: {source_pr})")
+
         signals_neg.append({
             "key": key,
-            "description": match.get("symptom", match.get("description", "")),
+            "description": " | ".join(desc_parts),
             "severity": severity,
-            "fix_action": match.get("fix_action", ""),
-            "source_pr": match.get("source_pr", ""),
+            "fix_action": fix_action,
+            "source_pr": source_pr,
         })
-        if match.get("fix_action"):
+        if fix_action:
             checklist.append({
                 "action": f"fix_{key}",
                 "priority": "P0" if severity in ("critical", "high") else "P1",
                 "done": False,
-                "hint": match["fix_action"],
+                "hint": fix_action,
             })
 
     # ---- 3. 标签信号 ----
