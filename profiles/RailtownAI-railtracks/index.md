@@ -22,6 +22,11 @@ agent_guidelines:
   default_branch: main
   response_time_h_median: 72
   external_merge_rate_30: 0.20
+agent_guidelines_evidence:
+  allow_unsolicited_pr: https://github.com/RailtownAI/railtracks/blob/main/CONTRIBUTING.md
+  ai_policy: https://github.com/RailtownAI/railtracks/blob/main/CONTRIBUTING.md
+  maintainer_vibe: https://github.com/RailtownAI/railtracks/pulls?q=is%3Apr+is%3Aclosed
+  external_merge_rate_30: https://github.com/RailtownAI/railtracks/pulls?q=is%3Apr+is%3Aclosed
 ---
 
 # RailtownAI/railtracks

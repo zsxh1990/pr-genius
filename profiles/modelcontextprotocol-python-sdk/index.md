@@ -27,6 +27,13 @@ agent_guidelines:
   external_merge_rate_30: 0.25
   close_keywords: ["stale", "out of scope", "duplicate"]
   one_pr_friendly: false
+agent_guidelines_evidence:
+  allow_unsolicited_pr: https://github.com/modelcontextprotocol/python-sdk/blob/main/CONTRIBUTING.md
+  ai_policy: https://github.com/modelcontextprotocol/python-sdk/blob/main/CONTRIBUTING.md
+  maintainer_vibe: https://github.com/modelcontextprotocol/python-sdk/pulls?q=is%3Apr+is%3Aclosed
+  bot_review: https://github.com/modelcontextprotocol/python-sdk/pulls?q=is%3Apr+is%3Aclosed
+  external_merge_rate_30: https://github.com/modelcontextprotocol/python-sdk/pulls?q=is%3Apr+is%3Aclosed
+  close_keywords: https://github.com/modelcontextprotocol/python-sdk/pulls?q=is%3Apr+is%3Aclosed
 ---
 
 # modelcontextprotocol/python-sdk

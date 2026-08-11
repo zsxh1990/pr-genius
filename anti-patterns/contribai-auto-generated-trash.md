@@ -26,6 +26,7 @@ prevention: |
   - 不用 Write 工具覆盖整个 README (用 Edit 增量)
 created: 2026-07-19
 learned_at: 2026-07-19
+
 ---
 
 ## ContribAI 实证 close 数据
