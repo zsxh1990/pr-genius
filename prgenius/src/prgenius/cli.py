@@ -167,6 +167,19 @@ def cmd_coach(args) -> int:
         status = "✅ PASS" if passed else "❌ FAIL"
         print(f"{icon} {status} — {label}\n")
 
+        # PR 大小和影响评估
+        pr_size = result.get("pr_size", "?")
+        pr_size_label = result.get("pr_size_label", "")
+        impact_score = result.get("impact_score", 0)
+        risk_level = result.get("risk_level", "unknown")
+        risk_description = result.get("risk_description", "")
+
+        size_icon = {"XS": "🔹", "S": "🔸", "M": "🔶", "L": "🟠", "XL": "🔴"}.get(pr_size, "⚪")
+        risk_icon = {"low": "🟢", "medium": "🟡", "high": "🔴"}.get(risk_level, "⚪")
+
+        print(f"{size_icon} PR 大小: {pr_size} ({pr_size_label})")
+        print(f"{risk_icon} 影响评分: {impact_score}/100 — {risk_description}\n")
+
         if result["signals"]["negative"]:
             for s in result["signals"]["negative"]:
                 sev = s.get("severity", "")
