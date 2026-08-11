@@ -239,6 +239,11 @@
     </div>
 
     <script>
+        // Global ECharts theme for better contrast
+        const chartTextColor = '#ffffff';
+        const chartAxisColor = 'rgba(255,255,255,0.8)';
+        const chartSplitLineColor = 'rgba(255,255,255,0.15)';
+
         // Extended PR Data
         const prData = [
             { number: 956, author: 'elevasyncsolutions-jpg', duration: 21.3, category: 'contributor', hasGenius: true },
@@ -297,6 +302,9 @@
             tooltip: {
                 trigger: 'axis',
                 axisPointer: { type: 'shadow' },
+                backgroundColor: 'rgba(0,0,0,0.8)',
+                borderColor: '#00d2ff',
+                textStyle: { color: '#fff' },
                 formatter: function(params) {
                     const d = sortedData[params[0].dataIndex];
                     return `PR #${d.number}<br/>作者: ${d.author}<br/>时长: ${d.duration} 分钟<br/>PR Genius: ${d.hasGenius ? '✅' : '❌'}`;
@@ -306,12 +314,17 @@
             xAxis: {
                 type: 'category',
                 data: sortedData.map(p => `#${p.number}`),
-                axisLabel: { rotate: 45, fontSize: 9 }
+                axisLabel: { rotate: 45, fontSize: 10, color: chartTextColor },
+                axisLine: { lineStyle: { color: chartAxisColor } },
+                splitLine: { lineStyle: { color: chartSplitLineColor } }
             },
             yAxis: {
                 type: 'log',
                 name: '分钟 (对数刻度)',
-                axisLabel: { formatter: '{value}' }
+                nameTextStyle: { color: chartTextColor, fontSize: 12 },
+                axisLabel: { formatter: '{value}', color: chartTextColor },
+                axisLine: { lineStyle: { color: chartAxisColor } },
+                splitLine: { lineStyle: { color: chartSplitLineColor } }
             },
             series: [{
                 type: 'bar',
@@ -322,7 +335,8 @@
                 label: {
                     show: true,
                     position: 'top',
-                    fontSize: 8,
+                    fontSize: 9,
+                    color: chartTextColor,
                     formatter: '{c}'
                 }
             }]
@@ -334,13 +348,31 @@
         const withoutGenius = prData.filter(p => !p.hasGenius).map(p => p.duration);
 
         comparisonChart.setOption({
-            tooltip: { trigger: 'axis' },
-            legend: { data: ['使用 PR Genius', '未使用 PR Genius'], bottom: '5%' },
+            tooltip: {
+                trigger: 'axis',
+                backgroundColor: 'rgba(0,0,0,0.8)',
+                borderColor: '#00d2ff',
+                textStyle: { color: '#fff' }
+            },
+            legend: {
+                data: ['使用 PR Genius', '未使用 PR Genius'],
+                bottom: '5%',
+                textStyle: { color: chartTextColor, fontSize: 12 }
+            },
             xAxis: {
                 type: 'category',
-                data: ['平均值', '中位数', '最小值', '最大值', 'P25', 'P75']
+                data: ['平均值', '中位数', '最小值', '最大值', 'P25', 'P75'],
+                axisLabel: { color: chartTextColor, fontSize: 11 },
+                axisLine: { lineStyle: { color: chartAxisColor } }
             },
-            yAxis: { type: 'value', name: '分钟' },
+            yAxis: {
+                type: 'value',
+                name: '分钟',
+                nameTextStyle: { color: chartTextColor, fontSize: 12 },
+                axisLabel: { color: chartTextColor },
+                axisLine: { lineStyle: { color: chartAxisColor } },
+                splitLine: { lineStyle: { color: chartSplitLineColor } }
+            },
             series: [
                 {
                     name: '使用 PR Genius',
@@ -382,13 +414,32 @@
         };
 
         boxplotChart.setOption({
-            tooltip: { trigger: 'item' },
-            xAxis: { type: 'category', data: ['使用 PR Genius', '未使用 PR Genius'] },
-            yAxis: { type: 'value', name: '分钟', scale: true },
+            tooltip: {
+                trigger: 'item',
+                backgroundColor: 'rgba(0,0,0,0.8)',
+                borderColor: '#00d2ff',
+                textStyle: { color: '#fff' }
+            },
+            xAxis: {
+                type: 'category',
+                data: ['使用 PR Genius', '未使用 PR Genius'],
+                axisLabel: { color: chartTextColor, fontSize: 11 },
+                axisLine: { lineStyle: { color: chartAxisColor } }
+            },
+            yAxis: {
+                type: 'value',
+                name: '分钟',
+                scale: true,
+                nameTextStyle: { color: chartTextColor, fontSize: 12 },
+                axisLabel: { color: chartTextColor },
+                axisLine: { lineStyle: { color: chartAxisColor } },
+                splitLine: { lineStyle: { color: chartSplitLineColor } }
+            },
             series: [{
                 type: 'boxplot',
                 data: [getBoxplotData(withGenius), getBoxplotData(withoutGenius)],
-                itemStyle: { color: 'rgba(0,210,255,0.3)', borderColor: '#00d2ff' }
+                itemStyle: { color: 'rgba(0,210,255,0.4)', borderColor: '#00d2ff', borderWidth: 2 },
+                label: { show: true, color: chartTextColor, fontSize: 10 }
             }]
         });
 
@@ -402,13 +453,36 @@
         cdfChart.setOption({
             tooltip: {
                 trigger: 'axis',
+                backgroundColor: 'rgba(0,0,0,0.8)',
+                borderColor: '#00d2ff',
+                textStyle: { color: '#fff' },
                 formatter: function(params) {
                     return `${params[0].seriesName}<br/>时长: ${params[0].data[0]} 分钟<br/>累积概率: ${params[0].data[1].toFixed(1)}%`;
                 }
             },
-            legend: { data: ['使用 PR Genius', '未使用 PR Genius'], bottom: '5%' },
-            xAxis: { type: 'value', name: '审核时长 (分钟)', scale: true },
-            yAxis: { type: 'value', name: '累积概率 (%)', max: 100 },
+            legend: {
+                data: ['使用 PR Genius', '未使用 PR Genius'],
+                bottom: '5%',
+                textStyle: { color: chartTextColor, fontSize: 12 }
+            },
+            xAxis: {
+                type: 'value',
+                name: '审核时长 (分钟)',
+                scale: true,
+                nameTextStyle: { color: chartTextColor, fontSize: 12 },
+                axisLabel: { color: chartTextColor },
+                axisLine: { lineStyle: { color: chartAxisColor } },
+                splitLine: { lineStyle: { color: chartSplitLineColor } }
+            },
+            yAxis: {
+                type: 'value',
+                name: '累积概率 (%)',
+                max: 100,
+                nameTextStyle: { color: chartTextColor, fontSize: 12 },
+                axisLabel: { color: chartTextColor },
+                axisLine: { lineStyle: { color: chartAxisColor } },
+                splitLine: { lineStyle: { color: chartSplitLineColor } }
+            },
             series: [
                 {
                     name: '使用 PR Genius',
