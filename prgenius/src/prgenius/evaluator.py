@@ -766,6 +766,72 @@ def analyze_pr(
     else:
         tier = "medium_risk"
 
+    # ---- 8.5. PR 大小评估 ----
+    from .pr_metadata import parse_diff_stat, assess_scope, detect_breaking_change, detect_security_sensitive
+    files_changed, lines_added, lines_deleted = parse_diff_stat("")
+    total_lines = lines_added + lines_deleted
+
+    # PR 大小分级 (基于标题关键词启发式)
+    title_lower = title.lower()
+    body_lower = body.lower() if body else ""
+    combined = f"{title_lower} {body_lower}"
+
+    # 启发式判断 PR 大小
+    if any(kw in combined for kw in ["major", "refactor", "rewrite", "migration", "breaking"]):
+        pr_size = "XL"
+        pr_size_label = "超大 (>500 行) — 标题暗示大规模变更"
+    elif any(kw in combined for kw in ["add", "implement", "feature", "enhance"]):
+        pr_size = "M"
+        pr_size_label = "中等 (150-300 行) — 新功能"
+    elif any(kw in combined for kw in ["fix", "bug", "patch", "hotfix"]):
+        pr_size = "S"
+        pr_size_label = "小 (50-150 行) — Bug 修复"
+    elif any(kw in combined for kw in ["docs", "readme", "typo", "comment"]):
+        pr_size = "XS"
+        pr_size_label = "极小 (<50 行) — 文档/注释"
+    else:
+        pr_size = "S"
+        pr_size_label = "小 (50-150 行)"
+
+    # 影响评分 (0-100)
+    impact_score = 0
+
+    # 基于标题关键词评分
+    if any(kw in combined for kw in ["breaking", "migration", "deprecat"]):
+        impact_score += 40  # Breaking change
+    elif any(kw in combined for kw in ["security", "auth", "vulnerability", "cve"]):
+        impact_score += 35  # Security
+    elif any(kw in combined for kw in ["major", "refactor", "rewrite"]):
+        impact_score += 30  # Major refactor
+    elif any(kw in combined for kw in ["add", "implement", "feature"]):
+        impact_score += 20  # New feature
+    elif any(kw in combined for kw in ["fix", "bug", "patch"]):
+        impact_score += 10  # Bug fix
+    elif any(kw in combined for kw in ["docs", "readme", "typo"]):
+        impact_score += 5   # Documentation
+
+    # 基于 labels 评分
+    if labels:
+        if any("breaking" in l.lower() for l in labels):
+            impact_score += 25
+        if any("security" in l.lower() for l in labels):
+            impact_score += 20
+        if any("feature" in l.lower() for l in labels):
+            impact_score += 15
+
+    impact_score = min(100, impact_score)
+
+    # 风险分类
+    if impact_score >= 70:
+        risk_level = "high"
+        risk_description = "高风险变更，需要仔细审查"
+    elif impact_score >= 40:
+        risk_level = "medium"
+        risk_description = "中等风险，建议审查"
+    else:
+        risk_level = "low"
+        risk_description = "低风险变更"
+
     # ---- 9. 合并概率估算 + 优化路径 ----
     merge_rate = repo_context.get("external_merge_rate_30", 0.0)
 
@@ -838,6 +904,16 @@ def analyze_pr(
     else:
         summary = f"🔴 {len(signals_neg)} blocking issue(s) — fix before submitting"
 
+    # 去重 checklist (相同 action 只保留第一个)
+    seen_actions = set()
+    unique_checklist = []
+    for item in checklist:
+        action_key = item.get("action", "")
+        if action_key not in seen_actions:
+            seen_actions.add(action_key)
+            unique_checklist.append(item)
+    checklist = unique_checklist
+
     return {
         "repo": repo,
         "title": title,
@@ -855,6 +931,12 @@ def analyze_pr(
         "anti_patterns_detail": anti_matches,
         "repo_context": repo_context,
         "comparison": comparison,
+        # v1.6.3: PR 大小和影响评估
+        "pr_size": pr_size,
+        "pr_size_label": pr_size_label,
+        "impact_score": impact_score,
+        "risk_level": risk_level,
+        "risk_description": risk_description,
     }
 
 
