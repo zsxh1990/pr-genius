@@ -1,7 +1,8 @@
 ---
 type: Documentation
 title: Status MVP Trial
-updated: 2026-08-02
+description: "Status MVP trial results and Phase 4 smoke test"
+updated: 2026-08-03
 ---
 
 # Status MVP Trial — 2026-08-02

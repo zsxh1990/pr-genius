@@ -1,6 +1,7 @@
 ---
 type: Documentation
 title: PR Genius Roadmap
+description: "PR Genius feature roadmap — Phase 0 through 4"
 updated: 2026-08-03
 ---
 

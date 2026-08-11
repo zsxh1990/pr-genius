@@ -22,6 +22,11 @@ agent_guidelines:
   default_branch: main
   response_time_h_median: 96
   external_merge_rate_30: 0.15
+agent_guidelines_evidence:
+  allow_unsolicited_pr: https://github.com/JasperHG90/memex/blob/main/CONTRIBUTING.md
+  ai_policy: https://github.com/JasperHG90/memex/blob/main/CONTRIBUTING.md
+  maintainer_vibe: https://github.com/JasperHG90/memex/pulls?q=is%3Apr+is%3Aclosed
+  external_merge_rate_30: https://github.com/JasperHG90/memex/pulls?q=is%3Apr+is%3Aclosed
 ---
 
 # JasperHG90/memex

@@ -19,6 +19,7 @@ source_pr: zsxh1990/pr-genius#commit a0c33f9
 prevention: "写任何用 Trusted Publisher 的 workflow（PyPI / npm provenance / GH Pages OIDC 等）前，permissions 块必须先写。GitHub UI 在 'Add workflow' 模板里默认不带，需要手动加"
 created: 2026-07-09
 learned_at: 2026-07-09
+
 ---
 
 # trusted-publisher-oidc-insufficient
