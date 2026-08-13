@@ -80,6 +80,11 @@ def extract_close_reason(pr: dict, comments: list, reviews: list, events: list =
     if events is None:
         events = []
 
+    # 检查是否已合并
+    if pr.get("merged_at"):
+        merged_by = pr.get("merged_by", {}).get("login", "unknown")
+        return f"已合并 by @{merged_by}"
+
     # 检查是否作者自己关闭 (通过 events API)
     pr_author = pr.get("user", {}).get("login", "")
     for event in events:
@@ -130,7 +135,7 @@ def generate_anti_pattern_draft(repo: str, pr: dict, close_reason: str, comments
     pr_number = pr["number"]
     title = pr["title"]
     author = pr["user"]["login"]
-    body = (pr.get("body") or "")[:500]
+    body = _redact_secrets((pr.get("body") or "")[:500])
     labels = [l["name"] for l in pr.get("labels", [])]
 
     # 从标题/描述中提取 key
@@ -183,7 +188,7 @@ def generate_lesson_draft(repo: str, pr: dict, close_reason: str, comments: list
     pr_number = pr["number"]
     title = pr["title"]
     author = pr["user"]["login"]
-    body = (pr.get("body") or "")[:500]
+    body = _redact_secrets((pr.get("body") or "")[:500])
 
     today = datetime.now().strftime("%Y-%m-%d")
     lesson_slug = re.sub(r'[^a-z0-9]+', '-', title.lower())[:40].strip('-')
@@ -200,11 +205,11 @@ learned_at: {today}
 
 ## Problem
 
-PR [{repo}#{pr_number}]({pr["html_url"]}) 被拒绝。
+PR [{repo}#{pr_number}]({pr["html_url"]}) {close_reason}。
 
 **标题**: {title}
 **作者**: @{author}
-**关闭原因**: {close_reason}
+**状态**: {close_reason}
 
 ## Root Cause
 
@@ -228,6 +233,42 @@ TODO: 如何验证教训已内化
 """
 
 
+def _redact_secrets(text: str) -> str:
+    """脱敏处理：移除或替换敏感信息"""
+    if not text:
+        return text
+
+    # GitHub tokens (ghp_, gho_, ghu_, ghs_, ghr_, github_pat_)
+    text = re.sub(r'ghp_[A-Za-z0-9]{36}', 'ghp_***REDACTED***', text)
+    text = re.sub(r'gho_[A-Za-z0-9]{36}', 'gho_***REDACTED***', text)
+    text = re.sub(r'ghu_[A-Za-z0-9]{36}', 'ghu_***REDACTED***', text)
+    text = re.sub(r'ghs_[A-Za-z0-9]{36}', 'ghs_***REDACTED***', text)
+    text = re.sub(r'ghr_[A-Za-z0-9]{36}', 'ghr_***REDACTED***', text)
+    text = re.sub(r'github_pat_[A-Za-z0-9_]{82}', 'github_pat_***REDACTED***', text)
+
+    # Generic API keys and tokens
+    text = re.sub(r'(?i)(api[_-]?key|token|secret|password|credential)["\s:=]+["\']?[A-Za-z0-9_\-]{20,}["\']?',
+                  r'\1: ***REDACTED***', text)
+
+    # AWS keys
+    text = re.sub(r'AKIA[0-9A-Z]{16}', 'AKIA***REDACTED***', text)
+    text = re.sub(r'(?i)aws[_-]?secret[_-]?access[_-]?key["\s:=]+["\']?[A-Za-z0-9/+=]{40}["\']?',
+                  r'aws_secret_access_key: ***REDACTED***', text)
+
+    # Private keys
+    text = re.sub(r'-----BEGIN (RSA |EC |DSA )?PRIVATE KEY-----[\s\S]*?-----END (RSA |EC |DSA )?PRIVATE KEY-----',
+                  '-----BEGIN PRIVATE KEY-----\n***REDACTED***\n-----END PRIVATE KEY-----', text)
+
+    # Email addresses (optional - only if they look like real emails)
+    text = re.sub(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}', '***@***.***', text)
+
+    # Internal URLs (mi.feishu.cn, internal domains)
+    text = re.sub(r'https?://mi\.feishu\.cn/[^\s"\']+', 'https://***FEISHU_INTERNAL***', text)
+    text = re.sub(r'https?://[a-z0-9\-]+\.internal\.[^\s"\']+', 'https://***INTERNAL***', text)
+
+    return text
+
+
 def _extract_key_comments(comments: list) -> str:
     """提取 maintainer 的关键评论"""
     lines = []
@@ -241,6 +282,8 @@ def _extract_key_comments(comments: list) -> str:
                 preview = "\n".join(body.split("\n")[:3])
                 if len(preview) > 200:
                     preview = preview[:200] + "..."
+                # 脱敏处理
+                preview = _redact_secrets(preview)
                 lines.append(f"> @{author}: {preview}")
     return "\n\n".join(lines) if lines else "无 maintainer 评论"
 
