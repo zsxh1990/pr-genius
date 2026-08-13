@@ -14,6 +14,7 @@ severity: critical
 source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-injection.md
 updated: 2026-08-01
 confidence: medium
+
 ---
 
 # Injection

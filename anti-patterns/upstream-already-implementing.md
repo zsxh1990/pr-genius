@@ -20,6 +20,7 @@ value: HIGH  # 最有价值的反模式，证明方向正确
 source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/upstream-already-implementing.md
 updated: 2026-08-01
 confidence: medium
+
 ---
 
 ## 案例

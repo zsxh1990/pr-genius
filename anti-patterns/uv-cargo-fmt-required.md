@@ -19,6 +19,7 @@ learned_at: 2026-07-02
 source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/uv-cargo-fmt-required.md
 updated: 2026-08-01
 confidence: medium
+
 ---
 
 # uv-cargo-fmt-required

@@ -13,6 +13,7 @@ severity: low
 source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-feature-envy.md
 updated: 2026-08-01
 confidence: medium
+
 ---
 
 # Feature Envy

@@ -18,6 +18,7 @@ learned_at: 2026-07-15
 source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/openclaw-platform-windows.md
 updated: 2026-08-01
 confidence: medium
+
 ---
 
 ## 反模式说明

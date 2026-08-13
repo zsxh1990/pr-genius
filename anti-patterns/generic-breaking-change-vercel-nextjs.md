@@ -13,6 +13,7 @@ severity: high
 source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-breaking-change-vercel-nextjs.md
 updated: 2026-08-01
 confidence: medium
+
 ---
 
 # Vercel Next.js Breaking Change

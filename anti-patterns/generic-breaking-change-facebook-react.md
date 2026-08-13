@@ -13,6 +13,7 @@ severity: high
 source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-breaking-change-facebook-react.md
 updated: 2026-08-01
 confidence: medium
+
 ---
 
 # Facebook React Breaking Change

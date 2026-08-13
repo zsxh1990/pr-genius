@@ -13,6 +13,7 @@ severity: medium
 source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-cosmetic-no-user-pain.md
 updated: 2026-08-01
 confidence: medium
+
 ---
 
 # Cosmetic Changes Without User Pain

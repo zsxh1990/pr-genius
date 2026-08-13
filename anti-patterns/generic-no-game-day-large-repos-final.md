@@ -13,6 +13,7 @@ severity: high
 source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-no-game-day-large-repos-final.md
 updated: 2026-08-01
 confidence: medium
+
 ---
 
 # No Game Day (Large Repos)

@@ -8,6 +8,7 @@ tags: [listing-pr, pending, devtools]
 source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/punkpeye-awesome-mcp-devtools-248-pending.md
 updated: 2026-08-01
 confidence: medium
+
 ---
 
 trigger_keywords:

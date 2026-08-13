@@ -8,6 +8,7 @@ tags: [glama-badge, mcp-server, listing-requirement, bot-gate]
 source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/awesome-mcp-servers-glama-badge-required.md
 updated: 2026-08-01
 confidence: medium
+
 ---
 
 trigger_keywords:

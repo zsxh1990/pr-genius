@@ -19,6 +19,7 @@ learned_at: 2026-07-02
 source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/e2b-feature-not-adding-canned-response.md
 updated: 2026-08-01
 confidence: medium
+
 ---
 
 # e2b-feature-not-adding-canned-response

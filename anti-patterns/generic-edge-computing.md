@@ -13,6 +13,7 @@ severity: high
 source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-edge-computing.md
 updated: 2026-08-01
 confidence: medium
+
 ---
 
 # Edge Computing

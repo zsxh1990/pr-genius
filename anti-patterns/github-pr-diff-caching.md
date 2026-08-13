@@ -19,6 +19,7 @@ created: 2026-07-08
 trigger_keywords:
   - github
 updated: 2026-08-01
+
 ---
 
 ## Problem

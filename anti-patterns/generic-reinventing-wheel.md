@@ -13,6 +13,7 @@ severity: medium
 source_url: https://github.com/zsxh1990/pr-genius/tree/main/anti-patterns/generic-reinventing-wheel.md
 updated: 2026-08-01
 confidence: medium
+
 ---
 
 # Reinventing the Wheel
