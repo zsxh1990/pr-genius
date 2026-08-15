@@ -1,0 +1,28 @@
+{
+  "name": "pr-genius",
+  "version": "1.1.0",
+  "description": "PR 评估和建议工具 — 基于历史反模式和成功模式",
+  "author": "zsxh1990",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zsxh1990/pr-genius.git"
+  },
+  "keywords": [
+    "dsh-plugin",
+    "deepseek",
+    "deepseek-harness",
+    "pr",
+    "code-review"
+  ],
+  "files": [
+    "skill",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
