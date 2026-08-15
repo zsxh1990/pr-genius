@@ -283,13 +283,14 @@
                 data: ['With PR Genius', 'Without PR Genius'],
                 textStyle: { color: chartTextColor }
             },
+            grid: { left: '10%', right: '10%', top: 60, bottom: 70, containLabel: true },
             xAxis: {
-                type: 'log',
+                type: 'category',
+                data: ['<5', '5–10', '10–20', '20–30', '30–45', '45+'],
                 name: 'Review Time (minutes)',
                 nameTextStyle: { color: chartTextColor },
                 axisLabel: {
-                    color: chartTextColor,
-                    formatter: '{value}'
+                    color: chartTextColor
                 },
                 axisLine: { lineStyle: { color: chartAxisColor } }
             },
@@ -304,7 +305,8 @@
                 name: 'With PR Genius',
                 type: 'bar',
                 data: [2, 8, 15, 12, 8, 5],
-                itemStyle: { color: '#3fb950' }
+                itemStyle: { color: '#3fb950' },
+                barGap: '10%'
             }, {
                 name: 'Without PR Genius',
                 type: 'bar',
