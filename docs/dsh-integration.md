@@ -1,3 +1,14 @@
+---
+type: Documentation
+title: DSH Integration Guide
+description: How to use pr-genius as an MCP skill inside DeepSeek Harness (DSH)
+version: 1.6.2
+created: 2026-08-15
+updated: 2026-08-15
+author: zsxh1990
+conforms_to: OKF v0.1 (Sudhakaran88/okf-conformance) + agent_guidelines extension
+---
+
 # DSH Integration Guide
 
 [![DSH Plugin](https://img.shields.io/badge/DSH-Plugin-blue?style=flat-square&logo=deepseek)](https://github.com/topics/dsh-plugin)
