@@ -20,6 +20,7 @@ mcp-name: io.github.zsxh1990/pr-genius
 [![Python](https://img.shields.io/badge/python-3.10+-blue)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/github/license/zsxh1990/pr-genius?style=flat&color=blueviolet)](https://github.com/zsxh1990/pr-genius/blob/main/LICENSE)
 [![Glama score](https://glama.ai/mcp/servers/zsxh1990/pr-genius/badges/score.svg)](https://glama.ai/mcp/servers/zsxh1990/pr-genius)
+[![DSH Plugin](https://img.shields.io/badge/DSH-Plugin-blue?style=flat-square&logo=deepseek)](https://github.com/topics/dsh-plugin)
 
 ---
 
