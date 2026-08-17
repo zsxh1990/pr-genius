@@ -361,31 +361,31 @@ def cmd_issue_review(args) -> int:
     # 人类可读输出
     grade = analysis["quality_grade"]
     score = analysis["score"]
-    risk = analysis["risk"]
+    tier = analysis["tier"]
 
     grade_icons = {"A": "🟢", "B": "🔵", "C": "🟡", "D": "🟠", "F": "🔴"}
-    risk_icons = {"low": "🟢", "medium": "🟡", "high": "🟠", "critical": "🔴"}
+    tier_icons = {"low_risk": "🟢", "medium_risk": "🟡", "high_risk": "🔴"}
 
     print(f"## Issue #{args.number} 审核\n")
     print(f"**{grade_icons.get(grade, '⚪')} 质量等级: {grade}** (score: {score}/100)")
-    print(f"**{risk_icons.get(risk, '⚪')} 风险: {risk}**\n")
+    print(f"**{tier_icons.get(tier, '⚪')} 风险: {tier}**\n")
 
     if analysis["is_spam"]:
         print("🚨 **SPAM detected** — 建议关闭\n")
 
-    if analysis["issues"]:
+    neg_signals = analysis["signals"]["negative"]
+    if neg_signals:
         print("### 问题\n")
-        for issue in analysis["issues"]:
-            sev_icon = {"critical": "🚨", "high": "⚠️", "medium": "📋", "low": "💡"}.get(issue["severity"], "•")
-            print(f"- {sev_icon} {issue['message']}")
-            if issue.get("fix"):
-                print(f"  → {issue['fix']}")
+        for sig in neg_signals:
+            sev_icon = {"critical": "🚨", "high": "⚠️", "medium": "📋", "low": "💡"}.get(sig.get("severity", ""), "•")
+            print(f"- {sev_icon} {sig['description']}")
         print()
 
-    if analysis["suggestions"]:
-        print("### 建议\n")
-        for s in analysis["suggestions"]:
-            print(f"- {s}")
+    if analysis["checklist"]:
+        print("### 待办\n")
+        for item in analysis["checklist"]:
+            check = "✅" if item["done"] else "⬜"
+            print(f"- {check} [{item['priority']}] {item['hint']}")
         print()
 
     crawler = "✅" if analysis["is_crawler_friendly"] else "❌"
@@ -442,14 +442,14 @@ def cmd_issue_batch(args) -> int:
             print(f"  {grade}: {bar} ({count})")
 
     # 列出高风险 issues
-    high_risk = [r for r in batch["results"] if r["risk"] in ("high", "critical")]
+    high_risk = [r for r in batch["results"] if r["tier"] == "high_risk"]
     if high_risk:
         print(f"\n### 高风险 Issues\n")
         for i, r in enumerate(high_risk, 1):
             issue = issues[batch["results"].index(r)]
             print(f"{i}. #{issue['number']}: {issue['title'][:50]}")
-            for problem in r["issues"][:3]:
-                print(f"   - {problem['message']}")
+            for sig in r["signals"]["negative"][:3]:
+                print(f"   - {sig['description']}")
 
     return 0
 

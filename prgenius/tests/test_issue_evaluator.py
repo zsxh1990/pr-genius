@@ -1,4 +1,9 @@
-"""Tests for issue_evaluator module — 200+ test cases, full coverage.
+"""Tests for issue_evaluator module — 285+ test cases, full coverage.
+
+v1.2.0: 输出结构对齐 PR Coach
+- signals: positive/negative/neutral 三分类
+- checklist: action/priority/done/hint
+- tier: low_risk/medium_risk/high_risk
 
 Covers:
 - analyze_issue() core flow
@@ -7,11 +12,14 @@ Covers:
 - _detect_secrets() patterns
 - _check_title/body/labels/structure/no_secrets() scoring
 - _check_labels_complete() validation
-- _calculate_risk() priority logic
+- _calculate_tier() priority logic
 - _grade() mapping
-- _generate_suggestions() output
 - Constant integrity
 - Edge cases: empty, None, huge input, boundary values
+- Adversarial spam tests
+- Performance tests
+- Real issue validation
+- MisakaNet 20% sample
 """
 
 from __future__ import annotations
@@ -30,9 +38,8 @@ from prgenius.issue_evaluator import (
     _check_structure,
     _check_no_secrets,
     _check_labels_complete,
-    _calculate_risk,
+    _calculate_tier,
     _grade,
-    _generate_suggestions,
     ISSUE_TYPE_LABELS,
     REQUIRED_LABELS,
     CRAWLER_LABELS,
@@ -109,7 +116,7 @@ class TestAnalyzeIssue:
         # New max: title(15) + body(30) + labels(15) + structure(20) + no_secrets(20) = 100
         assert r["score"] >= 70
         assert r["quality_grade"] in ("B", "C")
-        assert r["risk"] == "low"
+        assert r["tier"] == "low_risk"
         assert r["is_spam"] is False
 
     def test_empty_issue_returns_low_score(self):
@@ -132,7 +139,7 @@ class TestAnalyzeIssue:
             body="You won a prize! Click here to claim your free gift.",
         ))
         assert r["is_spam"] is True
-        assert r["risk"] == "critical"
+        assert r["tier"] == "high_risk"
         assert r["quality_grade"] == "F"
         assert r["score"] == 0
 
@@ -141,9 +148,9 @@ class TestAnalyzeIssue:
         r = analyze_issue(_make_issue(
             body="My config: password=abc123xyz",
         ))
-        assert r["risk"] == "high"
-        assert any("secret" in i["message"].lower() or "Secret" in i["message"]
-                    for i in r["issues"])
+        assert r["tier"] == "high_risk"
+        assert any("secret" in i["description"].lower() or "Secret" in i["description"]
+                    for i in r["signals"]["negative"])
 
     def test_crawler_friendly_with_enough_labels(self):
         """Should be crawler friendly when >= threshold labels present."""
@@ -179,7 +186,7 @@ class TestAnalyzeIssue:
             labels=["bug", "urgent", "help wanted", "good first issue"],
         ))
         assert r["score"] > 0
-        assert len(r["issues"]) >= 0  # may have repro warning
+        assert len(r["signals"]["negative"]) >= 0  # may have repro warning
 
     def test_labels_as_raw_strings(self):
         """Should handle raw string labels."""
@@ -211,19 +218,19 @@ class TestAnalyzeIssue:
         ))
         # score is low (0 for title + 0 for body + 0 for labels + 0 for structure + 20 for no_secrets = 20)
         # But no "quality" suggestion because score=20 >= 40 threshold? No, 20 < 40
-        assert len(r["suggestions"]) > 0
-        assert any("quality" in s.lower() or "crawler" in s.lower() for s in r["suggestions"])
+        assert len(r["checklist"]) > 0
+        assert any(s.get("action","") in ("improve_content", "add_crawler_labels") for s in r["checklist"])
 
     def test_suggestions_not_empty_for_non_crawler(self):
         """Non-crawler-friendly should suggest adding labels."""
         r = analyze_issue(_make_issue(labels=[]))
-        assert any("crawler" in s.lower() for s in r["suggestions"])
+        assert any(s.get("action","") == "add_crawler_labels" for s in r["checklist"])
 
     def test_body_none_treated_as_empty(self):
         """None body should be treated as empty string."""
         r = analyze_issue(_make_issue(body=None))
         assert r["score"] >= 0
-        assert isinstance(r["issues"], list)
+        assert isinstance(r["signals"]["negative"], list)
 
     def test_issue_with_many_labels(self):
         """Many labels should give full label score."""
@@ -239,8 +246,8 @@ class TestAnalyzeIssue:
             body="This is broken and I'm upset.",
             labels=["bug"],
         ))
-        repro_issues = [i for i in r["issues"] if "reproduction" in i["message"].lower()
-                        or "repro" in i["message"].lower()]
+        repro_issues = [i for i in r["signals"]["negative"] if "reproduction" in i["description"].lower()
+                        or "repro" in i["description"].lower()]
         assert len(repro_issues) == 1
 
     def test_bug_label_with_repro_steps_no_warn(self):
@@ -250,20 +257,20 @@ class TestAnalyzeIssue:
             body="## Steps to Reproduce\n1. Do this\n2. Do that",
             labels=["bug"],
         ))
-        repro_issues = [i for i in r["issues"] if "reproduction" in i["message"].lower()
-                        or "repro" in i["message"].lower()]
+        repro_issues = [i for i in r["signals"]["negative"] if "reproduction" in i["description"].lower()
+                        or "repro" in i["description"].lower()]
         assert len(repro_issues) == 0
 
     def test_intake_label_missing_pending_review_warns(self):
         """Intake without pending-review should warn."""
         r = analyze_issue(_make_issue(labels=["intake"]))
-        intake_issues = [i for i in r["issues"] if "pending-review" in i["message"]]
+        intake_issues = [i for i in r["signals"]["negative"] if "pending-review" in i["description"]]
         assert len(intake_issues) == 1
 
     def test_intake_label_with_pending_review_no_warn(self):
         """Intake with pending-review should not warn."""
         r = analyze_issue(_make_issue(labels=["intake", "pending-review"]))
-        intake_issues = [i for i in r["issues"] if "pending-review" in i["message"]]
+        intake_issues = [i for i in r["signals"]["negative"] if "pending-review" in i["description"]]
         assert len(intake_issues) == 0
 
     def test_enhancement_label_no_special_validation(self):
@@ -274,8 +281,8 @@ class TestAnalyzeIssue:
             labels=["enhancement"],
         ))
         # No bug or intake-specific warnings
-        assert not any("reproduction" in i["message"].lower() for i in r["issues"])
-        assert not any("pending-review" in i["message"] for i in r["issues"])
+        assert not any("reproduction" in i["description"].lower() for i in r["signals"]["negative"])
+        assert not any("pending-review" in i["description"] for i in r["signals"]["negative"])
 
 
 # ============================================================
@@ -1072,7 +1079,7 @@ class TestCheckLabelsComplete:
         issues = _check_labels_complete(["intake"], "")
         assert len(issues) == 1
         assert issues[0]["severity"] == "medium"
-        assert "pending-review" in issues[0]["message"]
+        assert "pending-review" in issues[0]["description"]
 
     def test_bug_with_repro_steps(self):
         """Bug with repro steps = no issues."""
@@ -1104,7 +1111,7 @@ class TestCheckLabelsComplete:
         issues = _check_labels_complete(["bug"], "It crashes sometimes")
         assert len(issues) == 1
         assert issues[0]["severity"] == "medium"
-        assert "reproduction" in issues[0]["message"].lower()
+        assert "reproduction" in issues[0]["description"].lower()
 
     def test_enhancement_label_no_check(self):
         """Enhancement label = no special checks."""
@@ -1114,7 +1121,7 @@ class TestCheckLabelsComplete:
         """Intake + other labels, missing pending-review."""
         issues = _check_labels_complete(["intake", "bug"], "")
         # Should get intake warning
-        assert any("pending-review" in i["message"] for i in issues)
+        assert any("pending-review" in i["description"] for i in issues)
 
     def test_bug_case_insensitive_body(self):
         """Bug repro check should be case insensitive."""
@@ -1122,88 +1129,72 @@ class TestCheckLabelsComplete:
 
 
 # ============================================================
-# 11. _calculate_risk() (12 cases)
+# 11. _calculate_tier() (12 cases)
 # ============================================================
 
-class TestCalculateRisk:
-    """Risk calculation priority tests."""
+class TestCalculateTier:
+    """_calculate_tier() priority logic."""
 
-    def test_spam_is_critical(self):
-        """Spam = critical."""
-        r = {"is_spam": True, "issues": [], "score": 50}
-        assert _calculate_risk(r) == "critical"
+    def test_negative_critical_returns_high_risk(self):
+        """Critical negative signal → high_risk."""
+        neg = [{"key": "spam", "severity": "critical"}]
+        assert _calculate_tier(neg, [], 50) == "high_risk"
 
-    def test_high_severity_issue(self):
-        """High severity issue = high."""
-        r = {
-            "is_spam": False,
-            "issues": [{"severity": "high", "message": "Secret", "fix": ""}],
-            "score": 80,
-        }
-        assert _calculate_risk(r) == "high"
+    def test_negative_high_returns_high_risk(self):
+        """High severity negative → high_risk."""
+        neg = [{"key": "secret", "severity": "high"}]
+        assert _calculate_tier(neg, [], 50) == "high_risk"
 
-    def test_critical_severity_issue(self):
-        """Critical severity issue = high."""
-        r = {
-            "is_spam": False,
-            "issues": [{"severity": "critical", "message": "X", "fix": ""}],
-            "score": 80,
-        }
-        assert _calculate_risk(r) == "high"
+    def test_two_medium_negatives_returns_high_risk(self):
+        """2+ medium negatives → high_risk."""
+        neg = [
+            {"key": "a", "severity": "medium"},
+            {"key": "b", "severity": "medium"},
+        ]
+        assert _calculate_tier(neg, [], 50) == "high_risk"
 
-    def test_low_score_below_30(self):
-        """Score < 30 = high."""
-        r = {"is_spam": False, "issues": [], "score": 25}
-        assert _calculate_risk(r) == "high"
+    def test_one_medium_no_positive_returns_high_risk(self):
+        """1 medium negative + no positive → high_risk."""
+        neg = [{"key": "a", "severity": "medium"}]
+        assert _calculate_tier(neg, [], 50) == "high_risk"
 
-    def test_medium_score_below_60(self):
-        """Score 30-59 = medium."""
-        r = {"is_spam": False, "issues": [], "score": 45}
-        assert _calculate_risk(r) == "medium"
+    def test_low_score_returns_high_risk(self):
+        """Score < 30 → high_risk."""
+        assert _calculate_tier([], [], 25) == "high_risk"
 
-    def test_good_score(self):
-        """Score >= 60 = low."""
-        r = {"is_spam": False, "issues": [], "score": 70}
-        assert _calculate_risk(r) == "low"
+    def test_medium_score_returns_medium_risk(self):
+        """Score 30-59 with no signals → medium_risk."""
+        assert _calculate_tier([], [], 45) == "medium_risk"
 
-    def test_high_score(self):
-        """Score 90+ = low."""
-        r = {"is_spam": False, "issues": [], "score": 95}
-        assert _calculate_risk(r) == "low"
+    def test_high_score_returns_low_risk(self):
+        """Score >= 60 + positive signals → low_risk."""
+        pos = [{"key": "a"}, {"key": "b"}]
+        assert _calculate_tier([], pos, 70) == "low_risk"
 
-    def test_spam_overrides_high_score(self):
-        """Spam overrides high score."""
-        r = {"is_spam": True, "issues": [], "score": 90}
-        assert _calculate_risk(r) == "critical"
+    def test_high_score_no_signals_returns_medium(self):
+        """High score but no positive signals → medium_risk."""
+        assert _calculate_tier([], [], 80) == "medium_risk"
 
-    def test_high_severity_overrides_high_score(self):
-        """High severity issue overrides high score."""
-        r = {
-            "is_spam": False,
-            "issues": [{"severity": "high", "message": "", "fix": ""}],
-            "score": 90,
-        }
-        assert _calculate_risk(r) == "high"
+    def test_one_medium_with_positive_returns_medium(self):
+        """1 medium negative + positive → medium_risk."""
+        neg = [{"key": "a", "severity": "medium"}]
+        pos = [{"key": "b"}]
+        assert _calculate_tier(neg, pos, 60) == "medium_risk"
 
-    def test_medium_severity_does_not_affect_risk(self):
-        """Medium severity issue does not affect risk calculation."""
-        r = {
-            "is_spam": False,
-            "issues": [{"severity": "medium", "message": "", "fix": ""}],
-            "score": 70,
-        }
-        assert _calculate_risk(r) == "low"
+    def test_empty_signals_medium_score(self):
+        """No signals, medium score → medium_risk."""
+        assert _calculate_tier([], [], 50) == "medium_risk"
 
-    def test_no_issues_no_spam_score_exactly_30(self):
-        """Score exactly 30 = medium (not < 30)."""
-        r = {"is_spam": False, "issues": [], "score": 30}
-        assert _calculate_risk(r) == "medium"
+    def test_many_positives_no_negatives(self):
+        """Many positives, no negatives → low_risk."""
+        pos = [{"key": "a"}, {"key": "b"}, {"key": "c"}]
+        assert _calculate_tier([], pos, 80) == "low_risk"
 
-    def test_no_issues_no_spam_score_exactly_60(self):
-        """Score exactly 60 = low (not < 60)."""
-        r = {"is_spam": False, "issues": [], "score": 60}
-        assert _calculate_risk(r) == "low"
-
+    def test_critical_overrides_positives(self):
+        """Critical negative overrides positives."""
+        neg = [{"key": "spam", "severity": "critical"}]
+        pos = [{"key": "a"}, {"key": "b"}]
+        assert _calculate_tier(neg, pos, 90) == "high_risk"
 
 # ============================================================
 # 12. _grade() (10 cases)
@@ -1259,93 +1250,88 @@ class TestGrade:
 
 
 # ============================================================
-# 13. _generate_suggestions() (10 cases)
+# 13. Checklist generation (replaces _generate_suggestions)
 # ============================================================
 
-class TestGenerateSuggestions:
-    """Suggestion generation tests."""
+class TestChecklist:
+    """Checklist generation (replaces _generate_suggestions)."""
 
-    def test_low_score_suggestion(self):
-        """Low score should suggest quality improvement."""
-        r = {"score": 30, "is_crawler_friendly": False, "issues": []}
-        s = _generate_suggestions(r, [])
-        assert any("quality" in x.lower() for x in s)
+    def test_low_score_gets_improve_content(self):
+        """Score < 40 should add improve_content checklist item."""
+        r = analyze_issue(_make_issue(title="hi", body="x", labels=[]))
+        actions = [c["action"] for c in r["checklist"]]
+        assert "improve_content" in actions
 
-    def test_high_score_no_quality_suggestion(self):
-        """High score should not suggest quality improvement."""
-        r = {"score": 80, "is_crawler_friendly": True, "issues": []}
-        s = _generate_suggestions(r, [])
-        assert not any("quality" in x.lower() for x in s)
+    def test_high_score_no_improve_content(self):
+        """Score >= 40 should not add improve_content."""
+        r = analyze_issue(_make_issue(
+            title="Bug: Something broken in the app",
+            body="A" * 500 + "\n## Steps\n- step 1\n- step 2",
+            labels=["bug", "help wanted"],
+        ))
+        actions = [c["action"] for c in r["checklist"]]
+        assert "improve_content" not in actions
 
-    def test_not_crawler_friendly_suggestion(self):
-        """Not crawler friendly should suggest adding labels."""
-        r = {"score": 80, "is_crawler_friendly": False, "issues": []}
-        s = _generate_suggestions(r, [])
-        assert any("crawler" in x.lower() for x in s)
+    def test_not_crawler_gets_add_crawler_labels(self):
+        """Non-crawler-friendly should add add_crawler_labels."""
+        r = analyze_issue(_make_issue(labels=[]))
+        actions = [c["action"] for c in r["checklist"]]
+        assert "add_crawler_labels" in actions
 
-    def test_crawler_friendly_no_suggestion(self):
-        """Crawler friendly should not suggest adding labels."""
-        r = {"score": 80, "is_crawler_friendly": True, "issues": []}
-        s = _generate_suggestions(r, [])
-        assert not any("crawler" in x.lower() for x in s)
+    def test_crawler_friendly_no_crawler_label_item(self):
+        """Crawler-friendly should not add add_crawler_labels."""
+        r = analyze_issue(_make_issue(
+            labels=["agent-friendly", "no-credentials", "has-test"],
+        ))
+        actions = [c["action"] for c in r["checklist"]]
+        assert "add_crawler_labels" not in actions
 
-    def test_issues_with_fix_add_suggestions(self):
-        """Issues with fix should add fix suggestions."""
-        r = {
-            "score": 50,
-            "is_crawler_friendly": False,
-            "issues": [
-                {"severity": "medium", "message": "Missing X", "fix": "Add X to the issue"},
-                {"severity": "low", "message": "Minor", "fix": ""},
-            ],
-        }
-        s = _generate_suggestions(r, [])
-        assert "Add X to the issue" in s
+    def test_checklist_items_have_required_fields(self):
+        """All checklist items should have action, priority, done, hint."""
+        r = analyze_issue(_make_issue(title="hi", body="x", labels=[]))
+        for item in r["checklist"]:
+            assert "action" in item
+            assert "priority" in item
+            assert "done" in item
+            assert "hint" in item
 
-    def test_no_issues_empty_suggestions(self):
-        """No issues = no issue-based suggestions."""
-        r = {"score": 80, "is_crawler_friendly": True, "issues": []}
-        s = _generate_suggestions(r, [])
-        assert s == []
+    def test_spam_returns_close_spam_checklist(self):
+        """Spam issue should have close_spam in checklist."""
+        r = analyze_issue(_make_issue(
+            title="Buy now free money casino",
+            body="You won! Click here.",
+        ))
+        actions = [c["action"] for c in r["checklist"]]
+        assert "close_spam" in actions
+
+    def test_secret_leakage_returns_redact_secrets(self):
+        """Secret leakage should have redact_secrets in checklist."""
+        r = analyze_issue(_make_issue(body="password=abc123xyz"))
+        actions = [c["action"] for c in r["checklist"]]
+        assert "redact_secrets" in actions
+
+    def test_empty_issue_has_improve_content(self):
+        """Empty issue should have improve_content."""
+        r = analyze_issue(_make_issue(title="", body=None, labels=[]))
+        actions = [c["action"] for c in r["checklist"]]
+        assert "improve_content" in actions
+
+    def test_checklist_priority_order(self):
+        """P0 items should come before P1/P2."""
+        r = analyze_issue(_make_issue(
+            title="Buy now free money casino",
+            body="password=abc123xyz",
+        ))
+        priorities = [c["priority"] for c in r["checklist"]]
+        # P0 (close_spam) should be first
+        assert priorities[0] == "P0"
 
     def test_both_low_score_and_not_crawler(self):
-        """Both low score and not crawler = 2 suggestions."""
-        r = {"score": 20, "is_crawler_friendly": False, "issues": []}
-        s = _generate_suggestions(r, [])
-        assert len(s) >= 2
-
-    def test_empty_labels_list(self):
-        """Empty labels list should not crash."""
-        r = {"score": 50, "is_crawler_friendly": False, "issues": []}
-        s = _generate_suggestions(r, [])
-        assert isinstance(s, list)
-
-    def test_multiple_issues_multiple_fixes(self):
-        """Multiple issues with fixes = multiple suggestions."""
-        r = {
-            "score": 40,
-            "is_crawler_friendly": False,
-            "issues": [
-                {"severity": "medium", "message": "A", "fix": "Fix A"},
-                {"severity": "medium", "message": "B", "fix": "Fix B"},
-            ],
-        }
-        s = _generate_suggestions(r, [])
-        assert "Fix A" in s
-        assert "Fix B" in s
-
-    def test_issue_without_fix_not_added(self):
-        """Issue without fix should not add suggestion."""
-        r = {
-            "score": 50,
-            "is_crawler_friendly": False,
-            "issues": [
-                {"severity": "low", "message": "Minor", "fix": ""},
-            ],
-        }
-        s = _generate_suggestions(r, [])
-        assert "" not in s
-
+        """Both low score and not crawler = 2 checklist items (plus any signal-based)."""
+        r = analyze_issue(_make_issue(title="hi", body="x", labels=[]))
+        actions = [c["action"] for c in r["checklist"]]
+        assert "improve_content" in actions
+        assert "add_crawler_labels" in actions
 
 # ============================================================
 # 14. Constant Integrity (12 cases)
@@ -1507,11 +1493,11 @@ class TestEdgeCases:
         assert r["high_risk_count"] >= 1
 
     def test_result_structure_completeness(self):
-        """Result should have all expected keys."""
+        """Result should have all expected keys (aligned with PR Coach)."""
         r = analyze_issue(_make_issue())
         expected_keys = {
-            "number", "title", "score", "risk", "issues",
-            "suggestions", "is_crawler_friendly", "is_spam", "quality_grade",
+            "number", "title", "tier", "signals", "checklist",
+            "score", "quality_grade", "is_crawler_friendly", "is_spam",
         }
         assert set(r.keys()) == expected_keys
 
@@ -1523,7 +1509,7 @@ class TestEdgeCases:
     def test_risk_is_valid_string(self):
         """Risk should be one of the valid values."""
         r = analyze_issue(_make_issue())
-        assert r["risk"] in ("low", "medium", "high", "critical")
+        assert r["tier"] in ("low_risk", "medium_risk", "high_risk")
 
     def test_quality_grade_is_valid(self):
         """Quality grade should be one of the valid values."""
@@ -1531,15 +1517,15 @@ class TestEdgeCases:
         assert r["quality_grade"] in ("A", "B", "C", "D", "F")
 
     def test_issues_list_contains_dicts(self):
-        """Issues list should contain dicts with expected keys."""
+        """Signals negative list should contain dicts with expected keys."""
         r = analyze_issue(_make_issue(
             labels=["bug"],
             body="It crashes",
         ))
-        for issue in r["issues"]:
-            assert "severity" in issue
-            assert "message" in issue
-            assert "fix" in issue
+        for sig in r["signals"]["negative"]:
+            assert "key" in sig
+            assert "description" in sig
+            assert "severity" in sig
 
     def test_analyze_issue_does_not_mutate_input(self):
         """analyze_issue should not mutate the input dict."""
@@ -1563,7 +1549,7 @@ class TestEdgeCases:
         r1 = analyze_issue(issue)
         r2 = analyze_issue(issue)
         assert r1["score"] == r2["score"]
-        assert r1["risk"] == r2["risk"]
+        assert r1["tier"] == r2["tier"]
         assert r1["quality_grade"] == r2["quality_grade"]
 
 
@@ -1577,10 +1563,10 @@ class TestV110Regression:
     def test_secret_name_is_human_readable(self):
         """Secret detection should return human-readable names."""
         r = analyze_issue(_make_issue(body="ghp_ABCDEFGHIJK12345678"))
-        secret_issues = [i for i in r["issues"] if "secret" in i["message"].lower()
-                         or "Secret" in i["message"]]
+        secret_issues = [i for i in r["signals"]["negative"] if "secret" in i["description"].lower()
+                         or "Secret" in i["description"]]
         assert len(secret_issues) == 1
-        assert "GitHub PAT" in secret_issues[0]["message"]
+        assert "GitHub PAT" in secret_issues[0]["description"]
 
     def test_spam_short_body_higher_confidence(self):
         """Short body + keyword should get higher confidence."""
@@ -1599,23 +1585,15 @@ class TestV110Regression:
         ))
         assert r["is_spam"] is False
 
-    def test_calculate_risk_preserves_high_from_issues(self):
-        """_calculate_risk should preserve high from high severity issues."""
-        r = {
-            "is_spam": False,
-            "issues": [{"severity": "high", "message": "Secret", "fix": ""}],
-            "score": 90,
-        }
-        assert _calculate_risk(r) == "high"
+    def test_calculate_tier_high_severity_returns_high_risk(self):
+        """_calculate_tier should return high_risk for high severity signals."""
+        neg = [{"key": "secret", "severity": "high"}]
+        assert _calculate_tier(neg, [], 90) == "high_risk"
 
-    def test_calculate_risk_preserves_critical_from_issues(self):
-        """_calculate_risk should preserve high from critical severity issues."""
-        r = {
-            "is_spam": False,
-            "issues": [{"severity": "critical", "message": "X", "fix": ""}],
-            "score": 90,
-        }
-        assert _calculate_risk(r) == "high"
+    def test_calculate_tier_critical_severity_returns_high_risk(self):
+        """_calculate_tier should return high_risk for critical severity signals."""
+        neg = [{"key": "spam", "severity": "critical"}]
+        assert _calculate_tier(neg, [], 90) == "high_risk"
 
     def test_result_carries_number_and_title(self):
         """Result should always carry issue number and title."""
@@ -1634,33 +1612,26 @@ class TestV110Regression:
         assert r["score"] == 0
         assert r["is_crawler_friendly"] is False
 
-    def test_medium_severity_not_upgraded_to_high(self):
-        """Medium severity issues should not be upgraded to high."""
-        r = {
-            "is_spam": False,
-            "issues": [{"severity": "medium", "message": "X", "fix": ""}],
-            "score": 70,
-        }
-        assert _calculate_risk(r) == "low"
+    def test_medium_severity_with_positive_returns_medium(self):
+        """Medium severity + positive signals → medium_risk."""
+        neg = [{"key": "x", "severity": "medium"}]
+        pos = [{"key": "y"}]
+        assert _calculate_tier(neg, pos, 70) == "medium_risk"
 
-    def test_low_severity_not_upgraded_to_high(self):
-        """Low severity issues should not be upgraded to high."""
-        r = {
-            "is_spam": False,
-            "issues": [{"severity": "low", "message": "X", "fix": ""}],
-            "score": 70,
-        }
-        assert _calculate_risk(r) == "low"
+    def test_low_severity_no_negative_returns_medium(self):
+        """1 positive, no negatives → medium_risk (need 2+ for low_risk)."""
+        pos = [{"key": "y"}]
+        assert _calculate_tier([], pos, 70) == "medium_risk"
 
     def test_multiple_secret_types_human_readable(self):
         """Multiple secrets should be human-readable."""
         r = analyze_issue(_make_issue(
             body="ghp_ABCDEFGHIJK12345678 and AKIAIOSFODNN7EXAMPLE",
         ))
-        secret_issues = [i for i in r["issues"] if "secret" in i["message"].lower()]
+        secret_issues = [i for i in r["signals"]["negative"] if "secret" in i["description"].lower()]
         assert len(secret_issues) == 1
-        assert "GitHub PAT" in secret_issues[0]["message"]
-        assert "AWS Access Key" in secret_issues[0]["message"]
+        assert "GitHub PAT" in secret_issues[0]["description"]
+        assert "AWS Access Key" in secret_issues[0]["description"]
 
     def test_spam_confidence_boundary_100(self):
         """Body length exactly 100 with high keyword = confidence 1 (not spam)."""
@@ -1673,22 +1644,19 @@ class TestV110Regression:
         assert _spam_confidence("Title", body) == 2
 
     def test_issue_with_only_low_severity_issues(self):
-        """Issues with only low severity should not be high risk."""
-        r = {
-            "is_spam": False,
-            "issues": [
-                {"severity": "low", "message": "Minor", "fix": ""},
-                {"severity": "low", "message": "Another", "fix": ""},
-            ],
-            "score": 50,
-        }
-        assert _calculate_risk(r) == "medium"
+        """Low severity signals with medium score → medium_risk."""
+        neg = [
+            {"key": "a", "severity": "low"},
+            {"key": "b", "severity": "low"},
+        ]
+        # low severity not counted as medium, score 50 → medium_risk
+        assert _calculate_tier(neg, [], 50) == "medium_risk"
 
-    def test_empty_issues_list_risk_based_on_score(self):
-        """Empty issues list should base risk on score only."""
-        assert _calculate_risk({"is_spam": False, "issues": [], "score": 70}) == "low"
-        assert _calculate_risk({"is_spam": False, "issues": [], "score": 40}) == "medium"
-        assert _calculate_risk({"is_spam": False, "issues": [], "score": 10}) == "high"
+    def test_empty_signals_score_based(self):
+        """Empty signals should base tier on score only."""
+        assert _calculate_tier([], [], 70) == "medium_risk"  # no pos → medium
+        assert _calculate_tier([], [{"key": "a"}, {"key": "b"}], 70) == "low_risk"  # 2+ pos → low
+        assert _calculate_tier([], [], 25) == "high_risk"  # score < 30 → high
 
     def test_v110_all_fixes集成(self):
         """Integration test: v1.1.0 all fixes together."""
@@ -1706,15 +1674,15 @@ class TestV110Regression:
             labels=["bug", "help wanted", "good first issue", "agent-friendly"],
         ))
         # Should detect secret
-        assert any("Hardcoded Secret" in i["message"] or "Secret" in i["message"]
-                    for i in r["issues"])
+        assert any("Hardcoded Secret" in i["description"] or "Secret" in i["description"]
+                    for i in r["signals"]["negative"])
         # Should not be spam
         assert r["is_spam"] is False
         # Should carry number and title
         assert r["number"] == 100
         assert r["title"] == "Bug: App crashes on startup"
         # Risk should be high (secret detected)
-        assert r["risk"] == "high"
+        assert r["tier"] == "high_risk"
 
 
 # ============================================================
@@ -1908,13 +1876,13 @@ class TestGitHubAPIIntegration:
     def test_triage_by_risk(self, mock_github_response):
         """Should correctly triage issues by risk level."""
         result = analyze_issues_batch(mock_github_response)
-        by_risk = {}
+        by_tier = {}
         for r in result["results"]:
-            by_risk.setdefault(r["risk"], []).append(r["number"])
-        # Issue 1235 is spam → critical
-        assert 1235 in by_risk.get("critical", [])
-        # Issue 1234 is good bug report → low
-        assert 1234 in by_risk.get("low", [])
+            by_tier.setdefault(r["tier"], []).append(r["number"])
+        # Issue 1235 is spam → high_risk
+        assert 1235 in by_tier.get("high_risk", [])
+        # Issue 1234 is good bug report → low_risk or medium_risk
+        assert 1234 in by_tier.get("low_risk", []) or 1234 in by_tier.get("medium_risk", [])
 
     def test_triage_by_grade(self, mock_github_response):
         """Should correctly grade issues."""
@@ -1935,12 +1903,14 @@ class TestGitHubAPIIntegration:
         assert "average_score" in result
         assert "grade_distribution" in result
         assert "results" in result
-        # Each result needs dashboard fields
+        # Each result needs dashboard fields (aligned with PR Coach)
         for r in result["results"]:
             assert "number" in r
             assert "title" in r
             assert "score" in r
-            assert "risk" in r
+            assert "tier" in r
+            assert "signals" in r
+            assert "checklist" in r
             assert "quality_grade" in r
 
     def test_empty_labels_github_format(self):
@@ -2104,9 +2074,9 @@ class TestRealIssueValidation:
         assert 65 <= avg <= 90, f"Average score {avg} outside healthy range"
 
     def test_all_results_have_required_fields(self, real_results):
-        """Every result should have all required fields."""
-        required = {"number", "title", "score", "risk", "issues",
-                    "suggestions", "is_crawler_friendly", "is_spam", "quality_grade"}
+        """Every result should have all required fields (aligned with PR Coach)."""
+        required = {"number", "title", "tier", "signals", "checklist",
+                    "score", "quality_grade", "is_crawler_friendly", "is_spam"}
         for r in real_results["results"]:
             assert required.issubset(set(r.keys())), f"Missing fields in #{r['number']}"
 
@@ -2117,9 +2087,9 @@ class TestRealIssueValidation:
 
     def test_risk_values_valid(self, real_results):
         """All risk values should be valid."""
-        valid_risks = {"low", "medium", "high", "critical"}
+        valid_tiers = {"low_risk", "medium_risk", "high_risk"}
         for r in real_results["results"]:
-            assert r["risk"] in valid_risks, f"#{r['number']}: invalid risk '{r['risk']}'"
+            assert r["tier"] in valid_tiers, f"#{r['number']}: invalid tier '{r['tier']}'"
 
     def test_grade_values_valid(self, real_results):
         """All grade values should be valid."""

@@ -1,10 +1,14 @@
 """Issue Evaluator — 自动化 issue 质量审核
 
+v1.2.0: 输出结构对齐 PR Coach
+- signals: positive/negative/neutral 三分类（替换 issues 列表）
+- checklist: action/priority/done/hint 可追踪（替换 suggestions）
+- tier: low_risk/medium_risk/high_risk（与 PR coach 一致）
+- 保留 score(0-100) + quality_grade(A-F) 便于排序分类
+
 v1.1.0: 维护者 review 修复
 - Secret 标识改为 human-readable 名称
 - Spam 检测加上下文窗口（短 body + keyword = 更高置信度）
-- _calculate_risk() 保留 high severity issues 的 risk
-- 分析结果带 number/title，不依赖 dict 相等性
 
 v1.0.0: 从 PR evaluator 扩展到 issue 审核
 - 核心接口: analyze_issue() → 结构化信号 + 可操作建议 + 风险等级
@@ -97,22 +101,20 @@ def analyze_issue(
 ) -> Dict[str, Any]:
     """分析单个 issue，返回结构化评估结果。
 
+    输出结构对齐 PR Coach (evaluator.py analyze_pr):
+    - signals: positive/negative/neutral 三分类
+    - checklist: action/priority/done/hint 可追踪
+    - tier: low_risk/medium_risk/high_risk
+
+    额外字段（issue 特有）:
+    - score: 0-100 数字分数，便于排序
+    - quality_grade: A-F 等级，便于分类
+    - is_spam: bool
+    - is_crawler_friendly: bool
+
     Args:
         issue: GitHub issue 对象（通过 API 获取）
         crawler_threshold: 爬虫友好标签最少数量
-
-    Returns:
-        {
-            "number": int,
-            "title": str,
-            "score": int (0-100),
-            "risk": "low" | "medium" | "high" | "critical",
-            "issues": [{"severity": str, "message": str, "fix": str}],
-            "suggestions": [str],
-            "is_crawler_friendly": bool,
-            "is_spam": bool,
-            "quality_grade": "A" | "B" | "C" | "D" | "F",
-        }
     """
     number = issue.get("number", 0)
     title = issue.get("title", "")
@@ -120,38 +122,54 @@ def analyze_issue(
     labels = [l.get("name", "") if isinstance(l, dict) else str(l)
               for l in issue.get("labels", [])]
 
-    result: Dict[str, Any] = {
-        "number": number,
-        "title": title,
-        "score": 0,
-        "risk": "low",
-        "issues": [],
-        "suggestions": [],
-        "is_crawler_friendly": False,
-        "is_spam": False,
-        "quality_grade": "F",
-    }
+    signals_pos: List[Dict] = []
+    signals_neg: List[Dict] = []
+    signals_neu: List[Dict] = []
+    checklist: List[Dict] = []
+
+    is_spam = False
+    is_crawler_friendly = False
 
     # 1. Spam 检测（带上下文）
     spam_confidence = _spam_confidence(title, body)
     if spam_confidence >= 2:
-        result["is_spam"] = True
-        result["risk"] = "critical"
-        result["quality_grade"] = "F"
-        result["issues"].append({
+        is_spam = True
+        signals_neg.append({
+            "key": "spam_detected",
+            "description": "Issue appears to be spam",
             "severity": "critical",
-            "message": "Issue appears to be spam",
-            "fix": "Close as spam",
         })
-        return result
+        checklist.append({
+            "action": "close_spam",
+            "priority": "P0",
+            "done": False,
+            "hint": "Close as spam",
+        })
+        return {
+            "number": number,
+            "title": title,
+            "tier": "high_risk",
+            "signals": {"positive": signals_pos, "negative": signals_neg, "neutral": signals_neu},
+            "checklist": checklist,
+            "score": 0,
+            "quality_grade": "F",
+            "is_spam": True,
+            "is_crawler_friendly": False,
+        }
 
     # 2. Secret 泄露检测
     secrets_found = _detect_secrets(body)
     if secrets_found:
-        result["issues"].append({
+        signals_neg.append({
+            "key": "secret_leakage",
+            "description": f"Possible secret leakage: {', '.join(secrets_found)}",
             "severity": "high",
-            "message": f"Possible secret leakage: {', '.join(secrets_found)}",
-            "fix": "Redact secrets before publishing",
+        })
+        checklist.append({
+            "action": "redact_secrets",
+            "priority": "P0",
+            "done": False,
+            "hint": "Redact secrets before publishing",
         })
 
     # 3. 内容质量评分
@@ -161,26 +179,96 @@ def analyze_issue(
     score += _check_labels(labels)
     score += _check_structure(body)
     score += _check_no_secrets(body)
-    result["score"] = min(score, 100)
+    score = min(score, 100)
 
-    # 4. 标签完整性
-    label_issues = _check_labels_complete(labels, body)
-    result["issues"].extend(label_issues)
+    # 4. 标签信号
+    label_signals = _check_labels_complete(labels, body)
+    for sig in label_signals:
+        signals_neg.append(sig)
+        checklist.append({
+            "action": sig["key"],
+            "priority": "P1",
+            "done": False,
+            "hint": sig.get("fix", ""),
+        })
 
-    # 5. 爬虫友好度
+    # 5. Positive signals
+    if title and len(title) >= 10:
+        signals_pos.append({
+            "key": "has_title",
+            "description": f"Title is {len(title)} chars (adequate)",
+        })
+    if body and len(body) >= 100:
+        signals_pos.append({
+            "key": "has_body",
+            "description": f"Body is {len(body)} chars (detailed)",
+        })
+    if len(labels) >= 2:
+        signals_pos.append({
+            "key": "has_labels",
+            "description": f"{len(labels)} labels attached",
+        })
+    has_headers = bool(re.search(r"^#{1,3}\s", body, re.MULTILINE))
+    has_lists = bool(re.search(r"^[-*]\s", body, re.MULTILINE))
+    has_code = bool(re.search(r"```", body))
+    if has_headers and has_lists:
+        signals_pos.append({
+            "key": "structured_format",
+            "description": "Issue has headers and lists (well-structured)",
+        })
+    if has_code:
+        signals_pos.append({
+            "key": "has_code_block",
+            "description": "Issue includes code blocks",
+        })
+
+    # 6. 爬虫友好度
     crawler_count = len(set(labels) & CRAWLER_LABELS)
-    result["is_crawler_friendly"] = crawler_count >= crawler_threshold
+    is_crawler_friendly = crawler_count >= crawler_threshold
+    if is_crawler_friendly:
+        signals_pos.append({
+            "key": "crawler_friendly",
+            "description": f"{crawler_count} crawler-friendly labels",
+        })
+    else:
+        signals_neu.append({
+            "key": "not_crawler_friendly",
+            "description": f"Only {crawler_count}/{crawler_threshold} crawler-friendly labels",
+        })
 
-    # 6. 风险等级（secret high 优先保留）
-    result["risk"] = _calculate_risk(result)
+    # 7. Tier 计算
+    tier = _calculate_tier(signals_neg, signals_pos, score)
 
-    # 7. 质量等级
-    result["quality_grade"] = _grade(result["score"])
+    # 8. Quality grade
+    quality_grade = _grade(score)
 
-    # 8. 建议
-    result["suggestions"] = _generate_suggestions(result, labels)
+    # 9. Checklist: 通用改进建议
+    if score < 40:
+        checklist.append({
+            "action": "improve_content",
+            "priority": "P1",
+            "done": False,
+            "hint": "Improve issue content quality (add description, steps, expected behavior)",
+        })
+    if not is_crawler_friendly:
+        checklist.append({
+            "action": "add_crawler_labels",
+            "priority": "P2",
+            "done": False,
+            "hint": "Add crawler-friendly labels (agent-friendly, no-credentials, has-test)",
+        })
 
-    return result
+    return {
+        "number": number,
+        "title": title,
+        "tier": tier,
+        "signals": {"positive": signals_pos, "negative": signals_neg, "neutral": signals_neu},
+        "checklist": checklist,
+        "score": score,
+        "quality_grade": quality_grade,
+        "is_spam": False,
+        "is_crawler_friendly": is_crawler_friendly,
+    }
 
 
 def analyze_issues_batch(
@@ -205,7 +293,7 @@ def analyze_issues_batch(
         }
 
     spam_count = sum(1 for r in results if r["is_spam"])
-    high_risk = sum(1 for r in results if r["risk"] in ("high", "critical"))
+    high_risk = sum(1 for r in results if r["tier"] == "high_risk")
     avg_score = sum(r["score"] for r in results) / total
     crawler_friendly = sum(1 for r in results if r["is_crawler_friendly"])
 
@@ -370,15 +458,16 @@ def _check_no_secrets(body: str) -> int:
 # ============================================================
 
 def _check_labels_complete(labels: List[str], body: str) -> List[Dict]:
-    """检查标签完整性。"""
-    issues = []
+    """检查标签完整性，返回 signals 格式。"""
+    signals = []
 
     # 检查 intake 类型
     if "intake" in labels:
         if "pending-review" not in labels:
-            issues.append({
+            signals.append({
+                "key": "missing_pending_review",
+                "description": "Intake issue missing 'pending-review' label",
                 "severity": "medium",
-                "message": "Intake issue missing 'pending-review' label",
                 "fix": "Add 'pending-review' label",
             })
 
@@ -390,34 +479,44 @@ def _check_labels_complete(labels: List[str], body: str) -> List[Dict]:
             "1.", "2.", "step 1", "步骤",
         ])
         if not has_repro:
-            issues.append({
+            signals.append({
+                "key": "missing_repro_steps",
+                "description": "Bug issue missing reproduction steps",
                 "severity": "medium",
-                "message": "Bug issue missing reproduction steps",
                 "fix": "Add reproduction steps to the issue body",
             })
 
-    return issues
+    return signals
 
 
 # ============================================================
-# 辅助函数 — 风险计算
+# 辅助函数 — Tier 计算（对齐 PR Coach）
 # ============================================================
 
-def _calculate_risk(result: Dict) -> str:
-    """计算风险等级。
+def _calculate_tier(
+    signals_neg: List[Dict],
+    signals_pos: List[Dict],
+    score: int,
+) -> str:
+    """计算 tier 等级（对齐 PR Coach analyze_pr 的 tier 逻辑）。
 
-    优先级：spam > high severity issues > score
+    优先级：negative severity > score > positive count
     """
-    if result["is_spam"]:
-        return "critical"
-    # 保留 high severity issues 的 risk（secret 泄露等）
-    if any(i["severity"] in ("critical", "high") for i in result["issues"]):
-        return "high"
-    if result["score"] < 30:
-        return "high"
-    if result["score"] < 60:
-        return "medium"
-    return "low"
+    neg_critical = sum(1 for s in signals_neg if s.get("severity") in ("critical", "high"))
+    neg_medium = sum(1 for s in signals_neg if s.get("severity") == "medium")
+    pos_count = len(signals_pos)
+
+    if neg_critical >= 1:
+        return "high_risk"
+    if neg_medium >= 2 or (neg_medium >= 1 and pos_count == 0):
+        return "high_risk"
+    if score < 30:
+        return "high_risk"
+    if neg_medium >= 1 or (pos_count == 0 and score < 60):
+        return "medium_risk"
+    if pos_count >= 2 and neg_critical == 0:
+        return "low_risk"
+    return "medium_risk"
 
 
 # ============================================================
@@ -435,30 +534,3 @@ def _grade(score: int) -> str:
     if score >= 40:
         return "D"
     return "F"
-
-
-# ============================================================
-# 辅助函数 — 建议生成
-# ============================================================
-
-def _generate_suggestions(result: Dict, labels: List[str]) -> List[str]:
-    """生成改进建议。
-
-    v1.1.1: 降低误报
-    - score < 40 才建议 "Improve content quality"（之前 60 太激进）
-    - 只有真正缺内容时才建议补充
-    """
-    suggestions = []
-
-    if result["score"] < 40:
-        suggestions.append("Improve issue content quality")
-
-    if not result["is_crawler_friendly"]:
-        suggestions.append(
-            "Add crawler-friendly labels (agent-friendly, no-credentials, has-test)")
-
-    for issue in result["issues"]:
-        if issue.get("fix"):
-            suggestions.append(issue["fix"])
-
-    return suggestions
