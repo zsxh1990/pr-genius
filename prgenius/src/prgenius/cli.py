@@ -341,7 +341,7 @@ def cmd_issue_review(args) -> int:
             ["gh", "issue", "view", str(args.number),
              "--repo", args.repo,
              "--json", "title,body,labels,author,createdAt,state"],
-            capture_output=True, text=True, timeout=15,
+            capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=15,
         )
         if result.returncode != 0:
             print(f"Error: {result.stderr}", file=sys.stderr)
@@ -408,7 +408,7 @@ def cmd_issue_batch(args) -> int:
         cmd.extend(["--label", args.label])
 
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=30)
         if result.returncode != 0:
             print(f"Error: {result.stderr}", file=sys.stderr)
             return 1
@@ -446,8 +446,7 @@ def cmd_issue_batch(args) -> int:
     if high_risk:
         print(f"\n### 高风险 Issues\n")
         for i, r in enumerate(high_risk, 1):
-            issue = issues[batch["results"].index(r)]
-            print(f"{i}. #{issue['number']}: {issue['title'][:50]}")
+            print(f"{i}. #{r['number']}: {r['title'][:50]}")
             for sig in r["signals"]["negative"][:3]:
                 print(f"   - {sig['description']}")
 
