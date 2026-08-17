@@ -768,6 +768,133 @@ def cmd_review_queue(args) -> int:
 
 
 # ============================================================
+# issue review
+# ============================================================
+
+def cmd_issue_review(args) -> int:
+    """审核单个 issue"""
+    import subprocess
+    import json as _json
+
+    # 通过 GitHub API 获取 issue
+    try:
+        result = subprocess.run(
+            ["gh", "issue", "view", str(args.number),
+             "--repo", args.repo,
+             "--json", "title,body,labels,author,createdAt,state"],
+            capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=15,
+        )
+        if result.returncode != 0:
+            print(f"Error: {result.stderr}", file=sys.stderr)
+            return 1
+        issue = _json.loads(result.stdout)
+    except Exception as e:
+        print(f"Error fetching issue: {e}", file=sys.stderr)
+        return 1
+
+    from .issue_evaluator import analyze_issue
+    analysis = analyze_issue(issue)
+
+    if args.format == "json":
+        print(_json.dumps(analysis, indent=2, ensure_ascii=False))
+        return 0
+
+    # 人类可读输出
+    grade = analysis["quality_grade"]
+    score = analysis["score"]
+    tier = analysis["tier"]
+
+    grade_icons = {"A": "🟢", "B": "🔵", "C": "🟡", "D": "🟠", "F": "🔴"}
+    tier_icons = {"low_risk": "🟢", "medium_risk": "🟡", "high_risk": "🔴"}
+
+    print(f"## Issue #{args.number} 审核\n")
+    print(f"**{grade_icons.get(grade, '⚪')} 质量等级: {grade}** (score: {score}/100)")
+    print(f"**{tier_icons.get(tier, '⚪')} 风险: {tier}**\n")
+
+    if analysis["is_spam"]:
+        print("🚨 **SPAM detected** — 建议关闭\n")
+
+    neg_signals = analysis["signals"]["negative"]
+    if neg_signals:
+        print("### 问题\n")
+        for sig in neg_signals:
+            sev_icon = {"critical": "🚨", "high": "⚠️", "medium": "📋", "low": "💡"}.get(sig.get("severity", ""), "•")
+            print(f"- {sev_icon} {sig['description']}")
+        print()
+
+    if analysis["checklist"]:
+        print("### 待办\n")
+        for item in analysis["checklist"]:
+            check = "✅" if item["done"] else "⬜"
+            print(f"- {check} [{item['priority']}] {item['hint']}")
+        print()
+
+    crawler = "✅" if analysis["is_crawler_friendly"] else "❌"
+    print(f"*爬虫友好: {crawler}*")
+
+    return 0
+
+
+def cmd_issue_batch(args) -> int:
+    """批量审核 issues"""
+    import subprocess
+    import json as _json
+
+    # 构建 gh 命令
+    cmd = ["gh", "issue", "list", "--repo", args.repo,
+           "--state", args.state, "--limit", str(args.limit),
+           "--json", "number,title,body,labels,author,createdAt,state"]
+
+    if args.label:
+        cmd.extend(["--label", args.label])
+
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=30)
+        if result.returncode != 0:
+            print(f"Error: {result.stderr}", file=sys.stderr)
+            return 1
+        issues = _json.loads(result.stdout)
+    except Exception as e:
+        print(f"Error fetching issues: {e}", file=sys.stderr)
+        return 1
+
+    from .issue_evaluator import analyze_issues_batch
+    batch = analyze_issues_batch(issues)
+
+    if args.format == "json":
+        print(_json.dumps(batch, indent=2, ensure_ascii=False))
+        return 0
+
+    # 人类可读输出
+    print(f"## 批量 Issue 审核 ({args.repo})\n")
+    print(f"**总计: {batch['total']} issues**\n")
+
+    print(f"| 指标 | 值 |")
+    print(f"|---|---|")
+    print(f"| 平均分 | {batch['average_score']} |")
+    print(f"| Spam | {batch['spam_count']} |")
+    print(f"| 高风险 | {batch['high_risk_count']} |")
+    print(f"| 爬虫友好 | {batch['crawler_friendly_count']} |")
+
+    print(f"\n### 等级分布\n")
+    for grade, count in batch["grade_distribution"].items():
+        if count > 0:
+            bar = "█" * count
+            print(f"  {grade}: {bar} ({count})")
+
+    # 列出高风险 issues
+    high_risk = [r for r in batch["results"] if r["tier"] == "high_risk"]
+    if high_risk:
+        print(f"\n### 高风险 Issues\n")
+        for i, r in enumerate(high_risk, 1):
+            print(f"{i}. #{r['number']}: {r['title'][:50]}")
+            for sig in r["signals"]["negative"][:3]:
+                print(f"   - {sig['description']}")
+
+    return 0
+
+
+# ============================================================
 # main
 # ============================================================
 
@@ -969,6 +1096,7 @@ def main(argv: list[str] | None = None) -> int:
     ms = m_serve_sub.add_parser("serve", help="Run stdio MCP shell")
     ms.set_defaults(func=cmd_mcp_serve)
 
+<<<<<<< HEAD
     # ---- maintainer (v1.5.0) ----
     mv = sub.add_parser(
         "maintainer",
@@ -1018,6 +1146,22 @@ def main(argv: list[str] | None = None) -> int:
     rq.add_argument("--format", "-f", choices=["json", "markdown"], default="markdown", help="Output format")
     rq.add_argument("--write-digest", help="Write digest to this path (git-trackable, opt-in)")
     rq.set_defaults(func=cmd_review_queue)
+
+    # ---- issue ----
+    issue_p = sub.add_parser("issue", help="Issue 质量审核")
+    issue_p.add_argument("--repo", required=True, help="owner/repo")
+    issue_p.add_argument("--number", type=int, required=True, help="Issue number")
+    issue_p.add_argument("--format", choices=["json", "text"], default="text")
+    issue_p.set_defaults(func=cmd_issue_review)
+
+    # ---- issue-batch ----
+    ibatch_p = sub.add_parser("issue-batch", help="批量 issue 审核")
+    ibatch_p.add_argument("--repo", required=True, help="owner/repo")
+    ibatch_p.add_argument("--state", default="open", choices=["open", "closed", "all"])
+    ibatch_p.add_argument("--label", help="Filter by label")
+    ibatch_p.add_argument("--limit", type=int, default=20)
+    ibatch_p.add_argument("--format", choices=["json", "text"], default="text")
+    ibatch_p.set_defaults(func=cmd_issue_batch)
 
     args = parser.parse_args(argv)
     return args.func(args)
