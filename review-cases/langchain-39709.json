@@ -1,0 +1,18 @@
+{
+  "repo": "langchain-ai/langchain",
+  "pr_number": 39709,
+  "outcome": "merged_success",
+  "title": "release(openai): 1.5.2a1",
+  "author": "eyurtsev",
+  "additions": 3,
+  "deletions": 3,
+  "labels": [
+    "release"
+  ],
+  "body_summary": "Release PR for openai package version 1.5.2a1.",
+  "anti_patterns": [],
+  "quality_notes": "Standard release PR, minimal changes.",
+  "verdict": "pass",
+  "verdict_reason": "Routine release, no code review needed.",
+  "created_at": "2026-08-18T14:04:50.665290"
+}

@@ -1,0 +1,18 @@
+{
+  "repo": "microsoft/vscode",
+  "pr_number": 331372,
+  "outcome": "merged_success",
+  "title": "agentHost: sync BYOK experiment enablement",
+  "author": "vritant24",
+  "additions": 170,
+  "deletions": 82,
+  "labels": [
+    "feature"
+  ],
+  "body_summary": "Synchronizes BYOK experiment setting through agent-host root configuration.",
+  "anti_patterns": [],
+  "quality_notes": "Feature implementation with configuration sync.",
+  "verdict": "pass",
+  "verdict_reason": "Well-structured feature with clear purpose.",
+  "created_at": "2026-08-18T14:04:50.665991"
+}

@@ -1,0 +1,19 @@
+{
+  "repo": "huggingface/transformers",
+  "pr_number": 47708,
+  "outcome": "merged_success",
+  "title": "Fix sliding window cache index off-by-one on wraparound",
+  "author": "hameedibrh",
+  "additions": 68,
+  "deletions": 9,
+  "labels": [
+    "bug",
+    "core"
+  ],
+  "body_summary": "Fixes off-by-one error in sliding window attention cache index when wrapping around.",
+  "anti_patterns": [],
+  "quality_notes": "Focused bug fix with clear explanation.",
+  "verdict": "pass",
+  "verdict_reason": "Clear bug fix with good test coverage.",
+  "created_at": "2026-08-18T14:04:50.665741"
+}
