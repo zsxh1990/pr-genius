@@ -2,7 +2,19 @@
 
 All notable changes to PR Genius will be documented in this file.
 
-Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+Format based on [Keep a Changelog](https://keepachlang.com/en/1.1.0/).
+
+## [1.6.3] - 2026-08-17
+
+### Added
+- **Issue Evaluator** (`prgenius issue`): automated issue quality review
+- **Issue Batch** (`prgenius issue-batch`): batch evaluation from YAML/JSON
+- Calibrated 5-dimension scoring model
+- Secret risk override (neg_critical ≥ 1 → high_risk)
+
+### Fixed
+- Windows encoding (utf-8 + errors="replace")
+- Issue-batch mapping bug (r['number'] instead of index)
 
 ## [1.2.0] - 2026-08-17
 

@@ -18,6 +18,22 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 
 （无）
 
+## [1.6.3] — Issue Evaluator + CLI Entry Points
+
+### Added
+- **issue_evaluator.py**: Automated issue quality scoring with calibrated 5-dimension model (reproducibility, scope clarity, metadata completeness, actionability, secret risk)
+- **CLI `issue` command**: Evaluate single issue by number (`prgenius issue <number>`)
+- **CLI `issue-batch` command**: Batch evaluate issues from YAML/JSON config
+- **Tier classification**: `high_risk` / `needs_work` / `ready` with secret risk override
+- **Evidence collection**: Per-dimension evidence with per-item scores
+
+### Fixed
+- **Windows encoding**: `subprocess.run` with `encoding="utf-8", errors="replace"` prevents garbled terminal output
+- **Issue-batch mapping**: Fixed `issues[batch["results"].index(r)]` KeyError — use `r['number']` and `r['title']` directly
+
+### Changed
+- **Output structure**: Aligned with PR Coach format (verdict dict with score/tier/summary/dimensions/evidence/next_steps)
+
 ## [1.6.2] — Composite Action Fix
 
 ### Fixed

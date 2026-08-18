@@ -6,7 +6,7 @@ FROM python:3.12-slim
 # 标签 — 给 Glama 目录展示用
 LABEL maintainer="zsxh1990 <445655361@qq.com>"
 LABEL project="pr-genius"
-LABEL version="1.6.2"
+LABEL version="1.6.3"
 LABEL description="Evidence-backed PR contribution advisor MCP — local-only, read-only, OKF v0.1 compliant"
 LABEL license="MIT"
 
