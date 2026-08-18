@@ -5,9 +5,6 @@ description: "PR 未关联 Issue，维护者无法追溯背景"
 symptom: "PR 提交后维护者询问背景、动机或关联的 Issue"
 trigger_keywords:
   - "related issue"
-  - "fixes #"
-  - "closes #"
-  - "resolves #"
 fix_action: "在 PR body 中添加 Fixes #NNN 或 Closes #NNN 关联已有 Issue。如果没有 Issue，先开 Issue 讨论"
 source_pr: ""
 severity: medium
