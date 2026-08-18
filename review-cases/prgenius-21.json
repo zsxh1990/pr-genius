@@ -1,0 +1,39 @@
+{
+  "id": "prgenius-21",
+  "repo": "zsxh1990/pr-genius",
+  "pr_number": 21,
+  "title": "feat: add issue evaluator — quality scoring + spam detection (v1.2.0)",
+  "author": "Ikalus1988",
+  "state": "MERGED",
+  "merged": true,
+  "category": "merged_success",
+  "created_at": "2026-08-17T14:10:00Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": true,
+    "has_test_mention": true,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": true,
+    "is_refactor": false,
+    "files_changed": 4,
+    "additions": 2903,
+    "deletions": 0,
+    "review_count": 0,
+    "comment_count": 0
+  },
+  "metrics": {
+    "files_changed": 4,
+    "additions": 2903,
+    "deletions": 0
+  },
+  "tags": ["feature", "issue-evaluator", "spam-detection", "quality-scoring"],
+  "learning_points": [
+    "Large feature PR with comprehensive test coverage (285 tests)",
+    "Multi-dimensional quality scoring (title, body, labels, structure, secrets)",
+    "Adversarial testing approach (Unicode homoglyphs, ZWS, leet speak)",
+    "Output structure aligned with existing PR Coach for consistency",
+    "Real-world validation against 15 repos with stratified sampling"
+  ]
+}
