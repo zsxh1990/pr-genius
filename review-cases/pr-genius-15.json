@@ -1,0 +1,18 @@
+{
+  "repo": "zsxh1990/pr-genius",
+  "pr_number": 15,
+  "outcome": "merged_success",
+  "title": "test: add end-to-end smoke test for coach/analyze/triage/maintainer",
+  "author": "zsxh1990",
+  "additions": 72,
+  "deletions": 0,
+  "labels": [
+    "testing"
+  ],
+  "body_summary": "Adds E2E smoke tests for core CLI tools.",
+  "anti_patterns": [],
+  "quality_notes": "Focused test addition, good coverage.",
+  "verdict": "pass",
+  "verdict_reason": "Test-only PR, well-scoped.",
+  "created_at": "2026-08-18T13:40:39.153210"
+}

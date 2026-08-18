@@ -1,0 +1,18 @@
+{
+  "repo": "Ikalus1988/MisakaNet",
+  "pr_number": 1045,
+  "outcome": "merged_success",
+  "title": "feat(pr-genius): add observation log and FP/FN regression tracking",
+  "author": "zsxh1990",
+  "additions": 386,
+  "deletions": 44,
+  "labels": [
+    "enhancement"
+  ],
+  "body_summary": "Adds observation log feature for tracking false positives/negatives in PR evaluation.",
+  "anti_patterns": [],
+  "quality_notes": "Well-structured feature addition with clear purpose.",
+  "verdict": "pass",
+  "verdict_reason": "Clear feature addition with good documentation.",
+  "created_at": "2026-08-18T13:40:39.152783"
+}
