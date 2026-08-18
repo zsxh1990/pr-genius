@@ -1,8 +1,8 @@
 ---
 type: Documentation
 title: PR Genius Roadmap
-description: "PR Genius feature roadmap — Phase 0 through 4"
-updated: 2026-08-03
+description: "PR Genius feature roadmap — Phase 0 through 9"
+updated: 2026-08-18
 ---
 
 # PR Genius Roadmap
@@ -67,6 +67,9 @@ updated: 2026-08-03
 | 5.1 | Maintainer 增强 (impact/review/author/conflicts) | ✅ v1.5.1 |
 | 5.2 | Action 复用性改造 (多仓库支持) | ✅ v1.5.2 |
 | 6 | Contributor View (5-action + checklist) | ✅ v1.6.0 |
+| 7 | Evidence Pipeline (enrich → features → score → evidence) | ✅ v1.7.0 |
+| 8 | Cross-Validation Framework | 📋 v1.8.0 |
+| 9 | ML Scoring Model | 📋 v2.0.0 |
 
 ## Phase 5 ✅ v1.5.0 — Maintainer View
 
@@ -132,3 +135,34 @@ prgenius/
 | 33 | persona-specific 决策层 | action / next_step / checklist / confidence | ✅ |
 | 34 | contributor unit tests | 17 测试，覆盖 5 actions + checklist + e2e | ✅ |
 | 35 | MCP contributor_view tool | `mcp.py` +50 行 | ✅ |
+
+## Phase 7 ✅ v1.7.0 — Evidence Pipeline
+
+| # | 待办 | 说明 | 状态 |
+|---|------|------|------|
+| 36 | enrich_cases.py | GitHub API 抽取 PR 证据链 | ✅ |
+| 37 | extract_features.py | 10+ 特征向量提取 | ✅ |
+| 38 | score_merge.py | 加权规则评分模型 (89.6% 准确率) | ✅ |
+| 39 | generate_evidence.py | 证据链报告生成 | ✅ |
+| 40 | run_pipeline.py | 一键流水线编排 | ✅ |
+| 41 | Pipeline 测试 | 18 个测试覆盖 evidence/features/predictions | ✅ |
+
+**数据**：268 真实 PR 证据链，173 闭合案例，89.6% 准确率
+
+## Phase 8 🔄 v1.8.0 — Cross-Validation Framework
+
+| # | 待办 | 说明 | 状态 |
+|---|------|------|------|
+| 42 | Holdout 集验证 | 80/20 划分，泛化误差评估 | 计划 |
+| 43 | Feature Importance | SHAP 或排列重要性 | 计划 |
+| 44 | Error Analysis | 错误案例分类 + 规则修正 | 计划 |
+| 45 | 500+ 标注案例 | 跨仓库扩展训练集 | 计划 |
+
+## Phase 9 📋 v2.0.0 — ML Scoring Model
+
+| # | 待办 | 说明 | 状态 |
+|---|------|------|------|
+| 46 | Gradient Boosting 模型 | XGBoost/LightGBM 替代规则 | 计划 |
+| 47 | 10x 特征集 | commit 历史 + CI 状态 + review 时间线 | 计划 |
+| 48 | Auto-retrain Pipeline | 增量学习 + 版本管理 | 计划 |
+| 49 | 模型解释性 | SHAP values + 规则回退 | 计划 |
