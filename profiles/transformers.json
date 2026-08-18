@@ -1,0 +1,27 @@
+{
+  "repo": "huggingface/transformers",
+  "merge_rate": 0.55,
+  "review_speed_hours": 48,
+  "strictness": "very_high",
+  "requirements": {
+    "issue_first": false,
+    "dco_required": false,
+    "tests_required": true,
+    "docs_required": true,
+    "review_required": true,
+    "min_reviewers": 2
+  },
+  "common_rejection_reasons": [
+    "code-agent-slop",
+    "ci-security-gate",
+    "slow-tests-fail",
+    "missing-docs"
+  ],
+  "preferred_pr_size": "small",
+  "label_workflow": false,
+  "bot_automation": [
+    "ci-dashboard",
+    "security-gate"
+  ],
+  "notes": "Very strict CI. AI-generated PRs flagged. Slow tests must pass."
+}

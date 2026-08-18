@@ -1,0 +1,29 @@
+{
+  "repo": "microsoft/vscode",
+  "pr_number": 331340,
+  "outcome": "merged_success",
+  "title": "[cherry-pick] Show Anthropic refusals correctly",
+  "author": "vs-code-engineering[bot]",
+  "author_association": "CONTRIBUTOR",
+  "additions": 129,
+  "deletions": 34,
+  "changed_files": 9,
+  "labels": [
+    "cherry-pick-artifact"
+  ],
+  "body_length": 247,
+  "review_comments": 4,
+  "time_to_merge_hours": 6.3,
+  "size_category": "s",
+  "has_tests": false,
+  "has_docs": false,
+  "is_fix": false,
+  "is_feature": false,
+  "created_at": "2026-08-17T21:15:12Z",
+  "merged_at": "2026-08-18T03:35:55Z",
+  "merge_commit": "d1d996042bdf0cfccbe36f37c2052c314ed159d5",
+  "anti_patterns": [],
+  "quality_notes": "",
+  "verdict": "pass",
+  "verdict_reason": "Merged successfully with good practices."
+}

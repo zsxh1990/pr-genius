@@ -1,0 +1,28 @@
+{
+  "repo": "vercel/next.js",
+  "merge_rate": 0.6,
+  "review_speed_hours": 24,
+  "strictness": "very_high",
+  "requirements": {
+    "issue_first": true,
+    "dco_required": false,
+    "tests_required": true,
+    "docs_required": true,
+    "review_required": true,
+    "min_reviewers": 1
+  },
+  "common_rejection_reasons": [
+    "failing-tests",
+    "performance-regression",
+    "duplicate",
+    "needs-benchmark"
+  ],
+  "preferred_pr_size": "small",
+  "label_workflow": true,
+  "bot_automation": [
+    "stats-comment",
+    "test-report",
+    "canary-release"
+  ],
+  "notes": "Strict CI with performance tracking. Regression detection automated."
+}

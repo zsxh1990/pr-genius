@@ -1,0 +1,28 @@
+{
+  "repo": "langchain-ai/langchain",
+  "merge_rate": 0.65,
+  "review_speed_hours": 24,
+  "strictness": "high",
+  "requirements": {
+    "issue_first": true,
+    "dco_required": false,
+    "tests_required": true,
+    "docs_required": false,
+    "review_required": true,
+    "min_reviewers": 1
+  },
+  "common_rejection_reasons": [
+    "missing-issue-link",
+    "duplicate",
+    "not-aligned-with-roadmap",
+    "needs-more-tests"
+  ],
+  "preferred_pr_size": "small",
+  "label_workflow": true,
+  "bot_automation": [
+    "require-issue-link",
+    "size-label",
+    "stale"
+  ],
+  "notes": "Strict issue-first policy. External contributors need Issue approval before PR."
+}

@@ -1,0 +1,26 @@
+{
+  "repo": "microsoft/vscode",
+  "merge_rate": 0.7,
+  "review_speed_hours": 12,
+  "strictness": "medium",
+  "requirements": {
+    "issue_first": true,
+    "dco_required": false,
+    "tests_required": true,
+    "docs_required": false,
+    "review_required": true,
+    "min_reviewers": 1
+  },
+  "common_rejection_reasons": [
+    "duplicate",
+    "out-of-scope",
+    "needs-discussion"
+  ],
+  "preferred_pr_size": "small",
+  "label_workflow": true,
+  "bot_automation": [
+    "area-label",
+    "assign-reviewer"
+  ],
+  "notes": "Fast review cycle. Clear area labels. Internal team has priority."
+}
