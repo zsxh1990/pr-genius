@@ -527,6 +527,8 @@ def cmd_update_issue(args) -> int:
             check=True,
             capture_output=True,
             text=True,
+            encoding="utf-8",
+            errors="replace",
         )
         print(f"Updated {args.issue_repo}#{args.issue_number}")
     except subprocess.CalledProcessError as e:
@@ -595,6 +597,7 @@ def cmd_auto_ping(args) -> int:
                  "--repo", p["repo"],
                  "--body", comment],
                 check=True, capture_output=True, text=True,
+                encoding="utf-8", errors="replace",
             )
             print(f"  ✅ Pinged {p['repo']}#{p['number']}")
         except subprocess.CalledProcessError as e:
@@ -646,6 +649,7 @@ def cmd_auto_rebase(args) -> int:
                 ["gh", "api", f"repos/{p['repo']}/pulls/{p['number']}/update-branch",
                  "-X", "PUT"],
                 capture_output=True, text=True,
+                encoding="utf-8", errors="replace",
             )
             if result.returncode == 0:
                 print(f"  ✅ Rebased {p['repo']}#{p['number']}")
@@ -1096,7 +1100,6 @@ def main(argv: list[str] | None = None) -> int:
     ms = m_serve_sub.add_parser("serve", help="Run stdio MCP shell")
     ms.set_defaults(func=cmd_mcp_serve)
 
-<<<<<<< HEAD
     # ---- maintainer (v1.5.0) ----
     mv = sub.add_parser(
         "maintainer",
