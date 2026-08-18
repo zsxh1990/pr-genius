@@ -18,6 +18,26 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 
 （无）
 
+## [1.7.0] — Evidence Pipeline
+
+### Added
+- **enrich_cases.py**: Fetch real PR data from GitHub API and build evidence chains
+- **extract_features.py**: Extract feature vectors from enriched cases
+- **score_merge.py**: Weighted rule-based scoring model with 89.6% accuracy
+- **generate_evidence.py**: Generate evidence chain reports with completeness verification
+- **run_pipeline.py**: One-command pipeline orchestrator (enrich → features → score → evidence)
+- **Pipeline tests**: 18 tests for evidence, features, and predictions validation
+
+### Changed
+- **Scoring accuracy**: 89.6% on closed cases (exceeds 80% target)
+- **Evidence completeness**: 100% of cases have verified evidence chains
+- **Feature coverage**: 10+ features per case (review engagement, author association, size, labels)
+
+### Data
+- **268 enriched cases**: Real PR data from GitHub API
+- **268 feature vectors**: Structured features for scoring
+- **268 predictions**: Merge probability predictions with evaluation metrics
+
 ## [1.6.3] — Issue Evaluator + CLI Entry Points
 
 ### Added

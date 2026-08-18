@@ -36,6 +36,12 @@ cache/
 /data/
 /prgenius/data/
 
+# Evidence pipeline (generated)
+/evidence/
+/features/
+/predictions/
+/reports/
+
 # Sensitive
 secrets.txt
 *.pat
