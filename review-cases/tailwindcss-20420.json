@@ -23,5 +23,26 @@
   "anti_patterns": [],
   "quality_notes": "",
   "verdict": "pass",
-  "verdict_reason": "Merged successfully with good practices."
+  "verdict_reason": "Merged successfully with good practices.",
+  "review_engagement": {
+    "total_reviews": 5,
+    "bot_reviews": 4,
+    "human_reviews": 1,
+    "maintainer_reviews": 1,
+    "avg_review_depth": 528,
+    "has_approval": true,
+    "has_changes_requested": false,
+    "review_states": [
+      "COMMENTED",
+      "COMMENTED",
+      "COMMENTED",
+      "COMMENTED",
+      "APPROVED"
+    ]
+  },
+  "rejection_signals": {
+    "auto_closed": false,
+    "no_human_engagement": false,
+    "rejection_mechanism": "human_close"
+  }
 }

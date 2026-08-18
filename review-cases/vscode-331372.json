@@ -14,5 +14,28 @@
   "quality_notes": "Feature implementation with configuration sync.",
   "verdict": "pass",
   "verdict_reason": "Well-structured feature with clear purpose.",
-  "created_at": "2026-08-18T14:04:50.665991"
+  "created_at": "2026-08-18T14:04:50.665991",
+  "review_engagement": {
+    "total_reviews": 7,
+    "bot_reviews": 4,
+    "human_reviews": 3,
+    "maintainer_reviews": 2,
+    "avg_review_depth": 1229,
+    "has_approval": true,
+    "has_changes_requested": false,
+    "review_states": [
+      "COMMENTED",
+      "COMMENTED",
+      "COMMENTED",
+      "COMMENTED",
+      "COMMENTED",
+      "COMMENTED",
+      "APPROVED"
+    ]
+  },
+  "rejection_signals": {
+    "auto_closed": false,
+    "no_human_engagement": false,
+    "rejection_mechanism": "human_close"
+  }
 }

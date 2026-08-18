@@ -15,5 +15,22 @@
   "quality_notes": "Focused bug fix with clear explanation.",
   "verdict": "pass",
   "verdict_reason": "Clear bug fix with good test coverage.",
-  "created_at": "2026-08-18T14:04:50.665741"
+  "created_at": "2026-08-18T14:04:50.665741",
+  "review_engagement": {
+    "total_reviews": 1,
+    "bot_reviews": 0,
+    "human_reviews": 1,
+    "maintainer_reviews": 1,
+    "avg_review_depth": 81,
+    "has_approval": true,
+    "has_changes_requested": false,
+    "review_states": [
+      "APPROVED"
+    ]
+  },
+  "rejection_signals": {
+    "auto_closed": false,
+    "no_human_engagement": false,
+    "rejection_mechanism": "human_close"
+  }
 }
