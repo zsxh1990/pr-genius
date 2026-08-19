@@ -1,7 +1,7 @@
 name: PR Genius Auto Check
 
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, synchronize, reopened]
 
 permissions:
@@ -28,10 +28,12 @@ jobs:
 
       - name: Get diff stat
         id: diff
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_REPO: ${{ github.repository }}
         run: |
-          # Get diff stat for impact assessment
-          # Try HEAD~1 first (single commit), fall back to origin/main (multi-commit)
-          DIFF_STAT=$(git diff --stat HEAD~1 HEAD 2>/dev/null || git diff --stat origin/main HEAD 2>/dev/null || echo "")
+          # Get diff stat for impact assessment via GitHub API
+          DIFF_STAT=$(gh pr diff $PR_NUMBER --repo $PR_REPO --stat 2>/dev/null || echo "")
           echo "stat<<EOF" >> "$GITHUB_OUTPUT"
           echo "$DIFF_STAT" >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
