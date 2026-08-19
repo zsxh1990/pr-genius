@@ -1,3 +1,7 @@
+---
+type: Documentation
+---
+
 # PR-Genius 双视角差距分析
 
 ## 核心洞察

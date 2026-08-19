@@ -1,3 +1,7 @@
+---
+type: Documentation
+---
+
 # PR Review 工具差距分析
 
 ## 现有工具覆盖矩阵

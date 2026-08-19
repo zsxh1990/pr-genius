@@ -47,7 +47,7 @@ BOT_AUTHORS = {
 
 # Issue 关联正则
 ISSUE_LINK_RE = re.compile(
-    r"(?:fix(?:es|ed)?|close[sd]?|resolve[sd]?)\s+#\d+",
+    r"(?:fix(?:es|ed)?|close[sd]?|resolve[sd]?|references?|related\s+to)\s+?",
     re.IGNORECASE,
 )
 

@@ -1,3 +1,7 @@
+---
+type: Documentation
+---
+
 # PR 评估框架：高区分度信号
 
 ## 核心发现
