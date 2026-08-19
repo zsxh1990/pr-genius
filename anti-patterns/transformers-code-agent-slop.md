@@ -3,7 +3,7 @@ type: Anti-Pattern
 key: transformers-code-agent-slop
 repo: huggingface/transformers
 description: "PR 被标记为 AI 生成的低质量代码"
-symptom: "标签包含 "Code agent slop""
+symptom: "标签包含 \"Code agent slop\""
 trigger_keywords:
   - "code agent slop"
 fix_action: "确保代码经过人工审查，理解每行改动的原因"

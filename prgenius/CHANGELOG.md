@@ -1,3 +1,7 @@
+---
+type: Documentation
+---
+
 # Changelog
 
 All notable changes to PR Genius will be documented in this file.

@@ -1,3 +1,7 @@
+---
+type: Documentation
+---
+
 # PR-Genius 最小可行实现计划
 
 ## 核心原则
