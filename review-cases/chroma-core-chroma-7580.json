@@ -1,0 +1,39 @@
+{
+  "id": "chroma-core-chroma-7580",
+  "repo": "chroma-core/chroma",
+  "pr_number": 7580,
+  "title": "fix(test): use idiomatic Jest error assertions",
+  "author": "zsxh1990",
+  "state": "OPEN",
+  "merged": false,
+  "category": "review_pending",
+  "created_at": "2026-08-13T16:25:58Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": true,
+    "has_test_mention": true,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": true,
+    "is_small_pr": true,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 2,
+    "additions": 14,
+    "deletions": 26,
+    "review_count": 0,
+    "comment_count": 2,
+    "change_ratio": 0.35
+  },
+  "metrics": {
+    "files_changed": 2,
+    "additions": 14,
+    "deletions": 26
+  }
+}
