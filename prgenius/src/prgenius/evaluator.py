@@ -105,6 +105,23 @@ def get_repo_size(star_count: int) -> str:
         return "large"
 
 
+def compute_risk_score(merge_rate: float, star_count: int, has_tests: bool) -> float:
+    """Compute a 0-100 risk score based on repo context.
+
+    Higher score = higher risk for contributors.
+    """
+    base = 50.0
+    if merge_rate < 0.3:
+        base += 20
+    elif merge_rate > 0.7:
+        base -= 15
+    if star_count > 20000:
+        base += 10
+    if not has_tests:
+        base += 15
+    return max(0.0, min(100.0, base))
+
+
 def check_issue_link(body: str) -> bool:
     return bool(ISSUE_LINK_RE.search(body))
 
