@@ -1,0 +1,36 @@
+name: Test Docker Image
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  pr-genius-docker:
+    name: PR Genius (Docker)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run PR Genius Coach
+        id: coach
+        uses: docker://ghcr.io/zsxh1990/pr-genius:latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: >
+            coach "${{ github.event.pull_request.title }}"
+            --repo ${{ github.repository }}
+            --body "${{ github.event.pull_request.body }}"
+            --format json
+
+      - name: Output Result
+        run: |
+          echo "## 🧬 PR Genius Docker Test" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Docker image executed successfully" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### PR Info" >> $GITHUB_STEP_SUMMARY
+          echo "- Title: ${{ github.event.pull_request.title }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Repo: ${{ github.repository }}" >> $GITHUB_STEP_SUMMARY
