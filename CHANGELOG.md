@@ -14,7 +14,7 @@ GitHub tag/release compare links per Keep a Changelog guidance.
 - **Git Tag**：仓库标签
 - **Milestone**：功能里程碑（可能跨多个 tag）
 
-## [Unreleased]
+## [1.8.0] — comment_mode PR Comment Feature
 
 ### Added
 - **PR Genius Check action**: `comment_mode` input (`never` / `high_risk` /
@@ -22,6 +22,14 @@ GitHub tag/release compare links per Keep a Changelog guidance.
   pr-agent's `/review`. Existing comments are updated in place via a
   `<!-- pr-genius:report -->` marker (no comment spam on repeated syncs).
   Legacy `comment_on_high_risk: true` still works (acts as `high_risk`).
+- **`post_comment.py`**: Structured comment renderer with tier icons,
+  severity icons, positive/negative/neutral signals, checklist,
+  anti-patterns, and repo context. Advisory-only (never fails workflow).
+
+### Fixed
+- **`post_comment.py`**: `anti_patterns_hit` contains string keys, not
+  dicts. Use `anti_patterns_detail` (with severity/fix_action) for the
+  Anti-Patterns section rendering. Fall back to key-only when detail unavailable.
 
 ## [1.7.2] — Docker Image & Bug Fixes
 
