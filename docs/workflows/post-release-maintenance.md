@@ -1,3 +1,7 @@
+---
+type: Document
+---
+
 # Post-Release Maintenance Workflow
 
 每次发版后执行的标准化维护流程。

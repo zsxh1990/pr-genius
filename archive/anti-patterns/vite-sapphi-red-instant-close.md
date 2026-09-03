@@ -67,7 +67,7 @@ Vite 在 `BLACKLIST.md` 永久拉黑清单中。任何 Agent 在自动扫描时�
 
 ## 相关反模式
 
-- [e2b-feature-not-adding-canned-response](./e2b-feature-not-adding-canned-response.md) — 类似拒绝模式但礼貌且可换方向
+- [e2b-feature-not-adding-canned-response](../../anti-patterns/e2b-feature-not-adding-canned-response.md) — 类似拒绝模式但礼貌且可换方向
 
 ## Applicability
 

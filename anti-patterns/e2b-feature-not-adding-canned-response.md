@@ -85,7 +85,7 @@ echo "$(date +%Y-%m-%d) - e2b-dev/E2B _ERROR_HANDLER 方向归档" >> archive.md
 
 ## 相关反模式
 
-- [vite-sapphi-red-instant-close](./vite-sapphi-red-instant-close.md) — 类似但秒拒 + 不可挽回
+- [vite-sapphi-red-instant-close](../archive/anti-patterns/vite-sapphi-red-instant-close.md) — 类似但秒拒 + 不可挽回
 
 ## Applicability
 

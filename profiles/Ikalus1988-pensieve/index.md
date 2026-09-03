@@ -27,6 +27,14 @@ agent_guidelines_evidence:
     evidence_urls: ["https://github.com/Ikalus1988/pensieve/pulls"]
     verified_at: "2026-08-07"
     confidence: high
+  require_signed_off:
+    evidence_urls: ["https://github.com/Ikalus1988/pensieve/pulls"]
+    verified_at: "2026-08-07"
+    confidence: medium
+  maintainer_vibe:
+    evidence_urls: ["https://github.com/Ikalus1988/pensieve/pulls"]
+    verified_at: "2026-08-07"
+    confidence: high
   ai_policy:
     evidence_urls: ["https://github.com/Ikalus1988/pensieve"]
     verified_at: "2026-08-07"

@@ -182,15 +182,14 @@ federated_at: 2026-07-02
 - [rejected-pr-retrospective.md](./docs/rejected-pr-retrospective.md) — 被拒 PR 复盘 — 18 个被拒 PR 的反模式分析
 - [success-pr-retrospective.md](./docs/success-pr-retrospective.md) — 成功 PR 复盘 — 21 个已合并 PR 的成功模式分析
 
-### ⚠️ anti-patterns/ — 反模式库（46 项）
+### ⚠️ anti-patterns/ — 反模式库
 
 > [README 索引](./anti-patterns/README.md) · 主条目按反模式 slug 组织。
+> 已归档 518 项孤立反模式至 [archive/anti-patterns/](./archive/anti-patterns/)。
 
 **AI/Vibe 编码反模式**
 
 - [ai-generated-content.md](./anti-patterns/ai-generated-content.md)
-- [anthropics-anthropic-sdk-python-1757.json](./anti-patterns/anthropics-anthropic-sdk-python-1757.json)
-- [missing-issue-reference.md](./anti-patterns/missing-issue-reference.md)
 - [nousresearch-comp-desktop.md](./anti-patterns/nousresearch-comp-desktop.md)
 - [nousresearch-cron-risk.md](./anti-patterns/nousresearch-cron-risk.md)
 - [nousresearch-duplicate-pr.md](./anti-patterns/nousresearch-duplicate-pr.md)
@@ -207,17 +206,10 @@ federated_at: 2026-07-02
 **代码/工程反模式**
 
 - [breaking-change-no-compat.md](./anti-patterns/breaking-change-no-compat.md)
-- [cosmetic-no-user-pain.md](./anti-patterns/cosmetic-no-user-pain.md)
 - [duplicate-pr-same-author.md](./anti-patterns/duplicate-pr-same-author.md)
-- [fork-main-sync-upstream.md](./anti-patterns/fork-main-sync-upstream.md)
-- [fork-pr-ci-permission-error.md](./anti-patterns/fork-pr-ci-permission-error.md)
-- [github-pr-diff-caching.md](./anti-patterns/github-pr-diff-caching.md)
 - [honcho-default-db-module-trap.md](./anti-patterns/honcho-default-db-module-trap.md)
-- [low-value-contribution.md](./anti-patterns/low-value-contribution.md)
-- [stale-pr-far-behind-main.md](./anti-patterns/stale-pr-far-behind-main.md)
-- [superseded-by-maintainer.md](./anti-patterns/superseded-by-maintainer.md)
-- [upstream-already-implementing.md](./anti-patterns/upstream-already-implementing.md)
 - [uv-cargo-fmt-required.md](./anti-patterns/uv-cargo-fmt-required.md)
+- [e2b-feature-not-adding-canned-response.md](./anti-patterns/e2b-feature-not-adding-canned-response.md) — E2B 仓"we're not adding this feature"反模式
 
 **OpenClaw 专项反模式（25 项，从 PR #93310 复盘提取）**
 
@@ -232,7 +224,7 @@ federated_at: 2026-07-02
 - [openclaw-merge-risk-caching.md](./anti-patterns/openclaw-merge-risk-caching.md)
 - [openclaw-message-delivery-risk.md](./anti-patterns/openclaw-message-delivery-risk.md)
 - [openclaw-missing-proof.md](./anti-patterns/openclaw-missing-proof.md)
-- [openclaw-module-refactored.md](./anti-patterns/openclaw-module-refactored.md)
+- [openclaw-module-refactored.md](./archive/anti-patterns/openclaw-module-refactored.md)
 - [openclaw-needs-real-behavior-proof.md](./anti-patterns/openclaw-needs-real-behavior-proof.md)
 - [openclaw-platform-windows.md](./anti-patterns/openclaw-platform-windows.md)
 - [openclaw-refactor-risk.md](./anti-patterns/openclaw-refactor-risk.md)
@@ -243,34 +235,6 @@ federated_at: 2026-07-02
 - [openclaw-sweeper-not-planned.md](./anti-patterns/openclaw-sweeper-not-planned.md)
 - [openclaw-triage-needs-pr-context.md](./anti-patterns/openclaw-triage-needs-pr-context.md)
 - [openclaw-waiting-on-author.md](./anti-patterns/openclaw-waiting-on-author.md)
-
-**真实 PR 反模式案例（按仓组织）**
-
-- [awesome-mcp-servers-glama-badge-required.md](./anti-patterns/awesome-mcp-servers-glama-badge-required.md) — awesome-mcp-servers 仓 Glama score badge requirement
-- [vite-sapphi-red-instant-close.md](./anti-patterns/vite-sapphi-red-instant-close.md) — Vite 仓 sapphi-red 秒拒反 AI PR
-- [e2b-feature-not-adding-canned-response.md](./anti-patterns/e2b-feature-not-adding-canned-response.md) — E2B 仓"we're not adding this feature"反模式
-- [trusted-publisher-oidc-insufficient.md](./anti-patterns/trusted-publisher-oidc-insufficient.md) — PyPI Trusted Publisher OIDC 权限缺失
-- [actions-checkout-2509.json](./anti-patterns/actions-checkout-2509.json)
-- [actions-checkout-2517.json](./anti-patterns/actions-checkout-2517.json)
-- [actions-checkout-2520.json](./anti-patterns/actions-checkout-2520.json)
-- [astral-sh-uv-20487.json](./anti-patterns/astral-sh-uv-20487.json)
-- [chroma-core-chroma-7434.json](./anti-patterns/chroma-core-chroma-7434.json)
-- [docker-compose-13930.json](./anti-patterns/docker-compose-13930.json)
-- [docker-compose-13932.json](./anti-patterns/docker-compose-13932.json)
-- [encode-httpx-3765.json](./anti-patterns/encode-httpx-3765.json)
-- [facebook-react-37042.json](./anti-patterns/facebook-react-37042.json)
-- [goharbor-harbor-23566.json](./anti-patterns/goharbor-harbor-23566.json)
-- [goharbor-harbor-23567.json](./anti-patterns/goharbor-harbor-23567.json)
-- [golang-go-80407.json](./anti-patterns/golang-go-80407.json)
-- [grafana-grafana-128644.json](./anti-patterns/grafana-grafana-128644.json)
-- [grafana-grafana-128650.json](./anti-patterns/grafana-grafana-128650.json)
-- [hashicorp-terraform-38874.json](./anti-patterns/hashicorp-terraform-38874.json)
-- [hashicorp-terraform-38886.json](./anti-patterns/hashicorp-terraform-38886.json)
-- [hashicorp-terraform-38889.json](./anti-patterns/hashicorp-terraform-38889.json)
-- [microsoft-TypeScript-63622~63638.json](./anti-patterns/microsoft-TypeScript-63622.json)（共 9 条）
-- [microsoft-markitdown-2200.json](./anti-patterns/microsoft-markitdown-2200.json)
-- [pydantic-pydantic-13439~13455.json](./anti-patterns/pydantic-pydantic-13439.json)（共 7 条）
-- [tailwindlabs-tailwindcss-20323~20342.json](./anti-patterns/tailwindlabs-tailwindcss-20323.json)（共 7 条）
 
 ### ✅ success-patterns/ — 成功模式库（31 项）
 

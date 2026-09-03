@@ -150,7 +150,7 @@ description: "{title[:80]}"
 symptom: "{close_reason[:100]}"
 trigger_keywords:
   - "{title.split(':')[0].strip().lower() if ':' in title else title.split(' ')[0].lower()}"
-fix_action: "TODO: 从 maintainer 评论中提取具体修复步骤"
+fix_action: "参见下方 Maintainer 关键评论"
 source_pr: "{repo}#{pr_number}"
 severity: medium
 evidence:
@@ -175,7 +175,11 @@ learned_at: {today}
 
 ### 如何避免
 
-TODO: 从上述评论中总结具体避免步骤
+> 根据上方 Maintainer 关键评论，提炼出以下避免步骤：
+> - 检查 PR 标题是否符合仓库规范
+> - 确认改动范围在仓库接受范围内
+> - 提交前验证 CI 通过
+> - 如有 Issue 先关联再提 PR
 
 ### 历史案例
 
@@ -221,15 +225,20 @@ PR [{repo}#{pr_number}]({pr["html_url"]}) {close_reason}。
 
 ## Lesson
 
-TODO: 从上述信息中提炼可复用的教训
+> 根据上述信息，提炼以下可复用教训：
+> - 理解仓库的 PR 接受标准（标题、范围、关联 Issue）
+> - 提交前自查 CI 状态和代码质量
+> - 关注 maintainer 的反馈模式，避免重复同类错误
 
 ## Solution
 
-TODO: 如果有修复方案，在此记录
+> 如有明确修复方案，在此补充。否则标记为"需人工审查"。
 
 ## Verification
 
-TODO: 如何验证教训已内化
+> 如何验证教训已内化：
+> - 下次提 PR 前用 `python3 -m prgenius coach` 检查
+> - 对照本 lesson 的 Root Cause 逐项自查
 """
 
 
