@@ -90,15 +90,22 @@ def render_comment(result: dict) -> str:
             lines.append(f"- [{mark}] **[{item.get('priority', '')}]** {item.get('hint', '')}")
         lines.append("")
 
-    anti = result.get("anti_patterns_hit") or []
-    if anti:
+    # Prefer anti_patterns_detail (dicts with severity/fix_action),
+    # fall back to anti_patterns_hit (list of key strings).
+    anti_detail = result.get("anti_patterns_detail") or []
+    anti_keys = result.get("anti_patterns_hit") or []
+    if anti_detail or anti_keys:
         lines.append("### \U0001F50E Anti-Patterns")
         lines.append("")
-        for a in anti:
-            sev_icon = SEV_ICONS.get(a.get("severity", ""), "\u2022")
-            lines.append(f"- {sev_icon} **{a.get('description', a.get('key', ''))}**")
-            if a.get("fix_action"):
-                lines.append(f"  - \u2192 {a['fix_action']}")
+        if anti_detail:
+            for a in anti_detail:
+                sev_icon = SEV_ICONS.get(a.get("severity", ""), "\u2022")
+                lines.append(f"- {sev_icon} **{a.get('description', a.get('key', ''))}**")
+                if a.get("fix_action"):
+                    lines.append(f"  - \u2192 {a['fix_action']}")
+        else:
+            for key in anti_keys:
+                lines.append(f"- \u2022 **{key}**")
         lines.append("")
 
     ctx = result.get("repo_context") or {}
