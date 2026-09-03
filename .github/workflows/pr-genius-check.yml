@@ -67,36 +67,14 @@ jobs:
           echo "tier=$TIER" >> "$GITHUB_OUTPUT"
           echo "summary=$SUMMARY" >> "$GITHUB_OUTPUT"
 
-      - name: Comment on PR
+      - name: Post PR Genius comment
         if: always()
-        uses: actions/github-script@v9
         env:
-          TIER: ${{ steps.genius.outputs.tier }}
-          SUMMARY: ${{ steps.genius.outputs.summary }}
           RESULT: ${{ steps.genius.outputs.result }}
-          PR_GENIUS_URL: ${{ env.PR_GENIUS_URL }}
-        with:
-          script: |
-            const tier = process.env.TIER || 'unknown';
-            const summary = process.env.SUMMARY || 'No summary';
-            const result = process.env.RESULT || '{}';
-            const prGeniusUrl = process.env.PR_GENIUS_URL;
-
-            let emoji = '🟢';
-            let status = 'Safe to submit';
-            if (tier === 'high_risk') {
-              emoji = '🔴';
-              status = 'Blocking issues found';
-            } else if (tier === 'medium_risk') {
-              emoji = '🟡';
-              status = 'Review suggestions';
-            }
-
-            const body = `## ${emoji} PR Genius\n\n${summary}\n\n<details><summary>Full Analysis</summary>\n\n\`\`\`json\n${result}\n\`\`\`\n</details>\n\n---\n*Powered by [PR Genius](${prGeniusUrl})*`;
-
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: body
-            });
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          echo "$RESULT" | python3 .github/actions/pr-genius-check/post_comment.py \
+            --repo "$REPO" --pr-number "$PR_NUMBER" --token "$GH_TOKEN" || \
+            echo "::warning::PR Genius comment step failed (advisory only)"
