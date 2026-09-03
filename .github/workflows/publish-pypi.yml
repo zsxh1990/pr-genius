@@ -13,6 +13,7 @@ jobs:
     environment: pypi  # optional but recommended for Trusted Publisher
     permissions:
       id-token: write   # required for PyPI Trusted Publisher OIDC token
+      contents: write   # required to update major version tag (v1)
 
     steps:
       - name: Checkout
