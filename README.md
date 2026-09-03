@@ -279,3 +279,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). AI-assisted PRs welcome.
 }
 ```
 <!-- action bot verification test -->
+# Test
+
+This is a test.
