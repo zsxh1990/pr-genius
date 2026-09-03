@@ -19,7 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.11'
+          python-version: '3.12'
 
       - name: Cache Python dependencies
         uses: actions/cache@v6
@@ -94,4 +94,4 @@ jobs:
           git clone --depth 1 https://github.com/Sudhakaran88/okf-conformance.git /tmp/okf-conformance
           node /tmp/okf-conformance/validator/okf-validate.mjs . || true
           echo "OKF validator completed (warnings only — M4 violations tracked in issue #XXX)"
-          echo "OK: upstream OKF v0.1 validator passed"
+          echo "OK: upstream OKF v0.1 validator passed"python-version: '3.12'
