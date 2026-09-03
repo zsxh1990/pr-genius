@@ -47,3 +47,4 @@ secrets.txt
 *.pat
 token.txt
 
+.aider.*
