@@ -11,6 +11,8 @@
     python3 validate.py --strict  # 警告也当错误
 """
 
+from __future__ import annotations
+
 import os
 import re
 import sys
