@@ -4,6 +4,8 @@ Extracted from scripts/coach_cases.py and scripts/daily_content_expand.py
 to avoid code duplication.
 """
 
+from __future__ import annotations
+
 import json
 import re
 import subprocess
