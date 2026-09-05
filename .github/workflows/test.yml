@@ -26,7 +26,18 @@ jobs:
           if [ -f requirements.txt ]; then
             pip install -r requirements.txt
           fi
-          pip install -e "prgenius[dev,mcp]"
+          # mcp requires Python >=3.10
+          if python3 -c "import sys; assert sys.version_info >= (3,10)"; then
+            pip install -e "prgenius[dev,mcp]"
+          else
+            pip install -e "prgenius[dev]"
+          fi
 
       - name: Run tests
-        run: python3 -m pytest prgenius/tests/ -v -k "not test_score_merge"
+        run: |
+          # mcp tests require Python >=3.10
+          if python3 -c "import sys; assert sys.version_info >= (3,10)"; then
+            python3 -m pytest prgenius/tests/ -v -k "not test_score_merge"
+          else
+            python3 -m pytest prgenius/tests/ -v -k "not test_score_merge and not test_mcp"
+          fi

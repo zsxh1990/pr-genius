@@ -37,6 +37,7 @@ jobs:
 
       - name: Install dev dependencies
         run: |
+          # mcp requires Python >=3.10; validate.yml uses 3.12 so always install
           pip install -e "prgenius[dev,mcp]"
 
       - name: Run tests (fail fast)
