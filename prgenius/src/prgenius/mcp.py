@@ -19,7 +19,9 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-REPO_ROOT_DEFAULT = Path(__file__).resolve().parents[3]
+from .utils import get_repo_root
+
+REPO_ROOT_DEFAULT = get_repo_root()
 
 
 def _load_tools(repo_root: Path | None = None):

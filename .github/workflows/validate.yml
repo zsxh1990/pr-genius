@@ -19,7 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.11'
+          python-version: '3.12'
 
       - name: Cache Python dependencies
         uses: actions/cache@v6
@@ -34,6 +34,14 @@ jobs:
           if [ -f requirements.txt ]; then
             pip install -r requirements.txt
           fi
+
+      - name: Install dev dependencies
+        run: |
+          pip install pytest
+          pip install -e prgenius/[dev]
+
+      - name: Run tests (fail fast)
+        run: pytest prgenius/tests/ -v
 
       - name: Run validator (soft checks)
         run: python3 validate.py
@@ -76,7 +84,8 @@ jobs:
                       if not m.startswith(('http://', 'https://', '/')):
                           target = os.path.normpath(os.path.join(os.path.dirname(md), m))
                           referenced.add(target)
-              except: pass
+              except Exception:
+                  pass
           orphans = md_files - referenced - {'README.md', 'CHANGELOG.md', 'LICENSE', 'CODE_OF_CONDUCT.md'}
           if orphans:
               print('::warning::Orphan .md files:', sorted(orphans))
@@ -88,10 +97,7 @@ jobs:
         # Run the official Sudhakaran88/okf-conformance validator against this
         # repo. Hard fail on any MUST violation. SHOULD warnings are surfaced
         # but do not block merge. See docs/COMPLIANCE_AUDIT.md.
-        # NOTE: Temporarily disabled due to 50 M4 broken link violations.
-        # See: https://github.com/zsxh1990/pr-genius/issues/XXX
         run: |
           git clone --depth 1 https://github.com/Sudhakaran88/okf-conformance.git /tmp/okf-conformance
-          node /tmp/okf-conformance/validator/okf-validate.mjs . || true
-          echo "OKF validator completed (warnings only — M4 violations tracked in issue #XXX)"
+          node /tmp/okf-conformance/validator/okf-validate.mjs .
           echo "OK: upstream OKF v0.1 validator passed"

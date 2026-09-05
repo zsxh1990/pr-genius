@@ -247,7 +247,8 @@ def contributor_view(
     Reuses analyze_pr for shared tier/signals.
     """
     if repo_root is None:
-        repo_root = Path(__file__).resolve().parents[3]
+        from .utils import get_repo_root
+        repo_root = get_repo_root()
 
     analysis = analyze_pr(
         title, description, repo, str(repo_root),

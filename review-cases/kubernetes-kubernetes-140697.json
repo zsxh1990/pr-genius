@@ -35,5 +35,6 @@
     "files_changed": 2,
     "additions": 20,
     "deletions": 5
-  }
+  },
+  "case_id": "kubernetes-140697"
 }

@@ -1,0 +1,36 @@
+{
+  "repo": "langchain-ai/langchain",
+  "pr_number": 39701,
+  "outcome": "rejected_auto_close",
+  "title": "fix(openai): surface Responses API stream failures",
+  "author": "unknown",
+  "author_association": "CONTRIBUTOR",
+  "additions": 0,
+  "deletions": 0,
+  "labels": [
+    "missing-issue-link",
+    "new-contributor"
+  ],
+  "review_engagement": {
+    "total_reviews": 0,
+    "bot_reviews": 0,
+    "human_reviews": 0,
+    "maintainer_reviews": 0,
+    "avg_review_depth": 0,
+    "has_approval": false,
+    "has_changes_requested": false,
+    "review_states": []
+  },
+  "rejection_signals": {
+    "auto_closed": true,
+    "no_human_engagement": true,
+    "rejection_mechanism": "bot_auto_close",
+    "rejection_reason": "missing-issue-link"
+  },
+  "anti_patterns": [
+    "langchain-missing-issue-link"
+  ],
+  "verdict": "reject",
+  "verdict_reason": "Auto-closed by require-issue-link bot. No Issue关联.",
+  "created_at": "2026-08-18T14:24:51.568796"
+}

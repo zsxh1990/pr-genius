@@ -24,9 +24,10 @@ from .parser import (
 )
 from .evaluator import analyze_pr, eval_pr
 from .status import check_status, format_table
+from .utils import get_repo_root
 
 
-REPO_ROOT_DEFAULT = Path(__file__).resolve().parents[3]
+REPO_ROOT_DEFAULT = get_repo_root()
 
 
 def _get_repo_root(args) -> Path:

@@ -1,0 +1,39 @@
+{
+  "id": "HolmesGPT-holmesgpt-2379",
+  "repo": "HolmesGPT/holmesgpt",
+  "pr_number": 2379,
+  "title": "fix: filter Azure-incompatible dynamic MCP tool schemas",
+  "author": "zsxh1990",
+  "state": "OPEN",
+  "merged": false,
+  "category": "review_pending",
+  "created_at": "2026-08-11T05:50:32Z",
+  "signals": {
+    "has_issue_link": true,
+    "has_description": true,
+    "has_test_mention": true,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 2,
+    "additions": 288,
+    "deletions": 6,
+    "review_count": 0,
+    "comment_count": 3,
+    "change_ratio": 0.96
+  },
+  "metrics": {
+    "files_changed": 2,
+    "additions": 288,
+    "deletions": 6
+  }
+}

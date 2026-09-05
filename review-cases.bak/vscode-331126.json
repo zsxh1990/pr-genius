@@ -1,0 +1,31 @@
+{
+  "repo": "microsoft/vscode",
+  "pr_number": 331126,
+  "outcome": "merged_success",
+  "title": "Chat: Use mouse Back to return to agent sessions",
+  "author": "dmitrivMS",
+  "author_association": "COLLABORATOR",
+  "additions": 37,
+  "deletions": 0,
+  "changed_files": 1,
+  "labels": [
+    "feature-request",
+    "ux",
+    "multi-chat-sessions"
+  ],
+  "body_length": 855,
+  "review_comments": 3,
+  "time_to_merge_hours": 29.6,
+  "size_category": "xs",
+  "has_tests": false,
+  "has_docs": false,
+  "is_fix": false,
+  "is_feature": true,
+  "created_at": "2026-08-16T21:39:47Z",
+  "merged_at": "2026-08-18T03:15:26Z",
+  "merge_commit": "c178d46ab59196bf7ff3c21aa5118b7f43a77149",
+  "anti_patterns": [],
+  "quality_notes": "",
+  "verdict": "pass",
+  "verdict_reason": "Merged successfully with good practices."
+}

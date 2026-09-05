@@ -1,0 +1,39 @@
+{
+  "id": "facebook-react-37069",
+  "repo": "facebook/react",
+  "pr_number": 37069,
+  "title": "[Flight] Add an inline data channel",
+  "author": "gaearon",
+  "state": "OPEN",
+  "merged": false,
+  "category": "open_pending",
+  "created_at": "2026-07-20T02:35:51Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": true,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": true,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 17,
+    "additions": 1517,
+    "deletions": 36,
+    "review_count": 0,
+    "comment_count": 1,
+    "change_ratio": 0.02
+  },
+  "metrics": {
+    "files_changed": 17,
+    "additions": 1517,
+    "deletions": 36
+  }
+}

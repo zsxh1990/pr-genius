@@ -27,5 +27,6 @@
     "files_changed": 29,
     "additions": 216,
     "deletions": 72
-  }
+  },
+  "case_id": "pydantic-13443"
 }

@@ -35,5 +35,6 @@
     "files_changed": 2,
     "additions": 123,
     "deletions": 9
-  }
+  },
+  "case_id": "ruff-26924"
 }

@@ -1,0 +1,39 @@
+{
+  "id": "docker-compose-13935",
+  "repo": "docker/compose",
+  "pr_number": 13935,
+  "title": "Pin image volume sources in config",
+  "author": "ousamabenyounes",
+  "state": "OPEN",
+  "merged": false,
+  "category": "open_pending",
+  "created_at": "2026-07-11T07:35:49Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": false,
+    "files_changed": 2,
+    "additions": 290,
+    "deletions": 21,
+    "review_count": 0,
+    "comment_count": 0,
+    "change_ratio": 0.07
+  },
+  "metrics": {
+    "files_changed": 2,
+    "additions": 290,
+    "deletions": 21
+  }
+}

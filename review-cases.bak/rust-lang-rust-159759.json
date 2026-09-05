@@ -1,0 +1,39 @@
+{
+  "id": "rust-lang-rust-159759",
+  "repo": "rust-lang/rust",
+  "pr_number": 159759,
+  "title": "rustc-dev-guide subtree update",
+  "author": "tshepang",
+  "state": "OPEN",
+  "merged": false,
+  "category": "open_pending",
+  "created_at": "2026-07-23T08:44:37Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": true,
+    "is_backport": false,
+    "is_dependency_update": true,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 22,
+    "additions": 419,
+    "deletions": 380,
+    "review_count": 0,
+    "comment_count": 6,
+    "change_ratio": 0.91
+  },
+  "metrics": {
+    "files_changed": 22,
+    "additions": 419,
+    "deletions": 380
+  }
+}

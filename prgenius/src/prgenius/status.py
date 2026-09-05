@@ -210,7 +210,8 @@ def _map_check_state(state: Optional[str]) -> str:
 def fetch_open_prs(author: Optional[str] = None, repo: Optional[str] = None) -> list[PRInfo]:
     """Fetch open PRs from GitHub using a single GraphQL query."""
     search_query = _build_search_query(author, repo)
-    query = _GRAPHQL_QUERY.replace("SEARCH_QUERY", search_query.replace('"', '\\"'))
+    safe_query = json.dumps(search_query)[1:-1]  # JSON-escapes \, ", newlines, control chars
+    query = _GRAPHQL_QUERY.replace("SEARCH_QUERY", safe_query)
 
     raw = _run_gh(["api", "graphql", "-f", f"query={query}"])
     data = json.loads(raw)

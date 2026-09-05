@@ -351,7 +351,8 @@ def triage_pr(
     Returns:
         dict with verdict, violations, policy_loaded, etc.
     """
-    root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[3]
+    from .utils import get_repo_root
+    root = Path(repo_root) if repo_root else get_repo_root()
 
     policy = _load_policy(repo, root)
 

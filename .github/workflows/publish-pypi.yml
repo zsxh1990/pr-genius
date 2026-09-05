@@ -32,6 +32,9 @@ jobs:
           # Use [dev] extras so we also pick up build/twine for local validation
           pip install -e "prgenius[dev]" || pip install build twine
 
+      - name: Run tests (gate)
+        run: python3 -m pytest prgenius/tests/ -v
+
       - name: Build sdist + wheel
         working-directory: prgenius
         run: python -m build

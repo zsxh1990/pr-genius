@@ -1,0 +1,30 @@
+{
+  "repo": "facebook/react",
+  "pr_number": 37290,
+  "outcome": "merged_success",
+  "title": "[flags] Enable enableParallelTransitions",
+  "author": "acdlite",
+  "author_association": "COLLABORATOR",
+  "additions": 6,
+  "deletions": 6,
+  "changed_files": 6,
+  "labels": [
+    "CLA Signed",
+    "React Core Team"
+  ],
+  "body_length": 297,
+  "review_comments": 3,
+  "time_to_merge_hours": 3.7,
+  "size_category": "xs",
+  "has_tests": false,
+  "has_docs": false,
+  "is_fix": false,
+  "is_feature": false,
+  "created_at": "2026-08-14T13:43:49Z",
+  "merged_at": "2026-08-14T17:26:45Z",
+  "merge_commit": "eb8feb71096eec5c885b2a4c7d8d030d3622f265",
+  "anti_patterns": [],
+  "quality_notes": "",
+  "verdict": "pass",
+  "verdict_reason": "Merged successfully with good practices."
+}

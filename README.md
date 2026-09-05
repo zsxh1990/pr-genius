@@ -2,9 +2,9 @@
 type: Knowledge Bundle
 title: PR Genius — Pre-submission PR Advisor
 description: Evidence-backed PR contribution advisor for large open-source projects
-version: 1.4.0
+version: 1.8.0
 created: 2026-07-01
-updated: 2026-07-22
+updated: 2026-09-05
 author: zsxh1990
 conforms_to: OKF v0.1 (Sudhakaran88/okf-conformance) + agent_guidelines extension
 ---
@@ -17,7 +17,7 @@ mcp-name: io.github.zsxh1990/pr-genius
 
 [![CI](https://github.com/zsxh1990/pr-genius/actions/workflows/validate.yml/badge.svg)](https://github.com/zsxh1990/pr-genius/actions/workflows/validate.yml)
 [![PyPI](https://img.shields.io/pypi/v/prgenius-core)](https://pypi.org/project/prgenius-core/)
-[![Python](https://img.shields.io/badge/python-3.10+-blue)](https://www.python.org/downloads/)
+[![Python](https://img.shields.io/badge/python-3.9+-blue)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/github/license/zsxh1990/pr-genius?style=flat&color=blueviolet)](https://github.com/zsxh1990/pr-genius/blob/main/LICENSE)
 [![Glama score](https://glama.ai/mcp/servers/zsxh1990/pr-genius/badges/score.svg)](https://glama.ai/mcp/servers/zsxh1990/pr-genius)
 [![DSH Plugin](https://img.shields.io/badge/DSH-Plugin-blue?style=flat-square&logo=deepseek)](https://github.com/topics/dsh-plugin)
@@ -204,7 +204,7 @@ updates:
 
 Docker: `docker run --rm -i ghcr.io/zsxh1990/pr-genius:1.3.0`
 
-### 8 MCP Tools
+### 12 MCP Tools
 
 | Tool | Purpose | Required Args |
 |------|---------|---------------|
@@ -216,6 +216,10 @@ Docker: `docker run --rm -i ghcr.io/zsxh1990/pr-genius:1.3.0`
 | `get_case_study` | PR case study details | `case_id` |
 | `search_patterns` | Anti-pattern/success-pattern search | `query` |
 | `schema_info` | OKF schema versions | *(none)* |
+| `status_prs` | Outbound PR status heartbeat | `author` |
+| `profile_writeback_suggestions` | Profile update suggestions (dry-run) | `author` |
+| `maintainer_view` | Maintainer-side PR view | `repo` |
+| `review_queue` | Prioritized review queue | `repo` |
 
 ### Tool Parameter Notes
 

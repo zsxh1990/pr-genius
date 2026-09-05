@@ -1,0 +1,39 @@
+{
+  "id": "hashicorp-terraform-38895",
+  "repo": "hashicorp/terraform",
+  "pr_number": 38895,
+  "title": "commands/state_migrate: Implement JSON output",
+  "author": "SarahFrench",
+  "state": "OPEN",
+  "merged": false,
+  "category": "review_approved_pending",
+  "created_at": "2026-07-20T18:51:42Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": true,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": false,
+    "files_changed": 12,
+    "additions": 1350,
+    "deletions": 187,
+    "review_count": 1,
+    "comment_count": 0,
+    "change_ratio": 0.14
+  },
+  "metrics": {
+    "files_changed": 12,
+    "additions": 1350,
+    "deletions": 187
+  }
+}

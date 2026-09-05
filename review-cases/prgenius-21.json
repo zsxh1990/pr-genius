@@ -28,12 +28,18 @@
     "additions": 2903,
     "deletions": 0
   },
-  "tags": ["feature", "issue-evaluator", "spam-detection", "quality-scoring"],
+  "tags": [
+    "feature",
+    "issue-evaluator",
+    "spam-detection",
+    "quality-scoring"
+  ],
   "learning_points": [
     "Large feature PR with comprehensive test coverage (285 tests)",
     "Multi-dimensional quality scoring (title, body, labels, structure, secrets)",
     "Adversarial testing approach (Unicode homoglyphs, ZWS, leet speak)",
     "Output structure aligned with existing PR Coach for consistency",
     "Real-world validation against 15 repos with stratified sampling"
-  ]
+  ],
+  "case_id": "pr-genius-21"
 }

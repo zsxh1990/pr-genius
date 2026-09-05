@@ -1,0 +1,48 @@
+# .dockerignore — reduce Docker build context size
+# Verified against Dockerfile and Dockerfile.github_action COPY instructions
+
+# Version control
+.git/
+.gitignore
+
+# Python build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+.venv-build/
+
+# Testing / CI
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Aider history
+.aider.*
+
+# Node
+node_modules/
+
+# Large directories NOT copied to image
+evidence/
+review-cases/
+predictions/
+features/
+misakanet-50/
+archive/
+data/
+reports/
+validate_checks/

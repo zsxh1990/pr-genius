@@ -35,5 +35,6 @@
     "files_changed": 1,
     "additions": 2,
     "deletions": 0
-  }
+  },
+  "case_id": "fastapi-16026"
 }

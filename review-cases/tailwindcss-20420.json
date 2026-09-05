@@ -44,5 +44,6 @@
     "auto_closed": false,
     "no_human_engagement": false,
     "rejection_mechanism": "human_close"
-  }
+  },
+  "case_id": "tailwindcss-20420"
 }

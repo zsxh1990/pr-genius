@@ -35,5 +35,6 @@
     "files_changed": 11,
     "additions": 97,
     "deletions": 129
-  }
+  },
+  "case_id": "rust-159760"
 }

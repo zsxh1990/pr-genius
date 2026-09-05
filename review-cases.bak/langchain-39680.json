@@ -1,0 +1,33 @@
+{
+  "repo": "langchain-ai/langchain",
+  "pr_number": 39680,
+  "outcome": "merged_success",
+  "title": "fix(core): accept non-dict Mapping values in mustache templates",
+  "author": "Haaaarry",
+  "author_association": "CONTRIBUTOR",
+  "additions": 13,
+  "deletions": 1,
+  "changed_files": 2,
+  "labels": [
+    "core",
+    "fix",
+    "external",
+    "size: XS",
+    "new-contributor"
+  ],
+  "body_length": 1008,
+  "review_comments": 1,
+  "time_to_merge_hours": 22.0,
+  "size_category": "xs",
+  "has_tests": false,
+  "has_docs": false,
+  "is_fix": true,
+  "is_feature": false,
+  "created_at": "2026-08-17T02:31:21Z",
+  "merged_at": "2026-08-18T00:29:34Z",
+  "merge_commit": "9c21d84bcbaf541d6aa9bcc28131bad3f4288c2d",
+  "anti_patterns": [],
+  "quality_notes": "",
+  "verdict": "pass",
+  "verdict_reason": "Merged successfully with good practices."
+}

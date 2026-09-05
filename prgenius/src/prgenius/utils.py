@@ -13,6 +13,11 @@ from typing import Optional
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 
 
+def get_repo_root() -> Path:
+    """Return the repo root directory (3 levels up from this file)."""
+    return Path(__file__).resolve().parents[3]
+
+
 def run_gh(args: list[str], timeout: int = 30) -> dict | list | None:
     """Run gh CLI and return JSON result."""
     cmd = ["gh"] + args

@@ -28,11 +28,17 @@
     "additions": 12,
     "deletions": 0
   },
-  "tags": ["packaging", "dsh", "plugin", "distribution"],
+  "tags": [
+    "packaging",
+    "dsh",
+    "plugin",
+    "distribution"
+  ],
   "learning_points": [
     "Minimal change (12 lines) with significant distribution impact",
     "Addresses reviewer feedback from related PR (awesome-dsh-plugin)",
     "Package manifest pattern: dsh.bundle + files array + patch yml",
     "Self-contained feature - no test needed for packaging-only changes"
-  ]
+  ],
+  "case_id": "misakanet-1055"
 }

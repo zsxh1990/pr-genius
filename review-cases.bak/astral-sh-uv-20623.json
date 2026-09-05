@@ -1,0 +1,39 @@
+{
+  "id": "astral-sh-uv-20623",
+  "repo": "astral-sh/uv",
+  "pr_number": 20623,
+  "title": "Test separated macOS code signing in CI",
+  "author": "zanieb",
+  "state": "OPEN",
+  "merged": false,
+  "category": "review_approved_pending",
+  "created_at": "2026-07-22T17:36:56Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": false,
+    "files_changed": 2,
+    "additions": 271,
+    "deletions": 1,
+    "review_count": 2,
+    "comment_count": 0,
+    "change_ratio": 0.0
+  },
+  "metrics": {
+    "files_changed": 2,
+    "additions": 271,
+    "deletions": 1
+  }
+}

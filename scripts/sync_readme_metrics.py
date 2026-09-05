@@ -20,6 +20,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 
 
+def _get_version() -> str:
+    """Read version from prgenius/pyproject.toml instead of hardcoding."""
+    pyproject = ROOT / "prgenius" / "pyproject.toml"
+    text = pyproject.read_text(encoding="utf-8")
+    match = re.search(r'^version\s*=\s*"(.+?)"', text, re.MULTILINE)
+    return match.group(1) if match else "unknown"
+
+
 def count_md_files() -> dict:
     """扫描真实数据快照"""
     profile_dirs = []
@@ -91,7 +99,7 @@ def build_metrics_block(snapshot: dict, coach: dict) -> str:
 
     return f"""| Metric | Value |
 |---|---|
-| Version | 1.2.0 |
+| Version | {_get_version()} |
 | Repo profiles | {snapshot['profiles']} |
 | Case studies (.md) | {snapshot['case_studies_md']} |
 | Anti-patterns (.md) | {snapshot['anti_patterns_md']} |

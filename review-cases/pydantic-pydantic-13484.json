@@ -35,5 +35,6 @@
     "files_changed": 14,
     "additions": 225,
     "deletions": 1
-  }
+  },
+  "case_id": "pydantic-13484"
 }

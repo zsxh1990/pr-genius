@@ -26,7 +26,7 @@ COPY pyproject.toml README.md CHANGELOG.md LICENSE ./
 RUN pip install --no-cache-dir ./prgenius
 
 # 3. 装 MCP extras (可选, prgenius-core[mcp])
-RUN pip install --no-cache-dir "mcp>=1.0"
+RUN pip install --no-cache-dir "mcp>=1.0,<3.0"
 
 # 4. 复制知识包数据 (OKF bundle — markdown 仓画像 + case study + anti-pattern)
 COPY index.md validate.py ./

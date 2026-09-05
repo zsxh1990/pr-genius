@@ -28,11 +28,17 @@
     "additions": 72,
     "deletions": 0
   },
-  "tags": ["testing", "smoke-test", "e2e", "quality-assurance"],
+  "tags": [
+    "testing",
+    "smoke-test",
+    "e2e",
+    "quality-assurance"
+  ],
   "learning_points": [
     "Focused smoke test covering all 4 core MCP surfaces",
     "Test scenarios include both low-risk and high-risk PR cases",
     "Simple, focused PR with single file change",
     "Validates critical paths without exhaustive coverage"
-  ]
+  ],
+  "case_id": "pr-genius-15"
 }

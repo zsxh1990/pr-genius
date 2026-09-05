@@ -211,6 +211,6 @@ When opening an issue, please use the appropriate template:
 
 ## Versioning
 
-- v0.5.3 (2026-07-02) — current
+- v1.8.0 (2026-09-05) — current
 - v0.5.0 (2026-07-02) — rounds schema v0.2.0
 - v0.1.0 (2026-07-01) — initial release

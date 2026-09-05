@@ -1,0 +1,39 @@
+{
+  "id": "astral-sh-ruff-27089",
+  "repo": "astral-sh/ruff",
+  "pr_number": 27089,
+  "title": "[pylint] Avoid false positive for augmented string assignment to `__all__` (PLE0605)",
+  "author": "nikolauspschuetz",
+  "state": "OPEN",
+  "merged": false,
+  "category": "open_pending",
+  "created_at": "2026-07-22T07:30:59Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": true,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 2,
+    "additions": 9,
+    "deletions": 1,
+    "review_count": 0,
+    "comment_count": 1,
+    "change_ratio": 0.11
+  },
+  "metrics": {
+    "files_changed": 2,
+    "additions": 9,
+    "deletions": 1
+  }
+}

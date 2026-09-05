@@ -1,0 +1,31 @@
+{
+  "id": "pydantic-pydantic-13446",
+  "repo": "pydantic/pydantic",
+  "pr_number": 13446,
+  "title": "fix: `Gt` constraint silently dropped in experimental pipeline API on numeric type mismatch",
+  "author": "Kropiunig",
+  "state": "OPEN",
+  "merged": false,
+  "category": "review_approved_pending",
+  "created_at": "2026-07-15T12:21:21Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "files_changed": 2,
+    "additions": 10,
+    "deletions": 4,
+    "review_count": 1,
+    "comment_count": 2
+  },
+  "metrics": {
+    "files_changed": 2,
+    "additions": 10,
+    "deletions": 4
+  }
+}

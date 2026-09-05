@@ -1,0 +1,39 @@
+{
+  "id": "anthropics-anthropic-sdk-python-1761",
+  "repo": "anthropics/anthropic-sdk-python",
+  "pr_number": 1761,
+  "title": "fix(retry): cap backoff exponent to avoid OverflowError on large attempts",
+  "author": "winklemad",
+  "state": "OPEN",
+  "merged": false,
+  "category": "open_pending",
+  "created_at": "2026-07-15T14:44:45Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": true,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": false,
+    "files_changed": 2,
+    "additions": 7,
+    "deletions": 1,
+    "review_count": 0,
+    "comment_count": 0,
+    "change_ratio": 0.14
+  },
+  "metrics": {
+    "files_changed": 2,
+    "additions": 7,
+    "deletions": 1
+  }
+}

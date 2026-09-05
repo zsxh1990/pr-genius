@@ -28,12 +28,18 @@
     "additions": 3,
     "deletions": 4
   },
-  "tags": ["lint", "code-quality", "ruff", "bare-except"],
+  "tags": [
+    "lint",
+    "code-quality",
+    "ruff",
+    "bare-except"
+  ],
   "learning_points": [
     "Small, focused cleanup PR targeting specific lint rules (ruff E722/F811)",
     "Bare except replaced with specific exception types (BaseException, ValueError, JSONDecodeError)",
     "Duplicate import removal is trivial but important for code hygiene",
     "Clear explanation of why each change was made (behavior preservation)",
     "Quick to review and merge - ideal contributor entry point"
-  ]
+  ],
+  "case_id": "misakanet-1047"
 }

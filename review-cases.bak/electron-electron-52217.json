@@ -1,0 +1,39 @@
+{
+  "id": "electron-electron-52217",
+  "repo": "electron/electron",
+  "pr_number": 52217,
+  "title": "refactor: webFrameMain managed by cppgc",
+  "author": "deepak1556",
+  "state": "open",
+  "merged": false,
+  "category": "open_pending",
+  "created_at": "2026-07-01",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": true,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": true,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": false,
+    "files_changed": 8,
+    "additions": 346,
+    "deletions": 81,
+    "review_count": 2,
+    "comment_count": 0,
+    "change_ratio": 0.23
+  },
+  "metrics": {
+    "files_changed": 8,
+    "additions": 346,
+    "deletions": 81
+  }
+}

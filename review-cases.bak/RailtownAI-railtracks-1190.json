@@ -1,0 +1,39 @@
+{
+  "id": "RailtownAI-railtracks-1190",
+  "repo": "RailtownAI/railtracks",
+  "pr_number": 1190,
+  "title": "fix: prevent data loss on partial re-ingest failure",
+  "author": "zsxh1990",
+  "state": "OPEN",
+  "merged": false,
+  "category": "review_pending",
+  "created_at": "2026-06-10T07:03:26Z",
+  "signals": {
+    "has_issue_link": true,
+    "has_description": true,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": true,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 1,
+    "additions": 23,
+    "deletions": 7,
+    "review_count": 0,
+    "comment_count": 12,
+    "change_ratio": 0.23
+  },
+  "metrics": {
+    "files_changed": 1,
+    "additions": 23,
+    "deletions": 7
+  }
+}

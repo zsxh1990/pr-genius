@@ -1,0 +1,31 @@
+{
+  "id": "grafana-grafana-128658",
+  "repo": "grafana/grafana",
+  "pr_number": 128658,
+  "title": "Scopes: only redirect on apply when redirectPath is configured",
+  "author": "tskarhed",
+  "state": "OPEN",
+  "merged": false,
+  "category": "review_approved_pending",
+  "created_at": "2026-07-17T07:44:48Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "files_changed": 6,
+    "additions": 106,
+    "deletions": 309,
+    "review_count": 1,
+    "comment_count": 0
+  },
+  "metrics": {
+    "files_changed": 6,
+    "additions": 106,
+    "deletions": 309
+  }
+}

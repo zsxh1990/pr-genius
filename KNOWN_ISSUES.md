@@ -2,9 +2,9 @@
 type: Schema Reference
 title: Known Issues
 description: pr-genius 已知数据瑕疵（待真实 PR 触发时一并修复）
-version: 0.2.0
+version: 1.8.0
 created: 2026-07-02
-updated: 2026-07-02
+updated: 2026-09-05
 ---
 
 # Known Issues — v0.5.0 review

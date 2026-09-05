@@ -1,0 +1,39 @@
+{
+  "id": "rust-lang-rust-159817",
+  "repo": "rust-lang/rust",
+  "pr_number": 159817,
+  "title": "Rename splat to avoid stable name collisions",
+  "author": "teor2345",
+  "state": "OPEN",
+  "merged": false,
+  "category": "review_changes_requested",
+  "created_at": "2026-07-24T06:55:50Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": true,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": true,
+    "files_changed": 89,
+    "additions": 617,
+    "deletions": 621,
+    "review_count": 1,
+    "comment_count": 9,
+    "change_ratio": 1.01
+  },
+  "metrics": {
+    "files_changed": 89,
+    "additions": 617,
+    "deletions": 621
+  }
+}

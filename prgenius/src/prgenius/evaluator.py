@@ -316,7 +316,7 @@ _ANTI_PATTERN_STOPWORDS = frozenset({
     "check", "path", "diff", "site", "call", "stack", "field", "names",
     "into", "extras", "extra", "allow", "prevent", "computed", "leaking",
     "instant", "validation", "witness", "throw", "mount", "labelling",
-    "error", "handle", "response", "request", "status", "code", "line",
+    "handle", "response", "request", "status", "code", "line",
     "function", "method", "class", "module", "import", "return", "value",
     "data", "key", "name", "id", "number", "string", "list",
     "dict", "object", "array", "null", "true", "false", "none",
@@ -326,14 +326,7 @@ _ANTI_PATTERN_STOPWORDS = frozenset({
     # More generic technical words
     "description", "parameter", "undocumented", "meaningful",
     "timeout", "redirect", "nginx", "slash", "hang", "endpoint",
-    "feat", "fix", "chore", "docs", "test", "ci", "refactor",
-    "connection", "request", "response", "status", "code", "line",
-    "function", "method", "class", "module", "import", "return",
-    "value", "data", "key", "name", "id", "number", "string",
-    "list", "dict", "object", "array", "null", "true", "false",
-    "none", "config", "setting", "env", "environment", "server",
-    "client", "token", "auth", "login", "session", "user", "password",
-    "database", "table", "column", "row", "index", "query",
+    "feat", "chore", "ci", "connection",
 })
 
 
@@ -463,50 +456,39 @@ def load_success_patterns(repo_root) -> Dict[str, dict]:
 
 
 # ============================================================
-# 核心: analyze_pr — 提交前改进顾问
+# analyze_pr 拆分辅助函数
 # ============================================================
 
-def analyze_pr(
+
+def _build_signals_and_checklist(
+    *,
     title: str,
     description: str,
+    body: str,
+    labels: List[str],
+    author: str,
+    star_count: int,
+    repo_merge_rate: float,
+    author_association: str,
+    mergeable: str,
+    is_bot: bool,
+    require_issue_first: Optional[bool],
+    anti_matches: List[dict],
+    repo_root: Path,
     repo: str,
-    repo_root,
-    body: str = "",
-    labels: Optional[List[str]] = None,
-    author: str = "",
-    star_count: int = 0,
-    repo_merge_rate: float = 0.0,
-    author_association: str = "NONE",
-    mergeable: str = "MERGEABLE",
-) -> dict:
-    """分析 PR 并生成结构化改进建议
+) -> Tuple[List[dict], List[dict], List[dict], List[dict], dict]:
+    """构建信号列表和检查清单。
 
-    返回:
-    {
-        "repo": str,
-        "title": str,
-        "tier": "low_risk" | "medium_risk" | "high_risk",
-        "signals": {
-            "positive": [{"key": str, "description": str}],
-            "negative": [{"key": str, "description": str, "severity": str}],
-            "neutral":  [{"key": str, "description": str}]
-        },
-        "checklist": [
-            {"action": str, "priority": "P0"|"P1"|"P2", "done": bool, "hint": str}
-        ],
-        "anti_patterns_hit": [...],
-        "repo_context": {...}
-    }
+    覆盖 Sections 0-8（除 tier 分类外）: 合并冲突、Issue 关联、
+    反模式处理、标签信号、作者身份、仓库上下文、Bot 检查、通用清单。
+
+    Returns:
+        (signals_pos, signals_neg, signals_neu, checklist, repo_context)
     """
-    # Accept str | Path — fix str/str 除法 bug (M0 MCP smoke test 暴露)
-    repo_root = Path(repo_root) if not isinstance(repo_root, Path) else repo_root
-    if labels is None:
-        labels = []
-
-    signals_pos = []
-    signals_neg = []
-    signals_neu = []
-    checklist = []
+    signals_pos: List[dict] = []
+    signals_neg: List[dict] = []
+    signals_neu: List[dict] = []
+    checklist: List[dict] = []
 
     # ---- 0. 合并冲突检查 ----
     if mergeable and mergeable.upper() == "CONFLICTING":
@@ -523,9 +505,6 @@ def analyze_pr(
         })
 
     # ---- 1. Issue 关联检查 (跳过 Bot, 仓库感知) ----
-    is_bot = is_bot_author(author)
-    require_issue_first = _check_require_issue_first(repo, repo_root)
-
     if not is_bot:
         has_issue_link = check_issue_link(body) if body else False
         if has_issue_link:
@@ -558,8 +537,7 @@ def analyze_pr(
                 })
             # require_issue_first = False → 不提示
 
-    # ---- 2. 反模式检测 ----
-    anti_matches = check_anti_patterns(title, description, repo, repo_root, body=body)
+    # ---- 2. 反模式处理 ----
     for match in anti_matches:
         key = match["key"]
         severity = ANTI_PATTERN_SEVERITY.get(key, "medium")
@@ -649,7 +627,7 @@ def analyze_pr(
             signals_neu.append({"key": "first_contributor", "description": "首次贡献者"})
 
     # ---- 5. 仓库上下文 ----
-    repo_context = {}
+    repo_context: dict = {}
     if star_count > 0:
         repo_context["star_count"] = star_count
         repo_context["repo_size"] = get_repo_size(star_count)
@@ -749,6 +727,26 @@ def analyze_pr(
                 "hint": "确认是否需要 DCO sign-off (`git commit -s`)",
             })
 
+    return signals_pos, signals_neg, signals_neu, checklist, repo_context
+
+
+def _classify_tier_and_pr_size(
+    *,
+    title: str,
+    body: str,
+    labels: List[str],
+    signals_pos: List[dict],
+    signals_neg: List[dict],
+    signals_neu: List[dict],
+) -> Tuple[str, str, str, int, str, str]:
+    """计算风险等级和 PR 大小评估。
+
+    覆盖 Sections 8 和 8.5: 基于信号统计计算 tier，基于标题/标签
+    启发式评估 PR 大小和影响分数。
+
+    Returns:
+        (tier, pr_size, pr_size_label, impact_score, risk_level, risk_description)
+    """
     # ---- 8. 计算 tier ----
     neg_critical = sum(1 for s in signals_neg if s.get("severity") in ("critical", "high"))
     neg_medium = sum(1 for s in signals_neg if s.get("severity") == "medium")
@@ -832,6 +830,25 @@ def analyze_pr(
         risk_level = "low"
         risk_description = "低风险变更"
 
+    return tier, pr_size, pr_size_label, impact_score, risk_level, risk_description
+
+
+def _estimate_merge_probability(
+    *,
+    signals_neg: List[dict],
+    signals_pos: List[dict],
+    signals_neu: List[dict],
+    tier: str,
+    repo_context: dict,
+) -> Tuple[float, List[dict], dict]:
+    """计算合并概率估算和优化路径。
+
+    覆盖 Section 9: 基于仓库合并率和信号严重程度估算合并概率，
+    生成优化路径建议和对比信息。
+
+    Returns:
+        (merge_probability, optimization_path, comparison)
+    """
     # ---- 9. 合并概率估算 + 优化路径 ----
     merge_rate = repo_context.get("external_merge_rate_30", 0.0)
 
@@ -860,7 +877,7 @@ def analyze_pr(
             base_probability *= 0.05  # 维护者要内部处理 → 不可能
 
     # 优化路径（所有 negative signals 都列出来供参考）
-    optimization_path = []
+    optimization_path: List[dict] = []
     for neg in signals_neg:
         sev = neg.get("severity", "medium")
         if sev == "critical":
@@ -885,7 +902,7 @@ def analyze_pr(
     merge_probability = max(0.05, min(0.95, base_probability))
 
     # 对比同仓库已合并 PR
-    comparison = {}
+    comparison: dict = {}
     if merge_rate > 0:
         comparison["repo_merge_rate"] = merge_rate
         comparison["your_estimate"] = f"{merge_probability:.0%}"
@@ -896,6 +913,36 @@ def analyze_pr(
                 "priority": "P0",
             })
 
+    return merge_probability, optimization_path, comparison
+
+
+def _assemble_output(
+    *,
+    repo: str,
+    title: str,
+    tier: str,
+    signals_pos: List[dict],
+    signals_neg: List[dict],
+    signals_neu: List[dict],
+    checklist: List[dict],
+    anti_matches: List[dict],
+    repo_context: dict,
+    merge_probability: float,
+    optimization_path: List[dict],
+    comparison: dict,
+    pr_size: str,
+    pr_size_label: str,
+    impact_score: int,
+    risk_level: str,
+    risk_description: str,
+) -> dict:
+    """组装最终输出。
+
+    覆盖输出组装: 生成摘要文案、去重检查清单、构建返回字典。
+
+    Returns:
+        analyze_pr() 的完整返回字典。
+    """
     # Positive confirmation (borrowed from Cubic AI pattern)
     if tier == "low_risk":
         summary = f"🟢 No issues found — {len(signals_pos)} positive signal(s), {len(signals_neg)} concern(s)"
@@ -905,14 +952,13 @@ def analyze_pr(
         summary = f"🔴 {len(signals_neg)} blocking issue(s) — fix before submitting"
 
     # 去重 checklist (相同 action 只保留第一个)
-    seen_actions = set()
-    unique_checklist = []
+    seen_actions: set = set()
+    unique_checklist: List[dict] = []
     for item in checklist:
         action_key = item.get("action", "")
         if action_key not in seen_actions:
             seen_actions.add(action_key)
             unique_checklist.append(item)
-    checklist = unique_checklist
 
     return {
         "repo": repo,
@@ -926,7 +972,7 @@ def analyze_pr(
             "negative": signals_neg,
             "neutral": signals_neu,
         },
-        "checklist": checklist,
+        "checklist": unique_checklist,
         "anti_patterns_hit": [m["key"] for m in anti_matches],
         "anti_patterns_detail": anti_matches,
         "repo_context": repo_context,
@@ -938,6 +984,89 @@ def analyze_pr(
         "risk_level": risk_level,
         "risk_description": risk_description,
     }
+
+
+# ============================================================
+# 核心: analyze_pr — 提交前改进顾问 (编排器)
+# ============================================================
+
+def analyze_pr(
+    title: str,
+    description: str,
+    repo: str,
+    repo_root,
+    body: str = "",
+    labels: Optional[List[str]] = None,
+    author: str = "",
+    star_count: int = 0,
+    repo_merge_rate: float = 0.0,
+    author_association: str = "NONE",
+    mergeable: str = "MERGEABLE",
+) -> dict:
+    """分析 PR 并生成结构化改进建议
+
+    编排器: 按顺序调用各辅助函数, 协调状态流转。
+    Sections 0-8 的信号生成 → tier 分类 → PR 大小评估 → 合并概率估算 → 输出组装。
+
+    返回:
+    {
+        "repo": str,
+        "title": str,
+        "tier": "low_risk" | "medium_risk" | "high_risk",
+        "signals": {
+            "positive": [{"key": str, "description": str}],
+            "negative": [{"key": str, "description": str, "severity": str}],
+            "neutral":  [{"key": str, "description": str}]
+        },
+        "checklist": [
+            {"action": str, "priority": "P0"|"P1"|"P2", "done": bool, "hint": str}
+        ],
+        "anti_patterns_hit": [...],
+        "repo_context": {...}
+    }
+    """
+    # Accept str | Path — fix str/str 除法 bug (M0 MCP smoke test 暴露)
+    repo_root = Path(repo_root) if not isinstance(repo_root, Path) else repo_root
+    if labels is None:
+        labels = []
+
+    # ---- 前置检测 (纯判断, 无信号副作用) ----
+    is_bot = is_bot_author(author)
+    require_issue_first = _check_require_issue_first(repo, repo_root)
+    anti_matches = check_anti_patterns(title, description, repo, repo_root, body=body)
+
+    # ---- Phase 1: 构建信号和检查清单 (Sections 0-8) ----
+    signals_pos, signals_neg, signals_neu, checklist, repo_context = _build_signals_and_checklist(
+        title=title, description=description, body=body, labels=labels,
+        author=author, star_count=star_count, repo_merge_rate=repo_merge_rate,
+        author_association=author_association, mergeable=mergeable,
+        is_bot=is_bot, require_issue_first=require_issue_first,
+        anti_matches=anti_matches, repo_root=repo_root, repo=repo,
+    )
+
+    # ---- Phase 2: Tier 分类 + PR 大小评估 (Sections 8, 8.5) ----
+    tier, pr_size, pr_size_label, impact_score, risk_level, risk_description = (
+        _classify_tier_and_pr_size(
+            title=title, body=body, labels=labels,
+            signals_pos=signals_pos, signals_neg=signals_neg, signals_neu=signals_neu,
+        )
+    )
+
+    # ---- Phase 3: 合并概率估算 + 优化路径 (Section 9) ----
+    merge_probability, optimization_path, comparison = _estimate_merge_probability(
+        signals_neg=signals_neg, signals_pos=signals_pos, signals_neu=signals_neu,
+        tier=tier, repo_context=repo_context,
+    )
+
+    # ---- Phase 4: 输出组装 ----
+    return _assemble_output(
+        repo=repo, title=title, tier=tier,
+        signals_pos=signals_pos, signals_neg=signals_neg, signals_neu=signals_neu,
+        checklist=checklist, anti_matches=anti_matches, repo_context=repo_context,
+        merge_probability=merge_probability, optimization_path=optimization_path,
+        comparison=comparison, pr_size=pr_size, pr_size_label=pr_size_label,
+        impact_score=impact_score, risk_level=risk_level, risk_description=risk_description,
+    )
 
 
 # ============================================================

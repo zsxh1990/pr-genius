@@ -1,0 +1,39 @@
+{
+  "id": "harbor-framework-harbor-2121",
+  "repo": "harbor-framework/harbor",
+  "pr_number": 2121,
+  "title": "feat: make litellm and datasets optional dependencies",
+  "author": "zsxh1990",
+  "state": "OPEN",
+  "merged": false,
+  "category": "review_pending",
+  "created_at": "2026-06-28T09:14:50Z",
+  "signals": {
+    "has_issue_link": true,
+    "has_description": true,
+    "has_test_mention": false,
+    "has_breaking_change": true,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": true,
+    "is_refactor": false,
+    "is_small_pr": false,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": true,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 6,
+    "additions": 105,
+    "deletions": 75,
+    "review_count": 0,
+    "comment_count": 6,
+    "change_ratio": 0.42
+  },
+  "metrics": {
+    "files_changed": 6,
+    "additions": 105,
+    "deletions": 75
+  }
+}

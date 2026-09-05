@@ -1,0 +1,39 @@
+{
+  "id": "prometheus-prometheus-19223",
+  "repo": "prometheus/prometheus",
+  "pr_number": 19223,
+  "title": "chore: update client_golang to v1.24.0-rc.0",
+  "author": "bwplotka",
+  "state": "OPEN",
+  "merged": false,
+  "category": "open_pending",
+  "created_at": "2026-07-17T13:39:53Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": true,
+    "is_small_pr": true,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": true,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": false,
+    "files_changed": 2,
+    "additions": 15,
+    "deletions": 15,
+    "review_count": 0,
+    "comment_count": 0,
+    "change_ratio": 1.0
+  },
+  "metrics": {
+    "files_changed": 2,
+    "additions": 15,
+    "deletions": 15
+  }
+}

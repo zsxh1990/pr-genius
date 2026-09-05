@@ -1,0 +1,39 @@
+{
+  "id": "kubernetes-kubernetes-140707",
+  "repo": "kubernetes/kubernetes",
+  "pr_number": 140707,
+  "title": "/test: add MinimumKubeletVersion:1.37 to CTB conformance tests",
+  "author": "neolit123",
+  "state": "OPEN",
+  "merged": false,
+  "category": "review_approved_pending",
+  "created_at": "2026-07-18T08:47:03Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": true,
+    "is_refactor": false,
+    "is_small_pr": true,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": true,
+    "files_changed": 2,
+    "additions": 33,
+    "deletions": 15,
+    "review_count": 2,
+    "comment_count": 5,
+    "change_ratio": 0.45
+  },
+  "metrics": {
+    "files_changed": 2,
+    "additions": 33,
+    "deletions": 15
+  }
+}

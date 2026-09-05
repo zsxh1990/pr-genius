@@ -32,5 +32,6 @@
   ],
   "verdict": "reject",
   "verdict_reason": "Auto-closed by require-issue-link bot. No Issue关联.",
-  "created_at": "2026-08-18T14:24:51.568796"
+  "created_at": "2026-08-18T14:24:51.568796",
+  "case_id": "langchain-39701"
 }

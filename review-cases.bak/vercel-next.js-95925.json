@@ -1,0 +1,39 @@
+{
+  "id": "vercel-next.js-95925",
+  "repo": "vercel/next.js",
+  "pr_number": 95925,
+  "title": "docs: note the `:has()` scaling limit in the Interactive apps guide",
+  "author": "aurorascharff",
+  "state": "OPEN",
+  "merged": false,
+  "category": "review_approved_pending",
+  "created_at": "2026-07-18T17:41:25Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": true,
+    "is_bug_fix": false,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": true,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": true,
+    "has_comments": true,
+    "files_changed": 1,
+    "additions": 2,
+    "deletions": 0,
+    "review_count": 1,
+    "comment_count": 2,
+    "change_ratio": 0.0
+  },
+  "metrics": {
+    "files_changed": 1,
+    "additions": 2,
+    "deletions": 0
+  }
+}

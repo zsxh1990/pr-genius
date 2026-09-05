@@ -1,0 +1,31 @@
+{
+  "id": "encode-httpx-3783",
+  "repo": "encode/httpx",
+  "pr_number": 3783,
+  "title": "Add option to keep the same method for 301/302 redirects",
+  "author": "kajinamit",
+  "state": "OPEN",
+  "merged": false,
+  "category": "open_pending",
+  "created_at": "2026-02-26T14:35:03Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": false,
+    "is_feature": true,
+    "is_refactor": false,
+    "files_changed": 2,
+    "additions": 53,
+    "deletions": 0,
+    "review_count": 0,
+    "comment_count": 0
+  },
+  "metrics": {
+    "files_changed": 2,
+    "additions": 53,
+    "deletions": 0
+  }
+}

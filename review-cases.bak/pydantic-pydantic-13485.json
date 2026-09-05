@@ -1,0 +1,39 @@
+{
+  "id": "pydantic-pydantic-13485",
+  "repo": "pydantic/pydantic",
+  "pr_number": 13485,
+  "title": "Fix uv `cache-keys` for `pydantic-core`",
+  "author": "Viicos",
+  "state": "OPEN",
+  "merged": false,
+  "category": "open_pending",
+  "created_at": "2026-07-20T09:51:09Z",
+  "signals": {
+    "has_issue_link": false,
+    "has_description": false,
+    "has_test_mention": false,
+    "has_breaking_change": false,
+    "is_docs_only": false,
+    "is_bug_fix": true,
+    "is_feature": false,
+    "is_refactor": false,
+    "is_small_pr": true,
+    "is_large_pr": false,
+    "is_backport": false,
+    "is_dependency_update": false,
+    "is_bot_pr": false,
+    "has_reviews": false,
+    "has_comments": true,
+    "files_changed": 1,
+    "additions": 4,
+    "deletions": 3,
+    "review_count": 0,
+    "comment_count": 3,
+    "change_ratio": 0.75
+  },
+  "metrics": {
+    "files_changed": 1,
+    "additions": 4,
+    "deletions": 3
+  }
+}
