@@ -21,7 +21,8 @@ dependencies = []  # stdlib only
 
 [project.optional-dependencies]
 mcp = ["mcp>=1.0"]
-dev = ["build", "twine", "pytest"]
+dev = ["build", "twine", "pytest", "pytest-asyncio"]
+mcp = ["mcp>=1.0"]
 
 [project.scripts]
 prgenius-core = "prgenius.cli:main"
