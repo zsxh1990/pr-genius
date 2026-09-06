@@ -20,7 +20,7 @@ classifiers = [
 dependencies = []  # stdlib only
 
 [project.optional-dependencies]
-mcp = ["mcp>=1.0"]
+mcp = ["mcp>=1.0,<2.0"]
 dev = ["build", "twine", "pytest", "pytest-asyncio"]
 
 [project.scripts]
