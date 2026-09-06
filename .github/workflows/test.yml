@@ -36,8 +36,10 @@ jobs:
       - name: Run tests
         run: |
           # mcp tests require Python >=3.10
+          # Skip tests requiring local pipeline data (evidence/, features/, predictions/)
+          SKIP="not test_score_merge and not test_evidence_directory_exists and not test_load_anti_patterns and not test_features_file_exists"
           if python3 -c "import sys; assert sys.version_info >= (3,10)"; then
-            python3 -m pytest prgenius/tests/ -v -k "not test_score_merge"
+            python3 -m pytest prgenius/tests/ -v -k "$SKIP"
           else
-            python3 -m pytest prgenius/tests/ -v -k "not test_score_merge and not test_mcp"
+            python3 -m pytest prgenius/tests/ -v -k "$SKIP and not test_mcp"
           fi
