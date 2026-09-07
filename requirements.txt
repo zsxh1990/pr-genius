@@ -1,2 +1,2 @@
 # Requirements for scripts/ (not the core package — that's stdlib-only)
-pyyaml>=6.0,<8.0
+pyyaml>=6.0.3,<8.0
