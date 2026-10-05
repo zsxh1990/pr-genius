@@ -38,14 +38,14 @@ jobs:
 
       # pnpm 必须在 setup-node 的 `cache: pnpm` 之前装好 —— setup-node 会去调
       # pnpm 解析 lockfile，没有就报 "Unable to locate executable file: pnpm"。
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           version: 10
 
       # Node 24 自带 npm 11.x。Trusted Publishing 要求 **npm CLI >= 11.5.1**
       # （Node 22 自带 npm 10.x，不够）。下面是硬校验，不够就红，不静默降级成
       # "看起来发布了其实没发"。
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: '24'
           cache: pnpm
