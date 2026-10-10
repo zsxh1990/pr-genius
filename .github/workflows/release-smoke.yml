@@ -48,11 +48,11 @@ jobs:
       # pnpm must be installed BEFORE setup-node's `cache: pnpm` runs — setup-node
       # shells out to `pnpm` to resolve the lockfile, and exits with
       # "Unable to locate executable file: pnpm" when it is not on PATH yet.
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           version: 10
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: pnpm
@@ -89,7 +89,7 @@ jobs:
 
       - name: Upload machine-readable report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: release-smoke-report
           path: reports/release-smoke.json
