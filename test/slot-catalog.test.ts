@@ -197,4 +197,26 @@ describe('slot probing: authority is the runtime, not any one catalog', () => {
       assert.ok(ALLOWED.has(key), `generated list has key ${key} missing from the authority`)
     }
   })
+
+  it('a surface probes its known candidate first — a dead key never burns the first try (#142)', () => {
+    // #97 的结论对着 live authority 已经反转：`details` 不在 100 keys 里，
+    // `sidebar.right.pane.tab` 在。而 `apply()` 是按顺序试的，所以把死 key 排在
+    // 前面＝每次启动白烧一次失败 inject。规则泛化成：只要候选里有我们认识的 key，
+    // 第一个就必须是我们认识的那个。
+    for (const surface of planRegistrations()) {
+      const raw = surface.seat as { candidates?: string[]; key?: string } | null
+      const candidates: string[] = Array.isArray(raw?.candidates)
+        ? raw!.candidates!
+        : [raw?.key ?? ''].filter(Boolean)
+      if (candidates.length < 2) continue
+      const known = candidates.filter((k) => CONFIRMED_SLOT_KEYS.includes(k))
+      if (known.length === 0) continue // 一个都不认识：顺序无所谓
+      assert.ok(
+        CONFIRMED_SLOT_KEYS.includes(candidates[0]),
+        `surface ${surface.id}: first candidate ${JSON.stringify(candidates[0])} is not in the catalog, ` +
+          `but ${JSON.stringify(known)} are. Probe a known key first — ` +
+          `a dead key wastes the first inject on every launch (#142).`,
+      )
+    }
+  })
 })

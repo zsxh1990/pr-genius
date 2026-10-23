@@ -65,14 +65,18 @@ export const SURFACE_PLAN: SurfaceRegistration[] = [
   },
   {
     id: SURFACE_IDS.advisorPanel,
-    // 右栏落点有版本分歧：pinned SDK 里是 `details`（42 keys），upstream master
-    // 里是 `sidebar.right.pane.tab`（92 keys）。不二选一 —— 交给 apply() 逐个试，
-    // 宿主认哪个用哪个，都不认就不注册（宁缺勿假）。
+    // 右栏落点的分歧**已经反转**（issue #142）。#97 当年认定 `details` 是真落点、
+    // `sidebar.right.pane.tab` 不存在；对着 2026-10-22 的 live authority（100 keys）
+    // 恰好相反：`details` 不在，`sidebar.right.pane.tab` 在。
+    //
+    // 顺序因此从「details 先试」倒过来：先试 live catalog 里有的那个，省掉每次启动
+    // 在一个死 key 上白烧的失败 inject。两个都留着 —— pinned SDK（42 keys）与
+    // upstream master（100 keys）仍不一致，谁存在用谁；都不认就不注册（宁缺勿假）。
     seat: {
-      key: 'details',
+      key: 'sidebar.right.pane.tab',
       kind: 'single',
       scope: 'session',
-      candidates: ['details', 'sidebar.right.pane.tab'],
+      candidates: ['sidebar.right.pane.tab', 'details'],
     } as unknown as SlotSeat,
     kind: 'panel',
     mode: 'both',
