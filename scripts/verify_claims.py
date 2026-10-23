@@ -91,29 +91,6 @@ def _live_pyproject_version() -> str:
     return m.group(1) if m else ""
 
 
-def _live_contract_gate_count() -> int:
-    """Run the DSH plugin contract gate and parse its blocking-check count.
-
-    Why the gate has to measure this rather than trust a literal: the count moves
-    whenever checks are added or retired (#117 took it 27 -> 29, #131 trimmed it
-    back), and the docs kept saying 27/27 in three places — including an expected
-    output line inside a block titled "可复跑" (#136). A hardcoded number in prose
-    is a claim with no writer; this makes the gate the one that notices.
-    """
-    script = REPO_ROOT / "scripts" / "check_dsh_plugin_contract.py"
-    if not script.exists():
-        return -1
-    try:
-        out = subprocess.run(
-            [sys.executable, str(script)],
-            capture_output=True, text=True, timeout=120, cwd=str(REPO_ROOT),
-        )
-    except Exception:
-        return -1
-    m = re.search(r"(\d+)\s*/\s*\d+\s+blocking checks passed", out.stdout + out.stderr)
-    return int(m.group(1)) if m else -1
-
-
 _CONTRACT_CLAIM = re.compile(r"(\d+)\s*/\s*\d+\s+blocking checks")
 _CONTRACT_CLAIM_CN = re.compile(r"契约符合性[^\d]{0,20}(\d+)\s*/\s*\d+")
 
@@ -154,10 +131,35 @@ def _slot_catalog_alignment() -> tuple[bool, str]:
         return False, f"could not run verify-slot-keys.mjs: {exc}"
     text = out.stdout + out.stderr
     if out.returncode != 0:
-        tail = "\n".join(text.splitlines()[-6:])
-        return False, f"verify-slot-keys.mjs exit {out.returncode}: {tail}"
+        tail = "\n".join(text.splitlines()[-4:])
+        # exit 2 = 内容不满足；exit 3 = 检查没跑起来。两者都叫「不一致」会让维护者
+        # 去改快照，而其实只是没装依赖（issue #143）。
+        if out.returncode == 3:
+            return False, f"could not run (environment): {tail}"
+        return False, f"out of step with the authority (content): {tail}"
     m = re.search(r"keys\s*:\s*(\d+)", text)
     return True, f"aligned, {m.group(1) if m else '?'} keys"
+
+
+def _live_contract_gate_total() -> int:
+    """The **denominator** of the DSH contract gate — the stable number.
+
+    比对分母而不是通过数：`dist/` 未构建时有一项会被跳过，通过数在 28/29 之间浮动，
+    而总数恒为 29。文档里该写的是总数 —— 否则同一 commit 在两台机器上数出两个
+    「总检查数」，文档里的数字没有稳定值可写（Ikalus1988 测 28、我测 29，都对）。
+    """
+    script = REPO_ROOT / "scripts" / "check_dsh_plugin_contract.py"
+    if not script.exists():
+        return -1
+    try:
+        out = subprocess.run(
+            [sys.executable, str(script)],
+            capture_output=True, text=True, timeout=120, cwd=str(REPO_ROOT),
+        )
+    except Exception:
+        return -1
+    m = re.search(r"\d+\s*/\s*(\d+)\s+blocking checks passed", out.stdout + out.stderr)
+    return int(m.group(1)) if m else -1
 
 
 
@@ -291,7 +293,7 @@ def main() -> int:
     # 5. DSH contract-gate count claimed in prose must equal the live gate (#136).
     #    The number moves whenever checks are added or retired, so a literal in a
     #    doc has no writer. Measure, then refuse to release while they disagree.
-    live_gate = _live_contract_gate_count()
+    live_gate = _live_contract_gate_total()
     claims = _doc_contract_claims()
     if live_gate < 0 and claims:
         errors.append(
@@ -302,7 +304,7 @@ def main() -> int:
         if live_gate >= 0 and claimed != live_gate:
             errors.append(
                 f"{where} claims {claimed} blocking checks, but "
-                f"check_dsh_plugin_contract.py reports {live_gate}. "
+                f"check_dsh_plugin_contract.py has {live_gate} in total (its denominator). "
                 f"Update the doc — or stop stating a number that has no writer."
             )
 
