@@ -18,7 +18,8 @@
     "cordis"
   ],
   "engines": {
-    "node": "^22.19.0 || >=24"
+    "node": "^22.19.0 || >=24",
+    "dsh": ">=0.2.0-rc.2"
   },
   "exports": {
     ".": {
@@ -65,11 +66,37 @@
       "platform": "web"
     },
     "compatibility": {
+      "dsh": ">=0.2.0-rc.2",
+      "node": "^22.19.0 || >=24",
+      "profiles": [
+        "web"
+      ],
       "dshReleases": {
         "0.1.5-rc.1": "unknown",
         "0.1.7-rc.2": "unknown",
         "0.2.0-rc.2": "compatible"
-      }
+      },
+      "dshOperations": {
+        "0.1.5-rc.1": {
+          "install": "unknown",
+          "start": "unknown",
+          "uninstall": "unknown",
+          "rollback": "unknown"
+        },
+        "0.1.7-rc.2": {
+          "install": "unknown",
+          "start": "unknown",
+          "uninstall": "unknown",
+          "rollback": "unknown"
+        },
+        "0.2.0-rc.2": {
+          "install": "unknown",
+          "start": "unknown",
+          "uninstall": "unknown",
+          "rollback": "unknown"
+        }
+      },
+      "systems": []
     }
   },
   "peerDependencies": {

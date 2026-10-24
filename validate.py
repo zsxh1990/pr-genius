@@ -910,6 +910,35 @@ def check_dsh_manifest_contract() -> None:
         )
     print(f"   dshReleases: {len(rel)} entries, {len(bad)} invalid")
 
+    # DSH-Store 的 compatibility 还要求 dsh/node/systems/profiles 四项**必填**
+    # （registry/catalog-detail.schema.json 的 required）。缺一项整条候选被拒 ——
+    # #1304 就是这么被 AUTOMATIC_POLICY_REJECTED 的。枚举合法但字段缺失同样过不了，
+    # 所以一起挡。
+    comp = data.get("dsh", {}).get("compatibility") or {}
+    required_fields = ("dsh", "node", "systems", "profiles")
+    missing = [f for f in required_fields if f not in comp]
+    if missing:
+        errors.append(
+            "package.json dsh.compatibility is missing required field(s): "
+            f"{missing} — the store schema requires all four "
+            f"{list(required_fields)}"
+        )
+    ops = comp.get("dshOperations") or {}
+    ops_allowed = {"passed", "failed", "unknown"}
+    bad_ops = [
+        f"{rel}/{op}={val!r}"
+        for rel, record in ops.items()
+        if isinstance(record, dict)
+        for op, val in record.items()
+        if val not in ops_allowed
+    ]
+    if bad_ops:
+        errors.append(
+            "package.json dsh.compatibility.dshOperations: value must be one of "
+            f"{sorted(ops_allowed)} — got {', '.join(bad_ops)}"
+        )
+    print(f"   compatibility: {len(required_fields) - len(missing)}/{len(required_fields)} required fields present")
+
 
 try:
     from validate_checks.anti_pattern_referenced import check_profile_guideline_evidence
