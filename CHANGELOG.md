@@ -8,6 +8,54 @@ description: Changelog following Keep a Changelog format + GitHub compare links
 
 ## [Unreleased]
 
+### Fixed
+
+- **The panel's default seat was a key the SDK deleted (#150).**
+  `ADVISOR_PANEL_SLOT` was `details`, and `SURFACE_PLAN`'s panel seat declared
+  `kind: 'single'` to match. In `@deepseek-ai/dsh-cordis-client-runner@0.2.1-rc.3`
+  that key is gone: `CLIENT_SLOT_API` drops `details`, `conversation`,
+  `conversation.details.tool` and `settings.plugin.item`, and adds
+  `sidebar.right.pane.tab` / `.title` (42 → 103 keys). The default is now the
+  keyed seat that 0.2.1 declares, and `details` is kept only as a legacy
+  fallback candidate so a host still on the 0.0.1 surface can land on it.
+
+  Probe order flipped to try the live key first (#142): `apply()` breaks on the
+  first accepted candidate, so a dead key listed first burns a failed inject on
+  every launch and shows up in the release-smoke ledger as
+  `C1.slot-key-not-in-catalog` — which is how #145 stayed red while the code was
+  correct and only the pinned SDK was stale.
+
+- **README claimed the DSH slot catalog is unobtainable. It is obtainable.**
+  The note cited `gh api repos/deepseek-ai/deepseek-harness-sdk` 404 as proof —
+  but that is a typo'd repository name. `deepseek-ai/deepseek-harness` is public
+  and `…/src/client/slot-catalog.ts` fetches (289,726 bytes at `master`);
+  `scripts/release-smoke/slot-catalog.mjs` already used the right name. What is
+  actually true is narrower: the *host's installed* SDK version is unknown at
+  build time, and that is what the probing defends against. (CI still cannot
+  fetch the cross-check source — it passes no `GH_TOKEN`; #149.)
+
+### Changed
+
+- **`@deepseek-ai/*` devDependencies move to `0.2.1-rc.3`.** These are the npm
+  `next` dist-tag, not `latest` — for most of the family `latest` is still
+  `0.0.1-rc.x`, so this is an opt-in to the prerelease line, not a routine bump.
+  `dsh.compatibility.dshReleases`/`dshOperations` record `0.2.1-rc.3` as
+  **`unknown`**, not `compatible`: no real DSH web host has been run against it
+  (`validate.py` Check 4c says those values must reflect 实测, and this is not
+  one). `docs/compatibility.md` is unchanged for the same reason — it has no
+  row that is verified.
+
+### Note on counts
+
+Earlier drafts of this change wrote "45 → 106 keys" as measured. Those numbers
+did not reproduce: a `key:` regex counts nested `key:` fields and inflates each
+version by 3. The bracket-matched `CLIENT_SLOT_API` element count is 42 and 103,
+which is also what `npm run smoke:release` reports (`catalog keys=103`) and what
+README/CHANGELOG already said for the pinned side. The qualitative claims —
+`details` removed, `sidebar.right.pane.tab`/`.title` added, 4 dropped / 65 added
+— reproduce either way.
+
+
 ## [2.2.5] - 2026-10-21
 
 > The point of this release is one thing: 2.2.4 shipped before the fix for

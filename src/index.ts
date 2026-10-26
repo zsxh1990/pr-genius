@@ -346,8 +346,8 @@ export function apply(ctx: Context, config: Config): void {
   surfaceReport.slotsAvailable = Boolean(slotsService?.inject && slotsService?.register)
   if (slotsService?.inject && slotsService?.register) {
     // 运行时探测：候选落点里挑宿主真的提供的那个。
-    // 不静态硬编码争议 key —— pinned SDK 与 upstream 的 catalog 不一致
-    // （42 vs 92 keys，右栏落点分别是 details / sidebar.right.pane.tab），
+    // 不静态硬编码争议 key —— 不同 SDK 版本的 catalog 不一致
+    // （实测 42 vs 103 keys，右栏落点分别是 details / sidebar.right.pane.tab，见 issue #150），
     // 谁存在用谁；都不存在就不注册。宁缺勿假。
     for (const surface of planRegistrations()) {
       if (surface.kind === 'command') continue

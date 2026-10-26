@@ -74,7 +74,8 @@
       "dshReleases": {
         "0.1.5-rc.1": "unknown",
         "0.1.7-rc.2": "unknown",
-        "0.2.0-rc.2": "compatible"
+        "0.2.0-rc.2": "compatible",
+        "0.2.1-rc.3": "unknown"
       },
       "dshOperations": {
         "0.1.5-rc.1": {
@@ -90,6 +91,12 @@
           "rollback": "unknown"
         },
         "0.2.0-rc.2": {
+          "install": "unknown",
+          "start": "unknown",
+          "uninstall": "unknown",
+          "rollback": "unknown"
+        },
+        "0.2.1-rc.3": {
           "install": "unknown",
           "start": "unknown",
           "uninstall": "unknown",
@@ -111,12 +118,12 @@
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "~4.0.4",
-    "@deepseek-ai/dsh": "0.2.0-rc.2",
-    "@deepseek-ai/dsh-client-connection": "0.0.1-rc.1",
-    "@deepseek-ai/dsh-client-ui-cordis": "0.0.1-rc.3",
-    "@deepseek-ai/dsh-client-ui-slots": "0.0.1-rc.1",
-    "@deepseek-ai/dsh-cordis-client-runner": "0.0.1-rc.3",
-    "@deepseek-ai/dsh-session-projection": "0.0.1-rc.1",
+    "@deepseek-ai/dsh": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-client-connection": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-client-ui-cordis": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-client-ui-slots": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-cordis-client-runner": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-session-projection": "0.2.1-rc.3",
     "@deepseek-ai/schemastery": "^3.18.4",
     "@types/node": "^26.6.3",
     "@types/react": "^19.3.0",

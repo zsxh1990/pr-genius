@@ -327,14 +327,25 @@ changes.
 ## 🧩 DSH Plugin
 
 > **Read this before installing.** The five surfaces are registered by **runtime
-> probing**, not by a known-good map: the authoritative DSH slot catalog is not
-> obtainable (`gh api repos/deepseek-ai/deepseek-harness-sdk` is 404), and the
-> pinned SDK (42 keys) and upstream `master` (92 keys) disagree about the
-> right-hand pane. So `apply()` tries each candidate slot and registers into
-> whichever the host accepts — and if the host accepts none of them, **the
-> install looks empty and there is nothing obviously wrong**. That is exactly how
-> "empty shell install" shipped eight times in five weeks (#86, #90, #95, #97,
-> #98, #100, #101, #117).
+> probing**, not by a known-good map. The reason is **not** that the catalog is
+> unobtainable — an earlier note here said so, citing `gh api
+> repos/deepseek-ai/deepseek-harness-sdk` 404, but that is a typo'd repo name; the
+> real one, `deepseek-ai/deepseek-harness`, is public and the catalog file
+> fetches fine (289,726 bytes at `master`). The reason is that **you do not know
+> which SDK version the host has installed**, and the right-hand pane moved
+> between them:
+>
+> | SDK | CLIENT_SLOT_API | `details` | `sidebar.right.pane.tab` |
+> |---|---|---|---|
+> | `0.0.1-rc.x` | 42 keys | yes | no |
+> | `0.2.1-rc.3` | 103 keys | **removed** | **added** (with `.title`) |
+>
+> Counts are the bracket-matched `CLIENT_SLOT_API` element count, matching
+> `npm run smoke:release`'s `catalog keys=` report. So `apply()` tries each
+> candidate slot and registers into whichever the host accepts — and if the host
+> accepts none of them, **the install looks empty and there is nothing obviously
+> wrong**. That is exactly how "empty shell install" shipped eight times in five
+> weeks (#86, #90, #95, #97, #98, #100, #101, #117).
 >
 > Two things now make it survivable: a total registration failure logs an
 > **error** (not a warn) naming the surfaces and the slots that were tried, and
