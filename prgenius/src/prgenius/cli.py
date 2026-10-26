@@ -36,6 +36,25 @@ def _get_repo_root(args) -> Path:
     return REPO_ROOT_DEFAULT
 
 
+def _read_diff_arg(spec: str) -> str:
+    """Resolve `--diff <path|->` to the diff text, or "" when not supplied.
+
+    `-` reads stdin so a pipeline (`git diff | prgenius coach … --diff -`) works
+    without a temp file. An explicit empty string means "no diff", which is
+    different from "a diff that happens to be empty" — the first is a declared
+    absence (`diff_scan.diff_scanned = False`), the second is a scanned diff
+    with no findings. Do not collapse them.
+    """
+    if not spec:
+        return ""
+    if spec == "-":
+        return sys.stdin.read()
+    p = Path(spec)
+    if not p.is_file():
+        raise SystemExit(f"--diff: no such file: {spec}")
+    return p.read_text(encoding="utf-8", errors="replace")
+
+
 def _add_snapshot_args(parser) -> None:
     """Shared snapshot flags for every subcommand that runs a status check.
 
@@ -99,6 +118,7 @@ def cmd_analyze(args) -> int:
     repo_root = _get_repo_root(args)
     labels = args.labels if args.labels else []
     diff_stat = getattr(args, "diff_stat", "") or ""
+    diff_body = _read_diff_arg(getattr(args, "diff", "") or "")
 
     result = analyze_pr(
         args.title, args.description or "", args.repo, repo_root,
@@ -107,6 +127,7 @@ def cmd_analyze(args) -> int:
         author_association=args.author_association or "NONE",
         mergeable=args.mergeable or "MERGEABLE",
         diff_stat=diff_stat,
+        diff=diff_body or None,
     )
 
     if args.format == "json":
@@ -195,6 +216,7 @@ def cmd_coach(args) -> int:
     repo_root = _get_repo_root(args)
     labels = args.labels if args.labels else []
     diff_stat = getattr(args, 'diff_stat', '') or ""
+    diff_body = _read_diff_arg(getattr(args, 'diff', '') or "")
 
     result = analyze_pr(
         args.title, args.description or "", args.repo, repo_root,
@@ -203,6 +225,7 @@ def cmd_coach(args) -> int:
         author_association=args.author_association or "NONE",
         mergeable=args.mergeable or "MERGEABLE",
         diff_stat=diff_stat,
+        diff=diff_body or None,
     )
     # issue #61: impact / review 已由 analyze_pr 统一计算并放在 result 中
     # (有 diff_stat 时为 dict, 否则为 null) — coach 不再单独拼装。
@@ -232,16 +255,41 @@ def cmd_coach(args) -> int:
         size_icon = {"XS": "🔹", "S": "🔸", "M": "🔶", "L": "🟠", "XL": "🔴"}.get(pr_size, "⚪")
         risk_icon = {"low": "🟢", "medium": "🟡", "high": "🔴"}.get(risk_level, "⚪")
 
-        # issue #109 (cheap half): pr_size is computed from the diff_stat summary
-        # counts (or from title keywords when no diff_stat was given) — the diff
-        # body/hunks are never analyzed. Say so, or readers assume we reviewed
-        # their changes. Keep this disclosure wording; a test locks it.
-        if diff_stat:
+        # issue #109 / #127 risk 4: pr_size is still computed from the diff_stat
+        # summary counts (or from title keywords when no diff_stat was given) —
+        # the hunk-level sizing was never added. But since `--diff` landed, the
+        # diff **body** *is* analyzed when supplied. So the caveat now has to
+        # track what actually happened, not assert a blanket absence: claiming
+        # "diff content not analyzed" after scanning one is the same class of
+        # lie as omitting it before.
+        scanned = bool(result.get("diff_scan", {}).get("diff_scanned"))
+        if scanned:
+            size_note = ""
+        elif diff_stat:
             size_note = " (from diff-stat only — diff content not analyzed)"
         else:
             size_note = " (from title keywords only — diff content not analyzed)"
         print(f"{size_icon} PR 大小: {pr_size} ({pr_size_label}){size_note}")
         print(f"{risk_icon} 影响评分: {impact_score}/100 — {risk_description}\n")
+
+        # diff 正文扫描结果 —— 扫了就必须给人看，否则 `--diff` 对文本用户等于没开。
+        # 没给 diff 时明说缺席；给了但一条没有，也说「扫过、无发现」——
+        # 「没扫」和「扫了干净」是两回事，不能都表现成沉默。
+        dscan = result.get("diff_scan") or {}
+        if not dscan.get("diff_scanned"):
+            print("🔍 diff 正文: 未分析（未提供 --diff）\n")
+        elif dscan.get("finding_count"):
+            print(f"🔍 diff 正文扫描: {dscan['finding_count']} 处需看")
+            for f in dscan["findings"]:
+                sev_icon = {"critical": "🚨", "high": "⚠️", "medium": "📋"}.get(f.get("severity", ""), "•")
+                print(f"  {sev_icon} [{f.get('family', '?')}] {f.get('detail', f.get('rule', ''))}")
+                if f.get("packages"):
+                    print(f"     包: {', '.join(f['packages'])}")
+                if f.get("line"):
+                    print(f"     {f['line']}")
+            print(f"     （{dscan.get('limitations', '')}）\n")
+        else:
+            print("🔍 diff 正文扫描: 已扫描，无发现\n")
 
         if result["signals"]["negative"]:
             for s in result["signals"]["negative"]:
@@ -808,8 +856,10 @@ def cmd_contributor_view(args) -> int:
     Mirrors `maintainer`, which has had a CLI entry since v1.5.0 while this one
     shipped MCP-only (issue #106). Note `--diff-stat`: without it the impact and
     review fields are null, and PR size — a real signal — is unavailable.
-    PR size is computed from the diff-stat summary counts only; the diff body
-    (hunks) is never analyzed (issue #109).
+    PR size is computed from the diff-stat summary counts only. This command
+    takes no `--diff`, so its diff body is never analyzed — if you want the
+    keyword pass over the diff, use `analyze` or `coach` with `--diff` (issue
+    #127 risk 4).
     """
     from .contributor_view import contributor_view
 
@@ -1130,7 +1180,11 @@ def main(argv: list[str] | None = None) -> int:
                     help="合并状态 (MERGEABLE/CONFLICTING/UNKNOWN)")
     an.add_argument("--diff-stat", default="",
                     help="git diff --stat 输出 (填充 impact/review 并作为 PR 大小权威信号；"
-                         "仅统计行数/文件数，不分析 diff 正文)")
+                         "仅统计行数/文件数；要分析 diff 正文请另给 --diff)")
+    an.add_argument("--diff", default="",
+                    help="unified diff 正文：给文件路径，或用 '-' 从 stdin 读。"
+                         "给了就跑 keyword pass（安装命令 / 管道执行 / 密钥形状）；"
+                         "不给则明确声明未分析 diff 正文")
     an.add_argument("--format", "-f", choices=["text", "json"], default="text", help="输出格式")
     an.set_defaults(func=cmd_analyze)
 
@@ -1160,7 +1214,12 @@ def main(argv: list[str] | None = None) -> int:
     ch.add_argument("--author-association", default="NONE", choices=AUTHOR_ASSOCIATIONS, help="作者身份")
     ch.add_argument("--mergeable", default="MERGEABLE", choices=MERGEABLE_STATES, help="合并状态 (MERGEABLE/CONFLICTING/UNKNOWN)")
     ch.add_argument("--diff-stat", default="",
-                    help="git diff --stat 输出 (用于 impact 评估；仅统计行数/文件数，不分析 diff 正文)")
+                    help="git diff --stat 输出 (用于 impact 评估；仅统计行数/文件数；"
+                         "要分析 diff 正文请另给 --diff)")
+    ch.add_argument("--diff", default="",
+                    help="unified diff 正文：给文件路径，或用 '-' 从 stdin 读。"
+                         "给了就跑 keyword pass（安装命令 / 管道执行 / 密钥形状）；"
+                         "不给则明确声明未分析 diff 正文")
     ch.add_argument("--format", "-f", choices=["text", "json"], default="text", help="输出格式")
     ch.set_defaults(func=cmd_coach)
 
@@ -1359,7 +1418,8 @@ def main(argv: list[str] | None = None) -> int:
             "read-only / advisory-only — never opens, edits, or comments on anything.\n"
             "Pass --diff-stat (git diff --stat output): without it impact/review are null\n"
             "and PR size — a real signal — is unavailable. PR size comes from the diff-stat\n"
-            "summary only; diff content (hunks) is never analyzed."
+            "summary only. This command takes no --diff; use `analyze`/`coach` --diff for\n"
+            "the keyword pass over the diff body."
         ),
         epilog=(
             "Examples:\n"

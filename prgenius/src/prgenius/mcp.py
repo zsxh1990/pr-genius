@@ -107,6 +107,7 @@ def _load_tools(repo_root: Path | None = None):
         repo_merge_rate: float = 0.0,
         mergeable: str = "MERGEABLE",
         diff_stat: str = "",
+        diff: str = "",
     ) -> dict:
         """Detailed PR analysis with signals and checklist. Use analyze_pr for deep analysis, coach_pr for quick pass/fail.
 
@@ -130,8 +131,15 @@ def _load_tools(repo_root: Path | None = None):
             mergeable: Mergeable state (MERGEABLE/CONFLICTING/UNKNOWN)
             diff_stat: git diff --stat output — populates impact/review and is
                 the authoritative PR-size signal (null when omitted). Summary
-                counts only: PR size is derived from these counts (or title
-                keywords when omitted); the diff body/hunks are never analyzed.
+                counts only: PR **size** is derived from these counts (or title
+                keywords when omitted).
+            diff: unified diff **body** (optional). When given, a keyword pass
+                runs over its added lines and reports install commands, downloads
+                piped to a shell, and secret-shaped strings — see
+                `result["diff_scan"]`. Omitting it is a declared absence
+                (`diff_scanned: false`), not a silent empty result. This is a
+                keyword pass, not a review, and it makes no network call: it
+                cannot say whether a package exists on PyPI/npm.
 
         Returns:
             dict with keys: tier, signals, checklist, recommended_action, repo,
@@ -162,6 +170,7 @@ def _load_tools(repo_root: Path | None = None):
             author_association=author_association,
             mergeable=mergeable,
             diff_stat=diff_stat,
+            diff=diff or None,
         )
 
     @mcp.tool(annotations=READ_ONLY)
