@@ -279,8 +279,15 @@ if pkg_path.is_file():
 
     # (b) built dist must only import what a consumer install + DSH host provide.
     dist_mjs = sorted((ROOT / "dist").rglob("*.mjs")) if (ROOT / "dist").is_dir() else []
+    # 这一项是**条件性**的（要先 npm run build）。把它整条不计入 BLOCKING 会让分母
+    # 随「跑没跑构建」在 28/29 之间浮动 —— 两台机器测同一个 commit 会数出不同的
+    # 「总检查数」，于是文档里那个数字没有稳定值可写（实测：dist 在 → 29/29，
+    # dist 无 → 28/28，都自称全绿）。修法：**分母固定、跳过显式** ——
+    # 检查始终计入 BLOCKING，跑不了就记 skipped，绝不悄悄缩小分母。
+    SKIPPED: list[str] = []
     if not dist_mjs:
-        warn("dist/ not built — runtime import surface check skipped (run `npm run build` first)")
+        SKIPPED.append("runtime import surface (dist/ not built — run `npm run build`)")
+        ok(False, "every dist/*.mjs bare import is a builtin, @deepseek-ai/* host package, or a dependency")
     else:
         specs: set[str] = set()
         for f in dist_mjs:
@@ -306,12 +313,17 @@ if pkg_path.is_file():
 # ── report ──────────────────────────────────────────────────────────────
 
 passed = [m for c, m in BLOCKING if c]
-failed = [m for m, c in [(m, c) for c, m in BLOCKING] if not c]
+# 跳过的项不是失败：它没跑，不是没通过。从 failed 里减掉，但**留在 BLOCKING 里**，
+# 好让分母恒定 —— 这就是「28/28」与「29/29」两个都自称全绿却互相对不上的原因。
+_skipped_names = set(SKIPPED)
+failed = [m for m, c in [(m, c) for c, m in BLOCKING] if not c and m not in _skipped_names]
+skipped = [m for m in _skipped_names]
 
 payload = {
     "passed": passed,
     "failed": failed,
     "warnings": WARNINGS,
+    "skipped": skipped,
     "score": f"{len(passed)}/{len(BLOCKING)}",
 }
 
@@ -326,8 +338,12 @@ else:
         print(f"  FAIL  {m}")
     for w in WARNINGS:
         print(f"  warn  {w}")
+    for m in skipped:
+        print(f"  SKIP  {m}")
     print("-" * 60)
-    print(f"  {len(passed)}/{len(BLOCKING)} blocking checks passed")
+    # 分母恒定 = BLOCKING 的总数，不随构建状态变化。文档里写的应该是这个总数。
+    print(f"  {len(passed)}/{len(BLOCKING)} blocking checks passed"
+          + (f" ({len(skipped)} skipped)" if skipped else ""))
     print()
     print("NOTE: this validates structure only. Nothing here has been run inside")
     print("      a DeepSeek Harness runtime — no DEEPSEEK_API_KEY on this machine.")
