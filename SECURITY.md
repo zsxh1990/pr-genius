@@ -88,8 +88,11 @@ nothing else:
 Setting that variable **is** the act that gives up "nothing leaves your machine
 during analysis". `prgenius telemetry status` tells you which layer you are on.
 
-The GitHub Action never sets it. It runs on third-party repositories whose
-users have not consented (#110).
+The GitHub Action never sets it. That is a **design constraint, not a
+description of today**: the Action would run on other people's repositories,
+where nobody has consented. As of 2026-10 this project has **no external
+users** — nothing is at stake in practice, and the constraint is there for when
+that changes (#110).
 
 ### What this deliberately cannot measure
 

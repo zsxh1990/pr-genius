@@ -5,6 +5,13 @@ description: What PR Genius measures, what it does not, and why there is no adop
 
 # Adoption data: what we know and what we deliberately do not collect
 
+> **Current reality, stated first so the rest is read in the right register.**
+> As of 2026-10 **this project has no external users** — the maintainer is the
+> only user. So the local counters below already answer every question that is
+> actually being asked today, and the network layer exists for *when* there are
+> people to aggregate, not because anyone is being aggregated now. Nothing in
+> this page describes live third-party data, because there is none.
+
 **Short answer: PR Genius has no adoption telemetry. The product cannot tell
 you how many people use it — and neither can we, from inside.**
 
@@ -58,8 +65,11 @@ give anything up:
 
 The guarantee still holds by default. `PRGENIUS_TELEMETRY_URL` is the switch,
 and setting it is the act that gives up "nothing leaves your machine during
-analysis". The GitHub Action never sets it (#110 was explicit: the Action runs
-on third-party repos where the user has not consented).
+analysis". The GitHub Action never sets it — a **design constraint, not a
+description of today**: the Action *would* run on other people's repositories
+where nobody has consented. As of 2026-10 this project has **no external
+users**, so nothing is at stake in practice; the constraint is for when that
+changes (#110).
 
 `prgenius telemetry status` says which of the two you are on.
 

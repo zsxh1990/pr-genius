@@ -34,8 +34,10 @@ description: Changelog following Keep a Changelog format + GitHub compare links
   - **A network sink exists and is off.** It activates only when
     `PRGENIUS_TELEMETRY_URL` is set, and then posts those counts and nothing
     else. Setting that variable is what gives up the guarantee. The GitHub
-    Action never sets it — it runs on third-party repos whose users have not
-    consented (#110).
+    Action never sets it — a design constraint, not a description of today:
+    the Action would run on other people's repos where nobody has consented.
+    As of 2026-10 this project has **no external users**, so nothing is at
+    stake in practice (#110).
 
   Conditions this page's predecessor set for such a change, kept: announced
   here, documented in [`SECURITY.md`](SECURITY.md), and **off by default

@@ -233,8 +233,11 @@ Stated plainly, because the rest of this page is worthless if these are fuzzy:
   2. **A network sink exists and is off.** It activates only if you set
      `PRGENIUS_TELEMETRY_URL`, and then it posts those counts and nothing else.
      **Setting that variable is the act that gives up "nothing leaves your
-     machine during analysis."** The GitHub Action never does it, because it
-     runs on third-party repos whose users have not consented.
+     machine during analysis."** The GitHub Action never does it. That is a
+     design constraint, not a description of today: the Action *would* run on
+     other people's repositories, where nobody has consented. As of 2026-10
+     this project has **no external users**, so nothing is at stake in practice
+     — the constraint is there for when that changes.
 
   `prgenius telemetry status` tells you which of the two you are on. See
   [docs/ADOPTION_DATA.md](docs/ADOPTION_DATA.md) for what this does and does
