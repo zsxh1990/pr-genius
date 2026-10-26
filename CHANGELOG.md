@@ -31,8 +31,9 @@ description: Changelog following Keep a Changelog format + GitHub compare links
   and `…/src/client/slot-catalog.ts` fetches (289,726 bytes at `master`);
   `scripts/release-smoke/slot-catalog.mjs` already used the right name. What is
   actually true is narrower: the *host's installed* SDK version is unknown at
-  build time, and that is what the probing defends against. (CI still cannot
-  fetch the cross-check source — it passes no `GH_TOKEN`; #149.)
+  build time, and that is what the probing defends against. (CI could not fetch
+  the cross-check source either — it passed no `GH_TOKEN`; fixed separately by
+  #149.)
 
 ### Changed
 

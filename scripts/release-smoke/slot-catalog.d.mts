@@ -79,6 +79,17 @@ export declare const UPSTREAM: {
 /** 从 JS/TS 源码静态切出 `const NAME = <array literal>` 并求值。 */
 export declare function extractArrayLiteral(source: string, marker: string): unknown[]
 
+/**
+ * 把 `execFileSync('gh', …)` 的失败压成一句可分诊的 reason（issue #149）。
+ *
+ * 必须带退出码 / 信号 / stderr 首行（gh 把 HTTP 码打在那），且「gh 压根没起来」
+ * 与「gh 跑了但失败」要分得开 —— 前者没有 HTTP 码，不替它编一个。
+ */
+export declare function describeGhFailure(
+  err: unknown,
+  target: { repo: string; ref: string; path: string },
+): string
+
 export declare function loadSlotCatalog(opts?: {
   source?: 'auto' | 'npm' | 'github' | 'file'
   cwd?: string

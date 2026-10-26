@@ -543,6 +543,41 @@ if (catalogResult.crossCheck) {
     ))
     console.log(`        ⚠ 漂移已记入 findings（发版声明必须按钉住版写，不是按上游写）`)
   }
+} else {
+  // 交叉校验缺席本身就是一条 WARN（issue #149 的第三条建议）。
+  //
+  // 为什么不能只改进 reason 就收工：主源（钉住的 npm 包）成功时，本 gate 此前
+  // **一声不吭** —— 交叉校验失败被折叠进 attempts 日志，VERDICT 照样是 PASS。
+  // 于是「CI 取不到上游」和「CI 一切正常」从结论上看不见区别，SDK 漂移在 CI 里
+  // 就完全不可见。#145 能红那么久而没人发现依赖过期，根子就在这。
+  //
+  // 判据：权威仅来自钉住的包时，必须在 VERDICT 里说出来 —— 不是失败（钉住版本
+  // 就是用户装到的那份，以它为准并不为错），但也不是「已交叉核对」。
+  const ghAttempt = catalogResult.attempts.find((a) => a.source === 'github')
+  // 「没尝试」和「试了没取到」是两件事，别混成一句：
+  // `--catalog npm` 会跳过 github，那是我们自己关的，不是网络/认证问题。
+  const neverTried = !ghAttempt
+  const howAbsent = neverTried
+    ? '本次运行被指定只用该来源，上游交叉校验**没有尝试**'
+    : `上游源码交叉校验试了但没取到${ghAttempt.reason ? `（${ghAttempt.reason}）` : ''}`
+  report.catalogCrossCheck = {
+    ok: false,
+    attempted: !neverTried,
+    reason: ghAttempt ? ghAttempt.reason : 'not-attempted',
+  }
+  report.findings.push(makeFinding(
+    'C0.catalog-crosscheck-absent',
+    'WARN',
+    '交叉校验缺席 —— 权威仅来自钉住的包，SDK 漂移未被核对',
+    `本次 gate 的权威 slot catalog 只有 ${catalog.provenance.kind} 一个来源；${howAbsent}。\n` +
+      `这不代表结论错了 —— 钉住版就是用户装到的那一份，以它为准是设计如此。` +
+      `但它意味着**没人在核对钉住版与上游是否已经漂开**：上游改了 key 而我们没跟，` +
+      `这里不会报。\n` +
+      `若这条 WARN 长期存在，先查 CI 有没有给 gh 一个 token（#149 的第一条），` +
+      `再查仓库名/路径是不是打错了。`,
+    { attempts: catalogResult.attempts.map((a) => ({ source: a.source, ok: a.ok, reason: a.reason })) },
+  ))
+  console.log(`        ⚠ 交叉校验缺席已记入 findings（权威仅来自钉住的包）`)
 }
 
 // 1b. 反循环自检 —— gate 自己的源码里不得种 slot 名 ────────────────────────

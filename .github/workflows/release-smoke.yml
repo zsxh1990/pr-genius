@@ -37,6 +37,13 @@ on:
       - '.github/workflows/release-smoke.yml'
   workflow_dispatch:
 
+# 最小权限：本 job 只做 checkout + 读一个**公开外部仓**的 contents + 上传产物。
+# 不声明 permissions 时 GITHUB_TOKEN 拿的是仓库默认授权（通常 read/write），
+# 远超一次只读 `gh api contents` 所需 —— issue #149 点名的 `contents: read` 就是这个意思。
+# upload-artifact 走 ACTIONS_RUNTIME_TOKEN，不受这里的 permissions 门控。
+permissions:
+  contents: read
+
 jobs:
   runtime-smoke:
     name: packed artifact × authoritative slot catalog
@@ -85,6 +92,12 @@ jobs:
       #   1 = 站不住（slot 名不在 SDK catalog / 组件是 null / 缺 required 注册项）
       #   2 = 无法验证（权威 catalog 不可得）——同样不放行
       - name: Release runtime smoke gate
+        # `gh api` 的上游交叉校验要认证：Actions runner 上的 `gh` 必须显式拿到 token，
+        # 否则是未认证请求，共享 IP 上极易被限流。仓库本身是公开的（deepseek-ai/deepseek-harness），
+        # 本机带认证的 `gh` 能取到；CI 里取不到就是没认证，不是「表不存在」。
+        # 缺这个 env 的后果是交叉校验静默缺席 —— SDK 漂移因此在 CI 里完全不可见（#149）。
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: node scripts/release-smoke/runtime-smoke-gate.mjs --json reports/release-smoke.json
 
       - name: Upload machine-readable report
