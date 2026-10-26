@@ -19,6 +19,8 @@ import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { describe, it } from 'vitest'
 import {
+  ADVISOR_PANEL_SLOT,
+  PANEL_SLOT_CANDIDATES,
   SLOT_DECLARATIONS,
   VERIFIED_SLOT_CONTRACTS,
   slotRegisterDef,
@@ -152,5 +154,59 @@ describe('registered slots follow the runtime probe contract', () => {
     assert.notEqual(slotRegisterDef('sidebar.right.pane.tab', 'pr-genius.x'), null, 'pane is a probe candidate')
     assert.equal(slotRegisterDef('nonexistent.slot.from.no.catalog', 'pr-genius.x'), null,
       'a key with no contract must be refused, not guessed')
+  })
+})
+
+/**
+ * SDK 0.2.1 的右栏落点契约（issue #150 / #145）。
+ *
+ * 实测（独立探针解 `lib/client.js` 的 CLIENT_SLOT_API，括号匹配数顶层元素，
+ * 非 pr-genius 自己的脚本；对 `key:` 扫正则会把嵌套对象的 key 字段也算进去、每个版本多算 3 个）：
+ *   pinned  0.0.1-rc.3   42 keys  — 有 `details`，无 `sidebar.right.pane.tab`
+ *   next    0.2.1-rc.3  103 keys  — 无 `details`，有 `sidebar.right.pane.tab` / `.title`
+ * 42 与 release-smoke gate 及 README/CHANGELOG 既有数字一致；103 与 gate 的
+ * `catalog keys=103` 一致。4 个 key 被删：`conversation`, `conversation.details.tool`,
+ * `details`, `settings.plugin.item`；65 个新增。
+ *
+ * 判据是**默认落点必须是升级后 SDK 仍声明的 key**，并且探测顺序先试活的、
+ * 再试 legacy 兜底 —— 不是「删掉 details」。宿主版本不可控，兜底探测是设计意图
+ * （见 VERIFIED_SLOT_CONTRACTS 的注释：候选提示，不是权威白名单）。
+ */
+describe('panel seat under the 0.2.1 SDK surface', () => {
+  it('the default panel key is the one the 0.2.1 SDK still declares', () => {
+    assert.equal(ADVISOR_PANEL_SLOT, 'sidebar.right.pane.tab',
+      'the default must be a key the pinned-after-bump SDK declares — `details` was removed in 0.2.1')
+  })
+
+  it('probe order tries the live key before the legacy fallback', () => {
+    assert.deepEqual(PANEL_SLOT_CANDIDATES, ['sidebar.right.pane.tab', 'details'],
+      'dead key first burns a failed inject on every launch (issue #142)')
+  })
+
+  it('the panel seat registers with the keyed shape, not the removed single shape', () => {
+    const panel = planRegistrations().find((s) => s.id === SURFACE_IDS.advisorPanel)
+    assert.ok(panel?.seat, 'panel must have a seat')
+    assert.equal(panel.seat.key, 'sidebar.right.pane.tab')
+    assert.equal(panel.seat.kind, 'keyed',
+      'sidebar.right.pane.tab is keyed/session upstream; `details` was the single-shaped legacy')
+    const def = slotRegisterDef(panel.seat.key, SURFACE_IDS.advisorPanel)
+    assert.deepEqual(def, {
+      name: 'sidebar.right.pane.tab',
+      key: SURFACE_IDS.advisorPanel,
+    }, 'keyed seats must register with `key`, not `id`')
+  })
+
+  it('the legacy fallback keeps a contract so the probe can still land on old hosts', () => {
+    assert.notEqual(slotRegisterDef('details', 'pr-genius.x'), null,
+      'details stays as a fallback candidate for hosts still on the 0.0.1 surface')
+    assert.equal(VERIFIED_SLOT_CONTRACTS['details']?.kind, 'single',
+      'its registration shape is still single — that is what the 0.0.1 host expects')
+  })
+
+  it('keys the 0.2.1 SDK removed are not presented as live defaults', () => {
+    for (const removed of ['details', 'conversation', 'conversation.details.tool', 'settings.plugin.item']) {
+      assert.notEqual(ADVISOR_PANEL_SLOT, removed,
+        `${removed} was deleted from CLIENT_SLOT_API in 0.2.1 and must not be a default`)
+    }
   })
 })

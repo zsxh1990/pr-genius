@@ -12,6 +12,7 @@ import {
   registerOptionsFor,
   type SlotSeat,
 } from './slot-catalog.ts'
+import { PANEL_SLOT_CANDIDATES } from '../client/slots.ts'
 
 
 /** 四个界面 + 命令面的稳定标识 —— 配置与测试都引用这些常量，不写字面量。 */
@@ -65,14 +66,15 @@ export const SURFACE_PLAN: SurfaceRegistration[] = [
   },
   {
     id: SURFACE_IDS.advisorPanel,
-    // 右栏落点有版本分歧：pinned SDK 里是 `details`（42 keys），upstream master
-    // 里是 `sidebar.right.pane.tab`（92 keys）。不二选一 —— 交给 apply() 逐个试，
-    // 宿主认哪个用哪个，都不认就不注册（宁缺勿假）。
+    // 右栏落点在 SDK 0.2.1 里换了：`details`（single/session）被删，
+    // `sidebar.right.pane.tab`（keyed/session，带 `.title` 伴席）成为唯一落点
+    // （实测 CLIENT_SLOT_API 42 → 103 keys，见 issue #150）。默认走 keyed 那张
+    // 真类型席位（REGISTERED_SLOTS.sidebarRightPaneTab，带 titleKey），
+    // `details` 降为 legacy 兜底 —— 仍留在候选里给老宿主，但不再当默认。
+    // 不二选一 —— 交给 apply() 逐个试，宿主认哪个用哪个，都不认就不注册（宁缺勿假）。
     seat: {
-      key: 'details',
-      kind: 'single',
-      scope: 'session',
-      candidates: ['details', 'sidebar.right.pane.tab'],
+      ...REGISTERED_SLOTS.sidebarRightPaneTab,
+      candidates: PANEL_SLOT_CANDIDATES,
     } as unknown as SlotSeat,
     kind: 'panel',
     mode: 'both',

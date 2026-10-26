@@ -34,9 +34,12 @@ export interface VerifiedSlotContract {
  * **候选提示，不是权威白名单。**
  *
  * 决定改在这里（issue #97 反复翻车后的取舍）：pinned SDK 与 upstream master
- * 的 catalog 不一致（42 vs 92 keys），两者都自称权威，对着任一个写死判据都会
- * 在对方更新时被推翻。所以权威是**运行时**——apply() 逐个试候选，宿主认哪个
- * 用哪个。这张表只回答「注册时该带哪些 options」，不回答「这个 key 合不合法」。
+ * 的 catalog 不一致（实测 0.0.1-rc.3 有 42 keys、0.2.1-rc.3 有 103 keys），
+ * 数字用括号匹配数 CLIENT_SLOT_API 顶层元素得出，与 release-smoke gate 的
+ * `catalog keys=` 报告一致；扫 `key:` 正则会把嵌套对象的 key 字段多算进去。
+ * 两者都自称权威，对着任一个写死判据都会在对方更新时被推翻。所以权威是**运行时**
+ * ——apply() 逐个试候选，宿主认哪个用哪个。这张表只回答「注册时该带哪些
+ * options」，不回答「这个 key 合不合法」。
  */
 export const VERIFIED_SLOT_CONTRACTS: Record<string, VerifiedSlotContract> = {
   'sidebar.footer.action': {
@@ -52,18 +55,21 @@ export const VERIFIED_SLOT_CONTRACTS: Record<string, VerifiedSlotContract> = {
     catalogSource: 'packages/extensions/cordis-client-runner/src/client/slot-catalog.ts',
   },
   /**
-   * 右栏落点：pinned SDK 里是 `details`（single/session），upstream master 里
-   * 是 `sidebar.right.pane.tab`（keyed/session）。运行时探测决定用哪个，所以
-   * 两个契约都登记 —— 只登记一个会让另一个的注册静默失败。
+   * 右栏落点 **legacy 兜底**（SDK 0.2.1 已删除此 key）。
+   *
+   * 0.2.1 的 CLIENT_SLOT_API 只有 `sidebar.right.pane.tab`（keyed/session），
+   * `details`（single/session）被删；但宿主版本不可控，老宿主仍只认 `details`。
+   * 所以两个契约都登记、候选按「活的在前」排序 —— 只登记一个会让另一个的注册
+   * 静默失败。默认值是 `ADVISOR_PANEL_SLOT`，走 keyed 那张。
    */
   'details': {
     kind: 'single',
     scope: 'session',
     // single 基数只接受 name —— 不是 id。gate 的 C4 报过这一点：多传 id/label
-    // 会被 SDK 忽略或报错（pinned CLIENT_SLOT_API 对 single 的 registerOptions
+    // 会被 SDK 忽略或报错（CLIENT_SLOT_API 对 single 的 registerOptions
     // 只声明 name）。id 是 list 基数的 cell 选项，别照抄。
     entryShape: 'none',
-    catalogSource: '@deepseek-ai/dsh-cordis-client-runner (pinned CLIENT_SLOT_API)',
+    catalogSource: '@deepseek-ai/dsh-cordis-client-runner 0.0.1-rc.3 CLIENT_SLOT_API (legacy)',
   },
   'sidebar.right.pane.tab': {
     kind: 'keyed',
@@ -117,8 +123,9 @@ declare module '@deepseek-ai/dsh-client-ui-slots' {
     /** 会话视图标签页（list / session）：顾问 Tab 与 Chat/Trajectory 并列。 */
     'conversation.view': { kind: 'list'; scope: 'session' }
     /**
-     * 右栏落点有两个版本的 catalog 说不同的话（见 docs/slot-key-drift.md）：
-     * pinned SDK 里是 `details`，upstream master 里是 `sidebar.right.pane.tab`（keyed）。
+     * 右栏落点有两个版本的 catalog 说不同的话（实测见 issue #150；本仓没有
+     * docs/slot-key-drift.md 这份文件，旧注释引错过）：
+     * 0.0.1-rc.x 里是 `details`（single），0.2.1-rc.3 里是 `sidebar.right.pane.tab`（keyed）。
      * 运行时探测决定用谁，所以这里把两个都声明成可注册，由 apply() 挑实际存在的。
      */
     'details': { kind: 'single'; scope: 'session' }
@@ -147,10 +154,21 @@ declare module '@deepseek-ai/dsh-client-ui-slots' {
  */
 export const DASHBOARD_SLOT = 'sidebar.footer.action'
 export const ADVISOR_TAB_SLOT = 'conversation.view'
-export const ADVISOR_PANEL_SLOT = 'details'
+/**
+ * 右栏面板默认落点。必须是**升级后 SDK 仍声明**的 key：
+ * 0.2.1 的 CLIENT_SLOT_API 删掉了 `details`、新增 `sidebar.right.pane.tab` / `.title`
+ * （实测 42 → 103 keys，见 issue #150）。`details` 只作为 legacy 兜底留在候选里，
+ * 不再是默认值 —— 一个被 SDK 删掉的 key 当默认值，等于把每个新宿主的注册送到空座位。
+ */
+export const ADVISOR_PANEL_SLOT = 'sidebar.right.pane.tab'
 /** 权威是 SURFACE_PLAN 的 preferences seat（REGISTERED_SLOTS.settingsSection）——不是 dashboard 的脚部席。 */
 export const PREFERENCES_SLOT = 'settings.section'
-export const PANEL_SLOT_CANDIDATES = ['details', 'sidebar.right.pane.tab']
+/**
+ * 探测顺序：**活的在前，legacy 兜底在后**（issue #142）。
+ * 顺序不是洁癖 —— apply() 试到被接受就 break，死的排前面会让每次启动都白烧一次
+ * 失败注入，而 release-smoke 的 C1 会把这次尝试记成「key 不在权威 catalog 内」。
+ */
+export const PANEL_SLOT_CANDIDATES = ['sidebar.right.pane.tab', 'details']
 
 /** 契约表 → register() 的第一参数。 */
 export function specOf(seat: SlotSeat): SlotEntryDef {

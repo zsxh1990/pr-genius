@@ -21,6 +21,7 @@ import { parseConfig } from '../src/config.ts'
 import {
   CATALOG_PROVENANCE,
   CONFIRMED_SLOT_KEYS,
+  isConfirmedSlotKey,
 } from '../src/ui/slot-catalog.ts'
 import { SURFACE_IDS, planRegistrations } from '../src/ui/surfaces.ts'
 import { SLOT_DECLARATIONS } from '../src/client/slots.ts'
@@ -196,5 +197,62 @@ describe('slot probing: authority is the runtime, not any one catalog', () => {
     for (const key of CONFIRMED_SLOT_KEYS) {
       assert.ok(ALLOWED.has(key), `generated list has key ${key} missing from the authority`)
     }
+  })
+})
+
+/**
+ * 候选顺序守卫（issue #142 / PR #145 的规则，这里写成通用规则而不是绑死面板）。
+ *
+ * 规则：**凡是带两个以上候选的 surface，只要候选里有任何一个在 catalog 里，
+ * 第一个就必须也在 catalog 里。** 违反它的代价是每次启动都白烧一次失败注入
+ * （apply() 试到被接受才 break），并让 release-smoke 的 C1 记成
+ * `slot-key-not-in-catalog`。
+ *
+ * 写成通用规则而不是断言面板的 key 叫什么，是因为上游改名时这个失败会自己
+ * 点名 surface 和两个 key，而不是指望有人重读一条注释（#142 就是这么翻的车）。
+ */
+describe('candidate order is self-guarding', () => {
+  /** 返回违规说明；合规返回 null。抽出来是为了正反两个方向共用同一段判据。 */
+  function orderViolation(id: string, candidates: string[]): string | null {
+    if (candidates.length < 2) return null
+    const resolving = candidates.filter((k) => isConfirmedSlotKey(k))
+    // 一个都不在 catalog 里是合法状态（宁缺勿假：都不认就不注册），
+    // 所以只在「至少有一个能落座」时才要求第一个也能落座。
+    if (resolving.length === 0) return null
+    if (isConfirmedSlotKey(candidates[0])) return null
+    return (
+      `surface ${id}: first candidate ${JSON.stringify(candidates[0])} is not in ` +
+      `the catalog, but ${JSON.stringify(resolving)} are. Probe a known key first — ` +
+      `a dead key wastes the first inject on every launch (#142).`
+    )
+  }
+
+  it('if any candidate resolves, the first candidate resolves too', () => {
+    for (const surface of planRegistrations()) {
+      const raw = surface.seat as { candidates?: unknown; key?: string } | null
+      const candidates: string[] = Array.isArray(raw?.candidates)
+        ? (raw!.candidates as string[]).filter((k) => typeof k === 'string' && k.length > 0)
+        : [raw?.key ?? ''].filter(Boolean)
+      const violation = orderViolation(surface.id, candidates)
+      assert.equal(violation, null, violation ?? '')
+    }
+  })
+
+  it('the guard is not vacuous: a dead key listed first is rejected', () => {
+    // 反向对照 —— 只验「规则写对了」不够，还得证明它在坏输入下真的会红，
+    // 否则上游改名时这条测试会安静地放过。
+    const deadFirst = ['details.gone.forever', 'sidebar.right.pane.tab']
+    const violation = orderViolation('pr-genius.fixture', deadFirst)
+    assert.ok(violation, 'a dead key first must produce a violation')
+    assert.match(violation, /first candidate "details\.gone\.forever" is not in/)
+    assert.match(violation, /"sidebar\.right\.pane\.tab"/)
+  })
+
+  it('a dead key first is fine when nothing resolves at all (宁缺勿假)', () => {
+    // 规则的边界：候选里一个都不在 catalog 时不判违规 —— 那是「都不认就不注册」
+    // 的合法状态，不是顺序问题。否则守卫会把保守降级误报成顺序 bug。
+    const allDead = ['nope.one', 'nope.two']
+    assert.equal(orderViolation('pr-genius.fixture', allDead), null,
+      'no candidate resolving is a valid conservative-degrade state, not an order bug')
   })
 })
