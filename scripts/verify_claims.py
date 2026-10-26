@@ -154,8 +154,12 @@ def _slot_catalog_alignment() -> tuple[bool, str]:
         return False, f"could not run verify-slot-keys.mjs: {exc}"
     text = out.stdout + out.stderr
     if out.returncode != 0:
-        tail = "\n".join(text.splitlines()[-6:])
-        return False, f"verify-slot-keys.mjs exit {out.returncode}: {tail}"
+        tail = "\n".join(text.splitlines()[-4:])
+        # exit 2 = 内容不满足；exit 3 = 检查没跑起来。两者都叫「不一致」会让维护者
+        # 去改快照，而其实只是没装依赖（issue #143）。
+        if out.returncode == 3:
+            return False, f"could not run (environment): {tail}"
+        return False, f"out of step with the authority (content): {tail}"
     m = re.search(r"keys\s*:\s*(\d+)", text)
     return True, f"aligned, {m.group(1) if m else '?'} keys"
 
