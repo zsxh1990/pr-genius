@@ -218,10 +218,27 @@ Stated plainly, because the rest of this page is worthless if these are fuzzy:
   Without one, it looks at the summary counts only.
 - **It will not write or send anything on your behalf** unless you pass an
   explicit `--confirm`. Every mutating command is dry-run by default.
-- **It will not phone home.** Analysis is local: no LLM, no API key, no network
-  call. The commands that touch GitHub do it with *your* token and only for PR
-  metadata. There is no telemetry — see [docs/ADOPTION_DATA.md](docs/ADOPTION_DATA.md)
-  for what is measured instead and why we chose not to build the rest.
+- **It will not phone home — unless you tell it to.** By default analysis is
+  local: no LLM, no API key, no network call. The commands that touch GitHub do
+  it with *your* token and only for PR metadata.
+
+  Two things changed this, and they are named here because the sentence above
+  used to end at "There is no telemetry":
+
+  1. **Local counters are always on.** Which tool ran, and which anti-pattern
+     families fired — counts, never content. No PR title, body, repo, author or
+     diff is recorded, and there is no install id. It is a file on your machine;
+     `prgenius telemetry` reads it and `prgenius telemetry reset` deletes it.
+     Nothing is transmitted. This does not weaken the promise.
+  2. **A network sink exists and is off.** It activates only if you set
+     `PRGENIUS_TELEMETRY_URL`, and then it posts those counts and nothing else.
+     **Setting that variable is the act that gives up "nothing leaves your
+     machine during analysis."** The GitHub Action never does it, because it
+     runs on third-party repos whose users have not consented.
+
+  `prgenius telemetry status` tells you which of the two you are on. See
+  [docs/ADOPTION_DATA.md](docs/ADOPTION_DATA.md) for what this does and does
+  not answer, including the question it deliberately still cannot.
 - **It will not pretend.** If a fact is not verified, the docs say so. This
   page has been wrong before and the corrections are in the
   [changelog](CHANGELOG.md).

@@ -115,6 +115,8 @@ TIER_LABELS = {"low_risk": "低风险", "medium_risk": "中风险", "high_risk":
 
 def cmd_analyze(args) -> int:
     """分析 PR 并输出改进建议"""
+    from . import telemetry as _telemetry
+    _telemetry.record("cli.analyze")
     repo_root = _get_repo_root(args)
     labels = args.labels if args.labels else []
     diff_stat = getattr(args, "diff_stat", "") or ""
@@ -129,6 +131,11 @@ def cmd_analyze(args) -> int:
         diff_stat=diff_stat,
         diff=diff_body or None,
     )
+    if result.get("diff_scan", {}).get("findings"):
+        _telemetry.record(
+            "cli.analyze.patterns",
+            patterns=[f.get("family", "unknown") for f in result["diff_scan"]["findings"]],
+        )
 
     if args.format == "json":
         print(json.dumps(result, indent=2, ensure_ascii=False))
@@ -217,6 +224,8 @@ def cmd_coach(args) -> int:
     labels = args.labels if args.labels else []
     diff_stat = getattr(args, 'diff_stat', '') or ""
     diff_body = _read_diff_arg(getattr(args, 'diff', '') or "")
+    from . import telemetry as _telemetry
+    _telemetry.record("cli.coach")
 
     result = analyze_pr(
         args.title, args.description or "", args.repo, repo_root,
@@ -227,6 +236,11 @@ def cmd_coach(args) -> int:
         diff_stat=diff_stat,
         diff=diff_body or None,
     )
+    if result.get("diff_scan", {}).get("findings"):
+        _telemetry.record(
+            "cli.coach.patterns",
+            patterns=[f.get("family", "unknown") for f in result["diff_scan"]["findings"]],
+        )
     # issue #61: impact / review 已由 analyze_pr 统一计算并放在 result 中
     # (有 diff_stat 时为 dict, 否则为 null) — coach 不再单独拼装。
 
@@ -1152,6 +1166,64 @@ def cmd_issue_batch(args) -> int:
 
 
 # ============================================================
+# telemetry — what is counted, and the switch that changes the guarantee
+# ============================================================
+
+def cmd_telemetry(args) -> int:
+    """Report, reset, or show the status of adoption telemetry (issue #127 risk 5).
+
+    Deliberately the only place a user sees this: the counters are theirs to
+    read and delete, and the network sink is theirs to turn on. Nothing here
+    sends anything — `flush` is not reachable from this command.
+    """
+    from . import telemetry as t
+
+    if args.telemetry_action == "reset":
+        t.reset()
+        print("已清空本地计数器。")
+        return 0
+
+    if args.telemetry_action == "status":
+        if t.sink_configured():
+            print("网络上报: **已开启** —— 你设置了 PRGENIUS_TELEMETRY_URL。")
+            print("  这一步放开了「分析期间不外发」的承诺。清掉该变量即恢复。")
+            print(f"  目标: {os.environ.get('PRGENIUS_TELEMETRY_URL')}")
+        else:
+            print("网络上报: 关闭（默认）")
+            print("  「分析期间不外发」的承诺仍然成立。")
+            print("  要开启请显式设置 PRGENIUS_TELEMETRY_URL=<你的接收端>。")
+        print()
+        print("本地计数: 永远只在这台机器上，永不传输。")
+        print(f"  位置: {t._state_dir()}")
+        print(f"  GitHub Action 默认不计（第三方仓库的使用者没有同意过）: "
+              f"{'是' if t.github_action_defaults_off() else '否'}")
+        return 0
+
+    # default: report
+    st = t.report()
+    print(f"自 {st['since']} 起（本地计数器）")
+    print(f"网络上报: {st['sink']}")
+    events = st.get("events") or {}
+    if not events:
+        print("  （还没有记录）")
+        return 0
+    patterns = events.pop("patterns", {}) or {}
+    print("  工具调用:")
+    for k in sorted(events):
+        print(f"    {k}: {events[k]}")
+    if patterns:
+        print("  命中过的 anti-pattern 家族:")
+        for k in sorted(patterns):
+            print(f"    {k}: {patterns[k]}")
+    else:
+        print("  命中过的 anti-pattern 家族: （无）")
+    print()
+    print("这些是计数，不是内容：不含 PR 标题/正文/仓库名/作者/diff，")
+    print("也没有安装 ID 或任何跨时间可关联的指纹（#110 提议的输入 SHA-1 刻意没做）。")
+    return 0
+
+
+# ============================================================
 # main
 # ============================================================
 
@@ -1351,6 +1423,21 @@ def main(argv: list[str] | None = None) -> int:
     ui.add_argument("--dry-run", action="store_true", help="Print issue body without updating")
     ui.add_argument("--repo-root", help="Path to pr-genius repo root")
     ui.set_defaults(func=cmd_update_issue)
+
+    # ---- telemetry ----
+    tm = sub.add_parser(
+        "telemetry",
+        help="查看/清空本地使用计数，或查看网络上报开关状态",
+        description=(
+            "本地计数器只在这台机器上，永不传输。网络上报默认关闭 —— "
+            "只有显式设置 PRGENIUS_TELEMETRY_URL 才会外发，"
+            "而那一步正是放开「分析期间不外发」承诺的动作。"
+        ),
+    )
+    tm.add_argument("telemetry_action", nargs="?", default="report",
+                    choices=["report", "status", "reset"],
+                    help="report=列出计数（默认）status=开关状态 reset=清空")
+    tm.set_defaults(func=cmd_telemetry)
 
     # ---- auto-ping ----
     ap = sub.add_parser("auto-ping", help="Suggest ping actions for stale PRs (dry-run by default)")
