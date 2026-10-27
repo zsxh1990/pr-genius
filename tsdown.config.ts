@@ -22,7 +22,31 @@ import { defineConfig } from 'tsdown'
  *
  * node: 内建模块由 target 处理，不列在这里。
  */
-export default defineConfig({
+
+import { createRequire } from 'node:module'
+import type { UserConfig } from 'tsdown'
+
+const CLIENT_ID = 'pr-genius'
+
+/** DSH client bundle 的外壳 —— 与 dsh-client-ui-cordis/lib/client.js 同形。 */
+const CLIENT_BANNER = `window.__ModuleLoader__.load({
+\tid: "${CLIENT_ID}",
+\tfactory: (require) => {
+\t\tvar module = { exports: {} };
+\t\tvar exports = module.exports;
+`
+
+const CLIENT_FOOTER = `
+\t\treturn module.exports;
+\t}
+});`
+
+function pkgVersion(): string {
+  const require = createRequire(import.meta.url)
+  return String(require('./package.json').version)
+}
+
+const hostConfig: UserConfig = {
   entry: ['src/index.ts', 'src/config.ts', 'src/kb.ts', 'src/mcp-client.ts', 'src/ui/surfaces.ts'],
   format: ['esm'],
   target: 'node22',
@@ -36,4 +60,52 @@ export default defineConfig({
     'cordis',
     'schemastery',
   ],
-})
+}
+
+/**
+ * client 半边（issue #159）—— 与宿主半边**分开构建**，因为形态完全不同。
+ *
+ * 输出**不是**标准 IIFE、也**不是**裸 ESM：DSH 的 client bundle 是
+ * `window.__ModuleLoader__.load({ id, factory })`，factory 内部是 CJS ——
+ * `var module = { exports: {} }` / 外部依赖走 `require()` / `return module.exports`。
+ * 权威依据是 DSH 自己的 `@deepseek-ai/dsh-client-ui-cordis/lib/client.js`。
+ *
+ * 外部依赖同样必须 external（同 issue #101 的理由）：react / cordis 由宿主提供，
+ * 打进 bundle 会产生两份 React、`Invalid hook call`。
+ *
+ * `clean: false` —— 两个 config 共用 `dist/`，第二个清盘会把第一个的产物擦掉。
+ */
+const clientConfig: UserConfig = {
+  entry: { client: 'src/client/index.ts' },
+  format: ['cjs'],
+  target: 'es2022',
+  platform: 'browser',
+  dts: false,
+  clean: false,
+  define: {
+    __PRGENIUS_VERSION__: JSON.stringify(pkgVersion()),
+  },
+  external: [
+    'react',
+    'react-dom',
+    'react/jsx-runtime',
+    'react-dom/server',
+    'cordis',
+    'schemastery',
+    '@deepseek-ai/cordis',
+    '@deepseek-ai/dsh-client-ui-slots',
+    '@deepseek-ai/dsh-client-connection',
+    '@deepseek-ai/dsh-client-locale',
+    '@deepseek-ai/dsh-client-ui-conversation',
+    '@deepseek-ai/dsh-client-ui-settings',
+    '@deepseek-ai/dsh-client-ui-sidebar-right',
+  ],
+  outputOptions: {
+    // 外部依赖在 factory 里走 require()，与 DSH 的 client bundle 一致。
+    externalLiveBindings: false,
+  },
+  banner: () => CLIENT_BANNER,
+  footer: () => CLIENT_FOOTER,
+}
+
+export default defineConfig([hostConfig, clientConfig])

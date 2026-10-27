@@ -29,6 +29,9 @@
     "./config": {
       "types": "./dist/config.d.mts",
       "default": "./dist/config.mjs"
+    },
+    "./client": {
+      "default": "./dist/client.cjs"
     }
   },
   "files": [
