@@ -5,6 +5,13 @@ description: What PR Genius measures, what it does not, and why there is no adop
 
 # Adoption data: what we know and what we deliberately do not collect
 
+> **Current reality, stated first so the rest is read in the right register.**
+> As of 2026-10 **this project has no external users** — the maintainer is the
+> only user. So the local counters below already answer every question that is
+> actually being asked today, and the network layer exists for *when* there are
+> people to aggregate, not because anyone is being aggregated now. Nothing in
+> this page describes live third-party data, because there is none.
+
 **Short answer: PR Genius has no adoption telemetry. The product cannot tell
 you how many people use it — and neither can we, from inside.**
 
@@ -37,22 +44,55 @@ Known adopters we **cannot** see: **5**.
 That number is the important one. Public search is not a usage count, and this
 project will never present it as one.
 
-## Why there is no telemetry
+## Telemetry: what ships, and what gave
 
 PR Genius's positioning is that analysis is **local, reproducible and
 network-free** — no LLM, no API key, no outbound request while analyzing. That
-is not a footnote; it is the reason to choose this over an LLM review bot. A
-usage-ping channel would contradict it, even a hashed and opt-in one.
+is not a footnote; it is the reason to choose this over an LLM review bot.
 
-So the trade was made deliberately: we give up adoption numbers and keep the
-"nothing leaves your machine during analysis" guarantee intact.
+**This page used to say a usage-ping channel would contradict that, "even a
+hashed and opt-in one", and that the trade was made deliberately.** That was
+the position. #127 risk 5 reversed it, and the sentence you are reading is the
+change of mind — not a quiet edit.
 
-Issue #110 proposed a privacy-preserving opt-in (SHA-1 of input arguments,
-`--no-telemetry` as the default for the Action). The design is sound and the
-offer is still open — but shipping it is a product decision that changes the
-guarantee above, so it is not something to slip in quietly. If it is ever
-shipped, it will be announced in `CHANGELOG.md`, documented in `SECURITY.md`,
-and **off by default everywhere**.
+What ships is deliberately asymmetric, so that only one of the two halves can
+give anything up:
+
+| Layer | Default | Leaves the machine? | What it answers |
+|---|---|---|---|
+| **Local counters** | **on** | **never** | Which tool ran; which anti-pattern families fired |
+| **Network sink** | **off** | only if `PRGENIUS_TELEMETRY_URL` is set | The same counts, aggregated across installs |
+
+The guarantee still holds by default. `PRGENIUS_TELEMETRY_URL` is the switch,
+and setting it is the act that gives up "nothing leaves your machine during
+analysis". The GitHub Action never sets it — a **design constraint, not a
+description of today**: the Action *would* run on other people's repositories
+where nobody has consented. As of 2026-10 this project has **no external
+users**, so nothing is at stake in practice; the constraint is for when that
+changes (#110).
+
+`prgenius telemetry status` says which of the two you are on.
+
+### What #110 proposed that this does not do
+
+#110 suggested SHA-1 of `(title || body || repo)[:64]` for dedup. **This does
+not do that.** A stable hash of someone's PR text is still a fingerprint of
+their work — it correlates the same contribution across time, which is the
+identifying power this page exists to withhold. There is no install id, no
+machine id, and no other stable token.
+
+The consequence is honest and worth stating plainly: **this cannot measure an
+adoption rate.** It can say "coach_pr ran 30 times here" and "tests_in_diff has
+never fired". It cannot say whether a suggestion was taken, because that needs
+per-PR correlation, which needs identity, which is what is being protected.
+
+### The conditions this page set, kept
+
+This page previously said: *"If it is ever shipped, it will be announced in
+`CHANGELOG.md`, documented in `SECURITY.md`, and **off by default
+everywhere**."* Those three are done: the CHANGELOG entry calls this a
+reversal, [SECURITY.md](../SECURITY.md) has the data-flow description, and the
+network sink has no default-on path anywhere — including the Action.
 
 ## What we *do* measure
 
@@ -74,18 +114,25 @@ Third-party badges in the README (PyPI version, Glama score, GitHub
 Marketplace) are **their** measurements of us, fetched when you load the page.
 They are not a channel we open.
 
-## What we do not know
+## What we still do not know
 
 - Install counts for `prgenius-core` or the GitHub Action
-- How often any of the 14 MCP tools is invoked
 - Whether any suggestion was adopted, or which ones
 - Anything at all about the title, body or diff of a PR you analyze
 
-That last one is the important one. **`analyze_pr` / `coach_pr` / `triage_pr`
-do not send your PR anywhere.** They read the local knowledge bundle and return
-a verdict. The commands that *do* talk to GitHub (`status`, `auto-ping`,
-`auto-rebase`, `update-issue`, `harvest`) fetch PR *metadata* through the API;
-they are not part of analysis.
+What changed is middle item of the old list. **How often each tool is invoked is
+now counted on your machine** — read it with `prgenius telemetry`. That is not
+an aggregate and it is not shared unless you turn the sink on.
+
+The last one is the important one, and it is unchanged: **`analyze_pr` /
+`coach_pr` / `triage_pr` do not send your PR anywhere.** They read the local
+knowledge bundle and return a verdict. The commands that *do* talk to GitHub
+(`status`, `auto-ping`, `auto-rebase`, `update-issue`, `harvest`) fetch PR
+*metadata* through the API; they are not part of analysis.
+
+If you turn the network sink on, what crosses the wire is the counter file and
+nothing else — three keys: `schema`, `client_version`, `events`. No PR data of
+any kind, in any form, hashed or not.
 
 ## How the corpus numbers should be read
 
