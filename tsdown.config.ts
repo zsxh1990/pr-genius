@@ -58,7 +58,13 @@ const hostConfig: UserConfig = {
     'react/jsx-runtime',
     'react-dom/server',
     'cordis',
-    'schemastery',
+    // 注意：这里**没有** `'schemastery'` / `'@deepseek-ai/schemastery'`。
+    // 源码 import 的是 `@deepseek-ai/schemastery`（scoped），而它必须**打进 bundle** ——
+    // 浏览器端没有 schemastery 可解析（DSH 前端 seed table 里没有它，见
+    // docs/data/dsh-web-seed-table.json），DSH 自己的 client bundle 也是内联的。
+    // 曾经这里有一条裸名 `'schemastery'`：它匹配不到任何 import，是死条目，
+    // 却看起来像在把它排除出去 —— 谁把它『修正』成 scoped 名，就会让
+    // dist/client.cjs 在浏览器里 require 到 undefined（issue #163）。
   ],
 }
 
@@ -91,7 +97,13 @@ const clientConfig: UserConfig = {
     'react/jsx-runtime',
     'react-dom/server',
     'cordis',
-    'schemastery',
+    // 注意：这里**没有** `'schemastery'` / `'@deepseek-ai/schemastery'`。
+    // 源码 import 的是 `@deepseek-ai/schemastery`（scoped），而它必须**打进 bundle** ——
+    // 浏览器端没有 schemastery 可解析（DSH 前端 seed table 里没有它，见
+    // docs/data/dsh-web-seed-table.json），DSH 自己的 client bundle 也是内联的。
+    // 曾经这里有一条裸名 `'schemastery'`：它匹配不到任何 import，是死条目，
+    // 却看起来像在把它排除出去 —— 谁把它『修正』成 scoped 名，就会让
+    // dist/client.cjs 在浏览器里 require 到 undefined（issue #163）。
     '@deepseek-ai/cordis',
     '@deepseek-ai/dsh-client-ui-slots',
     '@deepseek-ai/dsh-client-connection',

@@ -80,8 +80,13 @@ if entry_path is None:
     entry = ""
 
 if entry:
+    # 声明式（`export const name = …`）与再导出式（`export { name }` /
+    # `export { name } from '…'`）都算 —— 契约要的是「入口导出 name」，
+    # 运行时两者形状相同（`dist/index.mjs` 的 `export { … name … }`）。
+    # 但只认这两种，不认 `export default` / 动态拼出来的名字。
     ok(
-        re.search(r"export\s+(?:const|let|var)\s+name\s*=", entry) is not None,
+        re.search(r"export\s+(?:const|let|var)\s+name\s*=", entry) is not None
+        or re.search(r"export\s*\{[^}]*\bname\b[^}]*\}", entry) is not None,
         "entry exports `name`",
     )
     ok(
@@ -308,6 +313,51 @@ if pkg_path.is_file():
             warn(
                 "imported by dist but not in dependencies (peer-only is not enough: DSH "
                 f"never installs or supplies these) → {unresolvable}"
+            )
+
+    # (c) client half: every `require("X")` the browser bundle issues must be a
+    #     module the DSH web host actually provides. This is the check that
+    #     would have caught the shape of bug in #163 before anyone opened a real
+    #     browser: `exports["./client"]` can exist, the bundle can be well
+    #     formed, and it can still die at `require()` time in the factory.
+    #
+    #     The authority is **not** a list we wrote. `docs/data/dsh-web-seed-table.json`
+    #     is generated from npm packages we do not own — the `require()` surface of
+    #     `@deepseek-ai/*/lib/client.js`, plus the `@deepseek-ai/*` module names in
+    #     `@deepseek-ai/dsh-web-frontend`'s bundle. Provenance is recorded in the
+    #     file. Using our own table would be the circular validation
+    #     `docs/maturity-self-assessment.md` warns about.
+    SEED_PATH = ROOT / "docs" / "data" / "dsh-web-seed-table.json"
+    CLIENT_CJS = sorted((ROOT / "dist").rglob("client*.cjs")) if (ROOT / "dist").is_dir() else []
+    if not CLIENT_CJS:
+        SKIPPED.append("client require surface (dist/client*.cjs not built — run `npm run build`)")
+        ok(False, "every require() in the browser bundle resolves in the DSH web seed table")
+    elif not SEED_PATH.is_file():
+        SKIPPED.append("client require surface (docs/data/dsh-web-seed-table.json missing)")
+        ok(False, "every require() in the browser bundle resolves in the DSH web seed table")
+    else:
+        seed = json.loads(SEED_PATH.read_text(encoding="utf-8"))
+        provided = set(seed.get("modules") or [])
+        # 空表会让这条检查永远通过 —— 那是最坏的假绿，所以先钉住表本身。
+        ok(bool(provided), f"the DSH web seed table is non-empty ({len(provided)} modules)")
+        if not provided:
+            warn(f"{SEED_PATH.relative_to(ROOT)} has no modules — the check cannot fail, which is not the same as passing")
+
+        require_re = re.compile(r'\brequire\(\s*["\']([^"\']+)["\']\s*\)')
+        needed: set[str] = set()
+        for f in CLIENT_CJS:
+            needed.update(require_re.findall(f.read_text(encoding="utf-8", errors="replace")))
+        missing = sorted(s for s in needed if s not in provided)
+        ok(
+            not missing,
+            f"every require() in the browser bundle resolves in the DSH web seed table "
+            f"({len(needed)} specifiers, {len(provided)} modules available)",
+        )
+        if missing:
+            warn(
+                "required by the browser bundle but absent from the DSH web seed table — "
+                "the factory will get `undefined` at require() time and fail in the browser "
+                f"→ {missing}"
             )
 
 # ── report ──────────────────────────────────────────────────────────────
