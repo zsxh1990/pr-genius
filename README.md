@@ -22,9 +22,14 @@ mcp-name: io.github.zsxh1990/pr-genius
 other people's repositories, where you have no tracker, no standup, and no
 clue.
 
-It is **not** a code reviewer. By default it never reads your diff, and it will never tell
-you your code is correct. There are good tools for that, and this is not one of
-them.
+It is **not** a code reviewer. By default it never reads your diff, and it will
+never tell you your code is correct. There are good tools for that, and this is
+not one of them.
+
+**Unlike PR-Agent or CodeRabbit, this tool does not read your diff.** It does
+not write review comments on your code, and it is not an LLM. It scores a PR
+against **61 anti-patterns** harvested from PRs that actually got rejected, and
+answers a different question from the one a review bot answers.
 
 It answers the question a working contributor actually has on a Tuesday
 morning: **of everything I have sent out, what do I touch today — and what
@@ -225,6 +230,25 @@ Stated plainly, because the rest of this page is worthless if these are fuzzy:
 - **It will not pretend.** If a fact is not verified, the docs say so. This
   page has been wrong before and the corrections are in the
   [changelog](CHANGELOG.md).
+
+## What this tool is NOT
+
+The section above is about behaviour. This one is about **roles** — the jobs
+people assume it does because of what it looks like. It does not do them, and
+that is a boundary, not an oversight.
+
+| It is not | What that means in practice |
+|---|---|
+| **A merge gate** | It never blocks a merge and never fails a job. The GitHub Action offers `comment_mode` and `apply_labels` only — there is no required-check integration, because a "gate" that can be ignored is worse than no gate. If you want it to block, wire the Action's exit into *your* branch protection yourself. |
+| **A PR title linter** | It will not fail a PR for a malformed title. It will tell you that a missing `Fixes #N` is the most common reason a first PR gets bounced, and leave the decision to you. |
+| **A CODEOWNERS-aware reviewer** | It does not know who owns which file, and will not route or request reviewers. |
+| **A code reviewer** | See above. It never reads your diff unless you hand one to `--diff`, and what it does then is a keyword pass. |
+| **A positive-feedback system** | `success-patterns/` (692 of the 753 loaded patterns) is **retrieval/reference only** and is **not wired into scoring**. Only the 61 anti-patterns can move a verdict. |
+
+The last row is the one worth internalising: the corpus is large, but the part
+that *scores* is small on purpose — it is the part backed by PRs that actually
+got rejected.
+
 
 ---
 
