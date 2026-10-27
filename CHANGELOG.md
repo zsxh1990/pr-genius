@@ -10,6 +10,32 @@ description: Changelog following Keep a Changelog format + GitHub compare links
 
 ### Fixed
 
+- **The DSH web client half was never shipped (#159).** `package.json` declared
+  `dsh.client` (`platform: "web"`) but `exports` had no `"./client"`, so DSH's
+  `client-modules` silently dropped the plugin from the client graph — 67 boot
+  manifest entries, none of them pr-genius, four surfaces never mounted. This is
+  the shared root cause of the eight "empty shell install" bugs (#86 #90 #95
+  #97 #98 #100 #101 #117), and every one of them had been closed by a unit test
+  because they were all downstream of it. Silence was the worst part: a crash
+  logs, absence does not.
+
+  The fix is a real browser bundle, not a different `target`. The shared core
+  moves to `src/plugin-core.ts`; the two halves inject their own runtime:
+  `src/index.ts` resolves the knowledge bundle from disk and spawns the MCP
+  child process, `src/client/index.ts` provides browser versions. It is built as
+  DSH expects — **CJS inside `window.__ModuleLoader__.load({id, factory})`**, not
+  a bare ESM or a standard IIFE — and `exports["./client"]` points at it.
+
+  Verified against the built artifact, not the source: the bundle loads through
+  a `__ModuleLoader__` shim, exports `apply` / `inject` / `name` / `provide`,
+  pulls in no `node:` built-ins, and registers all four surfaces.
+
+  What it does **not** do yet: run analyses. `callTool` on the browser half
+  returns an explicit failure rather than crashing or inventing data — the
+  browser transport (`@deepseek-ai/dsh-client-connection`) is the follow-up,
+  as is the DSH-host verification of #159's criteria 3-4.
+
+
 - **The panel's default seat was a key the SDK deleted (#150).**
   `ADVISOR_PANEL_SLOT` was `details`, and `SURFACE_PLAN`'s panel seat declared
   `kind: 'single'` to match. In `@deepseek-ai/dsh-cordis-client-runner@0.2.1-rc.3`
