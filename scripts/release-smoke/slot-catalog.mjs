@@ -139,6 +139,60 @@ function loadFromNpm(cwd) {
   }
 }
 
+/**
+ * 把 `execFileSync('gh', …)` 的失败压成一句**可分诊**的 reason（issue #149）。
+ *
+ * 这里曾经只回声 `err.message`，而它恒等于 `Command failed: gh api …` ——
+ * 限流(403)、仓库名打错(404)、没认证(401)、gh 不在 PATH、超时，五种完全不同的
+ * 事故在 reason 里长得一模一样。CI 里 `gh api` 交叉校验因此从未被人当回事，
+ * SDK 漂移就一直不可见。
+ *
+ * 判据：**退出码、信号、stderr 首行（gh 把 HTTP 码打在那）必须在场**，
+ * 且「gh 压根没起来」要和「gh 跑了但失败」分得开 —— 后者才有 HTTP 码，前者没有，
+ * 不要替它编一个。
+ *
+ * 分支顺序是判据的一部分，不是实现细节。Node 的 `execFileSync` 超时错误形状是
+ * `{code:'ETIMEDOUT', syscall:'spawnSync …', status:null, signal:'SIGTERM'}`
+ * —— **没有 `killed` 属性**（实测 Node 26，CI 的 Node 22 同一条 spawn_sync 路径）。
+ * 所以超时必须排在「`status == null && syscall` ⇒ 没起来」之前判断，否则真实超时
+ * 会被误报成「gh 不可执行（ETIMEDOUT）」，而超时分支永远走不到。
+ */
+export function describeGhFailure(err, { repo, ref, path }) {
+  const target = `${repo}@${ref}:${path}`
+  const parts = [`gh api 取不到 ${target}`]
+
+  // 超时 / 被杀 —— 不是「取不到」。必须排在 spawn 分支之前：
+  // 真实超时同样带 syscall 且 status 为 null，会先被下面那条吃掉。
+  // 判据取自真实形状：`code === 'ETIMEDOUT'`、`killed`（仅被显式 kill 时有）、
+  // 或有信号却无退出码。不假设 `killed` 一定存在 —— 超时路径上它不存在。
+  const timedOut = err?.code === 'ETIMEDOUT' || err?.killed === true
+  const signalledNoStatus = Boolean(err?.signal) && (err.status === null || err.status === undefined)
+  if (timedOut || signalledNoStatus) {
+    parts.push(`超时或被杀（code=${err?.code ?? 'n/a'} signal=${err?.signal ?? 'n/a'}）`)
+    return parts.join(' —— ')
+  }
+
+  // spawn 没起来 —— 环境问题（gh 不在 PATH / 权限），不是「取不到」。
+  if (err?.code === 'ENOENT' || (err?.status == null && err?.syscall)) {
+    parts.push(`gh 不可执行（${err.code ?? err.syscall}）`)
+    return parts.join(' —— ')
+  }
+
+  if (typeof err?.status === 'number') parts.push(`exit=${err.status}`)
+  if (err?.signal) parts.push(`signal=${err.signal}`)
+
+  const stderr = String(err?.stderr ?? '').trim()
+  const firstLine = stderr.split('\n').find((l) => l.trim()) ?? ''
+  if (firstLine) {
+    parts.push(firstLine.trim())
+  } else if (err?.message) {
+    // stderr 空了才退回 err.message —— 但那句 "Command failed" 单独出现
+    // 正是本函数要消灭的形状，所以永远不作为唯一内容。
+    parts.push(err.message)
+  }
+  return parts.join(' —— ')
+}
+
 /** 来源 2：上游源码（gh api 只读）。 */
 function loadFromGithub({ repo, ref, path }) {
   let payload
@@ -149,7 +203,7 @@ function loadFromGithub({ repo, ref, path }) {
       { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], timeout: 60_000 },
     )
   } catch (err) {
-    return { ok: false, source: 'github', reason: `gh api 取不到 ${repo}@${ref}:${path} —— ${err.message}` }
+    return { ok: false, source: 'github', reason: describeGhFailure(err, { repo, ref, path }) }
   }
   let ts
   try {
