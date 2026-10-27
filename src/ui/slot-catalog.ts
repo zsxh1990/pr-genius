@@ -26,7 +26,7 @@ export const CATALOG_PROVENANCE = {
   blobSha: '791274948f015f1e',
   commit: '2db0c83e867c23918963ae8314630887d316e79d',
   commitDate: '2026-10-02T19:19:43Z',
-  fetchedAt: '2026-10-26',
+  fetchedAt: '2026-10-27',
   keyCount: 105,
 } as const
 

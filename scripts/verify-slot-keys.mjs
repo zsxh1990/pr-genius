@@ -142,12 +142,27 @@ function regenerateSource(keys, shaHex, srcText) {
   const sorted = [...keys].sort()
   const body = sorted.map((k) => `  '${k}',`).join('\n')
   let out = srcText.slice(0, at) + head + '\n' + body + srcText.slice(close)
-  const now = new Date().toISOString().slice(0, 10)
   out = out
     .replace(/blobSha: '[^']*'/, `blobSha: '${shaHex}'`)
     .replace(/keyCount: \d+/, `keyCount: ${keys.length}`)
-    .replace(/fetchedAt: '[^']*'/, `fetchedAt: '${now}'`)
+  // `fetchedAt` 记的是「我们哪天抓的」，不是上游的内容。内容没变就别动它 ——
+  // 否则每天跑一次就有一天的 diff，git 历史全是噪音，而且会让下面的比较
+  // 在没有任何真实漂移时也报 drift（issue: verify_claims 每天必红）。
+  const now = new Date().toISOString().slice(0, 10)
+  const contentChanged = normalizeForCompare(out) !== normalizeForCompare(srcText)
+  if (contentChanged) out = out.replace(/fetchedAt: '[^']*'/, `fetchedAt: '${now}'`)
   return { ok: true, text: out, count: keys.length }
+}
+
+/**
+ * 抹掉 `fetchedAt` 的值再比较。
+ *
+ * 判据：**只有内容才算漂移**。blobSha / keyCount / key 集合是上游的内容；
+ * fetchedAt 是我们抓取动作的时间戳，它必然随时间变，拿它当内容比会得到
+ * 「今天跑就红」的假阳性 —— 而假阳性的门比没有门更坏，久了没人信它。
+ */
+function normalizeForCompare(text) {
+  return text.replace(/fetchedAt: '[^']*'/g, "fetchedAt: '<normalized>'")
 }
 
 if (existsSync(SRC)) {
@@ -155,7 +170,8 @@ if (existsSync(SRC)) {
   const regen = regenerateSource(keys, sha, srcText)
   if (!regen.ok) fail(`无法重新生成 src/ui/slot-catalog.ts：${regen.why}`)
   const before = (srcText.match(/^  '[^']+',$/gm) || []).length
-  if (regen.text !== srcText) {
+  // 比内容，不比抓取时间（见 normalizeForCompare）。
+  if (normalizeForCompare(regen.text) !== normalizeForCompare(srcText)) {
     if (CHECK_ONLY) {
       const keyDiff =
         before === regen.count
