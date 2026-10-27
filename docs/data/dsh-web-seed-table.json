@@ -1,0 +1,25 @@
+{
+  "provenance": {
+    "kind": "dsh-web-frontend-seed-table",
+    "note": "union of (a) require() names in @deepseek-ai/*/lib/client.js and (b) @deepseek-ai/* module-name strings in @deepseek-ai/dsh-web-frontend dist/assets/*.js. Both are npm packages, not written by us.",
+    "webFrontendPackage": "@deepseek-ai/dsh-web-frontend",
+    "webFrontendVersion": "0.0.1-rc.5",
+    "clientBundles": [
+      "dsh-client-ui-cordis",
+      "dsh-cordis-client-runner"
+    ]
+  },
+  "modules": [
+    "@deepseek-ai/cordis",
+    "@deepseek-ai/dsh-client-app-shell",
+    "@deepseek-ai/dsh-client-modules",
+    "@deepseek-ai/dsh-client-schema-form",
+    "@deepseek-ai/dsh-client-ui-attachment",
+    "@deepseek-ai/dsh-client-ui-primitives",
+    "@deepseek-ai/dsh-client-ui-slots",
+    "@deepseek-ai/dsh-client-web-react",
+    "react",
+    "react-dom",
+    "react/jsx-runtime"
+  ]
+}
