@@ -8,6 +8,46 @@ description: Changelog following Keep a Changelog format + GitHub compare links
 
 ## [Unreleased]
 
+### Changed — this reverses a documented trade
+
+- **Adoption counters ship (#127 risk 5), and the "no telemetry" promise is
+  retired.** For as long as this project has existed, `README.md` said *"It will
+  not phone home… There is no telemetry"* and
+  [`docs/ADOPTION_DATA.md`](docs/ADOPTION_DATA.md) said a usage-ping channel
+  would contradict the local-only positioning *"even a hashed and opt-in one"*,
+  so the trade was made deliberately: adoption numbers were given up to keep
+  "nothing leaves your machine during analysis" intact.
+
+  **That trade is now reversed.** #127 risk 5 reopened it and the maintainer
+  chose numbers. This entry exists because a change of mind about a public
+  promise should be visible in the changelog and not only in a rewritten
+  paragraph.
+
+  What shipped is asymmetric, so only one half can give anything up:
+
+  - **Local counters are on and never transmit.** Per-tool invocation counts and
+    per anti-pattern *family* that fired. A file on your machine —
+    `prgenius telemetry` reads it, `prgenius telemetry reset` deletes it. No PR
+    title, body, repo, author or diff is recorded in any form, hashed or not,
+    and there is no install id. `telemetry.record()` accepts no free-form
+    payload so that nobody can smuggle one in later.
+  - **A network sink exists and is off.** It activates only when
+    `PRGENIUS_TELEMETRY_URL` is set, and then posts those counts and nothing
+    else. Setting that variable is what gives up the guarantee. The GitHub
+    Action never sets it — a design constraint, not a description of today:
+    the Action would run on other people's repos where nobody has consented.
+    As of 2026-10 this project has **no external users**, so nothing is at
+    stake in practice (#110).
+
+  Conditions this page's predecessor set for such a change, kept: announced
+  here, documented in [`SECURITY.md`](SECURITY.md), and **off by default
+  everywhere**.
+
+  **What this still cannot do:** measure an adoption rate. That needs per-PR
+  correlation, which needs a stable identifier. #110 proposed SHA-1 of the
+  input arguments for it; this deliberately does not, because a stable hash of
+  someone's PR text is still a fingerprint of their work.
+
 ### Fixed
 
 - **The DSH web client half was never shipped (#159).** `package.json` declared

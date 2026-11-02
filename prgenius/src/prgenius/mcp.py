@@ -150,6 +150,8 @@ def _load_tools(repo_root: Path | None = None):
             → {"tier": "medium_risk", "signals": {...}, "checklist": [...], "recommended_action": "..."}
         """
         _validate_pr_args(star_count, repo_merge_rate, author_association, mergeable)
+        from . import telemetry as _telemetry
+        _telemetry.record("mcp.analyze_pr")
 
         # Auto-read from profile if not provided
         if star_count == 0 or repo_merge_rate == 0.0:
@@ -163,7 +165,7 @@ def _load_tools(repo_root: Path | None = None):
                 if repo_merge_rate == 0.0:
                     repo_merge_rate = _profile_merge_rate(gl)
 
-        return _analyze_pr(
+        result = _analyze_pr(
             title, description, repo, rr,
             body=body, labels=labels or [], author=author,
             star_count=star_count, repo_merge_rate=repo_merge_rate,
@@ -172,6 +174,12 @@ def _load_tools(repo_root: Path | None = None):
             diff_stat=diff_stat,
             diff=diff or None,
         )
+        if result.get("diff_scan", {}).get("findings"):
+            _telemetry.record(
+                "mcp.analyze_pr.patterns",
+                patterns=[f.get("family", "unknown") for f in result["diff_scan"]["findings"]],
+            )
+        return result
 
     @mcp.tool(annotations=READ_ONLY)
     def coach_pr(
@@ -213,6 +221,8 @@ def _load_tools(repo_root: Path | None = None):
             dict with pass (bool), tier, signals, checklist, recommended_action
         """
         _validate_pr_args(star_count, repo_merge_rate, author_association, mergeable)
+        from . import telemetry as _telemetry
+        _telemetry.record("mcp.coach_pr")
 
         # Auto-read from profile if not provided
         if star_count == 0 or repo_merge_rate == 0.0:
@@ -234,6 +244,11 @@ def _load_tools(repo_root: Path | None = None):
             mergeable=mergeable,
             diff_stat=diff_stat,
         )
+        if result.get("diff_scan", {}).get("findings"):
+            _telemetry.record(
+                "mcp.coach_pr.patterns",
+                patterns=[f.get("family", "unknown") for f in result["diff_scan"]["findings"]],
+            )
         result["pass"] = result["tier"] != "high_risk"
         return result
 
